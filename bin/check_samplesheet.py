@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-# TODO nf-core: Update the script to check the samplesheet
 # This script is based on the example at: https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv
 
 import os
@@ -38,15 +37,14 @@ def print_error(error, context="Line", context_str=""):
     sys.exit(1)
 
 
-# TODO nf-core: Update the check_samplesheet function
 def check_samplesheet(file_in, file_out):
     """
     This function checks that the samplesheet follows the following structure:
 
-    sample,fastq_1,fastq_2
-    SAMPLE_PE,SAMPLE_PE_RUN1_1.fastq.gz,SAMPLE_PE_RUN1_2.fastq.gz
-    SAMPLE_PE,SAMPLE_PE_RUN2_1.fastq.gz,SAMPLE_PE_RUN2_2.fastq.gz
-    SAMPLE_SE,SAMPLE_SE_RUN1_1.fastq.gz,
+    sample,datatype,datafile,rgid
+    sample1,hic,/path/to/file1.cram,ID1
+    sample1,hic,/path/to/file2.cram,ID2
+    sample2,pacbio,/path/to/file1.bam,ID3
 
     For an example see:
     https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv
@@ -55,10 +53,9 @@ def check_samplesheet(file_in, file_out):
     sample_mapping_dict = {}
     with open(file_in, "r") as fin:
 
-        ## Check header
-        MIN_COLS = 2
-        # TODO nf-core: Update the column names for the input samplesheet
-        HEADER = ["sample", "fastq_1", "fastq_2"]
+        ##* Check header
+        MIN_COLS = 3
+        HEADER = ["sample", "datatype", "datafile", "rgid"]
         header = [x.strip('"') for x in fin.readline().strip().split(",")]
         if header[: len(HEADER)] != HEADER:
             print("ERROR: Please check samplesheet header -> {} != {}".format(",".join(header), ",".join(HEADER)))
@@ -83,34 +80,46 @@ def check_samplesheet(file_in, file_out):
                     line,
                 )
 
-            ## Check sample name entries
-            sample, fastq_1, fastq_2 = lspl[: len(HEADER)]
+            ##* Check sample name entries
+            sample, datatype, datafile, rgid = lspl[: len(HEADER)]
             sample = sample.replace(" ", "_")
             if not sample:
                 print_error("Sample entry has not been specified!", "Line", line)
 
-            ## Check FastQ file extension
-            for fastq in [fastq_1, fastq_2]:
-                if fastq:
-                    if fastq.find(" ") != -1:
-                        print_error("FastQ file contains spaces!", "Line", line)
-                    if not fastq.endswith(".fastq.gz") and not fastq.endswith(".fq.gz"):
-                        print_error(
-                            "FastQ file does not have extension '.fastq.gz' or '.fq.gz'!",
-                            "Line",
-                            line,
-                        )
-
-            ## Auto-detect paired-end/single-end
-            sample_info = []  ## [single_end, fastq_1, fastq_2]
-            if sample and fastq_1 and fastq_2:  ## Paired-end short reads
-                sample_info = ["0", fastq_1, fastq_2]
-            elif sample and fastq_1 and not fastq_2:  ## Single-end short reads
-                sample_info = ["1", fastq_1, fastq_2]
+            ##* Check datatype name entries
+            datatypes = ["hic", "pacbio", "illumina"]
+            if datatype:
+                if datatype not in datatypes:
+                    print_error(
+                        "Data type must be one of {}.".format(",".join(datatypes)), 
+                        "Line", 
+                        line,
+                    )
             else:
-                print_error("Invalid combination of columns provided!", "Line", line)
+                print_error(
+                    "Data type has not been specified!. Must be one of {}.".format(",".join(datatypes)), 
+                    "Line", 
+                    line,
+                )
 
-            ## Create sample mapping dictionary = { sample: [ single_end, fastq_1, fastq_2 ] }
+
+            ##* Check data file extension
+            if datafile:
+                if datafile.find(" ") != -1:
+                    print_error(
+                        "Data file contains spaces!", 
+                        "Line", 
+                        line,
+                    )
+                if not datafile.endswith(".cram") and not datafile.endswith(".bam"):
+                    print_error(
+                        "Data file does not have extension '.cram' or '.bam'!", 
+                        "Line", 
+                        line,
+                    )
+
+            ##* Create sample mapping dictionary = { sample: [ datatype, datafile, rgid ] }
+            sample_info = [datatype, datafile, rgid]
             if sample not in sample_mapping_dict:
                 sample_mapping_dict[sample] = [sample_info]
             else:
@@ -119,12 +128,12 @@ def check_samplesheet(file_in, file_out):
                 else:
                     sample_mapping_dict[sample].append(sample_info)
 
-    ## Write validated samplesheet with appropriate columns
+    ##* Write validated samplesheet with appropriate columns
     if len(sample_mapping_dict) > 0:
         out_dir = os.path.dirname(file_out)
         make_dir(out_dir)
         with open(file_out, "w") as fout:
-            fout.write(",".join(["sample", "single_end", "fastq_1", "fastq_2"]) + "\n")
+            fout.write(",".join(["sample", "datatype", "datafile", "rgid"]) + "\n")
             for sample in sorted(sample_mapping_dict.keys()):
 
                 ## Check that multiple runs of the same sample are of the same datatype

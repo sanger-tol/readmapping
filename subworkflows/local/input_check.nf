@@ -12,7 +12,7 @@ workflow INPUT_CHECK {
     SAMPLESHEET_CHECK ( samplesheet )
         .csv
         .splitCsv ( header:true, sep:',' )
-        .map { create_fastq_channels(it) }
+        .map { create_data_channels(it) }
         .set { reads }
 
     emit:
@@ -20,23 +20,19 @@ workflow INPUT_CHECK {
     versions = SAMPLESHEET_CHECK.out.versions // channel: [ versions.yml ]
 }
 
-// Function to get list of [ meta, [ fastq_1, fastq_2 ] ]
-def create_fastq_channels(LinkedHashMap row) {
+// Function to get list of [ meta, [ datafile ] ]
+def create_data_channels(LinkedHashMap row) {
     def meta = [:]
-    meta.id           = row.sample
-    meta.single_end   = row.single_end.toBoolean()
-
+    meta.id         = row.sample
+    meta.datatype   = row.datatype
+/*
+    def platform = ""
+    if (meta.datatype == "hic" || meta.datatype == "illumina") { platform = "ILLUMINA" }
+    else if (meta.datatype == "pacbio") { platform = "PACBIO" }
+    else if (meta.datatype == "ont") { platform = "ONT" }
+    meta.readgroup  = "\'@RG\\tID:" + row.datafile.split('/')[-1] + "\\tPL:" + platform + "\\tSM:" + row.rgid + "\'"
+*/
     def array = []
-    if (!file(row.fastq_1).exists()) {
-        exit 1, "ERROR: Please check input samplesheet -> Read 1 FastQ file does not exist!\n${row.fastq_1}"
-    }
-    if (meta.single_end) {
-        array = [ meta, [ file(row.fastq_1) ] ]
-    } else {
-        if (!file(row.fastq_2).exists()) {
-            exit 1, "ERROR: Please check input samplesheet -> Read 2 FastQ file does not exist!\n${row.fastq_2}"
-        }
-        array = [ meta, [ file(row.fastq_1), file(row.fastq_2) ] ]
-    }
+    array = [ meta, [ file(row.datafile) ] ]
     return array
 }
