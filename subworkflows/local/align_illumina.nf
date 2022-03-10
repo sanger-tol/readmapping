@@ -1,5 +1,5 @@
 //
-// Align Illumina read files against the genome
+// Align HiC read files against the genome
 //
 
 include { SAMTOOLS_FASTQ                        } from '../../modules/nf-core/modules/samtools/fastq/main'
@@ -36,7 +36,7 @@ workflow ALIGN_ILLUMINA {
     .set { ch_bams }
 
     // Mark duplicates
-    MARKDUPLICATE ( ch_bams, fasta )
+    MARKDUPLICATE ( ch_bams )
     ch_versions = ch_versions.mix(MARKDUPLICATE.out.versions.first())
 
     // Convert merged BAM to CRAM and calculate indices and statistics
@@ -46,15 +46,17 @@ workflow ALIGN_ILLUMINA {
     emit:
     cram1 = CONVERT_STATS_SINGLE.out.cram
     crai1 = CONVERT_STATS_SINGLE.out.crai
+/*
     stats1 = CONVERT_STATS_SINGLE.out.stats
     idxstats1 = CONVERT_STATS_SINGLE.out.idxstats
     flagstats1 = CONVERT_STATS_SINGLE.out.flagstats
-
+*/
     cram = CONVERT_STATS_MERGE.out.cram
     crai = CONVERT_STATS_MERGE.out.crai
+/*
     stats = CONVERT_STATS_MERGE.out.stats
     idxstats = CONVERT_STATS_MERGE.out.idxstats
     flagstats = CONVERT_STATS_MERGE.out.flagstats
-
+*/
     versions = ch_versions
 }

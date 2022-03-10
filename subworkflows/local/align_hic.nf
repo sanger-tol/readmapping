@@ -36,7 +36,7 @@ workflow ALIGN_HIC {
     .set { ch_bams }
 
     // Mark duplicates
-    MARKDUPLICATE ( ch_bams, fasta )
+    MARKDUPLICATE ( ch_bams )
     ch_versions = ch_versions.mix(MARKDUPLICATE.out.versions.first())
 
     // Convert merged BAM to CRAM and calculate indices and statistics

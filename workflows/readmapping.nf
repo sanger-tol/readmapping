@@ -37,6 +37,9 @@ ch_multiqc_custom_config = params.multiqc_config ? Channel.fromPath(params.multi
 include { INPUT_CHECK    } from '../subworkflows/local/input_check'
 include { PREPARE_GENOME } from '../subworkflows/local/prepare_genome'
 include { ALIGN_HIC      } from '../subworkflows/local/align_hic'
+include { ALIGN_ILLUMINA } from '../subworkflows/local/align_illumina'
+include { ALIGN_PACBIO   } from '../subworkflows/local/align_pacbio'
+include { ALIGN_ONT      } from '../subworkflows/local/align_ont'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -66,9 +69,20 @@ workflow READMAPPING {
     //
     // SUBWORKFLOW: Read in samplesheet, validate and stage input files
     //
-    INPUT_CHECK (
-        ch_input
-    )
+    INPUT_CHECK ( ch_input )
+      .reads
+      .branch {
+        meta, reads ->
+          hic : meta.datatype == "hic"
+            return [ meta, reads ]
+          illumina : meta.datatype == "illumina"
+            return [ meta, reads ]
+          pacbio : meta.datatype == "pacbio"
+            return [ meta, reads ]
+          ont : meta.datatype == "ont"
+            return [ meta, reads ]
+      }
+      .set { ch_reads }
     ch_versions = ch_versions.mix(INPUT_CHECK.out.versions)
 
     //
@@ -80,8 +94,17 @@ workflow READMAPPING {
     //
     // SUBWORKFLOW: Align raw reads to genome
     //
-    ALIGN_HIC ( INPUT_CHECK.out.reads, PREPARE_GENOME.out.bwaidx, PREPARE_GENOME.out.fasta )
+    ALIGN_HIC ( ch_reads.hic, PREPARE_GENOME.out.bwaidx, PREPARE_GENOME.out.fasta )
     ch_versions = ch_versions.mix(ALIGN_HIC.out.versions)
+    
+    ALIGN_ILLUMINA ( ch_reads.illumina, PREPARE_GENOME.out.bwaidx, PREPARE_GENOME.out.fasta )
+    ch_versions = ch_versions.mix(ALIGN_ILLUMINA.out.versions)
+
+    ALIGN_PACBIO ( ch_reads.pacbio, PREPARE_GENOME.out.minidx, PREPARE_GENOME.out.fasta )
+    ch_versions = ch_versions.mix(ALIGN_PACBIO.out.versions)
+
+    ALIGN_ONT ( ch_reads.ont, PREPARE_GENOME.out.minidx, PREPARE_GENOME.out.fasta )
+    ch_versions = ch_versions.mix(ALIGN_ONT.out.versions)
 
 
     CUSTOM_DUMPSOFTWAREVERSIONS (
