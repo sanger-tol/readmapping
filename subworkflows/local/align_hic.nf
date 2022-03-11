@@ -31,9 +31,14 @@ workflow ALIGN_HIC {
 
     // Collect all BWAMEM2 output by sample name
     BWAMEM2_MEM.out.bam
-    .map { meta, bam -> meta.id = meta.id.split('_')[0..-2].join('_')[ meta, bam ] }
+    .map { meta, bam ->
+    meta.id = meta.id.split('_')[0..-2].join('_')
+    [ [id: meta.id, datatype: meta.datatype] , bam ] 
+    }   
     .groupTuple(by: [0])
     .set { ch_bams }
+
+    ch_bams.view()
 
     // Mark duplicates
     MARKDUPLICATE ( ch_bams )
