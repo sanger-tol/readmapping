@@ -1,4 +1,4 @@
-# ![nf-core/readmapping](docus/images/nf-core-readmapping_logo_light.png#gh-light-mode-only) ![nf-core/readmapping](docus/images/nf-core-readmapping_logo_dark.png#gh-dark-mode-only)
+# ![sanger-tol/readmapping](docs/images/nf-core-readmapping_logo_light.png#gh-light-mode-only) ![nf-core/readmapping](docus/images/readmapping.png#gh-dark-mode-only)
 
 [![GitHub Actions CI Status](https://github.com/nf-core/readmapping/workflows/nf-core%20CI/badge.svg)](https://github.com/nf-core/readmapping/actions?query=workflow%3A%22nf-core+CI%22)
 [![GitHub Actions Linting Status](https://github.com/nf-core/readmapping/workflows/nf-core%20linting/badge.svg)](https://github.com/nf-core/readmapping/actions?query=workflow%3A%22nf-core+linting%22)
