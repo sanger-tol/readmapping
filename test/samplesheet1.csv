@@ -1,5 +1,0 @@
-sample,datatype,datafile,rgid
-gfLaeSulp1_short,illumina,./test/40063_3#5_20000LH.cram,
-gfLaeSulp1_short,illumina,./test/40063_3#5_20000LH_copy.cram,
-gfLaeSulp1_long,pacbio,./test/m64229e_210602_121910.ccs.bc1020_BAK8B_OA--bc1020_BAK8B_OA_125LH.bam,
-gfLaeSulp1_long,pacbio,./test/m64229e_210602_121910.ccs.bc1020_BAK8B_OA--bc1020_BAK8B_OA_125LH_copy.bam,
