@@ -1,3 +1,2 @@
 sample,datatype,datafile,rgid
-sample1,hic,https://github.com/priyanka-surana/readmapping/blob/main/test/40063_3%235_20000LH.cram,gfLaeSulp1
-sample1,hic,https://github.com/priyanka-surana/readmapping/blob/main/test/40063_3%235_20000LH_copy.cram,gfLaeSulp1
+gfLaeSulp1,pacbio,./full_test/m64229e_210602_121910.ccs.bc1020_BAK8B_OA--bc1020_BAK8B_OA.bam,

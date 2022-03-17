@@ -32,13 +32,12 @@ workflow ALIGN_HIC {
     // Collect all BWAMEM2 output by sample name
     BWAMEM2_MEM.out.bam
     .map { meta, bam ->
-    meta.id = meta.id.split('_')[0..-2].join('_')
-    [ [id: meta.id, datatype: meta.datatype] , bam ] 
+    new_meta = meta.clone()
+    new_meta.id = new_meta.id.split('_')[0..-2].join('_')
+    [ [id: new_meta.id, datatype: new_meta.datatype] , bam ] 
     }   
     .groupTuple(by: [0])
     .set { ch_bams }
-
-    ch_bams.view()
 
     // Mark duplicates
     MARKDUPLICATE ( ch_bams )
@@ -51,17 +50,15 @@ workflow ALIGN_HIC {
     emit:
     cram1 = CONVERT_STATS_SINGLE.out.cram
     crai1 = CONVERT_STATS_SINGLE.out.crai
-/*
     stats1 = CONVERT_STATS_SINGLE.out.stats
     idxstats1 = CONVERT_STATS_SINGLE.out.idxstats
-    flagstats1 = CONVERT_STATS_SINGLE.out.flagstats
-*/
+    flagstat1 = CONVERT_STATS_SINGLE.out.flagstat
+
     cram = CONVERT_STATS_MERGE.out.cram
     crai = CONVERT_STATS_MERGE.out.crai
-/*
     stats = CONVERT_STATS_MERGE.out.stats
     idxstats = CONVERT_STATS_MERGE.out.idxstats
-    flagstats = CONVERT_STATS_MERGE.out.flagstats
-*/
+    flagstat = CONVERT_STATS_MERGE.out.flagstat
+
     versions = ch_versions
 }

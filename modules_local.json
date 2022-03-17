@@ -1,0 +1,23 @@
+{
+    "name": "sanger-tol/readmapping",
+    "homePage": "https://github.com/sanger-tol/readmapping",
+    "repos": {
+        "local": {
+	    "minimap2_align": {
+		"md5sum": "fe0d769a5974b5e84d70d95667ac8788"
+	    },
+	    "samplesheet_check": {
+		"md5sum": "8f19f40348edf93ee1877a73702edbf3"
+	    },
+            "samtools_collate": {
+                "md5sum": "2226897acf392676a056205ada366bcd"
+            },
+            "samtools_markdup": {
+                "md5sum": "7ef470b3f161d7029b3932e3bfe21e2a"
+            },
+            "samtools_view": {
+                "md5sum": "9e3967b3200c2d84327ce9cdc2c0503e"
+            }
+        }
+    }
+}

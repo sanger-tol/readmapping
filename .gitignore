@@ -6,3 +6,5 @@ results/
 testing/
 testing*
 *.pyc
+full_test/
+.nf-core.yml

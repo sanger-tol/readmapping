@@ -3,14 +3,44 @@
     "homePage": "https://github.com/nf-core/readmapping",
     "repos": {
         "nf-core/modules": {
-            "custom/dumpsoftwareversions": {
-                "git_sha": "20d8250d9f39ddb05dfb437603aaf99b5c0b2b41"
+            "bwamem2/index": {
+                "git_sha": "e745e167c1020928ef20ea1397b6b4d230681b4d"
             },
-            "fastqc": {
-                "git_sha": "9d0cad583b9a71a6509b754fdf589cbfbed08961"
+            "bwamem2/mem": {
+                "git_sha": "950700bcdc0e9a2b6883d40d2c51c6fc435cd714"
             },
-            "multiqc": {
-                "git_sha": "20d8250d9f39ddb05dfb437603aaf99b5c0b2b41"
+            "gunzip": {
+                "git_sha": "e745e167c1020928ef20ea1397b6b4d230681b4d"
+            },
+            "minimap2/index": {
+                "git_sha": "e745e167c1020928ef20ea1397b6b4d230681b4d"
+            },
+            "samtools/fastq": {
+                "git_sha": "1ad73f1b2abdea9398680d6d20014838135c9a35"
+            },
+            "samtools/fixmate": {
+                "git_sha": "1ad73f1b2abdea9398680d6d20014838135c9a35"
+            },
+            "samtools/flagstat": {
+                "git_sha": "1ad73f1b2abdea9398680d6d20014838135c9a35"
+            },
+            "samtools/idxstats": {
+                "git_sha": "1ad73f1b2abdea9398680d6d20014838135c9a35"
+            },
+            "samtools/index": {
+                "git_sha": "1ad73f1b2abdea9398680d6d20014838135c9a35"
+            },
+            "samtools/merge": {
+                "git_sha": "1ad73f1b2abdea9398680d6d20014838135c9a35"
+            },
+            "samtools/sort": {
+                "git_sha": "1ad73f1b2abdea9398680d6d20014838135c9a35"
+            },
+            "samtools/stats": {
+                "git_sha": "1ad73f1b2abdea9398680d6d20014838135c9a35"
+            },
+            "untar": {
+                "git_sha": "7ec09d0ef4df89617baacc9b2dafcddb7cd4b05a"
             }
         }
     }

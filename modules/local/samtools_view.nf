@@ -12,8 +12,7 @@ process SAMTOOLS_VIEW {
     path fasta
 
     output:
-    tuple val(meta), path("*.bam") , emit: bam , optional: true
-    tuple val(meta), path("*.cram"), emit: cram, optional: true
+    tuple val(meta), path("*.cram"), emit: cram
     path  "versions.yml"           , emit: versions
 
     when:
@@ -21,20 +20,16 @@ process SAMTOOLS_VIEW {
 
     script:
     def args = task.ext.args ?: ''
-    def args2 = task.ext.args2 ?: ''
-    def prefix = task.ext.prefix ?: "${meta.id}"
-    def reference = fasta ? "--reference ${fasta} -C" : ""
-    def file_type = input.getExtension()
-    if ("$input" == "${prefix}.${file_type}") error "Input and output names are the same, use \"task.ext.prefix\" to disambiguate!"
+    def prefix = task.ext.prefix ?: "assembly.${meta.datatype}.${meta.id}"
+    if ("$input" == "${prefix}.cram") error "Input and output names are the same, use \"task.ext.prefix\" to disambiguate!"
     """
     samtools \\
         view \\
         --threads ${task.cpus-1} \\
-        ${reference} \\
+        --reference $fasta -C \\
         $args \\
         $input \\
-        $args2 \\
-        > ${prefix}.${file_type}
+        > ${prefix}.cram
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
