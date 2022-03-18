@@ -20,7 +20,7 @@ process SAMTOOLS_VIEW {
 
     script:
     def args = task.ext.args ?: ''
-    def prefix = task.ext.prefix ?: "assembly.${meta.datatype}.${meta.id}"
+    def prefix = task.ext.prefix ?: "assembly.${meta.datatype}.${input.baseName}"
     """
     samtools \\
         view \\
