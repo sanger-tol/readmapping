@@ -41,10 +41,11 @@ def check_samplesheet(file_in, file_out):
     """
     This function checks that the samplesheet follows the following structure:
 
-    sample,datatype,datafile,rgid
+    sample,datatype,datafile,library
     sample1,hic,/path/to/file1.cram,ID1
-    sample1,hic,/path/to/file2.cram,ID2
-    sample2,pacbio,/path/to/file1.bam,ID3
+    sample1,illumina,/path/to/file2.cram,ID2
+    sample1,pacbio,/path/to/file1.bam,ID3
+    sample1,ont,/path/to/file.fq.gz,ID4
 
     For an example see:
     https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv
@@ -55,7 +56,7 @@ def check_samplesheet(file_in, file_out):
 
         ##* Check header
         MIN_COLS = 3
-        HEADER = ["sample", "datatype", "datafile", "rgid"]
+        HEADER = ["sample", "datatype", "datafile", "library"]
         header = [x.strip('"') for x in fin.readline().strip().split(",")]
         if header[: len(HEADER)] != HEADER:
             print("ERROR: Please check samplesheet header -> {} != {}".format(",".join(header), ",".join(HEADER)))
@@ -81,13 +82,13 @@ def check_samplesheet(file_in, file_out):
                 )
 
             ##* Check sample name entries
-            sample, datatype, datafile, rgid = lspl[: len(HEADER)]
+            sample, datatype, datafile, library = lspl[: len(HEADER)]
             sample = sample.replace(" ", "_")
             if not sample:
                 print_error("Sample entry has not been specified!", "Line", line)
 
             ##* Check datatype name entries
-            datatypes = ["hic", "pacbio", "illumina"]
+            datatypes = ["hic", "pacbio", "illumina", "ont"]
             if datatype:
                 if datatype not in datatypes:
                     print_error(
@@ -118,8 +119,8 @@ def check_samplesheet(file_in, file_out):
                         line,
                     )
 
-            ##* Create sample mapping dictionary = { sample: [ datatype, datafile, rgid ] }
-            sample_info = [datatype, datafile, rgid]
+            ##* Create sample mapping dictionary = { sample: [ datatype, datafile, library ] }
+            sample_info = [datatype, datafile, library]
             if sample not in sample_mapping_dict:
                 sample_mapping_dict[sample] = [sample_info]
             else:
@@ -133,12 +134,8 @@ def check_samplesheet(file_in, file_out):
         out_dir = os.path.dirname(file_out)
         make_dir(out_dir)
         with open(file_out, "w") as fout:
-            fout.write(",".join(["sample", "datatype", "datafile", "rgid"]) + "\n")
+            fout.write(",".join(["sample", "datatype", "datafile", "library"]) + "\n")
             for sample in sorted(sample_mapping_dict.keys()):
-
-                ## Check that multiple runs of the same sample are of the same datatype
-                if not all(x[0] == sample_mapping_dict[sample][0][0] for x in sample_mapping_dict[sample]):
-                    print_error("Multiple runs of a sample must be of the same datatype!", "Sample: {}".format(sample))
 
                 for idx, val in enumerate(sample_mapping_dict[sample]):
                     fout.write(",".join(["{}_T{}".format(sample, idx + 1)] + val) + "\n")

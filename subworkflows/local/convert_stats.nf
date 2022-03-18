@@ -2,7 +2,7 @@
 // Convert BAM to CRAM, create index and calculate statistics
 //
 
-include { SAMTOOLS_VIEW     } from '../../modules/local/samtools_view'
+include { SAMTOOLS_VIEW     } from '../../modules/local/samtools/view'
 include { SAMTOOLS_INDEX    } from '../../modules/nf-core/modules/samtools/index/main'
 include { SAMTOOLS_STATS    } from '../../modules/nf-core/modules/samtools/stats/main'
 include { SAMTOOLS_FLAGSTAT } from '../../modules/nf-core/modules/samtools/flagstat/main'

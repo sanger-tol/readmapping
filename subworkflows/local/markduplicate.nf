@@ -3,10 +3,10 @@
 //
 
 include { SAMTOOLS_MERGE                        } from '../../modules/nf-core/modules/samtools/merge/main'
-include { SAMTOOLS_COLLATE                      } from '../../modules/local/samtools_collate'
+include { SAMTOOLS_COLLATE                      } from '../../modules/local/samtools/collate'
 include { SAMTOOLS_FIXMATE                      } from '../../modules/nf-core/modules/samtools/fixmate/main'
 include { SAMTOOLS_SORT                         } from '../../modules/nf-core/modules/samtools/sort/main'
-include { SAMTOOLS_MARKDUP                      } from '../../modules/local/samtools_markdup'
+include { SAMTOOLS_MARKDUP                      } from '../../modules/local/samtools/markdup'
 
 workflow MARKDUPLICATE {
     take:

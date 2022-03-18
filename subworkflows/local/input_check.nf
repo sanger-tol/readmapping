@@ -2,7 +2,7 @@
 // Check input samplesheet and get read channels
 //
 
-include { SAMPLESHEET_CHECK } from '../../modules/local/samplesheet_check'
+include { SAMPLESHEET_CHECK } from '../../modules/local/samplesheet/check'
 
 workflow INPUT_CHECK {
     take:
@@ -25,12 +25,13 @@ def create_data_channels(LinkedHashMap row) {
     def meta = [:]
     meta.id         = row.sample
     meta.datatype   = row.datatype
+    meta.library    = row.library
 
     def platform = ""
     if (meta.datatype == "hic" || meta.datatype == "illumina") { platform = "ILLUMINA" }
     else if (meta.datatype == "pacbio") { platform = "PACBIO" }
     else if (meta.datatype == "ont") { platform = "ONT" }
-    meta.readgroup  = "\'@RG\\tID:" + row.datafile.split('/')[-1] + "\\tPL:" + platform + "\\tSM:" + row.rgid + "\'"
+    meta.read_group  = "\'@RG\\tID:" + row.datafile.split('/')[-1] + "\\tPL:" + platform + "\\tSM:" + meta.id.split('_')[0..-2].join('_') + "\'"
 
     def array = []
     array = [ meta, [ file(row.datafile) ] ]

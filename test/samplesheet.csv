@@ -1,3 +1,4 @@
-sample,datatype,datafile,rgid
-gfLaeSulp1,illumina,./test/40063_3#5_20000LH.cram,
-gfLaeSulp1,illumina,./test/40063_3#5_20000LH_copy.cram,
+sample,datatype,datafile,library
+gfLaeSulp1,hic,./test/40063_3#5_20000LH.cram,org
+gfLaeSulp1,hic,./test/40063_3#5_20000LH_copy2.cram,copy2
+gfLaeSulp1,illumina,./test/40063_3#5_20000LH_copy.cram,copy

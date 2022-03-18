@@ -10,7 +10,7 @@ def summary_params = NfcoreSchema.paramsSummaryMap(workflow, params)
 WorkflowReadmapping.initialise(params, log)
 
 // Check input path parameters to see if they exist
-def checkPathParamList = [ params.input, params.multiqc_config, params.fasta ]
+def checkPathParamList = [ params.input, params.multiqc_config, params.fasta, params.bwamem2_index, params.minimap2_index ]
 for (param in checkPathParamList) { if (param) { file(param, checkIfExists: true) } }
 
 // Check mandatory parameters
@@ -106,7 +106,9 @@ workflow READMAPPING {
     ALIGN_ONT ( ch_reads.ont, PREPARE_GENOME.out.minidx, PREPARE_GENOME.out.fasta )
     ch_versions = ch_versions.mix(ALIGN_ONT.out.versions)
 
-
+    // 
+    // MODULE: Collate versions.yml file
+    //
     CUSTOM_DUMPSOFTWAREVERSIONS (
         ch_versions.unique().collectFile(name: 'collated_versions.yml')
     )

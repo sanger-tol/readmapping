@@ -2,7 +2,7 @@
 // Align HiC read files against the genome
 //
 
-include { SAMTOOLS_FASTQ                        } from '../../modules/nf-core/modules/samtools/fastq/main'
+include { SAMTOOLS_FASTQ                        } from '../../modules/local/samtools/fastq'
 include { BWAMEM2_MEM                           } from '../../modules/nf-core/modules/bwamem2/mem/main'
 include { CONVERT_STATS as CONVERT_STATS_SINGLE } from '../../subworkflows/local/convert_stats'
 include { MARKDUPLICATE                         } from '../../subworkflows/local/markduplicate'
@@ -27,7 +27,7 @@ workflow ALIGN_HIC {
 
     // Convert to CRAM and calculate indices and statistics
     CONVERT_STATS_SINGLE ( BWAMEM2_MEM.out.bam, fasta )
-    ch_versions = ch_versions.mix(CONVERT_STATS_SINGLE.out.versions.first())
+    ch_versions = ch_versions.mix(CONVERT_STATS_SINGLE.out.versions)
 
     // Collect all BWAMEM2 output by sample name
     BWAMEM2_MEM.out.bam
@@ -41,11 +41,11 @@ workflow ALIGN_HIC {
 
     // Mark duplicates
     MARKDUPLICATE ( ch_bams )
-    ch_versions = ch_versions.mix(MARKDUPLICATE.out.versions.first())
+    ch_versions = ch_versions.mix(MARKDUPLICATE.out.versions)
 
     // Convert merged BAM to CRAM and calculate indices and statistics
     CONVERT_STATS_MERGE ( MARKDUPLICATE.out.bam, fasta )
-    ch_versions = ch_versions.mix(CONVERT_STATS_MERGE.out.versions.first())
+    ch_versions = ch_versions.mix(CONVERT_STATS_MERGE.out.versions)
 
     emit:
     cram1 = CONVERT_STATS_SINGLE.out.cram
