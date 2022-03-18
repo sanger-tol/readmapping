@@ -8,3 +8,5 @@ testing*
 *.pyc
 full_test/
 .nf-core.yml
+*.e
+*.o

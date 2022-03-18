@@ -25,13 +25,13 @@ def create_data_channels(LinkedHashMap row) {
     def meta = [:]
     meta.id         = row.sample
     meta.datatype   = row.datatype
-    meta.library    = row.library
+    meta.library    = (row.library == "") ? row.datafile.split('/')[-1].split('\\.')[0] : row.library
 
     def platform = ""
     if (meta.datatype == "hic" || meta.datatype == "illumina") { platform = "ILLUMINA" }
     else if (meta.datatype == "pacbio") { platform = "PACBIO" }
     else if (meta.datatype == "ont") { platform = "ONT" }
-    meta.read_group  = "\'@RG\\tID:" + row.datafile.split('/')[-1] + "\\tPL:" + platform + "\\tSM:" + meta.id.split('_')[0..-2].join('_') + "\'"
+    meta.read_group  = "\'@RG\\tID:" + row.datafile.split('/')[-1].split('\\.')[0] + "\\tPL:" + platform + "\\tSM:" + meta.id.split('_')[0..-2].join('_') + "\'"
 
     def array = []
     array = [ meta, [ file(row.datafile) ] ]
