@@ -112,9 +112,9 @@ def check_samplesheet(file_in, file_out):
                         "Line", 
                         line,
                     )
-                if not datafile.endswith(".cram") and not datafile.endswith(".bam"):
+                if not datafile.endswith(".cram") and not datafile.endswith(".bam") and not datafile.endswith("fq.gz") and not datafile.endswith("fastq.gz"):
                     print_error(
-                        "Data file does not have extension '.cram' or '.bam'!", 
+                        "Data file does not have extension '.cram' or '.bam' or compressed '.f*q'!", 
                         "Line", 
                         line,
                     )
