@@ -62,6 +62,7 @@ On release, tests run the pipeline on a full-sized dataset on the Wellcome Sange
 5. Mark duplicates ([Samtools markdup](https://www.htslib.org/doc/samtools-markdup.html))
 
 **Workflow**
+</br>
 <img src="docs/images/readmapping_workflow.png" height="400">
 
 ## Quick Start
