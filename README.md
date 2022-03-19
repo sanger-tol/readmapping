@@ -74,7 +74,7 @@ On release, tests run the pipeline on a full-sized dataset on the Wellcome Sange
 3. Download the pipeline and test it on a minimal dataset with a single command:
 
     ```console
-    nextflow run nf-core/readmapping -profile test,YOURPROFILE
+    nextflow run sanger-tol/readmapping -profile test,YOURPROFILE
     ```
 
     Note that some form of configuration will be needed so that Nextflow knows how to fetch the required software. This is usually done in the form of a config profile (`YOURPROFILE` in the example command above). You can chain multiple config profiles in a comma-separated string.
@@ -86,36 +86,30 @@ On release, tests run the pipeline on a full-sized dataset on the Wellcome Sange
 
 4. Start running your own analysis!
 
-    <!-- TODO nf-core: Update the example "typical command" below used to run the pipeline -->
-
     ```console
-    nextflow run nf-core/readmapping -profile <docker/singularity/podman/shifter/charliecloud/conda/institute> --input samplesheet.csv --genome GRCh37
+    nextflow run sanger-tol/readmapping -profile <docker/singularity/podman/shifter/charliecloud/conda/institute> --input samplesheet.csv --fasta genome.fa.gz
     ```
 
 ## Documentation
 
-The nf-core/readmapping pipeline comes with documentation about the pipeline [usage](https://nf-co.re/readmapping/usage), [parameters](https://nf-co.re/readmapping/parameters) and [output](https://nf-co.re/readmapping/output).
+The sanger-tol/readmapping pipeline comes with documentation about the pipeline [usage](!https://nf-co.re/readmapping/usage), [parameters](!https://nf-co.re/readmapping/parameters) and [output](!https://nf-co.re/readmapping/output).
 
 ## Credits
 
-nf-core/readmapping was originally written by @priyanka-surana.
+sanger-tol/readmapping was originally written by @priyanka-surana.
 
 We thank the following people for their extensive assistance in the development of this pipeline:
-
-<!-- TODO nf-core: If applicable, make list of people who have also contributed -->
 
 ## Contributions and Support
 
 If you would like to contribute to this pipeline, please see the [contributing guidelines](.github/CONTRIBUTING.md).
 
-For further information or help, don't hesitate to get in touch on the [Slack `#readmapping` channel](https://nfcore.slack.com/channels/readmapping) (you can join with [this invite](https://nf-co.re/join/slack)).
+For further information or help, don't hesitate to get in touch on the [Slack `#pipelines` channel](https://SangerTreeofLife.slack.com/channels/pipelines). Please [create an issue](https://github.com/sanger-tol/readmapping/issues/new/choose) on GitHub if you are not on the Sanger slack channel.
 
 ## Citations
 
-<!-- TODO nf-core: Add citation for pipeline after first release. Uncomment lines below and update Zenodo doi and badge at the top of this file. -->
-<!-- If you use  nf-core/readmapping for your analysis, please cite it using the following doi: [10.5281/zenodo.XXXXXX](https://doi.org/10.5281/zenodo.XXXXXX) -->
+If you use  sanger-tol/readmapping for your analysis, please cite it using the following doi: [10.5281/zenodo.XXXXXX](https://doi.org/10.5281/zenodo.XXXXXX)
 
-<!-- TODO nf-core: Add bibliography of tools and data used in your pipeline -->
 An extensive list of references for the tools used by the pipeline can be found in the [`CITATIONS.md`](CITATIONS.md) file.
 
 You can cite the `nf-core` publication as follows:
