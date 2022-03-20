@@ -1,5 +1,5 @@
 //
-// This file holds several functions specific to the workflow/readmapping.nf in the nf-core/readmapping pipeline
+// This file holds several functions specific to the workflow/readmapping.nf in the sanger-tol/readmapping pipeline
 //
 
 class WorkflowReadmapping {

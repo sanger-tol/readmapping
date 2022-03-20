@@ -1,4 +1,4 @@
-# nf-core/readmapping: Output
+# sanger-tol/readmapping: Output
 
 ## Introduction
 

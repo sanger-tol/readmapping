@@ -1,6 +1,6 @@
-# nf-core/readmapping: Documentation
+# sanger-tol/readmapping: Documentation
 
-The nf-core/readmapping documentation is split into the following pages:
+The sanger-tol/readmapping documentation is split into the following pages:
 
 * [Usage](usage.md)
     * An overview of how the pipeline works, how to run it and a description of all of the different command-line flags.
@@ -8,3 +8,5 @@ The nf-core/readmapping documentation is split into the following pages:
     * An overview of the different results produced by the pipeline and how to interpret them.
 
 You can find a lot more documentation about installing, configuring and running nf-core pipelines on the website: [https://nf-co.re](https://nf-co.re)
+
+Detailed documentation about the sanger-tol/readmapping pipeline can be found: [GitHub Wiki](https://github.com/sanger-tol/readmapping/wiki)

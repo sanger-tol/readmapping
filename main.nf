@@ -1,11 +1,10 @@
 #!/usr/bin/env nextflow
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    nf-core/readmapping
+    sanger-tol/readmapping
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Github : https://github.com/nf-core/readmapping
-    Website: https://nf-co.re/readmapping
-    Slack  : https://nfcore.slack.com/channels/readmapping
+    Github : https://github.com/sanger-tol/readmapping
+    Slack  : https://SangerTreeofLife.slack.com/channels/pipelines
 ----------------------------------------------------------------------------------------
 */
 

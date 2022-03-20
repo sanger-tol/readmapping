@@ -10,10 +10,20 @@
 
 ## Pipeline tools
 
-* [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
+* [Bam2Fastx]()
+    > 
+
+* [BWA-MEM2](https://ieeexplore.ieee.org/document/8820962)
+    > Vasimuddin Md, Misra S, Li H, Aluru S. Efficient Architecture-Aware Acceleration of BWA-MEM for Multicore Systems. 2019 IEEE International Parallel and Distributed Processing Symposium. 2019 May;314–24. doi: 10.1109/IPDPS.2019.00041.
+
+* [Minimap2](https://pubmed.ncbi.nlm.nih.gov/34623391/)
+    > Li H. New strategies to improve minimap2 alignment accuracy. Bioinformatics. 2021 Oct 8;37(23):4572–4. doi: 10.1093/bioinformatics/btab705. Epub ahead of print. PMID: 34623391; PMCID: PMC8652018.
 
 * [MultiQC](https://pubmed.ncbi.nlm.nih.gov/27312411/)
     > Ewels P, Magnusson M, Lundin S, Käller M. MultiQC: summarize analysis results for multiple tools and samples in a single report. Bioinformatics. 2016 Oct 1;32(19):3047-8. doi: 10.1093/bioinformatics/btw354. Epub 2016 Jun 16. PubMed PMID: 27312411; PubMed Central PMCID: PMC5039924.
+
+* [Samtools](https://pubmed.ncbi.nlm.nih.gov/33590861/)
+    > Danecek P, Bonfield JK, Liddle J, Marshall J, Ohan V, Pollard MO, Whitwham A, Keane T, McCarthy SA, Davies RM, Li H. Twelve years of SAMtools and BCFtools. Gigascience. 2021 Feb 16;10(2):giab008. doi: 10.1093/gigascience/giab008. PMID: 33590861; PMCID: PMC7931819.
 
 ## Software packaging/containerisation tools
 

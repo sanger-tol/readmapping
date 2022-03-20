@@ -1,4 +1,4 @@
-# ![sanger-tol/readmapping](docs/images/readmapping.png#gh-light-mode-only) ![sanger-tol/readmapping](docs/images/readmapping.png#gh-dark-mode-only)
+# ![sanger-tol/readmapping](docs/images/sanger-tol-readmapping_logo.png#gh-light-mode-only) ![sanger-tol/readmapping](docs/images/sanger-tol-readmapping_logo.png#gh-dark-mode-only)
 
 [![GitHub Actions CI Status](https://github.com/sanger-tol/readmapping/workflows/sanger-tol%20CI/badge.svg)](https://github.com/sanger-tol/readmapping/actions?query=workflow%3A%22sanger-tol+CI%22)
 [![GitHub Actions Linting Status](https://github.com/sanger-tol/readmapping/workflows/sanger-tol%20linting/badge.svg)](https://github.com/sanger-tol/readmapping/actions?query=workflow%3A%22sanger-tol+linting%22)
@@ -20,7 +20,7 @@
 
 The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool to run tasks across multiple compute infrastructures in a very portable manner. It uses Docker/Singularity containers making installation trivial and results highly reproducible. The [Nextflow DSL2](https://www.nextflow.io/docs/latest/dsl2.html) implementation of this pipeline uses one container per process which makes it much easier to maintain and update software dependencies. Where possible, these processes have been submitted to and installed from [nf-core/modules](https://github.com/nf-core/modules) in order to make them available to all nf-core pipelines, and to everyone within the Nextflow community!
 
-On release, tests run the pipeline on a full-sized dataset on the Wellcome Sanger Institute HPC farm with Sigularity containers. This ensures that the pipeline runs, has sensible resource allocation defaults set to run on real-world datasets, and permits the persistent storage of results to benchmark between pipeline releases and other analysis sources. The results obtained from the full-sized test can be viewed on the [sanger-tol website](!https://nf-co.re/readmapping/results).
+On release, tests run the pipeline on a full-sized dataset on the Wellcome Sanger Institute HPC farm with Sigularity containers. This ensures that the pipeline runs, has sensible resource allocation defaults set to run on real-world datasets, and permits the persistent storage of results to benchmark between pipeline releases and other analysis sources. The results obtained from the full-sized test can be viewed on the [sanger-tol website](https://github.com/sanger-tol/readmapping/wiki/Results).
 
 ## Pipeline summary
 
@@ -92,7 +92,7 @@ On release, tests run the pipeline on a full-sized dataset on the Wellcome Sange
 
 ## Documentation
 
-The sanger-tol/readmapping pipeline comes with documentation about the pipeline [usage](!https://nf-co.re/readmapping/usage), [parameters](!https://nf-co.re/readmapping/parameters) and [output](!https://nf-co.re/readmapping/output).
+The sanger-tol/readmapping pipeline comes with documentation about the pipeline [usage](https://github.com/sanger-tol/readmapping/wiki/Usage), [parameters](https://github.com/sanger-tol/readmapping/wiki/Parameters) and [output](https://github.com/sanger-tol/readmapping/wiki/Output).
 
 ## Credits
 
@@ -104,7 +104,7 @@ We thank the following people for their extensive assistance in the development 
 
 If you would like to contribute to this pipeline, please see the [contributing guidelines](.github/CONTRIBUTING.md).
 
-For further information or help, don't hesitate to get in touch on the [Slack `#pipelines` channel](https://SangerTreeofLife.slack.com/channels/pipelines). Please [create an issue](https://github.com/sanger-tol/readmapping/issues/new/choose) on GitHub if you are not on the Sanger slack channel.
+For further information or help, don't hesitate to get in touch on the [Slack `#pipelines` channel](https://sangertreeoflife.slack.com/channels/pipelines). Please [create an issue](https://github.com/sanger-tol/readmapping/issues/new/choose) on GitHub if you are not on the Sanger slack channel.
 
 ## Citations
 

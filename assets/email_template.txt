@@ -4,16 +4,16 @@
   |\\ | |__  __ /  ` /  \\ |__) |__         }  {
   | \\| |       \\__, \\__/ |  \\ |___     \\`-._,-`-,
                                         `._,._,'
-  nf-core/readmapping v${version}
+  sanger-tol/readmapping v${version}
 ----------------------------------------------------
 
 Run Name: $runName
 
 <% if (success){
-    out << "## nf-core/readmapping execution completed successfully! ##"
+    out << "## sanger-tol/readmapping execution completed successfully! ##"
 } else {
     out << """####################################################
-## nf-core/readmapping execution completed unsuccessfully! ##
+## sanger-tol/readmapping execution completed unsuccessfully! ##
 ####################################################
 The exit status of the task that caused the workflow execution to fail was: $exitStatus.
 The full error message was:
@@ -36,5 +36,5 @@ Pipeline Configuration:
 <% out << summary.collect{ k,v -> " - $k: $v" }.join("\n") %>
 
 --
-nf-core/readmapping
-https://github.com/nf-core/readmapping
+sanger-tol/readmapping
+https://github.com/sanger-tol/readmapping

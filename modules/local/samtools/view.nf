@@ -21,7 +21,7 @@ process SAMTOOLS_VIEW {
     script:
     def args = task.ext.args ?: ''
 
-    def prefix = task.ext.prefix ?: (meta.library == null) ? "assembly.${meta.datatype}" : "assembly.${meta.datatype}.${meta.library}"
+    def prefix = task.ext.prefix ?: (meta.library == null) ? "assembly.${meta.datatype}.all" : "assembly.${meta.datatype}.${meta.library}"
     """
     samtools \\
         view \\

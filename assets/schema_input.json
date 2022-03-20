@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema",
-    "$id": "https://raw.githubusercontent.com/nf-core/readmapping/master/assets/schema_input.json",
-    "title": "nf-core/readmapping pipeline - params.input schema",
+    "$id": "https://raw.githubusercontent.com/sanger-tol/readmapping/master/assets/schema_input.json",
+    "title": "sanger-tol/readmapping pipeline - params.input schema",
     "description": "Schema for the file provided with params.input",
     "type": "array",
     "items": {
@@ -12,28 +12,26 @@
                 "pattern": "^\\S+$",
                 "errorMessage": "Sample name must be provided and cannot contain spaces"
             },
-            "fastq_1": {
+            "datatype": {
                 "type": "string",
-                "pattern": "^\\S+\\.f(ast)?q\\.gz$",
-                "errorMessage": "FastQ file for reads 1 must be provided, cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
+                "pattern": "^\\S+$",
+                "errorMessage": "Data type, and must be one of: 'hic' or 'illumina' or 'ont' or 'pacbio'"
             },
-            "fastq_2": {
-                "errorMessage": "FastQ file for reads 2 cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'",
-                "anyOf": [
-                    {
-                        "type": "string",
-                        "pattern": "^\\S+\\.f(ast)?q\\.gz$"
-                    },
-                    {
-                        "type": "string",
-                        "maxLength": 0
-                    }
-                ]
+            "datafile": {
+		"type": "string",
+		"pattern": "^\\S+$",
+                "errorMessage": "Data file for reads cannot contain spaces and must have extension 'cram' or 'bam' or '.fq.gz' or '.fastq.gz'"
+            },
+	    "library": {
+                "type": "string",
+                "pattern": "^\\S+$",
+                "errorMessage": "Library name to be assigned to read group (@RG) ID value"
             }
         },
         "required": [
             "sample",
-            "fastq_1"
+            "datatype",
+	    "datafile"
         ]
     }
 }
