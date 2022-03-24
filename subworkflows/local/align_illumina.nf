@@ -2,11 +2,9 @@
 // Align HiC read files against the genome
 //
 
-include { SAMTOOLS_FASTQ                        } from '../../modules/local/samtools/fastq'
-include { BWAMEM2_MEM                           } from '../../modules/nf-core/modules/bwamem2/mem/main'
-include { CONVERT_STATS as CONVERT_STATS_SINGLE } from '../../subworkflows/local/convert_stats'
-include { MARKDUPLICATE                         } from '../../subworkflows/local/markduplicate'
-include { CONVERT_STATS as CONVERT_STATS_MERGE  } from '../../subworkflows/local/convert_stats'
+include { SAMTOOLS_FASTQ } from '../../modules/local/samtools/fastq'
+include { BWAMEM2_MEM    } from '../../modules/nf-core/modules/bwamem2/mem/main'
+include { STATS_MARKDUP  } from '../../subworkflows/local/stats_markdup'
 
 workflow ALIGN_ILLUMINA {
     take:
@@ -25,40 +23,28 @@ workflow ALIGN_ILLUMINA {
     BWAMEM2_MEM ( SAMTOOLS_FASTQ.out.fastq, index, true )
     ch_versions = ch_versions.mix(BWAMEM2_MEM.out.versions.first())
 
-    // Convert to CRAM and calculate indices and statistics
-    CONVERT_STATS_SINGLE ( BWAMEM2_MEM.out.bam, fasta )
-    ch_versions = ch_versions.mix(CONVERT_STATS_SINGLE.out.versions)
-
-    // Collect all BWAMEM2 output by sample name
-    BWAMEM2_MEM.out.bam
-    .map { meta, bam -> 
-    new_meta = meta.clone()
-    new_meta.id = new_meta.id.split('_')[0..-2].join('_')
-    [ [id: new_meta.id, datatype: new_meta.datatype] , bam ]
-    }
-    .groupTuple(by: [0])
-    .set { ch_bams }
-
-    // Mark duplicates
-    MARKDUPLICATE ( ch_bams )
-    ch_versions = ch_versions.mix(MARKDUPLICATE.out.versions)
-
-    // Convert merged BAM to CRAM and calculate indices and statistics
-    CONVERT_STATS_MERGE ( MARKDUPLICATE.out.bam, fasta )
-    ch_versions = ch_versions.mix(CONVERT_STATS_MERGE.out.versions)
+    // Convert to CRAM, calculate indices and statistics, merge, markdup, and repeat
+    STATS_MARKDUP ( BWAMEM2_MEM.out.bam, fasta )
+    ch_versions = ch_versions.mix(STATS_MARKDUP.out.versions)
 
     emit:
-    cram1 = CONVERT_STATS_SINGLE.out.cram
-    crai1 = CONVERT_STATS_SINGLE.out.crai
-    stats1 = CONVERT_STATS_SINGLE.out.stats
-    idxstats1 = CONVERT_STATS_SINGLE.out.idxstats
-    flagstat1 = CONVERT_STATS_SINGLE.out.flagstat
+    cram1 = STATS_MARKDUP.out.cram1
+    crai1 = STATS_MARKDUP.out.crai1
+    stats1 = STATS_MARKDUP.out.stats1
+    idxstats1 = STATS_MARKDUP.out.idxstats1
+    flagstat1 = STATS_MARKDUP.out.flagstat1
 
-    cram = CONVERT_STATS_MERGE.out.cram
-    crai = CONVERT_STATS_MERGE.out.crai
-    stats = CONVERT_STATS_MERGE.out.stats
-    idxstats = CONVERT_STATS_MERGE.out.idxstats
-    flagstat = CONVERT_STATS_MERGE.out.flagstat
+    cram2 = STATS_MARKDUP.out.cram2
+    crai2 = STATS_MARKDUP.out.crai2
+    stats2 = STATS_MARKDUP.out.stats2
+    idxstats2 = STATS_MARKDUP.out.idxstats2
+    flagstat2 = STATS_MARKDUP.out.flagstat2
+
+    cram3 = STATS_MARKDUP.out.cram3
+    crai3 = STATS_MARKDUP.out.crai3
+    stats3 = STATS_MARKDUP.out.stats3
+    idxstats3 = STATS_MARKDUP.out.idxstats3
+    flagstat3 = STATS_MARKDUP.out.flagstat3
 
     versions = ch_versions
 }

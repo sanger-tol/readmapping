@@ -1,4 +1,4 @@
 sample,datatype,datafile,library
-gfLaeSulp1,hic,./test/40063_3#5_20000LH.cram,
-gfLaeSulp1,illumina,./test/40063_3#5_20000LH_copy2.cram,
-gfLaeSulp1,hic,./test/40063_3#5_20000LH_copy.cram,
+gfLaeSulp1,hic,"s3://sanger-tol-readmapping/40063_3#5_20000LH.cram",
+gfLaeSulp1,hic,"s3://sanger-tol-readmapping/40063_3#5_20000LH_copy2.cram",
+gfLaeSulp2,hic,"s3://sanger-tol-readmapping/40063_3#5_20000LH_copy.cram",
