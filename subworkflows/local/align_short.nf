@@ -1,12 +1,12 @@
 //
-// Align Illumina read files against the genome
+// Align short read (HiC and Illumina) data against the genome
 //
 
 include { SAMTOOLS_FASTQ } from '../../modules/local/samtools/fastq'
 include { BWAMEM2_MEM    } from '../../modules/local/bwamem2/mem'
 include { MARKDUP_STATS  } from '../../subworkflows/local/markdup_stats'
 
-workflow ALIGN_ILLUMINA {
+workflow ALIGN_SHORT {
     take:
     reads // channel: [ val(meta), [ datafile ] ]
     index // channel: /path/to/bwamem2/

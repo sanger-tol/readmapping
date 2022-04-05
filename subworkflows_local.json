@@ -3,11 +3,8 @@
     "homePage": "https://github.com/sanger-tol/readmapping",
     "repos": {
         "local": {
-            "align_hic": {
-                "md5sum": "ec857d95312c5990fd82e80b3b4fe0d2"
-            },
-            "align_illumina": {
-                "md5sum": "84942061bda6913138a2926fa102601a"
+            "align_short": {
+                "md5sum": "4893b878e6eea39a0a66ba2a796b5cbb"
             },
 	    "align_ont": {
 	    	"md5sum": "d114f15fc5eb2dfedd9dc2510d710f0d"

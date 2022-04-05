@@ -34,12 +34,12 @@ ch_multiqc_custom_config = params.multiqc_config ? Channel.fromPath(params.multi
 //
 // SUBWORKFLOW: Consisting of a mix of local and nf-core/modules
 //
-include { INPUT_CHECK    } from '../subworkflows/local/input_check'
-include { PREPARE_GENOME } from '../subworkflows/local/prepare_genome'
-include { ALIGN_HIC      } from '../subworkflows/local/align_hic'
-include { ALIGN_ILLUMINA } from '../subworkflows/local/align_illumina'
-include { ALIGN_PACBIO   } from '../subworkflows/local/align_pacbio'
-include { ALIGN_ONT      } from '../subworkflows/local/align_ont'
+include { INPUT_CHECK                   } from '../subworkflows/local/input_check'
+include { PREPARE_GENOME                } from '../subworkflows/local/prepare_genome'
+include { ALIGN_SHORT as ALIGN_HIC      } from '../subworkflows/local/align_short'
+include { ALIGN_SHORT as ALIGN_ILLUMINA } from '../subworkflows/local/align_short'
+include { ALIGN_PACBIO                  } from '../subworkflows/local/align_pacbio'
+include { ALIGN_ONT                     } from '../subworkflows/local/align_ont'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
