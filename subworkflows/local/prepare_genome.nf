@@ -23,20 +23,20 @@ workflow PREPARE_GENOME {
 
   // Unmask genome fasta
   REMOVE_MASKING ( ch_fasta )
-  ch_versions = ch_versions.mix(REMOVE_MASKING.out.versions.first())
+  ch_versions = ch_versions.mix(REMOVE_MASKING.out.versions)
 
   // Generate BWA index
   ch_bwamem2_index = Channel.empty()
   if (params.bwamem2_index) {
         if (params.bwamem2_index.endsWith('.tar.gz')) {
                 ch_bwamem2_index = UNTAR_BWAMEM2 (params.bwamem2_index).untar
-                ch_versions      = ch_versions.mix(UNTAR_BWAMEM2.out.versions.first())
+                ch_versions      = ch_versions.mix(UNTAR_BWAMEM2.out.versions)
         } else {
                 ch_bwamem2_index = file(params.bwamem2_index)
         }
   } else {
         ch_bwamem2_index = BWAMEM2_INDEX (REMOVE_MASKING.out.fasta).index
-        ch_versions      = ch_versions.mix(BWAMEM2_INDEX.out.versions.first())
+        ch_versions      = ch_versions.mix(BWAMEM2_INDEX.out.versions)
   }
 
   // Generate Minimap2 index
@@ -44,13 +44,13 @@ workflow PREPARE_GENOME {
   if (params.minimap2_index) {
         if (params.minimap2_index.endsWith('.tar.gz')) {
                 ch_minimap2_index = UNTAR_MINIMAP2 (params.minimap2_index).untar
-                ch_versions       = ch_versions.mix(UNTAR_MINIMAP2.out.versions.first())
+                ch_versions       = ch_versions.mix(UNTAR_MINIMAP2.out.versions)
         } else {
                 ch_minimap2_index = file(params.minimap2_index)
         }
   } else {
         ch_minimap2_index = MINIMAP2_INDEX (REMOVE_MASKING.out.fasta).index
-        ch_versions      = ch_versions.mix(MINIMAP2_INDEX.out.versions.first())
+        ch_versions      = ch_versions.mix(MINIMAP2_INDEX.out.versions)
   }
 
   emit:
