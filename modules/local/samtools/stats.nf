@@ -1,6 +1,6 @@
 process SAMTOOLS_STATS {
     tag "$meta.id"
-    label 'process_low'
+    label 'process_medium'
 
     conda (params.enable_conda ? "bioconda::samtools=1.15" : null)
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
@@ -28,6 +28,14 @@ process SAMTOOLS_STATS {
         ${reference} \\
         ${input} \\
         > ${input}.stats
+
+    samtools \\
+        stats \\
+        -F0xB00 \\
+        --threads ${task.cpus-1} \\
+        ${reference} \\
+        ${input} \\
+        > ${input}.primary_alignments.stats
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

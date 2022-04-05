@@ -4,7 +4,7 @@
 
 include { GUNZIP                  } from '../../modules/nf-core/modules/gunzip/main'
 include { UNTAR as UNTAR_BWAMEM2  } from '../../modules/nf-core/modules/untar/main'
-include { BWAMEM2_INDEX           } from '../../modules/nf-core/modules/bwamem2/index/main'
+include { BWAMEM2_INDEX           } from '../../modules/local/bwamem2/index'
 include { UNTAR as UNTAR_MINIMAP2 } from '../../modules/nf-core/modules/untar/main'
 include { MINIMAP2_INDEX          } from '../../modules/nf-core/modules/minimap2/index/main'
 

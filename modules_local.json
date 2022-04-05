@@ -3,20 +3,41 @@
     "homePage": "https://github.com/sanger-tol/readmapping",
     "repos": {
         "local": {
-	    "minimap2_align": {
-		"md5sum": "fe0d769a5974b5e84d70d95667ac8788"
+	    "bam2fastx/bam2fastq": {
+                "md5sum": "e60b3a787e51e500244924be315c59b7"
+            },
+	    "bwamem2/index": {
+                "md5sum": "498b54349467b61f4eb347d219c94e02"
+            },
+	    "bwamem2/mem": {
+                "md5sum": "b6a54656a61e55e083fa00387dc42fa0"
+            },
+	    "custom/remove_masking": {
+                "md5sum": "c2c7e62b3dc2a50f91f6647aa53bac8a"
+            },
+	    "minimap2/align": {
+		"md5sum": "632462f55cfe3593c7edaf928a4d4d5b"
 	    },
-	    "samplesheet_check": {
+	    "samplesheet/check": {
 		"md5sum": "8f19f40348edf93ee1877a73702edbf3"
 	    },
-            "samtools_collate": {
-                "md5sum": "2226897acf392676a056205ada366bcd"
+            "samtools/collate": {
+                "md5sum": "a6a156bccf7d7f916659984d7258011b"
             },
-            "samtools_markdup": {
+	    "samtools/fastq": {
+                "md5sum": "fd4ad75d5ea50df3d326b0e986364abe"
+            },
+            "samtools/markdup": {
                 "md5sum": "7ef470b3f161d7029b3932e3bfe21e2a"
             },
-            "samtools_view": {
-                "md5sum": "9e3967b3200c2d84327ce9cdc2c0503e"
+            "samtools/sort": {
+                "md5sum": "77fc48f61ccfa4cd7f17ccafd32fbdd5"
+            },
+            "samtools/stats": {
+                "md5sum": "ed83c15660f0234738280b2c8504e0c0"
+            },
+            "samtools/view": {
+                "md5sum": "0de589e2084b198290a91f5ef9d2c2f2"
             }
         }
     }

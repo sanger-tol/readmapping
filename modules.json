@@ -3,12 +3,6 @@
     "homePage": "https://github.com/nf-core/readmapping",
     "repos": {
         "nf-core/modules": {
-            "bwamem2/index": {
-                "git_sha": "e745e167c1020928ef20ea1397b6b4d230681b4d"
-            },
-            "bwamem2/mem": {
-                "git_sha": "950700bcdc0e9a2b6883d40d2c51c6fc435cd714"
-            },
             "custom/dumpsoftwareversions": {
                 "git_sha": "e745e167c1020928ef20ea1397b6b4d230681b4d"
             },

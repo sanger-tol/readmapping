@@ -4,7 +4,7 @@
 
 include { SAMTOOLS_VIEW     } from '../../modules/local/samtools/view'
 include { SAMTOOLS_INDEX    } from '../../modules/nf-core/modules/samtools/index/main'
-include { SAMTOOLS_STATS    } from '../../modules/nf-core/modules/samtools/stats/main'
+include { SAMTOOLS_STATS    } from '../../modules/local/samtools/stats'
 include { SAMTOOLS_FLAGSTAT } from '../../modules/nf-core/modules/samtools/flagstat/main'
 include { SAMTOOLS_IDXSTATS } from '../../modules/nf-core/modules/samtools/idxstats/main'
 

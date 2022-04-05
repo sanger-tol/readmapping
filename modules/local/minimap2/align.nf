@@ -25,6 +25,7 @@ process MINIMAP2_ALIGN {
     def read_group = meta.read_group ? "-R ${meta.read_group}" : ""
     """
     minimap2 \\
+        --cs=short \\
         $args \\
         -t $task.cpus \\
         $read_group \\
