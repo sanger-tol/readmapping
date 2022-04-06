@@ -88,7 +88,7 @@ def check_samplesheet(file_in, file_out):
                 print_error("Sample entry has not been specified!", "Line", line)
 
             ##* Check datatype name entries
-            datatypes = ["hic", "pacbio", "illumina", "ont"]
+            datatypes = ["hic", "pacbio", "illumina", "ont", "pacbio_clr"]
             if datatype:
                 if datatype not in datatypes:
                     print_error(

@@ -38,7 +38,8 @@ include { INPUT_CHECK                   } from '../subworkflows/local/input_chec
 include { PREPARE_GENOME                } from '../subworkflows/local/prepare_genome'
 include { ALIGN_SHORT as ALIGN_HIC      } from '../subworkflows/local/align_short'
 include { ALIGN_SHORT as ALIGN_ILLUMINA } from '../subworkflows/local/align_short'
-include { ALIGN_PACBIO                  } from '../subworkflows/local/align_pacbio'
+include { ALIGN_PACBIO as ALIGN_HIFI    } from '../subworkflows/local/align_pacbio'
+include { ALIGN_PACBIO as ALIGN_CLR     } from '../subworkflows/local/align_pacbio'
 include { ALIGN_ONT                     } from '../subworkflows/local/align_ont'
 
 /*
@@ -79,6 +80,8 @@ workflow READMAPPING {
             return [ meta, reads ]
           pacbio : meta.datatype == "pacbio"
             return [ meta, reads ]
+          clr : meta.datatype == "pacbio_clr"
+            return [ meta, reads ]
           ont : meta.datatype == "ont"
             return [ meta, reads ]
       }
@@ -100,8 +103,11 @@ workflow READMAPPING {
     ALIGN_ILLUMINA ( ch_reads.illumina, PREPARE_GENOME.out.bwaidx, PREPARE_GENOME.out.fasta )
     ch_versions = ch_versions.mix(ALIGN_ILLUMINA.out.versions)
 
-    ALIGN_PACBIO ( ch_reads.pacbio, PREPARE_GENOME.out.minidx, PREPARE_GENOME.out.fasta )
-    ch_versions = ch_versions.mix(ALIGN_PACBIO.out.versions)
+    ALIGN_HIFI ( ch_reads.pacbio, PREPARE_GENOME.out.minidx, PREPARE_GENOME.out.fasta )
+    ch_versions = ch_versions.mix(ALIGN_HIFI.out.versions)
+
+    ALIGN_CLR ( ch_reads.clr, PREPARE_GENOME.out.minidx, PREPARE_GENOME.out.fasta )
+    ch_versions = ch_versions.mix(ALIGN_CLR.out.versions)
 
     ALIGN_ONT ( ch_reads.ont, PREPARE_GENOME.out.minidx, PREPARE_GENOME.out.fasta )
     ch_versions = ch_versions.mix(ALIGN_ONT.out.versions)
