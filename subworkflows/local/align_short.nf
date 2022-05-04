@@ -18,7 +18,7 @@ workflow ALIGN_SHORT {
     // Convert from CRAM to FASTQ
     SAMTOOLS_FASTQ ( reads )
     ch_versions = ch_versions.mix(SAMTOOLS_FASTQ.out.versions.first())
- 
+
     // Align Fastq to Genome
     BWAMEM2_MEM ( SAMTOOLS_FASTQ.out.fastq, index )
     ch_versions = ch_versions.mix(BWAMEM2_MEM.out.versions.first())

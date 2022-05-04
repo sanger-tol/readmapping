@@ -48,7 +48,7 @@ workflow PREPARE_GENOME {
             ch_minimap2_index = UNTAR_MINIMAP2 (params.minimap2_index).untar
             ch_versions       = ch_versions.mix(UNTAR_MINIMAP2.out.versions)
         } else {
-             ch_minimap2_index = file(params.minimap2_index)
+            ch_minimap2_index = file(params.minimap2_index)
         }
     } else {
         ch_minimap2_index = MINIMAP2_INDEX (REMOVE_MASKING.out.fasta).index
