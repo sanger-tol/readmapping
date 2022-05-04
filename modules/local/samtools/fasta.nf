@@ -1,4 +1,4 @@
-process SAMTOOLS_FASTQ {
+process SAMTOOLS_FASTA {
     tag "$meta.id"
     label 'process_samtools'
 
@@ -8,11 +8,11 @@ process SAMTOOLS_FASTQ {
         'quay.io/biocontainers/samtools:1.15--h1170115_1' }"
 
     input:
-    tuple val(meta), path(input)
+    tuple val(meta), path(bam)
 
     output:
-    tuple val(meta), path("*.fastq"), emit: fastq
-    path  "versions.yml"               , emit: versions
+    tuple val(meta), path("*.fasta"), emit: fasta
+    path  "versions.yml"            , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -22,11 +22,11 @@ process SAMTOOLS_FASTQ {
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
     samtools \\
-        fastq \\
+        fasta \\
         $args \\
         --threads ${task.cpus-1} \\
-        $input \\
-        > ${prefix}.fastq
+        $bam \\
+        > ${prefix}.fasta
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

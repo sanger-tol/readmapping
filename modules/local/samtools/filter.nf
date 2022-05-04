@@ -1,4 +1,4 @@
-process SAMTOOLS_FASTQ {
+process SAMTOOLS_FILTER {
     tag "$meta.id"
     label 'process_samtools'
 
@@ -9,10 +9,11 @@ process SAMTOOLS_FASTQ {
 
     input:
     tuple val(meta), path(input)
+    path list
 
     output:
-    tuple val(meta), path("*.fastq"), emit: fastq
-    path  "versions.yml"               , emit: versions
+    tuple val(meta), path("*.filtered.bam"), emit: bam
+    path  "versions.yml"          , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -22,11 +23,13 @@ process SAMTOOLS_FASTQ {
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
     samtools \\
-        fastq \\
+        view \\
         $args \\
         --threads ${task.cpus-1} \\
-        $input \\
-        > ${prefix}.fastq
+        -b -h -N $list \\
+        -o /dev/null \\
+        -U ${prefix}.filtered.bam \\
+        $input
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
