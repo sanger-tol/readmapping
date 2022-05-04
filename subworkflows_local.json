@@ -6,9 +6,9 @@
             "align_short": {
                 "md5sum": "4893b878e6eea39a0a66ba2a796b5cbb"
             },
-	    "align_ont": {
-	    	"md5sum": "d114f15fc5eb2dfedd9dc2510d710f0d"
-	    },
+            "align_ont": {
+                "md5sum": "d114f15fc5eb2dfedd9dc2510d710f0d"
+            },
             "align_pacbio": {
                 "md5sum": "a283f22abae4d02da5880daa85ee2e14"
             },

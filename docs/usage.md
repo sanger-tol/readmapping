@@ -145,7 +145,7 @@ process {
 }
 ```
 
-> **NB:** We specify the full process name i.e. `NFCORE_READMAPPING:READMAPPING:ALIGN_HIC:BWAMEM2_MEM` in the config file because this takes priority over the short name (`BWAMEM2_MEM`) and allows existing configuration using the full process name to be correctly overridden. 
+> **NB:** We specify the full process name i.e. `NFCORE_READMAPPING:READMAPPING:ALIGN_HIC:BWAMEM2_MEM` in the config file because this takes priority over the short name (`BWAMEM2_MEM`) and allows existing configuration using the full process name to be correctly overridden.
 > If you get a warning suggesting that the process selector isn't recognised check that the process name has been specified correctly.
 
 ### Updating containers

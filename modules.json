@@ -3,6 +3,9 @@
     "homePage": "https://github.com/nf-core/readmapping",
     "repos": {
         "nf-core/modules": {
+            "blast/blastn": {
+                "git_sha": "e745e167c1020928ef20ea1397b6b4d230681b4d"
+            },
             "custom/dumpsoftwareversions": {
                 "git_sha": "e745e167c1020928ef20ea1397b6b4d230681b4d"
             },
@@ -14,6 +17,9 @@
             },
             "multiqc": {
                 "git_sha": "e745e167c1020928ef20ea1397b6b4d230681b4d"
+            },
+            "samtools/faidx": {
+                "git_sha": "897c33d5da084b61109500ee44c01da2d3e4e773"
             },
             "samtools/fixmate": {
                 "git_sha": "1ad73f1b2abdea9398680d6d20014838135c9a35"
@@ -35,6 +41,9 @@
             },
             "samtools/stats": {
                 "git_sha": "1ad73f1b2abdea9398680d6d20014838135c9a35"
+            },
+            "samtools/view": {
+                "git_sha": "12afb6b0faf3cabf769c9a2a7dd477e3f066eac0"
             },
             "untar": {
                 "git_sha": "7ec09d0ef4df89617baacc9b2dafcddb7cd4b05a"

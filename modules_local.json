@@ -3,28 +3,28 @@
     "homePage": "https://github.com/sanger-tol/readmapping",
     "repos": {
         "local": {
-	    "bam2fastx/bam2fastq": {
+            "bam2fastx/bam2fastq": {
                 "md5sum": "e60b3a787e51e500244924be315c59b7"
             },
-	    "bwamem2/index": {
+            "bwamem2/index": {
                 "md5sum": "498b54349467b61f4eb347d219c94e02"
             },
-	    "bwamem2/mem": {
+            "bwamem2/mem": {
                 "md5sum": "b6a54656a61e55e083fa00387dc42fa0"
             },
-	    "custom/remove_masking": {
+            "custom/remove_masking": {
                 "md5sum": "643ee60b938215a5dab23f2957ecd33e"
             },
-	    "minimap2/align": {
-		"md5sum": "632462f55cfe3593c7edaf928a4d4d5b"
-	    },
-	    "samplesheet/check": {
-		"md5sum": "8f19f40348edf93ee1877a73702edbf3"
-	    },
+            "minimap2/align": {
+                "md5sum": "632462f55cfe3593c7edaf928a4d4d5b"
+            },
+            "samplesheet/check": {
+                "md5sum": "8f19f40348edf93ee1877a73702edbf3"
+            },
             "samtools/collate": {
                 "md5sum": "a6a156bccf7d7f916659984d7258011b"
             },
-	    "samtools/fastq": {
+            "samtools/fastq": {
                 "md5sum": "fd4ad75d5ea50df3d326b0e986364abe"
             },
             "samtools/markdup": {

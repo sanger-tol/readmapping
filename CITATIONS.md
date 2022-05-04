@@ -10,9 +10,6 @@
 
 ## Pipeline tools
 
-* [Bam2Fastx]()
-    > 
-
 * [BWA-MEM2](https://ieeexplore.ieee.org/document/8820962)
     > Vasimuddin Md, Misra S, Li H, Aluru S. Efficient Architecture-Aware Acceleration of BWA-MEM for Multicore Systems. 2019 IEEE International Parallel and Distributed Processing Symposium. 2019 May;314–24. doi: 10.1109/IPDPS.2019.00041.
 

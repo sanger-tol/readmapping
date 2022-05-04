@@ -24,37 +24,42 @@ On release, tests run the pipeline on a full-sized dataset on the Wellcome Sange
 
 ## Pipeline summary
 
-**Subworkflow: Input check**
+Subworkflow: Input check
+
 1. Checks samplesheet
 
-**Subworkflow: Prepare genome**
+Subworkflow: Prepare genome
+
 1. Uncompress genome
 2. Create bwa-mem2 index ([bwa-mem2 index](https://github.com/bwa-mem2/bwa-mem2))
 3. Create minimap2 index ([minimap2 index](https://github.com/lh3/minimap2))
 
-**Subworkflow: Align reads to genome**
+Subworkflow: Align reads to genome
+
 1. Alignment
     - HiC/Illumina
-        * Convert CRAM to FASTQ ([Samtools fastq](https://www.htslib.org/doc/samtools-fasta.html))
-        * Align reads to genome ([bwa-mem2 mem](https://github.com/bwa-mem2/bwa-mem2))
+        - Convert CRAM to FASTQ ([Samtools fastq](https://www.htslib.org/doc/samtools-fasta.html))
+        - Align reads to genome ([bwa-mem2 mem](https://github.com/bwa-mem2/bwa-mem2))
     - Nanopore
-        * Align reads to genome ([minimap2](https://github.com/lh3/minimap2))
+        - Align reads to genome ([minimap2](https://github.com/lh3/minimap2))
     - PacBio
-        * Convert BAM to FASTQ ([bam2fastx bam2fastq](https://github.com/PacificBiosciences/bam2fastx))
-        * Align reads to genome ([minimap2](https://github.com/lh3/minimap2))
+        - Convert BAM to FASTQ ([bam2fastx bam2fastq](https://github.com/PacificBiosciences/bam2fastx))
+        - Align reads to genome ([minimap2](https://github.com/lh3/minimap2))
 2. Sort aligned files ([Samtools sort](https://www.htslib.org/doc/samtools-sort.html))
 3. Convert sorted BAM to CRAM and calculate statistics (Convert and statistics subworkflow)
 4. Merge all aligned BAMs and mark duplicates (Markduplicate subworkflow)
 5. Convert merged and mark duplicated BAM to CRAM and calculate statistics (Convert and statistics subworkflow)
 
-**Subworkflow: Convert and statistics**
+Subworkflow: Convert and statistics
+
 1. Convert BAM to CRAM ([Samtools view](https://www.htslib.org/doc/samtools-view.html))
 2. Index CRAM file ([Samtools index](https://www.htslib.org/doc/samtools-index.html))
 3. Calculate statistics ([Samtools stats](https://www.htslib.org/doc/samtools-stats.html))
 4. Calculate statistics based on flag values ([Samtools flagstat](https://www.htslib.org/doc/samtools-flagstat.html))
 5. Calculate index statistics ([Samtools idxstats](https://www.htslib.org/doc/samtools-idxstats.html))
 
-**Subworkflow: Markduplicate**
+Subworkflow: Markduplicate
+
 1. Merge position sorted bam files ([Samtools merge](https://www.htslib.org/doc/samtools-merge.html))
 2. Collate merged BAM file ([Samtools collate](https://www.htslib.org/doc/samtools-collate.html))
 3. Fill in mate coordinates and insert size fields ([Samtools fixmate](https://www.htslib.org/doc/samtools-fixmate.html))
@@ -79,10 +84,10 @@ On release, tests run the pipeline on a full-sized dataset on the Wellcome Sange
 
     Note that some form of configuration will be needed so that Nextflow knows how to fetch the required software. This is usually done in the form of a config profile (`YOURPROFILE` in the example command above). You can chain multiple config profiles in a comma-separated string.
 
-    > * The pipeline comes with config profiles called `docker`, `singularity`, `podman`, `shifter`, `charliecloud` and `conda` which instruct the pipeline to use the named tool for software management. For example, `-profile test,docker`.
-    > * Please check [nf-core/configs](https://github.com/nf-core/configs#documentation) to see if a custom config file to run nf-core pipelines already exists for your Institute. If so, you can simply use `-profile <institute>` in your command. This will enable either `docker` or `singularity` and set the appropriate execution settings for your local compute environment.
-    > * If you are using `singularity`, please use the [`nf-core download`](https://nf-co.re/tools/#downloading-pipelines-for-offline-use) command to download images first, before running the pipeline. Setting the [`NXF_SINGULARITY_CACHEDIR` or `singularity.cacheDir`](https://www.nextflow.io/docs/latest/singularity.html?#singularity-docker-hub) Nextflow options enables you to store and re-use the images from a central location for future pipeline runs.
-    > * If you are using `conda`, it is highly recommended to use the [`NXF_CONDA_CACHEDIR` or `conda.cacheDir`](https://www.nextflow.io/docs/latest/conda.html) settings to store the environments in a central location for future pipeline runs.
+    > - The pipeline comes with config profiles called `docker`, `singularity`, `podman`, `shifter`, `charliecloud` and `conda` which instruct the pipeline to use the named tool for software management. For example, `-profile test,docker`.
+    > - Please check [nf-core/configs](https://github.com/nf-core/configs#documentation) to see if a custom config file to run nf-core pipelines already exists for your Institute. If so, you can simply use `-profile <institute>` in your command. This will enable either `docker` or `singularity` and set the appropriate execution settings for your local compute environment.
+    > - If you are using `singularity`, please use the [`nf-core download`](https://nf-co.re/tools/#downloading-pipelines-for-offline-use) command to download images first, before running the pipeline. Setting the [`NXF_SINGULARITY_CACHEDIR` or `singularity.cacheDir`](https://www.nextflow.io/docs/latest/singularity.html?#singularity-docker-hub) Nextflow options enables you to store and re-use the images from a central location for future pipeline runs.
+    > - If you are using `conda`, it is highly recommended to use the [`NXF_CONDA_CACHEDIR` or `conda.cacheDir`](https://www.nextflow.io/docs/latest/conda.html) settings to store the environments in a central location for future pipeline runs.
 
 4. Start running your own analysis!
 

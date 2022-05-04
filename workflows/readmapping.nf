@@ -71,21 +71,21 @@ workflow READMAPPING {
     // SUBWORKFLOW: Read in samplesheet, validate and stage input files
     //
     INPUT_CHECK ( ch_input )
-      .reads
-      .branch {
-        meta, reads ->
-          hic : meta.datatype == "hic"
-            return [ meta, reads ]
-          illumina : meta.datatype == "illumina"
-            return [ meta, reads ]
-          pacbio : meta.datatype == "pacbio"
-            return [ meta, reads ]
-          clr : meta.datatype == "pacbio_clr"
-            return [ meta, reads ]
-          ont : meta.datatype == "ont"
-            return [ meta, reads ]
-      }
-      .set { ch_reads }
+        .reads
+        .branch {
+            meta, reads ->
+                hic : meta.datatype == "hic"
+                    return [ meta, reads ]
+                illumina : meta.datatype == "illumina"
+                    return [ meta, reads ]
+                pacbio : meta.datatype == "pacbio"
+                    return [ meta, reads ]
+                clr : meta.datatype == "pacbio_clr"
+                    return [ meta, reads ]
+                ont : meta.datatype == "ont"
+                    return [ meta, reads ]
+        }
+        .set { ch_reads }
     ch_versions = ch_versions.mix(INPUT_CHECK.out.versions)
 
     //
@@ -93,26 +93,26 @@ workflow READMAPPING {
     //
     PREPARE_GENOME ( )
     ch_versions = ch_versions.mix(PREPARE_GENOME.out.versions)
-   
+
     //
     // SUBWORKFLOW: Align raw reads to genome
     //
     ALIGN_HIC ( ch_reads.hic, PREPARE_GENOME.out.bwaidx, PREPARE_GENOME.out.fasta )
     ch_versions = ch_versions.mix(ALIGN_HIC.out.versions)
-    
+
     ALIGN_ILLUMINA ( ch_reads.illumina, PREPARE_GENOME.out.bwaidx, PREPARE_GENOME.out.fasta )
     ch_versions = ch_versions.mix(ALIGN_ILLUMINA.out.versions)
 
-    ALIGN_HIFI ( ch_reads.pacbio, PREPARE_GENOME.out.minidx, PREPARE_GENOME.out.fasta )
+    ALIGN_HIFI ( ch_reads.pacbio, PREPARE_GENOME.out.minidx, PREPARE_GENOME.out.fasta, params.vector_db )
     ch_versions = ch_versions.mix(ALIGN_HIFI.out.versions)
 
-    ALIGN_CLR ( ch_reads.clr, PREPARE_GENOME.out.minidx, PREPARE_GENOME.out.fasta )
+    ALIGN_CLR ( ch_reads.clr, PREPARE_GENOME.out.minidx, PREPARE_GENOME.out.fasta, params.vector_db )
     ch_versions = ch_versions.mix(ALIGN_CLR.out.versions)
 
     ALIGN_ONT ( ch_reads.ont, PREPARE_GENOME.out.minidx, PREPARE_GENOME.out.fasta )
     ch_versions = ch_versions.mix(ALIGN_ONT.out.versions)
 
-    // 
+    //
     // MODULE: Collate versions.yml file
     //
     CUSTOM_DUMPSOFTWAREVERSIONS (

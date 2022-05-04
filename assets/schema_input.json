@@ -18,11 +18,11 @@
                 "errorMessage": "Data type, and must be one of: 'hic' or 'illumina' or 'ont' or 'pacbio'"
             },
             "datafile": {
-		"type": "string",
-		"pattern": "^\\S+$",
+                "type": "string",
+                "pattern": "^\\S+$",
                 "errorMessage": "Data file for reads cannot contain spaces and must have extension 'cram' or 'bam' or '.fq.gz' or '.fastq.gz'"
             },
-	    "library": {
+            "library": {
                 "type": "string",
                 "pattern": "^\\S+$",
                 "errorMessage": "Library name to be assigned to read group (@RG) ID value"
@@ -31,7 +31,7 @@
         "required": [
             "sample",
             "datatype",
-	    "datafile"
+            "datafile"
         ]
     }
 }

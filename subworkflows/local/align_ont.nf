@@ -3,7 +3,7 @@
 //
 
 include { MINIMAP2_ALIGN } from '../../modules/local/minimap2/align'
-include { MARKDUP_STATS  } from '../../subworkflows/local/markdup_stats'
+include { MERGE_STATS  } from '../../subworkflows/local/merge_stats'
 
 workflow ALIGN_ONT {
     take:
@@ -19,15 +19,15 @@ workflow ALIGN_ONT {
     ch_versions = ch_versions.mix(MINIMAP2_ALIGN.out.versions.first())
 
     // Merge, markdup, convert, and stats
-    MARKDUP_STATS ( MINIMAP2_ALIGN.out.sam, fasta )
-    ch_versions = ch_versions.mix(MARKDUP_STATS.out.versions)
+    MERGE_STATS ( MINIMAP2_ALIGN.out.sam, fasta )
+    ch_versions = ch_versions.mix(MERGE_STATS.out.versions)
 
     emit:
-    cram = MARKDUP_STATS.out.cram
-    crai = MARKDUP_STATS.out.crai
-    stats = MARKDUP_STATS.out.stats
-    idxstats = MARKDUP_STATS.out.idxstats
-    flagstat = MARKDUP_STATS.out.flagstat
+    cram = MERGE_STATS.out.cram
+    crai = MERGE_STATS.out.crai
+    stats = MERGE_STATS.out.stats
+    idxstats = MERGE_STATS.out.idxstats
+    flagstat = MERGE_STATS.out.flagstat
 
     versions = ch_versions
 }

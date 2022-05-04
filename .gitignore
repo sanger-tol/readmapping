@@ -5,5 +5,4 @@ results/
 .DS_Store
 *.pyc
 full_test/
-.nf-core.yml
 test_full/

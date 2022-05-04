@@ -58,7 +58,7 @@ workflow FILTER_PACBIO {
     ch_versions = ch_versions.mix(SAMTOOLS_FASTQ.out.versions.first())
 
     emit:
-    fastq    = SAMTOOLS_FASTQ.out.fastq 
-    
+    fastq    = SAMTOOLS_FASTQ.out.fastq
+
     versions = ch_versions.ifEmpty(null) // channel: [ versions.yml ]
 }

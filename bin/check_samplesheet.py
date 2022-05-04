@@ -92,30 +92,29 @@ def check_samplesheet(file_in, file_out):
             if datatype:
                 if datatype not in datatypes:
                     print_error(
-                        "Data type must be one of {}.".format(",".join(datatypes)), 
-                        "Line", 
+                        "Data type must be one of {}.".format(",".join(datatypes)),
+                        "Line",
                         line,
                     )
             else:
                 print_error(
-                    "Data type has not been specified!. Must be one of {}.".format(",".join(datatypes)), 
-                    "Line", 
+                    "Data type has not been specified!. Must be one of {}.".format(",".join(datatypes)),
+                    "Line",
                     line,
                 )
-
 
             ##* Check data file extension
             if datafile:
                 if datafile.find(" ") != -1:
                     print_error(
-                        "Data file contains spaces!", 
-                        "Line", 
+                        "Data file contains spaces!",
+                        "Line",
                         line,
                     )
                 if not datafile.endswith(".cram") and not datafile.endswith(".bam") and not datafile.endswith(".fq.gz") and not datafile.endswith(".fastq.gz"):
                     print_error(
-                        "Data file does not have extension '.cram' or '.bam' or compressed '.f*q'!", 
-                        "Line", 
+                        "Data file does not have extension '.cram' or '.bam' or compressed '.f*q'!",
+                        "Line",
                         line,
                     )
 
