@@ -4,7 +4,6 @@
 //
 
 include { SAMTOOLS_PACBIO } from '../../modules/local/samtools/pacbio'
-// include { PBBAM_PBINDEX   } from '../../modules/local/pbbam/pbindex'
 include { SAMTOOLS_FASTA  } from '../../modules/local/samtools/fasta'
 include { UNTAR           } from '../../modules/nf-core/modules/untar/main'
 include { BLAST_BLASTN    } from '../../modules/nf-core/modules/blast/blastn/main'
@@ -15,7 +14,6 @@ include { SAMTOOLS_FASTQ  } from '../../modules/local/samtools/fastq'
 workflow FILTER_PACBIO {
     take:
     bam
-    blastDB
 
     main:
     ch_versions = Channel.empty()
@@ -24,21 +22,19 @@ workflow FILTER_PACBIO {
     SAMTOOLS_PACBIO ( bam )
     ch_versions = ch_versions.mix(SAMTOOLS_PACBIO.out.versions.first())
 
-    // Index Samtools BAM
-    // PBBAM_PBINDEX ( SAMTOOLS_PACBIO.out.bam )
-    // ch_versions = ch_versions.mix(PBBAM_PBINDEX.out.versions.first())
-
     // Convert BAM to FASTA
     SAMTOOLS_FASTA ( SAMTOOLS_PACBIO.out.bam )
     ch_versions = ch_versions.mix(SAMTOOLS_FASTA.out.versions.first())
 
     // BLAST database
-    ch_db = Channel.empty()
-    if (blastDB.endsWith('.tar.gz')) {
-        ch_db       = UNTAR (blastDB).untar
-        ch_versions = ch_versions.mix(UNTAR.out.versions)
-    } else {
-        ch_db       = file(blastDB)
+    if (bam) { 
+        ch_db = Channel.empty()
+        if (params.vector_db.endsWith('.tar.gz')) {
+            ch_db       = UNTAR (params.vector_db).untar
+            ch_versions = ch_versions.mix(UNTAR.out.versions)
+        } else {
+            ch_db       = file(params.vector_db)
+        }
     }
 
     // Nucleotide BLAST

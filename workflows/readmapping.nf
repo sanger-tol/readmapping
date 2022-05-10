@@ -103,10 +103,10 @@ workflow READMAPPING {
     ALIGN_ILLUMINA ( ch_reads.illumina, PREPARE_GENOME.out.bwaidx, PREPARE_GENOME.out.fasta )
     ch_versions = ch_versions.mix(ALIGN_ILLUMINA.out.versions)
 
-    ALIGN_HIFI ( ch_reads.pacbio, PREPARE_GENOME.out.minidx, PREPARE_GENOME.out.fasta, params.vector_db )
+    ALIGN_HIFI ( ch_reads.pacbio, PREPARE_GENOME.out.minidx, PREPARE_GENOME.out.fasta )
     ch_versions = ch_versions.mix(ALIGN_HIFI.out.versions)
 
-    ALIGN_CLR ( ch_reads.clr, PREPARE_GENOME.out.minidx, PREPARE_GENOME.out.fasta, params.vector_db )
+    ALIGN_CLR ( ch_reads.clr, PREPARE_GENOME.out.minidx, PREPARE_GENOME.out.fasta )
     ch_versions = ch_versions.mix(ALIGN_CLR.out.versions)
 
     ALIGN_ONT ( ch_reads.ont, PREPARE_GENOME.out.minidx, PREPARE_GENOME.out.fasta )

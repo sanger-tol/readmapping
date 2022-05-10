@@ -11,13 +11,12 @@ workflow ALIGN_PACBIO {
     reads // channel: [ val(meta), [ datafile ] ]
     index // channel: /path/to/mmi
     fasta // channel: /path/to/fasta
-    db // channel: /path/to/vector_db
 
     main:
     ch_versions = Channel.empty()
 
     // Filter BAM and output as FASTQ
-    FILTER_PACBIO ( reads, db )
+    FILTER_PACBIO ( reads )
     ch_versions = ch_versions.mix(FILTER_PACBIO.out.versions)
 
     // Align Fastq to Genome
