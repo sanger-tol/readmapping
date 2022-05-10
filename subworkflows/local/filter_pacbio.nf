@@ -27,7 +27,7 @@ workflow FILTER_PACBIO {
     ch_versions = ch_versions.mix(SAMTOOLS_FASTA.out.versions.first())
 
     // BLAST database
-    if (bam) { 
+    if (bam) {
         ch_db = Channel.empty()
         if (params.vector_db.endsWith('.tar.gz')) {
             ch_db       = UNTAR (params.vector_db).untar

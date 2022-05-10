@@ -41,7 +41,7 @@ sample1_T5,pacbio,pacbio2.bam,pacbio2
 | `datafile` | Full path to read data file. Must be `bam` or `cram` for `hic` and `illumina`. Must be `bam` for `pacbio`. Must be `fastq.gz` or `fq.gz` for `ont`. |
 | `library`  | (Optional) The library value is a unique identifier which is assigned to read group (`@RG`) ID. If the library name is not specified, the pipeline will auto-create library name using the data filename provided in the samplesheet. |
 
-An [example samplesheet](https://github.com/sanger-tol/readmapping/blob/main/test/samplesheet.csv) has been provided with the pipeline.
+An [example samplesheet](https://github.com/sanger-tol/readmapping/blob/main/assests/samplesheet.csv) has been provided with the pipeline.
 
 ## Running the pipeline
 

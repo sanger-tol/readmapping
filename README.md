@@ -33,30 +33,31 @@ Subworkflow: Prepare genome
 1. Uncompress genome
 2. Create bwa-mem2 index ([bwa-mem2 index](https://github.com/bwa-mem2/bwa-mem2))
 3. Create minimap2 index ([minimap2 index](https://github.com/lh3/minimap2))
+4. Create samtools index ([samtools faidx](https://www.htslib.org/doc/samtools-faidx.html)]
 
 Subworkflow: Align reads to genome
 
 1. Alignment
-    - HiC/Illumina
+    - HiC and Illumina
         - Convert CRAM to FASTQ ([Samtools fastq](https://www.htslib.org/doc/samtools-fasta.html))
         - Align reads to genome ([bwa-mem2 mem](https://github.com/bwa-mem2/bwa-mem2))
     - Nanopore
         - Align reads to genome ([minimap2](https://github.com/lh3/minimap2))
-    - PacBio
+    - PacBio CLR and CCS
         - Convert BAM to FASTQ ([bam2fastx bam2fastq](https://github.com/PacificBiosciences/bam2fastx))
         - Align reads to genome ([minimap2](https://github.com/lh3/minimap2))
 2. Sort aligned files ([Samtools sort](https://www.htslib.org/doc/samtools-sort.html))
-3. Convert sorted BAM to CRAM and calculate statistics (Convert and statistics subworkflow)
-4. Merge all aligned BAMs and mark duplicates (Markduplicate subworkflow)
-5. Convert merged and mark duplicated BAM to CRAM and calculate statistics (Convert and statistics subworkflow)
+3. Merge all aligned BAMs and mark duplicates (Markduplicate subworkflow)
+4. Convert merged and mark duplicated BAM to CRAM and calculate statistics (Convert and statistics subworkflow)
 
 Subworkflow: Convert and statistics
 
 1. Convert BAM to CRAM ([Samtools view](https://www.htslib.org/doc/samtools-view.html))
 2. Index CRAM file ([Samtools index](https://www.htslib.org/doc/samtools-index.html))
-3. Calculate statistics ([Samtools stats](https://www.htslib.org/doc/samtools-stats.html))
-4. Calculate statistics based on flag values ([Samtools flagstat](https://www.htslib.org/doc/samtools-flagstat.html))
-5. Calculate index statistics ([Samtools idxstats](https://www.htslib.org/doc/samtools-idxstats.html))
+3. Calculate statistics for all alignments ([Samtools stats](https://www.htslib.org/doc/samtools-stats.html))
+4. Calculate statistics for primary alignments ([Samtools stats](https://www.htslib.org/doc/samtools-stats.html))
+5. Calculate statistics based on flag values ([Samtools flagstat](https://www.htslib.org/doc/samtools-flagstat.html))
+6. Calculate index statistics ([Samtools idxstats](https://www.htslib.org/doc/samtools-idxstats.html))
 
 Subworkflow: Markduplicate
 
@@ -97,7 +98,7 @@ Subworkflow: Markduplicate
 
 ## Documentation
 
-The sanger-tol/readmapping pipeline comes with documentation about the pipeline [usage](https://github.com/sanger-tol/readmapping/wiki/Usage), [parameters](https://github.com/sanger-tol/readmapping/wiki/Parameters) and [output](https://github.com/sanger-tol/readmapping/wiki/Output).
+The sanger-tol/readmapping pipeline comes with documentation about the pipeline [usage](docs/usage.md) and [output](docs/output.md).
 
 ## Credits
 
