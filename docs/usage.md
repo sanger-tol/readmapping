@@ -1,6 +1,4 @@
-# sanger-tol/readmapping: Usage
-
-## Introduction
+# Usage
 
 ## Samplesheet input
 
