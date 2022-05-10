@@ -3,17 +3,17 @@
     "homePage": "https://github.com/sanger-tol/readmapping",
     "repos": {
         "local": {
-            "bam2fastx/bam2fastq": {
-                "md5sum": "e60b3a787e51e500244924be315c59b7"
-            },
             "bwamem2/index": {
                 "md5sum": "498b54349467b61f4eb347d219c94e02"
             },
             "bwamem2/mem": {
                 "md5sum": "b6a54656a61e55e083fa00387dc42fa0"
             },
+            "custom/pacbio_filter": {
+                "md5sum": "1dbc468a2e5fad40b5561fe948d7519a"
+            },
             "custom/remove_masking": {
-                "md5sum": "643ee60b938215a5dab23f2957ecd33e"
+                "md5sum": "a47364438010c34a2ebd73f57d06b6b1"
             },
             "minimap2/align": {
                 "md5sum": "632462f55cfe3593c7edaf928a4d4d5b"
@@ -22,22 +22,34 @@
                 "md5sum": "8f19f40348edf93ee1877a73702edbf3"
             },
             "samtools/collate": {
-                "md5sum": "a6a156bccf7d7f916659984d7258011b"
+                "md5sum": "8197709fa199d2a057113a0cd4b12f77"
+            },
+            "samtools/faidx": {
+                "md5sum": "faa28255921d356606cf03a3d43476c8"
+            },
+            "samtools/fasta": {
+                "md5sum": "60614d6309ad95fd4b5db1d45c3e435a"
             },
             "samtools/fastq": {
-                "md5sum": "fd4ad75d5ea50df3d326b0e986364abe"
+                "md5sum": "c2bac6def103b467a399f356ab477d99"
+            },
+            "samtools/filter": {
+                "md5sum": "7934efe5420abaecda00b0b2d9371901"
             },
             "samtools/markdup": {
-                "md5sum": "7ef470b3f161d7029b3932e3bfe21e2a"
+                "md5sum": "e2c8c721ccd5fe9a1d53c7c71ec1c99c"
+            },
+            "samtools/pacbio": {
+                "md5sum": "810c2370bdc5cc20980ef822ffe2f1f9"
             },
             "samtools/sort": {
-                "md5sum": "77fc48f61ccfa4cd7f17ccafd32fbdd5"
+                "md5sum": "8e6e6f81646dc22963161a74672371b7"
             },
             "samtools/stats": {
-                "md5sum": "ed83c15660f0234738280b2c8504e0c0"
+                "md5sum": "fe820eed8bd67b5642d40451649d7379"
             },
             "samtools/view": {
-                "md5sum": "0de589e2084b198290a91f5ef9d2c2f2"
+                "md5sum": "4403e881b071d8e04a6c9f70f1958b5d"
             }
         }
     }
