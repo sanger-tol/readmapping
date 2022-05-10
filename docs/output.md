@@ -1,4 +1,4 @@
-# sanger-tol/readmapping: Output
+# Output
 
 ## Introduction
 
