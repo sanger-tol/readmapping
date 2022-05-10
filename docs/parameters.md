@@ -5,7 +5,7 @@ Define where the pipeline should find input data and save output data.
 #### `-input`
 Path to comma-separated file containing information about the samples in the experiment. `required`
 > You will need to create a design file with information about the samples in your experiment before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 4 columns, and a header row. See [usage docs](https://github.com/sanger-tol/readmapping/wiki/Usage#samplesheet-input).
-> 
+>
 > pattern: `^\S+\.csv$`
 
 #### `--outdir`
@@ -14,7 +14,7 @@ The output directory where the results will be saved. You have to use absolute p
 #### `--email`
 Email address for completion summary.
 > Set this parameter to your e-mail address to get a summary e-mail with details of the run sent to you when the workflow exits. If set in your user config file (`~/.nextflow/config`) then you don't need to specify this on the command line for every run.
-> 
+>
 > pattern: `^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$`
 
 #### `--multiqc_title`
@@ -26,7 +26,7 @@ Reference genome related files and options required for the workflow.
 #### `--fasta`
 Path to FASTA genome file. `required`
 > If you don't have the appropriate alignment index available this will be generated for you automatically.
-> 
+>
 > pattern: `^\S+\.fn?a(sta)?(\.gz)?$`
 
 ### `--vector_db`
@@ -67,7 +67,7 @@ Institutional config URL link.
 ## Max job request options
 Set the top limit for requested resources for any single job.
 > If you are running on a smaller system, a pipeline step requesting more resources than are available may cause the Nextflow to stop the run with an error. These options allow you to cap the maximum resources requested by any single job so that the pipeline will run on your system.
-> 
+>
 > Note that you can not *increase* the resources requested by any job using these options. For that you will need your own configuration file. See the [nf-core website](https://nf-co.re/usage/configuration) for details.
 
 #### `--max_cpus`
@@ -77,19 +77,19 @@ Maximum number of CPUs that can be requested for any single job. default: `16`.
 #### `--max_memory`
 Maximum amount of memory that can be requested for any single job. default: `'128.GB'`.
 > Use to set an upper-limit for the memory requirement for each process. Should be a string in the format integer-unit e.g. `--max_memory '8.GB'`.
-> 
+>
 > pattern: `^\d+(\.\d+)?\.?\s*(K|M|G|T)?B$`
 
 #### `--max_time`
 Maximum amount of time that can be requested for any single job. default: `'240.h'`.
 > Use to set an upper-limit for the time requirement for each process. Should be a string in the format integer-unit e.g. `--max_time '2.h'`.
-> 
+>
 > pattern: `^(\d+\.?\s*(s|m|h|day)\s*)+$`
 
 ## Generic options
 Less common options for the pipeline, typically set in a config file.
 > These options are common to all nf-core pipelines and allow you to customise some of the core preferences for how the pipeline runs.
-> 
+>
 > Typically these options would be set in a Nextflow config file loaded for all pipeline runs, such as `~/.nextflow/config`.
 
 #### `--help`
@@ -98,7 +98,7 @@ Display help text.
 #### `--email_on_fail`
 Email address for completion summary, only when pipeline fails.
 > An email address to send a summary email to when the pipeline is completed - ONLY sent if the pipeline does not exit successfully.
-> 
+>
 > pattern: `^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$`
 
 #### `--plaintext_email`
