@@ -6,3 +6,4 @@ results/
 *.pyc
 full_test/
 test_full/
+test/
