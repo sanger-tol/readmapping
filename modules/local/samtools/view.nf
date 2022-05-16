@@ -20,8 +20,7 @@ process SAMTOOLS_VIEW {
 
     script:
     def args = task.ext.args ?: ''
-
-    def prefix = task.ext.prefix ?: (meta.library == null) ? "assembly.${meta.datatype}.${meta.id}" : "assembly.${meta.datatype}.${meta.library}"
+    def prefix = task.ext.prefix ?: (meta.library == null) ? "${fasta.baseName}.${meta.datatype}.${meta.id}" : "${fasta.baseName}.${meta.datatype}.${meta.library}"
     """
     samtools \\
         view \\
