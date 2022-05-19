@@ -44,10 +44,11 @@ Subworkflow: Align reads to genome
     - Nanopore
         - Align reads to genome ([minimap2](https://github.com/lh3/minimap2))
     - PacBio CLR and CCS
-        - Convert BAM to FASTQ ([bam2fastx bam2fastq](https://github.com/PacificBiosciences/bam2fastx))
+        - Filter reads subworkflow
+        - Convert BAM to FASTQ ([Samtools fastq](https://www.htslib.org/doc/samtools-fasta.html))
         - Align reads to genome ([minimap2](https://github.com/lh3/minimap2))
 2. Sort aligned files ([Samtools sort](https://www.htslib.org/doc/samtools-sort.html))
-3. Merge all aligned BAMs and mark duplicates (Markduplicate subworkflow)
+3. Merge all aligned BAMs and mark duplicates (Markduplicate subworkflow) - HiC and Illumina only
 4. Convert merged and mark duplicated BAM to CRAM and calculate statistics (Convert and statistics subworkflow)
 
 Subworkflow: Convert and statistics
