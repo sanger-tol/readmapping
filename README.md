@@ -103,9 +103,9 @@ The sanger-tol/readmapping pipeline comes with documentation about the pipeline 
 
 ## Credits
 
-sanger-tol/readmapping was originally written by @priyanka-surana.
+`sanger-tol/readmapping` is developed and maintained by @priyanka-surana.
 
-We thank the following people for their extensive assistance in the development of this pipeline:
+The text logo for `Sanger-ToL` was created by @muffato.
 
 ## Contributions and Support
 
