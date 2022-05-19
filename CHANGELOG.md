@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 Initial release of sanger-tol/readmapping, created with the [nf-core](https://nf-co.re/) template.
 
 ### `Added`
+
 - HiC and Illumina read alignment to genome
 - PacBio CLR and CCS read alignment to genome after filtering
 - Nanopore read alignment to genome
@@ -17,6 +18,7 @@ Initial release of sanger-tol/readmapping, created with the [nf-core](https://nf
 ### `Fixed`
 
 ### `Dependencies`
+
 - `nextflow`
 - `singularity` or `docker`
 
