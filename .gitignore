@@ -7,3 +7,5 @@ results/
 full_test/
 test_full/
 test/
+*.err
+*.out

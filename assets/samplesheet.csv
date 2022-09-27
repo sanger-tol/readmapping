@@ -1,5 +1,3 @@
 sample,datatype,datafile,library
-mMelMel1,illumina,https://tolit.cog.sanger.ac.uk/test-data/Meles_meles/genomic_data/mMelMel1/illumina/31231_3%231.subset.cram,
-mMelMel2,illumina,https://tolit.cog.sanger.ac.uk/test-data/Meles_meles/genomic_data/mMelMel2/illumina/31231_4%231.subset.cram,
-mMelMel3,hic,https://tolit.cog.sanger.ac.uk/test-data/Meles_meles/genomic_data/mMelMel3/hic/35528_2%231.subset.cram,
-mMelMel3,ont,https://tolit.cog.sanger.ac.uk/test-data/Meles_meles/genomic_data/mMelMel3/ont/PAE35587_pass_1f1f0707_115.subset.fastq.gz,
+gfLaeSulp1,hic,/lustre/scratch123/tol/projects/.sandbox/data/fungi/Laetiporus_sulphureus/genomic_data/gfLaeSulp1/hic-arima2/40063_3#5.cram,
+gfLaeSulp1,pacbio,/lustre/scratch123/tol/projects/.sandbox/data/fungi/Laetiporus_sulphureus/genomic_data/gfLaeSulp1/pacbio/m64229e_210602_121910.ccs.bc1020_BAK8B_OA--bc1020_BAK8B_OA.bam,
