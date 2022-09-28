@@ -1,7 +1,8 @@
-name: samtools_merge
-description: Merge BAM or CRAM file
+name: samtools_stats
+description: Produces comprehensive statistics from SAM/BAM/CRAM file
 keywords:
-  - merge
+  - statistics
+  - counts
   - bam
   - sam
   - cram
@@ -21,42 +22,32 @@ input:
       description: |
         Groovy Map containing sample information
         e.g. [ id:'test', single_end:false ]
-  - input_files:
-      type: file
-      description: BAM/CRAM file
-      pattern: "*.{bam,cram,sam}"
+  - input:
+    type: file
+    description: BAM/CRAM file from alignment
+    pattern: "*.{bam,cram}"
+  - input_index:
+    type: file
+    description: BAI/CRAI file from alignment
+    pattern: "*.{bai,crai}"
   - fasta:
       type: optional file
       description: Reference file the CRAM was created with
       pattern: "*.{fasta,fa}"
-  - fai:
-      type: optional file
-      description: Index of the reference file the CRAM was created with
-      pattern: "*.fai"
 output:
   - meta:
       type: map
       description: |
         Groovy Map containing sample information
         e.g. [ id:'test', single_end:false ]
-  - bam:
+  - stats:
       type: file
-      description: BAM file
-      pattern: "*.{bam}"
-  - cram:
-      type: file
-      description: CRAM file
-      pattern: "*.{cram}"
+      description: File containing samtools stats output
+      pattern: "*.{stats}"
   - versions:
       type: file
       description: File containing software versions
       pattern: "versions.yml"
-  - csi:
-      type: file
-      description: BAM index file (optional)
-      pattern: "*.csi"
 authors:
   - "@drpatelh"
-  - "@yuukiiwa "
-  - "@maxulysse"
   - "@FriederikeHanssen"

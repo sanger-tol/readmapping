@@ -97,19 +97,19 @@ workflow READMAPPING {
     //
     // SUBWORKFLOW: Align raw reads to genome
     //
-    ALIGN_HIC ( ch_reads.hic, PREPARE_GENOME.out.bwaidx, PREPARE_GENOME.out.fasta )
+    ALIGN_HIC ( PREPARE_GENOME.out.fasta, PREPARE_GENOME.out.bwaidx, ch_reads.hic)
     ch_versions = ch_versions.mix(ALIGN_HIC.out.versions)
 
-    ALIGN_ILLUMINA ( ch_reads.illumina, PREPARE_GENOME.out.bwaidx, PREPARE_GENOME.out.fasta )
+    ALIGN_ILLUMINA ( PREPARE_GENOME.out.fasta, PREPARE_GENOME.out.bwaidx, ch_reads.illumina )
     ch_versions = ch_versions.mix(ALIGN_ILLUMINA.out.versions)
 
-    ALIGN_HIFI ( ch_reads.pacbio, PREPARE_GENOME.out.minidx, PREPARE_GENOME.out.fasta )
+    ALIGN_HIFI ( PREPARE_GENOME.out.fasta, PREPARE_GENOME.out.minidx, ch_reads.pacbio )
     ch_versions = ch_versions.mix(ALIGN_HIFI.out.versions)
 
-    ALIGN_CLR ( ch_reads.clr, PREPARE_GENOME.out.minidx, PREPARE_GENOME.out.fasta )
+    ALIGN_CLR ( PREPARE_GENOME.out.fasta, PREPARE_GENOME.out.minidx, ch_reads.clr )
     ch_versions = ch_versions.mix(ALIGN_CLR.out.versions)
 
-    ALIGN_ONT ( ch_reads.ont, PREPARE_GENOME.out.minidx, PREPARE_GENOME.out.fasta )
+    ALIGN_ONT ( PREPARE_GENOME.out.fasta, PREPARE_GENOME.out.minidx, ch_reads.ont )
     ch_versions = ch_versions.mix(ALIGN_ONT.out.versions)
 
     //

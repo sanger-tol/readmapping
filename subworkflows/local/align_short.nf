@@ -2,15 +2,15 @@
 // Align short read (HiC and Illumina) data against the genome
 //
 
-include { SAMTOOLS_FASTQ } from '../../modules/local/samtools/fastq'
-include { BWAMEM2_MEM    } from '../../modules/local/bwamem2/mem'
+include { SAMTOOLS_FASTQ } from '../../modules/nf-core/modules/samtools/fastq/main'
+include { BWAMEM2_MEM    } from '../../modules/nf-core/modules/bwamem2/mem/main'
 include { MARKDUP_STATS  } from '../../subworkflows/local/markdup_stats'
 
 workflow ALIGN_SHORT {
     take:
-    reads // channel: [ val(meta), [ datafile ] ]
-    index // channel: /path/to/bwamem2/
     fasta // channel: /path/to/fasta
+    index // channel: [ val(meta), /path/to/bwamem2/]
+    reads // channel: [ val(meta), [ datafile ] ]
 
     main:
     ch_versions = Channel.empty()
@@ -20,11 +20,11 @@ workflow ALIGN_SHORT {
     ch_versions = ch_versions.mix(SAMTOOLS_FASTQ.out.versions.first())
 
     // Align Fastq to Genome
-    BWAMEM2_MEM ( SAMTOOLS_FASTQ.out.fastq, index )
+    BWAMEM2_MEM ( SAMTOOLS_FASTQ.out.fastq, index, [] )
     ch_versions = ch_versions.mix(BWAMEM2_MEM.out.versions.first())
 
     // Merge, markdup, convert, and stats
-    MARKDUP_STATS ( BWAMEM2_MEM.out.sam, fasta )
+    MARKDUP_STATS ( BWAMEM2_MEM.out.bam, fasta )
     ch_versions = ch_versions.mix(MARKDUP_STATS.out.versions)
 
     emit:

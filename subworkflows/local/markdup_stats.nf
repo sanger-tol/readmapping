@@ -2,7 +2,7 @@
 // Merge and Markdup all alignments at specimen level
 // Convert to CRAM and calculate statistics
 //
-include { SAMTOOLS_SORT } from '../../modules/local/samtools/sort'
+include { SAMTOOLS_SORT } from '../../modules/nf-core/modules/samtools/sort/main'
 include { MARKDUPLICATE } from '../../subworkflows/local/markduplicate'
 include { CONVERT_STATS } from '../../subworkflows/local/convert_stats'
 
@@ -33,7 +33,9 @@ workflow MARKDUP_STATS {
     ch_versions = ch_versions.mix(MARKDUPLICATE.out.versions)
 
     // Convert merged BAM to CRAM and calculate indices and statistics
-    CONVERT_STATS ( MARKDUPLICATE.out.bam, fasta )
+    ch_stat = MARKDUPLICATE.out.bam.map { meta, bam -> [ meta, bam, [] ] }
+    
+    CONVERT_STATS ( ch_stat, fasta )
     ch_versions = ch_versions.mix(CONVERT_STATS.out.versions)
 
     emit:

@@ -1,10 +1,10 @@
-name: samtools_merge
-description: Merge BAM or CRAM file
+name: samtools_fastq
+description: Converts a SAM/BAM/CRAM file to FASTQ
 keywords:
-  - merge
   - bam
   - sam
   - cram
+  - fastq
 tools:
   - samtools:
       description: |
@@ -21,42 +21,23 @@ input:
       description: |
         Groovy Map containing sample information
         e.g. [ id:'test', single_end:false ]
-  - input_files:
+  - bam:
       type: file
-      description: BAM/CRAM file
+      description: BAM/CRAM/SAM file
       pattern: "*.{bam,cram,sam}"
-  - fasta:
-      type: optional file
-      description: Reference file the CRAM was created with
-      pattern: "*.{fasta,fa}"
-  - fai:
-      type: optional file
-      description: Index of the reference file the CRAM was created with
-      pattern: "*.fai"
 output:
   - meta:
       type: map
       description: |
         Groovy Map containing sample information
         e.g. [ id:'test', single_end:false ]
-  - bam:
+  - fastq:
       type: file
-      description: BAM file
-      pattern: "*.{bam}"
-  - cram:
-      type: file
-      description: CRAM file
-      pattern: "*.{cram}"
+      description: compressed FASTQ file
+      pattern: "*.fastq.gz"
   - versions:
       type: file
       description: File containing software versions
       pattern: "versions.yml"
-  - csi:
-      type: file
-      description: BAM index file (optional)
-      pattern: "*.csi"
 authors:
-  - "@drpatelh"
-  - "@yuukiiwa "
-  - "@maxulysse"
-  - "@FriederikeHanssen"
+  - "@suzannejin"

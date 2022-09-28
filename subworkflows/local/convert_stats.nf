@@ -2,9 +2,9 @@
 // Convert BAM to CRAM, create index and calculate statistics
 //
 
-include { SAMTOOLS_VIEW     } from '../../modules/local/samtools/view'
+include { SAMTOOLS_VIEW     } from '../../modules/nf-core/modules/samtools/view/main'
 include { SAMTOOLS_INDEX    } from '../../modules/nf-core/modules/samtools/index/main'
-include { SAMTOOLS_STATS    } from '../../modules/local/samtools/stats'
+include { SAMTOOLS_STATS    } from '../../modules/nf-core/modules/samtools/stats/main'
 include { SAMTOOLS_FLAGSTAT } from '../../modules/nf-core/modules/samtools/flagstat/main'
 include { SAMTOOLS_IDXSTATS } from '../../modules/nf-core/modules/samtools/idxstats/main'
 
@@ -25,9 +25,7 @@ workflow CONVERT_STATS {
     ch_versions = ch_versions.mix(SAMTOOLS_INDEX.out.versions.first())
 
     // Combine CRAM and CRAI into one channel
-    SAMTOOLS_VIEW.out.cram
-    .join(SAMTOOLS_INDEX.out.crai, by: [0], remainder: true)
-    .set { ch_cram_crai }
+    ch_cram_crai = SAMTOOLS_VIEW.out.cram.join(SAMTOOLS_INDEX.out.crai)
 
     // Calculate statistics
     SAMTOOLS_STATS ( ch_cram_crai, fasta )

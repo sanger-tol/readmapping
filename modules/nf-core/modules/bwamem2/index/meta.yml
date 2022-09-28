@@ -1,15 +1,17 @@
-name: minimap2_index
-description: Provides fasta index required by minimap2 alignment.
+name: bwamem2_index
+description: Create BWA-mem2 index for reference genome
 keywords:
   - index
   - fasta
+  - genome
   - reference
 tools:
-  - minimap2:
+  - bwa:
       description: |
-        A versatile pairwise aligner for genomic and spliced nucleotide sequences.
-      homepage: https://github.com/lh3/minimap2
-      documentation: https://github.com/lh3/minimap2#uguide
+        BWA-mem2 is a software package for mapping DNA sequences against
+        a large reference genome, such as the human genome.
+      homepage: https://github.com/bwa-mem2/bwa-mem2
+      documentation: https://github.com/bwa-mem2/bwa-mem2#usage
       licence: ["MIT"]
 input:
   - meta:
@@ -19,22 +21,20 @@ input:
         e.g. [ id:'test', single_end:false ]
   - fasta:
       type: file
-      description: |
-        Reference database in FASTA format.
+      description: Input genome fasta file
 output:
   - meta:
       type: map
       description: |
         Groovy Map containing sample information
         e.g. [ id:'test', single_end:false ]
-  - mmi:
+  - index:
       type: file
-      description: Minimap2 fasta index.
-      pattern: "*.mmi"
+      description: BWA genome index files
+      pattern: "*.{0123,amb,ann,bwt.2bit.64,pac}"
   - versions:
       type: file
       description: File containing software versions
       pattern: "versions.yml"
 authors:
-  - "@yuukiiwa"
-  - "@drpatelh"
+  - "@maxulysse"
