@@ -3,13 +3,12 @@
 //
 
 include { FILTER_PACBIO  } from '../../subworkflows/local/filter_pacbio'
-include { MINIMAP2_ALIGN } from '../../modules/local/minimap2/align'
+include { MINIMAP2_ALIGN } from '../../modules/nf-core/modules/minimap2/align/main'
 include { MERGE_STATS    } from '../../subworkflows/local/merge_stats'
 
 workflow ALIGN_PACBIO {
     take:
     reads // channel: [ val(meta), [ datafile ] ]
-    index // channel: /path/to/mmi
     fasta // channel: /path/to/fasta
 
     main:
@@ -20,11 +19,11 @@ workflow ALIGN_PACBIO {
     ch_versions = ch_versions.mix(FILTER_PACBIO.out.versions)
 
     // Align Fastq to Genome
-    MINIMAP2_ALIGN ( FILTER_PACBIO.out.fastq, fasta, index )
+    MINIMAP2_ALIGN ( FILTER_PACBIO.out.fastq, fasta, true, false, false )
     ch_versions = ch_versions.mix(MINIMAP2_ALIGN.out.versions.first())
 
     // Merge, markdup, convert, and stats
-    MERGE_STATS ( MINIMAP2_ALIGN.out.sam, fasta )
+    MERGE_STATS ( MINIMAP2_ALIGN.out.bam, fasta )
     ch_versions = ch_versions.mix(MERGE_STATS.out.versions)
 
     emit:

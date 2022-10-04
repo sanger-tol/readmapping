@@ -22,8 +22,6 @@ if (params.input) { ch_input = file(params.input) } else { exit 1, 'Input sample
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-ch_multiqc_config        = file("$projectDir/assets/multiqc_config.yaml", checkIfExists: true)
-ch_multiqc_custom_config = params.multiqc_config ? Channel.fromPath(params.multiqc_config) : Channel.empty()
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -51,7 +49,7 @@ include { ALIGN_ONT                     } from '../subworkflows/local/align_ont'
 //
 // MODULE: Installed directly from nf-core/modules
 //
-include { MULTIQC                     } from '../modules/nf-core/modules/multiqc/main'
+include { UNTAR                       } from '../modules/nf-core/modules/untar/main'
 include { CUSTOM_DUMPSOFTWAREVERSIONS } from '../modules/nf-core/modules/custom/dumpsoftwareversions/main'
 
 /*
@@ -95,6 +93,16 @@ workflow READMAPPING {
     ch_versions = ch_versions.mix(PREPARE_GENOME.out.versions)
 
     //
+    // Create channel for vector DB
+    //
+    if (params.vector_db.endsWith('.tar.gz')) {
+        ch_db       = UNTAR (params.vector_db).untar
+        ch_versions = ch_versions.mix(UNTAR.out.versions)
+    } else {
+        ch_db       = file(params.vector_db)
+    }
+
+    //
     // SUBWORKFLOW: Align raw reads to genome
     //
     ALIGN_HIC ( PREPARE_GENOME.out.fasta, PREPARE_GENOME.out.bwaidx, ch_reads.hic)
@@ -103,13 +111,13 @@ workflow READMAPPING {
     ALIGN_ILLUMINA ( PREPARE_GENOME.out.fasta, PREPARE_GENOME.out.bwaidx, ch_reads.illumina )
     ch_versions = ch_versions.mix(ALIGN_ILLUMINA.out.versions)
 
-    ALIGN_HIFI ( PREPARE_GENOME.out.fasta, PREPARE_GENOME.out.minidx, ch_reads.pacbio )
+    ALIGN_HIFI ( PREPARE_GENOME.out.fasta, ch_reads.pacbio, ch_db )
     ch_versions = ch_versions.mix(ALIGN_HIFI.out.versions)
 
-    ALIGN_CLR ( PREPARE_GENOME.out.fasta, PREPARE_GENOME.out.minidx, ch_reads.clr )
+    ALIGN_CLR ( PREPARE_GENOME.out.fasta, ch_reads.clr, ch_db )
     ch_versions = ch_versions.mix(ALIGN_CLR.out.versions)
 
-    ALIGN_ONT ( PREPARE_GENOME.out.fasta, PREPARE_GENOME.out.minidx, ch_reads.ont )
+    ALIGN_ONT ( PREPARE_GENOME.out.fasta, ch_reads.ont )
     ch_versions = ch_versions.mix(ALIGN_ONT.out.versions)
 
     //
@@ -118,24 +126,6 @@ workflow READMAPPING {
     CUSTOM_DUMPSOFTWAREVERSIONS (
         ch_versions.unique().collectFile(name: 'collated_versions.yml')
     )
-
-    //
-    // MODULE: MultiQC
-    //
-    workflow_summary    = WorkflowReadmapping.paramsSummaryMultiqc(workflow, summary_params)
-    ch_workflow_summary = Channel.value(workflow_summary)
-
-    ch_multiqc_files = Channel.empty()
-    ch_multiqc_files = ch_multiqc_files.mix(Channel.from(ch_multiqc_config))
-    ch_multiqc_files = ch_multiqc_files.mix(ch_multiqc_custom_config.collect().ifEmpty([]))
-    ch_multiqc_files = ch_multiqc_files.mix(ch_workflow_summary.collectFile(name: 'workflow_summary_mqc.yaml'))
-    ch_multiqc_files = ch_multiqc_files.mix(CUSTOM_DUMPSOFTWAREVERSIONS.out.mqc_yml.collect())
-
-    MULTIQC (
-        ch_multiqc_files.collect()
-    )
-    multiqc_report = MULTIQC.out.report.toList()
-    ch_versions    = ch_versions.mix(MULTIQC.out.versions)
 }
 
 /*
