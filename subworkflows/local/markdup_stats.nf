@@ -2,7 +2,7 @@
 // Merge and Markdup all alignments at specimen level
 // Convert to CRAM and calculate statistics
 //
-include { SAMTOOLS_SORT } from '../../modules/nf-core/modules/samtools/sort/main'
+include { SAMTOOLS_SORT } from '../../modules/nf-core/modules/nf-core/samtools/sort/main'
 include { MARKDUPLICATE } from '../../subworkflows/local/markduplicate'
 include { CONVERT_STATS } from '../../subworkflows/local/convert_stats'
 

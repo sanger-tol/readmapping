@@ -2,8 +2,8 @@
 // Merge all alignments at specimen level
 // Convert to CRAM and calculate statistics
 //
-include { SAMTOOLS_MERGE } from '../../modules/nf-core/modules/samtools/merge/main'
-include { SAMTOOLS_SORT  } from '../../modules/nf-core/modules/samtools/sort/main'
+include { SAMTOOLS_MERGE } from '../../modules/nf-core/modules/nf-core/samtools/merge/main'
+include { SAMTOOLS_SORT  } from '../../modules/nf-core/modules/nf-core/samtools/sort/main'
 include { CONVERT_STATS  } from '../../subworkflows/local/convert_stats'
 
 workflow MERGE_STATS {

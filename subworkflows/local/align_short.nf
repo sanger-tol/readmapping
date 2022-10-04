@@ -2,8 +2,8 @@
 // Align short read (HiC and Illumina) data against the genome
 //
 
-include { SAMTOOLS_FASTQ } from '../../modules/nf-core/modules/samtools/fastq/main'
-include { BWAMEM2_MEM    } from '../../modules/nf-core/modules/bwamem2/mem/main'
+include { SAMTOOLS_FASTQ } from '../../modules/nf-core/modules/nf-core/samtools/fastq/main'
+include { BWAMEM2_MEM    } from '../../modules/nf-core/modules/nf-core/bwamem2/mem/main'
 include { MARKDUP_STATS  } from '../../subworkflows/local/markdup_stats'
 
 workflow ALIGN_SHORT {

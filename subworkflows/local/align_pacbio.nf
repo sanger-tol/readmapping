@@ -3,7 +3,7 @@
 //
 
 include { FILTER_PACBIO  } from '../../subworkflows/local/filter_pacbio'
-include { MINIMAP2_ALIGN } from '../../modules/nf-core/modules/minimap2/align/main'
+include { MINIMAP2_ALIGN } from '../../modules/nf-core/modules/nf-core/minimap2/align/main'
 include { MERGE_STATS    } from '../../subworkflows/local/merge_stats'
 
 workflow ALIGN_PACBIO {
