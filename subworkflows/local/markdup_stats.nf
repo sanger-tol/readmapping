@@ -23,7 +23,7 @@ workflow MARKDUP_STATS {
     .map { meta, bam ->
     new_meta = meta.clone()
     new_meta.id = new_meta.id.split('_')[0..-2].join('_')
-    [ [id: new_meta.id, datatype: new_meta.datatype] , bam ]
+    [ [id: new_meta.id, datatype: new_meta.datatype, outdir: new_meta.outdir] , bam ]
     }
     .groupTuple(by: [0])
     .set { ch_bams }

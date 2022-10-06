@@ -42,11 +42,11 @@ def check_samplesheet(file_in, file_out):
     """
     This function checks that the samplesheet follows the following structure:
 
-    sample,datatype,datafile,library
-    sample1,hic,/path/to/file1.cram,ID1
-    sample1,illumina,/path/to/file2.cram,ID2
-    sample1,pacbio,/path/to/file1.bam,ID3
-    sample1,ont,/path/to/file.fq.gz,ID4
+    sample,datatype,datafile,library,outdir
+    sample1,hic,/path/to/file1.cram,ID1,/path/to/dir
+    sample1,illumina,/path/to/file2.cram,ID2,/path/to/dir
+    sample1,pacbio,/path/to/file1.bam,ID3,/path/to/dir
+    sample1,ont,/path/to/file.fq.gz,ID4,/path/to/dir
 
     For an example see:
     https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv
@@ -57,7 +57,7 @@ def check_samplesheet(file_in, file_out):
 
         ##* Check header
         MIN_COLS = 3
-        HEADER = ["sample", "datatype", "datafile", "library"]
+        HEADER = ["sample", "datatype", "datafile", "library", "outdir"]
         header = [x.strip('"') for x in fin.readline().strip().split(",")]
         if header[: len(HEADER)] != HEADER:
             print("ERROR: Please check samplesheet header -> {} != {}".format(",".join(header), ",".join(HEADER)))
@@ -83,7 +83,7 @@ def check_samplesheet(file_in, file_out):
                 )
 
             ##* Check sample name entries
-            sample, datatype, datafile, library = lspl[: len(HEADER)]
+            sample, datatype, datafile, library, outdir = lspl[: len(HEADER)]
             sample = sample.replace(" ", "_")
             if not sample:
                 print_error("Sample entry has not been specified!", "Line", line)
@@ -120,7 +120,7 @@ def check_samplesheet(file_in, file_out):
                     )
 
             ##* Create sample mapping dictionary = { sample: [ datatype, datafile, library ] }
-            sample_info = [datatype, datafile, library]
+            sample_info = [datatype, datafile, library, outdir]
             if sample not in sample_mapping_dict:
                 sample_mapping_dict[sample] = [sample_info]
             else:
@@ -134,7 +134,7 @@ def check_samplesheet(file_in, file_out):
         out_dir = os.path.dirname(file_out)
         make_dir(out_dir)
         with open(file_out, "w") as fout:
-            fout.write(",".join(["sample", "datatype", "datafile", "library"]) + "\n")
+            fout.write(",".join(["sample", "datatype", "datafile", "library", "outdir"]) + "\n")
             for sample in sorted(sample_mapping_dict.keys()):
 
                 for idx, val in enumerate(sample_mapping_dict[sample]):

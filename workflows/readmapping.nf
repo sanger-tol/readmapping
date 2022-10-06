@@ -7,14 +7,16 @@
 def summary_params = NfcoreSchema.paramsSummaryMap(workflow, params)
 
 // Validate input parameters
-WorkflowReadmapping.initialise(params, log)
+// WorkflowReadmapping.initialise(params, log)
 
 // Check input path parameters to see if they exist
-def checkPathParamList = [ params.input, params.fasta, params.bwamem2_index ]
+def checkPathParamList = [ params.fasta, params.bwamem2_index ]
 for (param in checkPathParamList) { if (param) { file(param, checkIfExists: true) } }
 
 // Check mandatory parameters
-if (params.input) { ch_input = file(params.input) } else { exit 1, 'Input samplesheet not specified!' }
+if (params.input && params.fasta) { inputs = [ file(params.input, checkIfExists: true), file(params.fasta) ] }
+else if (params.input && params.project) { inputs = [ params.input, params.project ] }
+else { exit 1, 'Input not specified. Please include either a samplesheet or Tree of Life organism ID and project directory.' }
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -66,7 +68,8 @@ workflow READMAPPING {
     //
     // SUBWORKFLOW: Read in samplesheet, validate and stage input files
     //
-    INPUT_CHECK ( ch_input )
+    ch_in = Channel.of( inputs )
+    INPUT_CHECK ( ch_in )
         .reads
         .branch {
             meta, reads ->
@@ -87,7 +90,7 @@ workflow READMAPPING {
     //
     // SUBWORKFLOW: Uncompress and prepare reference genome files
     //
-    PREPARE_GENOME ( )
+    PREPARE_GENOME ( INPUT_CHECK.out.genome )
     ch_versions = ch_versions.mix(PREPARE_GENOME.out.versions)
 
     //
@@ -103,21 +106,19 @@ workflow READMAPPING {
     //
     // SUBWORKFLOW: Align raw reads to genome
     //
-    ch_genome = PREPARE_GENOME.out.fasta.map { meta, file -> file }
-
-    ALIGN_HIC ( ch_genome, PREPARE_GENOME.out.bwaidx, ch_reads.hic)
+    ALIGN_HIC ( PREPARE_GENOME.out.fasta, PREPARE_GENOME.out.bwaidx, ch_reads.hic)
     ch_versions = ch_versions.mix(ALIGN_HIC.out.versions)
 
-    ALIGN_ILLUMINA ( ch_genome, PREPARE_GENOME.out.bwaidx, ch_reads.illumina )
+    ALIGN_ILLUMINA ( PREPARE_GENOME.out.fasta, PREPARE_GENOME.out.bwaidx, ch_reads.illumina )
     ch_versions = ch_versions.mix(ALIGN_ILLUMINA.out.versions)
 
-    ALIGN_HIFI ( ch_genome, ch_reads.pacbio, ch_db )
+    ALIGN_HIFI ( PREPARE_GENOME.out.fasta, ch_reads.pacbio, ch_db )
     ch_versions = ch_versions.mix(ALIGN_HIFI.out.versions)
 
-    ALIGN_CLR ( ch_genome, ch_reads.clr, ch_db )
+    ALIGN_CLR ( PREPARE_GENOME.out.fasta, ch_reads.clr, ch_db )
     ch_versions = ch_versions.mix(ALIGN_CLR.out.versions)
 
-    ALIGN_ONT ( ch_genome, ch_reads.ont )
+    ALIGN_ONT ( PREPARE_GENOME.out.fasta, ch_reads.ont )
     ch_versions = ch_versions.mix(ALIGN_ONT.out.versions)
 
     //

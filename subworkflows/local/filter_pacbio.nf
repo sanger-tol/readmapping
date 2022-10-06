@@ -6,7 +6,7 @@
 include { SAMTOOLS_VIEW as SAMTOOLS_CONVERT } from '../../modules/nf-core/modules/nf-core/samtools/view/main'
 include { SAMTOOLS_FASTA                    } from '../../modules/nf-core/modules/nf-core/samtools/fasta/main'
 include { BLAST_BLASTN                      } from '../../modules/nf-core/modules/nf-core/blast/blastn/main'
-include { PACBIO_FILTER                     } from '../../modules/local/custom/pacbio_filter'
+include { PACBIO_FILTER                     } from '../../modules/local/pacbio_filter'
 include { SAMTOOLS_VIEW as SAMTOOLS_FILTER  } from '../../modules/nf-core/modules/nf-core/samtools/view/main'
 include { SAMTOOLS_FASTQ                    } from '../../modules/nf-core/modules/nf-core/samtools/fastq/main'
 
