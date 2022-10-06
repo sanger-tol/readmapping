@@ -24,7 +24,7 @@ workflow MERGE_STATS {
     .set { ch_bams }
 
     // Merge
-    SAMTOOLS_MERGE ( ch_bams, [] )
+    SAMTOOLS_MERGE ( ch_bams, [], [] )
     ch_versions = ch_versions.mix(SAMTOOLS_MERGE.out.versions.first())
 
     // Position sort BAM file
@@ -32,7 +32,8 @@ workflow MERGE_STATS {
     ch_versions = ch_versions.mix(SAMTOOLS_SORT.out.versions.first())
 
     // Convert merged BAM to CRAM and calculate indices and statistics
-    CONVERT_STATS ( SAMTOOLS_SORT.out.bam, fasta )
+    ch_merged = SAMTOOLS_SORT.out.bam.map { meta, file -> [ meta, file, [] ] }
+    CONVERT_STATS ( ch_merged, fasta )
     ch_versions = ch_versions.mix(CONVERT_STATS.out.versions)
 
     emit:

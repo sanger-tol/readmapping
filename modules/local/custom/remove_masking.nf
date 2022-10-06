@@ -8,11 +8,11 @@ process REMOVE_MASKING {
         'quay.io/biocontainers/gawk:5.1.0' }"
 
     input:
-    path(genome)
+    tuple val(meta), path(genome)
 
     output:
-    path("*.unmasked.fasta"),      emit: fasta
-    path  "versions.yml", emit: versions
+    tuple val(meta), path("*.unmasked.fasta"), emit: fasta
+    path  "versions.yml",                      emit: versions
 
     when:
     task.ext.when == null || task.ext.when

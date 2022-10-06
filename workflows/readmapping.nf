@@ -10,7 +10,7 @@ def summary_params = NfcoreSchema.paramsSummaryMap(workflow, params)
 WorkflowReadmapping.initialise(params, log)
 
 // Check input path parameters to see if they exist
-def checkPathParamList = [ params.input, params.multiqc_config, params.fasta, params.bwamem2_index, params.minimap2_index ]
+def checkPathParamList = [ params.input, params.fasta, params.bwamem2_index ]
 for (param in checkPathParamList) { if (param) { file(param, checkIfExists: true) } }
 
 // Check mandatory parameters
@@ -49,8 +49,8 @@ include { ALIGN_ONT                     } from '../subworkflows/local/align_ont'
 //
 // MODULE: Installed directly from nf-core/modules
 //
-include { UNTAR                       } from '../modules/nf-core/modules/untar/main'
-include { CUSTOM_DUMPSOFTWAREVERSIONS } from '../modules/nf-core/modules/custom/dumpsoftwareversions/main'
+include { UNTAR                       } from '../modules/nf-core/modules/nf-core/untar/main'
+include { CUSTOM_DUMPSOFTWAREVERSIONS } from '../modules/nf-core/modules/nf-core/custom/dumpsoftwareversions/main'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -59,8 +59,6 @@ include { CUSTOM_DUMPSOFTWAREVERSIONS } from '../modules/nf-core/modules/custom/
 */
 
 // Info required for completion email and summary
-def multiqc_report = []
-
 workflow READMAPPING {
 
     ch_versions = Channel.empty()
@@ -96,28 +94,30 @@ workflow READMAPPING {
     // Create channel for vector DB
     //
     if (params.vector_db.endsWith('.tar.gz')) {
-        ch_db       = UNTAR (params.vector_db).untar
+        ch_db   = UNTAR ([ [:], params.vector_db ]).untar.map { meta, file -> file }
         ch_versions = ch_versions.mix(UNTAR.out.versions)
     } else {
-        ch_db       = file(params.vector_db)
+        ch_db   = file(params.vector_db)
     }
 
     //
     // SUBWORKFLOW: Align raw reads to genome
     //
-    ALIGN_HIC ( PREPARE_GENOME.out.fasta, PREPARE_GENOME.out.bwaidx, ch_reads.hic)
+    ch_genome = PREPARE_GENOME.out.fasta.map { meta, file -> file }
+
+    ALIGN_HIC ( ch_genome, PREPARE_GENOME.out.bwaidx, ch_reads.hic)
     ch_versions = ch_versions.mix(ALIGN_HIC.out.versions)
 
-    ALIGN_ILLUMINA ( PREPARE_GENOME.out.fasta, PREPARE_GENOME.out.bwaidx, ch_reads.illumina )
+    ALIGN_ILLUMINA ( ch_genome, PREPARE_GENOME.out.bwaidx, ch_reads.illumina )
     ch_versions = ch_versions.mix(ALIGN_ILLUMINA.out.versions)
 
-    ALIGN_HIFI ( PREPARE_GENOME.out.fasta, ch_reads.pacbio, ch_db )
+    ALIGN_HIFI ( ch_genome, ch_reads.pacbio, ch_db )
     ch_versions = ch_versions.mix(ALIGN_HIFI.out.versions)
 
-    ALIGN_CLR ( PREPARE_GENOME.out.fasta, ch_reads.clr, ch_db )
+    ALIGN_CLR ( ch_genome, ch_reads.clr, ch_db )
     ch_versions = ch_versions.mix(ALIGN_CLR.out.versions)
 
-    ALIGN_ONT ( PREPARE_GENOME.out.fasta, ch_reads.ont )
+    ALIGN_ONT ( ch_genome, ch_reads.ont )
     ch_versions = ch_versions.mix(ALIGN_ONT.out.versions)
 
     //
@@ -136,7 +136,7 @@ workflow READMAPPING {
 
 workflow.onComplete {
     if (params.email || params.email_on_fail) {
-        NfcoreTemplate.email(workflow, params, summary_params, projectDir, log, multiqc_report)
+        NfcoreTemplate.email(workflow, params, summary_params, projectDir, log)
     }
     NfcoreTemplate.summary(workflow, params, log)
 }

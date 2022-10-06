@@ -8,14 +8,15 @@ include { MERGE_STATS    } from '../../subworkflows/local/merge_stats'
 
 workflow ALIGN_PACBIO {
     take:
-    reads // channel: [ val(meta), [ datafile ] ]
     fasta // channel: /path/to/fasta
+    reads // channel: [ val(meta), [ datafile ] ]
+    db    // channel: /path/to/vector_db
 
     main:
     ch_versions = Channel.empty()
 
     // Filter BAM and output as FASTQ
-    FILTER_PACBIO ( reads )
+    FILTER_PACBIO ( reads, db )
     ch_versions = ch_versions.mix(FILTER_PACBIO.out.versions)
 
     // Align Fastq to Genome
@@ -27,11 +28,10 @@ workflow ALIGN_PACBIO {
     ch_versions = ch_versions.mix(MERGE_STATS.out.versions)
 
     emit:
-    cram = MERGE_STATS.out.cram
-    crai = MERGE_STATS.out.crai
-    stats = MERGE_STATS.out.stats
+    cram     = MERGE_STATS.out.cram
+    crai     = MERGE_STATS.out.crai
+    stats    = MERGE_STATS.out.stats
     idxstats = MERGE_STATS.out.idxstats
     flagstat = MERGE_STATS.out.flagstat
-
     versions = ch_versions
 }

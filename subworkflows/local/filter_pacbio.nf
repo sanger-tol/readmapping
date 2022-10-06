@@ -35,7 +35,7 @@ workflow FILTER_PACBIO {
     ch_versions = ch_versions.mix(PACBIO_FILTER.out.versions.first())
 
     // Create filtered BAM file
-    SAMTOOLS_FILTER ( SAMTOOLS_PACBIO.out.bam, [], PACBIO_FILTER.out.list )
+    SAMTOOLS_FILTER ( SAMTOOLS_CONVERT.out.bam, [], PACBIO_FILTER.out.list )
     ch_versions = ch_versions.mix(SAMTOOLS_FILTER.out.versions.first())
 
     // Convert BAM to FASTQ

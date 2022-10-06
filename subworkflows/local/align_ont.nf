@@ -7,8 +7,8 @@ include { MERGE_STATS    } from '../../subworkflows/local/merge_stats'
 
 workflow ALIGN_ONT {
     take:
-    reads // channel: [ val(meta), [ datafile ] ]
     fasta // channel: /path/to/fasta
+    reads // channel: [ val(meta), [ datafile ] ]
 
     main:
     ch_versions = Channel.empty()
@@ -22,11 +22,10 @@ workflow ALIGN_ONT {
     ch_versions = ch_versions.mix(MERGE_STATS.out.versions)
 
     emit:
-    cram = MERGE_STATS.out.cram
-    crai = MERGE_STATS.out.crai
-    stats = MERGE_STATS.out.stats
+    cram     = MERGE_STATS.out.cram
+    crai     = MERGE_STATS.out.crai
+    stats    = MERGE_STATS.out.stats
     idxstats = MERGE_STATS.out.idxstats
     flagstat = MERGE_STATS.out.flagstat
-
     versions = ch_versions
 }

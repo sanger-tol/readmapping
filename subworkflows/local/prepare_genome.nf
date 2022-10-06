@@ -14,11 +14,12 @@ workflow PREPARE_GENOME {
     ch_versions = Channel.empty()
 
     // Uncompress genome fasta file if required
+    tag = params.fasta.tokenize("/")[-1].tokenize(".")[0..1].join(".")
     if (params.fasta.endsWith('.gz')) {
-        ch_fasta    = GUNZIP ( [ [:], params.fasta ] ).gunzip.map { it[1] }
+        ch_fasta    = GUNZIP ([ [id: tag], params.fasta ]).gunzip
         ch_versions = ch_versions.mix(GUNZIP.out.versions)
     } else {
-        ch_fasta = file(params.fasta)
+        ch_fasta = file([ [id: tag], params.fasta ])
     }
 
     // Unmask genome fasta
@@ -29,10 +30,10 @@ workflow PREPARE_GENOME {
     ch_bwamem2_index = Channel.empty()
     if (params.bwamem2_index) {
         if (params.bwamem2_index.endsWith('.tar.gz')) {
-            ch_bwamem2_index = UNTAR_BWAMEM2 (params.bwamem2_index).untar
+            ch_bwamem2_index = UNTAR_BWAMEM2 ([ [id: tag], params.bwamem2_index ]).untar
             ch_versions      = ch_versions.mix(UNTAR_BWAMEM2.out.versions)
         } else {
-            ch_bwamem2_index = file(params.bwamem2_index)
+            ch_bwamem2_index = file(params.bwamem2_index).map { file -> [ [id: tag], file ] }
         }
     } else {
         ch_bwamem2_index = BWAMEM2_INDEX (REMOVE_MASKING.out.fasta).index
@@ -43,10 +44,10 @@ workflow PREPARE_GENOME {
     ch_samtools_index = Channel.empty()
     if (params.samtools_index) {
         if (params.samtools_index.endsWith('.tar.gz')) {
-            ch_samtools_index = UNTAR_SAMTOOLS (params.samtools_index).untar
+            ch_samtools_index = UNTAR_SAMTOOLS ([ [id: tag], params.samtools_index ]).untar
             ch_versions       = ch_versions.mix(UNTAR_SAMTOOLS.out.versions)
         } else {
-            ch_samtools_index = file(params.samtools_index)
+            ch_samtools_index = file(params.samtools_index).map { file -> [ [id: tag], file ] }
         }
     } else {
         ch_samtools_index = SAMTOOLS_FAIDX (REMOVE_MASKING.out.fasta).fai
@@ -54,8 +55,8 @@ workflow PREPARE_GENOME {
     }
 
     emit:
-    fasta    = REMOVE_MASKING.out.fasta  // path: genome.unmasked.fasta
-    bwaidx   = ch_bwamem2_index          // path: bwamem2/index/
-    faidx    = ch_samtools_index         // path: samtools/faidx/
+    fasta    = REMOVE_MASKING.out.fasta  // path: [meta, genome.unmasked.fasta]
+    bwaidx   = ch_bwamem2_index          // path: [meta, bwamem2/]
+    faidx    = ch_samtools_index         // path: [meta, genome.fai]
     versions = ch_versions.ifEmpty(null) // channel: [ versions.yml ]
 }

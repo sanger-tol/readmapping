@@ -34,7 +34,6 @@ workflow MARKDUP_STATS {
 
     // Convert merged BAM to CRAM and calculate indices and statistics
     ch_stat = MARKDUPLICATE.out.bam.map { meta, bam -> [ meta, bam, [] ] }
-    
     CONVERT_STATS ( ch_stat, fasta )
     ch_versions = ch_versions.mix(CONVERT_STATS.out.versions)
 
