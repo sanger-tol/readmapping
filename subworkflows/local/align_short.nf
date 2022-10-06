@@ -33,6 +33,5 @@ workflow ALIGN_SHORT {
     stats = MARKDUP_STATS.out.stats
     idxstats = MARKDUP_STATS.out.idxstats
     flagstat = MARKDUP_STATS.out.flagstat
-
     versions = ch_versions
 }
