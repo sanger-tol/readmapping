@@ -28,10 +28,6 @@
                 "errorMessage": "Library name to be assigned to read group (@RG) ID value"
             }
         },
-        "required": [
-            "sample",
-            "datatype",
-            "datafile"
-        ]
+        "required": ["sample", "datatype", "datafile"]
     }
 }

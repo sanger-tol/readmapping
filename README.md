@@ -3,6 +3,7 @@
 <!-- [![GitHub Actions CI Status](https://github.com/sanger-tol/readmapping/workflows/sanger-tol%20CI/badge.svg)](https://github.com/sanger-tol/readmapping/actions?query=workflow%3A%22sanger-tol+CI%22) -->
 <!-- [![GitHub Actions Linting Status](https://github.com/sanger-tol/readmapping/workflows/sanger-tol%20linting/badge.svg)](https://github.com/sanger-tol/readmapping/actions?query=workflow%3A%22sanger-tol+linting%22) -->
 <!-- [![AWS CI](https://img.shields.io/badge/CI%20tests-full%20size-FF9900?labelColor=000000&logo=Amazon%20AWS)](https://nf-co.re/readmapping/results) -->
+
 [![Cite with Zenodo](http://img.shields.io/badge/DOI-10.5281/zenodo.6563578-1073c8?labelColor=000000)](https://doi.org/10.5281/zenodo.6563578)
 
 [![Nextflow](https://img.shields.io/badge/nextflow%20DSL2-%E2%89%A522.04.0-23aa62.svg?labelColor=000000)](https://www.nextflow.io/)
@@ -115,7 +116,7 @@ For further information or help, don't hesitate to get in touch on the [Slack `#
 
 ## Citations
 
-If you use  sanger-tol/readmapping for your analysis, please cite it using the following doi: [10.5281/zenodo.6563578](https://doi.org/10.5281/zenodo.6563578)
+If you use sanger-tol/readmapping for your analysis, please cite it using the following doi: [10.5281/zenodo.6563578](https://doi.org/10.5281/zenodo.6563578)
 
 An extensive list of references for the tools used by the pipeline can be found in the [`CITATIONS.md`](CITATIONS.md) file.
 

@@ -34,11 +34,11 @@ sample1_T4,pacbio,pacbio1.bam,pacbio1
 sample1_T5,pacbio,pacbio2.bam,pacbio2
 ```
 
-| Column     | Description |
-|------------|-------------|
-| `sample`   | Custom sample name. This entry will be identical for multiple sequencing libraries/runs from the same sample. Spaces in sample names are automatically converted to underscores (_). |
-| `datatype` | Type of sequencing data. Must be one of `hic`, `Illumina`, `pacbio`, or `ont`. |
-| `datafile` | Full path to read data file. Must be `bam` or `cram` for `hic` and `illumina`. Must be `bam` for `pacbio`. Must be `fastq.gz` or `fq.gz` for `ont`. |
+| Column     | Description                                                                                                                                                                                                                           |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `sample`   | Custom sample name. This entry will be identical for multiple sequencing libraries/runs from the same sample. Spaces in sample names are automatically converted to underscores (\_).                                                 |
+| `datatype` | Type of sequencing data. Must be one of `hic`, `Illumina`, `pacbio`, or `ont`.                                                                                                                                                        |
+| `datafile` | Full path to read data file. Must be `bam` or `cram` for `hic` and `illumina`. Must be `bam` for `pacbio`. Must be `fastq.gz` or `fq.gz` for `ont`.                                                                                   |
 | `library`  | (Optional) The library value is a unique identifier which is assigned to read group (`@RG`) ID. If the library name is not specified, the pipeline will auto-create library name using the data filename provided in the samplesheet. |
 
 An [example samplesheet](https://github.com/sanger-tol/readmapping/blob/main/assests/samplesheet.csv) has been provided with the pipeline.
@@ -97,21 +97,21 @@ They are loaded in sequence, so later profiles can overwrite earlier profiles.
 
 If `-profile` is not specified, the pipeline will run locally and expect all software to be installed and available on the `PATH`. This is _not_ recommended.
 
-* `docker`
-    * A generic configuration profile to be used with [Docker](https://docker.com/)
-* `singularity`
-    * A generic configuration profile to be used with [Singularity](https://sylabs.io/docs/)
-* `podman`
-    * A generic configuration profile to be used with [Podman](https://podman.io/)
-* `shifter`
-    * A generic configuration profile to be used with [Shifter](https://nersc.gitlab.io/development/shifter/how-to-use/)
-* `charliecloud`
-    * A generic configuration profile to be used with [Charliecloud](https://hpc.github.io/charliecloud/)
-* `conda`
-    * A generic configuration profile to be used with [Conda](https://conda.io/docs/). Please only use Conda as a last resort i.e. when it's not possible to run the pipeline with Docker, Singularity, Podman, Shifter or Charliecloud.
-* `test`
-    * A profile with a complete configuration for automated testing
-    * Includes links to test data so needs no other parameters
+-   `docker`
+    -   A generic configuration profile to be used with [Docker](https://docker.com/)
+-   `singularity`
+    -   A generic configuration profile to be used with [Singularity](https://sylabs.io/docs/)
+-   `podman`
+    -   A generic configuration profile to be used with [Podman](https://podman.io/)
+-   `shifter`
+    -   A generic configuration profile to be used with [Shifter](https://nersc.gitlab.io/development/shifter/how-to-use/)
+-   `charliecloud`
+    -   A generic configuration profile to be used with [Charliecloud](https://hpc.github.io/charliecloud/)
+-   `conda`
+    -   A generic configuration profile to be used with [Conda](https://conda.io/docs/). Please only use Conda as a last resort i.e. when it's not possible to run the pipeline with Docker, Singularity, Podman, Shifter or Charliecloud.
+-   `test`
+    -   A profile with a complete configuration for automated testing
+    -   Includes links to test data so needs no other parameters
 
 ### `-resume`
 
@@ -150,7 +150,7 @@ The [Nextflow DSL2](https://www.nextflow.io/docs/latest/dsl2.html) implementatio
 2. Find the latest version of the Biocontainer available on [Quay.io](https://quay.io/repository/biocontainers/pangolin?tag=latest&tab=tags)
 3. Create the custom config accordingly:
 
-    * For Docker:
+    - For Docker:
 
         ```nextflow
         process {
@@ -160,7 +160,7 @@ The [Nextflow DSL2](https://www.nextflow.io/docs/latest/dsl2.html) implementatio
         }
         ```
 
-    * For Singularity:
+    - For Singularity:
 
         ```nextflow
         process {
@@ -170,7 +170,7 @@ The [Nextflow DSL2](https://www.nextflow.io/docs/latest/dsl2.html) implementatio
         }
         ```
 
-    * For Conda:
+    - For Conda:
 
         ```nextflow
         process {
