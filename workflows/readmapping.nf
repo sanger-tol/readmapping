@@ -106,10 +106,12 @@ workflow READMAPPING {
     //
     // SUBWORKFLOW: Align raw reads to genome
     //
-    ALIGN_HIC ( PREPARE_GENOME.out.fasta, PREPARE_GENOME.out.bwaidx, ch_reads.hic)
+    ch_bwaidx = PREPARE_GENOME.out.bwaidx.collect()
+    
+    ALIGN_HIC ( PREPARE_GENOME.out.fasta, ch_bwaidx, ch_reads.hic)
     ch_versions = ch_versions.mix(ALIGN_HIC.out.versions)
 
-    ALIGN_ILLUMINA ( PREPARE_GENOME.out.fasta, PREPARE_GENOME.out.bwaidx, ch_reads.illumina )
+    ALIGN_ILLUMINA ( PREPARE_GENOME.out.fasta, ch_bwaidx, ch_reads.illumina )
     ch_versions = ch_versions.mix(ALIGN_ILLUMINA.out.versions)
 
     ALIGN_HIFI ( PREPARE_GENOME.out.fasta, ch_reads.pacbio, ch_db )
