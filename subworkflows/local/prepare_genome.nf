@@ -43,27 +43,11 @@ workflow PREPARE_GENOME {
         ch_versions      = ch_versions.mix(BWAMEM2_INDEX.out.versions)
     }
 
-    // Generate Samtools index
-    ch_samtools_index = Channel.empty()
-    if (params.samtools_index) {
-        faidx = Channel.fromPath(params.samtools_index).combine(ch_fasta).map { file, meta, fa -> [ meta, file ] }
-        if (params.samtools_index.endsWith('.tar.gz')) {
-            ch_samtools_index = UNTAR_SAMTOOLS ( faidx ).untar
-            ch_versions       = ch_versions.mix(UNTAR_SAMTOOLS.out.versions)
-        } else {
-            ch_samtools_index = faidx
-        }
-    } else {
-        ch_samtools_index = SAMTOOLS_FAIDX (REMOVE_MASKING.out.fasta).fai
-        ch_versions       = ch_versions.mix(SAMTOOLS_FAIDX.out.versions)
-    }
-
     // Update genome
-    ch_asm   = REMOVE_MASKING.out.fasta.map { meta, file -> file }
+    ch_asm   = REMOVE_MASKING.out.fasta.map { meta, file -> file }.collect()
 
     emit:
-    fasta    = ch_asm                    // path: /path/to/fasta
-    bwaidx   = ch_bwamem2_index          // path: [meta, bwamem2/]
-    faidx    = ch_samtools_index         // path: [meta, genome.fai]
-    versions = ch_versions.ifEmpty(null) // channel: [ versions.yml ]
+    fasta    = ch_asm                      // path: /path/to/fasta
+    bwaidx   = ch_bwamem2_index.collect()  // path: [meta, bwamem2/]
+    versions = ch_versions.ifEmpty(null)   // channel: [ versions.yml ]
 }
