@@ -1,0 +1,31 @@
+name: nf-core LSF full size tests
+
+on:
+  push:
+    branches:
+      - lsf-full-test
+  workflow_dispatch:
+jobs:
+  run-tower:
+    name: Run LSF full size tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Launch workflow via tower
+        uses: nf-core/tower-action@v2
+        with:
+          workspace_id: ${{ secrets.TOWER_WORKSPACE_ID }}
+          access_token: ${{ secrets.TOWER_ACCESS_TOKEN }}
+          compute_env: ${{ secrets.TOWER_COMPUTE_ENV }}
+          pipeline: ${{ github.repository }}
+          revision: ${{ github.sha }}
+          workdir: ${{ secrets.TOWER_WORKDIR_PARAENT }}/work/readmapping/work-${{ github.sha }}
+          parameters: |
+            {
+              "outdir": "${{ secrets.TOWER_WORKDIR_PARAENT }}/results/readmapping/results-${{ github.sha }}",
+              "email": "${{ secrets.TOWER_RUN_EMAIL }}",
+              "email_on_fail": "${{ secrets.TOWER_RUN_EMAIL }}"
+            }
+          profiles: test,sanger,singularity
+          nextflow_config: |
+            process.errorStrategy = 'retry'
+            process.maxRetries = 3
