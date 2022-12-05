@@ -21,7 +21,7 @@ jobs:
           workdir: ${{ secrets.TOWER_WORKDIR_PARAENT }}/work/readmapping/work-${{ github.sha }}
           parameters: |
             {
-              "outdir": "${{ secrets.TOWER_WORKDIR_PARAENT }}/results/readmapping/results-${{ github.sha }}",
+              "outdir": "${{ secrets.TOWER_WORKDIR_PARENT }}/results/readmapping/results-${{ github.sha }}",
               "email": "${{ secrets.TOWER_RUN_EMAIL }}",
               "email_on_fail": "${{ secrets.TOWER_RUN_EMAIL }}"
             }
