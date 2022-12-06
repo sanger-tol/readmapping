@@ -1,9 +1,10 @@
 name: nf-core LSF full size tests
 
 on:
-  push:
+  pull_request:
     branches:
-      - lsf-full-test
+      - main
+      - dev
   workflow_dispatch:
 jobs:
   run-tower:
