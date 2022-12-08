@@ -1,10 +1,9 @@
-name: nf-core LSF full size tests
+name: nf-core Sanger LSF full size tests
 
 on:
-  pull_request:
-    branches:
-      - main
-      - dev
+  release:
+    types: [published]
+  workflow_dispatch:
 jobs:
   run-tower:
     name: Run LSF full size tests
@@ -17,10 +16,10 @@ jobs:
           access_token: ${{ secrets.TOWER_ACCESS_TOKEN }}
           compute_env: ${{ secrets.TOWER_COMPUTE_ENV }}
           pipeline: ${{ github.repository }}
-          revision: ${{ github.event.pull_request.head.sha }}
-          workdir: ${{ secrets.TOWER_WORKDIR_PARENT }}/work/readmapping/work-${{ github.event.pull_request.head.sha }}
+          revision: ${{ github.sha }}
+          workdir: ${{ secrets.TOWER_WORKDIR_PARENT }}/work/readmapping/work-${{ github.sha }}
           parameters: |
             {
-              "outdir": "${{ secrets.TOWER_WORKDIR_PARENT }}/results/readmapping/results-${{ github.event.pull_request.head.sha }}",
+              "outdir": "${{ secrets.TOWER_WORKDIR_PARENT }}/results/readmapping/results-${{ github.sha }}",
             }
           profiles: test,sanger,singularity
