@@ -1,0 +1,4 @@
+sample,datatype,datafile,library,outdir
+gfLaeSulp1,hic,/lustre/scratch124/tol/projects/darwin/data/fungi/Laetiporus_sulphureus/genomic_data/gfLaeSulp1/hic-arima2/40063_3#5.cram,,
+gfLaeSulp1,pacbio,/lustre/scratch124/tol/projects/darwin/data/fungi/Laetiporus_sulphureus/genomic_data/gfLaeSulp1/pacbio/m64229e_210602_121910.ccs.bc1020_BAK8B_OA--bc1020_BAK8B_OA.bam,,
+gfLaeSulp1,pacbio,/lustre/scratch124/tol/projects/darwin/data/fungi/Laetiporus_sulphureus/genomic_data/gfLaeSulp1/pacbio/m64097e_220913_071535.ccs.bc1017_BAK8B_OA--bc1017_BAK8B_OA.bam,,

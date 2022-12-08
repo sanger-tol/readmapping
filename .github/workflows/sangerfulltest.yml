@@ -22,4 +22,4 @@ jobs:
             {
               "outdir": "${{ secrets.TOWER_WORKDIR_PARENT }}/results/readmapping/results-${{ github.sha }}",
             }
-          profiles: test,sanger,singularity
+          profiles: test_full,sanger,singularity
