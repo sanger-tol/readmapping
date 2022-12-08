@@ -22,10 +22,5 @@ jobs:
           parameters: |
             {
               "outdir": "${{ secrets.TOWER_WORKDIR_PARENT }}/results/readmapping/results-${{ github.event.pull_request.head.sha }}",
-              "email": "${{ secrets.TOWER_RUN_EMAIL }}",
-              "email_on_fail": "${{ secrets.TOWER_RUN_EMAIL }}"
             }
           profiles: test,sanger,singularity
-          nextflow_config: |
-            process.errorStrategy = 'retry'
-            process.maxRetries = 3
