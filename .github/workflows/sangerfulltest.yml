@@ -1,7 +1,7 @@
 name: nf-core Sanger LSF full size tests
 
 on:
-  pull_request:
+  push:
     branches:
       - main
       - dev
@@ -12,9 +12,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - name: Sets env vars for pull request
+      - name: Sets env vars for push
         run: |
-          echo "REVISION=${{ github.event.pull_request.head.sha }}" >> $GITHUB_ENV
+          echo "REVISION=${{ github.sha }}" >> $GITHUB_ENV
         if: github.event_name == 'pull_request'
 
       - name: Sets env vars for workflow_dispatch
