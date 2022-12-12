@@ -15,7 +15,7 @@ jobs:
       - name: Sets env vars for push
         run: |
           echo "REVISION=${{ github.sha }}" >> $GITHUB_ENV
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'push'
 
       - name: Sets env vars for workflow_dispatch
         run: |
