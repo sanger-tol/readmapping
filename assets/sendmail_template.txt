@@ -1,0 +1,28 @@
+To: $email
+Subject: $subject
+Mime-Version: 1.0
+Content-Type: multipart/related;boundary="nfcoremimeboundary"
+
+--nfcoremimeboundary
+Content-Type: text/html; charset=utf-8
+
+$email_html
+
+--nfcoremimeboundary
+Content-Type: image/png;name="sanger-tol-readmapping_logo.png"
+Content-Transfer-Encoding: base64
+Content-ID: <nfcorepipelinelogo>
+Content-Disposition: inline; filename="sanger-tol-readmapping_logo.png"
+
+<% out << new File("$projectDir/docs/images/nf-core-readmapping_logo.png").
+    bytes.
+    encodeBase64().
+    toString().
+    tokenize( '\n' )*.
+    toList()*.
+    collate( 76 )*.
+    collect { it.join() }.
+    flatten().
+    join( '\n' ) %>
+
+--nfcoremimeboundary--
