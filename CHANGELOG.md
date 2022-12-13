@@ -9,11 +9,11 @@ Initial release of sanger-tol/readmapping, created with the [nf-core](https://nf
 
 ### `Added`
 
--   HiC and Illumina read alignment to genome
--   PacBio CLR and CCS read alignment to genome after filtering
--   Nanopore read alignment to genome
--   Mark duplicates for HiC and Illumina alignments
--   Convert to CRAM and calculate statistics for all alignments
+- HiC and Illumina read alignment to genome
+- PacBio CLR and CCS read alignment to genome after filtering
+- Nanopore read alignment to genome
+- Mark duplicates for HiC and Illumina alignments
+- Convert to CRAM and calculate statistics for all alignments
 
 ### `Fixed`
 
@@ -21,5 +21,15 @@ Initial release of sanger-tol/readmapping, created with the [nf-core](https://nf
 
 -   `nextflow`
 -   `singularity` or `docker`
+
+### `Deprecated`
+
+## v1.1 - [date]
+
+### `Added`
+
+### `Fixed`
+
+### `Dependencies`
 
 ### `Deprecated`
