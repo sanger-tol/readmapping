@@ -2,7 +2,7 @@
 // Align Nanopore read files against the genome
 //
 
-include { MINIMAP2_ALIGN } from '../../modules/nf-core/modules/nf-core/minimap2/align/main'
+include { MINIMAP2_ALIGN } from '../../modules/nf-core/minimap2/align/main'
 include { MERGE_STATS    } from '../../subworkflows/local/merge_stats'
 
 workflow ALIGN_ONT {
