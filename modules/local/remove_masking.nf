@@ -1,5 +1,5 @@
 process REMOVE_MASKING {
-    tag "${genome.baseName}"
+    tag "${meta.id}"
     label 'process_single'
 
     conda (params.enable_conda ? "conda-forge::gawk=5.1.0" : null)

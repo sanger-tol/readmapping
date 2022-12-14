@@ -22,7 +22,7 @@
                     "pattern": "^\\S+\\.csv$",
                     "schema": "assets/schema_input.json",
                     "description": "Path to comma-separated file containing information about the samples in the experiment.",
-                    "help_text": "You will need to create a design file with information about the samples in your experiment before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 3 columns, and a header row.",
+                    "help_text": "You will need to create a design file with information about the samples in your experiment before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 4 columns, and a header row.",
                     "fa_icon": "fas fa-file-csv"
                 },
                 "outdir": {
@@ -37,6 +37,13 @@
                     "fa_icon": "fas fa-envelope",
                     "help_text": "Set this parameter to your e-mail address to get a summary e-mail with details of the run sent to you when the workflow exits. If set in your user config file (`~/.nextflow/config`) then you don't need to specify this on the command line for every run.",
                     "pattern": "^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$"
+                },
+                "vector_db": {
+                    "type": "string",
+                    "description": "Path to directory or tar.gz archive for pre-built PacBio vector database.",
+                    "format": "path",
+                    "default": "${projectDir}/assets/vectorDB.tar.gz",
+                    "fa_icon": "fas fa-bezier-curve"
                 }
             }
         },
@@ -45,7 +52,25 @@
             "type": "object",
             "fa_icon": "fas fa-dna",
             "description": "Reference genome related files and options required for the workflow.",
-            "properties": {}
+            "required": [
+                "fasta"
+            ],
+            "properties": {
+                "fasta": {
+                    "type": "string",
+                    "description": "Path to FASTA genome file.",
+                    "format": "file-path",
+                    "mimetype": "text/plain",
+                    "pattern": "^\\S+\\.fn?a(sta)?(\\.gz)?$",
+                    "fa_icon": "far fa-file-code"
+                },
+                "bwamem2_index": {
+                    "type": "string",
+                    "description": "Path to directory or tar.gz archive for pre-built BWAMEM2 index.",
+                    "format": "path",
+                    "fa_icon": "fas fa-bezier-curve"
+                }
+            }
         },
         "institutional_config_options": {
             "title": "Institutional config options",

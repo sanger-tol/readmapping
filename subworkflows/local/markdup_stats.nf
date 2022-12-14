@@ -2,47 +2,59 @@
 // Merge and Markdup all alignments at specimen level
 // Convert to CRAM and calculate statistics
 //
+
 include { SAMTOOLS_SORT } from '../../modules/nf-core/samtools/sort/main'
 include { MARKDUPLICATE } from '../../subworkflows/local/markduplicate'
 include { CONVERT_STATS } from '../../subworkflows/local/convert_stats'
 
+
 workflow MARKDUP_STATS {
     take:
-    aln // channel: [ val(meta), [ sam ] ]
-    fasta // channel: /path/to/fasta
+    aln      // channel: [ val(meta), /path/to/bam ]
+    fasta    // channel: [ val(meta), /path/to/fasta ]
+
 
     main:
     ch_versions = Channel.empty()
 
-    // Sort SAM and convert to BAM
+
+    // Sort BAM file
     SAMTOOLS_SORT ( aln )
-    ch_versions = ch_versions.mix(SAMTOOLS_SORT.out.versions.first())
+    ch_versions = ch_versions.mix ( SAMTOOLS_SORT.out.versions.first() )
+
 
     // Collect all BWAMEM2 output by sample name
     SAMTOOLS_SORT.out.bam
-    .map { meta, bam ->
-    new_meta = meta.clone()
-    new_meta.id = new_meta.id.split('_')[0..-2].join('_')
-    [ [id: new_meta.id, datatype: new_meta.datatype, outdir: new_meta.outdir] , bam ]
-    }
-    .groupTuple(by: [0])
-    .set { ch_bams }
+    | map { meta, bam ->
+        new_id = meta.id.split('_')[0..-2].join('_')
+        [ meta + [ id: new_id ], bam ] }
+    | groupTuple( by: [0] )
+    | set { ch_bams }
+
 
     // Mark duplicates
     MARKDUPLICATE ( ch_bams )
-    ch_versions = ch_versions.mix(MARKDUPLICATE.out.versions)
+    ch_versions = ch_versions.mix ( MARKDUPLICATE.out.versions )
+
 
     // Convert merged BAM to CRAM and calculate indices and statistics
-    ch_stat = MARKDUPLICATE.out.bam.map { meta, bam -> [ meta, bam, [] ] }
-    CONVERT_STATS ( ch_stat, fasta )
-    ch_versions = ch_versions.mix(CONVERT_STATS.out.versions)
+    MARKDUPLICATE.out.bam
+    | map { meta, bam -> [ meta, bam, [] ] }
+    | set { ch_stat }
+
+    fasta
+    | map { meta, file -> file }
+    | set { ch_fasta }
+
+    CONVERT_STATS ( ch_stat, ch_fasta )
+    ch_versions = ch_versions.mix ( CONVERT_STATS.out.versions )
+
 
     emit:
-    cram = CONVERT_STATS.out.cram
-    crai = CONVERT_STATS.out.crai
-    stats = CONVERT_STATS.out.stats
-    idxstats = CONVERT_STATS.out.idxstats
-    flagstat = CONVERT_STATS.out.flagstat
-
-    versions = ch_versions
+    cram     = CONVERT_STATS.out.cram        // channel: [ val(meta), /path/to/cram ]
+    crai     = CONVERT_STATS.out.crai        // channel: [ val(meta), /path/to/crai ]
+    stats    = CONVERT_STATS.out.stats       // channel: [ val(meta), /path/to/stats ]
+    idxstats = CONVERT_STATS.out.idxstats    // channel: [ val(meta), /path/to/idxstats ]
+    flagstat = CONVERT_STATS.out.flagstat    // channel: [ val(meta), /path/to/flagstat ]
+    versions = ch_versions                   // channel: [ versions.yml ]
 }
