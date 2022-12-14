@@ -32,15 +32,15 @@ Subworkflow: Prepare genome
 Subworkflow: Align reads to genome
 
 1. Alignment
-    - HiC and Illumina
-        - Convert CRAM to FASTQ ([Samtools fastq](https://www.htslib.org/doc/samtools-fasta.html))
-        - Align reads to genome ([bwa-mem2 mem](https://github.com/bwa-mem2/bwa-mem2))
-    - Nanopore
-        - Align reads to genome ([minimap2](https://github.com/lh3/minimap2))
-    - PacBio CLR and CCS
-        - Filter reads subworkflow
-        - Convert BAM to FASTQ ([Samtools fastq](https://www.htslib.org/doc/samtools-fasta.html))
-        - Align reads to genome ([minimap2](https://github.com/lh3/minimap2))
+   - HiC and Illumina
+     - Convert CRAM to FASTQ ([Samtools fastq](https://www.htslib.org/doc/samtools-fasta.html))
+     - Align reads to genome ([bwa-mem2 mem](https://github.com/bwa-mem2/bwa-mem2))
+   - Nanopore
+     - Align reads to genome ([minimap2](https://github.com/lh3/minimap2))
+   - PacBio CLR and CCS
+     - Filter reads subworkflow
+     - Convert BAM to FASTQ ([Samtools fastq](https://www.htslib.org/doc/samtools-fasta.html))
+     - Align reads to genome ([minimap2](https://github.com/lh3/minimap2))
 2. Sort aligned files ([Samtools sort](https://www.htslib.org/doc/samtools-sort.html))
 3. Merge all aligned BAMs and mark duplicates (Markduplicate subworkflow) - HiC and Illumina only
 4. Convert merged and mark duplicated BAM to CRAM and calculate statistics (Convert and statistics subworkflow)
@@ -93,8 +93,8 @@ sanger-tol/readmapping was originally written by [Priyanka Surana](https://githu
 
 We thank the following people for their extensive assistance in the development of this pipeline:
 
-* [Matthieu Muffato](https://github.com/muffato) for the text logo
-* [Guoying Qi](https://github.com/gq1) for being able to run tests using Nf-Tower and the Sanger HPC farm
+- [Matthieu Muffato](https://github.com/muffato) for the text logo
+- [Guoying Qi](https://github.com/gq1) for being able to run tests using Nf-Tower and the Sanger HPC farm
 
 ## Contributions and Support
 
@@ -104,8 +104,7 @@ For further information or help, don't hesitate to get in touch on the [Slack `#
 
 ## Citations
 
-If you use  sanger-tol/readmapping for your analysis, please cite it using the following doi: [10.5281/zenodo.6563578](https://doi.org/10.5281/zenodo.6563578)
-
+If you use sanger-tol/readmapping for your analysis, please cite it using the following doi: [10.5281/zenodo.6563578](https://doi.org/10.5281/zenodo.6563578)
 
 An extensive list of references for the tools used by the pipeline can be found in the [`CITATIONS.md`](CITATIONS.md) file.
 
