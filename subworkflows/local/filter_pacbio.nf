@@ -3,12 +3,12 @@
 // Original protocol is a modified version by Shane of the original program, HiFiAdapterFilt
 //
 
-include { SAMTOOLS_VIEW as SAMTOOLS_CONVERT } from '../../modules/nf-core/modules/nf-core/samtools/view/main'
-include { SAMTOOLS_FASTA                    } from '../../modules/nf-core/modules/nf-core/samtools/fasta/main'
-include { BLAST_BLASTN                      } from '../../modules/nf-core/modules/nf-core/blast/blastn/main'
+include { SAMTOOLS_VIEW as SAMTOOLS_CONVERT } from '../../modules/nf-core/samtools/view/main'
+include { SAMTOOLS_FASTA                    } from '../../modules/nf-core/samtools/fasta/main'
+include { BLAST_BLASTN                      } from '../../modules/nf-core/blast/blastn/main'
 include { PACBIO_FILTER                     } from '../../modules/local/pacbio_filter'
-include { SAMTOOLS_VIEW as SAMTOOLS_FILTER  } from '../../modules/nf-core/modules/nf-core/samtools/view/main'
-include { SAMTOOLS_FASTQ                    } from '../../modules/nf-core/modules/nf-core/samtools/fastq/main'
+include { SAMTOOLS_VIEW as SAMTOOLS_FILTER  } from '../../modules/nf-core/samtools/view/main'
+include { SAMTOOLS_FASTQ                    } from '../../modules/nf-core/samtools/fastq/main'
 
 workflow FILTER_PACBIO {
     take:

@@ -2,12 +2,12 @@
 // Uncompress and prepare reference genome files
 //
 
-include { GUNZIP                  } from '../../modules/nf-core/modules/nf-core/gunzip/main'
+include { GUNZIP                  } from '../../modules/nf-core/gunzip/main'
 include { REMOVE_MASKING          } from '../../modules/local/remove_masking'
-include { UNTAR as UNTAR_BWAMEM2  } from '../../modules/nf-core/modules/nf-core/untar/main'
-include { BWAMEM2_INDEX           } from '../../modules/nf-core/modules/nf-core/bwamem2/index/main'
-include { UNTAR as UNTAR_SAMTOOLS } from '../../modules/nf-core/modules/nf-core/untar/main'
-include { SAMTOOLS_FAIDX          } from '../../modules/nf-core/modules/nf-core/samtools/faidx/main'
+include { UNTAR as UNTAR_BWAMEM2  } from '../../modules/nf-core/untar/main'
+include { BWAMEM2_INDEX           } from '../../modules/nf-core/bwamem2/index/main'
+include { UNTAR as UNTAR_SAMTOOLS } from '../../modules/nf-core/untar/main'
+include { SAMTOOLS_FAIDX          } from '../../modules/nf-core/samtools/faidx/main'
 
 workflow PREPARE_GENOME {
     take:
