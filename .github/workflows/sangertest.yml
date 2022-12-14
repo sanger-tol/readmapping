@@ -15,9 +15,9 @@ jobs:
           compute_env: ${{ secrets.TOWER_COMPUTE_ENV }}
           pipeline: ${{ github.repository }}
           revision: ${{ github.sha }}
-          workdir: ${{ secrets.TOWER_WORKDIR_PARENT }}/work/readmapping/work-${{ github.sha }}
+          workdir: ${{ secrets.TOWER_WORKDIR_PARENT }}/work/${{ github.repository }}/work-${{ github.sha }}
           parameters: |
             {
-              "outdir": "${{ secrets.TOWER_WORKDIR_PARENT }}/results/readmapping/results-${{ github.sha }}",
+              "outdir": "${{ secrets.TOWER_WORKDIR_PARENT }}/results/${{ github.repository }}/results-${{ github.sha }}",
             }
           profiles: test,sanger,singularity
