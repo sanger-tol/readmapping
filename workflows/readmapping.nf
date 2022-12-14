@@ -121,8 +121,8 @@ workflow READMAPPING {
     // ALIGN_CLR ( PREPARE_GENOME.out.fasta, ch_reads.clr, ch_db )
     // ch_versions = ch_versions.mix ( ALIGN_CLR.out.versions )
 
-    // ALIGN_ONT ( PREPARE_GENOME.out.fasta, ch_reads.ont )
-    // ch_versions = ch_versions.mix ( ALIGN_ONT.out.versions )
+    ALIGN_ONT ( PREPARE_GENOME.out.fasta, ch_reads.ont )
+    ch_versions = ch_versions.mix ( ALIGN_ONT.out.versions )
 
 
     //
