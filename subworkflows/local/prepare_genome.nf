@@ -2,10 +2,10 @@
 // Uncompress and prepare reference genome files
 //
 
-include { GUNZIP                  } from '../../modules/nf-core/gunzip/main'
-include { REMOVE_MASKING          } from '../../modules/local/remove_masking'
-include { UNTAR                   } from '../../modules/nf-core/untar/main'
-include { BWAMEM2_INDEX           } from '../../modules/nf-core/bwamem2/index/main'
+include { GUNZIP        } from '../../modules/nf-core/gunzip/main'
+include { UNMASK        } from '../../modules/local/unmask'
+include { UNTAR         } from '../../modules/nf-core/untar/main'
+include { BWAMEM2_INDEX } from '../../modules/nf-core/bwamem2/index/main'
 
 
 workflow PREPARE_GENOME {    
@@ -27,8 +27,8 @@ workflow PREPARE_GENOME {
 
 
     // Unmask genome fasta
-    REMOVE_MASKING ( ch_fasta )
-    ch_versions = ch_versions.mix ( REMOVE_MASKING.out.versions )
+    UNMASK ( ch_fasta )
+    ch_versions = ch_versions.mix ( UNMASK.out.versions )
 
 
     // Generate BWA index
@@ -46,13 +46,13 @@ workflow PREPARE_GENOME {
         }
 
     } else {
-        ch_bwamem2_index = BWAMEM2_INDEX ( REMOVE_MASKING.out.fasta ).index
+        ch_bwamem2_index = BWAMEM2_INDEX ( UNMASK.out.fasta ).index
         ch_versions      = ch_versions.mix ( BWAMEM2_INDEX.out.versions )
     }
 
 
     emit:
-    fasta    = REMOVE_MASKING.out.fasta.first()    // channel: [ meta, /path/to/fasta ]
-    bwaidx   = ch_bwamem2_index.first()            // channel: [ meta, /path/to/bwamem2/index_dir/ ]
-    versions = ch_versions                         // channel: [ versions.yml ]
+    fasta    = UNMASK.out.fasta.first()    // channel: [ meta, /path/to/fasta ]
+    bwaidx   = ch_bwamem2_index.first()    // channel: [ meta, /path/to/bwamem2/index_dir/ ]
+    versions = ch_versions                 // channel: [ versions.yml ]
 }
