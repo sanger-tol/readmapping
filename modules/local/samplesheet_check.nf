@@ -25,6 +25,7 @@ process SAMPLESHEET_CHECK {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
+        check_samplesheet.py: \$(check_samplesheet.py --version | cut -d' ' -f2)
         python: \$(python --version | sed 's/Python //g')
     END_VERSIONS
     """

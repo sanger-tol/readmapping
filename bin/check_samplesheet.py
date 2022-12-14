@@ -243,6 +243,12 @@ def parse_args(argv=None):
         choices=("CRITICAL", "ERROR", "WARNING", "INFO", "DEBUG"),
         default="WARNING",
     )
+    parser.add_argument(
+        "-v",
+        "--version",
+        action="version",
+        version="%(prog)s 1.0",
+    )
     return parser.parse_args(argv)
 
 
