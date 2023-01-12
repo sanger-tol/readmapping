@@ -1,11 +1,22 @@
 repository_type: pipeline
 lint:
   files_exist:
-    - CODE_OF_CONDUCT.md
-    - docs/images/nf-core-readmapping_logo.png
+    - assets/multiqc_config.yml
+    - assets/nf-core-readmapping_logo_light.png
+    - conf/igenomes.config
+    - docs/images/nf-core-readmapping_logo_dark.png
+    - docs/images/nf-core-readmapping_logo_light.png
     - .github/ISSUE_TEMPLATE/config.yml
-    - .github/workflows/sangertest.yml
-    - .github/workflows/sangerfulltest.yml
+    - .github/workflows/awstest.yml
+    - .github/workflows/awsfulltest.yml
+  files_unchanged:
+    - LICENSE
+    - .github/CONTRIBUTING.md
+    - .github/ISSUE_TEMPLATE/bug_report.yml
+    - assets/email_template.html
+    - assets/sendmail_template.txt
+    - docs/README.md
+    - lib/NfcoreTemplate.groovy
   nextflow_config:
     - manifest.name
     - manifest.homePage
