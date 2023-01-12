@@ -95,13 +95,13 @@ workflow READMAPPING {
         if ( params.vector_db.endsWith( '.tar.gz' ) ) {
             UNTAR ( [ [:], params.vector_db ] ).untar
             | map { meta, file -> file }
-            | set { ch_db }
+            | set { ch_vector_db }
 
             ch_versions = ch_versions.mix ( UNTAR.out.versions )
 
         } else {
             Channel.fromPath ( params.vector_db )
-            | set { ch_db }
+            | set { ch_vector_db }
         }
     }
 
@@ -115,11 +115,11 @@ workflow READMAPPING {
     ALIGN_ILLUMINA ( PREPARE_GENOME.out.fasta, PREPARE_GENOME.out.bwaidx, ch_reads.illumina )
     ch_versions = ch_versions.mix ( ALIGN_ILLUMINA.out.versions )
 
-    // ALIGN_HIFI ( PREPARE_GENOME.out.fasta, ch_reads.pacbio, ch_db )
-    // ch_versions = ch_versions.mix ( ALIGN_HIFI.out.versions )
+    ALIGN_HIFI ( PREPARE_GENOME.out.fasta, ch_reads.pacbio, ch_vector_db )
+    ch_versions = ch_versions.mix ( ALIGN_HIFI.out.versions )
 
-    // ALIGN_CLR ( PREPARE_GENOME.out.fasta, ch_reads.clr, ch_db )
-    // ch_versions = ch_versions.mix ( ALIGN_CLR.out.versions )
+    ALIGN_CLR ( PREPARE_GENOME.out.fasta, ch_reads.clr, ch_vector_db )
+    ch_versions = ch_versions.mix ( ALIGN_CLR.out.versions )
 
     ALIGN_ONT ( PREPARE_GENOME.out.fasta, ch_reads.ont )
     ch_versions = ch_versions.mix ( ALIGN_ONT.out.versions )

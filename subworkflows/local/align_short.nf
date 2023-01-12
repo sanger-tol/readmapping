@@ -19,7 +19,7 @@ workflow ALIGN_SHORT {
 
 
     // Convert from CRAM to FASTQ
-    SAMTOOLS_FASTQ ( reads )
+    SAMTOOLS_FASTQ ( reads, false )
     ch_versions = ch_versions.mix ( SAMTOOLS_FASTQ.out.versions.first() )
 
 
