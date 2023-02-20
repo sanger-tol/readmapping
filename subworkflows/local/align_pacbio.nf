@@ -36,13 +36,11 @@ workflow ALIGN_PACBIO {
 
     // Collect all alignment output by sample name
     MINIMAP2_ALIGN.out.bam
-    | map { meta, bam ->
-         new_id = meta.id.split('_')[0..-2].join('_')
-         [ meta + [ id: new_id ] , bam ] }
-    | map { meta, bam -> [ [ meta.id, meta.datatype ], bam ] }
+    | map { meta, bam -> [['id': meta.id.split('_')[0..-2].join('_'), 'datatype': meta.datatype], bam] }
     | groupTuple ( by: [0] )
     | set { ch_bams }
 
+    ch_bams.view()
 
     // Merge
     SAMTOOLS_MERGE ( ch_bams, [], [] )

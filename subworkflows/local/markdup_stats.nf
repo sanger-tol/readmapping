@@ -25,9 +25,7 @@ workflow MARKDUP_STATS {
 
     // Collect all BWAMEM2 output by sample name
     SAMTOOLS_SORT.out.bam
-    | map { meta, bam ->
-        new_id = meta.id.split('_')[0..-2].join('_')
-        [ meta + [ id: new_id ], bam ] }
+    | map { meta, bam -> [['id': meta.id.split('_')[0..-2].join('_'), 'datatype': meta.datatype], bam] }
     | groupTuple( by: [0] )
     | set { ch_bams }
 
