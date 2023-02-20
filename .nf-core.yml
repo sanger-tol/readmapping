@@ -13,6 +13,7 @@ lint:
     - LICENSE
     - .github/CONTRIBUTING.md
     - .github/ISSUE_TEMPLATE/bug_report.yml
+    - .github/workflows/linting_comment.yml
     - assets/email_template.html
     - assets/sendmail_template.txt
     - docs/README.md
