@@ -40,7 +40,6 @@ workflow ALIGN_PACBIO {
     | groupTuple ( by: [0] )
     | set { ch_bams }
 
-    ch_bams.view()
 
     // Merge
     SAMTOOLS_MERGE ( ch_bams, [], [] )
