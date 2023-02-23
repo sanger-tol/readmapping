@@ -19,8 +19,8 @@ Initial release of sanger-tol/readmapping, created with the [nf-core](https://nf
 
 ### `Dependencies`
 
--   `nextflow`
--   `singularity` or `docker`
+- `nextflow`
+- `singularity` or `docker`
 
 ### `Deprecated`
 

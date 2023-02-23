@@ -80,7 +80,7 @@ class RowChecker:
         self._validate_sample(row)
         self._validate_type(row)
         self._validate_file(row)
-        self._seen.add((row[self._sample_col],  row[self._file_col]))
+        self._seen.add((row[self._sample_col], row[self._file_col]))
         self.modified.append(row)
 
     def _validate_sample(self, row):
@@ -103,7 +103,6 @@ class RowChecker:
         if len(row[self._file_col]) <= 0:
             raise AssertionError("Data file is required.")
         self._validate_data_format(row[self._file_col])
-
 
     def _validate_data_format(self, filename):
         """Assert that a given filename has one of the expected FASTQ extensions."""

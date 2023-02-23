@@ -1,5 +1,5 @@
-sample,datatype,datafile,library,outdir
-mMelMel1,illumina,/lustre/scratch123/tol/resources/nextflow/test-data/Meles_meles/genomic_data/mMelMel1/illumina/31231_3#1.subset.cram,,
-mMelMel2,illumina,/lustre/scratch123/tol/resources/nextflow/test-data/Meles_meles/genomic_data/mMelMel2/illumina/31231_4#1.subset.cram,,
-mMelMel3,hic,/lustre/scratch123/tol/resources/nextflow/test-data/Meles_meles/genomic_data/mMelMel3/hic/35528_2#1.subset.cram,,
-mMelMel3,ont,/lustre/scratch123/tol/resources/nextflow/test-data/Meles_meles/genomic_data/mMelMel3/ont/PAE35587_pass_1f1f0707_115.subset.fastq.gz,,
+sample,datatype,datafile,library
+mMelMel1,illumina,/lustre/scratch123/tol/resources/nextflow/test-data/Meles_meles/genomic_data/mMelMel1/illumina/31231_3#1.subset.cram,
+mMelMel2,illumina,/lustre/scratch123/tol/resources/nextflow/test-data/Meles_meles/genomic_data/mMelMel2/illumina/31231_4#1.subset.cram,
+mMelMel3,hic,/lustre/scratch123/tol/resources/nextflow/test-data/Meles_meles/genomic_data/mMelMel3/hic/35528_2#1.subset.cram,
+mMelMel3,ont,/lustre/scratch123/tol/resources/nextflow/test-data/Meles_meles/genomic_data/mMelMel3/ont/PAE35587_pass_1f1f0707_115.subset.fastq.gz,

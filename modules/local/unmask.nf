@@ -1,4 +1,4 @@
-process PACBIO_FILTER {
+process UNMASK {
     tag "$meta.id"
     label 'process_single'
 
@@ -8,23 +8,28 @@ process PACBIO_FILTER {
         'quay.io/biocontainers/gawk:5.1.0' }"
 
     input:
-    tuple val(meta), path(txt)
+    tuple val(meta), path(fasta)
 
     output:
-    path("*.blocklist"),  emit: list
-    path  "versions.yml", emit: versions
+    tuple val(meta), path("*.fasta"), emit: fasta
+    path "versions.yml"             , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
 
     script:
+    def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
-    pacbio_filter.sh $txt ${prefix}.blocklist
+    awk 'BEGIN { FS = " " } \\
+        { if ( !/>/ ) { print toupper(\$0) } \\
+        else { print \$0 } \\
+        }' $fasta \\
+        > ${prefix}.unmasked.fasta
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        GNU Awk: \$(echo \$(awk --version 2>&1) | grep -i awk | sed 's/GNU Awk //; s/,.*//')
+        awk: \$( awk --version | grep -oP '(?<=GNU Awk ).*?(?=, )' )
     END_VERSIONS
     """
 }

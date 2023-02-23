@@ -1,4 +1,3 @@
-
 name: sanger-tol LSF full size tests
 
 on:
@@ -12,7 +11,6 @@ jobs:
     name: Run LSF full size tests
     runs-on: ubuntu-latest
     steps:
-
       - name: Sets env vars for push
         run: |
           echo "REVISION=${{ github.sha }}" >> $GITHUB_ENV
