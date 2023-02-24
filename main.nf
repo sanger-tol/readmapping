@@ -4,19 +4,10 @@
     sanger-tol/readmapping
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Github : https://github.com/sanger-tol/readmapping
-    Slack  : https://SangerTreeofLife.slack.com/channels/pipelines
 ----------------------------------------------------------------------------------------
 */
 
 nextflow.enable.dsl = 2
-
-/*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    GENOME PARAMETER VALUES
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
-
-params.fasta = WorkflowMain.getGenomeAttribute(params, 'fasta')
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -35,9 +26,9 @@ WorkflowMain.initialise(workflow, params, log)
 include { READMAPPING } from './workflows/readmapping'
 
 //
-// WORKFLOW: Run main nf-core/readmapping analysis pipeline
+// WORKFLOW: Run main sanger-tol/readmapping analysis pipeline
 //
-workflow NFCORE_READMAPPING {
+workflow SANGERTOL_READMAPPING {
     READMAPPING ()
 }
 
@@ -52,7 +43,7 @@ workflow NFCORE_READMAPPING {
 // See: https://github.com/nf-core/rnaseq/issues/619
 //
 workflow {
-    NFCORE_READMAPPING ()
+    SANGERTOL_READMAPPING ()
 }
 
 /*

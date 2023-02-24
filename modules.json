@@ -2,89 +2,105 @@
     "name": "sanger-tol/readmapping",
     "homePage": "https://github.com/sanger-tol/readmapping",
     "repos": {
-        "nf-core/modules": {
-            "git_url": "https://github.com/nf-core/modules.git",
+        "https://github.com/nf-core/modules.git": {
             "modules": {
-                "nf-core/blast/blastn": {
-                    "branch": "master",
-                    "git_sha": "5e34754d42cd2d5d248ca8673c0a53cdf5624905"
-                },
-                "nf-core/bwamem2/index": {
-                    "branch": "master",
-                    "git_sha": "5e34754d42cd2d5d248ca8673c0a53cdf5624905"
-                },
-                "nf-core/bwamem2/mem": {
-                    "branch": "master",
-                    "git_sha": "5e34754d42cd2d5d248ca8673c0a53cdf5624905"
-                },
-                "nf-core/custom/dumpsoftwareversions": {
-                    "branch": "master",
-                    "git_sha": "5e34754d42cd2d5d248ca8673c0a53cdf5624905"
-                },
-                "nf-core/gunzip": {
-                    "branch": "master",
-                    "git_sha": "5e34754d42cd2d5d248ca8673c0a53cdf5624905"
-                },
-                "nf-core/minimap2/align": {
-                    "branch": "master",
-                    "git_sha": "5e34754d42cd2d5d248ca8673c0a53cdf5624905",
-                    "patch": "modules/nf-core/modules/nf-core/minimap2/align/nf-core-minimap2-align.diff"
-                },
-                "nf-core/samtools/collate": {
-                    "branch": "master",
-                    "git_sha": "5e34754d42cd2d5d248ca8673c0a53cdf5624905"
-                },
-                "nf-core/samtools/faidx": {
-                    "branch": "master",
-                    "git_sha": "5e34754d42cd2d5d248ca8673c0a53cdf5624905"
-                },
-                "nf-core/samtools/fasta": {
-                    "branch": "master",
-                    "git_sha": "5e34754d42cd2d5d248ca8673c0a53cdf5624905"
-                },
-                "nf-core/samtools/fastq": {
-                    "branch": "master",
-                    "git_sha": "5e34754d42cd2d5d248ca8673c0a53cdf5624905"
-                },
-                "nf-core/samtools/fixmate": {
-                    "branch": "master",
-                    "git_sha": "5e34754d42cd2d5d248ca8673c0a53cdf5624905"
-                },
-                "nf-core/samtools/flagstat": {
-                    "branch": "master",
-                    "git_sha": "5e34754d42cd2d5d248ca8673c0a53cdf5624905"
-                },
-                "nf-core/samtools/idxstats": {
-                    "branch": "master",
-                    "git_sha": "5e34754d42cd2d5d248ca8673c0a53cdf5624905"
-                },
-                "nf-core/samtools/index": {
-                    "branch": "master",
-                    "git_sha": "5e34754d42cd2d5d248ca8673c0a53cdf5624905"
-                },
-                "nf-core/samtools/markdup": {
-                    "branch": "master",
-                    "git_sha": "5e34754d42cd2d5d248ca8673c0a53cdf5624905"
-                },
-                "nf-core/samtools/merge": {
-                    "branch": "master",
-                    "git_sha": "5e34754d42cd2d5d248ca8673c0a53cdf5624905"
-                },
-                "nf-core/samtools/sort": {
-                    "branch": "master",
-                    "git_sha": "5e34754d42cd2d5d248ca8673c0a53cdf5624905"
-                },
-                "nf-core/samtools/stats": {
-                    "branch": "master",
-                    "git_sha": "5e34754d42cd2d5d248ca8673c0a53cdf5624905"
-                },
-                "nf-core/samtools/view": {
-                    "branch": "master",
-                    "git_sha": "5e34754d42cd2d5d248ca8673c0a53cdf5624905"
-                },
-                "nf-core/untar": {
-                    "branch": "master",
-                    "git_sha": "5e34754d42cd2d5d248ca8673c0a53cdf5624905"
+                "nf-core": {
+                    "blast/blastn": {
+                        "branch": "master",
+                        "git_sha": "c8e35eb2055c099720a75538d1b8adb3fb5a464c",
+                        "installed_by": ["modules"]
+                    },
+                    "bwamem2/index": {
+                        "branch": "master",
+                        "git_sha": "c8e35eb2055c099720a75538d1b8adb3fb5a464c",
+                        "installed_by": ["modules"]
+                    },
+                    "bwamem2/mem": {
+                        "branch": "master",
+                        "git_sha": "c8e35eb2055c099720a75538d1b8adb3fb5a464c",
+                        "installed_by": ["modules"]
+                    },
+                    "custom/dumpsoftwareversions": {
+                        "branch": "master",
+                        "git_sha": "c8e35eb2055c099720a75538d1b8adb3fb5a464c",
+                        "installed_by": ["modules"]
+                    },
+                    "gunzip": {
+                        "branch": "master",
+                        "git_sha": "c8e35eb2055c099720a75538d1b8adb3fb5a464c",
+                        "installed_by": ["modules"]
+                    },
+                    "minimap2/align": {
+                        "branch": "master",
+                        "git_sha": "c8e35eb2055c099720a75538d1b8adb3fb5a464c",
+                        "installed_by": ["modules"]
+                    },
+                    "samtools/collate": {
+                        "branch": "master",
+                        "git_sha": "c8e35eb2055c099720a75538d1b8adb3fb5a464c",
+                        "installed_by": ["modules"]
+                    },
+                    "samtools/faidx": {
+                        "branch": "master",
+                        "git_sha": "c8e35eb2055c099720a75538d1b8adb3fb5a464c",
+                        "installed_by": ["modules"]
+                    },
+                    "samtools/fasta": {
+                        "branch": "master",
+                        "git_sha": "5a31b92f8298f361ed232e8a6657560ac135f9af",
+                        "installed_by": ["modules"]
+                    },
+                    "samtools/fastq": {
+                        "branch": "master",
+                        "git_sha": "f7552d46aad5411343134cac5e4bfe1a66cb3872",
+                        "installed_by": ["modules"]
+                    },
+                    "samtools/fixmate": {
+                        "branch": "master",
+                        "git_sha": "c8e35eb2055c099720a75538d1b8adb3fb5a464c",
+                        "installed_by": ["modules"]
+                    },
+                    "samtools/flagstat": {
+                        "branch": "master",
+                        "git_sha": "c8e35eb2055c099720a75538d1b8adb3fb5a464c",
+                        "installed_by": ["modules"]
+                    },
+                    "samtools/idxstats": {
+                        "branch": "master",
+                        "git_sha": "c8e35eb2055c099720a75538d1b8adb3fb5a464c",
+                        "installed_by": ["modules"]
+                    },
+                    "samtools/markdup": {
+                        "branch": "master",
+                        "git_sha": "c8e35eb2055c099720a75538d1b8adb3fb5a464c",
+                        "installed_by": ["modules"]
+                    },
+                    "samtools/merge": {
+                        "branch": "master",
+                        "git_sha": "c8e35eb2055c099720a75538d1b8adb3fb5a464c",
+                        "installed_by": ["modules"]
+                    },
+                    "samtools/sort": {
+                        "branch": "master",
+                        "git_sha": "c8e35eb2055c099720a75538d1b8adb3fb5a464c",
+                        "installed_by": ["modules"]
+                    },
+                    "samtools/stats": {
+                        "branch": "master",
+                        "git_sha": "c8e35eb2055c099720a75538d1b8adb3fb5a464c",
+                        "installed_by": ["modules"]
+                    },
+                    "samtools/view": {
+                        "branch": "master",
+                        "git_sha": "c8e35eb2055c099720a75538d1b8adb3fb5a464c",
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/samtools/view/samtools-view.diff"
+                    },
+                    "untar": {
+                        "branch": "master",
+                        "git_sha": "cc1f997fab6d8fde5dc0e6e2a310814df5b53ce7",
+                        "installed_by": ["modules"]
+                    }
                 }
             }
         }
