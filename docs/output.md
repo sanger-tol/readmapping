@@ -39,7 +39,7 @@ Short read data from HiC and Illumina technologies is aligned with `BWAMEM2_MEM`
 
 ### Oxford Nanopore reads
 
-Reads generated using Oxford Nanopore technology is aligned with `MINIMAP2_ALIGN`. The sorted and merged alignment is output in the CRAM format, along with the index.
+Reads generated using Oxford Nanopore technology are aligned with `MINIMAP2_ALIGN`. The sorted and merged alignment is output in the CRAM format, along with the index.
 
 <details markdown="1">
 <summary>Output files</summary>
