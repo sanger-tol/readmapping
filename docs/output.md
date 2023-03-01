@@ -14,12 +14,11 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 
 - [Preprocessing](#preprocessing)
   - [Filtering](#filtering) – Filtering PacBio data before alignment
-- [Alignment](#alignment)
+- [Alignment and Mark duplicates](#alignment-markdup)
   - [Short reads](#short-reads) – Aligning HiC and Illumina reads using BWAMEM2
   - [Oxford Nanopore reads](#ont) – Aligning ONT reads using MINIMAP2
   - [PacBio reads](#pacbio) – Aligning PacBio CLR and CCS filtered reads using MINIMAP2
 - [Alignment post-processing](#alignment-post-processing)
-  - [Markduplicates](#markduplicates) – Duplicate read marking
   - [Statistics](#statistics) – Alignment statistics
 - [Workflow reporting and genomes](#workflow-reporting-and-genomes)
   - [Reference genome files](#reference-genome-files) - Reference genome indices/files
@@ -31,11 +30,24 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 
 PacBio reads generated using both CLR and CCS technology are filtered using `BLAST_BLASTN` against a database of adapter sequences. The collated FASTQ of the filtered reads is required by the downstream alignment step. The results from the PacBio filtering subworkflow are currently not set to output.
 
-## Alignment
+## Alignment and Mark duplicates
 
 ### Short reads
 
-Short read data from HiC and Illumina technologies is aligned with `BWAMEM2_MEM`. The sorted and merged alignment is required by the downstream markduplicate step. The results from this alignment subworkflow are currently not set to output.
+Short read data from HiC and Illumina technologies is aligned with `BWAMEM2_MEM`. The sorted and merged alignment files are processed using the `SAMTOOLS` markduplicate workflow. The mark duplicate alignments is output in the CRAM format, along with the index.
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `read_mapping`
+  - `hic`
+    - `<gca_accession>.unmasked.hic.<sample_id>.cram`: Sorted and merged CRAM file at the individual level
+    - `<gca_accession>.unmasked.hic.<sample_id>.cram.crai`: Index for the alignment
+  - `illumina`
+    - `<gca_accession>.unmasked.illumina.<sample_id>.cram`: Sorted and merged CRAM file at the individual level
+    - `<gca_accession>.unmasked.illumina.<sample_id>.cram.crai`: Index for the alignment
+
+</details>
 
 ### Oxford Nanopore reads
 
@@ -66,20 +78,6 @@ The filtered PacBio reads are aligned with `MINIMAP2_ALIGN`. The sorted and merg
 </details>
 
 ## Alignment post-processing
-
-### Markduplicates
-
-The aligned short reads (HiC and Illumina) are processed using the `SAMTOOLS` markduplicate workflow. The mark duplicate alignments is output in the CRAM format, along with the index.
-
-<details markdown="1">
-<summary>Output files</summary>
-
-- `read_mapping`
-  - `hic`
-    - `<gca_accession>.unmasked.hic.<sample_id>.cram`: Sorted and merged CRAM file at the individual level
-    - `<gca_accession>.unmasked.hic.<sample_id>.cram.crai`: Index for the alignment
-
-</details>
 
 ### Statistics
 
