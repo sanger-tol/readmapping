@@ -46,4 +46,3 @@ Initial release of sanger-tol/readmapping, created with the [nf-core](https://nf
 - `singularity` or `docker`
 
 ### `Deprecated`
-
