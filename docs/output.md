@@ -16,7 +16,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
   - [Filtering](#filtering) – Filtering PacBio data before alignment
 - [Alignment and Mark duplicates](#alignment-and-mark-duplicates)
   - [Short reads](#short-reads) – Aligning HiC and Illumina reads using BWAMEM2
-  - [Oxford Nanopore reads](#ont) – Aligning ONT reads using MINIMAP2
+  - [Oxford Nanopore reads](#oxford-nanopore-reads) – Aligning ONT reads using MINIMAP2
   - [PacBio reads](#pacbio) – Aligning PacBio CLR and CCS filtered reads using MINIMAP2
 - [Alignment post-processing](#alignment-post-processing)
   - [Statistics](#statistics) – Alignment statistics
