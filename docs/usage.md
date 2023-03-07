@@ -2,7 +2,7 @@
 
 ## Introduction
 
-<!-- TODO nf-core: Add documentation about anything specific to running your pipeline. For general topics, please point to (and add to) the main nf-core website. -->
+This pipeline aligns raw reads from various technolgies (such as HiC, Illumina, ONT, PacBio CCS, and PacBio CLR) to the reference genome. It marks duplicates for the short read alignments (HiC and Illumina). Standard statistics are calculated for all aligned data.
 
 ## Samplesheet input
 
@@ -141,13 +141,7 @@ A first step to bypass this error, you could try to increase the amount of CPUs,
 
 #### Advanced option on process level
 
-To bypass this error you would need to find exactly which resources are set by the `BWAMEM2_MEM` process. The quickest way is to search for `process BWAMEM2_MEM` in the [sanger-tol/readmapping Github repo](https://github.com/sanger-tol/readmapping/search?q=process+BWAMEM2_MEM).
-We have standardised the structure of Nextflow DSL2 pipelines such that all module files will be present in the `modules/` directory and so, based on the search results, the file we want is `modules/nf-core/bwamem2/mem/main.nf`.
-If you click on the link to that file you will notice that there is a `label` directive at the top of the module that is set to [`label process_high`](https://github.com/sanger-tol/readmapping/blob/main/modules/nf-core/bwamem2/mem/main.nf#L3).
-The [Nextflow `label`](https://www.nextflow.io/docs/latest/process.html#label) directive allows us to organise workflow processes in separate groups which can be referenced in a configuration file to select and configure subset of processes having similar computing requirements.
-The default values for the `process_high` label are set in the pipeline's [`base.config`](https://github.com/sanger-tol/readmapping/blob/main/conf/base.config#L44-L48) which in this case is defined as 72GB.
-Providing you haven't set any other standard nf-core parameters to **cap** the [maximum resources](https://nf-co.re/usage/configuration#max-resources) used by the pipeline then we can try and bypass the `BWAMEM2_MEM` process failure by creating a custom config file that sets at least 72GB of memory, in this case increased to 100GB.
-The custom config below can then be provided to the pipeline via the [`-c`](#-c) parameter as highlighted in previous sections.
+To bypass this error you would need to find exactly which resources are set by the `BWAMEM2_MEM` process. The quickest way is to search for `process BWAMEM2_MEM` in the [sanger-tol/readmapping Github repo](https://github.com/sanger-tol/readmapping/search?q=process+BWAMEM2_MEM). We have standardised the structure of Nextflow DSL2 pipelines such that all module files will be present in the `modules/` directory and so, based on the search results, the file we want is `modules/nf-core/bwamem2/mem/main.nf`. If you click on the link to that file you will notice that there is a `label` directive at the top of the module that is set to [`label process_high`](https://github.com/sanger-tol/readmapping/blob/main/modules/nf-core/bwamem2/mem/main.nf#L3). The [Nextflow `label`](https://www.nextflow.io/docs/latest/process.html#label) directive allows us to organise workflow processes in separate groups which can be referenced in a configuration file to select and configure subset of processes having similar computing requirements. The default values for the `process_high` label are set in the pipeline's [`base.config`](https://github.com/sanger-tol/readmapping/blob/main/conf/base.config#L44-L48) which in this case is defined as 72GB. Providing you haven't set any other standard nf-core parameters to **cap** the [maximum resources](https://nf-co.re/usage/configuration#max-resources) used by the pipeline then we can try and bypass the `BWAMEM2_MEM` process failure by creating a custom config file that sets at least 72GB of memory, in this case increased to 100GB. The custom config below can then be provided to the pipeline via the [`-c`](#-c) parameter as highlighted in previous sections.
 
 ```nextflow
 process {
