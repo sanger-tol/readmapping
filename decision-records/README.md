@@ -1,4 +1,6 @@
-To add a new decision, please create a pull request that adds a new markdown file to this directory. The new file should have the following structure:
+Design decisions about the pipeline are indexed and recorded as individual files in this directory.
+
+To add a new decision, please create a pull request that adds a new markdown file named `XX-short-summary.md` to this directory. When replacing a previous decision, change the status of the latter to "Superseded". The new file should have the following structure:
 
 ## Title – Decision Statement
 
