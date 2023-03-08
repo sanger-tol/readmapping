@@ -25,7 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | `--minimap2_index` |               |
 | `--samtools_index` |               |
 
-> **NB:** Parameter has been **updated** if both old and new parameter information is present. </br> > **NB:** Parameter has been **added** if just the new parameter information is present. </br> > **NB:** Parameter has been **removed** if new parameter information isn't present.
+> **NB:** Parameter has been **updated** if both old and new parameter information is present. </br> **NB:** Parameter has been **added** if just the new parameter information is present. </br> **NB:** Parameter has been **removed** if new parameter information isn't present.
 
 ### Software dependencies
 
@@ -39,7 +39,7 @@ Note, since the pipeline is using Nextflow DSL2, each process will be run with i
 | `bam2fastx` | 1.3.1           |                 |
 | `pbbam`     | 2.1.0           |                 |
 
-> **NB:** Dependency has been **updated** if both old and new version information is present. </br> > **NB:** Dependency has been **added** if just the new version information is present. </br> > **NB:** Dependency has been **removed** if version information isn't present.
+> **NB:** Dependency has been **updated** if both old and new version information is present. </br> **NB:** Dependency has been **added** if just the new version information is present. </br> **NB:** Dependency has been **removed** if version information isn't present.
 
 ## v1.0.0 – Ukrainian Ironbelly - [2022-05-19]
 
