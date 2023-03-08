@@ -30,12 +30,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Software dependencies
 
-Note, since the pipeline is now using Nextflow DSL2, each process will be run with its own [Biocontainer](https://biocontainers.pro/#/registry). This means that on occasion it is entirely possible for the pipeline to be using different versions of the same tool. However, the overall software dependency changes compared to the last release have been listed below for reference.
+Note, since the pipeline is using Nextflow DSL2, each process will be run with its own [Biocontainer](https://biocontainers.pro/#/registry). This means that on occasion it is entirely possible for the pipeline to be using different versions of the same tool. However, the overall software dependency changes compared to the last release have been listed below for reference.
 
-| Dependency | Old version | New version |
-| ---------- | ----------- | ----------- |
-| `minimap2` | 2.21        | 2.24        |
-| `samtools` | 1.15        | 1.16.1      |
+| Dependency  |   Old version   |   New version   |
+| ----------- | --------------- | --------------- |
+| `minimap2`  | 2.21            | 2.24            |
+| `samtools`  | 1.15 and 1.15.1 | 1.14 and 1.16.1 |
+| `multiqc`   | 1.11 and 1.12   | 1.13            |
+| `bam2fastx` | 1.3.1           |                 |
+| `pbbam`     | 2.1.0           |                 |
 
 > **NB:** Dependency has been **updated** if both old and new version information is present.
 > **NB:** Dependency has been **added** if just the new version information is present.
