@@ -8,7 +8,7 @@ To add a new decision, please create a pull request that adds a new markdown fil
 
 ## Context
 
-Provide details of the different options considered when making this decision.
+Explain why a decision is needed (problem statement) and provide details of the different options considered when making this decision.
 
 ## Decision
 
