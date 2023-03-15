@@ -3,7 +3,7 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [[1.1.0](https://github.com/sanger-tol/readmapping/releases/tag/1.1.0)] – Hebridean Black - [2023-03-13]
+## [[1.1.0](https://github.com/sanger-tol/readmapping/releases/tag/1.1.0)] – Hebridean Black - [2023-03-15]
 
 ### Enhancements & fixes
 
@@ -41,7 +41,7 @@ Note, since the pipeline is using Nextflow DSL2, each process will be run with i
 
 > **NB:** Dependency has been **updated** if both old and new version information is present. </br> **NB:** Dependency has been **added** if just the new version information is present. </br> **NB:** Dependency has been **removed** if version information isn't present.
 
-## v1.0.0 – Ukrainian Ironbelly - [2022-05-19]
+## [[v1.0.0](https://github.com/sanger-tol/readmapping/releases/tag/v1.0.0)] – Ukrainian Ironbelly - [2022-05-19]
 
 Initial release of sanger-tol/readmapping, created with the [nf-core](https://nf-co.re/) template.
 
