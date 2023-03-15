@@ -3,7 +3,6 @@ work/
 data/
 results/
 .DS_Store
+testing/
+testing*
 *.pyc
-full_test/
-test_full/
-test/
