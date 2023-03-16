@@ -18,7 +18,7 @@ On merge to `dev` and `main` branch, automated continuous integration tests run 
 
 ## Pipeline summary
 
-Coming soon
+<img src="https://raw.githubusercontent.com/sanger-tol/readmapping/976525ad7b5327607a049aa85bbca36a48c6ba48/docs/images/sanger-tol-readmapping_workflow.png" height="700">
 
 ## Quick Start
 
