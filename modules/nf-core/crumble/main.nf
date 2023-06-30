@@ -5,7 +5,7 @@ process CRUMBLE {
     conda "bioconda::crumble=0.9.1"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
         'https://depot.galaxyproject.org/singularity/crumble:0.9.1--hb0d9459_0':
-        'quay.io/biocontainers/crumble:0.9.1--hb0d9459_0' }"
+        'biocontainers/crumble:0.9.1--hb0d9459_0' }"
 
     input:
     tuple val(meta), path(input)
@@ -30,7 +30,7 @@ process CRUMBLE {
                     args.contains("-O cram") ? "cram" :
                     "sam"
     def bedin      = keepbed ? "-R ${keepbed}" : ""
-    def bedout     = bedout ? "-b ${prefix}.out.bed" : ""
+    def bedout     = bedout ? "-b ${prefix}.suspicious_regions.bed" : ""
     if ("$input" == "${prefix}.${extension}") error "Input and output names are the same, use \"task.ext.prefix\" to disambiguate!"
 
     def CRUMBLE_VERSION = '0.9.1' //WARN: Version information not provided by tool on CLI. Please update this string when bumping container versions.
