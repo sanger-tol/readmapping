@@ -40,11 +40,7 @@ workflow MARKDUP_STATS {
     | map { meta, bam -> [ meta, bam, [] ] }
     | set { ch_stat }
 
-    fasta
-    | map { meta, file -> file }
-    | set { ch_fasta }
-
-    CONVERT_STATS ( ch_stat, ch_fasta )
+    CONVERT_STATS ( ch_stat, fasta )
     ch_versions = ch_versions.mix ( CONVERT_STATS.out.versions )
 
 

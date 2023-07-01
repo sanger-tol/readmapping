@@ -19,7 +19,7 @@ workflow MARKDUPLICATE {
 
 
     // Merge position sorted bam files
-    SAMTOOLS_MERGE ( bams, [], [] )
+    SAMTOOLS_MERGE ( bams, [ [], [] ], [ [], [] ] )
     ch_versions = ch_versions.mix ( SAMTOOLS_MERGE.out.versions.first() )
 
 

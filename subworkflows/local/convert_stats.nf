@@ -11,7 +11,7 @@ include { SAMTOOLS_IDXSTATS } from '../../modules/nf-core/samtools/idxstats/main
 workflow CONVERT_STATS {
     take:
     bam      // channel: [ val(meta), /path/to/bam, /path/to/bai]
-    fasta    // channel: /path/to/fasta
+    fasta    // channel: [ val(meta), /path/to/fasta ]
 
 
     main:

@@ -42,7 +42,7 @@ workflow ALIGN_PACBIO {
 
 
     // Merge
-    SAMTOOLS_MERGE ( ch_bams, [], [] )
+    SAMTOOLS_MERGE ( ch_bams, [ [], [] ], [ [], [] ] )
     ch_versions = ch_versions.mix ( SAMTOOLS_MERGE.out.versions.first() )
 
 
@@ -56,7 +56,7 @@ workflow ALIGN_PACBIO {
     | map { meta, bam -> [ meta, bam, [] ] }
     | set { ch_sort }
 
-    CONVERT_STATS ( ch_sort, ch_fasta )
+    CONVERT_STATS ( ch_sort, fasta )
     ch_versions = ch_versions.mix ( CONVERT_STATS.out.versions )
 
 
