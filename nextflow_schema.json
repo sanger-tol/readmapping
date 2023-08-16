@@ -208,7 +208,7 @@
                 "tracedir": {
                     "type": "string",
                     "description": "Directory to keep pipeline Nextflow logs and reports.",
-                    "default": "${params.outdir}/readmapping_info",
+                    "default": "${params.outdir}/pipeline_info/readmapping",
                     "fa_icon": "fas fa-cogs",
                     "hidden": true
                 },
