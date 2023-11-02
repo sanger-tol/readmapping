@@ -29,8 +29,9 @@ workflow ALIGN_ONT {
 
     // Collect all alignment output by sample name
     MINIMAP2_ALIGN.out.bam
-    | map { meta, bam -> [['id': meta.id.split('_')[0..-2].join('_'), 'datatype': meta.datatype], bam] }
+    | map { meta, bam -> [['id': meta.id.split('_')[0..-2].join('_'), 'datatype': meta.datatype], meta.read_count, bam] }
     | groupTuple ( by: [0] )
+    | map { meta, read_counts, bams -> [meta + [read_count: read_counts.sum()], bams] }
     | set { ch_bams }
 
 
