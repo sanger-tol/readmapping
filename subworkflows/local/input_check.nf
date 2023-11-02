@@ -61,7 +61,7 @@ def create_data_channel ( LinkedHashMap row, datafile, stats ) {
     stats.withReader {
         line = it.readLine()
         def lspl = line.split()
-        def read_count = lspl[0].toInteger() + lspl[2].toInteger()
+        def read_count = lspl[0].toLong() + lspl[2].toLong()
         meta.read_count = read_count
     }
 
