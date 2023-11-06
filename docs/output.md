@@ -34,7 +34,7 @@ PacBio reads generated using both CLR and CCS technology are filtered using `BLA
 
 ### Short reads
 
-Short read data from HiC and Illumina technologies is aligned with `BWAMEM2_MEM`. The sorted and merged alignment files are processed using the `SAMTOOLS` markduplicate workflow. The mark duplicate alignments is output in the CRAM format, along with the index.
+Short read data from HiC and Illumina technologies is aligned with `BWAMEM2_MEM`. The sorted and merged alignment files are processed using the `SAMTOOLS` [mark-duplicate workflow](https://www.htslib.org/algorithms/duplicate.html#workflow). The mark duplicate alignments is output in the CRAM format, along with the index.
 
 <details markdown="1">
 <summary>Output files</summary>

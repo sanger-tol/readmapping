@@ -3,10 +3,10 @@
 // Convert to CRAM and calculate statistics
 //
 
-include { SAMTOOLS_MERGE } from '../../modules/nf-core/samtools/merge/main'
-include { SAMTOOLS_SORT  } from '../../modules/nf-core/samtools/sort/main'
-include { MARKDUPLICATE  } from '../../subworkflows/local/markduplicate'
-include { CONVERT_STATS  } from '../../subworkflows/local/convert_stats'
+include { SAMTOOLS_MERGE    } from '../../modules/nf-core/samtools/merge/main'
+include { SAMTOOLS_SORT     } from '../../modules/nf-core/samtools/sort/main'
+include { SAMTOOLS_SORMADUP } from '../../modules/local/samtools_sormadup'
+include { CONVERT_STATS     } from '../../subworkflows/local/convert_stats'
 
 
 workflow MARKDUP_STATS {
@@ -48,12 +48,12 @@ workflow MARKDUP_STATS {
 
 
     // Mark duplicates
-    MARKDUPLICATE ( ch_bam )
-    ch_versions = ch_versions.mix ( MARKDUPLICATE.out.versions )
+    SAMTOOLS_SORMADUP ( ch_bam, fasta )
+    ch_versions = ch_versions.mix ( SAMTOOLS_SORMADUP.out.versions )
 
 
     // Convert merged BAM to CRAM and calculate indices and statistics
-    MARKDUPLICATE.out.bam
+    SAMTOOLS_SORMADUP.out.bam
     | map { meta, bam -> [ meta, bam, [] ] }
     | set { ch_stat }
 
