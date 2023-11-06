@@ -23,6 +23,7 @@ workflow ALIGN_ONT {
     | map { meta, file -> file }
     | set { ch_fasta }
 
+    // Align with minimap2. bam_format is set to true, making the output a *sorted* BAM
     MINIMAP2_ALIGN ( reads, ch_fasta, true, false, false )
     ch_versions = ch_versions.mix ( MINIMAP2_ALIGN.out.versions.first() )
 

@@ -29,6 +29,7 @@ workflow ALIGN_PACBIO {
     | map { meta, file -> file }
     | set { ch_fasta }
 
+    // Align with minimap2. bam_format is set to true, making the output a *sorted* BAM
     MINIMAP2_ALIGN ( FILTER_PACBIO.out.fastq, ch_fasta, true, false, false )
     ch_versions = ch_versions.mix ( MINIMAP2_ALIGN.out.versions.first() )
 
