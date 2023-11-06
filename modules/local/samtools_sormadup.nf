@@ -25,7 +25,6 @@ process SAMTOOLS_SORMADUP {
     def args2 = task.ext.args2 ?: ''
     def args3 = task.ext.args3 ?: ''
     def args4 = task.ext.args4 ?: ''
-    def args5 = task.ext.args5 ?: ''
 
     def prefix = task.ext.prefix ?: "${meta.id}"
     def extension = args.contains("--output-fmt sam") ? "sam" :
@@ -36,22 +35,18 @@ process SAMTOOLS_SORMADUP {
     def sort_memory = (task.memory.mega/task.cpus*0.75).intValue()
 
     """
-    samtools cat \\
-        $args2 \\
-        --threads $task.cpus \\
-        ${input}  \\
-    | \\
     samtools collate \\
-        $args3 \\
+        $args \\
         -O \\
         -u \\
         -T ${prefix}.collate \\
         --threads $task.cpus \\
         ${reference} \\
+        ${input}  \\
         - \\
     | \\
     samtools fixmate \\
-        $args4 \\
+        $args2 \\
         -m \\
         -u \\
         --threads $task.cpus \\
@@ -59,7 +54,7 @@ process SAMTOOLS_SORMADUP {
         - \\
     | \\
     samtools sort \\
-        $args5 \\
+        $args3 \\
         -u \\
         -T ${prefix}.sort \\
         --threads $task.cpus \\
@@ -70,7 +65,7 @@ process SAMTOOLS_SORMADUP {
         -T ${prefix}.markdup \\
         -f ${prefix}.metrics \\
         --threads $task.cpus \\
-        $args \\
+        $args4 \\
         - \\
         ${prefix}.${extension}
 
