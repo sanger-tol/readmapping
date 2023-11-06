@@ -5,7 +5,6 @@
 include { FILTER_PACBIO  } from '../../subworkflows/local/filter_pacbio'
 include { MINIMAP2_ALIGN } from '../../modules/nf-core/minimap2/align/main'
 include { SAMTOOLS_MERGE } from '../../modules/nf-core/samtools/merge/main'
-include { SAMTOOLS_SORT  } from '../../modules/nf-core/samtools/sort/main'
 include { CONVERT_STATS  } from '../../subworkflows/local/convert_stats'
 
 
@@ -47,13 +46,8 @@ workflow ALIGN_PACBIO {
     ch_versions = ch_versions.mix ( SAMTOOLS_MERGE.out.versions.first() )
 
 
-    // Position sort BAM file
-    SAMTOOLS_SORT ( SAMTOOLS_MERGE.out.bam )
-    ch_versions = ch_versions.mix ( SAMTOOLS_SORT.out.versions.first() )
-
-
     // Convert merged BAM to CRAM and calculate indices and statistics
-    SAMTOOLS_SORT.out.bam
+    SAMTOOLS_MERGE.out.bam
     | map { meta, bam -> [ meta, bam, [] ] }
     | set { ch_sort }
 
