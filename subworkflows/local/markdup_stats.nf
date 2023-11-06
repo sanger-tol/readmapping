@@ -29,16 +29,26 @@ workflow MARKDUP_STATS {
     | map { meta, bam -> [['id': meta.id.split('_')[0..-2].join('_'), 'datatype': meta.datatype], meta.read_count, bam] }
     | groupTuple( by: [0] )
     | map { meta, read_counts, bams -> [meta + [read_count: read_counts.sum()], bams] }
+    | branch {
+        meta, bams ->
+            single_bam: bams.size() == 1
+            multi_bams: true
+    }
     | set { ch_bams }
 
 
     // Merge position sorted bam files
-    SAMTOOLS_MERGE ( ch_bams, [ [], [] ], [ [], [] ] )
+    SAMTOOLS_MERGE ( ch_bams.multi_bams, [ [], [] ], [ [], [] ] )
     ch_versions = ch_versions.mix ( SAMTOOLS_MERGE.out.versions.first() )
 
 
+    SAMTOOLS_MERGE.out.bam
+    | mix ( ch_bams.single_bam )
+    | set { ch_bam }
+
+
     // Mark duplicates
-    MARKDUPLICATE ( SAMTOOLS_MERGE.out.bam )
+    MARKDUPLICATE ( ch_bam )
     ch_versions = ch_versions.mix ( MARKDUPLICATE.out.versions )
 
 
