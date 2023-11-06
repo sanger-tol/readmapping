@@ -2,7 +2,6 @@
 // Merge BAM files and mark duplicates
 //
 
-include { SAMTOOLS_MERGE    } from '../../modules/nf-core/samtools/merge/main'
 include { SAMTOOLS_COLLATE  } from '../../modules/nf-core/samtools/collate/main'
 include { SAMTOOLS_FIXMATE  } from '../../modules/nf-core/samtools/fixmate/main'
 include { SAMTOOLS_SORT     } from '../../modules/nf-core/samtools/sort/main'
@@ -11,20 +10,15 @@ include { SAMTOOLS_MARKDUP  } from '../../modules/nf-core/samtools/markdup/main'
 
 workflow MARKDUPLICATE {
     take:
-    bams    // channel: [ val(meta), [ /path/to/bams ] ]
+    bam   // channel: val(meta), [ /path/to/bam ]
 
 
     main:
     ch_versions = Channel.empty()
 
 
-    // Merge position sorted bam files
-    SAMTOOLS_MERGE ( bams, [ [], [] ], [ [], [] ] )
-    ch_versions = ch_versions.mix ( SAMTOOLS_MERGE.out.versions.first() )
-
-
     // Collate merged BAM file
-    SAMTOOLS_COLLATE ( SAMTOOLS_MERGE.out.bam, [] )
+    SAMTOOLS_COLLATE ( bam, [] )
     ch_versions = ch_versions.mix ( SAMTOOLS_COLLATE.out.versions.first() )
 
 
