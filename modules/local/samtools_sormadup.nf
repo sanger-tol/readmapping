@@ -1,3 +1,5 @@
+// Copied from https://github.com/nf-core/modules/pull/3310
+// Author: Matthias De Smet, https://github.com/matthdsm
 process SAMTOOLS_SORMADUP {
     tag "$meta.id"
     label 'process_medium'
