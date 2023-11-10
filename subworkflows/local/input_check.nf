@@ -29,7 +29,7 @@ workflow INPUT_CHECK {
     // Create the read channel for the rest of the pipeline
     samplesheet_rows
     | join( SAMTOOLS_FLAGSTAT.out.flagstat )
-    | map { meta, datafile, dummy, stats -> create_data_channel( meta, datafile, stats ) }
+    | map { meta, datafile, meta2, stats -> create_data_channel( meta, datafile, stats ) }
     | set { reads }
 
 
