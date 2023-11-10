@@ -37,7 +37,7 @@ workflow MARKDUP_STATS {
     | set { ch_bams }
 
 
-    // Merge position sorted bam files
+    // Merge, but only if there is more than 1 file
     SAMTOOLS_MERGE ( ch_bams.multi_bams, [ [], [] ], [ [], [] ] )
     ch_versions = ch_versions.mix ( SAMTOOLS_MERGE.out.versions.first() )
 
