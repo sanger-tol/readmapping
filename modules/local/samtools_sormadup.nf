@@ -34,7 +34,6 @@ process SAMTOOLS_SORMADUP {
                     args.contains("--output-fmt cram") ? "cram" :
                     "bam"
     def reference = fasta ? "--reference ${fasta}" : ""
-    def sort_memory = ((task.memory.mega - 1024 * (1 + Math.ceil( meta.read_count / 100000000 )) * task.attempt)/task.cpus).intValue()
 
     """
     samtools collate \\
@@ -60,7 +59,6 @@ process SAMTOOLS_SORMADUP {
         -u \\
         -T ${prefix}.sort \\
         --threads $task.cpus \\
-        -m ${sort_memory}M \\
         - \\
     | \\
     samtools markdup \\
