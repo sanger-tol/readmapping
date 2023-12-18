@@ -35,6 +35,9 @@ process CRUMBLE {
 
     def CRUMBLE_VERSION = '0.9.1' //WARN: Version information not provided by tool on CLI. Please update this string when bumping container versions.
     """
+    # Need to fake REF_PATH to force crumble to use the Fasta file defined in
+    # the UR field of the @SQ headers. (bug reported to the samtools team).
+    env REF_PATH=/missing \\
     crumble \\
         $args \\
         $bedin \\

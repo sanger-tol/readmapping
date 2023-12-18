@@ -81,7 +81,7 @@ workflow READMAPPING {
     // SUBWORKFLOW: Uncompress and prepare reference genome files
     //
     ch_fasta
-    | map { [ [ id: it.baseName.tokenize(".")[0..1].join(".") ], it ] }
+    | map { [ [ id: it.baseName ], it ] }
     | set { ch_genome }
 
     PREPARE_GENOME ( ch_genome )
