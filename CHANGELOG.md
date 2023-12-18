@@ -16,8 +16,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - All resource requirements (memory, time, CPUs) now fit the actual usage. This
   is achieved by automatically adjusting to the size of the input whenever
   possible.
+- Added the `--use_work_dir_as_temp` parameter to make SAMTOOLS_COLLATE use its
+  work directory for temporary files instead of `$TMPDIR`. It can be used to avoid
+  leaving unwanted temporary files on a HPC.
 
 ### Parameters
+
+| Old parameter | New parameter            |
+| ------------- | ------------------------ |
+|               | `--use_work_dir_as_temp` |
+
+> **NB:** Parameter has been **updated** if both old and new parameter information is present. </br> **NB:** Parameter has been **added** if just the new parameter information is present. </br> **NB:** Parameter has been **removed** if new parameter information isn't present.
 
 ### Software dependencies
 
