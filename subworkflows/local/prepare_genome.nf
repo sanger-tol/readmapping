@@ -19,12 +19,15 @@ workflow PREPARE_GENOME {
 
     // Uncompress genome fasta file if required
     if ( params.fasta.endsWith('.gz') ) {
-        ch_fasta    = GUNZIP ( fasta ).gunzip
+        ch_unzipped = GUNZIP ( fasta ).gunzip
         ch_versions = ch_versions.mix ( GUNZIP.out.versions )
     } else {
-        ch_fasta    = fasta
+        ch_unzipped = fasta
     }
 
+    ch_unzipped
+    | map { meta, fa -> [ meta + [id: fa.baseName, genome_size: fa.size()], fa] }
+    | set { ch_fasta }
 
     // Unmask genome fasta
     UNMASK ( ch_fasta )

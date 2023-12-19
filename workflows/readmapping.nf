@@ -45,6 +45,7 @@ include { ALIGN_ONT                     } from '../subworkflows/local/align_ont'
 //
 
 include { UNTAR                       } from '../modules/nf-core/untar/main'
+include { CRUMBLE                     } from '../modules/nf-core/crumble/main'
 include { CUSTOM_DUMPSOFTWAREVERSIONS } from '../modules/nf-core/custom/dumpsoftwareversions/main'
 
 
@@ -80,7 +81,7 @@ workflow READMAPPING {
     // SUBWORKFLOW: Uncompress and prepare reference genome files
     //
     ch_fasta
-    | map { [ [ id: it.baseName.tokenize(".")[0..1].join(".") ], it ] }
+    | map { [ [ id: it.baseName ], it ] }
     | set { ch_genome }
 
     PREPARE_GENOME ( ch_genome )
@@ -123,6 +124,13 @@ workflow READMAPPING {
 
     ALIGN_ONT ( PREPARE_GENOME.out.fasta, ch_reads.ont )
     ch_versions = ch_versions.mix ( ALIGN_ONT.out.versions )
+
+
+    //
+    // MODULE: To compress PacBio HiFi aligned CRAM files
+    //
+    CRUMBLE ( ALIGN_HIFI.out.cram, [], true )
+    ch_versions = ch_versions.mix ( CRUMBLE.out.versions )
 
 
     //
