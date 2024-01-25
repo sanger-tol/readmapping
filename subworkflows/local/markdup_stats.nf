@@ -4,7 +4,6 @@
 //
 
 include { SAMTOOLS_MERGE    } from '../../modules/nf-core/samtools/merge/main'
-include { SAMTOOLS_SORT     } from '../../modules/nf-core/samtools/sort/main'
 include { SAMTOOLS_SORMADUP } from '../../modules/local/samtools_sormadup'
 
 
@@ -18,13 +17,8 @@ workflow MARKDUP_STATS {
     ch_versions = Channel.empty()
 
 
-    // Sort BAM file
-    SAMTOOLS_SORT ( aln )
-    ch_versions = ch_versions.mix ( SAMTOOLS_SORT.out.versions.first() )
-
-
     // Collect all BWAMEM2 output by sample name
-    SAMTOOLS_SORT.out.bam
+    aln
     | map { meta, bam -> [['id': meta.id.split('_')[0..-2].join('_'), 'datatype': meta.datatype], meta.read_count, bam] }
     | groupTuple( by: [0] )
     | map { meta, read_counts, bams -> [meta + [read_count: read_counts.sum()], bams] }

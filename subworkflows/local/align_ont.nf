@@ -4,7 +4,6 @@
 
 include { MINIMAP2_ALIGN } from '../../modules/nf-core/minimap2/align/main'
 include { SAMTOOLS_MERGE } from '../../modules/nf-core/samtools/merge/main'
-include { SAMTOOLS_SORT  } from '../../modules/nf-core/samtools/sort/main'
 
 
 workflow ALIGN_ONT {
