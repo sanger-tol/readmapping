@@ -6,7 +6,6 @@
 include { SAMTOOLS_MERGE    } from '../../modules/nf-core/samtools/merge/main'
 include { SAMTOOLS_SORT     } from '../../modules/nf-core/samtools/sort/main'
 include { SAMTOOLS_SORMADUP } from '../../modules/local/samtools_sormadup'
-include { CONVERT_STATS     } from '../../subworkflows/local/convert_stats'
 
 
 workflow MARKDUP_STATS {
@@ -57,15 +56,8 @@ workflow MARKDUP_STATS {
     | map { meta, bam -> [ meta, bam, [] ] }
     | set { ch_stat }
 
-    CONVERT_STATS ( ch_stat, fasta )
-    ch_versions = ch_versions.mix ( CONVERT_STATS.out.versions )
-
 
     emit:
-    cram     = CONVERT_STATS.out.cram        // channel: [ val(meta), /path/to/cram ]
-    crai     = CONVERT_STATS.out.crai        // channel: [ val(meta), /path/to/crai ]
-    stats    = CONVERT_STATS.out.stats       // channel: [ val(meta), /path/to/stats ]
-    idxstats = CONVERT_STATS.out.idxstats    // channel: [ val(meta), /path/to/idxstats ]
-    flagstat = CONVERT_STATS.out.flagstat    // channel: [ val(meta), /path/to/flagstat ]
+    bam      = ch_stat                       // channel: [ val(meta), /path/to/bam ]
     versions = ch_versions                   // channel: [ versions.yml ]
 }

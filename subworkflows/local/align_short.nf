@@ -34,10 +34,6 @@ workflow ALIGN_SHORT {
 
 
     emit:
-    cram     = MARKDUP_STATS.out.cram        // channel: [ val(meta), /path/to/cram ]
-    crai     = MARKDUP_STATS.out.crai        // channel: [ val(meta), /path/to/crai ]
-    stats    = MARKDUP_STATS.out.stats       // channel: [ val(meta), /path/to/stats ]
-    idxstats = MARKDUP_STATS.out.idxstats    // channel: [ val(meta), /path/to/idxstats ]
-    flagstat = MARKDUP_STATS.out.flagstat    // channel: [ val(meta), /path/to/flagstat ]
+    bam      = MARKDUP_STATS.out.bam         // channel: [ val(meta), /path/to/bam ]
     versions = ch_versions                   // channel: [ versions.yml ]
 }
