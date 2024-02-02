@@ -38,7 +38,7 @@
                     },
                     "minimap2/align": {
                         "branch": "master",
-                        "git_sha": "603ecbd9f45300c9788f197d2a15a005685b4220",
+                        "git_sha": "efbf86bb487f288ac30660282709d9620dd6048e",
                         "installed_by": ["modules"]
                     },
                     "samtools/faidx": {
