@@ -46,7 +46,6 @@ include { CONVERT_STATS                 } from '../subworkflows/local/convert_st
 //
 
 include { UNTAR                       } from '../modules/nf-core/untar/main'
-include { CRUMBLE                     } from '../modules/nf-core/crumble/main'
 include { CUSTOM_DUMPSOFTWAREVERSIONS } from '../modules/nf-core/custom/dumpsoftwareversions/main'
 
 
@@ -135,15 +134,6 @@ workflow READMAPPING {
     | mix( ALIGN_ONT.out.bam )
     CONVERT_STATS ( ch_aligned_bams, PREPARE_GENOME.out.fasta )
     ch_versions = ch_versions.mix ( CONVERT_STATS.out.versions )
-
-    //
-    // MODULE: To compress PacBio HiFi aligned CRAM files
-    //
-    CONVERT_STATS.out.cram
-    | filter { meta, bam -> meta.datatype == "pacbio" }
-    | set { ch_pacbio_bams }
-    CRUMBLE ( ch_pacbio_bams, [], [] )
-    ch_versions = ch_versions.mix ( CRUMBLE.out.versions )
 
 
     //

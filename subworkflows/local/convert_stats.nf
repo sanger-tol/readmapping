@@ -2,6 +2,7 @@
 // Convert BAM to CRAM, create index and calculate statistics
 //
 
+include { CRUMBLE           } from '../../modules/nf-core/crumble/main'
 include { SAMTOOLS_VIEW     } from '../../modules/nf-core/samtools/view/main'
 include { SAMTOOLS_STATS    } from '../../modules/nf-core/samtools/stats/main'
 include { SAMTOOLS_FLAGSTAT } from '../../modules/nf-core/samtools/flagstat/main'
@@ -17,11 +18,28 @@ workflow CONVERT_STATS {
     main:
     ch_versions = Channel.empty()
 
+    // Compress the quality scores of Illumina and PacBio CCS alignments
+    bam
+    | branch {
+        meta, bam, bai ->
+            run_crumble : meta.datatype == "hic" || meta.datatype == "illumina" || meta.datatype == "pacbio"
+                          [meta, bam]
+            no_crumble: true
+    }
+    | set { ch_bams }
+
+    CRUMBLE ( ch_bams.run_crumble, [], [] )
+    ch_versions = ch_versions.mix ( CRUMBLE.out.versions )
+
 
     // Convert BAM to CRAM
-    SAMTOOLS_VIEW ( bam, fasta, [] )
-    ch_versions = ch_versions.mix ( SAMTOOLS_VIEW.out.versions.first() )
+    CRUMBLE.out.bam
+    | map { meta, bam -> [meta, bam, []] }
+    | mix ( ch_bams.no_crumble )
+    | set { ch_bams_for_conversion }
 
+    SAMTOOLS_VIEW ( ch_bams_for_conversion, fasta, [] )
+    ch_versions = ch_versions.mix ( SAMTOOLS_VIEW.out.versions.first() )
 
     // Combine CRAM and CRAI into one channel
     SAMTOOLS_VIEW.out.cram
