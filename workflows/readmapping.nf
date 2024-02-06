@@ -142,7 +142,7 @@ workflow READMAPPING {
     CONVERT_STATS.out.cram
     | filter { meta, bam -> meta.datatype == "pacbio" }
     | set { ch_pacbio_bams }
-    CRUMBLE ( ch_pacbio_bams, [], true )
+    CRUMBLE ( ch_pacbio_bams, [], [] )
     ch_versions = ch_versions.mix ( CRUMBLE.out.versions )
 
 
