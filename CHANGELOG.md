@@ -3,6 +3,12 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [[1.2.1](https://github.com/sanger-tol/readmapping/releases/tag/1.2.1)] - [2024-02-27]
+
+### Enhancements & fixes
+
+- Increased the memory requests for reruns of BWAMEM2_MEM and SAMTOOLS_SORMADUP.
+
 ## [[1.2.0](https://github.com/sanger-tol/readmapping/releases/tag/1.2.0)] – Norwegian Ridgeback - [2023-12-19]
 
 ### Enhancements & fixes
