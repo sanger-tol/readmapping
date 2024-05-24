@@ -3,13 +3,13 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [[1.2.2](https://github.com/sanger-tol/readmapping/releases/tag/1.2.2)] - [2024-05-23]
+## [[1.2.2](https://github.com/sanger-tol/readmapping/releases/tag/1.2.2)] - Norwegian Ridgeback (patch 2) -[2024-05-23]
 
 ### Enhancements & fixes
 
 - Fixed the bug in the filtering of multiple PacBio files
 
-## [[1.2.1](https://github.com/sanger-tol/readmapping/releases/tag/1.2.1)] - [2024-02-29]
+## [[1.2.1](https://github.com/sanger-tol/readmapping/releases/tag/1.2.1)] - Norwegian Ridgeback (patch 1) - [2024-02-29]
 
 ### Enhancements & fixes
 
