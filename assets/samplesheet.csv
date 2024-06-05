@@ -3,3 +3,5 @@ mMelMel1,illumina,/lustre/scratch123/tol/resources/nextflow/test-data/Meles_mele
 mMelMel2,illumina,/lustre/scratch123/tol/resources/nextflow/test-data/Meles_meles/genomic_data/mMelMel2/illumina/31231_4#1.subset.cram,
 mMelMel3,hic,/lustre/scratch123/tol/resources/nextflow/test-data/Meles_meles/genomic_data/mMelMel3/hic/35528_2#1.subset.cram,
 mMelMel3,ont,/lustre/scratch123/tol/resources/nextflow/test-data/Meles_meles/genomic_data/mMelMel3/ont/PAE35587_pass_1f1f0707_115.subset.fastq.gz,
+mMelMel3,pacbio,/lustre/scratch123/tol/resources/nextflow/test-data/Meles_meles/genomic_data/mMelMel3/pacbio/m64094_200910_173211.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.subset.bam,
+mMelMel3,pacbio,/lustre/scratch123/tol/resources/nextflow/test-data/Meles_meles/genomic_data/mMelMel3/pacbio/m64094_200911_174739.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.subset.bam,

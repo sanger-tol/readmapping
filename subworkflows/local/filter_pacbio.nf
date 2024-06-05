@@ -60,9 +60,18 @@ workflow FILTER_PACBIO {
     // Create filtered BAM file
     SAMTOOLS_CONVERT.out.bam
     | join ( SAMTOOLS_CONVERT.out.csi )
+    | join ( PACBIO_FILTER.out.list )
+    | set { ch_reads_and_list }
+
+    ch_reads_and_list
+    | map { meta, bam, csi, list -> [meta, bam, csi] }
     | set { ch_reads }
 
-    SAMTOOLS_FILTER ( ch_reads, [ [], [] ], PACBIO_FILTER.out.list )
+    ch_reads_and_list
+    | map { meta, bam, csi, list -> list }
+    | set { ch_lists }
+
+    SAMTOOLS_FILTER ( ch_reads, [ [], [] ], ch_lists )
     ch_versions = ch_versions.mix ( SAMTOOLS_FILTER.out.versions.first() )
 
 
