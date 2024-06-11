@@ -1,6 +1,6 @@
-process SAMTOOLS_SORT {
+process SAMTOOLS_FILTERTOFASTQ {
     tag "$meta.id"
-    label 'process_medium'
+    label 'process_low'
 
     conda "bioconda::samtools=1.17"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
@@ -8,27 +8,35 @@ process SAMTOOLS_SORT {
         'biocontainers/samtools:1.17--h00cdaf9_0' }"
 
     input:
-    tuple val(meta), path(bam)
+    tuple val(meta), path(input), path(index)
+    path qname
 
     output:
-    tuple val(meta), path("*.bam"), emit: bam
-    tuple val(meta), path("*.csi"), emit: csi, optional: true
-    path  "versions.yml"          , emit: versions
+    tuple val(meta), path("*.fastq.gz") , emit: fastq
+    path  "versions.yml"                , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
 
     script:
     def args = task.ext.args ?: ''
+    def args2 = task.ext.args2 ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
-    if ("$bam" == "${prefix}.bam") error "Input and output names are the same, use \"task.ext.prefix\" to disambiguate!"
     """
-    samtools sort \\
+    samtools view \\
+        --threads $task.cpus \\
+        --qname-file ${qname} \\
+        --unoutput - \\
         $args \\
-        -@ $task.cpus \\
-        -o ${prefix}.bam \\
-        -T $prefix \\
-        $bam
+        -o /dev/null \\
+        $input \\
+    | \\
+    samtools fastq \\
+        $args2 \\
+        --threads $task.cpus \\
+        -0 ${prefix}.fastq.gz \\
+        - \\
+        > /dev/null
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
@@ -39,7 +47,7 @@ process SAMTOOLS_SORT {
     stub:
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
-    touch ${prefix}.bam
+    echo | gzip > ${prefix}.fastq.gz
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

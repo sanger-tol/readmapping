@@ -3,7 +3,24 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [[1.2.2](https://github.com/sanger-tol/readmapping/releases/tag/1.2.2)] - Norwegian Ridgeback (patch 2) -[2024-05-23]
+## [[1.3.0](https://github.com/sanger-tol/readmapping/releases/tag/1.3.0)] - Antipodean Opaleye - [2024-06-XX]
+
+### Enhancements & fixes
+
+- Combined steps to improve the efficiency of the pipeline, especially on large genomes
+- "crumble" is now run on _every_ data type, not just PacBio
+
+### Software dependencies
+
+Note, since the pipeline is using Nextflow DSL2, each process will be run with its own [Biocontainer](https://biocontainers.pro/#/registry). This means that on occasion it is entirely possible for the pipeline to be using different versions of the same tool. However, the overall software dependency changes compared to the last release have been listed below for reference.
+
+| Dependency | Old version   | New version   |
+| ---------- | ------------- | ------------- |
+| `samtools` | 1.14 and 1.17 | 1.17 and 1.18 |
+
+> **NB:** Dependency has been **updated** if both old and new version information is present. </br> **NB:** Dependency has been **added** if just the new version information is present. </br> **NB:** Dependency has been **removed** if version information isn't present.
+
+## [[1.2.2](https://github.com/sanger-tol/readmapping/releases/tag/1.2.2)] - Norwegian Ridgeback (patch 2) - [2024-05-23]
 
 ### Enhancements & fixes
 
