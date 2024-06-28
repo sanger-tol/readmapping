@@ -154,8 +154,6 @@ workflow READMAPPING {
         // If no reheadering is done, use the original aligned bams
         ch_reheadered_bams = ch_aligned_bams
     }
-    ch_aligned_bams.view()
-    ch_reheadered_bams.view()
 
     // convert to cram and gather stats
     CONVERT_STATS ( ch_reheadered_bams, PREPARE_GENOME.out.fasta )
