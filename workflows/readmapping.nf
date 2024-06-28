@@ -148,7 +148,7 @@ workflow READMAPPING {
             [meta, bam, file( params.header )]
         }
         SAMTOOLS_REHEADER( ch_combined )
-        ch_reheadered_bams = SAMTOOLS_REHEADER.out.bam.map { bam -> bam + [[]] }
+        ch_reheadered_bams = SAMTOOLS_REHEADER.out.bam.map { bam -> bam + [] }
         ch_versions = ch_versions.mix ( SAMTOOLS_REHEADER.out.versions )
     } else {
         // If no reheadering is done, use the original aligned bams
