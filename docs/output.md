@@ -81,7 +81,7 @@ The filtered PacBio reads are aligned with `MINIMAP2_ALIGN`. The sorted and merg
 
 ### External metadata
 
-If provided using the `--header` option, all output alignments (`*.cram`) will include any additional metadata supplied as a SAM header template, replacing the existing *@HD* and *@SD* entries (note that this behaviour can be altered by modifying the `ext.args` for `SAMTOOLS_REHEADER` in `modules.config`.
+If provided using the `--header` option, all output alignments (`*.cram`) will include any additional metadata supplied as a SAM header template, replacing the existing _@HD_ and _@SD_ entries (note that this behaviour can be altered by modifying the `ext.args` for `SAMTOOLS_REHEADER` in `modules.config`.
 
 ### Statistics
 
