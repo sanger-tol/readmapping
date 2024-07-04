@@ -20,16 +20,24 @@ process SAMTOOLS_REHEADER {
     script:
     def prefix = task.ext.prefix ?: "${meta.id}"
     def suffix = "${meta.suffix}"
-    def args  = task.ext.args  ?: ''
 
     if ("$file" == "${prefix}.${suffix}") error "Input and output names are the same, use \"task.ext.prefix\" to disambiguate!"
     """
-    if [ ! -z "${args}" ]; then
-        samtools reheader ${args} ${file} | \\
-        samtools reheader ${header} - > ${prefix}.${suffix}
-    else
-        samtools reheader ${header} ${file} > ${prefix}.${suffix}
-    fi
+    # Replace SQ lines with those from external template
+    ( samtools view --no-PG --header-only ${file} | \\
+    grep -v ^@SQ && grep ^@SQ ${header} ) > .temp.header.sam
+
+    # custom sort for readability (retain order of insertion but sort groups by tag)
+    ( grep ^@HD .temp.header.sam && \
+    grep ^@SQ .temp.header.sam && \
+    grep ^@RG .temp.header.sam && \
+    grep ^@PG .temp.header.sam && \
+    if grep -q -E -v '^@HD|^@SQ|^@RG|^@PG' .temp.header.sam; then \
+        grep -v -E '^@HD|^@SQ|^@RG|^@PG' .temp.header.sam; \
+    fi; ) > .temp.sorted.header.sam
+
+    # Insert new header into file
+    samtools reheader .temp.sorted.header.sam ${file} > ${prefix}.${suffix}
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
