@@ -11,15 +11,16 @@ process SAMTOOLS_REHEADER {
     tuple val(meta), path(file), path(header)
 
     output:
-    tuple val(meta), path("*.${meta.suffix}"), emit: bam
+    tuple val(meta), path("${prefix}.${suffix}"), optional:true, emit: bam
+    tuple val(meta), path("${prefix}.${suffix}"), optional:true, emit: cram
     path "versions.yml", emit: versions
 
     when:
     task.ext.when == null || task.ext.when
 
     script:
-    def prefix = task.ext.prefix ?: "${meta.id}"
-    def suffix = "${meta.suffix}"
+    prefix = task.ext.prefix ?: "${meta.id}"
+    suffix = file.getExtension()
 
     if ("$file" == "${prefix}.${suffix}") error "Input and output names are the same, use \"task.ext.prefix\" to disambiguate!"
     """
@@ -28,11 +29,11 @@ process SAMTOOLS_REHEADER {
     grep -v ^@SQ && grep ^@SQ ${header} ) > .temp.header.sam
 
     # custom sort for readability (retain order of insertion but sort groups by tag)
-    ( grep ^@HD .temp.header.sam && \
-    grep ^@SQ .temp.header.sam && \
-    grep ^@RG .temp.header.sam && \
-    grep ^@PG .temp.header.sam && \
-    grep -v -E '^@HD|^@SQ|^@RG|^@PG' .temp.header.sam || false; \
+    ( grep ^@HD .temp.header.sam || true && \
+    grep ^@SQ .temp.header.sam || true && \
+    grep ^@RG .temp.header.sam || true && \
+    grep ^@PG .temp.header.sam || true && \
+    grep -v -E '^@HD|^@SQ|^@RG|^@PG' .temp.header.sam || true; \
     ) > .temp.sorted.header.sam
 
     # Insert new header into file
@@ -45,8 +46,8 @@ process SAMTOOLS_REHEADER {
     """
 
     stub:
-    def prefix = task.ext.prefix ?: "${meta.id}"
-    def suffix = file.name.split('\\.')[-1]
+    prefix = task.ext.prefix ?: "${meta.id}"
+    suffix = file.getExtension()
     """
     touch ${prefix}.${suffix}
 
