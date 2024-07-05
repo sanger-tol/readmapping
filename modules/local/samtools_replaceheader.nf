@@ -32,9 +32,8 @@ process SAMTOOLS_REHEADER {
     grep ^@SQ .temp.header.sam && \
     grep ^@RG .temp.header.sam && \
     grep ^@PG .temp.header.sam && \
-    if grep -q -E -v '^@HD|^@SQ|^@RG|^@PG' .temp.header.sam; then \
-        grep -v -E '^@HD|^@SQ|^@RG|^@PG' .temp.header.sam; \
-    fi; ) > .temp.sorted.header.sam
+    grep -v -E '^@HD|^@SQ|^@RG|^@PG' .temp.header.sam || false; \
+    ) > .temp.sorted.header.sam
 
     # Insert new header into file
     samtools reheader .temp.sorted.header.sam ${file} > ${prefix}.${suffix}
