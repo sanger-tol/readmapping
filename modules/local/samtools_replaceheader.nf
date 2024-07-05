@@ -8,7 +8,8 @@ process SAMTOOLS_REHEADER {
         'biocontainers/samtools:1.17--h00cdaf9_0' }"
 
     input:
-    tuple val(meta), path(file), path(header)
+    tuple val(meta), path(file)
+    path(header)
 
     output:
     tuple val(meta), path("${prefix}.${suffix}"), optional:true, emit: bam

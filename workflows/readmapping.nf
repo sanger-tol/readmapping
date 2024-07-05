@@ -13,7 +13,7 @@ for (param in checkPathParamList) { if (param) { file(param, checkIfExists: true
 // Check mandatory parameters
 if (params.input) { ch_input = Channel.fromPath(params.input) } else { exit 1, 'Input samplesheet not specified!' }
 if (params.fasta) { ch_fasta = Channel.fromPath(params.fasta) } else { exit 1, 'Genome fasta file not specified!' }
-
+if (params.header) { ch_header = Channel.fromPath(params.header) }
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -142,13 +142,8 @@ workflow READMAPPING {
     // Optionally insert params.header information to bams
     ch_reheadered_bams = Channel.empty()
     if ( params.header ) {
-        ch_combined = ch_aligned_bams.map { meta, bam, _ ->
-            def suffix = bam instanceof List ? bam[0].getExtension() : bam.getExtension()
-            meta.suffix = suffix // add suffix to meta so output matches input type
-            [meta, bam, file( params.header )]
-        }
-        SAMTOOLS_REHEADER( ch_combined )
-        ch_reheadered_bams = SAMTOOLS_REHEADER.out.bam.map { bam -> bam + [[]] }
+        SAMTOOLS_REHEADER( ch_aligned_bams, ch_header.first() )
+        ch_reheadered_bams = SAMTOOLS_REHEADER.out.bam
         ch_versions = ch_versions.mix ( SAMTOOLS_REHEADER.out.versions )
     } else {
         ch_reheadered_bams = ch_aligned_bams
