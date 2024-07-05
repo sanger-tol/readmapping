@@ -21,7 +21,7 @@ workflow CONVERT_STATS {
     // Compress the quality scores of Illumina and PacBio CCS alignments
     bam
     | branch {
-        meta, bam, bai ->
+        meta, bam ->
             run_crumble : meta.datatype == "hic" || meta.datatype == "illumina" || meta.datatype == "pacbio"
                           [meta, bam]
             no_crumble: true
@@ -35,7 +35,9 @@ workflow CONVERT_STATS {
     // Convert BAM to CRAM
     CRUMBLE.out.bam
     | map { meta, bam -> [meta, bam, []] }
-    | mix ( ch_bams.no_crumble )
+    | mix ( ch_bams.no_crumble.map{
+        meta, bam -> [meta, bam, []] }
+    )
     | set { ch_bams_for_conversion }
 
     SAMTOOLS_VIEW ( ch_bams_for_conversion, fasta, [] )

@@ -58,8 +58,9 @@ workflow ALIGN_SHORT {
 
 
     // Convert merged BAM to CRAM and calculate indices and statistics
+    SAMTOOLS_SORMADUP.out.bam.view()
     SAMTOOLS_SORMADUP.out.bam
-    | map { meta, bam -> [ meta, bam, [] ] }
+    | map { meta, bam -> [ meta, bam] }
     | set { ch_stat }
 
 
