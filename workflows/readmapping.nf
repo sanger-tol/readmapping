@@ -33,7 +33,6 @@ include { ALIGN_PACBIO as ALIGN_HIFI    } from '../subworkflows/local/align_pacb
 include { ALIGN_PACBIO as ALIGN_CLR     } from '../subworkflows/local/align_pacbio'
 include { ALIGN_ONT                     } from '../subworkflows/local/align_ont'
 include { CONVERT_STATS                 } from '../subworkflows/local/convert_stats'
-include { ALIGN_ILLUMINA_FASTQ          } from '../subworkflows/local/align_illumina_fastq'
 
 
 /*
@@ -77,13 +76,6 @@ workflow READMAPPING {
 
     ch_versions = ch_versions.mix ( INPUT_CHECK.out.versions )
 
-    ch_reads.illumina
-    | branch {
-        meta, reads ->
-            fastq : reads.findAll { it.getName().toLowerCase() =~ /.*f.*\.gz/ }
-            cram : reads.findAll { it.getName().toLowerCase() =~ /.*cram/ }
-    }
-    | set { ch_illumina }
 
     //
     // SUBWORKFLOW: Uncompress and prepare reference genome files
@@ -121,11 +113,8 @@ workflow READMAPPING {
     ALIGN_HIC ( PREPARE_GENOME.out.fasta, PREPARE_GENOME.out.bwaidx, ch_reads.hic )
     ch_versions = ch_versions.mix ( ALIGN_HIC.out.versions )
     
-    ALIGN_ILLUMINA ( PREPARE_GENOME.out.fasta, PREPARE_GENOME.out.bwaidx, ch_illumina.cram )
+    ALIGN_ILLUMINA ( PREPARE_GENOME.out.fasta, PREPARE_GENOME.out.bwaidx, ch_reads.illumina )
     ch_versions = ch_versions.mix ( ALIGN_ILLUMINA.out.versions )
-
-    ALIGN_ILLUMINA_FASTQ ( PREPARE_GENOME.out.fasta, PREPARE_GENOME.out.bwaidx, ch_illumina.fastq )
-    ch_versions = ch_versions.mix ( ALIGN_ILLUMINA_FASTQ.out.versions )
 
     ALIGN_HIFI ( PREPARE_GENOME.out.fasta, ch_reads.pacbio, ch_vector_db )
     ch_versions = ch_versions.mix ( ALIGN_HIFI.out.versions )
