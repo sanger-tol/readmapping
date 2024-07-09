@@ -28,21 +28,19 @@ workflow ALIGN_SHORT {
     | set { ch_reads }
 
 
-    if ( ch_reads.cram ) {
-        // Convert from CRAM to FASTQ
-        SAMTOOLS_FASTQ ( ch_reads.cram, false )
-        ch_versions = ch_versions.mix ( SAMTOOLS_FASTQ.out.versions.first() )
+    // Convert from CRAM to FASTQ only if CRAM files were provided as input
+    SAMTOOLS_FASTQ ( ch_reads.cram, false )
+    ch_versions = ch_versions.mix ( SAMTOOLS_FASTQ.out.versions.first() )
+    
+    
+    SAMTOOLS_FASTQ.out.fastq
+    | mix ( ch_reads.fastq )
+    | set { ch_reads_fastq }
 
 
-        // Align Fastq to Genome and output sorted BAM
-        BWAMEM2_MEM ( SAMTOOLS_FASTQ.out.fastq, index, true )
-        ch_versions = ch_versions.mix ( BWAMEM2_MEM.out.versions.first() )
-
-        
-    } else {
-        BWAMEM2_MEM ( ch_reads.fastq, index, true )
-        ch_versions = ch_versions.mix ( BWAMEM2_MEM.out.versions.first() )
-    }
+     // Align Fastq to Genome and output sorted BAM
+    BWAMEM2_MEM ( ch_reads_fastq, index, true )
+    ch_versions = ch_versions.mix ( BWAMEM2_MEM.out.versions.first() )
 
 
     // Collect all BWAMEM2 output by sample name
