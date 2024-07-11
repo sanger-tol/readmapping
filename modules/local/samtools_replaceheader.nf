@@ -27,18 +27,18 @@ process SAMTOOLS_REHEADER {
     """
     # Replace SQ lines with those from external template
     ( samtools view --no-PG --header-only ${file} | \\
-    grep -v ^@SQ && grep ^@SQ ${header} ) > .temp.header.sam
+    grep -v ^@SQ && grep ^@SQ ${header} ) > temp.header.sam
 
     # custom sort for readability (retain order of insertion but sort groups by tag)
-    ( grep ^@HD .temp.header.sam || true && \
-    grep ^@SQ .temp.header.sam || true && \
-    grep ^@RG .temp.header.sam || true && \
-    grep ^@PG .temp.header.sam || true && \
-    grep -v -E '^@HD|^@SQ|^@RG|^@PG' .temp.header.sam || true; \
-    ) > .temp.sorted.header.sam
+    ( grep ^@HD temp.header.sam || true && \
+    grep ^@SQ temp.header.sam || true && \
+    grep ^@RG temp.header.sam || true && \
+    grep ^@PG temp.header.sam || true && \
+    grep -v -E '^@HD|^@SQ|^@RG|^@PG' temp.header.sam || true; \
+    ) > temp.sorted.header.sam
 
     # Insert new header into file
-    samtools reheader .temp.sorted.header.sam ${file} > ${prefix}.${suffix}
+    samtools reheader temp.sorted.header.sam ${file} > ${prefix}.${suffix}
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
