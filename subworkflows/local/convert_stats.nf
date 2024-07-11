@@ -23,7 +23,6 @@ workflow CONVERT_STATS {
     | branch {
         meta, bam ->
             run_crumble : meta.datatype == "hic" || meta.datatype == "illumina" || meta.datatype == "pacbio"
-                          [meta, bam]
             no_crumble: true
     }
     | set { ch_bams }
