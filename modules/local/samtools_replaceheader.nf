@@ -12,8 +12,8 @@ process SAMTOOLS_REHEADER {
     path(header)
 
     output:
-    tuple val(meta), path("${prefix}.${suffix}"), optional:true, emit: bam
-    tuple val(meta), path("${prefix}.${suffix}"), optional:true, emit: cram
+    tuple val(meta), path("${prefix}.bam") , optional:true, emit: bam
+    tuple val(meta), path("${prefix}.cram"), optional:true, emit: cram
     path "versions.yml", emit: versions
 
     when:
