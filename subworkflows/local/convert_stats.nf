@@ -33,10 +33,8 @@ workflow CONVERT_STATS {
 
     // Convert BAM to CRAM
     CRUMBLE.out.bam
+    | mix ( ch_bams.no_crumble )
     | map { meta, bam -> [meta, bam, []] }
-    | mix ( ch_bams.no_crumble.map{
-        meta, bam -> [meta, bam, []] }
-    )
     | set { ch_bams_for_conversion }
 
     SAMTOOLS_VIEW ( ch_bams_for_conversion, fasta, [] )
