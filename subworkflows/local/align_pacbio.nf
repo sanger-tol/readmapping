@@ -49,7 +49,6 @@ workflow ALIGN_PACBIO {
     // Convert merged BAM to CRAM and calculate indices and statistics
     SAMTOOLS_MERGE.out.bam
     | mix ( ch_bams.single_bam )
-    | map { meta, bam -> [ meta, bam, [] ] }
     | set { ch_sort }
 
 

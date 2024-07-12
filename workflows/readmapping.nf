@@ -13,13 +13,20 @@ for (param in checkPathParamList) { if (param) { file(param, checkIfExists: true
 // Check mandatory parameters
 if (params.input) { ch_input = Channel.fromPath(params.input) } else { exit 1, 'Input samplesheet not specified!' }
 if (params.fasta) { ch_fasta = Channel.fromPath(params.fasta) } else { exit 1, 'Genome fasta file not specified!' }
-
+if (params.header) { ch_header = Channel.fromPath(params.header) }
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT LOCAL MODULES/SUBWORKFLOWS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
+
+//
+// MODULE: Local modules
+//
+
+include { SAMTOOLS_REHEADER           } from '../modules/local/samtools_replaceheader'
+
 
 //
 // SUBWORKFLOW: Consisting of a mix of local and nf-core/modules
@@ -47,7 +54,6 @@ include { CONVERT_STATS                 } from '../subworkflows/local/convert_st
 
 include { UNTAR                       } from '../modules/nf-core/untar/main'
 include { CUSTOM_DUMPSOFTWAREVERSIONS } from '../modules/nf-core/custom/dumpsoftwareversions/main'
-
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -125,14 +131,26 @@ workflow READMAPPING {
     ALIGN_ONT ( PREPARE_GENOME.out.fasta, ch_reads.ont )
     ch_versions = ch_versions.mix ( ALIGN_ONT.out.versions )
 
-
+    // gather alignments
     ch_aligned_bams = Channel.empty()
     | mix( ALIGN_HIC.out.bam )
     | mix( ALIGN_ILLUMINA.out.bam )
     | mix( ALIGN_HIFI.out.bam )
     | mix( ALIGN_CLR.out.bam )
     | mix( ALIGN_ONT.out.bam )
-    CONVERT_STATS ( ch_aligned_bams, PREPARE_GENOME.out.fasta )
+
+    // Optionally insert params.header information to bams
+    ch_reheadered_bams = Channel.empty()
+    if ( params.header ) {
+        SAMTOOLS_REHEADER( ch_aligned_bams, ch_header.first() )
+        ch_reheadered_bams = SAMTOOLS_REHEADER.out.bam
+        ch_versions = ch_versions.mix ( SAMTOOLS_REHEADER.out.versions )
+    } else {
+        ch_reheadered_bams = ch_aligned_bams
+    }
+
+    // convert to cram and gather stats
+    CONVERT_STATS ( ch_reheadered_bams, PREPARE_GENOME.out.fasta )
     ch_versions = ch_versions.mix ( CONVERT_STATS.out.versions )
 
 

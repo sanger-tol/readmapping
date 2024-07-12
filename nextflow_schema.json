@@ -26,7 +26,8 @@
                     "type": "string",
                     "format": "directory-path",
                     "description": "The output directory where the results will be saved. You have to use absolute paths to storage on Cloud infrastructure.",
-                    "fa_icon": "fas fa-folder-open"
+                    "fa_icon": "fas fa-folder-open",
+                    "default": "./results"
                 },
                 "vector_db": {
                     "type": "string",
@@ -64,6 +65,12 @@
                     "description": "Path to directory or tar.gz archive for pre-built BWAMEM2 index.",
                     "format": "path",
                     "fa_icon": "fas fa-bezier-curve"
+                },
+                "header": {
+                    "type": "string",
+                    "format": "path",
+                    "description": "Optional template header file for BAM/CRAM outputs",
+                    "fa_icon": "far fa-file-code"
                 }
             }
         },

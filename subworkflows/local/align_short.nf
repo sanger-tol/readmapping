@@ -56,14 +56,7 @@ workflow ALIGN_SHORT {
     SAMTOOLS_SORMADUP ( ch_bam, fasta )
     ch_versions = ch_versions.mix ( SAMTOOLS_SORMADUP.out.versions )
 
-
-    // Convert merged BAM to CRAM and calculate indices and statistics
-    SAMTOOLS_SORMADUP.out.bam
-    | map { meta, bam -> [ meta, bam, [] ] }
-    | set { ch_stat }
-
-
     emit:
-    bam      = ch_stat                       // channel: [ val(meta), /path/to/bam ]
+    bam      = SAMTOOLS_SORMADUP.out.bam     // channel: [ val(meta), /path/to/bam ]
     versions = ch_versions                   // channel: [ versions.yml ]
 }
