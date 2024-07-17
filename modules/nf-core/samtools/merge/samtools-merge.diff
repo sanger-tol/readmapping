@@ -1,7 +1,7 @@
 Changes in module 'nf-core/samtools/merge'
 --- modules/nf-core/samtools/merge/main.nf
 +++ modules/nf-core/samtools/merge/main.nf
-@@ -26,6 +26,11 @@
+@@ -27,6 +27,11 @@
      def args = task.ext.args   ?: ''
      prefix   = task.ext.prefix ?: "${meta.id}"
      def file_type = input_files instanceof List ? input_files[0].getExtension() : input_files.getExtension()
@@ -13,7 +13,7 @@ Changes in module 'nf-core/samtools/merge'
      def reference = fasta ? "--reference ${fasta}" : ""
      """
      samtools \\
-@@ -34,7 +39,7 @@
+@@ -35,7 +40,7 @@
          $args \\
          ${reference} \\
          ${prefix}.${file_type} \\

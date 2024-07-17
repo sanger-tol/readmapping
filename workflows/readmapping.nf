@@ -101,7 +101,6 @@ workflow READMAPPING {
     if ( ch_reads.pacbio || ch_reads.clr ) {
         if ( params.vector_db.endsWith( '.tar.gz' ) ) {
             UNTAR ( [ [:], params.vector_db ] ).untar
-            | map { meta, file -> file }
             | set { ch_vector_db }
 
             ch_versions = ch_versions.mix ( UNTAR.out.versions )
