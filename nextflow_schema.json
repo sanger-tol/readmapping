@@ -33,7 +33,7 @@
                     "type": "string",
                     "description": "Path to directory or tar.gz archive for pre-built PacBio vector database.",
                     "format": "path",
-                    "default": "${projectDir}/assets/vectorDB.tar.gz",
+                    "default": "/Users/tc25/projects/readmapping/assets/vectorDB.tar.gz",
                     "fa_icon": "fas fa-bezier-curve"
                 },
                 "email": {
@@ -230,7 +230,7 @@
                 "tracedir": {
                     "type": "string",
                     "description": "Directory to keep pipeline Nextflow logs and reports.",
-                    "default": "${params.outdir}/pipeline_info/readmapping",
+                    "default": "./results/pipeline_info/readmapping",
                     "fa_icon": "fas fa-cogs",
                     "hidden": true
                 },
@@ -270,5 +270,11 @@
         {
             "$ref": "#/definitions/generic_options"
         }
-    ]
+    ],
+    "properties": {
+        "schema_ignore_params": {
+            "type": "string",
+            "default": "genomes"
+        }
+    }
 }
