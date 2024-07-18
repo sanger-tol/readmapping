@@ -1,19 +1,3 @@
-/*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    VALIDATE INPUTS
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
-
-def summary_params = NfcoreSchema.paramsSummaryMap(workflow, params)
-
-// Check input path parameters to see if they exist
-def checkPathParamList = [ params.input, params.fasta, params.vector_db, params.bwamem2_index ]
-for (param in checkPathParamList) { if (param) { file(param, checkIfExists: true) } }
-
-// Check mandatory parameters
-if (params.input) { ch_input = Channel.fromPath(params.input) } else { exit 1, 'Input samplesheet not specified!' }
-if (params.fasta) { ch_fasta = Channel.fromPath(params.fasta) } else { exit 1, 'Genome fasta file not specified!' }
-if (params.header) { ch_header = Channel.fromPath(params.header) }
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -63,13 +47,19 @@ include { CUSTOM_DUMPSOFTWAREVERSIONS } from '../modules/nf-core/custom/dumpsoft
 
 workflow READMAPPING {
 
-    ch_versions = Channel.empty()
+    take:
+    ch_samplesheet
+    ch_fasta
+    ch_header
 
+    main:
+    // Initialize an empty versions channel
+    ch_versions = Channel.empty()
 
     //
     // SUBWORKFLOW: Read in samplesheet, validate and stage input files
     //
-    INPUT_CHECK ( ch_input ).reads
+    INPUT_CHECK ( ch_samplesheet ).reads
     | branch {
         meta, reads ->
             hic : meta.datatype == "hic"
@@ -163,22 +153,6 @@ workflow READMAPPING {
     )
 }
 
-
-/*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    COMPLETION EMAIL AND SUMMARY
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
-
-workflow.onComplete {
-    if ( params.email || params.email_on_fail ) {
-        NfcoreTemplate.email ( workflow, params, summary_params, projectDir, log )
-    }
-    NfcoreTemplate.summary ( workflow, params, log )
-    if ( params.hook_url ) {
-        NfcoreTemplate.IM_notification ( workflow, params, summary_params, projectDir, log )
-    }
-}
 
 
 /*
