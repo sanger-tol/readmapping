@@ -1,11 +1,4 @@
+nf_core_version: 2.14.1
 repository_type: pipeline
-lint:
-  files_exist:
-  - CODE_OF_CONDUCT.md
-  - docs/images/nf-core-readmapping_logo.png
-  - .github/ISSUE_TEMPLATE/config.yml
-  - .github/workflows/sangertest.yml
-  - .github/workflows/sangerfulltest.yml
-  nextflow_config:
-  - manifest.name
-  - manifest.homePage
+template:
+  name: readmapping
