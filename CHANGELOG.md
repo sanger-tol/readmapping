@@ -1,4 +1,4 @@
-# sanger-tol/readmapping: Changelog
+# nf-core/readmapping: Changelog
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
@@ -110,7 +110,7 @@ Note, since the pipeline is using Nextflow DSL2, each process will be run with i
 
 ## [[v1.0.0](https://github.com/sanger-tol/readmapping/releases/tag/1.0.0)] – Ukrainian Ironbelly - [2022-05-19]
 
-Initial release of sanger-tol/readmapping, created with the [nf-core](https://nf-co.re/) template.
+Initial release of nf-core/readmapping, created with the [nf-core](https://nf-co.re/) template.
 
 ### `Added`
 
