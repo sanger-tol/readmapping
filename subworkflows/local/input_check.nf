@@ -6,7 +6,7 @@ include { SAMTOOLS_FLAGSTAT } from '../../modules/nf-core/samtools/flagstat/main
 
 workflow INPUT_CHECK {
     take:
-    ch_samplesheet    // channel: [ [meta], /path/to/reads ]
+    ch_samplesheet    // channel: [ val(meta), /path/to/reads ]
 
     main:
     ch_versions = Channel.empty()
