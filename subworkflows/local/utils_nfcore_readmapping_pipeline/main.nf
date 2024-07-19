@@ -223,33 +223,37 @@ def sangerTolLogo(monochrome_logs=true) {
 
 
 //
-// Generate methods description for MultiQC
+// Generate methods description for tools
 //
 def toolCitationText() {
-    // TODO nf-core: Optionally add in-text citation tools to this list.
     // Can use ternary operators to dynamically construct based conditions, e.g. params["run_xyz"] ? "Tool (Foo et al. 2023)" : "",
     // Uncomment function in methodsDescriptionText to render in MultiQC report
     def citation_text = [
             "Tools used in the workflow included:",
-            "FastQC (Andrews 2010),",
-            "MultiQC (Ewels et al. 2016)",
-            "."
+            "blastn (Altschul et al. 1990),",
+            "bwa-mem2 (Vasimuddin et al. 2019),",
+            "crumble (Croucher et al. 2020),",
+            "MiniMap2 (Li 2018),",
+            "Samtools (Li et al. 2009)"
         ].join(' ').trim()
 
     return citation_text
 }
 
 def toolBibliographyText() {
-    // TODO nf-core: Optionally add bibliographic entries to this list.
     // Can use ternary operators to dynamically construct based conditions, e.g. params["run_xyz"] ? "<li>Author (2023) Pub name, Journal, DOI</li>" : "",
     // Uncomment function in methodsDescriptionText to render in MultiQC report
     def reference_text = [
-            "<li>Andrews S, (2010) FastQC, URL: https://www.bioinformatics.babraham.ac.uk/projects/fastqc/).</li>",
-            "<li>Ewels, P., Magnusson, M., Lundin, S., & Käller, M. (2016). MultiQC: summarize analysis results for multiple tools and samples in a single report. Bioinformatics , 32(19), 3047–3048. doi: /10.1093/bioinformatics/btw354</li>"
+            "<li>Altschul, S.F., Gish, W., Miller, W., Myers, E.W., & Lipman, D.J. (1990). Basic local alignment search tool. Journal of Molecular Biology, 215(3), 403-410. doi:10.1016/S0022-2836(05)80360-2.</li>",
+            "<li>Vasimuddin, Md., Misra, S., Li, H., & Aluru, S. (2019). Efficient Architecture-Aware Acceleration of BWA-MEM for Multicore Systems. IEEE Parallel and Distributed Processing Symposium (IPDPS), 2019. doi:10.1109/IPDPS.2019.00041.</li>",
+            "<li>Croucher, N.J., Page, A.J., Connor, T.R., Delaney, A.J., Keane, J.A., & Bentley, S.D. (2020). Rapid phylogenetic analysis of large samples of recombinant bacterial whole genome sequences using Gubbins. Nucleic Acids Research, 43(3), e15. doi:10.1093/nar/gku1196.</li>",
+            "<li>Li, H. (2018). Minimap2: pairwise alignment for nucleotide sequences. Bioinformatics, 34(18), 3094-3100. doi:10.1093/bioinformatics/bty191.</li>",
+            "<li>Li, H., Handsaker, B., Wysoker, A., Fennell, T., Ruan, J., Homer, N., ... & Durbin, R. (2009). The Sequence Alignment/Map format and SAMtools. Bioinformatics, 25(16), 2078-2079. doi:10.1093/bioinformatics/btp352.</li>"
         ].join(' ').trim()
 
     return reference_text
 }
+
 
 def methodsDescriptionText(mqc_methods_yaml) {
     // Convert  to a named map so can be used as with familar NXF ${workflow} variable syntax in the MultiQC YML file
@@ -274,8 +278,8 @@ def methodsDescriptionText(mqc_methods_yaml) {
     meta["tool_bibliography"] = ""
 
     // TODO nf-core: Only uncomment below if logic in toolCitationText/toolBibliographyText has been filled!
-    // meta["tool_citations"] = toolCitationText().replaceAll(", \\.", ".").replaceAll("\\. \\.", ".").replaceAll(", \\.", ".")
-    // meta["tool_bibliography"] = toolBibliographyText()
+    meta["tool_citations"] = toolCitationText().replaceAll(", \\.", ".").replaceAll("\\. \\.", ".").replaceAll(", \\.", ".")
+    meta["tool_bibliography"] = toolBibliographyText()
 
 
     def methods_text = mqc_methods_yaml.text
