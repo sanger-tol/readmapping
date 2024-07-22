@@ -58,7 +58,7 @@ workflow READMAPPING {
     ch_multiqc_files = Channel.empty()
 
     //
-    // MODULE: Run FastQC
+    // SUBWORKFLOW: Read in samplesheet, validate and stage input files
     //
     INPUT_CHECK ( ch_samplesheet ).reads
     | branch {
