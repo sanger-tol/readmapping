@@ -33,7 +33,7 @@
                     "type": "string",
                     "description": "Path to directory or tar.gz archive for pre-built PacBio vector database.",
                     "format": "path",
-                    "default": "assets/vectorDB.tar.gz",
+                    "default": "/Users/tc25/projects/readmapping/assets/vectorDB.tar.gz",
                     "fa_icon": "fas fa-bezier-curve"
                 },
                 "email": {
@@ -233,6 +233,10 @@
                     "fa_icon": "fas fa-palette",
                     "hidden": true
                 },
+                "monochromeLogs": {
+                    "type": "boolean",
+                    "hidden": true
+                },
                 "hook_url": {
                     "type": "string",
                     "description": "Incoming hook URL for messaging service",
@@ -250,14 +254,14 @@
                 "multiqc_logo": {
                     "type": "string",
                     "description": "Directory to keep pipeline Nextflow logs and reports.",
-                    "default": "./results/pipeline_info/readmapping",
                     "fa_icon": "fas fa-cogs",
                     "hidden": true
                 },
                 "multiqc_methods_description": {
                     "type": "string",
                     "description": "Custom MultiQC yaml file containing HTML including a methods description.",
-                    "fa_icon": "fas fa-cog"
+                    "fa_icon": "fas fa-cog",
+                    "hidden": true
                 },
                 "validate_params": {
                     "type": "boolean",
@@ -286,6 +290,11 @@
                     "description": "Validation of parameters in lenient more.",
                     "hidden": true,
                     "help_text": "Allows string values that are parseable as numbers or booleans. For further information see [JSONSchema docs](https://github.com/everit-org/json-schema#lenient-mode)."
+                },
+                "schema_ignore_params": {
+                    "type": "string",
+                    "default": "genomes",
+                    "hidden": true
                 }
             }
         }
@@ -309,11 +318,5 @@
         {
             "$ref": "#/definitions/generic_options"
         }
-    ],
-    "properties": {
-        "schema_ignore_params": {
-            "type": "string",
-            "default": "genomes"
-        }
-    }
+    ]
 }
