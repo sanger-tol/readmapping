@@ -75,7 +75,16 @@ workflow READMAPPING {
     | set { ch_reads }
 
     ch_versions = ch_versions.mix ( INPUT_CHECK.out.versions )
-
+    // Determine datatype of short and long reads
+    INPUT_CHECK.out.reads
+    | branch {
+        meta, reads ->
+            short_reads: meta.datatype == "illumina" || meta.datatype == "hic"
+                        return [meta.datatype, true]
+            long_reads: meta.datatype == "pacbio" || meta.datatype == "pacbio_clr" || meta.datatype == "ont"
+                        return [meta.datatype, false]
+    }
+    | set { ch_filtered_reads }
 
     //
     // SUBWORKFLOW: Uncompress and prepare reference genome files
@@ -84,7 +93,7 @@ workflow READMAPPING {
     | map { [ [ id: it.baseName ], it ] }
     | set { ch_genome }
 
-    PREPARE_GENOME ( ch_genome )
+    PREPARE_GENOME ( ch_genome, ch_filtered_reads.short_reads )
     ch_versions = ch_versions.mix ( PREPARE_GENOME.out.versions )
 
 
