@@ -22,6 +22,10 @@ lint:
     - docs/README.md
     - lib/NfcoreTemplate.groovy
     - .github/workflows/branch.yml
+    - .gitignore
+    - .github/workflows/linting.yml
+    - .github/PULL_REQUEST_TEMPLATE.md
   nextflow_config:
     - manifest.name
     - manifest.homePage
+  multiqc_config: False
