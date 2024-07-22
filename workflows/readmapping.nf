@@ -118,7 +118,7 @@ workflow READMAPPING {
     //
     ALIGN_HIC ( PREPARE_GENOME.out.fasta, PREPARE_GENOME.out.bwaidx, ch_reads.hic )
     ch_versions = ch_versions.mix ( ALIGN_HIC.out.versions )
-
+    
     ALIGN_ILLUMINA ( PREPARE_GENOME.out.fasta, PREPARE_GENOME.out.bwaidx, ch_reads.illumina )
     ch_versions = ch_versions.mix ( ALIGN_ILLUMINA.out.versions )
 
