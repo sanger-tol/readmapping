@@ -18,14 +18,28 @@ workflow ALIGN_SHORT {
     main:
     ch_versions = Channel.empty()
 
+    // Check file types and branch
+    reads
+    | branch {
+        meta, reads ->
+            fastq : reads.findAll { it.getName().toLowerCase() =~ /.*f.*\.gz/ }
+            cram : true
+    }
+    | set { ch_reads }
 
-    // Convert from CRAM to FASTQ
-    SAMTOOLS_FASTQ ( reads, false )
+
+    // Convert from CRAM to FASTQ only if CRAM files were provided as input
+    SAMTOOLS_FASTQ ( ch_reads.cram, false )
     ch_versions = ch_versions.mix ( SAMTOOLS_FASTQ.out.versions.first() )
+    
+    
+    SAMTOOLS_FASTQ.out.fastq
+    | mix ( ch_reads.fastq )
+    | set { ch_reads_fastq }
 
 
     // Align Fastq to Genome and output sorted BAM
-    BWAMEM2_MEM ( SAMTOOLS_FASTQ.out.fastq, index, fasta, true )
+    BWAMEM2_MEM ( ch_reads_fastq, index, fasta, true )
     ch_versions = ch_versions.mix ( BWAMEM2_MEM.out.versions.first() )
 
 
