@@ -28,4 +28,6 @@ lint:
   nextflow_config:
     - manifest.name
     - manifest.homePage
+    - config_defaults:
+      - params.vector_db
   multiqc_config: False
