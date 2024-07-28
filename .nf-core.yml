@@ -29,5 +29,5 @@ lint:
     - manifest.name
     - manifest.homePage
     - config_defaults:
-      - params.vector_db
+        - params.vector_db
   multiqc_config: False
