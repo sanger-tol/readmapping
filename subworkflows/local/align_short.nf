@@ -38,8 +38,8 @@ workflow ALIGN_SHORT {
     | set { ch_reads_fastq }
 
 
-     // Align Fastq to Genome and output sorted BAM
-    BWAMEM2_MEM ( ch_reads_fastq, index, true )
+    // Align Fastq to Genome and output sorted BAM
+    BWAMEM2_MEM ( ch_reads_fastq, index, fasta, true )
     ch_versions = ch_versions.mix ( BWAMEM2_MEM.out.versions.first() )
 
 

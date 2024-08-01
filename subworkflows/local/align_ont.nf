@@ -17,7 +17,7 @@ workflow ALIGN_ONT {
 
 
     // Align Fastq to Genome with minimap2. bam_format is set to true, making the output a *sorted* BAM
-    MINIMAP2_ALIGN ( reads, fasta, true, false, false )
+    MINIMAP2_ALIGN ( reads, fasta, true, "bai", false, false )
     ch_versions = ch_versions.mix ( MINIMAP2_ALIGN.out.versions.first() )
 
 

@@ -2,25 +2,19 @@
 // Check input samplesheet and get read channels
 //
 
-include { SAMPLESHEET_CHECK } from '../../modules/local/samplesheet_check'
 include { SAMTOOLS_FLAGSTAT } from '../../modules/nf-core/samtools/flagstat/main'
-
 
 workflow INPUT_CHECK {
     take:
-    samplesheet    // file: /path/to/samplesheet.csv
-
+    ch_samplesheet    // channel: [ val(meta), /path/to/reads ]
 
     main:
     ch_versions = Channel.empty()
 
-    // Read the samplesheet
-    SAMPLESHEET_CHECK ( samplesheet ).csv
-    | splitCsv ( header:true, sep:',' )
-    // Prepare the channel for SAMTOOLS_FLAGSTAT
-    | map { row -> [row + [id: file(row.datafile).baseName], file(row.datafile, checkIfExists: true), []] }
-    | set { samplesheet_rows }
-    ch_versions = ch_versions.mix ( SAMPLESHEET_CHECK.out.versions.first() )
+    // Prepare the samplesheet channel for SAMTOOLS_FLAGSTAT
+    ch_samplesheet
+    .map { meta, file -> [meta, file, []] }
+    .set { samplesheet_rows }
 
     // Get stats from each input file
     SAMTOOLS_FLAGSTAT ( samplesheet_rows )
@@ -46,14 +40,17 @@ def create_data_channel ( LinkedHashMap row, datafile, stats ) {
     meta.id         = row.sample
     meta.datatype   = row.datatype
 
-    if ( meta.datatype == "hic" || meta.datatype == "illumina" ) { 
+    if ( meta.datatype == "hic" || meta.datatype == "illumina" ) {
         platform = "ILLUMINA"
-    } else if ( meta.datatype == "pacbio" || meta.datatype == "pacbio_clr" ) { 
+    } else if ( meta.datatype == "pacbio" || meta.datatype == "pacbio_clr" ) {
         platform = "PACBIO"
-    } else if (meta.datatype == "ont") { 
+    } else if (meta.datatype == "ont") {
         platform = "ONT"
     }
-    meta.read_group  = "\'@RG\\tID:" + row.datafile.split('/')[-1].split('\\.')[0] + "\\tPL:" + platform + "\\tSM:" + meta.id.split('_')[0..-2].join('_') + "\'"
+
+    // Convert datafile to string path and then split
+    def datafile_path = datafile.toString()
+    meta.read_group  = "\'@RG\\tID:" + datafile_path.split('/')[-1].split('\\.')[0] + "\\tPL:" + platform + "\\tSM:" + meta.id.split('_')[0..-2].join('_') + "\'"
 
     // Read the first line of the flagstat file
     // 3127898040 + 0 in total (QC-passed reads + QC-failed reads)

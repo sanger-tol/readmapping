@@ -10,22 +10,28 @@
             "sample": {
                 "type": "string",
                 "pattern": "^\\S+$",
-                "errorMessage": "Sample name must be provided and cannot contain spaces"
+                "errorMessage": "Sample name must be provided and cannot contain spaces",
+                "meta": ["sample"]
             },
             "datatype": {
                 "type": "string",
-                "pattern": "^\\S+$",
-                "errorMessage": "Data type, and must be one of: 'hic' or 'illumina' or 'ont' or 'pacbio'"
+                "enum": ["hic", "illumina", "pacbio", "pacbio_clr", "ont"],
+                "errorMessage": "Datatype must be one of: hic, illumina, pacbio, pacbio_clr, ont",
+                "meta": ["datatype"]
             },
             "datafile": {
-                "type": "string",
+                "format": "file-path",
+                "exists": true,
                 "pattern": "^\\S+$",
-                "errorMessage": "Data file for reads cannot contain spaces and must have extension 'cram' or 'bam' or '.fq.gz' or '.fastq.gz'"
+                "errorMessage": "Data file for reads cannot contain spaces and must have extension 'cram', 'bam', '.fq.gz' or '.fastq.gz'",
+                "meta": ["datafile"]
             },
             "library": {
                 "type": "string",
-                "pattern": "^\\S+$",
-                "errorMessage": "Library name to be assigned to read group (@RG) ID value"
+                "pattern": "^\\S*$",
+                "errorMessage": "Library information cannot contain spaces",
+                "default": "",
+                "meta": ["library"]
             }
         },
         "required": ["sample", "datatype", "datafile"]

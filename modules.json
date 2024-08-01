@@ -1,85 +1,114 @@
 {
-    "name": "sanger-tol/readmapping",
-    "homePage": "https://github.com/sanger-tol/readmapping",
+    "name": "nf-core/readmapping",
+    "homePage": "https://github.com/nf-core/readmapping",
     "repos": {
         "https://github.com/nf-core/modules.git": {
             "modules": {
                 "nf-core": {
                     "blast/blastn": {
                         "branch": "master",
-                        "git_sha": "911696ea0b62df80e900ef244d7867d177971f73",
+                        "git_sha": "4262a04142431275e54e1f4b413628a2201ed6e6",
                         "installed_by": ["modules"]
                     },
                     "bwamem2/index": {
                         "branch": "master",
-                        "git_sha": "911696ea0b62df80e900ef244d7867d177971f73",
+                        "git_sha": "7081e04c18de9480948d34513a1c1e2d0fa9126d",
                         "installed_by": ["modules"]
                     },
                     "bwamem2/mem": {
                         "branch": "master",
-                        "git_sha": "0460d316170f75f323111b4a2c0a2989f0c32013",
+                        "git_sha": "3afb95b2e15fc4a2347470255a7ef654f650c8ec",
                         "installed_by": ["modules"]
                     },
                     "crumble": {
                         "branch": "master",
-                        "git_sha": "911696ea0b62df80e900ef244d7867d177971f73",
+                        "git_sha": "3f5420aa22e00bd030a2556dfdffc9e164ec0ec5",
                         "installed_by": ["modules"]
                     },
                     "custom/dumpsoftwareversions": {
                         "branch": "master",
-                        "git_sha": "911696ea0b62df80e900ef244d7867d177971f73",
+                        "git_sha": "82024cf6325d2ee194e7f056d841ecad2f6856e9",
+                        "installed_by": ["modules"]
+                    },
+                    "fastqc": {
+                        "branch": "master",
+                        "git_sha": "285a50500f9e02578d90b3ce6382ea3c30216acd",
                         "installed_by": ["modules"]
                     },
                     "gunzip": {
                         "branch": "master",
-                        "git_sha": "5c460c5a4736974abde2843294f35307ee2b0e5e",
+                        "git_sha": "4e5f4687318f24ba944a13609d3ea6ebd890737d",
                         "installed_by": ["modules"]
                     },
                     "minimap2/align": {
                         "branch": "master",
-                        "git_sha": "efbf86bb487f288ac30660282709d9620dd6048e",
+                        "git_sha": "e83b347b3e674de6bb1bb7bdf9b2674768c8e0fe",
+                        "installed_by": ["modules"]
+                    },
+                    "multiqc": {
+                        "branch": "master",
+                        "git_sha": "b7ebe95761cd389603f9cc0e0dc384c0f663815a",
                         "installed_by": ["modules"]
                     },
                     "samtools/faidx": {
                         "branch": "master",
-                        "git_sha": "fd742419940e01ba1c5ecb172c3e32ec840662fe",
+                        "git_sha": "04fbbc7c43cebc0b95d5b126f6d9fe4effa33519",
                         "installed_by": ["modules"]
                     },
                     "samtools/fastq": {
                         "branch": "master",
-                        "git_sha": "911696ea0b62df80e900ef244d7867d177971f73",
+                        "git_sha": "04fbbc7c43cebc0b95d5b126f6d9fe4effa33519",
                         "installed_by": ["modules"]
                     },
                     "samtools/flagstat": {
                         "branch": "master",
-                        "git_sha": "911696ea0b62df80e900ef244d7867d177971f73",
+                        "git_sha": "04fbbc7c43cebc0b95d5b126f6d9fe4effa33519",
                         "installed_by": ["modules"]
                     },
                     "samtools/idxstats": {
                         "branch": "master",
-                        "git_sha": "911696ea0b62df80e900ef244d7867d177971f73",
+                        "git_sha": "04fbbc7c43cebc0b95d5b126f6d9fe4effa33519",
                         "installed_by": ["modules"]
                     },
                     "samtools/merge": {
                         "branch": "master",
-                        "git_sha": "0460d316170f75f323111b4a2c0a2989f0c32013",
+                        "git_sha": "04fbbc7c43cebc0b95d5b126f6d9fe4effa33519",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/samtools/merge/samtools-merge.diff"
                     },
                     "samtools/stats": {
                         "branch": "master",
-                        "git_sha": "735e1e04e7e01751d2d6e97055bbdb6f70683cc1",
+                        "git_sha": "04fbbc7c43cebc0b95d5b126f6d9fe4effa33519",
                         "installed_by": ["modules"]
                     },
                     "samtools/view": {
                         "branch": "master",
-                        "git_sha": "3ffae3598260a99e8db3207dead9f73f87f90d1f",
+                        "git_sha": "6c2309aaec566c0d44a6cf14d4b2d0c51afe2e91",
                         "installed_by": ["modules"]
                     },
                     "untar": {
                         "branch": "master",
-                        "git_sha": "5c460c5a4736974abde2843294f35307ee2b0e5e",
+                        "git_sha": "4e5f4687318f24ba944a13609d3ea6ebd890737d",
                         "installed_by": ["modules"]
+                    }
+                }
+            },
+            "subworkflows": {
+                "nf-core": {
+                    "utils_nextflow_pipeline": {
+                        "branch": "master",
+                        "git_sha": "5caf7640a9ef1d18d765d55339be751bb0969dfa",
+                        "installed_by": ["subworkflows"]
+                    },
+                    "utils_nfcore_pipeline": {
+                        "branch": "master",
+                        "git_sha": "92de218a329bfc9a9033116eb5f65fd270e72ba3",
+                        "installed_by": ["subworkflows"]
+                    },
+                    "utils_nfvalidation_plugin": {
+                        "branch": "master",
+                        "git_sha": "5caf7640a9ef1d18d765d55339be751bb0969dfa",
+                        "installed_by": ["subworkflows"]
                     }
                 }
             }
