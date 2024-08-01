@@ -76,10 +76,6 @@ workflow READMAPPING {
 
     ch_versions = ch_versions.mix ( INPUT_CHECK.out.versions )
 
-
-    //
-    // SUBWORKFLOW: Uncompress and prepare reference genome files
-    //
     ch_fasta
     | map { [ [ id: it.baseName ], it ] }
     | set { ch_genome }
