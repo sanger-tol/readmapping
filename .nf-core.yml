@@ -2,6 +2,7 @@ nf_core_version: 2.14.1
 repository_type: pipeline
 template:
   name: readmapping
+  prefix: sanger-tol
 lint:
   files_exist:
     - assets/multiqc_config.yml
