@@ -1,7 +1,4 @@
 sample,datatype,datafile,library
-mMelMel1,illumina,https://tolit.cog.sanger.ac.uk/test-data/Meles_meles/genomic_data/mMelMel1/illumina/31231_3%231.subset.cram,
-mMelMel2,illumina,https://tolit.cog.sanger.ac.uk/test-data/Meles_meles/genomic_data/mMelMel2/illumina/31231_4%231.subset.fastq.gz,
-mMelMel3,hic,https://tolit.cog.sanger.ac.uk/test-data/Meles_meles/genomic_data/mMelMel3/hic/35528_2%231.subset.cram,
 mMelMel3,ont,https://tolit.cog.sanger.ac.uk/test-data/Meles_meles/genomic_data/mMelMel3/ont/PAE35587_pass_1f1f0707_115.subset.fastq.gz,
 mMelMel3,pacbio,https://tolit.cog.sanger.ac.uk/test-data/Meles_meles/genomic_data/mMelMel3/pacbio/m64094_200910_173211.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.subset.bam,
 mMelMel3,pacbio,https://tolit.cog.sanger.ac.uk/test-data/Meles_meles/genomic_data/mMelMel3/pacbio/m64094_200911_174739.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.subset.bam,

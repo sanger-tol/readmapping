@@ -6,6 +6,7 @@ lint:
   files_exist:
     - assets/multiqc_config.yml
     - assets/nf-core-readmapping_logo_light.png
+    - assets/methods_description_template.yml
     - conf/igenomes.config
     - docs/images/nf-core-readmapping_logo_dark.png
     - docs/images/nf-core-readmapping_logo_light.png
