@@ -1,11 +1,9 @@
 #!/usr/bin/env nextflow
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    nf-core/readmapping
+    sanger-tol/readmapping
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Github : https://github.com/nf-core/readmapping
-    Website: https://nf-co.re/readmapping
-    Slack  : https://nfcore.slack.com/channels/readmapping
+    Github : https://github.com/sanger-tol/readmapping
 ----------------------------------------------------------------------------------------
 */
 
@@ -43,7 +41,7 @@ params.fasta = getGenomeAttribute('fasta')
 //
 // WORKFLOW: Run main analysis pipeline depending on type of input
 //
-workflow NFCORE_READMAPPING {
+workflow SANGERTOL_READMAPPING {
 
     take:
     samplesheet // channel: samplesheet read in from --input
@@ -87,7 +85,7 @@ workflow {
     //
     // WORKFLOW: Run main workflow
     //
-    NFCORE_READMAPPING (
+    SANGERTOL_READMAPPING (
         PIPELINE_INITIALISATION.out.samplesheet
     )
 
@@ -101,7 +99,7 @@ workflow {
         params.outdir,
         params.monochrome_logs,
         params.hook_url,
-        NFCORE_READMAPPING.out.multiqc_report
+        SANGERTOL_READMAPPING.out.multiqc_report
     )
 }
 

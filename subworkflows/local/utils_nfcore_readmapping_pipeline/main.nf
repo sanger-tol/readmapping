@@ -1,5 +1,5 @@
 //
-// Subworkflow with functionality specific to the nf-core/readmapping pipeline
+// Subworkflow with functionality specific to the sanger-tol/readmapping pipeline
 //
 
 /*

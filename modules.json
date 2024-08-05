@@ -1,6 +1,6 @@
 {
-    "name": "nf-core/readmapping",
-    "homePage": "https://github.com/nf-core/readmapping",
+    "name": "sanger-tol/readmapping",
+    "homePage": "https://github.com/sanger-tol/readmapping",
     "repos": {
         "https://github.com/nf-core/modules.git": {
             "modules": {
