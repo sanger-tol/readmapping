@@ -36,16 +36,4 @@ process MINIMAP2_SPLICE {
         minimap2: \$(minimap2 --version | grep minimap2 | sed 's/minimap2 //')
     END_VERSIONS
     """
-
-    stub:
-    def args = task.ext.args ?: ''
-    def prefix = task.ext.prefix ?: "${meta.id}"
-    """
-    touch ${prefix}.paf
-
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        minimap2: \$(minimap2 --version | grep minimap2 | sed 's/minimap2 //')
-    END_VERSIONS
-    """
 }
