@@ -10,7 +10,7 @@ process MINIMAP2_SPLICE {
     input:
     tuple val(meta) , path(fasta)
     path(db)
-   
+
     output:
     tuple val(meta), path('*.paf'), emit: paf
     path "versions.yml"           , emit: versions
