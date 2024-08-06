@@ -8,7 +8,7 @@ process PACBIO_FILTER {
         'biocontainers/gawk:5.1.0' }"
 
     input:
-    tuple val(meta), path(txt)
+    tuple val(meta), path(paf)
 
     output:
     tuple val(meta), path("*.blocklist"), emit: list
@@ -20,7 +20,7 @@ process PACBIO_FILTER {
     script:
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
-    pacbio_filter.sh $txt ${prefix}.blocklist
+    pacbio_filter.sh $paf ${prefix}.blocklist
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

@@ -84,25 +84,6 @@ workflow READMAPPING {
     PREPARE_GENOME ( ch_genome )
     ch_versions = ch_versions.mix ( PREPARE_GENOME.out.versions )
 
-
-    //
-    // Create channel for vector DB
-    //
-    // ***PacBio condition does not work - needs fixing***
-    if ( ch_reads.pacbio || ch_reads.clr ) {
-        if ( params.vector_db.endsWith( '.tar.gz' ) ) {
-            UNTAR ( [ [:], params.vector_db ] ).untar
-            | set { ch_vector_db }
-
-            ch_versions = ch_versions.mix ( UNTAR.out.versions )
-
-        } else {
-            Channel.fromPath ( params.vector_db )
-            | set { ch_vector_db }
-        }
-    }
-
-
     //
     // SUBWORKFLOW: Align raw reads to genome
     //
@@ -112,10 +93,10 @@ workflow READMAPPING {
     ALIGN_ILLUMINA ( PREPARE_GENOME.out.fasta, PREPARE_GENOME.out.bwaidx, ch_reads.illumina )
     ch_versions = ch_versions.mix ( ALIGN_ILLUMINA.out.versions )
 
-    ALIGN_HIFI ( PREPARE_GENOME.out.fasta, ch_reads.pacbio, ch_vector_db )
+    ALIGN_HIFI ( PREPARE_GENOME.out.fasta, ch_reads.pacbio, params.vector_db )
     ch_versions = ch_versions.mix ( ALIGN_HIFI.out.versions )
 
-    ALIGN_CLR ( PREPARE_GENOME.out.fasta, ch_reads.clr, ch_vector_db )
+    ALIGN_CLR ( PREPARE_GENOME.out.fasta, ch_reads.clr, params.vector_db )
     ch_versions = ch_versions.mix ( ALIGN_CLR.out.versions )
 
     ALIGN_ONT ( PREPARE_GENOME.out.fasta, ch_reads.ont )

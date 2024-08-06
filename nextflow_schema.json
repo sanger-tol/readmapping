@@ -31,9 +31,9 @@
                 },
                 "vector_db": {
                     "type": "string",
-                    "description": "Path to directory or tar.gz archive for pre-built PacBio vector database.",
+                    "description": "Path to PacBio vector reference (.fasta, .fasta.gz, .fa, .fa.gz)",
                     "format": "path",
-                    "default": "${projectDir}/assets/vectorDB.tar.gz",
+                    "default": "${projectDir}/assets/pacbio_vectorDB.fasta",
                     "fa_icon": "fas fa-bezier-curve"
                 },
                 "email": {
