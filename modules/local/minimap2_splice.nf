@@ -6,18 +6,18 @@ process MINIMAP2_SPLICE {
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
         'https://depot.galaxyproject.org/singularity/minimap2:2.24--h5bf99c6_0':
         'biocontainers/minimap2:2.24--h5bf99c6_0' }"
-    
+
     input:
     tuple val(meta) , path(fasta)
     path(db)
-    
+   
     output:
     tuple val(meta), path('*.paf'), emit: paf
     path "versions.yml"           , emit: versions
-    
+
     when:
     task.ext.when == null || task.ext.when
-    
+
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
