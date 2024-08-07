@@ -20,7 +20,7 @@
                 "meta": ["datatype"]
             },
             "datafile": {
-                "format": "file-path",
+                "format": "string",
                 "exists": true,
                 "pattern": "^\\S+$",
                 "errorMessage": "Data file for reads cannot contain spaces and must have extension 'cram', 'bam', '.fq.gz' or '.fastq.gz'",
