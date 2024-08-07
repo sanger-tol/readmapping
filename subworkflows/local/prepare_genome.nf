@@ -86,7 +86,7 @@ def checkShortReads(filePath, columnToCheck="datatype") {
         def columns = line.split(',')
         valuesToCheck.contains(columns[columnIndex].toLowerCase())
     }
-    println(containsValues)
+
     return containsValues
 }
 
