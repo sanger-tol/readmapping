@@ -5,7 +5,7 @@
 
 include { SAMTOOLS_VIEW as SAMTOOLS_CONVERT } from '../../modules/nf-core/samtools/view/main'
 include { SAMTOOLS_COLLATETOFASTA           } from '../../modules/local/samtools_collatetofasta'
-include { MINIMAP2_SPLICE                   } from '../../modules/local/minimap2_splice'
+include { MINIMAP2_ALIGN                   } from '../../modules/nf-core/minimap2/align/main'
 include { PACBIO_FILTER                     } from '../../modules/local/pacbio_filter'
 include { SAMTOOLS_FILTERTOFASTQ            } from '../../modules/local/samtools_filtertofastq'
 
@@ -34,17 +34,13 @@ workflow FILTER_PACBIO {
     ch_versions = ch_versions.mix ( SAMTOOLS_COLLATETOFASTA.out.versions.first() )
 
 
-    // // Nucleotide BLAST
-    // BLAST_BLASTN ( SAMTOOLS_COLLATETOFASTA.out.fasta, db )
-    // ch_versions = ch_versions.mix ( BLAST_BLASTN.out.versions.first() )
-
     // Minimap2 splice
-    MINIMAP2_SPLICE ( SAMTOOLS_COLLATETOFASTA.out.fasta, db )
-    ch_versions = ch_versions.mix ( MINIMAP2_SPLICE.out.versions.first() )
+    MINIMAP2_ALIGN ( [ [], [] ],[ [], [] ], false, "bai", false, false, SAMTOOLS_COLLATETOFASTA.out.fasta, db )
+    ch_versions = ch_versions.mix ( MINIMAP2_ALIGN.out.versions.first() )
 
 
     // Filter BLAST output
-    PACBIO_FILTER ( MINIMAP2_SPLICE.out.paf )
+    PACBIO_FILTER ( MINIMAP2_ALIGN.out.paf_filtered )
     ch_versions = ch_versions.mix ( PACBIO_FILTER.out.versions.first() )
 
 
