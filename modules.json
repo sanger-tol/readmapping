@@ -84,7 +84,17 @@
                     "samtools/view": {
                         "branch": "master",
                         "git_sha": "6c2309aaec566c0d44a6cf14d4b2d0c51afe2e91",
-                        "installed_by": ["modules"]
+                        "installed_by": [
+                            "modules"
+                        ]
+                    },
+                    "seqkit/split2": {
+                        "branch": "master",
+                        "git_sha": "2be41ca2cc780eca4293d1b0dd3850b0b7ac40a3",
+                        "installed_by": [
+                            "modules"
+                        ],
+                        "patch": "modules/nf-core/seqkit/split2/seqkit-split2.diff"
                     },
                     "untar": {
                         "branch": "master",
