@@ -9,7 +9,6 @@ include { SAMTOOLS_MERGE    } from '../../modules/nf-core/samtools/merge/main'
 include { SAMTOOLS_MERGE as SAMTOOLS_MERGE_CHUNKS } from '../../modules/nf-core/samtools/merge/main' 
 include { SAMTOOLS_SORMADUP } from '../../modules/local/samtools_sormadup'
 include { SEQKIT_SPLIT2     } from '../../modules/nf-core/seqkit/split2/main'
-include { SAMTOOLS_SORT     } from '../../modules/nf-core/samtools/sort/main'
 include { SAMTOOLS_SPLIT    } from '../../modules/local/samtools_split'
 
 
