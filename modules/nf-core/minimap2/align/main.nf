@@ -1,5 +1,5 @@
 process MINIMAP2_ALIGN {
-    tag "${meta ? meta.id : meta3.id}"
+    tag "${meta.id}"
     label 'process_high'
 
     // Note: the versions here need to match the versions used in the mulled container below and minimap2/index
@@ -15,12 +15,10 @@ process MINIMAP2_ALIGN {
     val bam_index_extension
     val cigar_paf_format
     val cigar_bam
-    tuple val(meta3), path(fasta)
-    val db
+
 
     output:
     tuple val(meta), path("*.paf")                       , optional: true, emit: paf
-    tuple val(meta3), path("*.paf")                       , optional: true, emit: paf_filtered
     tuple val(meta), path("*.bam")                       , optional: true, emit: bam
     tuple val(meta), path("*.bam.${bam_index_extension}"), optional: true, emit: index
     path "versions.yml"                                  , emit: versions
@@ -40,8 +38,6 @@ process MINIMAP2_ALIGN {
     minimap2 \\
         $args \\
         -t $task.cpus \\
-        ${db} \\
-        ${fasta} \\
         ${reference ?: reads} \\
         $reads \\
         $cigar_paf \\

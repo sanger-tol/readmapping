@@ -28,7 +28,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 
 ### Filtering
 
-PacBio reads generated using both CLR and CCS technology are filtered using `MINIMAP2_ALIGN` against a database of adapter sequences. The collated FASTQ of the filtered reads is required by the downstream alignment step. The results from the PacBio filtering subworkflow are currently not set to output.
+PacBio reads generated using both CLR and CCS technology are filtered using `MINIMAP2_SPLICE` against a database of adapter sequences. The `splice` mode can be effectively used to filter PacBio reads, allowing for the identification and removal of these sequences from the dataset. The collated FASTQ of the filtered reads is required by the downstream alignment step. The results from the PacBio filtering subworkflow are currently not set to output.
 
 ## Alignment and Mark duplicates
 

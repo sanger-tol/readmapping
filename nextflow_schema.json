@@ -33,7 +33,7 @@
                     "type": "string",
                     "description": "Path to PacBio vector reference (.fasta, .fasta.gz, .fa, .fa.gz)",
                     "format": "path",
-                    "default": "${projectDir}/assets/pacbio_vectorDB.fasta",
+                    "default": "${projectDir}/assets/vectorDB.fasta.gz",
                     "fa_icon": "fas fa-bezier-curve"
                 },
                 "email": {
