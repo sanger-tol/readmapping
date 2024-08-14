@@ -8,6 +8,8 @@ include { SAMTOOLS_COLLATETOFASTA           } from '../../modules/local/samtools
 include { BLAST_BLASTN                      } from '../../modules/nf-core/blast/blastn/main'
 include { PACBIO_FILTER                     } from '../../modules/local/pacbio_filter'
 include { SAMTOOLS_FILTERTOFASTQ            } from '../../modules/local/samtools_filtertofastq'
+include { SEQKIT_FQ2FA                      } from '../../modules/nf-core/seqkit/fq2fa'
+include { SEQTK_SUBSEQ                      } from '../../modules/nf-core/seqtk/subseq'
 
 
 workflow FILTER_PACBIO {
@@ -20,8 +22,18 @@ workflow FILTER_PACBIO {
     ch_versions = Channel.empty()
 
 
-    // Convert from PacBio BAM to Samtools BAM
+    // Check file types and branch
     reads
+    | branch {
+        meta, reads ->
+            fastq : reads.findAll { it.getName().toLowerCase() =~ /.*f.*\.gz/ }
+            bam : true
+    }
+    | set { ch_reads }
+
+
+    // Convert from PacBio BAM to Samtools BAM
+    ch_reads.bam
     | map { meta, bam -> [ meta, bam, [] ] }
     | set { ch_pacbio }
 
@@ -34,8 +46,19 @@ workflow FILTER_PACBIO {
     ch_versions = ch_versions.mix ( SAMTOOLS_COLLATETOFASTA.out.versions.first() )
 
 
+    // Convert FASTQ to FASTA using SEQKIT_FQ2FA
+    SEQKIT_FQ2FA ( ch_reads.fastq )
+    ch_versions = ch_versions.mix ( SEQKIT_FQ2FA.out.versions.first() )
+
+
+    // Combine BAM-derived FASTA with converted FASTQ inputs
+    SAMTOOLS_COLLATETOFASTA.out.fasta
+    | concat( SEQKIT_FQ2FA.out.fasta )
+    | set { ch_fasta }
+
+
     // Nucleotide BLAST
-    BLAST_BLASTN ( SAMTOOLS_COLLATETOFASTA.out.fasta, db )
+    BLAST_BLASTN ( ch_fasta, db )
     ch_versions = ch_versions.mix ( BLAST_BLASTN.out.versions.first() )
 
 
@@ -44,25 +67,40 @@ workflow FILTER_PACBIO {
     ch_versions = ch_versions.mix ( PACBIO_FILTER.out.versions.first() )
 
 
-    // Filter the BAM file and convert to FASTQ
+    // Filter the BAM files and convert to FASTQ
     SAMTOOLS_CONVERT.out.bam
     | join ( SAMTOOLS_CONVERT.out.csi )
     | join ( PACBIO_FILTER.out.list )
-    | set { ch_reads_and_list }
+    | multiMap { meta, bam, csi, list -> \
+            bams: [meta, bam, csi]
+            lists: list
+    }
+    | set { ch_bam_reads }
 
-    ch_reads_and_list
-    | map { meta, bam, csi, list -> [meta, bam, csi] }
-    | set { ch_reads }
-
-    ch_reads_and_list
-    | map { meta, bam, csi, list -> list }
-    | set { ch_lists }
-
-    SAMTOOLS_FILTERTOFASTQ ( ch_reads, ch_lists )
+    SAMTOOLS_FILTERTOFASTQ ( ch_bam_reads.bams, ch_bam_reads.lists )
     ch_versions = ch_versions.mix ( SAMTOOLS_FILTERTOFASTQ.out.versions.first() )
 
 
+    // Filter inputs provided as FASTQ
+    ch_reads.fastq
+    | join(PACBIO_FILTER.out.list)
+    | multiMap { meta, fastq, list -> \
+            fastqs: [meta, fastq]
+            lists: list
+    }
+    | set { ch_reads_fastq }
+
+    SEQTK_SUBSEQ ( ch_reads_fastq.fastqs, ch_reads_fastq.lists )
+    ch_versions = ch_versions.mix ( SEQTK_SUBSEQ.out.versions.first() )
+
+
+    // Merge filtered outputs as ch_output_fastq
+    SEQTK_SUBSEQ.out.sequences
+    | concat ( SAMTOOLS_FILTERTOFASTQ.out.fastq )
+    | set { ch_filtered_fastq }
+
+
     emit:
-    fastq    = SAMTOOLS_FILTERTOFASTQ.out.fastq     // channel: [ meta, /path/to/fastq ]
-    versions = ch_versions                          // channel: [ versions.yml ]
+    fastq    = ch_filtered_fastq        // channel: [ meta, /path/to/fastq ]
+    versions = ch_versions              // channel: [ versions.yml ]
 }

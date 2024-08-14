@@ -42,7 +42,7 @@ sample1_T5,pacbio,pacbio2.bam,pacbio2
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `sample`   | Custom sample name. This entry will be identical for multiple sequencing libraries/runs from the same sample. Spaces in sample names are automatically converted to underscores (\_).                                                 |
 | `datatype` | Type of sequencing data. Must be one of `hic`, `Illumina`, `pacbio`, or `ont`.                                                                                                                                                        |
-| `datafile` | Full path to read data file. Must be `bam` or `cram` or `fastq.gz` or `fq.gz` for `Illumina` and `HiC`. Must be `bam` for `pacbio`. Must be `fastq.gz` or `fq.gz` for `ont`.                                                          |
+| `datafile` | Full path to read data file. Must be `bam`, `cram`, `fastq.gz` or `fq.gz` for `Illumina` and `HiC`. Must be `bam`, `fastq.gz` or `fq.gz` for `pacbio`. Must be `fastq.gz` or `fq.gz` for `ont`.                          |
 | `library`  | (Optional) The library value is a unique identifier which is assigned to read group (`@RG`) ID. If the library name is not specified, the pipeline will auto-create library name using the data filename provided in the samplesheet. |
 
 An [example samplesheet](../assets/samplesheet.csv) has been provided with the pipeline.
