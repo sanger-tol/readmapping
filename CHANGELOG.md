@@ -3,12 +3,15 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [[1.3.0](https://github.com/sanger-tol/readmapping/releases/tag/1.3.0)] - Antipodean Opaleye - [2024-06-XX]
+## [[1.3.0](https://github.com/sanger-tol/readmapping/releases/tag/1.3.0)] - Antipodean Opaleye - [2024-08-19]
 
 ### Enhancements & fixes
 
 - Combined steps to improve the efficiency of the pipeline, especially on large genomes
 - "crumble" is now run on _every_ data type, not just PacBio
+- Added options for output format and to turn on/off crumble compression (https://github.com/sanger-tol/readmapping/pull/107)
+- Added `fastq` as possible input type for PacBio (https://github.com/sanger-tol/readmapping/pull/106) and Illumina/HiC (https://github.com/sanger-tol/readmapping/pull/96) 
+- Disabled running `bwa index` when no short-read data provided (https://github.com/sanger-tol/readmapping/pull/100) 
 
 ### Software dependencies
 
