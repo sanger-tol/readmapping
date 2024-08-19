@@ -168,11 +168,29 @@ workflow PIPELINE_COMPLETION {
 // Check and validate pipeline parameters
 //
 def validateInputParameters() {
-
+    // Validate fasta parameter
     if (!params.fasta) {
         log.error "Genome fasta file not specified with e.g. '--fasta genome.fa' or via a detectable config file."
     }
 
+    // Validate outfmt parameter
+    if (!params.outfmt) {
+        log.error "Output format not specified. Please specify '--outfmt bam', '--outfmt cram', or both separated by a comma."
+    } else {
+        def outfmtOptions = params.outfmt.split(',').collect { it.trim() }
+        def validOutfmtOptions = ['bam', 'cram']
+        def invalidOptions = outfmtOptions.findAll { !(it in validOutfmtOptions) }
+
+        if (invalidOptions) {
+            log.error "Invalid output format(s) specified: '${invalidOptions.join(', ')}'. Valid options are 'bam' or 'cram'."
+        }
+    }
+    // Validate compression parameter
+    if (!params.compression) {
+        log.error "Compression option not specified. Please specify '--compression none' or '--compression crumble'."
+    } else if (!(params.compression in ['none', 'crumble'])) {
+        log.error "Invalid compression option specified: '${params.compression}'. Valid options are 'none' or 'crumble'."
+    }
 }
 
 //
