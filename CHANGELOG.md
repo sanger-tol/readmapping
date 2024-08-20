@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Combined steps to improve the efficiency of the pipeline, especially on large genomes
 - "crumble" is now run on _every_ data type, not just PacBio
 - Added options for output format and to turn on/off crumble compression (https://github.com/sanger-tol/readmapping/pull/107)
-- Added `fastq` as possible input type for PacBio (https://github.com/sanger-tol/readmapping/pull/106) and Illumina/HiC (https://github.com/sanger-tol/readmapping/pull/96) 
+- Added `fastq` as possible input type for PacBio (https://github.com/sanger-tol/readmapping/pull/106) and Illumina/HiC (https://github.com/sanger-tol/readmapping/pull/96)
 - Disabled running `bwa index` when no short-read data provided (https://github.com/sanger-tol/readmapping/pull/100)
 - Added support for optional custom SAM header (https://github.com/sanger-tol/readmapping/pull/95)
 - Switch to `nf-validation` (https://github.com/sanger-tol/readmapping/pull/99) and further updates for nf-core v2.14 compliance (https://github.com/sanger-tol/readmapping/pull/98)
@@ -19,23 +19,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Note, since the pipeline is using Nextflow DSL2, each process will be run with its own [Biocontainer](https://biocontainers.pro/#/registry). This means that on occasion it is entirely possible for the pipeline to be using different versions of the same tool. However, the overall software dependency changes compared to the last release have been listed below for reference.
 
-| Dependency | Old version   | New version   |
-| ---------- | ------------- | ------------- |
-| `blastn`   | 2.13          | 2.15          |
-| `minimap2` | 2.24          | 2.28          |
-| `samtools` | 1.14 and 1.17 | 1.20          |
-| `seqkit`   |               | 2.8.1         |
-| `seqtk`    |               | 1.4           |
+| Dependency | Old version   | New version |
+| ---------- | ------------- | ----------- |
+| `blastn`   | 2.13          | 2.15        |
+| `minimap2` | 2.24          | 2.28        |
+| `samtools` | 1.14 and 1.17 | 1.20        |
+| `seqkit`   |               | 2.8.1       |
+| `seqtk`    |               | 1.4         |
 
 > **NB:** Dependency has been **updated** if both old and new version information is present. </br> **NB:** Dependency has been **added** if just the new version information is present. </br> **NB:** Dependency has been **removed** if version information isn't present.
 
 ### Parameters
 
-| Old parameter      | New parameter |
-| ------------------ | ------------- |
-|                    |   '--header'  |
-|                    |   '--outfmt'  |
-|                    | '--compression|
+| Old parameter | New parameter  |
+| ------------- | -------------- |
+|               | '--header'     |
+|               | '--outfmt'     |
+|               | '--compression |
 
 > **NB:** Parameter has been **updated** if both old and new parameter information is present. </br> **NB:** Parameter has been **added** if just the new parameter information is present. </br> **NB:** Parameter has been **removed** if new parameter information isn't present.
 
