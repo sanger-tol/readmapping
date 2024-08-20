@@ -3,7 +3,7 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [[1.3.0](https://github.com/sanger-tol/readmapping/releases/tag/1.3.0)] - Antipodean Opaleye - [2024-08-19]
+## [[1.3.0](https://github.com/sanger-tol/readmapping/releases/tag/1.3.0)] - Antipodean Opaleye - [2024-08-20]
 
 ### Enhancements & fixes
 
@@ -21,8 +21,11 @@ Note, since the pipeline is using Nextflow DSL2, each process will be run with i
 
 | Dependency | Old version   | New version   |
 | ---------- | ------------- | ------------- |
-| `blastn` | 2.13 | 2.15 |
-| `samtools` | 1.14 and 1.17 | 1.17 and 1.18 |
+| `blastn`   | 2.13          | 2.15          |
+| `minimap2` | 2.24          | 2.28          |
+| `samtools` | 1.14 and 1.17 | 1.20          |
+| `seqkit`   |               | 2.8.1         |
+| `seqtk`    |               | 1.4           |
 
 > **NB:** Dependency has been **updated** if both old and new version information is present. </br> **NB:** Dependency has been **added** if just the new version information is present. </br> **NB:** Dependency has been **removed** if version information isn't present.
 
@@ -30,9 +33,9 @@ Note, since the pipeline is using Nextflow DSL2, each process will be run with i
 
 | Old parameter      | New parameter |
 | ------------------ | ------------- |
-| `--enable_conda`   |               |
-| `--minimap2_index` |               |
-| `--samtools_index` |               |
+|                    |   '--header'  |
+|                    |   '--outfmt'  |
+|                    | '--compression|
 
 > **NB:** Parameter has been **updated** if both old and new parameter information is present. </br> **NB:** Parameter has been **added** if just the new parameter information is present. </br> **NB:** Parameter has been **removed** if new parameter information isn't present.
 
