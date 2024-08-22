@@ -1,13 +1,13 @@
 {
-    "name": "nf-core/readmapping",
-    "homePage": "https://github.com/nf-core/readmapping",
+    "name": "sanger-tol/readmapping",
+    "homePage": "https://github.com/sanger-tol/readmapping",
     "repos": {
         "https://github.com/nf-core/modules.git": {
             "modules": {
                 "nf-core": {
                     "blast/blastn": {
                         "branch": "master",
-                        "git_sha": "4262a04142431275e54e1f4b413628a2201ed6e6",
+                        "git_sha": "583edaf97c9373a20df05a3b7be5a6677f9cd719",
                         "installed_by": ["modules"]
                     },
                     "bwamem2/index": {
@@ -17,7 +17,7 @@
                     },
                     "bwamem2/mem": {
                         "branch": "master",
-                        "git_sha": "3afb95b2e15fc4a2347470255a7ef654f650c8ec",
+                        "git_sha": "2201e21b09213f083832ac58e33353d410a6fde7",
                         "installed_by": ["modules"]
                     },
                     "crumble": {
@@ -30,11 +30,6 @@
                         "git_sha": "82024cf6325d2ee194e7f056d841ecad2f6856e9",
                         "installed_by": ["modules"]
                     },
-                    "fastqc": {
-                        "branch": "master",
-                        "git_sha": "285a50500f9e02578d90b3ce6382ea3c30216acd",
-                        "installed_by": ["modules"]
-                    },
                     "gunzip": {
                         "branch": "master",
                         "git_sha": "4e5f4687318f24ba944a13609d3ea6ebd890737d",
@@ -42,12 +37,7 @@
                     },
                     "minimap2/align": {
                         "branch": "master",
-                        "git_sha": "e83b347b3e674de6bb1bb7bdf9b2674768c8e0fe",
-                        "installed_by": ["modules"]
-                    },
-                    "multiqc": {
-                        "branch": "master",
-                        "git_sha": "b7ebe95761cd389603f9cc0e0dc384c0f663815a",
+                        "git_sha": "a33ef9475558c6b8da08c5f522ddaca1ec810306",
                         "installed_by": ["modules"]
                     },
                     "samtools/faidx": {
@@ -62,12 +52,12 @@
                     },
                     "samtools/flagstat": {
                         "branch": "master",
-                        "git_sha": "04fbbc7c43cebc0b95d5b126f6d9fe4effa33519",
+                        "git_sha": "46eca555142d6e597729fcb682adcc791796f514",
                         "installed_by": ["modules"]
                     },
                     "samtools/idxstats": {
                         "branch": "master",
-                        "git_sha": "04fbbc7c43cebc0b95d5b126f6d9fe4effa33519",
+                        "git_sha": "46eca555142d6e597729fcb682adcc791796f514",
                         "installed_by": ["modules"]
                     },
                     "samtools/merge": {
@@ -78,7 +68,7 @@
                     },
                     "samtools/stats": {
                         "branch": "master",
-                        "git_sha": "04fbbc7c43cebc0b95d5b126f6d9fe4effa33519",
+                        "git_sha": "1fe379cf6e6c1e6fa5e32bcbeefea0f1e874dac6",
                         "installed_by": ["modules"]
                     },
                     "samtools/view": {

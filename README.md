@@ -53,7 +53,9 @@ We thank the following people for their extensive assistance in the development 
 
 - [Matthieu Muffato](https://github.com/muffato) for the text logo
 - [Guoying Qi](https://github.com/gq1) for being able to run tests using Nf-Tower and the Sanger HPC farm
-- [Tyler Chafin](https://github.com/tkchafin) for maintenance and updates
+- [Tyler Chafin](https://github.com/tkchafin) for maintenance, updates, and code reviews
+- [Chau Duong](https://github.com/reichan1998) for updates and code reviews
+- [Sandra Babirye](https://github.com/SandraBabirye) for updates and code reviews
 
 ## Contributions and Support
 
