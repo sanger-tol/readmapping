@@ -5,7 +5,7 @@ process GENERATE_CRAM_CSV {
     container 'quay.io/sanger-tol/cramfilter_bwamem2_minimap2_samtools_perl:0.001-c1'
 
     input:
-    tuple val(meta), path(crampath)
+    tuple val(meta), path(crampath), path(crai)
 
 
     output:
