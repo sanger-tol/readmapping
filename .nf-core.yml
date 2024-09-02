@@ -14,6 +14,7 @@ lint:
     - .github/ISSUE_TEMPLATE/config.yml
     - .github/workflows/awstest.yml
     - .github/workflows/awsfulltest.yml
+    - tower.yml
   files_unchanged:
     - LICENSE
     - .github/CONTRIBUTING.md
