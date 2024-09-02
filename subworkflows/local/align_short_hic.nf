@@ -31,6 +31,7 @@ workflow ALIGN_SHORT_HIC {
     }
     | set { ch_reads }
 
+
     // Convert FASTQ to CRAM only if FASTQ were provided as input
     CONVERT_CRAM ( ch_reads.fastq, fasta )
     ch_versions = ch_versions.mix (    CONVERT_CRAM.out.versions )
@@ -39,25 +40,10 @@ workflow ALIGN_SHORT_HIC {
     | mix ( ch_reads.cram )
     | set { ch_reads_cram }
 
-    ch_reads_cram.view()
-
-    // fasta
-    // | combine( ch_reads.cram )
-    // | map { meta, ref, hic_meta, hic_reads_path ->
-    //         tuple(
-    //             [ id: meta.id, single_end: true],
-    //             hic_reads_path
-    //         )
-    // }
-    // .set { get_reads_input }
-
-    // get_reads_input.view()
 
     // Index the CRAM file
     SAMTOOLS_INDEX ( ch_reads_cram )
     ch_versions = ch_versions.mix( SAMTOOLS_INDEX.out.versions )
-
-    SAMTOOLS_INDEX.out.crai.view()
 
     ch_reads_cram
     | join ( SAMTOOLS_INDEX.out.crai )
@@ -65,68 +51,69 @@ workflow ALIGN_SHORT_HIC {
 
     ch_reads_cram_crai.view()
 
+
     //
     // MODULE: generate a CRAM CSV file containing the required parametres for CRAM_FILTER_ALIGN_BWAMEM2_FIXMATE_SORT
     //
     GENERATE_CRAM_CSV( ch_reads_cram_crai )
     ch_versions = ch_versions.mix( GENERATE_CRAM_CSV.out.versions )
 
-    // GENERATE_CRAM_CSV.out.csv.view()
 
-    // //
-    // // SUBWORKFLOW: mapping hic reads using minimap2 or bwamem2
-    // //
-    // if (params.hic_aligner == 'minimap2') {
-    //     HIC_MINIMAP2 (
-    //         fasta,
-    //         GENERATE_CRAM_CSV.out.csv,
-    //         index
-    //     )
-    //     ch_versions         = ch_versions.mix( HIC_MINIMAP2.out.versions )
-    //     ch_merged_bam           = ch_merged_bam.mix(HIC_MINIMAP2.out.mergedbam)
-    // } else {
-    //     HIC_BWAMEM2 (
-    //         fasta,
-    //         GENERATE_CRAM_CSV.out.csv,
-    //         index
-    //     )
-    //     ch_versions         = ch_versions.mix( HIC_BWAMEM2.out.versions )
-    //     ch_merged_bam           = ch_merged_bam.mix(HIC_BWAMEM2.out.mergedbam)
-    // }
+    //
+    // SUBWORKFLOW: mapping hic reads using minimap2 or bwamem2
+    //
+    if (params.hic_aligner == 'minimap2') {
+        HIC_MINIMAP2 (
+            fasta,
+            GENERATE_CRAM_CSV.out.csv,
+            index
+        )
+        ch_versions         = ch_versions.mix( HIC_MINIMAP2.out.versions )
+        ch_merged_bam           = ch_merged_bam.mix(HIC_MINIMAP2.out.mergedbam)
+    } else {
+        HIC_BWAMEM2 (
+            fasta,
+            GENERATE_CRAM_CSV.out.csv,
+            index
+        )
+        ch_versions         = ch_versions.mix( HIC_BWAMEM2.out.versions )
+        ch_merged_bam           = ch_merged_bam.mix(HIC_BWAMEM2.out.mergedbam)
+    }
 
-    // ch_merged_bam
-    // | combine( ch_reads_cram )
-    // | map { meta_bam, bam, meta_cram, cram, crai -> [ meta_cram, bam ] }
-    // | set { ch_merged_bam }
+    ch_merged_bam
+    | combine( ch_reads_cram_crai )
+    | map { meta_bam, bam, meta_cram, cram, crai -> [ meta_cram, bam ] }
+    | set { ch_merged_bam }
 
-    // // // Collect all BWAMEM2 output by sample name
-    // ch_merged_bam
-    // | map { meta, bam -> [['id': meta.id.split('_')[0..-2].join('_'), 'datatype': meta.datatype], meta.read_count, bam] }
-    // | groupTuple( by: [0] )
-    // | map { meta, read_counts, bams -> [meta + [read_count: read_counts.sum()], bams] }
-    // | branch {
-    //     meta, bams ->
-    //         single_bam: bams.size() == 1
-    //         multi_bams: true
-    // }
-    // | set { ch_bams }
-
-
-    // // Merge, but only if there is more than 1 file
-    // SAMTOOLS_MERGE ( ch_bams.multi_bams, [ [], [] ], [ [], [] ] )
-    // ch_versions = ch_versions.mix ( SAMTOOLS_MERGE.out.versions.first() )
+    
+    // Collect all BAM output by sample name
+    ch_merged_bam
+    | map { meta, bam -> [['id': meta.id.split('_')[0..-2].join('_'), 'datatype': meta.datatype], meta.read_count, bam] }
+    | groupTuple( by: [0] )
+    | map { meta, read_counts, bams -> [meta + [read_count: read_counts.sum()], bams] }
+    | branch {
+        meta, bams ->
+            single_bam: bams.size() == 1
+            multi_bams: true
+    }
+    | set { ch_bams }
 
 
-    // SAMTOOLS_MERGE.out.bam
-    // | mix ( ch_bams.single_bam )
-    // | set { ch_bam }
+    // Merge, but only if there is more than 1 file
+    SAMTOOLS_MERGE ( ch_bams.multi_bams, [ [], [] ], [ [], [] ] )
+    ch_versions = ch_versions.mix ( SAMTOOLS_MERGE.out.versions.first() )
 
 
-    // // Mark duplicates
-    // SAMTOOLS_SORMADUP ( ch_bam, fasta )
-    // ch_versions = ch_versions.mix ( SAMTOOLS_SORMADUP.out.versions )
+    SAMTOOLS_MERGE.out.bam
+    | mix ( ch_bams.single_bam )
+    | set { ch_bam }
+
+
+    // Mark duplicates
+    SAMTOOLS_SORMADUP ( ch_bam, fasta )
+    ch_versions = ch_versions.mix ( SAMTOOLS_SORMADUP.out.versions )
 
     emit:
-    bam      = ch_reads_cram_crai     // channel: [ val(meta), /path/to/bam ]
+    bam      = SAMTOOLS_SORMADUP.out.bam     // channel: [ val(meta), /path/to/bam ]
     versions = ch_versions                   // channel: [ versions.yml ]
 }

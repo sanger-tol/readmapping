@@ -12,11 +12,13 @@ chunk_cram() {
     local cram=$1
     local chunkn=$2
     local outcsv=$3
+    local crai=$4
     realcram=$(readlink -f ${cram})
-    realcrai=$(readlink -f ${cram}.crai)
+    # realcrai=$(readlink -f ${cram}.crai)
+    realcrai=$(readlink -f ${crai})
     local rgline=$(samtools view -H "${realcram}" | grep "@RG" | sed 's/\t/\\t/g' | sed "s/'//g")
-    # local ncontainers=$(zcat "${realcrai}" | wc -l)
-    local ncontainers=$(cat "${realcram}" | wc -l)
+    local ncontainers=$(zcat "${realcrai}" | wc -l)
+    # local ncontainers=$(cat "${realcram}" | wc -l)
     local base=$(basename "${realcram}" .cram)
     local from=0
     local to=10000
@@ -42,6 +44,7 @@ process_cram_file() {
     local cram=$1
     local chunkn=$2
     local outcsv=$3
+    local crai=$4
 
     local read_groups=$(samtools view -H "$cram" | grep '@RG' | awk '{for(i=1;i<=NF;i++){if($i ~ /^ID:/){print substr($i,4)}}}')
     local num_read_groups=$(echo "$read_groups" | wc -w)
@@ -52,11 +55,11 @@ process_cram_file() {
             local output_cram="$(basename "${cram%.cram}")_output_${rg}.cram"
             samtools view -h -r "$rg" -o "$output_cram" "$cram"
             samtools index "$output_cram"
-            chunkn=$(chunk_cram "$output_cram" "$chunkn" "$outcsv")
+            chunkn=$(chunk_cram "$output_cram" "$chunkn" "$outcsv" "$crai")
         done
     else
         # Single read group or no read groups
-        chunkn=$(chunk_cram "$cram" "$chunkn" "$outcsv")
+        chunkn=$(chunk_cram "$cram" "$chunkn" "$outcsv" "$crai")
     fi
 
     echo $chunkn
@@ -76,6 +79,7 @@ fi
 cram=$1
 chunkn=0
 outcsv=$2
+crai=$3
 
 # # Loop through each CRAM file in the specified directory. cram cannot be the synlinked cram
 # for cram in ${cram_path}/*.cram; do
@@ -83,4 +87,5 @@ outcsv=$2
 #     chunkn=$(process_cram_file $realcram $chunkn $outcsv)
 # done
 realcram=$(readlink -f $cram)
-chunkn=$(process_cram_file $realcram $chunkn $outcsv)
+realcrai=$(readlink -f $crai)
+chunkn=$(process_cram_file $realcram $chunkn $outcsv $realcrai) 
