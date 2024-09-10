@@ -57,6 +57,22 @@
                 }
             }
         },
+        "aligner_options": {
+            "title": "Aligner options",
+            "type": "object",
+            "fa_icon": "fas fa-code",
+            "description": "Options for the aligner used in the pipeline.",
+            "required": ["hic_aligner"],
+            "properties": {
+                "hic_aligner": {
+                    "type": "string",
+                    "description": "The aligner to be used for HiC reads.",
+                    "enum": ["bwamem2", "minimap2"],
+                    "default": "minimap2",
+                    "fa_icon": "fas fa-code"
+                }
+            }
+        },
         "reference_genome_options": {
             "title": "Reference genome options",
             "type": "object",
