@@ -26,7 +26,7 @@ process CRAM_FILTER_ALIGN_BWAMEM2_FIXMATE_SORT {
     def args4 = task.ext.args4 ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     // Please be aware one of the tools here required mem = 28 * reference size!!!
-    
+
     """
     INDEX=`find -L ./ -name "*.amb" | sed 's/\\.amb\$//'`
 

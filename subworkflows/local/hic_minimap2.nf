@@ -20,8 +20,8 @@ workflow HIC_MINIMAP2 {
 
 
     //
-    // MODULE: generate minimap2 mmi file 
-    //       
+    // MODULE: generate minimap2 mmi file
+    //
     MINIMAP2_INDEX (
         fasta
         )
@@ -30,7 +30,7 @@ workflow HIC_MINIMAP2 {
 
     //
     // LOGIC: generate input channel for mapping
-    // 
+    //
     csv_ch
         .splitCsv()
         .combine ( fasta )
@@ -55,7 +55,7 @@ workflow HIC_MINIMAP2 {
 
     //
     // MODULE: map hic reads by 10,000 container per time
-    // 
+    //
     CRAM_FILTER_MINIMAP2_FILTER5END_FIXMATE_SORT (
         ch_filtering_input
 
@@ -92,8 +92,8 @@ workflow HIC_MINIMAP2 {
         [ [], [] ]
     )
     ch_versions         = ch_versions.mix ( SAMTOOLS_MERGE.out.versions.first() )
-    
-    
+
+
     emit:
     mergedbam           = SAMTOOLS_MERGE.out.bam
     versions            = ch_versions.ifEmpty(null)

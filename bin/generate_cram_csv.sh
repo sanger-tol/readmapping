@@ -88,4 +88,4 @@ crai=$3
 # done
 realcram=$(readlink -f $cram)
 realcrai=$(readlink -f $crai)
-chunkn=$(process_cram_file $realcram $chunkn $outcsv $realcrai) 
+chunkn=$(process_cram_file $realcram $chunkn $outcsv $realcrai)

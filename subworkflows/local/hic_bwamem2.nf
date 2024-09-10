@@ -65,7 +65,7 @@ workflow HIC_BWAMEM2 {
         }
         .set { collected_files_for_merge }
 
-    
+
     //
     // MODULE: MERGE POSITION SORTED BAM FILES AND MARK DUPLICATES
     //

@@ -82,7 +82,7 @@ workflow ALIGN_SHORT_HIC {
     | map { meta_bam, bam, meta_cram, cram, crai -> [ meta_cram, bam ] }
     | set { ch_merged_bam }
 
-    
+
     // Collect all BAM output by sample name
     ch_merged_bam
     | map { meta, bam -> [['id': meta.id.split('_')[0..-2].join('_'), 'datatype': meta.datatype], meta.read_count, bam] }
