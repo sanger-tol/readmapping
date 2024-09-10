@@ -7,7 +7,9 @@ process CRAM_FILTER_ALIGN_BWAMEM2_FIXMATE_SORT {
         'biocontainers/mulled-v2-1a6fe65bd6674daba65066aa796ed8f5e8b4687b:688e175eb0db54de17822ba7810cc9e20fa06dd5-0' }"
 
     input:
-    tuple val(meta), path(cramfile), path(cramindex), val(from), val(to), val(base), val(chunkid), val(rglines), val(bwaprefix), path(reference)
+    tuple val(meta), path(cramfile), path(cramindex), val(from), val(to), val(base), val(chunkid), val(rglines)
+    tuple val(meta2), path(fasta)
+    tuple val(meta3), path(index)
 
     output:
     tuple val(meta), path("*.bam"), emit: mappedbam
@@ -24,10 +26,13 @@ process CRAM_FILTER_ALIGN_BWAMEM2_FIXMATE_SORT {
     def args4 = task.ext.args4 ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     // Please be aware one of the tools here required mem = 28 * reference size!!!
+    
     """
+    INDEX=`find -L ./ -name "*.amb" | sed 's/\\.amb\$//'`
+
     cram_filter -n ${from}-${to} ${cramfile} - | \\
         samtools fastq ${args1} | \\
-        bwa-mem2 mem -p ${bwaprefix} -t${task.cpus} -5SPCp -H'${rglines}' - | \\
+        bwa-mem2 mem \$INDEX -t ${task.cpus} ${args2} - | \\
         samtools fixmate ${args3} - - | \\
         samtools sort ${args4} -@${task.cpus} -T ${base}_${chunkid}_sort_tmp -o ${prefix}_${base}_${chunkid}_mem.bam -
 

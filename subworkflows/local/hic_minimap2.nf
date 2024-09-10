@@ -12,7 +12,6 @@ workflow HIC_MINIMAP2 {
     take:
     fasta    // Channel: tuple [ val(meta), path( file )      ]
     csv_ch
-    index
 
 
     main:
@@ -90,7 +89,7 @@ workflow HIC_MINIMAP2 {
     SAMTOOLS_MERGE (
         collected_files_for_merge,
         fasta,
-        index
+        [ [], [] ]
     )
     ch_versions         = ch_versions.mix ( SAMTOOLS_MERGE.out.versions.first() )
     

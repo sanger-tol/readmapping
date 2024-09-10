@@ -49,8 +49,6 @@ workflow ALIGN_SHORT_HIC {
     | join ( SAMTOOLS_INDEX.out.crai )
     | set { ch_reads_cram_crai }
 
-    ch_reads_cram_crai.view()
-
 
     //
     // MODULE: generate a CRAM CSV file containing the required parametres for CRAM_FILTER_ALIGN_BWAMEM2_FIXMATE_SORT
@@ -65,8 +63,7 @@ workflow ALIGN_SHORT_HIC {
     if (params.hic_aligner == 'minimap2') {
         HIC_MINIMAP2 (
             fasta,
-            GENERATE_CRAM_CSV.out.csv,
-            index
+            GENERATE_CRAM_CSV.out.csv
         )
         ch_versions         = ch_versions.mix( HIC_MINIMAP2.out.versions )
         ch_merged_bam           = ch_merged_bam.mix(HIC_MINIMAP2.out.mergedbam)

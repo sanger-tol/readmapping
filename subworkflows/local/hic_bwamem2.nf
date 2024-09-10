@@ -3,7 +3,6 @@
 //
 // MODULE IMPORT BLOCK
 //
-include { BWAMEM2_INDEX                                   } from '../../modules/nf-core/bwamem2/index/main'
 include { CRAM_FILTER_ALIGN_BWAMEM2_FIXMATE_SORT          } from '../../modules/local/cram_filter_align_bwamem2_fixmate_sort'
 include { SAMTOOLS_MERGE                                  } from '../../modules/nf-core/samtools/merge/main'
 
@@ -18,16 +17,10 @@ workflow HIC_BWAMEM2 {
     ch_versions         = Channel.empty()
     mappedbam_ch        = Channel.empty()
 
-    BWAMEM2_INDEX (
-        fasta
-        )
-    ch_versions         = ch_versions.mix( BWAMEM2_INDEX.out.versions )
 
     csv_ch
         .splitCsv()
-        .combine ( fasta )
-        .combine ( BWAMEM2_INDEX.out.index )
-        .map{ cram_id, cram_info, ref_id, ref_dir, bwa_id, bwa_path ->
+        .map{ cram_id, cram_info ->
             tuple([
                     id: cram_id.id
                     ],
@@ -37,9 +30,7 @@ workflow HIC_BWAMEM2 {
                 cram_info[3],
                 cram_info[4],
                 cram_info[5],
-                cram_info[6],
-                bwa_path.toString() + '/' + ref_dir.toString().split('/')[-1],
-                ref_dir
+                cram_info[6]
             )
     }
     .set { ch_filtering_input }
@@ -48,7 +39,9 @@ workflow HIC_BWAMEM2 {
     // MODULE: map hic reads by 10,000 container per time using bwamem2
     //
     CRAM_FILTER_ALIGN_BWAMEM2_FIXMATE_SORT (
-        ch_filtering_input
+        ch_filtering_input,
+        fasta,
+        index
 
     )
     ch_versions         = ch_versions.mix( CRAM_FILTER_ALIGN_BWAMEM2_FIXMATE_SORT.out.versions )
@@ -79,7 +72,7 @@ workflow HIC_BWAMEM2 {
     SAMTOOLS_MERGE (
         collected_files_for_merge,
         fasta,
-        index
+        [ [], [] ]
     )
     ch_versions         = ch_versions.mix ( SAMTOOLS_MERGE.out.versions.first() )
 
