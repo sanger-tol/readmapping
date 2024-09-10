@@ -2,10 +2,9 @@
 // Align PacBio read files against the genome
 //
 
-include { FILTER_PACBIO  } from '../../subworkflows/local/filter_pacbio'
-include { MINIMAP2_ALIGN } from '../../modules/nf-core/minimap2/align/main'
-include { SAMTOOLS_MERGE } from '../../modules/nf-core/samtools/merge/main'
-
+include { FILTER_PACBIO    } from '../../subworkflows/local/filter_pacbio'
+include { MINIMAP2_ALIGN   } from '../../modules/nf-core/minimap2/align/main'
+include { SAMTOOLS_MERGE   } from '../../modules/nf-core/samtools/merge/main'
 
 workflow ALIGN_PACBIO {
     take:
