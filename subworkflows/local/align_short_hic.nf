@@ -8,8 +8,8 @@ include { SAMTOOLS_SORMADUP                     } from '../../modules/local/samt
 include { SAMTOOLS_INDEX                        } from '../../modules/nf-core/samtools/index/main'
 include { GENERATE_CRAM_CSV                     } from '../../modules/local/generate_cram_csv'
 include { SAMTOOLS_SORMADUP as CONVERT_CRAM     } from '../../modules/local/samtools_sormadup'
-include { HIC_MINIMAP2                          } from '../../subworkflows/local/hic_minimap2'
-include { HIC_BWAMEM2                           } from '../../subworkflows/local/hic_bwamem2'
+include { MINIMAP2_MAPREDUCE as HIC_MINIMAP2    } from '../../subworkflows/local/minimap2_mapreduce'
+include { BWAMEM2_MAPREDUCE as HIC_BWAMEM2      } from '../../subworkflows/local/bwamem2_mapreduce'
 
 workflow ALIGN_SHORT_HIC {
     take:
@@ -60,7 +60,7 @@ workflow ALIGN_SHORT_HIC {
     //
     // SUBWORKFLOW: mapping hic reads using minimap2 or bwamem2
     //
-    if (params.hic_aligner == 'minimap2') {
+    if (params.short_aligner.startsWith("minimap")) {
         HIC_MINIMAP2 (
             fasta,
             GENERATE_CRAM_CSV.out.csv
