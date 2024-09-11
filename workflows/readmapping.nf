@@ -1,19 +1,3 @@
-/*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    VALIDATE INPUTS
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
-
-def summary_params = NfcoreSchema.paramsSummaryMap(workflow, params)
-
-// Check input path parameters to see if they exist
-def checkPathParamList = [ params.input, params.fasta, params.vector_db, params.bwamem2_index ]
-for (param in checkPathParamList) { if (param) { file(param, checkIfExists: true) } }
-
-// Check mandatory parameters
-if (params.input) { ch_input = Channel.fromPath(params.input) } else { exit 1, 'Input samplesheet not specified!' }
-if (params.fasta) { ch_fasta = Channel.fromPath(params.fasta) } else { exit 1, 'Genome fasta file not specified!' }
-
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -22,16 +6,24 @@ if (params.fasta) { ch_fasta = Channel.fromPath(params.fasta) } else { exit 1, '
 */
 
 //
+// MODULE: Local modules
+//
+
+include { SAMTOOLS_REHEADER           } from '../modules/local/samtools_replaceheader'
+
+
+//
 // SUBWORKFLOW: Consisting of a mix of local and nf-core/modules
 //
 
 include { INPUT_CHECK                   } from '../subworkflows/local/input_check'
 include { PREPARE_GENOME                } from '../subworkflows/local/prepare_genome'
-include { ALIGN_SHORT as ALIGN_HIC      } from '../subworkflows/local/align_short'
+include { ALIGN_SHORT_HIC as ALIGN_HIC  } from '../subworkflows/local/align_short_hic'
 include { ALIGN_SHORT as ALIGN_ILLUMINA } from '../subworkflows/local/align_short'
 include { ALIGN_PACBIO as ALIGN_HIFI    } from '../subworkflows/local/align_pacbio'
 include { ALIGN_PACBIO as ALIGN_CLR     } from '../subworkflows/local/align_pacbio'
 include { ALIGN_ONT                     } from '../subworkflows/local/align_ont'
+include { CONVERT_STATS                 } from '../subworkflows/local/convert_stats'
 
 
 /*
@@ -45,9 +37,7 @@ include { ALIGN_ONT                     } from '../subworkflows/local/align_ont'
 //
 
 include { UNTAR                       } from '../modules/nf-core/untar/main'
-include { CRUMBLE                     } from '../modules/nf-core/crumble/main'
 include { CUSTOM_DUMPSOFTWAREVERSIONS } from '../modules/nf-core/custom/dumpsoftwareversions/main'
-
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -57,13 +47,20 @@ include { CUSTOM_DUMPSOFTWAREVERSIONS } from '../modules/nf-core/custom/dumpsoft
 
 workflow READMAPPING {
 
-    ch_versions = Channel.empty()
+    take:
+    ch_samplesheet
+    ch_fasta
+    ch_header
 
+    main:
+    // Initialize an empty versions channel
+    ch_versions = Channel.empty()
+    ch_multiqc_files = Channel.empty()
 
     //
     // SUBWORKFLOW: Read in samplesheet, validate and stage input files
     //
-    INPUT_CHECK ( ch_input ).reads
+    INPUT_CHECK ( ch_samplesheet ).reads
     | branch {
         meta, reads ->
             hic : meta.datatype == "hic"
@@ -76,10 +73,6 @@ workflow READMAPPING {
 
     ch_versions = ch_versions.mix ( INPUT_CHECK.out.versions )
 
-
-    //
-    // SUBWORKFLOW: Uncompress and prepare reference genome files
-    //
     ch_fasta
     | map { [ [ id: it.baseName ], it ] }
     | set { ch_genome }
@@ -95,7 +88,6 @@ workflow READMAPPING {
     if ( ch_reads.pacbio || ch_reads.clr ) {
         if ( params.vector_db.endsWith( '.tar.gz' ) ) {
             UNTAR ( [ [:], params.vector_db ] ).untar
-            | map { meta, file -> file }
             | set { ch_vector_db }
 
             ch_versions = ch_versions.mix ( UNTAR.out.versions )
@@ -125,12 +117,27 @@ workflow READMAPPING {
     ALIGN_ONT ( PREPARE_GENOME.out.fasta, ch_reads.ont )
     ch_versions = ch_versions.mix ( ALIGN_ONT.out.versions )
 
+    // gather alignments
+    ch_aligned_bams = Channel.empty()
+    | mix( ALIGN_HIC.out.bam )
+    | mix( ALIGN_ILLUMINA.out.bam )
+    | mix( ALIGN_HIFI.out.bam )
+    | mix( ALIGN_CLR.out.bam )
+    | mix( ALIGN_ONT.out.bam )
 
-    //
-    // MODULE: To compress PacBio HiFi aligned CRAM files
-    //
-    CRUMBLE ( ALIGN_HIFI.out.cram, [], true )
-    ch_versions = ch_versions.mix ( CRUMBLE.out.versions )
+    // Optionally insert params.header information to bams
+    ch_reheadered_bams = Channel.empty()
+    if ( params.header ) {
+        SAMTOOLS_REHEADER( ch_aligned_bams, ch_header.first() )
+        ch_reheadered_bams = SAMTOOLS_REHEADER.out.bam
+        ch_versions = ch_versions.mix ( SAMTOOLS_REHEADER.out.versions )
+    } else {
+        ch_reheadered_bams = ch_aligned_bams
+    }
+
+    // convert to cram and gather stats
+    CONVERT_STATS ( ch_reheadered_bams, PREPARE_GENOME.out.fasta )
+    ch_versions = ch_versions.mix ( CONVERT_STATS.out.versions )
 
 
     //
@@ -143,22 +150,6 @@ workflow READMAPPING {
     )
 }
 
-
-/*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    COMPLETION EMAIL AND SUMMARY
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
-
-workflow.onComplete {
-    if ( params.email || params.email_on_fail ) {
-        NfcoreTemplate.email ( workflow, params, summary_params, projectDir, log )
-    }
-    NfcoreTemplate.summary ( workflow, params, log )
-    if ( params.hook_url ) {
-        NfcoreTemplate.IM_notification ( workflow, params, summary_params, projectDir, log )
-    }
-}
 
 
 /*

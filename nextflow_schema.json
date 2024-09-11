@@ -10,14 +10,15 @@
             "type": "object",
             "fa_icon": "fas fa-terminal",
             "description": "Define where the pipeline should find input data and save output data.",
-            "required": ["input", "outdir"],
+            "required": ["input", "outdir", "outfmt", "compression"],
             "properties": {
                 "input": {
                     "type": "string",
                     "format": "file-path",
+                    "exists": true,
+                    "schema": "assets/schema_input.json",
                     "mimetype": "text/csv",
                     "pattern": "^\\S+\\.csv$",
-                    "schema": "assets/schema_input.json",
                     "description": "Path to comma-separated file containing information about the samples in the experiment.",
                     "help_text": "You will need to create a design file with information about the samples in your experiment before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 4 columns, and a header row.",
                     "fa_icon": "fas fa-file-csv"
@@ -27,6 +28,18 @@
                     "format": "directory-path",
                     "description": "The output directory where the results will be saved. You have to use absolute paths to storage on Cloud infrastructure.",
                     "fa_icon": "fas fa-folder-open"
+                },
+                "outfmt": {
+                    "type": "string",
+                    "default": "cram",
+                    "description": "Format for output alignment files. Accepts options: \"bam\" or \"cram\".",
+                    "fa_icon": "fas fa-file-signature"
+                },
+                "compression": {
+                    "type": "string",
+                    "default": "crumble",
+                    "description": "Output file compression type. Currently accepts: \"none\" or \"crumble\"",
+                    "fa_icon": "fas fa-file-archive"
                 },
                 "vector_db": {
                     "type": "string",
@@ -41,6 +54,13 @@
                     "fa_icon": "fas fa-envelope",
                     "help_text": "Set this parameter to your e-mail address to get a summary e-mail with details of the run sent to you when the workflow exits. If set in your user config file (`~/.nextflow/config`) then you don't need to specify this on the command line for every run.",
                     "pattern": "^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$"
+                },
+                "hic_aligner": {
+                    "type": "string",
+                    "description": "The aligner to be used for HiC reads.",
+                    "enum": ["bwamem2", "minimap2"],
+                    "default": "minimap2",
+                    "fa_icon": "fas fa-code"
                 }
             }
         },
@@ -64,6 +84,12 @@
                     "description": "Path to directory or tar.gz archive for pre-built BWAMEM2 index.",
                     "format": "path",
                     "fa_icon": "fas fa-bezier-curve"
+                },
+                "header": {
+                    "type": "string",
+                    "format": "path",
+                    "description": "Optional template header file for BAM/CRAM outputs",
+                    "fa_icon": "far fa-file-code"
                 }
             }
         },
@@ -159,7 +185,7 @@
                     "description": "Maximum amount of time that can be requested for any single job.",
                     "default": "240.h",
                     "fa_icon": "far fa-clock",
-                    "pattern": "^(\\d+\\.?\\s*(s|m|h|day)\\s*)+$",
+                    "pattern": "^(\\d+\\.?\\s*(s|m|h|d|day)\\s*)+$",
                     "hidden": true,
                     "help_text": "Use to set an upper-limit for the time requirement for each process. Should be a string in the format integer-unit e.g. `--max_time '2.h'`"
                 }
@@ -213,18 +239,15 @@
                     "fa_icon": "fas fa-palette",
                     "hidden": true
                 },
+                "monochromeLogs": {
+                    "type": "boolean",
+                    "hidden": true
+                },
                 "hook_url": {
                     "type": "string",
                     "description": "Incoming hook URL for messaging service",
                     "fa_icon": "fas fa-people-group",
                     "help_text": "Incoming hook URL for messaging service. Currently, MS Teams and Slack are supported.",
-                    "hidden": true
-                },
-                "tracedir": {
-                    "type": "string",
-                    "description": "Directory to keep pipeline Nextflow logs and reports.",
-                    "default": "${params.outdir}/pipeline_info/readmapping",
-                    "fa_icon": "fas fa-cogs",
                     "hidden": true
                 },
                 "validate_params": {
@@ -234,12 +257,30 @@
                     "fa_icon": "fas fa-check-square",
                     "hidden": true
                 },
-                "show_hidden_params": {
+                "validationShowHiddenParams": {
                     "type": "boolean",
                     "fa_icon": "far fa-eye-slash",
                     "description": "Show all params when using `--help`",
                     "hidden": true,
                     "help_text": "By default, parameters set as _hidden_ in the schema are not shown on the command line when a user runs with `--help`. Specifying this option will tell the pipeline to show all parameters."
+                },
+                "validationFailUnrecognisedParams": {
+                    "type": "boolean",
+                    "fa_icon": "far fa-check-circle",
+                    "description": "Validation of parameters fails when an unrecognised parameter is found.",
+                    "hidden": true,
+                    "help_text": "By default, when an unrecognised parameter is found, it returns a warinig."
+                },
+                "validationLenientMode": {
+                    "type": "boolean",
+                    "fa_icon": "far fa-check-circle",
+                    "description": "Validation of parameters in lenient more.",
+                    "hidden": true,
+                    "help_text": "Allows string values that are parseable as numbers or booleans. For further information see [JSONSchema docs](https://github.com/everit-org/json-schema#lenient-mode)."
+                },
+                "schema_ignore_params": {
+                    "type": "string",
+                    "hidden": true
                 }
             }
         }

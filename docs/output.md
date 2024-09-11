@@ -15,6 +15,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 - [Preprocessing](#preprocessing)
   - [Filtering](#filtering) – Filtering PacBio data before alignment
 - [Alignment and Mark duplicates](#alignment-and-mark-duplicates)
+  - [Output options](#outfmt) – Output options for all read types
   - [Short reads](#short-reads) – Aligning HiC and Illumina reads using BWAMEM2
   - [Oxford Nanopore reads](#oxford-nanopore-reads) – Aligning ONT reads using MINIMAP2
   - [PacBio reads](#pacbio-reads) – Aligning PacBio CLR and CCS filtered reads using MINIMAP2
@@ -32,52 +33,61 @@ PacBio reads generated using both CLR and CCS technology are filtered using `BLA
 
 ## Alignment and Mark duplicates
 
+### Output options
+
+- **outfmt**: Specifies the output format for alignments. It can be set to "bam", "cram", or both, separated by a comma (e.g., `--outfmt bam,cram`). The pipeline will generate output files in the specified formats.
+- **compression**: Specifies the compression method for alignments. It can be set to "none" or "crumble". When set to "crumble", the pipeline compresses the quality scores of the alignments.
+
 ### Short reads
 
-Short read data from HiC and Illumina technologies is aligned with `BWAMEM2_MEM`. The sorted and merged alignment files are processed using the `SAMTOOLS` [mark-duplicate workflow](https://www.htslib.org/algorithms/duplicate.html#workflow). The mark duplicate alignments is output in the CRAM format, along with the index.
+Short read data from HiC and Illumina technologies is aligned with `BWAMEM2_MEM`. The sorted and merged alignment files are processed using the `SAMTOOLS` [mark-duplicate workflow](https://www.htslib.org/algorithms/duplicate.html#workflow). The marked duplicate alignments are output in the CRAM or BAM format, along with the index.
 
 <details markdown="1">
 <summary>Output files</summary>
 
 - `read_mapping`
   - `hic`
-    - `<gca_accession>.unmasked.hic.<sample_id>.cram`: Sorted and merged CRAM file at the individual level
-    - `<gca_accession>.unmasked.hic.<sample_id>.cram.crai`: Index for the alignment
+    - `<gca_accession>.unmasked.hic.<sample_id>.[cr|b]am`: Sorted and merged BAM or CRAM file at the individual level
+    - `<gca_accession>.unmasked.hic.<sample_id>.[cr|b]am.[cr|c]si`: Index for the alignment (as either .csi or .crai)
   - `illumina`
-    - `<gca_accession>.unmasked.illumina.<sample_id>.cram`: Sorted and merged CRAM file at the individual level
-    - `<gca_accession>.unmasked.illumina.<sample_id>.cram.crai`: Index for the alignment
+    - `<gca_accession>.unmasked.illumina.<sample_id>.[cr|b]am`: Sorted and merged BAM or CRAM file at the individual level
+    - `<gca_accession>.unmasked.illumina.<sample_id>.[cr|b]am.[cr|c]si`: Index for the alignment
 
 </details>
 
 ### Oxford Nanopore reads
 
-Reads generated using Oxford Nanopore technology are aligned with `MINIMAP2_ALIGN`. The sorted and merged alignment is output in the CRAM format, along with the index.
+Reads generated using Oxford Nanopore technology are aligned with `MINIMAP2_ALIGN`. The sorted and merged alignment is output in the CRAM or BAM format, along with the index.
 
 <details markdown="1">
 <summary>Output files</summary>
 
 - `read_mapping`
   - `ont`
-    - `<gca_accession>.unmasked.ont.<sample_id>.cram`: Sorted and merged CRAM file at the individual level
-    - `<gca_accession>.unmasked.ont.<sample_id>.cram.crai`: Index for the alignment
+    - `<gca_accession>.unmasked.ont.<sample_id>.[cr|b]am`: Sorted and merged BAM or CRAM file at the individual level
+    - `<gca_accession>.unmasked.ont.<sample_id>.[cr|b]am.[cr|c]si`: Index for the alignment
 
 </details>
 
 ### PacBio reads
 
-The filtered PacBio reads are aligned with `MINIMAP2_ALIGN`. The sorted and merged alignment is output in the CRAM format, along with the index.
+The filtered PacBio reads are aligned with `MINIMAP2_ALIGN`. The sorted and merged alignment is output in the CRAM or BAM format, along with the index.
 
 <details markdown="1">
 <summary>Output files</summary>
 
 - `read_mapping`
   - `pacbio`
-    - `<gca_accession>.unmasked.pacbio.<sample_id>.cram`: Sorted and merged CRAM file at the individual level
-    - `<gca_accession>.unmasked.pacbio.<sample_id>.cram.crai`: Index for the alignment
+    - `<gca_accession>.unmasked.pacbio.<sample_id>.[cr|b]am`: Sorted and merged BAM or CRAM file at the individual level
+    - `<gca_accession>.unmasked.pacbio.<sample_id>.[cr|b]am.[cr|c]si`: Index for the alignment
 
 </details>
 
 ## Alignment post-processing
+
+### External metadata
+
+If provided using the `--header` option, all output alignments (`*.cram` or `*.bam`) will include any additional metadata supplied as a SAM header template, replacing the existing _@HD_ and _@SD_ entries (note that this behaviour can be altered by modifying the `ext.args` for `SAMTOOLS_REHEADER` in `modules.config`).
 
 ### Statistics
 

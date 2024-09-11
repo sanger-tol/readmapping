@@ -2,7 +2,7 @@ process CRUMBLE {
     tag "$meta.id"
     label 'process_medium'
 
-    conda "bioconda::crumble=0.9.1"
+    conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
         'https://depot.galaxyproject.org/singularity/crumble:0.9.1--hb0d9459_0':
         'biocontainers/crumble:0.9.1--hb0d9459_0' }"
@@ -30,14 +30,11 @@ process CRUMBLE {
                     args.contains("-O cram") ? "cram" :
                     "sam"
     def bedin      = keepbed ? "-R ${keepbed}" : ""
-    def bedout     = bedout ? "-b ${prefix}.suspicious_regions.bed" : ""
+    def bedout     = bedout ? "-b ${prefix}.out.bed" : ""
     if ("$input" == "${prefix}.${extension}") error "Input and output names are the same, use \"task.ext.prefix\" to disambiguate!"
 
     def CRUMBLE_VERSION = '0.9.1' //WARN: Version information not provided by tool on CLI. Please update this string when bumping container versions.
     """
-    # Need to fake REF_PATH to force crumble to use the Fasta file defined in
-    # the UR field of the @SQ headers. (bug reported to the samtools team).
-    env REF_PATH=/missing \\
     crumble \\
         $args \\
         $bedin \\
