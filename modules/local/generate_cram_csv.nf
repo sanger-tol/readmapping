@@ -1,8 +1,10 @@
 process GENERATE_CRAM_CSV {
     tag "${meta.id}"
-    // label 'process_tiny'
+    label 'process_single'
 
-    container 'quay.io/sanger-tol/cramfilter_bwamem2_minimap2_samtools_perl:0.001-c1'
+    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+        'quay.io/sanger-tol/cramfilter_bwamem2_minimap2_samtools_perl:0.001-c1' :
+        'sanger-tol/cramfilter_bwamem2_minimap2_samtools_perl:0.001-c1' }"
 
     input:
     tuple val(meta), path(crampath), path(crai)
@@ -15,7 +17,7 @@ process GENERATE_CRAM_CSV {
     script:
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
-    generate_cram_csv.sh $crampath ${prefix}_cram.csv $crai
+    generate_cram_csv.sh $crampath ${prefix}_cram.csv $crai ${params.chunk_size}
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
