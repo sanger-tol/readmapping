@@ -54,13 +54,6 @@
                     "fa_icon": "fas fa-envelope",
                     "help_text": "Set this parameter to your e-mail address to get a summary e-mail with details of the run sent to you when the workflow exits. If set in your user config file (`~/.nextflow/config`) then you don't need to specify this on the command line for every run.",
                     "pattern": "^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$"
-                },
-                "hic_aligner": {
-                    "type": "string",
-                    "description": "The aligner to be used for HiC reads.",
-                    "enum": ["bwamem2", "minimap2"],
-                    "default": "minimap2",
-                    "fa_icon": "fas fa-code"
                 }
             }
         },
@@ -90,6 +83,26 @@
                     "format": "path",
                     "description": "Optional template header file for BAM/CRAM outputs",
                     "fa_icon": "far fa-file-code"
+                }
+            }
+        },
+        "aligner_options": {
+            "title": "Aligner options",
+            "type": "object",
+            "description": "",
+            "default": "",
+            "properties": {
+                "short_aligner": {
+                    "type": "string",
+                    "default": "minimap2",
+                    "description": "Alignment method to use for short-reads (options are: \"minimap2\" or \"bwamem2\"",
+                    "enum": ["minimap2", "bwamem2"]
+                },
+                "chunk_size": {
+                    "type": "integer",
+                    "default": 10000,
+                    "description": "Chunk size for parallel processing of CRAM files, in number of containers",
+                    "minimum": 1
                 }
             }
         },
@@ -291,6 +304,9 @@
         },
         {
             "$ref": "#/definitions/reference_genome_options"
+        },
+        {
+            "$ref": "#/definitions/aligner_options"
         },
         {
             "$ref": "#/definitions/execution"
