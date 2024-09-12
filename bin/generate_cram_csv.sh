@@ -21,11 +21,15 @@ chunk_cram() {
     local rgline=$(samtools view -H "${realcram}" | grep "@RG" | sed 's/\t/\\t/g' | sed "s/'//g")
     local ncontainers=$(zcat "${realcrai}" | wc -l)
     local base=$(basename "${realcram}" .cram)
+
+    if [ $chunk_size -gt $ncontainers ]; then
+        chunk_size=$((ncontainers - 1))
+    fi
     local from=0
     local to=$((chunk_size - 1))
 
     while [ $to -lt $ncontainers ]; do
-        echo "chunk $chunkn: $from - $to"
+        #echo "chunk $chunkn: $from - $to"
         echo "${realcram},${realcrai},${from},${to},${base},${chunkn},${rgline}" >> $outcsv
         from=$((to + 1))
         to=$((to + chunk_size))
@@ -35,7 +39,7 @@ chunk_cram() {
     # Catch any remainder
     if [ $from -lt $ncontainers ]; then
         to=$((ncontainers - 1))
-        echo "chunk $chunkn: $from - $to"
+        #echo "chunk $chunkn: $from - $to"
         echo "${realcram},${realcrai},${from},${to},${base},${chunkn},${rgline}" >> $outcsv
         ((chunkn++))
     fi
