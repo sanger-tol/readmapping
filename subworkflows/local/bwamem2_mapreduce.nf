@@ -36,8 +36,9 @@ workflow BWAMEM2_MAPREDUCE {
     }
     .set { ch_filtering_input }
 
+
     //
-    // MODULE: map hic reads by 10,000 container per time using bwamem2
+    // MODULE: map hic reads in each chunk using bwamem2
     //
     CRAM_FILTER_ALIGN_BWAMEM2_FIXMATE_SORT (
         ch_filtering_input,

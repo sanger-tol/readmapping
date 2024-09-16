@@ -27,7 +27,7 @@ process SAMTOOLS_ADDREPLACERG {
     """
     samtools \\
         addreplacerg \\
-        --threads ${task.cpus-1} \\
+        --threads $task.cpus \\
         $args \\
         -o ${prefix}.${file_type} \\
         $input

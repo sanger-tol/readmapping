@@ -30,7 +30,7 @@ workflow PREPARE_GENOME {
 
     // Unmask genome fasta
     UNMASK ( ch_fasta )
-    ch_versions = ch_versions.mix ( UNMASK.out.versions.first() )
+    ch_versions = ch_versions.mix ( UNMASK.out.versions )
 
     // Generate BWA index
     if ( checkShortReads( params.input ) ) {
@@ -42,14 +42,14 @@ workflow PREPARE_GENOME {
 
             if ( params.bwamem2_index.endsWith('.tar.gz') ) {
                 ch_bwamem2_index = UNTAR ( ch_bwamem ).untar
-                ch_versions      = ch_versions.mix ( UNTAR.out.versions.first() )
+                ch_versions      = ch_versions.mix ( UNTAR.out.versions )
             } else {
                 ch_bwamem2_index = ch_bwamem
             }
 
         } else {
             ch_bwamem2_index = BWAMEM2_INDEX ( UNMASK.out.fasta ).index
-            ch_versions      = ch_versions.mix ( BWAMEM2_INDEX.out.versions.first() )
+            ch_versions      = ch_versions.mix ( BWAMEM2_INDEX.out.versions )
         }
     } else {
         ch_bwamem2_index = Channel.empty()
