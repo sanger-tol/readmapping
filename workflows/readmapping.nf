@@ -18,7 +18,7 @@ include { SAMTOOLS_REHEADER           } from '../modules/local/samtools_replaceh
 
 include { INPUT_CHECK                   } from '../subworkflows/local/input_check'
 include { PREPARE_GENOME                } from '../subworkflows/local/prepare_genome'
-include { ALIGN_SHORT_HIC as ALIGN_HIC  } from '../subworkflows/local/align_short_hic'
+include { ALIGN_SHORT as ALIGN_HIC      } from '../subworkflows/local/align_short'
 include { ALIGN_SHORT as ALIGN_ILLUMINA } from '../subworkflows/local/align_short'
 include { ALIGN_PACBIO as ALIGN_HIFI    } from '../subworkflows/local/align_pacbio'
 include { ALIGN_PACBIO as ALIGN_CLR     } from '../subworkflows/local/align_pacbio'

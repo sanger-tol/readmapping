@@ -3,14 +3,15 @@
 //
 // MODULE IMPORT BLOCK
 //
-include { CRAM_FILTER_ALIGN_BWAMEM2_FIXMATE_SORT          } from '../../modules/local/cram_filter_align_bwamem2_fixmate_sort'
+include { CRAM_FILTER_MINIMAP2_FILTER5END_FIXMATE_SORT    } from '../../modules/local/cram_filter_minimap2_filter5end_fixmate_sort'
 include { SAMTOOLS_MERGE                                  } from '../../modules/nf-core/samtools/merge/main'
+include { MINIMAP2_INDEX                                  } from '../../modules/nf-core/minimap2/index/main'
 
-workflow HIC_BWAMEM2 {
+
+workflow MINIMAP2_MAPREDUCE {
     take:
-    fasta     // Channel: tuple [ val(meta), path( file )      ]
+    fasta    // Channel: tuple [ val(meta), path( file )      ]
     csv_ch
-    index
 
 
     main:
@@ -18,11 +19,26 @@ workflow HIC_BWAMEM2 {
     mappedbam_ch        = Channel.empty()
 
 
+    //
+    // MODULE: generate minimap2 mmi file
+    //
+    MINIMAP2_INDEX (
+        fasta
+        )
+    ch_versions         = ch_versions.mix( MINIMAP2_INDEX.out.versions )
+
+
+    //
+    // LOGIC: generate input channel for mapping
+    //
     csv_ch
         .splitCsv()
-        .map{ cram_id, cram_info ->
+        .combine ( fasta )
+        .combine ( MINIMAP2_INDEX.out.index )
+        .map{ cram_id, cram_info, ref_id, ref_dir, mmi_id, mmi_path->
             tuple([
-                    id: cram_id.id
+                    id: cram_id.id,
+                    chunk_id: cram_id.id + "_" + cram_info[5]
                     ],
                 file(cram_info[0]),
                 cram_info[1],
@@ -30,22 +46,24 @@ workflow HIC_BWAMEM2 {
                 cram_info[3],
                 cram_info[4],
                 cram_info[5],
-                cram_info[6]
+                cram_info[6],
+                mmi_path.toString(),
+                ref_dir
             )
     }
     .set { ch_filtering_input }
 
+
     //
-    // MODULE: map hic reads by 10,000 container per time using bwamem2
+    // MODULE: map hic reads by 10,000 container per time
     //
-    CRAM_FILTER_ALIGN_BWAMEM2_FIXMATE_SORT (
-        ch_filtering_input,
-        fasta,
-        index
+    CRAM_FILTER_MINIMAP2_FILTER5END_FIXMATE_SORT (
+        ch_filtering_input
 
     )
-    ch_versions         = ch_versions.mix( CRAM_FILTER_ALIGN_BWAMEM2_FIXMATE_SORT.out.versions )
-    mappedbam_ch        = CRAM_FILTER_ALIGN_BWAMEM2_FIXMATE_SORT.out.mappedbam
+    ch_versions         = ch_versions.mix( CRAM_FILTER_MINIMAP2_FILTER5END_FIXMATE_SORT.out.versions )
+    mappedbam_ch        = CRAM_FILTER_MINIMAP2_FILTER5END_FIXMATE_SORT.out.mappedbam
+
 
     //
     // LOGIC: PREPARING BAMS FOR MERGE
