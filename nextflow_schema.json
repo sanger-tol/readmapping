@@ -86,6 +86,26 @@
                 }
             }
         },
+        "aligner_options": {
+            "title": "Aligner options",
+            "type": "object",
+            "description": "",
+            "default": "",
+            "properties": {
+                "short_aligner": {
+                    "type": "string",
+                    "default": "minimap2",
+                    "description": "Alignment method to use for short-reads (options are: \"minimap2\" or \"bwamem2\"",
+                    "enum": ["minimap2", "bwamem2"]
+                },
+                "chunk_size": {
+                    "type": "integer",
+                    "default": 10000,
+                    "description": "Chunk size for parallel processing of CRAM files, in number of containers",
+                    "minimum": 1
+                }
+            }
+        },
         "execution": {
             "title": "Execution",
             "type": "object",
@@ -284,6 +304,9 @@
         },
         {
             "$ref": "#/definitions/reference_genome_options"
+        },
+        {
+            "$ref": "#/definitions/aligner_options"
         },
         {
             "$ref": "#/definitions/execution"

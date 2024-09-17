@@ -40,6 +40,11 @@
                         "git_sha": "a33ef9475558c6b8da08c5f522ddaca1ec810306",
                         "installed_by": ["modules"]
                     },
+                    "minimap2/index": {
+                        "branch": "master",
+                        "git_sha": "72e277acfd9e61a9f1368eafb4a9e83f5bcaa9f5",
+                        "installed_by": ["modules"]
+                    },
                     "samtools/faidx": {
                         "branch": "master",
                         "git_sha": "04fbbc7c43cebc0b95d5b126f6d9fe4effa33519",
@@ -56,6 +61,11 @@
                         "installed_by": ["modules"]
                     },
                     "samtools/idxstats": {
+                        "branch": "master",
+                        "git_sha": "46eca555142d6e597729fcb682adcc791796f514",
+                        "installed_by": ["modules"]
+                    },
+                    "samtools/index": {
                         "branch": "master",
                         "git_sha": "46eca555142d6e597729fcb682adcc791796f514",
                         "installed_by": ["modules"]
