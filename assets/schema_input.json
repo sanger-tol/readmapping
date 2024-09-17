@@ -22,7 +22,7 @@
             "datafile": {
                 "format": "string",
                 "pattern": "^\\S+$",
-                "errorMessage": "Data file for reads cannot contain spaces and must have extension 'cram', 'bam', '.fq.gz' or '.fastq.gz'",
+                "errorMessage": "Data file for reads cannot contain spaces and must have extension 'cram', 'bam', '.fq.gz' or '.fastq.gz'. Note that FASTQ inputs should be interleaved if paired-end.",
                 "meta": ["datafile"]
             },
             "library": {
