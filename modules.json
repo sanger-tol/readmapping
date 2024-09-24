@@ -5,6 +5,11 @@
         "https://github.com/nf-core/modules.git": {
             "modules": {
                 "nf-core": {
+                    "bbmap/filterbyname": {
+                        "branch": "master",
+                        "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
+                        "installed_by": ["modules"]
+                    },
                     "blast/blastn": {
                         "branch": "master",
                         "git_sha": "583edaf97c9373a20df05a3b7be5a6677f9cd719",
@@ -79,11 +84,6 @@
                     "seqkit/fq2fa": {
                         "branch": "master",
                         "git_sha": "03fbf6c89e551bd8d77f3b751fb5c955f75b34c5",
-                        "installed_by": ["modules"]
-                    },
-                    "seqtk/subseq": {
-                        "branch": "master",
-                        "git_sha": "730f3aee80d5f8d0b5fc532202ac59361414d006",
                         "installed_by": ["modules"]
                     },
                     "untar": {
