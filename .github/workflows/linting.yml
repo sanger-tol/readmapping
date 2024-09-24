@@ -22,7 +22,13 @@ jobs:
         run: npm install -g editorconfig-checker
 
       - name: Run ECLint check
-        run: editorconfig-checker -exclude README.md $(find .* -type f | grep -v '.git\|.py\|.md\|json\|yml\|yaml\|html\|css\|work\|.nextflow\|build\|nf_core.egg-info\|log.txt\|Makefile')
+        run: |
+          files=$(find .* -type f | grep -v '.git\|.py\|.md\|json\|yml\|yaml\|html\|css\|work\|.nextflow\|build\|nf_core.egg-info\|log.txt\|Makefile')
+          if [ -n "$files" ]; then
+            editorconfig-checker -exclude README.md $files
+          else
+            echo "No files found to check."
+          fi
 
   Prettier:
     runs-on: ubuntu-latest
