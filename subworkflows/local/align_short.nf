@@ -29,11 +29,11 @@ workflow ALIGN_SHORT {
 
 
     // Convert from CRAM to FASTQ only if CRAM files were provided as input
-    SAMTOOLS_FASTQ ( ch_reads.cram, false )
+    SAMTOOLS_FASTQ ( ch_reads.cram, true )
     ch_versions = ch_versions.mix ( SAMTOOLS_FASTQ.out.versions.first() )
-    
-    
-    SAMTOOLS_FASTQ.out.fastq
+
+
+    SAMTOOLS_FASTQ.out.interleaved
     | mix ( ch_reads.fastq )
     | set { ch_reads_fastq }
 
