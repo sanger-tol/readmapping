@@ -11,6 +11,7 @@
 ## Pipeline tools
 
 - [BBTools](http://sourceforge.net/projects/bbmap/)
+
   > Bushnell B. BBTools software package. 2014. http://sourceforge.net/projects/bbmap/
 
 - [Blast](https://pubmed.ncbi.nlm.nih.gov/20003500/)
@@ -36,7 +37,6 @@
 - [SeqKit](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5051824/)
 
   > Shen W, Le S, Li Y, Hu F. SeqKit: A cross-platform and ultrafast toolkit for FASTA/Q file manipulation. PLoS One. 2016 Oct 5;11(10):e0163962. doi: 10.1371/journal.pone.0163962. PubMed PMID: 27706213; PMCID: PMC5051824.
-
 
 ## Software packaging/containerisation tools
 
