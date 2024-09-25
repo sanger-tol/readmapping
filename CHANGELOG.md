@@ -10,6 +10,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed bug in handling CRAM HiC inputs introduced in 1.1.0
 - Fixed bug in handling PacBio FASTQ inputs introduced in 1.3.0
 
+| Dependency | Old version   | New version |
+| ---------- | ------------- | ----------- |
+| `bbtools`  |               | 39.01       |
+| `seqtk`    |   1.4         |             |
+
 ## [[1.3.0](https://github.com/sanger-tol/readmapping/releases/tag/1.3.0)] - Antipodean Opaleye - [2024-08-23]
 
 ### Enhancements & fixes
