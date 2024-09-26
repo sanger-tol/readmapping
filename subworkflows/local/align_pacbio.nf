@@ -52,7 +52,7 @@ workflow ALIGN_PACBIO {
     ch_versions = ch_versions.mix( GENERATE_CRAM_CSV.out.versions )
 
     //
-    // SUBWORKFLOW: mapping pacbio reads using minimap2 
+    // SUBWORKFLOW: mapping pacbio reads using minimap2
     //
     MINIMAP2_MAPREDUCE (
         fasta,
