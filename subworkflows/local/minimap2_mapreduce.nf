@@ -38,7 +38,8 @@ workflow MINIMAP2_MAPREDUCE {
         .map{ cram_id, cram_info, ref_id, ref_dir, mmi_id, mmi_path->
             tuple([
                     id: cram_id.id,
-                    chunk_id: cram_id.id + "_" + cram_info[5]
+                    chunk_id: cram_id.id + "_" + cram_info[5],
+                    genome_size: ref_id.genome_size
                     ],
                 file(cram_info[0]),
                 cram_info[1],
@@ -92,7 +93,7 @@ workflow MINIMAP2_MAPREDUCE {
         fasta,
         [ [], [] ]
     )
-    ch_versions         = ch_versions.mix ( SAMTOOLS_MERGE.out.versions.first() )
+    ch_versions         = ch_versions.mix ( SAMTOOLS_MERGE.out.versions )
 
 
     emit:
