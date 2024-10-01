@@ -256,6 +256,7 @@ def toolCitationText() {
     // Uncomment function in methodsDescriptionText to render in MultiQC report
     def citation_text = [
             "Tools used in the workflow included:",
+            "BBtools (Buschnell 2014),",
             "blastn (Camacho et al. 2009),",
             "bwa-mem2 (Vasimuddin et al. 2019),",
             "Crumble (Bonfield et al. 2019),",
@@ -270,6 +271,7 @@ def toolBibliographyText() {
     // Can use ternary operators to dynamically construct based conditions, e.g. params["run_xyz"] ? "<li>Author (2023) Pub name, Journal, DOI</li>" : "",
     // Uncomment function in methodsDescriptionText to render in MultiQC report
     def reference_text = [
+            "<li>Buschnell, B. (2014). BBtools software package. sourceforge.net/projects/bbmap.</li>",
             "<li>Camacho, C., Coulouris, G., Avagyan, V., Ma, N., Papadopoulos, J., Bealer, K., & Madden, T.L. (2009). BLAST+: architecture and applications. BMC Bioinformatics, 10, 421. doi:10.1186/1471-2105-10-421.</li>",
             "<li>Vasimuddin, Md., Misra, S., Li, H., & Aluru, S. (2019). Efficient Architecture-Aware Acceleration of BWA-MEM for Multicore Systems. IEEE Parallel and Distributed Processing Symposium (IPDPS), 2019. doi:10.1109/IPDPS.2019.00041.</li>",
             "<li>Bonfield, J.K., McCarthy, S.A., & Durbin, R. (2019). Crumble: reference free lossy compression of sequence quality values. Bioinformatics, 35(2), 337-339. doi:10.1093/bioinformatics/bty608.</li>",
