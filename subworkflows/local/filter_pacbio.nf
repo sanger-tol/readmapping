@@ -9,7 +9,7 @@ include { BLAST_BLASTN                      } from '../../modules/nf-core/blast/
 include { PACBIO_FILTER                     } from '../../modules/local/pacbio_filter'
 include { SAMTOOLS_FILTERTOFASTQ            } from '../../modules/local/samtools_filtertofastq'
 include { SEQKIT_FQ2FA                      } from '../../modules/nf-core/seqkit/fq2fa'
-include { BBMAP_FILTERBYNAME                } from '../../modules/nf-core/bbmap/filterbyname/main'
+include { BBMAP_FILTERBYNAME               } from '../../modules/nf-core/bbmap/filterbyname'
 
 
 workflow FILTER_PACBIO {
@@ -67,7 +67,7 @@ workflow FILTER_PACBIO {
     ch_versions = ch_versions.mix ( PACBIO_FILTER.out.versions.first() )
 
 
-    // Filter the BAM files and convert to FASTQ
+    // Filter the input BAM and output as interleaved FASTA
     SAMTOOLS_CONVERT.out.bam
     | join ( SAMTOOLS_CONVERT.out.csi )
     | join ( PACBIO_FILTER.out.list )
@@ -81,7 +81,7 @@ workflow FILTER_PACBIO {
     ch_versions = ch_versions.mix ( SAMTOOLS_FILTERTOFASTQ.out.versions.first() )
 
 
-    // Filter inputs provided as FASTQ
+    // Filter inputs provided as FASTQ and output as interleaved FASTQ
     ch_reads.fastq
     | join(PACBIO_FILTER.out.list)
     | multiMap { meta, fastq, list -> \
