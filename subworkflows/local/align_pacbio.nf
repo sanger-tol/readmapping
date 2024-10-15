@@ -4,12 +4,16 @@
 
 include { FILTER_PACBIO  } from '../../subworkflows/local/filter_pacbio'
 include { SAMTOOLS_ADDREPLACERG } from '../../modules/local/samtools_addreplacerg'
+include { SAMTOOLS_ADDREPLACERG as SAMTOOLS_ADDREPLACERG_FQ } from '../../modules/local/samtools_addreplacerg'
 include { SAMTOOLS_INDEX } from '../../modules/nf-core/samtools/index/main'
+include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_FQ } from '../../modules/nf-core/samtools/index/main'
 include { GENERATE_CRAM_CSV } from '../../modules/local/generate_cram_csv'
+include { GENERATE_CRAM_CSV as GENERATE_CRAM_CSV_FQ } from '../../modules/local/generate_cram_csv'
 include { MINIMAP2_MAPREDUCE } from '../../subworkflows/local/minimap2_mapreduce'
 include { SAMTOOLS_SORMADUP as CONVERT_CRAM } from '../../modules/local/samtools_sormadup'
+include { SAMTOOLS_SORMADUP as CONVERT_FQ_CRAM } from '../../modules/local/samtools_sormadup'
 include { SAMTOOLS_MERGE } from '../../modules/nf-core/samtools/merge/main'
-
+include { CREATE_CRAM_FILTER_INPUT } from '../../subworkflows/local/create_cram_filter_input' 
 
 workflow ALIGN_PACBIO {
     take:
@@ -22,41 +26,61 @@ workflow ALIGN_PACBIO {
     ch_versions = Channel.empty()
     ch_merged_bam   = Channel.empty()
 
-    // Filter BAM and output as FASTQ
-    FILTER_PACBIO ( reads, db )
-    ch_versions = ch_versions.mix ( FILTER_PACBIO.out.versions )
-
-    // Convert FASTQ to CRAM
-    CONVERT_CRAM ( FILTER_PACBIO.out.fastq, fasta )
+   // Convert input to CRAM
+    CONVERT_CRAM ( reads, fasta )
     ch_versions = ch_versions.mix ( CONVERT_CRAM.out.versions )
+    CONVERT_CRAM.out.bam.view()
+
 
     SAMTOOLS_ADDREPLACERG ( CONVERT_CRAM.out.bam )
     ch_versions = ch_versions.mix ( SAMTOOLS_ADDREPLACERG.out.versions )
 
-    SAMTOOLS_ADDREPLACERG.out.cram
-    | set { ch_reads_cram }
-
     // Index the CRAM file
-    SAMTOOLS_INDEX ( ch_reads_cram )
+    SAMTOOLS_INDEX ( SAMTOOLS_ADDREPLACERG.out.cram )
     ch_versions = ch_versions.mix( SAMTOOLS_INDEX.out.versions )
 
-    ch_reads_cram
+    SAMTOOLS_ADDREPLACERG.out.cram
     | join ( SAMTOOLS_INDEX.out.crai )
+    | set { ch_reads_cram }
+
+    GENERATE_CRAM_CSV( ch_reads_cram )
+    ch_versions = ch_versions.mix( GENERATE_CRAM_CSV.out.versions )
+
+    CREATE_CRAM_FILTER_INPUT ( GENERATE_CRAM_CSV.out.csv, fasta )
+    ch_versions = ch_versions.mix( CREATE_CRAM_FILTER_INPUT.out.versions )
+
+    // Filter BAM and output as FASTQ
+    FILTER_PACBIO ( CREATE_CRAM_FILTER_INPUT.out.chunked_cram, db )
+    ch_versions = ch_versions.mix ( FILTER_PACBIO.out.versions )
+
+    // Convert FASTQ to CRAM
+    CONVERT_FQ_CRAM ( FILTER_PACBIO.out.fastq, fasta )
+    ch_versions = ch_versions.mix ( CONVERT_FQ_CRAM.out.versions )
+    CONVERT_FQ_CRAM.out.bam.view()
+
+    SAMTOOLS_ADDREPLACERG_FQ ( CONVERT_FQ_CRAM.out.bam )
+    ch_versions = ch_versions.mix ( SAMTOOLS_ADDREPLACERG_FQ.out.versions )
+
+    SAMTOOLS_INDEX_FQ ( SAMTOOLS_ADDREPLACERG_FQ.out.cram )
+    ch_versions = ch_versions.mix( SAMTOOLS_INDEX_FQ.out.versions )
+
+    SAMTOOLS_ADDREPLACERG_FQ.out.cram
+    | join ( SAMTOOLS_INDEX_FQ.out.crai )
     | set { ch_reads_cram_crai }
 
 
     //
     // MODULE: generate a CRAM CSV file containing the required parametres for CRAM_FILTER_MINIMAP2_FILTER5END_FIXMATE_SORT
     //
-    GENERATE_CRAM_CSV( ch_reads_cram_crai )
-    ch_versions = ch_versions.mix( GENERATE_CRAM_CSV.out.versions )
+    GENERATE_CRAM_CSV_FQ( ch_reads_cram_crai )
+    ch_versions = ch_versions.mix( GENERATE_CRAM_CSV_FQ.out.versions )
 
     //
     // SUBWORKFLOW: mapping pacbio reads using minimap2
     //
     MINIMAP2_MAPREDUCE (
         fasta,
-        GENERATE_CRAM_CSV.out.csv
+        GENERATE_CRAM_CSV_FQ.out.csv
     )
     ch_versions         = ch_versions.mix( MINIMAP2_MAPREDUCE.out.versions )
     ch_merged_bam           = ch_merged_bam.mix(MINIMAP2_MAPREDUCE.out.mergedbam)
