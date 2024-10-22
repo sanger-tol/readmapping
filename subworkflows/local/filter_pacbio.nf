@@ -20,7 +20,7 @@ workflow FILTER_PACBIO {
     main:
     ch_versions = Channel.empty()
 
-    // Convert from PacBio CRAM to BAM
+    // Convert from PacBio CRAM to Samtools BAM
     reads
     | map { meta, cram -> [ meta, cram, [] ] }
     | set { ch_pacbio }
