@@ -19,7 +19,7 @@ workflow ALIGN_PACBIO {
 
 
     // Filter BAM and output as FASTQ
-    FILTER_PACBIO ( reads, db )
+    FILTER_PACBIO ( reads, db, fasta )
     ch_versions = ch_versions.mix ( FILTER_PACBIO.out.versions )
 
 
@@ -41,7 +41,7 @@ workflow ALIGN_PACBIO {
 
 
     // Merge, but only if there is more than 1 file
-    SAMTOOLS_MERGE ( ch_bams.multi_bams, [ [], [] ], [ [], [] ] )
+    SAMTOOLS_MERGE ( ch_bams.multi_bams, fasta, [ [], [] ] )
     ch_versions = ch_versions.mix ( SAMTOOLS_MERGE.out.versions.first() )
 
 
