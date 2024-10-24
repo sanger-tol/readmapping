@@ -76,7 +76,7 @@ workflow BWAMEM2_MAPREDUCE {
         fasta,
         [ [], [] ]
     )
-    ch_versions         = ch_versions.mix ( SAMTOOLS_MERGE.out.versions.first() )
+    ch_versions         = ch_versions.mix ( SAMTOOLS_MERGE.out.versions )
 
 
     emit:
