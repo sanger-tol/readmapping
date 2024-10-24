@@ -6,6 +6,7 @@ include { GUNZIP        } from '../../modules/nf-core/gunzip/main'
 include { UNMASK        } from '../../modules/local/unmask'
 include { UNTAR         } from '../../modules/nf-core/untar/main'
 include { BWAMEM2_INDEX } from '../../modules/nf-core/bwamem2/index/main'
+include { CRAM_CACHE    } from '../../modules/local/cram_cache'
 
 
 workflow PREPARE_GENOME {
@@ -32,6 +33,9 @@ workflow PREPARE_GENOME {
     UNMASK ( ch_fasta )
     ch_versions = ch_versions.mix ( UNMASK.out.versions )
 
+    // Generate CRAM cache
+    CRAM_CACHE ( UNMASK.out.fasta )
+
     // Generate BWA index
     if ( checkShortReads( params.input ) ) {
         if ( params.bwamem2_index ) {
@@ -57,9 +61,9 @@ workflow PREPARE_GENOME {
 
 
     emit:
-    fasta    = UNMASK.out.fasta.first()    // channel: [ meta, /path/to/fasta ]
-    bwaidx   = ch_bwamem2_index.first()    // channel: [ meta, /path/to/bwamem2/index_dir/ ]
-    versions = ch_versions                 // channel: [ versions.yml ]
+    fasta    = UNMASK.out.fasta    // channel: [ meta, /path/to/fasta ]
+    bwaidx   = ch_bwamem2_index    // channel: [ meta, /path/to/bwamem2/index_dir/ ]
+    versions = ch_versions         // channel: [ versions.yml ]
 }
 
 //

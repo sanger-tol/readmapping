@@ -16,6 +16,7 @@ workflow FILTER_PACBIO {
     take:
     reads    // channel: [ val(meta), /path/to/datafile ]
     db       // channel: /path/to/vector_db
+    fasta    // channel: [ val(meta), /path/to/fasta ]
 
 
     main:
@@ -37,7 +38,7 @@ workflow FILTER_PACBIO {
     | map { meta, bam -> [ meta, bam, [] ] }
     | set { ch_pacbio }
 
-    SAMTOOLS_CONVERT ( ch_pacbio, [ [], [] ], [] )
+    SAMTOOLS_CONVERT ( ch_pacbio, fasta, [] )
     ch_versions = ch_versions.mix ( SAMTOOLS_CONVERT.out.versions.first() )
 
 
