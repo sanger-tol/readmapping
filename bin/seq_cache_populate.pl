@@ -55,7 +55,7 @@ my $usage = "Usage: $0 -root <dir> [-subdirs <n>] input1.fasta ...\n       $0 -r
 
 # Deal with options
 GetOptions("root=s" => \$root_dir, "subdirs=s" => \$subdirs,
-       "find=s" => \$find) || die $usage;
+            "find=s" => \$find) || die $usage;
 
 unless ($root_dir && $subdirs =~ /^\d+$/) { die $usage; }
 if ($subdirs >= 16) {
@@ -81,8 +81,8 @@ if ($find) {
         find_files($File::Find::name, $root_dir, $dest_re, $max_acc);
     },
     no_chdir => 1,
-     },
-     $find);
+    },
+    $find);
 } elsif (@ARGV) {
     # If a list of files was given on the command line, go through them
     # and try to add each one.
@@ -151,7 +151,7 @@ sub process_file {
     my $tmpfile;   # Temporary file name
     my $tmpfh;     # Temporary file handle
     my $extra = 1024; # Extra space to pre-allocate to account for reading
-                      # 1 line past $max_acc
+                    # 1 line past $max_acc
     vec($acc, $max_acc + $extra, 8) = 1; # Pre-allocate some space
     $acc = '';
 
@@ -171,7 +171,7 @@ sub process_file {
         # Found a fasta header
         if ($ctx) { # Finish previous entry, if there is one
             finish_entry($id, $ctx, \$acc, $tmpfh, $tmpfile,
-                 $root_dir, $dest_re);
+                $root_dir, $dest_re);
             undef($tmpfile);
             $acc = '';
         }
@@ -192,7 +192,7 @@ sub process_file {
             # $root_dir.
             unless ($tmpfile) {
                 ($tmpfh, $tmpfile) = tempfile(DIR => $root_dir,
-                              SUFFIX => '.tmp');
+                                SUFFIX => '.tmp');
             }
             print $tmpfh $acc
                 || die "Error writing to $tmpfile: $!\n";
@@ -204,7 +204,7 @@ sub process_file {
     if ($ctx) {
         # Finish off the last entry
         finish_entry($id, $ctx, \$acc, $tmpfh, $tmpfile,
-             $root_dir, $dest_re);
+                $root_dir, $dest_re);
         undef($tmpfile);
     }
     };
@@ -248,7 +248,7 @@ sub finish_entry {
         # we won't leave a file with the right name but half-written
         # content.
         ($tmpfh, $tmpfile) = tempfile(DIR => $dest_dir,
-                      SUFFIX => '.tmp');
+                        SUFFIX => '.tmp');
     }
 
     # Assert that the $tmpfile is now set
@@ -287,9 +287,9 @@ seq_cache_populate.pl
 
 =head1 SYNOPSIS
 
- seq_cache_populate.pl -root <dir> [-subdirs <n>] input1.fasta ...
+seq_cache_populate.pl -root <dir> [-subdirs <n>] input1.fasta ...
 
- seq_cache_populate.pl -root <dir> [-subdirs <n>]  -find <dir>
+seq_cache_populate.pl -root <dir> [-subdirs <n>]  -find <dir>
 
 =head1 DESCRIPTION
 
