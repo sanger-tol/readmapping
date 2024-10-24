@@ -24,3 +24,4 @@ process CRAM_CACHE {
     seq_cache_populate.pl -root ref_cache/ !{reference}
     REF_PATH="ref_cache/%2s/%2s/%s"
     '''
+}
