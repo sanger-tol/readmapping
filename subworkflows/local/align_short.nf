@@ -2,10 +2,11 @@
 // Align short read (HiC and Illumina) data against the genome
 //
 
-include { SAMTOOLS_FASTQ    } from '../../modules/nf-core/samtools/fastq/main'
-include { BWAMEM2_MEM       } from '../../modules/nf-core/bwamem2/mem/main'
-include { SAMTOOLS_MERGE    } from '../../modules/nf-core/samtools/merge/main'
-include { SAMTOOLS_SORMADUP } from '../../modules/local/samtools_sormadup'
+include { SAMTOOLS_FASTQ          } from '../../modules/nf-core/samtools/fastq/main'
+include { SAMTOOLS_COLLATETOFASTQ } from '../../modules/local/samtools_collatetofastq'
+include { BWAMEM2_MEM             } from '../../modules/nf-core/bwamem2/mem/main'
+include { SAMTOOLS_MERGE          } from '../../modules/nf-core/samtools/merge/main'
+include { SAMTOOLS_SORMADUP       } from '../../modules/local/samtools_sormadup'
 
 
 workflow ALIGN_SHORT {
@@ -29,11 +30,11 @@ workflow ALIGN_SHORT {
 
 
     // Convert from CRAM to FASTQ only if CRAM files were provided as input
-    SAMTOOLS_FASTQ ( ch_reads.cram, true )
-    ch_versions = ch_versions.mix ( SAMTOOLS_FASTQ.out.versions.first() )
+    SAMTOOLS_COLLATETOFASTQ ( ch_reads.cram, true )
+    ch_versions = ch_versions.mix ( SAMTOOLS_COLLATETOFASTQ.out.versions.first() )
 
 
-    SAMTOOLS_FASTQ.out.interleaved
+    SAMTOOLS_COLLATETOFASTQ.out.interleaved
     | mix ( ch_reads.fastq )
     | set { ch_reads_fastq }
 
