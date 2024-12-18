@@ -22,17 +22,26 @@ process SAMTOOLS_COLLATETOFASTQ {
     task.ext.when == null || task.ext.when
 
     script:
-    def args = task.ext.args ?: ''
+    def args  = task.ext.args  ?: ''
+    def args2 = task.ext.args2 ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     def output = ( interleave && ! meta.single_end ) ? "> ${prefix}_interleaved.fasta" :
         meta.single_end ? "-1 ${prefix}_1.fasta -s ${prefix}_singleton.fasta" :
         "-1 ${prefix}_1.fasta -2 ${prefix}_2.fasta -s ${prefix}_singleton.fasta"
     """
-    samtools fasta \\
+    samtools collate \\
         $args \\
+        -O \\
+        -u \\
+        -T ${prefix}.collate \\
+        --threads $task.cpus \\
+        ${input} \\
+    | \\
+    samtools \\
+        fastq \\
+        $args2 \\
         --threads ${task.cpus-1} \\
-        -0 ${prefix}_other.fasta \\
-        $input \\
+        -0 ${prefix}_other.fastq.gz \\
         $output
 
     cat <<-END_VERSIONS > versions.yml
