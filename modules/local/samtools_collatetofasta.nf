@@ -2,7 +2,7 @@ process SAMTOOLS_COLLATETOFASTA {
     tag "$meta.id"
     label 'process_medium'
 
-    conda "bioconda::samtools=1.20"
+    conda "bioconda::samtools=1.21"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
         'https://depot.galaxyproject.org/singularity/samtools:1.21--h50ea8bc_0' :
         'biocontainers/samtools:1.21--h50ea8bc_0' }"
