@@ -3,7 +3,19 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [[1.3.1](https://github.com/sanger-tol/readmapping/releases/tag/1.3.0)] - Antipodean Opaleye (patch 1) - [2024-09-24]
+## [[1.3.2](https://github.com/sanger-tol/readmapping/releases/tag/1.3.2)] - Antipodean Opaleye (patch 2) - [2025-01-13]
+
+### Enhancements & fixes
+
+- Dependency version updates
+- Remove references to Anaconda channels
+
+| Dependency | Old version | New version |
+| ---------- | ----------- | ----------- |
+| `bbtools`  | 39.01       | 39.10       |
+| `samtools` | 1.20        | 1.21        |
+
+## [[1.3.1](https://github.com/sanger-tol/readmapping/releases/tag/1.3.1)] - Antipodean Opaleye (patch 1) - [2024-09-24]
 
 ### Enhancements & fixes
 

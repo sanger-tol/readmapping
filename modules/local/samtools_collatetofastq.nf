@@ -1,4 +1,4 @@
-process SAMTOOLS_COLLATETOFASTA {
+process SAMTOOLS_COLLATETOFASTQ {
     tag "$meta.id"
     label 'process_medium'
 
@@ -9,10 +9,14 @@ process SAMTOOLS_COLLATETOFASTA {
 
     input:
     tuple val(meta), path(input)
+    val(interleave)
 
     output:
-    tuple val(meta), path("*.fasta"), emit: fasta
-    path "versions.yml"             , emit: versions
+    tuple val(meta), path("*_{1,2}.fasta")      , optional:true, emit: fasta
+    tuple val(meta), path("*_interleaved.fasta"), optional:true, emit: interleaved
+    tuple val(meta), path("*_singleton.fasta")  , optional:true, emit: singleton
+    tuple val(meta), path("*_other.fasta")      , optional:true, emit: other
+    path  "versions.yml"                        , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -20,8 +24,10 @@ process SAMTOOLS_COLLATETOFASTA {
     script:
     def args  = task.ext.args  ?: ''
     def args2 = task.ext.args2 ?: ''
-
     def prefix = task.ext.prefix ?: "${meta.id}"
+    def output = ( interleave && ! meta.single_end ) ? "> ${prefix}_interleaved.fasta" :
+        meta.single_end ? "-1 ${prefix}_1.fasta -s ${prefix}_singleton.fasta" :
+        "-1 ${prefix}_1.fasta -2 ${prefix}_2.fasta -s ${prefix}_singleton.fasta"
     """
     samtools collate \\
         $args \\
@@ -31,11 +37,12 @@ process SAMTOOLS_COLLATETOFASTA {
         --threads $task.cpus \\
         ${input} \\
     | \\
-    samtools fasta \\
+    samtools \\
+        fastq \\
         $args2 \\
-        --threads $task.cpus \\
-        -0 ${prefix}.fasta \\
-        > /dev/null
+        --threads ${task.cpus-1} \\
+        -0 ${prefix}_other.fastq.gz \\
+        $output
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
