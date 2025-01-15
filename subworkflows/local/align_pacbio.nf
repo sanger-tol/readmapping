@@ -49,7 +49,7 @@ workflow ALIGN_PACBIO {
 
     // Align without map reduce
     // Align Fastq to Genome with minimap2. bam_format is set to true, making the output a *sorted* BAM
-    MINIMAP2_ALIGN ( FILTER_PACBIO.out.fastq, fasta, true, "bai", false, false )
+    MINIMAP2_ALIGN ( FILTER_PACBIO.out.fastq, fasta, true, "csi", false, false )
     ch_versions = ch_versions.mix ( MINIMAP2_ALIGN.out.versions.first() )
 
     // Collect all alignment output by sample name
