@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Enhancements & fixes
 
-- Fixed the memory requests of SAMTOOLS_COLLATETOFASTQ
+- Fixed the resource requirements of SAMTOOLS_COLLATETOFASTQ, CRUMBLE, and SEQKIT_FQ2FA
 
 ## [[1.3.2](https://github.com/sanger-tol/readmapping/releases/tag/1.3.2)] - Antipodean Opaleye (patch 2) - [2025-01-14]
 
