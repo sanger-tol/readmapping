@@ -2,7 +2,6 @@
 // Align short read (HiC and Illumina) data against the genome
 //
 
-include { SAMTOOLS_FASTQ                        } from '../../modules/nf-core/samtools/fastq/main'
 include { SAMTOOLS_MERGE                        } from '../../modules/nf-core/samtools/merge/main'
 include { SAMTOOLS_SORMADUP                     } from '../../modules/local/samtools_sormadup'
 include { SAMTOOLS_INDEX                        } from '../../modules/nf-core/samtools/index/main'
