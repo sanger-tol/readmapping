@@ -3,6 +3,12 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [[1.3.4](https://github.com/sanger-tol/readmapping/releases/tag/1.3.4)] - Antipodean Opaleye (patch 4) - [2025-03-18]
+
+### Enhancements & fixes
+
+- Even more memory for CRUMBLE
+
 ## [[1.3.3](https://github.com/sanger-tol/readmapping/releases/tag/1.3.3)] - Antipodean Opaleye (patch 3) - [2025-02-10]
 
 ### Enhancements & fixes
