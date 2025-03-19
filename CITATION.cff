@@ -1,0 +1,42 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: sanger-tol/readmapping v1.3.4
+type: software
+authors:
+    - given-names: Sandra Ruth
+      family-names: Babirye
+      affiliation: Wellcome Sanger Institute
+      orcid: "https://orcid.org/0009-0004-7773-7008"
+    - given-names: Tyler
+      family-names: Chafin
+      affiliation: Wellcome Sanger Institute
+      orcid: "https://orcid.org/0000-0001-8687-5905"
+    - given-names: Chau
+      family-names: Duong
+      affiliation: Wellcome Sanger Institute
+      orcid: "https://orcid.org/0009-0001-0649-2291"
+    - given-names: Matthieu
+      family-names: Muffato
+      affiliation: Wellcome Sanger Institute
+      orcid: "https://orcid.org/0000-0002-7860-3560"
+    - given-names: Guoying
+      family-names: Qi
+      affiliation: Wellcome Sanger Institute
+      orcid: "https://orcid.org/0000-0003-1262-8973"
+    - given-names: Priyanka
+      family-names: Surana
+      affiliation: Wellcome Sanger Institute
+      orcid: "https://orcid.org/0000-0002-7167-0875"
+    - given-names: Bethan
+      family-names: Yates
+      affiliation: Wellcome Sanger Institute
+      orcid: "https://orcid.org/0000-0003-1658-1762"
+identifiers:
+    - type: doi
+      value: 10.5281/zenodo.6563577
+repository-code: "https://github.com/sanger-tol/readmapping"
+license: MIT
+version: 1.3.4
+date-released: "2022-10-07"
