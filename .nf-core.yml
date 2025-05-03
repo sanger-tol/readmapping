@@ -40,4 +40,6 @@ template:
   name: readmapping
   org: sanger-tol
   outdir: .
+  skip_features:
+    - igenomes
   version: 1.3.3

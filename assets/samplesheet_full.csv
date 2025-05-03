@@ -1,0 +1,5 @@
+sample,datatype,datafile,library
+ilPolIcar1,pacbio,/lustre/scratch124/tol/projects/darwin/data/insects/Polyommatus_icarus/genomic_data/ilPolIcar1/pacbio/m64016_191206_183623.ccs.bc1019_BAK8B_OA--bc1019_BAK8B_OA.bam,
+ilPolIcar2,hic,/lustre/scratch124/tol/projects/darwin/data/insects/Polyommatus_icarus/genomic_data/ilPolIcar2/hic-arima2/34957_2#4.cram,
+ilPolIcar2,hic,/lustre/scratch124/tol/projects/darwin/data/insects/Polyommatus_icarus/genomic_data/ilPolIcar2/hic-arima2/34892_5#4.cram,
+ilPolIcar4,ont,/lustre/scratch124/tol/projects/darwin/data/insects/Polyommatus_icarus/genomic_data/ilPolIcar4/ont/ilPolIcar4.ont.fastq.gz,
