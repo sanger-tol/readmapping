@@ -91,7 +91,7 @@ workflow PIPELINE_INITIALISATION {
 
     Channel
         // .fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
-        .fromSamplesheet("input")
+        .fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
         .map { row ->
             def meta = row[0] + [id: file(row[0].datafile).baseName]
             return [meta, file(row[0].datafile, checkIfExists: true)]
