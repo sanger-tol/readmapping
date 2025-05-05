@@ -32,7 +32,7 @@ lint:
 nf_core_version: 3.2.0
 repository_type: pipeline
 template:
-  author: '@priyanka-surana'
+  author: "@priyanka-surana"
   description: Pipeline to map reads generated using different sequencing technologies
     against a genome assembly.
   force: false
