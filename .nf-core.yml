@@ -1,38 +1,38 @@
 lint:
   files_exist:
-  - assets/multiqc_config.yml
-  - assets/nf-core-readmapping_logo_light.png
-  - assets/methods_description_template.yml
-  - conf/igenomes.config
-  - docs/images/nf-core-readmapping_logo_dark.png
-  - docs/images/nf-core-readmapping_logo_light.png
-  - .github/ISSUE_TEMPLATE/config.yml
-  - .github/workflows/awstest.yml
-  - .github/workflows/awsfulltest.yml
-  - tower.yml
+    - assets/multiqc_config.yml
+    - assets/nf-core-readmapping_logo_light.png
+    - assets/methods_description_template.yml
+    - conf/igenomes.config
+    - docs/images/nf-core-readmapping_logo_dark.png
+    - docs/images/nf-core-readmapping_logo_light.png
+    - .github/ISSUE_TEMPLATE/config.yml
+    - .github/workflows/awstest.yml
+    - .github/workflows/awsfulltest.yml
+    - tower.yml
   files_unchanged:
-  - LICENSE
-  - .github/CONTRIBUTING.md
-  - .github/ISSUE_TEMPLATE/bug_report.yml
-  - .github/workflows/linting_comment.yml
-  - assets/email_template.html
-  - assets/sendmail_template.txt
-  - docs/README.md
-  - lib/NfcoreTemplate.groovy
-  - .github/workflows/branch.yml
-  - .gitignore
-  - .github/workflows/linting.yml
-  - .github/PULL_REQUEST_TEMPLATE.md
+    - LICENSE
+    - .github/CONTRIBUTING.md
+    - .github/ISSUE_TEMPLATE/bug_report.yml
+    - .github/workflows/linting_comment.yml
+    - assets/email_template.html
+    - assets/sendmail_template.txt
+    - docs/README.md
+    - lib/NfcoreTemplate.groovy
+    - .github/workflows/branch.yml
+    - .gitignore
+    - .github/workflows/linting.yml
+    - .github/PULL_REQUEST_TEMPLATE.md
   multiqc_config: false
   nextflow_config:
-  - manifest.name
-  - manifest.homePage
-  - config_defaults:
-    - params.vector_db
+    - manifest.name
+    - manifest.homePage
+    - config_defaults:
+        - params.vector_db
 nf_core_version: 3.2.0
 repository_type: pipeline
 template:
-  author: '@priyanka-surana'
+  author: "@priyanka-surana"
   description: Pipeline to map reads generated using different sequencing technologies
     against a genome assembly.
   force: false
@@ -40,4 +40,8 @@ template:
   name: readmapping
   org: sanger-tol
   outdir: .
+  skip_features:
+    - igenomes
+    - multiqc
+    - fastqc
   version: 1.3.3
