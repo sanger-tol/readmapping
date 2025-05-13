@@ -30,8 +30,8 @@ workflow PIPELINE_INITIALISATION {
     validate_params   // boolean: Boolean whether to validate parameters against the schema at runtime
     monochrome_logs   // boolean: Do not use coloured log outputs
     nextflow_cli_args //   array: List of positional nextflow CLI args
-    outdir
-    input
+    outdir            //  string: The output directory where the results will be saved
+    input             //  string: Path to input samplesheet
 
     main:
 
@@ -255,6 +255,7 @@ def toolBibliographyText() {
 
     return reference_text
 }
+
 def methodsDescriptionText(mqc_methods_yaml) {
     // Convert  to a named map so can be used as with familiar NXF ${workflow} variable syntax in the MultiQC YML file
     def meta = [:]
