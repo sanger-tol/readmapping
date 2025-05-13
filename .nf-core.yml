@@ -1,5 +1,6 @@
 lint:
   files_exist:
+    - CODE_OF_CONDUCT.md
     - assets/multiqc_config.yml
     - assets/nf-core-readmapping_logo_light.png
     - assets/methods_description_template.yml
