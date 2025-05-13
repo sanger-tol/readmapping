@@ -1,5 +1,5 @@
-
 # sanger-tol/readmapping
+
 ![sanger-tol/readmapping](docs/images/sanger-tol-readmapping_logo.png)
 
 [![GitHub Actions CI Status](https://github.com/sanger-tol/readmapping/actions/workflows/ci.yml/badge.svg)](https://github.com/sanger-tol/readmapping/actions/workflows/ci.yml)
