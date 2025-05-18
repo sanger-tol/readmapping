@@ -36,7 +36,7 @@ include { CONVERT_STATS                 } from '../subworkflows/local/convert_st
 // MODULE: Installed directly from nf-core/modules
 //
 
-include { UNTAR                       } from '../modules/nf-core/untar/main'
+include { UNTAR                  } from '../modules/nf-core/untar/main'
 
 
 include { paramsSummaryMap       } from 'plugin/nf-schema'
