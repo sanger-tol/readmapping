@@ -8,7 +8,6 @@ include { SAMTOOLS_COLLATETOFASTA           } from '../../modules/local/samtools
 include { BLAST_BLASTN                      } from '../../modules/nf-core/blast/blastn/main'
 include { PACBIO_FILTER                     } from '../../modules/local/pacbio_filter'
 include { SAMTOOLS_FILTERTOFASTQ            } from '../../modules/local/samtools_filtertofastq'
-include { SEQKIT_FQ2FA                      } from '../../modules/nf-core/seqkit/fq2fa'
 
 
 workflow FILTER_PACBIO {
