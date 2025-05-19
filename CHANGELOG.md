@@ -168,7 +168,6 @@ Note, since the pipeline is using Nextflow DSL2, each process will be run with i
 > **NB:** Dependency has been **updated** if both old and new version information is present. </br> **NB:** Dependency has been **added** if just the new version information is present. </br> **NB:** Dependency has been **removed** if version information isn't present.
 
 ## [[v1.0.0](https://github.com/sanger-tol/readmapping/releases/tag/1.0.0)] – Ukrainian Ironbelly - [2022-05-19]
->>>>>>> dev
 
 Initial release of sanger-tol/readmapping, created with the [nf-core](https://nf-co.re/) template.
 
