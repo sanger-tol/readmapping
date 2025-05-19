@@ -3,6 +3,10 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## v1.4.0dev - [date]
+
+### Enhancements & fixes
+
 ## [[1.3.4](https://github.com/sanger-tol/readmapping/releases/tag/1.3.4)] - Antipodean Opaleye (patch 4) - [2025-03-18]
 
 ### Enhancements & fixes
