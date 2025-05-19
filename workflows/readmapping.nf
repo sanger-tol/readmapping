@@ -36,8 +36,11 @@ include { CONVERT_STATS                 } from '../subworkflows/local/convert_st
 // MODULE: Installed directly from nf-core/modules
 //
 
-include { UNTAR                       } from '../modules/nf-core/untar/main'
-include { CUSTOM_DUMPSOFTWAREVERSIONS } from '../modules/nf-core/custom/dumpsoftwareversions/main'
+include { UNTAR                  } from '../modules/nf-core/untar/main'
+
+
+include { paramsSummaryMap       } from 'plugin/nf-schema'
+include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -55,7 +58,6 @@ workflow READMAPPING {
     main:
     // Initialize an empty versions channel
     ch_versions = Channel.empty()
-    ch_multiqc_files = Channel.empty()
 
     //
     // SUBWORKFLOW: Read in samplesheet, validate and stage input files
@@ -139,18 +141,22 @@ workflow READMAPPING {
     CONVERT_STATS ( ch_reheadered_bams, PREPARE_GENOME.out.fasta )
     ch_versions = ch_versions.mix ( CONVERT_STATS.out.versions )
 
+    //
+    // Collate and save software versions
+    //
+    softwareVersionsToYAML(ch_versions)
+        .collectFile(
+            storeDir: "${params.outdir}/pipeline_info",
+            name:  'readmapping_software_'  + 'versions.yml',
+            sort: true,
+            newLine: true
+        ).set { ch_collated_versions }
 
-    //
-    // MODULE: Combine different versions.yml
-    //
-    CUSTOM_DUMPSOFTWAREVERSIONS (
-        ch_versions
-        | unique { it.text }
-        | collectFile ( name: 'collated_versions.yml' )
-    )
+
+    emit:
+    versions       = ch_versions                 // channel: [ path(versions.yml) ]
+
 }
-
-
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -1,10 +1,6 @@
-nf_core_version: 2.14.1
-repository_type: pipeline
-template:
-  name: readmapping
-  prefix: sanger-tol
 lint:
   files_exist:
+    - CODE_OF_CONDUCT.md
     - assets/multiqc_config.yml
     - assets/nf-core-readmapping_logo_light.png
     - assets/methods_description_template.yml
@@ -28,9 +24,25 @@ lint:
     - .gitignore
     - .github/workflows/linting.yml
     - .github/PULL_REQUEST_TEMPLATE.md
+  multiqc_config: false
   nextflow_config:
     - manifest.name
     - manifest.homePage
     - config_defaults:
         - params.vector_db
-  multiqc_config: False
+nf_core_version: 3.2.0
+repository_type: pipeline
+template:
+  author: "@priyanka-surana"
+  description: Pipeline to map reads generated using different sequencing technologies
+    against a genome assembly.
+  force: false
+  is_nfcore: false
+  name: readmapping
+  org: sanger-tol
+  outdir: .
+  skip_features:
+    - igenomes
+    - multiqc
+    - fastqc
+  version: 1.4.0dev

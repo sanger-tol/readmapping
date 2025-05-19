@@ -6,7 +6,7 @@
 
 ## [Nextflow](https://pubmed.ncbi.nlm.nih.gov/28398311/)
 
->
+> Di Tommaso P, Chatzou M, Floden EW, Barja PP, Palumbo E, Notredame C. Nextflow enables reproducible computational workflows. Nat Biotechnol. 2017 Apr 11;35(4):316-319. doi: 10.1038/nbt.3820. PubMed PMID: 28398311.
 
 ## Pipeline tools
 
@@ -40,9 +40,9 @@
 
 ## Software packaging/containerisation tools
 
-- [Anaconda](https://anaconda.com)
+- [Conda](https://conda.org/)
 
-  > Anaconda Software Distribution. Computer software. Vers. 2-2.4.0. Anaconda, Nov. 2016. Web.
+  > conda contributors. conda: A system-level, binary package and environment manager running on all major operating systems and platforms. Computer software. https://github.com/conda/conda
 
 - [Bioconda](https://pubmed.ncbi.nlm.nih.gov/29967506/)
 
@@ -54,7 +54,7 @@
 
 - [Docker](https://dl.acm.org/doi/10.5555/2600239.2600241)
 
-  > Merkel, D. Docker: lightweight linux containers for consistent development and deployment. Linux Journal, 2014 Mar;2014(239):2. doi: 10.5555/2600239.2600241.
+  > Merkel, D. (2014). Docker: lightweight linux containers for consistent development and deployment. Linux Journal, 2014(239), 2. doi: 10.5555/2600239.2600241.
 
 - [Singularity](https://pubmed.ncbi.nlm.nih.gov/28494014/)
 
