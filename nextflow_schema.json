@@ -41,6 +41,12 @@
                     "description": "Output file compression type. Currently accepts: \"none\" or \"crumble\"",
                     "fa_icon": "fas fa-file-archive"
                 },
+                "merge_output":{
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Merge output alignment files by samples",
+                    "fa_icon": "fas fa-layer-group"
+                },
                 "vector_db": {
                     "type": "string",
                     "description": "Path to directory or tar.gz archive for pre-built PacBio vector database.",

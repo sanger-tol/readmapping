@@ -58,33 +58,32 @@ workflow ALIGN_ONT {
 
     ch_merged_bam
     | combine( ch_reads_cram_crai )
-    | map { meta_bam, bam, meta_cram, cram, crai -> [ meta_cram, bam ] }
+    | map { meta_bam, bam, meta_cram, cram, crai -> [ meta_cram + [merged: false], bam ] }
     | set { ch_merged_bam }
 
+    
+    ch_sort = ch_merged_bam
+    if ( params.merge_output ) {
+        // Collect all BAM output by sample name
+        ch_merged_bam
+        | map { meta, bam -> [['id': meta.id.split('_')[0..-2].join('_'), 'datatype': meta.datatype], meta.read_count, bam] }
+        | groupTuple( by: [0] )
+        | map { meta, read_counts, bams -> [meta + [read_count: read_counts.sum()], bams] }
+        | filter { it[1].size() > 1 }
+        | set { ch_multi_bams }
 
-    // Collect all BAM output by sample name
-    ch_merged_bam
-    | map { meta, bam -> [['id': meta.id.split('_')[0..-2].join('_'), 'datatype': meta.datatype], meta.read_count, bam] }
-    | groupTuple( by: [0] )
-    | map { meta, read_counts, bams -> [meta + [read_count: read_counts.sum()], bams] }
-    | branch {
-        meta, bams ->
-            single_bam: bams.size() == 1
-            multi_bams: true
+
+        // Merge, but only if there is more than 1 file
+        SAMTOOLS_MERGE ( ch_multi_bams, [ [], [] ], [ [], [] ] )
+        ch_versions = ch_versions.mix ( SAMTOOLS_MERGE.out.versions )
+
+
+        // Convert merged BAM to CRAM and calculate indices and statistics
+        ch_sort = SAMTOOLS_MERGE.out.bam
+        | map { meta, bam -> [meta.tap { it.merged = true }, bam] }
+        | mix ( ch_merged_bam )
     }
-    | set { ch_bams }
-
-
-    // Merge, but only if there is more than 1 file
-    SAMTOOLS_MERGE ( ch_bams.multi_bams, [ [], [] ], [ [], [] ] )
-    ch_versions = ch_versions.mix ( SAMTOOLS_MERGE.out.versions )
-
-
-    // Convert merged BAM to CRAM and calculate indices and statistics
-    SAMTOOLS_MERGE.out.bam
-    | mix ( ch_bams.single_bam )
-    | set { ch_sort }
-
+    
 
     emit:
     bam      = ch_sort                       // channel: [ val(meta), /path/to/bam ]
