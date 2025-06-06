@@ -61,7 +61,7 @@ workflow ALIGN_ONT {
     | map { meta_bam, bam, meta_cram, cram, crai -> [ meta_cram + [merged: false], bam ] }
     | set { ch_merged_bam }
 
-    
+
     ch_sort = ch_merged_bam
     if ( params.merge_output ) {
         // Collect all BAM output by sample name
@@ -83,7 +83,7 @@ workflow ALIGN_ONT {
         | map { meta, bam -> [meta.tap { it.merged = true }, bam] }
         | mix ( ch_merged_bam )
     }
-    
+
 
     emit:
     bam      = ch_sort                       // channel: [ val(meta), /path/to/bam ]

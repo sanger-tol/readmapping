@@ -18,7 +18,7 @@ include { SAMTOOLS_REHEADER           } from '../modules/local/samtools_replaceh
 
 include { INPUT_CHECK                   } from '../subworkflows/local/input_check'
 include { SAMTOOLS_COLLATETOFASTQ       } from '../modules/local/samtools_collatetofastq'
-include { FASTQC                        } from '../modules/nf-core/fastqc/main'   
+include { FASTQC                        } from '../modules/nf-core/fastqc/main'
 include { PREPARE_GENOME                } from '../subworkflows/local/prepare_genome'
 include { ALIGN_SHORT as ALIGN_HIC      } from '../subworkflows/local/align_short'
 include { ALIGN_SHORT as ALIGN_ILLUMINA } from '../subworkflows/local/align_short'
@@ -88,14 +88,15 @@ workflow READMAPPING {
     // Control quality of input files
     //
     INPUT_CHECK.out.reads
-    | branch { meta, reads -> 
-                cram:  reads.getName().endsWith("cram") 
+    | branch { meta, reads ->
+                cram:  reads.getName().endsWith("cram")
                 other: true
     }
     | set { ch_fastqc_reads }
 
+    // Convert cram to FASTQs
     SAMTOOLS_COLLATETOFASTQ ( ch_fastqc_reads.cram, true )
-    
+
     ch_fastqc_reads = ch_fastqc_reads.other.mix ( SAMTOOLS_COLLATETOFASTQ.out.interleaved )
     FASTQC ( ch_fastqc_reads )
 
