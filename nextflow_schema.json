@@ -41,7 +41,7 @@
                     "description": "Output file compression type. Currently accepts: \"none\" or \"crumble\"",
                     "fa_icon": "fas fa-file-archive"
                 },
-                "merge_output":{
+                "merge_output": {
                     "type": "boolean",
                     "default": false,
                     "description": "Merge output alignment files by samples",
