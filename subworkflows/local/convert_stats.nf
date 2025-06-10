@@ -2,6 +2,7 @@
 // Convert BAM to CRAM, create index and calculate statistics
 //
 
+include { BLOBTK_DEPTH                      } from '../../modules/local/blobtk_depth'
 include { CRUMBLE                           } from '../../modules/nf-core/crumble/main'
 include { SAMTOOLS_VIEW as SAMTOOLS_CRAM    } from '../../modules/nf-core/samtools/view/main'
 include { SAMTOOLS_VIEW as SAMTOOLS_REINDEX } from '../../modules/nf-core/samtools/view/main'
@@ -81,13 +82,18 @@ workflow CONVERT_STATS {
 
         // Set the BAM and BAI channels for emission
         ch_bam = SAMTOOLS_REINDEX.out.bam
-        ch_bai = SAMTOOLS_REINDEX.out.bai
+        ch_csi = SAMTOOLS_REINDEX.out.csi
 
         // If using BAM for stats, use the reindexed BAM
         if ( !("cram" in outfmt_options) ) {
-            ch_data_for_stats = ch_bam.join ( ch_bai )
+            ch_data_for_stats = ch_bam.join ( ch_csi )
         }
     }
+
+
+    // Calculate read depth
+    BLOBTK_DEPTH ( ch_data_for_stats )
+    ch_versions = ch_versions.mix( BLOBTK_DEPTH.out.versions.first() )
 
 
     // Calculate statistics
