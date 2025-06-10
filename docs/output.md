@@ -11,6 +11,7 @@ The directories comply with Tree of Life's canonical directory structure.
 ## Pipeline overview
 
 The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes data using the following steps:
+
 - [Quality control](#quality-control) - Check quality of input reads
 - [Preprocessing](#preprocessing)
   - [Filtering](#filtering) – Filtering PacBio data before alignment
@@ -28,6 +29,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 ## Preprocessing
 
 ### Quality Control
+
 Input files undergo quality assessment using FASTQC, a widely-used tool for evaluating raw sequencing data. If the input is in CRAM format, it is first converted to FASTQ format to enable compatibility with FASTQC.
 
 <details markdown="1">
