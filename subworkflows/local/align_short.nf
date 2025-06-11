@@ -2,14 +2,14 @@
 // Align short read (HiC and Illumina) data against the genome
 //
 
-include { SAMTOOLS_MERGE                        } from '../../modules/nf-core/samtools/merge/main'
-include { SAMTOOLS_SORMADUP                     } from '../../modules/local/samtools_sormadup'
-include { SAMTOOLS_INDEX                        } from '../../modules/nf-core/samtools/index/main'
-include { GENERATE_CRAM_CSV                     } from '../../modules/local/generate_cram_csv'
-include { SAMTOOLS_SORMADUP as CONVERT_CRAM     } from '../../modules/local/samtools_sormadup'
-include { SAMTOOLS_ADDREPLACERG                 } from '../../modules/local/samtools_addreplacerg'
-include { MINIMAP2_MAPREDUCE                    } from '../../subworkflows/local/minimap2_mapreduce'
-include { BWAMEM2_MAPREDUCE                     } from '../../subworkflows/local/bwamem2_mapreduce'
+include { SAMTOOLS_SORMADUP                 } from '../../modules/local/samtools_sormadup'
+include { SAMTOOLS_INDEX                    } from '../../modules/nf-core/samtools/index/main'
+include { GENERATE_CRAM_CSV                 } from '../../modules/local/generate_cram_csv'
+include { SAMTOOLS_SORMADUP as CONVERT_CRAM } from '../../modules/local/samtools_sormadup'
+include { SAMTOOLS_ADDREPLACERG             } from '../../modules/local/samtools_addreplacerg'
+include { MINIMAP2_MAPREDUCE                } from '../../subworkflows/local/minimap2_mapreduce'
+include { BWAMEM2_MAPREDUCE                 } from '../../subworkflows/local/bwamem2_mapreduce'
+include { MERGE_OUTPUT                      } from '../../subworkflows/local/merge_output'
 
 workflow ALIGN_SHORT {
     take:
@@ -80,33 +80,19 @@ workflow ALIGN_SHORT {
 
     ch_merged_bam
     | combine( ch_reads_cram_crai )
-    | map { meta_bam, bam, meta_cram, cram, crai -> [ meta_cram + [ merged: false ], bam ] }
+    | map { meta_bam, bam, meta_cram, cram, crai -> [ meta_cram, bam ] }
     | set { ch_merged_bam }
 
-
-    // Collect all BAM output by sample name
-    if ( params.merge_output ) {
-        ch_merged_bam
-        | map { meta, bam -> [['id': meta.id.split('_')[0..-2].join('_'), 'datatype': meta.datatype], meta.read_count, bam] }
-        | groupTuple( by: [0] )
-        | map { meta, read_counts, bams -> [meta + [read_count: read_counts.sum()], bams] }
-        | filter { it[1].size() > 1 }
-        | set { ch_multi_bams }
-
-
-        // Merge, but only if there is more than 1 file
-        SAMTOOLS_MERGE ( ch_multi_bams, [ [], [] ], [ [], [] ] )
-        ch_versions = ch_versions.mix ( SAMTOOLS_MERGE.out.versions )
-
-
-        ch_merged_bam = SAMTOOLS_MERGE.out.bam
-        | map { meta, bam -> [meta.tap { it.merged = true }, bam] }
-        | mix ( ch_merged_bam )
-    }
+    //
+    // SUBWORKFLOW: Merge all alignment output by sample name
+    //
+    ch_sort = MERGE_OUTPUT( ch_merged_bam ).bam
+    ch_versions = ch_versions.mix ( MERGE_OUTPUT.out.versions)
 
     // Mark duplicates
-    SAMTOOLS_SORMADUP ( ch_merged_bam, fasta )
+    SAMTOOLS_SORMADUP ( ch_sort, fasta )
     ch_versions = ch_versions.mix ( SAMTOOLS_SORMADUP.out.versions )
+
 
     emit:
     bam      = SAMTOOLS_SORMADUP.out.bam     // channel: [ val(meta), /path/to/bam ]
