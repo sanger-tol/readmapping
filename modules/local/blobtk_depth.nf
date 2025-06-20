@@ -24,7 +24,7 @@ process BLOBTK_DEPTH {
     blobtk depth \\
         -c ${cram} \\
         $args \\
-        -O ${prefix}.regions.bed.gz \\
+        -O ${prefix}.coverage.bedGraph.gz \\
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

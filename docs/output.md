@@ -91,14 +91,14 @@ If provided using the `--header` option, all output alignments (`*.cram` or `*.b
 
 ### Read coverage
 
-Read coverage of the output alignment file is calculated with [blotk_depth](https://github.com/genomehubs/blobtk/wiki/blobtk-depth).
+Read coverage of the output alignment file is calculated with [blobtk depth](https://github.com/genomehubs/blobtk/wiki/blobtk-depth).
 
 <details markdown="1">
 <summary>Output files</summary>
 
 - `read_mapping`
   - `<sequence-type>`
-    - `<gca_accession>.unmasked.<sequence-type>.<sample_id>.[cr|b]am.regions.bed.gz`: Read coverage in BED format
+    - `<gca_accession>.unmasked.<sequence-type>.<sample_id>.[cr|b]am.coverage.bedGraph.gz`: Read coverage in bedGraph format
 
 </details>
 
