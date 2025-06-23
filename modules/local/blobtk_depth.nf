@@ -11,8 +11,8 @@ process BLOBTK_DEPTH {
     tuple val(meta), path(cram), path(bai)
 
     output:
-    tuple val(meta), path('*.regions.bed.gz') , emit: bed
-    path "versions.yml"                       , emit: versions
+    tuple val(meta), path('*.coverage.bedGraph')    , emit: bedgraph
+    path "versions.yml"                             , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -24,7 +24,8 @@ process BLOBTK_DEPTH {
     blobtk depth \\
         -c ${cram} \\
         $args \\
-        -O ${prefix}.coverage.bedGraph.gz \\
+        -O ${prefix}.coverage.bedGraph \\
+
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

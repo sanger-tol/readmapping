@@ -3,6 +3,7 @@
 //
 
 include { BLOBTK_DEPTH                      } from '../../modules/local/blobtk_depth'
+include { TABIX_BGZIP as BGZIP_BEDGRAPH     } from '../../modules/nf-core/tabix/bgzip/main'
 include { CRUMBLE                           } from '../../modules/nf-core/crumble/main'
 include { SAMTOOLS_VIEW as SAMTOOLS_CRAM    } from '../../modules/nf-core/samtools/view/main'
 include { SAMTOOLS_VIEW as SAMTOOLS_REINDEX } from '../../modules/nf-core/samtools/view/main'
@@ -95,6 +96,9 @@ workflow CONVERT_STATS {
     BLOBTK_DEPTH ( ch_data_for_stats )
     ch_versions = ch_versions.mix( BLOBTK_DEPTH.out.versions.first() )
 
+    BGZIP_BEDGRAPH ( BLOBTK_DEPTH.out.bedgraph )
+    ch_versions = ch_versions.mix( BGZIP_BEDGRAPH.out.versions.first() )
+
 
     // Calculate statistics
     SAMTOOLS_STATS ( ch_data_for_stats, fasta )
@@ -109,6 +113,7 @@ workflow CONVERT_STATS {
     // Calculate index statistics
     SAMTOOLS_IDXSTATS ( ch_data_for_stats )
     ch_versions = ch_versions.mix( SAMTOOLS_IDXSTATS.out.versions.first() )
+
 
     emit:
     bam      = ch_bam                               // channel: [ val(meta), /path/to/bam ] (optional)
