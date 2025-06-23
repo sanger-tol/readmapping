@@ -55,7 +55,7 @@ workflow ALIGN_ONT {
     ch_merged_bam
     | mix(MINIMAP2_MAPREDUCE.out.mergedbam)
     | combine( ch_reads_cram_crai )
-    | map { meta_bam, bam, meta_cram, cram, crai -> [ meta_cram + [merged: false], bam ] }
+    | map { meta_bam, bam, meta_cram, cram, crai -> [ meta_cram, bam ] }
     | set { ch_merged_bam }
 
     //
