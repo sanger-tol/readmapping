@@ -64,31 +64,46 @@ workflow PIPELINE_INITIALISATION {
     )
 
     //
+    // Custom validation for pipeline parameters
+    //
+    validateInputParameters()
+
+    // Check input path parameters to see if they exist
+    def checkPathParamList = [
+        params.input,
+        params.fasta,
+        params.vector_db,
+        params.bwamem2_index
+    ]
+
+    for (param in checkPathParamList) {
+        if (param) { file(param, checkIfExists: true) }
+    }
+
+    // Create channels from input paths
+    ch_fasta = params.fasta ? Channel.fromPath(params.fasta) : Channel.empty().tap { error 'Genome fasta file not specified!' }
+    ch_header = params.header ? Channel.fromPath(params.header) : Channel.empty()
+
+
+    //
     // Create channel from input file provided through params.input
     //
 
     Channel
+        // .fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
         .fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
-        .map {
-            meta, fastq_1, fastq_2 ->
-                if (!fastq_2) {
-                    return [ meta.id, meta + [ single_end:true ], [ fastq_1 ] ]
-                } else {
-                    return [ meta.id, meta + [ single_end:false ], [ fastq_1, fastq_2 ] ]
-                }
-        }
-        .groupTuple()
-        .map { samplesheet ->
-            validateInputSamplesheet(samplesheet)
-        }
-        .map {
-            meta, fastqs ->
-                return [ meta, fastqs.flatten() ]
+        .map { row ->
+            def meta = row[0] + [id: file(row[0].datafile).baseName]
+            return [meta, file(row[0].datafile, checkIfExists: true)]
         }
         .set { ch_samplesheet }
+    validateInputSamplesheet(ch_samplesheet)
+        .set { ch_validated_samplesheet }
 
     emit:
-    samplesheet = ch_samplesheet
+    samplesheet = ch_validated_samplesheet
+    fasta       = ch_fasta
+    header      = ch_header
     versions    = ch_versions
 }
 
@@ -144,40 +159,98 @@ workflow PIPELINE_COMPLETION {
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
+
+//
+// Check and validate pipeline parameters
+//
+def validateInputParameters() {
+    // Validate fasta parameter
+    if (!params.fasta) {
+        log.error "Genome fasta file not specified with e.g. '--fasta genome.fa' or via a detectable config file."
+    }
+
+    // Validate outfmt parameter
+    if (!params.outfmt) {
+        log.error "Output format not specified. Please specify '--outfmt bam', '--outfmt cram', or both separated by a comma."
+    } else {
+        def outfmtOptions = params.outfmt.split(',').collect { it.trim() }
+        def validOutfmtOptions = ['bam', 'cram']
+        def invalidOptions = outfmtOptions.findAll { !(it in validOutfmtOptions) }
+
+        if (invalidOptions) {
+            log.error "Invalid output format(s) specified: '${invalidOptions.join(', ')}'. Valid options are 'bam' or 'cram'."
+        }
+    }
+    // Validate compression parameter
+    if (!params.compression) {
+        log.error "Compression option not specified. Please specify '--compression none' or '--compression crumble'."
+    } else if (!(params.compression in ['none', 'crumble'])) {
+        log.error "Invalid compression option specified: '${params.compression}'. Valid options are 'none' or 'crumble'."
+    }
+}
+
 //
 // Validate channels from input samplesheet
 //
-def validateInputSamplesheet(input) {
-    def (metas, fastqs) = input[1..2]
+def validateInputSamplesheet(channel) {
+    def seen = [:].withDefault { 0 }
+    def uniquePairs = new HashSet()
+    def validFormats = [".fq.gz", ".fastq.gz", ".cram", ".bam"]
 
-    // Check that multiple runs of the same sample are of the same datatype i.e. single-end / paired-end
-    def endedness_ok = metas.collect{ meta -> meta.single_end }.unique().size == 1
-    if (!endedness_ok) {
-        error("Please check input samplesheet -> Multiple runs of a sample must be of the same datatype i.e. single-end or paired-end: ${metas[0].id}")
+    return channel.map { sample ->
+        def (meta, file) = sample
+
+        // Replace spaces with underscores in sample names
+        meta.sample = meta.sample.replace(" ", "_")
+
+        // Validate that the file path is non-empty and has a valid format
+        if (!file || !validFormats.any { file.toString().endsWith(it) }) {
+            error("Data file is required and must have a valid extension: ${file}")
+        }
+
+        def pair = [meta.sample, file.toString()].toString()
+
+        if (!uniquePairs.add(pair)) {
+            error("The pair of sample name and read file must be unique: ${pair}")
+        }
+
+        seen[meta.sample] += 1
+        meta.sample = "${meta.sample}_T${seen[meta.sample]}"
+
+        return [meta, file]
     }
-
-    return [ metas[0], fastqs ]
 }
+
+
 //
-// Generate methods description for MultiQC
+// Generate methods description for tools
 //
 def toolCitationText() {
-    // TODO nf-core: Optionally add in-text citation tools to this list.
     // Can use ternary operators to dynamically construct based conditions, e.g. params["run_xyz"] ? "Tool (Foo et al. 2023)" : "",
     // Uncomment function in methodsDescriptionText to render in MultiQC report
     def citation_text = [
             "Tools used in the workflow included:",
-            "."
+            "BBtools (Buschnell 2014),",
+            "blastn (Camacho et al. 2009),",
+            "bwa-mem2 (Vasimuddin et al. 2019),",
+            "Crumble (Bonfield et al. 2019),",
+            "MiniMap2 (Li 2018),",
+            "Samtools (Li et al. 2009)"
         ].join(' ').trim()
 
     return citation_text
 }
 
 def toolBibliographyText() {
-    // TODO nf-core: Optionally add bibliographic entries to this list.
     // Can use ternary operators to dynamically construct based conditions, e.g. params["run_xyz"] ? "<li>Author (2023) Pub name, Journal, DOI</li>" : "",
     // Uncomment function in methodsDescriptionText to render in MultiQC report
     def reference_text = [
+            "<li>Buschnell, B. (2014). BBtools software package. sourceforge.net/projects/bbmap.</li>",
+            "<li>Camacho, C., Coulouris, G., Avagyan, V., Ma, N., Papadopoulos, J., Bealer, K., & Madden, T.L. (2009). BLAST+: architecture and applications. BMC Bioinformatics, 10, 421. doi:10.1186/1471-2105-10-421.</li>",
+            "<li>Vasimuddin, Md., Misra, S., Li, H., & Aluru, S. (2019). Efficient Architecture-Aware Acceleration of BWA-MEM for Multicore Systems. IEEE Parallel and Distributed Processing Symposium (IPDPS), 2019. doi:10.1109/IPDPS.2019.00041.</li>",
+            "<li>Bonfield, J.K., McCarthy, S.A., & Durbin, R. (2019). Crumble: reference free lossy compression of sequence quality values. Bioinformatics, 35(2), 337-339. doi:10.1093/bioinformatics/bty608.</li>",
+            "<li>Li, H. (2018). Minimap2: pairwise alignment for nucleotide sequences. Bioinformatics, 34(18), 3094-3100. doi:10.1093/bioinformatics/bty191.</li>",
+            "<li>Li, H., Handsaker, B., Wysoker, A., Fennell, T., Ruan, J., Homer, N., ... & Durbin, R. (2009). The Sequence Alignment/Map format and SAMtools. Bioinformatics, 25(16), 2078-2079. doi:10.1093/bioinformatics/btp352.</li>"
         ].join(' ').trim()
 
     return reference_text
@@ -204,12 +277,8 @@ def methodsDescriptionText(mqc_methods_yaml) {
     meta["nodoi_text"] = meta.manifest_map.doi ? "" : "<li>If available, make sure to update the text to include the Zenodo DOI of version of the pipeline used. </li>"
 
     // Tool references
-    meta["tool_citations"] = ""
-    meta["tool_bibliography"] = ""
-
-    // TODO nf-core: Only uncomment below if logic in toolCitationText/toolBibliographyText has been filled!
-    // meta["tool_citations"] = toolCitationText().replaceAll(", \\.", ".").replaceAll("\\. \\.", ".").replaceAll(", \\.", ".")
-    // meta["tool_bibliography"] = toolBibliographyText()
+    meta["tool_citations"] = toolCitationText().replaceAll(", \\.", ".").replaceAll("\\. \\.", ".").replaceAll(", \\.", ".")
+    meta["tool_bibliography"] = toolBibliographyText()
 
 
     def methods_text = mqc_methods_yaml.text
