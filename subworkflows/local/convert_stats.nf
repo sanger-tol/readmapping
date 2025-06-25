@@ -81,7 +81,7 @@ workflow CONVERT_STATS {
 
         // Set the BAM and BAI channels for emission
         ch_bam = SAMTOOLS_REINDEX.out.bam
-        ch_bai = SAMTOOLS_REINDEX.out.bai
+        ch_bai = SAMTOOLS_REINDEX.out.bai.mix(SAMTOOLS_REINDEX.out.csi)
 
         // If using BAM for stats, use the reindexed BAM
         if ( !("cram" in outfmt_options) ) {
