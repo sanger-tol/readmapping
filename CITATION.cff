@@ -17,6 +17,11 @@ authors:
     orcid: https://orcid.org/0009-0001-0649-2291
     website: https://github.com/reichan1998
   - affiliation: Wellcome Sanger Institute
+    family-names: "Ho\xE0ng"
+    given-names: "H\u1EA1nh"
+    orcid: https://orcid.org/0009-0008-6911-9903
+    website: https://github.com/sainsachiko
+  - affiliation: Wellcome Sanger Institute
     email: mm49@sanger.ac.uk
     family-names: Muffato
     given-names: Matthieu
