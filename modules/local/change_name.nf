@@ -21,7 +21,7 @@ process CHANGE_NAME {
     def prefix = task.ext.prefix ?: "${meta.id}"
     def new_fn = "${prefix}.${file.extension}"
     """
-    mv ${file} ${new_fn}
+    ln -s ${file} ${new_fn}
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
