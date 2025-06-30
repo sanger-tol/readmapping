@@ -31,7 +31,7 @@ workflow CONVERT_STATS {
 
     // Split outfmt parameter into a list
     def outfmt_options = params.outfmt.split(',').collect { it.trim() }
-    
+
     // Reserve fasta base name for prefix of CHANGE_NAME and BLOBTK_DEPTH
     bam
     .combine( fasta )
@@ -109,9 +109,9 @@ workflow CONVERT_STATS {
         ch_bam = SAMTOOLS_REHEADER_BAM ( ch_bam, ch_header.first() ).bam
         ch_cram = SAMTOOLS_REHEADER_CRAM ( ch_cram, ch_header.first() ).bam
         ch_versions = ch_versions.mix ( SAMTOOLS_REHEADER_BAM.out.versions )
-                                 .mix ( SAMTOOLS_REHEADER_CRAM.out.versions )
+                                .mix ( SAMTOOLS_REHEADER_CRAM.out.versions )
     }
-    
+
 
     // Calculate read depth
     BLOBTK_DEPTH ( ch_bams_for_conversion )
