@@ -46,14 +46,14 @@ workflow CONVERT_STATS {
                 run_crumble: meta.datatype == "hic" || meta.datatype == "illumina" || meta.datatype == "pacbio"
                 no_crumble: true
         }
-        | set { ch_bams }
+        | set { crumble_selector }
 
-        CRUMBLE ( ch_bams.run_crumble, [], [] )
+        CRUMBLE ( crumble_selector.run_crumble, [], [] )
         ch_versions = ch_versions.mix( CRUMBLE.out.versions )
 
         // Convert BAM to CRAM
         CRUMBLE.out.bam
-        | mix( ch_bams.no_crumble )
+        | mix( crumble_selector.no_crumble )
         | map { meta, bam -> [meta, bam, []] }
         | set { ch_bams_for_conversion }
 
