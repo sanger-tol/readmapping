@@ -51,7 +51,6 @@ workflow CONVERT_STATS {
         CRUMBLE ( crumble_selector.run_crumble, [], [] )
         ch_versions = ch_versions.mix( CRUMBLE.out.versions )
 
-        // Convert BAM to CRAM
         CRUMBLE.out.bam
         | mix( crumble_selector.no_crumble )
         | map { meta, bam -> [meta, bam, []] }
