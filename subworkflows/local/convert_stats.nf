@@ -89,7 +89,6 @@ workflow CONVERT_STATS {
         ch_bams_to_index = ch_bams_for_conversion.map{ it -> [it[0], it[1]]}
         // Change name of BAM files to final name for publishing
         ch_bam = CHANGE_NAME ( ch_bams_to_index ).file
-        ch_versions = ch_versions.mix( CHANGE_NAME.out.versions.first() )
 
         // Reindex BAM
         SAMTOOLS_INDEX ( ch_bam )
