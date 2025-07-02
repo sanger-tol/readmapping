@@ -8,7 +8,7 @@ process BLOBTK_DEPTH {
     container "docker.io/genomehubs/blobtk:0.6.5"
 
     input:
-    tuple val(meta), path(cram), path(bai)
+    tuple val(meta), path(bam), path(bai)
 
     output:
     tuple val(meta), path('*.coverage.bedGraph')    , emit: bedgraph
@@ -22,7 +22,7 @@ process BLOBTK_DEPTH {
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
     blobtk depth \\
-        -c ${cram} \\
+        -b ${bam} \\
         $args \\
         -O ${prefix}.coverage.bedGraph \\
 
