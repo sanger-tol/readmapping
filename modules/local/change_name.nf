@@ -15,7 +15,7 @@ process CHANGE_NAME {
     def prefix = task.ext.prefix ?: "${meta.id}"
     def new_fn = "${prefix}.${file.extension}"
     """
-    ln -s ${file} ${new_fn}
+    ln -sf ${file} ${new_fn}
     """
 
     stub:
