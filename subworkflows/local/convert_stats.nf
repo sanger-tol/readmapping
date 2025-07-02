@@ -23,7 +23,7 @@ workflow CONVERT_STATS {
     take:
     bam      // channel: [ val(meta), /path/to/bam, /path/to/bai ]
     fasta    // channel: [ val(meta), /path/to/fasta ]
-    ch_header
+    header   // channel: /path/to/header.sam
 
     main:
     ch_versions = Channel.empty()
@@ -104,8 +104,8 @@ workflow CONVERT_STATS {
 
     // Optionally insert params.header information to bams
     if ( params.header ) {
-        ch_bam = SAMTOOLS_REHEADER_BAM ( ch_bam, ch_header.first() ).bam
-        ch_cram = SAMTOOLS_REHEADER_CRAM ( ch_cram, ch_header.first() ).cram
+        ch_bam = SAMTOOLS_REHEADER_BAM ( ch_bam, header.first() ).bam
+        ch_cram = SAMTOOLS_REHEADER_CRAM ( ch_cram, header.first() ).cram
         ch_versions = ch_versions.mix ( SAMTOOLS_REHEADER_BAM.out.versions )
                                 .mix ( SAMTOOLS_REHEADER_CRAM.out.versions )
     }
