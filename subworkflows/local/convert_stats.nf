@@ -47,15 +47,15 @@ workflow CONVERT_STATS {
 
         CRUMBLE.out.bam
         | mix( crumble_selector.no_crumble )
-        | set { ch_bams_for_conversion }
+        | set { ch_bams_for_renaming }
 
     } else {
-        ch_bams_for_conversion = bam
+        ch_bams_for_renaming = bam
     }
 
 
     // Change name of BAM files to final name for publishing
-    CHANGE_NAME ( ch_bams_for_conversion, fasta )
+    CHANGE_NAME ( ch_bams_for_renaming, fasta )
 
     CHANGE_NAME.out.file
     | map { meta, bam -> [meta, bam, []] }
