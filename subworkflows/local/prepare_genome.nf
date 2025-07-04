@@ -89,4 +89,3 @@ def checkShortReads(filePath, columnToCheck="datatype") {
 
     return containsValues
 }
-
