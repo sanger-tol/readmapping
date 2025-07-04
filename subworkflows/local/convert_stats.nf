@@ -23,7 +23,7 @@ workflow CONVERT_STATS {
     take:
     bam      // channel: [ val(meta), /path/to/bam, /path/to/bai ]
     fasta    // channel: [ val(meta), /path/to/fasta ]
-    ch_header
+    header   // channel: /path/to/header.sam
 
     main:
     ch_versions = Channel.empty()
@@ -46,14 +46,13 @@ workflow CONVERT_STATS {
                 run_crumble: meta.datatype == "hic" || meta.datatype == "illumina" || meta.datatype == "pacbio"
                 no_crumble: true
         }
-        | set { ch_bams }
+        | set { crumble_selector }
 
-        CRUMBLE ( ch_bams.run_crumble, [], [] )
+        CRUMBLE ( crumble_selector.run_crumble, [], [] )
         ch_versions = ch_versions.mix( CRUMBLE.out.versions )
 
-        // Convert BAM to CRAM
         CRUMBLE.out.bam
-        | mix( ch_bams.no_crumble )
+        | mix( crumble_selector.no_crumble )
         | map { meta, bam -> [meta, bam, []] }
         | set { ch_bams_for_conversion }
 
@@ -89,7 +88,6 @@ workflow CONVERT_STATS {
         ch_bams_to_index = ch_bams_for_conversion.map{ it -> [it[0], it[1]]}
         // Change name of BAM files to final name for publishing
         ch_bam = CHANGE_NAME ( ch_bams_to_index ).file
-        ch_versions = ch_versions.mix( CHANGE_NAME.out.versions.first() )
 
         // Reindex BAM
         SAMTOOLS_INDEX ( ch_bam )
@@ -106,8 +104,8 @@ workflow CONVERT_STATS {
 
     // Optionally insert params.header information to bams
     if ( params.header ) {
-        ch_bam = SAMTOOLS_REHEADER_BAM ( ch_bam, ch_header.first() ).bam
-        ch_cram = SAMTOOLS_REHEADER_CRAM ( ch_cram, ch_header.first() ).bam
+        ch_bam = SAMTOOLS_REHEADER_BAM ( ch_bam, header.first() ).bam
+        ch_cram = SAMTOOLS_REHEADER_CRAM ( ch_cram, header.first() ).cram
         ch_versions = ch_versions.mix ( SAMTOOLS_REHEADER_BAM.out.versions )
                                 .mix ( SAMTOOLS_REHEADER_CRAM.out.versions )
     }
