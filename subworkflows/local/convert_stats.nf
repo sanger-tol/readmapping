@@ -73,6 +73,7 @@ workflow CONVERT_STATS {
         // Combine CRAM and CRAI into one channel
         ch_cram = SAMTOOLS_CRAM.out.cram
         ch_crai = SAMTOOLS_CRAM.out.crai
+        ch_for_stats = ch_cram.join( ch_crai )
     }
 
 
@@ -88,6 +89,11 @@ workflow CONVERT_STATS {
         // Set the BAM and BAI channels for emission
         ch_bam = CHANGE_NAME.out.file
         ch_bai = SAMTOOLS_INDEX.out.bai.mix(SAMTOOLS_INDEX.out.csi)
+
+        if ( !('cram' in outfmt_options) ) {
+            ch_for_stats = ch_bam.join( ch_bai )
+        }
+
     }
 
 
@@ -107,17 +113,16 @@ workflow CONVERT_STATS {
     BGZIP_BEDGRAPH ( BLOBTK_DEPTH.out.bedgraph )
     ch_versions = ch_versions.mix( BGZIP_BEDGRAPH.out.versions.first() )
 
-
     // Calculate statistics
-    SAMTOOLS_STATS ( ch_renamed_bams, [[], []] )
+    SAMTOOLS_STATS (ch_for_stats, [[], []] )
     ch_versions = ch_versions.mix( SAMTOOLS_STATS.out.versions.first() )
 
     // Calculate statistics based on flag values
-    SAMTOOLS_FLAGSTAT ( ch_renamed_bams )
+    SAMTOOLS_FLAGSTAT ( ch_for_stats )
     ch_versions = ch_versions.mix( SAMTOOLS_FLAGSTAT.out.versions.first() )
 
     // Calculate index statistics
-    SAMTOOLS_IDXSTATS ( ch_renamed_bams )
+    SAMTOOLS_IDXSTATS ( ch_for_stats )
     ch_versions = ch_versions.mix( SAMTOOLS_IDXSTATS.out.versions.first() )
 
 
