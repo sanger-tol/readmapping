@@ -4,6 +4,7 @@ process CHANGE_NAME {
 
     input:
     tuple val(meta), path(file)
+    tuple val(meta2), path(fasta)
 
     output:
     tuple val(meta), path("*.${file.extension}"), emit: file
