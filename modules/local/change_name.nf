@@ -24,4 +24,3 @@ process CHANGE_NAME {
     touch ${new_fn}
     """
 }
-
