@@ -56,9 +56,9 @@ workflow ALIGN_PACBIO {
     MINIMAP2_ALIGN.out.bam
     |map { meta, bam -> [meta.id, meta, bam] }
     |groupTuple()
-    |map { id, meta, bam -> 
+    |map { id, meta, bam ->
         def newMeta = meta[0].findAll { key, value -> key != 'chunk_id' }
-        [newMeta, bam] 
+        [newMeta, bam]
     }
     |set { collected_files_for_merge }
 
