@@ -116,6 +116,19 @@ The filtered PacBio reads are aligned with `MINIMAP2_ALIGN`. The sorted and merg
 
 If provided using the `--header` option, all output alignments (`*.cram` or `*.bam`) will include any additional metadata supplied as a SAM header template, replacing the existing _@HD_ and _@SD_ entries (note that this behaviour can be altered by modifying the `ext.args` for `SAMTOOLS_REHEADER` in `modules.config`).
 
+### Read coverage
+
+Read coverage of the output alignment file is calculated with [blobtk depth](https://github.com/genomehubs/blobtk/wiki/blobtk-depth).
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `read_mapping`
+  - `<sequence-type>`
+    - `<gca_accession>.unmasked.<sequence-type>.<sample_id>.[cr|b]am.coverage.bedGraph.gz`: Read coverage in bedGraph format
+
+</details>
+
 ### Statistics
 
 The output alignments, along with the index, are used to calculate mapping statistics. Output files are generated using `SAMTOOLS_STATS`, `SAMTOOLS_FLAGSTAT` and `SAMTOOLS_IDXSTATS`.

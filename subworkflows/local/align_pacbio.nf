@@ -10,6 +10,7 @@ include { SAMTOOLS_SORMADUP as CONVERT_CRAM } from '../../modules/local/samtools
 include { CREATE_CRAM_FILTER_INPUT          } from '../../subworkflows/local/create_cram_filter_input'
 include { MINIMAP2_ALIGN                    } from '../../modules/nf-core/minimap2/align/main'
 include { MERGE_OUTPUT                      } from '../../subworkflows/local/merge_output'
+include { SAMTOOLS_MERGE                    } from '../../modules/nf-core/samtools/merge/main'
 
 workflow ALIGN_PACBIO {
     take:
@@ -52,12 +53,28 @@ workflow ALIGN_PACBIO {
     MINIMAP2_ALIGN ( FILTER_PACBIO.out.fastq, fasta, true, "csi", false, false )
     ch_versions = ch_versions.mix ( MINIMAP2_ALIGN.out.versions.first() )
 
+    MINIMAP2_ALIGN.out.bam
+    |map { meta, bam -> [meta.id, meta, bam] }
+    |groupTuple()
+    |map { id, meta, bam ->
+        def newMeta = meta[0].findAll { key, value -> key != 'chunk_id' }
+        [newMeta, bam]
+    }
+    |set { collected_files_for_merge }
+
+
+    // Merge chunked aligned bams from minimap align
+    SAMTOOLS_MERGE (
+        collected_files_for_merge,
+        fasta,
+        [ [], [] ]
+    )
+
     //
     // SUBWORKFLOW: Merge all alignment output by sample name
     //
-    ch_sort  = MERGE_OUTPUT( MINIMAP2_ALIGN.out.bam ).bam
+    ch_sort  = MERGE_OUTPUT( SAMTOOLS_MERGE.out.bam ).bam
     ch_versions = ch_versions.mix ( MERGE_OUTPUT.out.versions)
-
 
     emit:
     bam      = ch_sort                       // channel: [ val(meta), /path/to/bam ]

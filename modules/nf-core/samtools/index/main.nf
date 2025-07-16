@@ -11,6 +11,7 @@ process SAMTOOLS_INDEX {
     tuple val(meta), path(input)
 
     output:
+    tuple val(meta), path("${input}"), emit: input
     tuple val(meta), path("*.bai") , optional:true, emit: bai
     tuple val(meta), path("*.csi") , optional:true, emit: csi
     tuple val(meta), path("*.crai"), optional:true, emit: crai

@@ -6,13 +6,6 @@
 */
 
 //
-// MODULE: Local modules
-//
-
-include { SAMTOOLS_REHEADER           } from '../modules/local/samtools_replaceheader'
-
-
-//
 // SUBWORKFLOW: Consisting of a mix of local and nf-core/modules
 //
 
@@ -148,18 +141,9 @@ workflow READMAPPING {
     | mix( ALIGN_CLR.out.bam )
     | mix( ALIGN_ONT.out.bam )
 
-    // Optionally insert params.header information to bams
-    ch_reheadered_bams = Channel.empty()
-    if ( params.header ) {
-        SAMTOOLS_REHEADER( ch_aligned_bams, ch_header.first() )
-        ch_reheadered_bams = SAMTOOLS_REHEADER.out.bam
-        ch_versions = ch_versions.mix ( SAMTOOLS_REHEADER.out.versions )
-    } else {
-        ch_reheadered_bams = ch_aligned_bams
-    }
 
     // convert to cram and gather stats
-    CONVERT_STATS ( ch_reheadered_bams, PREPARE_GENOME.out.fasta )
+    CONVERT_STATS ( ch_aligned_bams, PREPARE_GENOME.out.fasta, ch_header )
     ch_versions = ch_versions.mix ( CONVERT_STATS.out.versions )
 
     //
