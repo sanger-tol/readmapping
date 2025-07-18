@@ -78,12 +78,9 @@ def getWorkflowVersion() {
 // Get software versions for pipeline
 //
 def processVersionsFromYAML(yaml_file) {
-
-    //Quote version values to preserve them as strings
-    def patchedText = yaml_file.text.replaceAll(/(?m)^(\s*\w+:\s*)(\d+(\.\d+)+)\s*$/, '$1"$2"')
     def yaml = new org.yaml.snakeyaml.Yaml()
-    def versions = yaml.load(patchedText).collectEntries { k, v -> [k.tokenize(':')[-1], v] }
-    return yaml.dumpAsMap(versions).trim().replaceAll(/'(\d+(\.\d+)+)'/, '$1') // Post-process: remove quote
+    def versions = yaml.load(yaml_file).collectEntries { k, v -> [k.tokenize(':')[-1], v] }
+    return yaml.dumpAsMap(versions).trim()
 }
 
 //
