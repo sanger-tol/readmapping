@@ -12,7 +12,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add params `--merge_output` to allow publishing both individuals and merged-by-specimen alignemnt files
 - Perform CRAM file reheadering after converting BAM to CRAM (previously done before conversion) to ensure provided headers are retained.
 - Compressed samtools stats files to reduce storage usage
-- Fix version parsing to prevent automatic rounding (e.g., 1.10 being converted to 1.1)
 
 | Dependency     | Old version | New version |
 | -------------- | ----------- | ----------- |
