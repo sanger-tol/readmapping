@@ -1,6 +1,6 @@
 nextflow_pipeline {
 
-    name "Test readmapping pipeline with bwamem2 as short aligner"
+    name "Test readmapping pipeline with minimap2 as short aligner"
     script "../main.nf"
     tag "pipeline"
 
@@ -25,9 +25,9 @@ nextflow_pipeline {
                     // pipeline versions.yml file for multiqc from which Nextflow version is removed because we test pipelines on multiple Nextflow versions
                     removeNextflowVersion("$outputDir/pipeline_info/readmapping_software_versions.yml"),
                     // All stable path name, with a relative path
-                    stable_name
+                    stable_name,
                     // All files with stable contents
-                    //stable_path
+                    stable_path
                 ).match() }
             )
         }
