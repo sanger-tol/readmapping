@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Enhancements & fixes
 
+- Add [Blobtk depth](https://github.com/genomehubs/blobtk/wiki/blobtk-depth) to calculate read coverage
+- Add [FastQC](https://github.com/s-andrews/FastQC/releases/tag/v0.12.1) for quality control of reads
+- Switched to not merging alignments by specimen by default. Merged alignment can be reenabled with the new `--merge_output`.
+- Perform CRAM file reheadering after converting BAM to CRAM (previously done before conversion) to ensure provided headers are retained.
+- Compressed samtools stats files to reduce storage usage
+
+| Dependency     | Old version | New version |
+| -------------- | ----------- | ----------- |
+| `fastqc `      |             | 0.12.1      |
+| `blobtk depth` |             | 0.6.5       |
+
 ## [[1.3.4](https://github.com/sanger-tol/readmapping/releases/tag/1.3.4)] - Antipodean Opaleye (patch 4) - [2025-03-18]
 
 ### Enhancements & fixes

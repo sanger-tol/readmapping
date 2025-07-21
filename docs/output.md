@@ -139,26 +139,26 @@ The output alignments, along with the index, are used to calculate mapping stati
 - `read_mapping`
   - `hic`
     - `merged`
-      - `<gca_accession>.unmasked.hic.<sample_id>.stats`: Comprehensive statistics from merged alignment file
+      - `<gca_accession>.unmasked.hic.<sample_id>.stats.gz`: Comprehensive statistics from merged alignment file
       - `<gca_accession>.unmasked.hic.<sample_id>.flagstat`: Number of merged alignments for each FLAG type
       - `<gca_accession>.unmasked.hic.<sample_id>.idxstats`: Merged alignment summary statistics
-    - `<gca_accession>.unmasked.hic.<sample_id>_T<number>.stats`: Comprehensive statistics from each alignment file
+    - `<gca_accession>.unmasked.hic.<sample_id>_T<number>.stats.gz`: Comprehensive statistics from each alignment file
     - `<gca_accession>.unmasked.hic.<sample_id>_T<number>.flagstat`: Number of alignments for each FLAG type
     - `<gca_accession>.unmasked.hic.<sample_id>_T<number>.idxstats`: Alignment summary statistics
   - `ont`
     - `merged`
-      - `<gca_accession>.unmasked.ont.<sample_id>.stats`: Comprehensive statistics from merged alignment file
+      - `<gca_accession>.unmasked.ont.<sample_id>.stats.gz`: Comprehensive statistics from merged alignment file
       - `<gca_accession>.unmasked.ont.<sample_id>.flagstat`: Number of alignments for each FLAG type
       - `<gca_accession>.unmasked.ont.<sample_id>.idxstats`: Merged alignment summary statistics
-    - `<gca_accession>.unmasked.ont.<sample_id>_T<number>.stats`: Comprehensive statistics from each alignment file
+    - `<gca_accession>.unmasked.ont.<sample_id>_T<number>.stats.gz`: Comprehensive statistics from each alignment file
     - `<gca_accession>.unmasked.ont.<sample_id>_T<number>.flagstat`: Number of alignments for each FLAG type
     - `<gca_accession>.unmasked.ont.<sample_id>_T<number>.idxstats`: Alignment summary statistics
   - `pacbio`
     - `merged`
-      - `<gca_accession>.unmasked.pacbio.<sample_id>.stats`: Comprehensive statistics from alignment file
+      - `<gca_accession>.unmasked.pacbio.<sample_id>.stats.gz`: Comprehensive statistics from alignment file
       - `<gca_accession>.unmasked.pacbio.<sample_id>.flagstat`: Number of merged alignments for each FLAG type
       - `<gca_accession>.unmasked.pacbio.<sample_id>.idxstats`: Merged alignment summary statistics
-    - `<gca_accession>.unmasked.pacbio.<sample_id>_T<number>.stats`: Comprehensive statistics from each alignment file
+    - `<gca_accession>.unmasked.pacbio.<sample_id>_T<number>.stats.gz`: Comprehensive statistics from each alignment file
     - `<gca_accession>.unmasked.pacbio.<sample_id>_T<number>.flagstat`: Number of alignments for each FLAG type
     - `<gca_accession>.unmasked.pacbio.<sample_id>_T<number>.idxstats`: Alignment summary statistics
 

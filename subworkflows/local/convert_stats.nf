@@ -17,6 +17,7 @@ include { SAMTOOLS_FLAGSTAT                 } from '../../modules/nf-core/samtoo
 include { SAMTOOLS_IDXSTATS                 } from '../../modules/nf-core/samtools/idxstats/main'
 include { BLOBTK_DEPTH                      } from '../../modules/local/blobtk_depth'
 include { TABIX_BGZIP as BGZIP_BEDGRAPH     } from '../../modules/nf-core/tabix/bgzip/main'
+include { GUNZIP as GZIP_STATS              } from '../../modules/local/gzip'
 
 
 workflow CONVERT_STATS {
@@ -116,6 +117,9 @@ workflow CONVERT_STATS {
     // Calculate statistics
     SAMTOOLS_STATS (ch_for_stats, [[], []] )
     ch_versions = ch_versions.mix( SAMTOOLS_STATS.out.versions.first() )
+
+    GZIP_STATS  ( SAMTOOLS_STATS.out.stats )
+    ch_versions = ch_versions.mix( GZIP_STATS.out.versions.first() )
 
     // Calculate statistics based on flag values
     SAMTOOLS_FLAGSTAT ( ch_for_stats )
