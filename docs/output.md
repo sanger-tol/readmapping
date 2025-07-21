@@ -143,8 +143,8 @@ The output alignments, along with the index, are used to calculate mapping stati
       - `<gca_accession>.unmasked.hic.<sample_id>.flagstat.gz`: Number of merged alignments for each FLAG type
       - `<gca_accession>.unmasked.hic.<sample_id>.idxstats.gz`: Merged alignment summary statistics
     - `<gca_accession>.unmasked.hic.<sample_id>_T<number>.stats.gz`: Comprehensive statistics from each alignment file
-    - `<gca_accession>.unmasked.hic.<sample_id>_T<number>.flagstat.gz`: Number of alignments for each FLAG type
-    - `<gca_accession>.unmasked.hic.<sample_id>_T<number>.idxstats.gz`: Alignment summary statistics
+    - `<gca_accession>.unmasked.hic.<sample_id>_T<number>.flagstat`: Number of alignments for each FLAG type
+    - `<gca_accession>.unmasked.hic.<sample_id>_T<number>.idxstats`: Alignment summary statistics
   - `ont`
     - `merged`
       - `<gca_accession>.unmasked.ont.<sample_id>.stats.gz`: Comprehensive statistics from merged alignment file

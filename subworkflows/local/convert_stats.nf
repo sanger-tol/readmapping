@@ -118,6 +118,9 @@ workflow CONVERT_STATS {
     SAMTOOLS_STATS (ch_for_stats, [[], []] )
     ch_versions = ch_versions.mix( SAMTOOLS_STATS.out.versions.first() )
 
+    GZIP_STATS  ( SAMTOOLS_STATS.out.stats )
+    ch_versions = ch_versions.mix( GZIP_STATS.out.versions.first() )
+
     // Calculate statistics based on flag values
     SAMTOOLS_FLAGSTAT ( ch_for_stats )
     ch_versions = ch_versions.mix( SAMTOOLS_FLAGSTAT.out.versions.first() )
@@ -125,12 +128,6 @@ workflow CONVERT_STATS {
     // Calculate index statistics
     SAMTOOLS_IDXSTATS ( ch_for_stats )
     ch_versions = ch_versions.mix( SAMTOOLS_IDXSTATS.out.versions.first() )
-
-    GZIP_STATS  ( SAMTOOLS_STATS.out.stats
-            .mix(SAMTOOLS_FLAGSTAT.out.flagstat)
-            .mix(SAMTOOLS_IDXSTATS.out.idxstats)
-    )
-    ch_versions = ch_versions.mix( GZIP_STATS.out.versions.first() )
 
 
     emit:
