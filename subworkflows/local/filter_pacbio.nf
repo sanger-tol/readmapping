@@ -11,7 +11,7 @@ include { PACBIO_PBMARKDUP                  } from '../../modules/local/pbmarkdu
 include { SAMTOOLS_FILTERTOFASTQ            } from '../../modules/local/samtools_filtertofastq'
 include { SEQKIT_FQ2FA                      } from '../../modules/nf-core/seqkit/fq2fa'
 include { SEQTK_SUBSEQ                      } from '../../modules/nf-core/seqtk/subseq'
-
+include { LIMA                              } from '../../modules/nf-core/lima'
 
 workflow FILTER_PACBIO {
     take:
@@ -32,8 +32,11 @@ workflow FILTER_PACBIO {
     }
     | set { ch_reads_branched }
 
+    // Trim ULI adapter
+    LIMA ( ch_reads_branched.uli, params.uli_adapter )
+
     // Mark/remove duplicates
-    PACBIO_PBMARKDUP ( ch_reads_branched.uli )
+    PACBIO_PBMARKDUP ( LIMA.out.bam )
     ch_versions = ch_versions.mix ( PACBIO_PBMARKDUP.out.versions.first() )
 
     PACBIO_PBMARKDUP.out.output
