@@ -33,19 +33,21 @@ workflow FILTER_PACBIO {
     | set { ch_reads_branched }
 
     // Trim ULI adapter
-    LIMA ( ch_reads_branched.uli, params.uli_adapter )
+    bam_for_md = ch_reads_branched.uli
+    if ( params.trim_uli_adapter ) {
+        bam_for_md = LIMA ( ch_reads_branched.uli, params.uli_adapter ).bam
+    }
 
     // Mark/remove duplicates
-    PACBIO_PBMARKDUP ( LIMA.out.bam )
+    PACBIO_PBMARKDUP ( bam_for_md )
     ch_versions = ch_versions.mix ( PACBIO_PBMARKDUP.out.versions.first() )
 
     PACBIO_PBMARKDUP.out.output
     | mix ( ch_reads_branched.other )
     | set { ch_reads_all }
 
-
     // Check file types and branch
-    ch_reads_branched.other
+    ch_reads_all
     | branch {
         meta, reads ->
             fastq : reads.findAll { it.getName().toLowerCase() =~ /.*f.*\.gz/ }
