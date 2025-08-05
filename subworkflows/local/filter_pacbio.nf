@@ -7,11 +7,7 @@ include { SAMTOOLS_VIEW as SAMTOOLS_CONVERT } from '../../modules/nf-core/samtoo
 include { SAMTOOLS_COLLATETOFASTA           } from '../../modules/local/samtools_collatetofasta'
 include { BLAST_BLASTN                      } from '../../modules/nf-core/blast/blastn/main'
 include { PACBIO_FILTER                     } from '../../modules/local/pacbio_filter'
-include { PACBIO_PBMARKDUP                  } from '../../modules/local/pbmarkdup'
 include { SAMTOOLS_FILTERTOFASTQ            } from '../../modules/local/samtools_filtertofastq'
-include { SEQKIT_FQ2FA                      } from '../../modules/nf-core/seqkit/fq2fa'
-include { SEQTK_SUBSEQ                      } from '../../modules/nf-core/seqtk/subseq'
-include { LIMA                              } from '../../modules/nf-core/lima'
 
 workflow FILTER_PACBIO {
     take:
@@ -21,43 +17,9 @@ workflow FILTER_PACBIO {
     main:
     ch_versions = Channel.empty()
 
-
-    // Branch for handling ultra low-input libraries
+    // Convert from PacBio CRAM to Samtools CRAM
     reads
-    | branch {
-        meta, reads ->
-            uli : meta.library == "uli"
-            other : true
-    }
-    | set { ch_reads_branched }
-
-    // Trim ULI adapter
-    bam_for_md = ch_reads_branched.uli
-    if ( params.trim_uli_adapter ) {
-        bam_for_md = LIMA ( ch_reads_branched.uli, params.uli_adapter ).bam
-    }
-
-    // Mark/remove duplicates
-    PACBIO_PBMARKDUP ( bam_for_md )
-    ch_versions = ch_versions.mix ( PACBIO_PBMARKDUP.out.versions.first() )
-
-    PACBIO_PBMARKDUP.out.output
-    | mix ( ch_reads_branched.other )
-    | set { ch_reads_all }
-
-    // Check file types and branch
-    ch_reads_all
-    | branch {
-        meta, reads ->
-            fastq : reads.findAll { it.getName().toLowerCase() =~ /.*f.*\.gz/ }
-            bam : true
-    }
-    | set { ch_reads }
-
-
-    // Convert from PacBio BAM to Samtools BAM
-    ch_reads.bam
-    | map { meta, bam -> [ meta, bam, [] ] }
+    | map { meta, cram -> [ meta, cram, [] ] }
     | set { ch_pacbio }
 
     SAMTOOLS_CONVERT ( ch_pacbio, [ [], [] ], [] )
