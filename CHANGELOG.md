@@ -3,6 +3,57 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## v1.4.0dev - [date]
+
+### Enhancements & fixes
+
+- Add [Blobtk depth](https://github.com/genomehubs/blobtk/wiki/blobtk-depth) to calculate read coverage
+- Add [FastQC](https://github.com/s-andrews/FastQC/releases/tag/v0.12.1) for quality control of reads
+- Switched to not merging alignments by specimen by default. Merged alignment can be reenabled with the new `--merge_output`.
+- Perform CRAM file reheadering after converting BAM to CRAM (previously done before conversion) to ensure provided headers are retained.
+- Compressed samtools stats files to reduce storage usage
+
+| Dependency     | Old version | New version |
+| -------------- | ----------- | ----------- |
+| `fastqc `      |             | 0.12.1      |
+| `blobtk depth` |             | 0.6.5       |
+
+## [[1.3.4](https://github.com/sanger-tol/readmapping/releases/tag/1.3.4)] - Antipodean Opaleye (patch 4) - [2025-03-18]
+
+### Enhancements & fixes
+
+- Even more memory for CRUMBLE
+
+## [[1.3.3](https://github.com/sanger-tol/readmapping/releases/tag/1.3.3)] - Antipodean Opaleye (patch 3) - [2025-02-10]
+
+### Enhancements & fixes
+
+- Fixed the resource requirements of SAMTOOLS_COLLATETOFASTQ, CRUMBLE, and SEQKIT_FQ2FA
+
+## [[1.3.2](https://github.com/sanger-tol/readmapping/releases/tag/1.3.2)] - Antipodean Opaleye (patch 2) - [2025-01-14]
+
+### Enhancements & fixes
+
+- Dependency version updates
+- Remove references to Anaconda channels
+
+| Dependency | Old version | New version |
+| ---------- | ----------- | ----------- |
+| `bbtools`  | 39.01       | 39.10       |
+| `samtools` | 1.20        | 1.21        |
+
+## [[1.3.1](https://github.com/sanger-tol/readmapping/releases/tag/1.3.1)] - Antipodean Opaleye (patch 1) - [2024-09-24]
+
+### Enhancements & fixes
+
+- Fixed bug in handling CRAM HiC inputs introduced in 1.1.0
+- Fixed bug in handling PacBio FASTQ inputs introduced in 1.3.0
+
+| Dependency | Old version | New version |
+| ---------- | ----------- | ----------- |
+| `bbtools`  |             | 39.01       |
+| `seqtk`    | 1.4         |             |
+
 ## [[1.3.0](https://github.com/sanger-tol/readmapping/releases/tag/1.3.0)] - Antipodean Opaleye - [2024-08-23]
 
 ### Enhancements & fixes

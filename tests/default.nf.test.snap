@@ -1,0 +1,169 @@
+{
+    "-profile test": {
+        "content": [
+            144,
+            {
+                "BGZIP_BEDGRAPH": {
+                    "tabix": 1.21
+                },
+                "BLAST_BLASTN": {
+                    "blast": "2.15.0+"
+                },
+                "BLOBTK_DEPTH": {
+                    "blobtk": "0.6.5"
+                },
+                "BWAMEM2_INDEX": {
+                    "bwamem2": "2.2.1"
+                },
+                "CONVERT_CRAM": {
+                    "samtools": 1.21
+                },
+                "CRAM_FILTER": {
+                    "samtools": 1.17,
+                    "staden_io": 1.15
+                },
+                "CRAM_FILTER_MINIMAP2_FILTER5END_FIXMATE_SORT": {
+                    "samtools": 1.17,
+                    "minimap2": "2.24-r1122",
+                    "staden_io": 1.15
+                },
+                "CRUMBLE": {
+                    "crumble": "0.9.1"
+                },
+                "FASTQC": {
+                    "fastqc": "0.12.1"
+                },
+                "GENERATE_CRAM_CSV": {
+                    "samtools": 1.17
+                },
+                "GUNZIP": {
+                    "gunzip": 1.1
+                },
+                "GZIP_STATS": {
+                    "gzip": 1.1
+                },
+                "MINIMAP2_ALIGN": {
+                    "minimap2": "2.28-r1209",
+                    "samtools": 1.2
+                },
+                "MINIMAP2_INDEX": {
+                    "minimap2": "2.28-r1209"
+                },
+                "PACBIO_FILTER": {
+                    "GNU Awk": "5.1.0"
+                },
+                "SAMTOOLS_ADDREPLACERG": {
+                    "samtools": 1.2
+                },
+                "SAMTOOLS_COLLATETOFASTA": {
+                    "samtools": 1.21
+                },
+                "SAMTOOLS_COLLATETOFASTQ": {
+                    "samtools": 1.21
+                },
+                "SAMTOOLS_CONVERT": {
+                    "samtools": 1.21
+                },
+                "SAMTOOLS_CRAM": {
+                    "samtools": 1.21
+                },
+                "SAMTOOLS_FILTERTOFASTQ": {
+                    "samtools": 1.21
+                },
+                "SAMTOOLS_FLAGSTAT": {
+                    "samtools": 1.21
+                },
+                "SAMTOOLS_IDXSTATS": {
+                    "samtools": 1.21
+                },
+                "SAMTOOLS_INDEX": {
+                    "samtools": 1.2
+                },
+                "SAMTOOLS_MERGE": {
+                    "samtools": 1.21
+                },
+                "SAMTOOLS_REHEADER_CRAM": {
+                    "samtools": 1.21
+                },
+                "SAMTOOLS_SORMADUP": {
+                    "samtools": 1.21
+                },
+                "SAMTOOLS_STATS": {
+                    "samtools": 1.21
+                },
+                "UNMASK": {
+                    "awk": "5.1.0"
+                },
+                "UNTAR": {
+                    "untar": 1.34
+                },
+                "Workflow": {
+                    "sanger-tol/readmapping": "v1.4.0dev"
+                }
+            },
+            [
+                "pipeline_info",
+                "pipeline_info/readmapping_software_versions.yml",
+                "quality_control",
+                "quality_control/mMelMel1_T1.illumina.fasta_fastqc.html",
+                "quality_control/mMelMel1_T1.illumina.fasta_fastqc.zip",
+                "quality_control/mMelMel2_T1.illumina_fastqc.html",
+                "quality_control/mMelMel2_T1.illumina_fastqc.zip",
+                "quality_control/mMelMel3_T1.hic.fasta_fastqc.html",
+                "quality_control/mMelMel3_T1.hic.fasta_fastqc.zip",
+                "quality_control/mMelMel3_T2.ont_fastqc.html",
+                "quality_control/mMelMel3_T2.ont_fastqc.zip",
+                "quality_control/mMelMel3_T3.pacbio_fastqc.html",
+                "quality_control/mMelMel3_T3.pacbio_fastqc.zip",
+                "quality_control/mMelMel3_T4.pacbio_fastqc.html",
+                "quality_control/mMelMel3_T4.pacbio_fastqc.zip",
+                "read_mapping",
+                "read_mapping/hic",
+                "read_mapping/hic/GCA_922984935.2.subset.unmasked.hic.mMelMel3_T1.coverage.bedGraph.gz",
+                "read_mapping/hic/GCA_922984935.2.subset.unmasked.hic.mMelMel3_T1.cram",
+                "read_mapping/hic/GCA_922984935.2.subset.unmasked.hic.mMelMel3_T1.cram.crai",
+                "read_mapping/hic/GCA_922984935.2.subset.unmasked.hic.mMelMel3_T1.flagstat",
+                "read_mapping/hic/GCA_922984935.2.subset.unmasked.hic.mMelMel3_T1.idxstats",
+                "read_mapping/hic/GCA_922984935.2.subset.unmasked.hic.mMelMel3_T1.stats.gz",
+                "read_mapping/illumina",
+                "read_mapping/illumina/GCA_922984935.2.subset.unmasked.illumina.mMelMel1_T1.coverage.bedGraph.gz",
+                "read_mapping/illumina/GCA_922984935.2.subset.unmasked.illumina.mMelMel1_T1.cram",
+                "read_mapping/illumina/GCA_922984935.2.subset.unmasked.illumina.mMelMel1_T1.cram.crai",
+                "read_mapping/illumina/GCA_922984935.2.subset.unmasked.illumina.mMelMel1_T1.flagstat",
+                "read_mapping/illumina/GCA_922984935.2.subset.unmasked.illumina.mMelMel1_T1.idxstats",
+                "read_mapping/illumina/GCA_922984935.2.subset.unmasked.illumina.mMelMel1_T1.stats.gz",
+                "read_mapping/illumina/GCA_922984935.2.subset.unmasked.illumina.mMelMel2_T1.coverage.bedGraph.gz",
+                "read_mapping/illumina/GCA_922984935.2.subset.unmasked.illumina.mMelMel2_T1.cram",
+                "read_mapping/illumina/GCA_922984935.2.subset.unmasked.illumina.mMelMel2_T1.cram.crai",
+                "read_mapping/illumina/GCA_922984935.2.subset.unmasked.illumina.mMelMel2_T1.flagstat",
+                "read_mapping/illumina/GCA_922984935.2.subset.unmasked.illumina.mMelMel2_T1.idxstats",
+                "read_mapping/illumina/GCA_922984935.2.subset.unmasked.illumina.mMelMel2_T1.stats.gz",
+                "read_mapping/ont",
+                "read_mapping/ont/GCA_922984935.2.subset.unmasked.ont.mMelMel3_T2.coverage.bedGraph.gz",
+                "read_mapping/ont/GCA_922984935.2.subset.unmasked.ont.mMelMel3_T2.cram",
+                "read_mapping/ont/GCA_922984935.2.subset.unmasked.ont.mMelMel3_T2.cram.crai",
+                "read_mapping/ont/GCA_922984935.2.subset.unmasked.ont.mMelMel3_T2.flagstat",
+                "read_mapping/ont/GCA_922984935.2.subset.unmasked.ont.mMelMel3_T2.idxstats",
+                "read_mapping/ont/GCA_922984935.2.subset.unmasked.ont.mMelMel3_T2.stats.gz",
+                "read_mapping/pacbio",
+                "read_mapping/pacbio/GCA_922984935.2.subset.unmasked.pacbio.mMelMel3_T3.coverage.bedGraph.gz",
+                "read_mapping/pacbio/GCA_922984935.2.subset.unmasked.pacbio.mMelMel3_T3.cram",
+                "read_mapping/pacbio/GCA_922984935.2.subset.unmasked.pacbio.mMelMel3_T3.cram.crai",
+                "read_mapping/pacbio/GCA_922984935.2.subset.unmasked.pacbio.mMelMel3_T3.flagstat",
+                "read_mapping/pacbio/GCA_922984935.2.subset.unmasked.pacbio.mMelMel3_T3.idxstats",
+                "read_mapping/pacbio/GCA_922984935.2.subset.unmasked.pacbio.mMelMel3_T3.stats.gz",
+                "read_mapping/pacbio/GCA_922984935.2.subset.unmasked.pacbio.mMelMel3_T4.coverage.bedGraph.gz",
+                "read_mapping/pacbio/GCA_922984935.2.subset.unmasked.pacbio.mMelMel3_T4.cram",
+                "read_mapping/pacbio/GCA_922984935.2.subset.unmasked.pacbio.mMelMel3_T4.cram.crai",
+                "read_mapping/pacbio/GCA_922984935.2.subset.unmasked.pacbio.mMelMel3_T4.flagstat",
+                "read_mapping/pacbio/GCA_922984935.2.subset.unmasked.pacbio.mMelMel3_T4.idxstats",
+                "read_mapping/pacbio/GCA_922984935.2.subset.unmasked.pacbio.mMelMel3_T4.stats.gz"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.2"
+        },
+        "timestamp": "2025-07-21T12:39:41.008711"
+    }
+}

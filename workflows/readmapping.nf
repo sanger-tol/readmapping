@@ -6,17 +6,12 @@
 */
 
 //
-// MODULE: Local modules
-//
-
-include { SAMTOOLS_REHEADER           } from '../modules/local/samtools_replaceheader'
-
-
-//
 // SUBWORKFLOW: Consisting of a mix of local and nf-core/modules
 //
 
 include { INPUT_CHECK                   } from '../subworkflows/local/input_check'
+include { SAMTOOLS_COLLATETOFASTQ       } from '../modules/local/samtools_collatetofastq'
+include { FASTQC                        } from '../modules/nf-core/fastqc/main'
 include { PREPARE_GENOME                } from '../subworkflows/local/prepare_genome'
 include { ALIGN_SHORT as ALIGN_HIC      } from '../subworkflows/local/align_short'
 include { ALIGN_SHORT as ALIGN_ILLUMINA } from '../subworkflows/local/align_short'
@@ -36,8 +31,11 @@ include { CONVERT_STATS                 } from '../subworkflows/local/convert_st
 // MODULE: Installed directly from nf-core/modules
 //
 
-include { UNTAR                       } from '../modules/nf-core/untar/main'
-include { CUSTOM_DUMPSOFTWAREVERSIONS } from '../modules/nf-core/custom/dumpsoftwareversions/main'
+include { UNTAR                  } from '../modules/nf-core/untar/main'
+
+
+include { paramsSummaryMap       } from 'plugin/nf-schema'
+include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -55,7 +53,6 @@ workflow READMAPPING {
     main:
     // Initialize an empty versions channel
     ch_versions = Channel.empty()
-    ch_multiqc_files = Channel.empty()
 
     //
     // SUBWORKFLOW: Read in samplesheet, validate and stage input files
@@ -80,6 +77,25 @@ workflow READMAPPING {
     PREPARE_GENOME ( ch_genome )
     ch_versions = ch_versions.mix ( PREPARE_GENOME.out.versions )
 
+    //
+    // Control quality of input files
+    //
+    INPUT_CHECK.out.reads
+    | branch { meta, reads ->
+                cram:  reads.getName().endsWith("cram")
+                other: true
+    }
+    | set { ch_fastqc_reads }
+
+    // Convert cram to FASTQs
+    SAMTOOLS_COLLATETOFASTQ ( ch_fastqc_reads.cram, true )
+
+    ch_fastqc_reads = ch_fastqc_reads.other.mix ( SAMTOOLS_COLLATETOFASTQ.out.interleaved )
+    FASTQC ( ch_fastqc_reads )
+
+    ch_versions = ch_versions
+    | mix ( FASTQC.out.versions )
+    | mix ( SAMTOOLS_COLLATETOFASTQ.out.versions )
 
     //
     // Create channel for vector DB
@@ -125,32 +141,27 @@ workflow READMAPPING {
     | mix( ALIGN_CLR.out.bam )
     | mix( ALIGN_ONT.out.bam )
 
-    // Optionally insert params.header information to bams
-    ch_reheadered_bams = Channel.empty()
-    if ( params.header ) {
-        SAMTOOLS_REHEADER( ch_aligned_bams, ch_header.first() )
-        ch_reheadered_bams = SAMTOOLS_REHEADER.out.bam
-        ch_versions = ch_versions.mix ( SAMTOOLS_REHEADER.out.versions )
-    } else {
-        ch_reheadered_bams = ch_aligned_bams
-    }
 
     // convert to cram and gather stats
-    CONVERT_STATS ( ch_reheadered_bams, PREPARE_GENOME.out.fasta )
+    CONVERT_STATS ( ch_aligned_bams, PREPARE_GENOME.out.fasta, ch_header )
     ch_versions = ch_versions.mix ( CONVERT_STATS.out.versions )
 
+    //
+    // Collate and save software versions
+    //
+    softwareVersionsToYAML(ch_versions)
+        .collectFile(
+            storeDir: "${params.outdir}/pipeline_info",
+            name:  'readmapping_software_'  + 'versions.yml',
+            sort: true,
+            newLine: true
+        ).set { ch_collated_versions }
 
-    //
-    // MODULE: Combine different versions.yml
-    //
-    CUSTOM_DUMPSOFTWAREVERSIONS (
-        ch_versions
-        | unique { it.text }
-        | collectFile ( name: 'collated_versions.yml' )
-    )
+
+    emit:
+    versions       = ch_versions                 // channel: [ path(versions.yml) ]
+
 }
-
-
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

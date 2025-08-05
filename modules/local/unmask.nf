@@ -29,7 +29,7 @@ process UNMASK {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        awk: \$( awk --version | grep -oP '(?<=GNU Awk ).*?(?=, )' )
+        awk: \$( awk --version | awk 'NR==1 { gsub(/,/, "", \$3); print \$3 }')
     END_VERSIONS
     """
 }

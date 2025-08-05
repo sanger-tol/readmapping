@@ -12,6 +12,7 @@ The directories comply with Tree of Life's canonical directory structure.
 
 The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes data using the following steps:
 
+- [Quality control](#quality-control) - Check quality of input reads
 - [Preprocessing](#preprocessing)
   - [Filtering](#filtering) – Filtering PacBio data before alignment
 - [Alignment and Mark duplicates](#alignment-and-mark-duplicates)
@@ -27,6 +28,19 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 
 ## Preprocessing
 
+### Quality Control
+
+Input files undergo quality assessment using FASTQC, a widely-used tool for evaluating raw sequencing data. If the input is in CRAM format, it is first converted to FASTQ format to enable compatibility with FASTQC.
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `Quality_control`
+  - `*_fastqc.html`: An interactive HTML report summarizing key quality metrics
+  - `*_fastqc.zip`: A compressed archive containing the full set of FASTQC output files, including raw data and plots, suitable for further automated parsing or archival.
+
+</details>
+
 ### Filtering
 
 PacBio reads generated using both CLR and CCS technology are filtered using `BLAST_BLASTN` against a database of adapter sequences. The collated FASTQ of the filtered reads is required by the downstream alignment step. The results from the PacBio filtering subworkflow are currently not set to output.
@@ -37,6 +51,7 @@ PacBio reads generated using both CLR and CCS technology are filtered using `BLA
 
 - **outfmt**: Specifies the output format for alignments. It can be set to "bam", "cram", or both, separated by a comma (e.g., `--outfmt bam,cram`). The pipeline will generate output files in the specified formats.
 - **compression**: Specifies the compression method for alignments. It can be set to "none" or "crumble". When set to "crumble", the pipeline compresses the quality scores of the alignments.
+- **merge_output**: Merge output at the individual level. If merge_output is enabled (default: false), both unmerged and merged output files per sample will be generated; otherwise, only unmerged files are exported.
 
 ### Short reads
 
@@ -47,11 +62,17 @@ Short read data from HiC and Illumina technologies is aligned with `BWAMEM2_MEM`
 
 - `read_mapping`
   - `hic`
-    - `<gca_accession>.unmasked.hic.<sample_id>.[cr|b]am`: Sorted and merged BAM or CRAM file at the individual level
-    - `<gca_accession>.unmasked.hic.<sample_id>.[cr|b]am.[cr|c]si`: Index for the alignment (as either .csi or .crai)
+    - `merged`
+      - `<gca_accession>.unmasked.hic.<sample_id>.[cr|b]am`: Sorted and merged BAM or CRAM file at the individual level
+      - `<gca_accession>.unmasked.hic.<sample_id>.[cr|b]am.[cr|c]si`: Index for the alignment (as either .csi or .crai)
+    - `<gca_accession>.unmasked.hic.<sample_id><T1>.[cr|b]am`: Unmerged sorted BAM or CRAM
+    - `<gca_accession>.unmasked.hic.<sample_id><T1>.[cr|b]am.[cr|c]si`: Index for the alignment (as either .csi or .crai)
   - `illumina`
-    - `<gca_accession>.unmasked.illumina.<sample_id>.[cr|b]am`: Sorted and merged BAM or CRAM file at the individual level
-    - `<gca_accession>.unmasked.illumina.<sample_id>.[cr|b]am.[cr|c]si`: Index for the alignment
+    - `merged`
+      - `<gca_accession>.unmasked.hic.<sample_id>.[cr|b]am`: Sorted and merged BAM or CRAM file at the individual level
+      - `<gca_accession>.unmasked.hic.<sample_id>.[cr|b]am.[cr|c]si`: Index for the alignment (as either .csi or .crai)
+    - `<gca_accession>.unmasked.hic.<sample_id>_T<number>.[cr|b]am`: Unmerged BAM or CRAM. `T<number` is sample identifier with occurrence number, i.e., T1 indicates the first occurrence of that sample name, T2 indicates the second occurrence.
+    - `<gca_accession>.unmasked.hic.<sample_id>_T<number>.[cr|b]am.[cr|c]si`: Corresponding index for the alignment (as either .csi or .crai)
 
 </details>
 
@@ -64,8 +85,11 @@ Reads generated using Oxford Nanopore technology are aligned with `MINIMAP2_ALIG
 
 - `read_mapping`
   - `ont`
-    - `<gca_accession>.unmasked.ont.<sample_id>.[cr|b]am`: Sorted and merged BAM or CRAM file at the individual level
-    - `<gca_accession>.unmasked.ont.<sample_id>.[cr|b]am.[cr|c]si`: Index for the alignment
+    - `merged`
+      - `<gca_accession>.unmasked.ont.<sample_id>.[cr|b]am`: Sorted and merged BAM or CRAM file at the individual level
+      - `<gca_accession>.unmasked.ont.<sample_id>.[cr|b]am.[cr|c]si`: Index for the alignment (as either .csi or .crai)
+    - `<gca_accession>.unmasked.ont.<sample_id>_T<number>.[cr|b]am`: Unmerged BAM or CRAM. `T<number` is sample identifier with occurrence number, i.e., T1 indicates the first occurrence of that sample name, T2 indicates the second occurrence.
+    - `<gca_accession>.unmasked.ont.<sample_id>_T<number>.[cr|b]am.[cr|c]si`: Corresponding index for the alignment (as either .csi or .crai)
 
 </details>
 
@@ -78,8 +102,11 @@ The filtered PacBio reads are aligned with `MINIMAP2_ALIGN`. The sorted and merg
 
 - `read_mapping`
   - `pacbio`
-    - `<gca_accession>.unmasked.pacbio.<sample_id>.[cr|b]am`: Sorted and merged BAM or CRAM file at the individual level
-    - `<gca_accession>.unmasked.pacbio.<sample_id>.[cr|b]am.[cr|c]si`: Index for the alignment
+    - `merged`
+      - `<gca_accession>.unmasked.pacbio.<sample_id>.[cr|b]am`: Sorted and merged BAM or CRAM file at the individual level
+      - `<gca_accession>.unmasked.pacbio.<sample_id>.[cr|b]am.[cr|c]si`: Index for the alignment (as either .csi or .crai)
+    - `<gca_accession>.unmasked.pacbio.<sample_id>_T<number>.[cr|b]am`: Unmerged BAM or CRAM. `T<number` is sample identifier with occurrence number, i.e., T1 indicates the first occurrence of that sample name, T2 indicates the second occurrence.
+    - `<gca_accession>.unmasked.pacbio.<sample_id>_T<number>.[cr|b]am.[cr|c]si`: Corresponding index for the alignment (as either .csi or .crai)
 
 </details>
 
@@ -88,6 +115,19 @@ The filtered PacBio reads are aligned with `MINIMAP2_ALIGN`. The sorted and merg
 ### External metadata
 
 If provided using the `--header` option, all output alignments (`*.cram` or `*.bam`) will include any additional metadata supplied as a SAM header template, replacing the existing _@HD_ and _@SD_ entries (note that this behaviour can be altered by modifying the `ext.args` for `SAMTOOLS_REHEADER` in `modules.config`).
+
+### Read coverage
+
+Read coverage of the output alignment file is calculated with [blobtk depth](https://github.com/genomehubs/blobtk/wiki/blobtk-depth).
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `read_mapping`
+  - `<sequence-type>`
+    - `<gca_accession>.unmasked.<sequence-type>.<sample_id>.[cr|b]am.coverage.bedGraph.gz`: Read coverage in bedGraph format
+
+</details>
 
 ### Statistics
 
@@ -98,17 +138,29 @@ The output alignments, along with the index, are used to calculate mapping stati
 
 - `read_mapping`
   - `hic`
-    - `<gca_accession>.unmasked.hic.<sample_id>.stats`: Comprehensive statistics from alignment file
-    - `<gca_accession>.unmasked.hic.<sample_id>.flagstat`: Number of alignments for each FLAG type
-    - `<gca_accession>.unmasked.hic.<sample_id>.idxstats`: Alignment summary statistics
+    - `merged`
+      - `<gca_accession>.unmasked.hic.<sample_id>.stats.gz`: Comprehensive statistics from merged alignment file
+      - `<gca_accession>.unmasked.hic.<sample_id>.flagstat`: Number of merged alignments for each FLAG type
+      - `<gca_accession>.unmasked.hic.<sample_id>.idxstats`: Merged alignment summary statistics
+    - `<gca_accession>.unmasked.hic.<sample_id>_T<number>.stats.gz`: Comprehensive statistics from each alignment file
+    - `<gca_accession>.unmasked.hic.<sample_id>_T<number>.flagstat`: Number of alignments for each FLAG type
+    - `<gca_accession>.unmasked.hic.<sample_id>_T<number>.idxstats`: Alignment summary statistics
   - `ont`
-    - `<gca_accession>.unmasked.ont.<sample_id>.stats`: Comprehensive statistics from alignment file
-    - `<gca_accession>.unmasked.ont.<sample_id>.flagstat`: Number of alignments for each FLAG type
-    - `<gca_accession>.unmasked.ont.<sample_id>.idxstats`: Alignment summary statistics
+    - `merged`
+      - `<gca_accession>.unmasked.ont.<sample_id>.stats.gz`: Comprehensive statistics from merged alignment file
+      - `<gca_accession>.unmasked.ont.<sample_id>.flagstat`: Number of alignments for each FLAG type
+      - `<gca_accession>.unmasked.ont.<sample_id>.idxstats`: Merged alignment summary statistics
+    - `<gca_accession>.unmasked.ont.<sample_id>_T<number>.stats.gz`: Comprehensive statistics from each alignment file
+    - `<gca_accession>.unmasked.ont.<sample_id>_T<number>.flagstat`: Number of alignments for each FLAG type
+    - `<gca_accession>.unmasked.ont.<sample_id>_T<number>.idxstats`: Alignment summary statistics
   - `pacbio`
-    - `<gca_accession>.unmasked.pacbio.<sample_id>.stats`: Comprehensive statistics from alignment file
-    - `<gca_accession>.unmasked.pacbio.<sample_id>.flagstat`: Number of alignments for each FLAG type
-    - `<gca_accession>.unmasked.pacbio.<sample_id>.idxstats`: Alignment summary statistics
+    - `merged`
+      - `<gca_accession>.unmasked.pacbio.<sample_id>.stats.gz`: Comprehensive statistics from alignment file
+      - `<gca_accession>.unmasked.pacbio.<sample_id>.flagstat`: Number of merged alignments for each FLAG type
+      - `<gca_accession>.unmasked.pacbio.<sample_id>.idxstats`: Merged alignment summary statistics
+    - `<gca_accession>.unmasked.pacbio.<sample_id>_T<number>.stats.gz`: Comprehensive statistics from each alignment file
+    - `<gca_accession>.unmasked.pacbio.<sample_id>_T<number>.flagstat`: Number of alignments for each FLAG type
+    - `<gca_accession>.unmasked.pacbio.<sample_id>_T<number>.idxstats`: Alignment summary statistics
 
 </details>
 
