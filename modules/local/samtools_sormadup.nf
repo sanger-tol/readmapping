@@ -4,10 +4,12 @@ process SAMTOOLS_SORMADUP {
     tag "$meta.id"
     label 'process_medium'
 
-    conda "bioconda::samtools=1.21"
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/samtools:1.21--h50ea8bc_0' :
-        'biocontainers/samtools:1.21--h50ea8bc_0' }"
+    // conda "bioconda::samtools=1.21"
+    // container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+    //     'https://depot.galaxyproject.org/singularity/samtools:1.21--h50ea8bc_0' :
+    //     'biocontainers/samtools:1.21--h50ea8bc_0' }"
+
+    container 'docker.io/staphb/samtools:1.22.1'
 
     input:
     tuple val(meta), path(input)

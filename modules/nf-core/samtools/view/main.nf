@@ -2,10 +2,12 @@ process SAMTOOLS_VIEW {
     tag "$meta.id"
     label 'process_low'
 
-    conda "${moduleDir}/environment.yml"
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/samtools:1.21--h50ea8bc_0' :
-        'biocontainers/samtools:1.21--h50ea8bc_0' }"
+    // conda "${moduleDir}/environment.yml"
+    // container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+    //     'https://depot.galaxyproject.org/singularity/samtools:1.21--h50ea8bc_0' :
+    //     'biocontainers/samtools:1.21--h50ea8bc_0' }"
+
+    container 'docker.io/staphb/samtools:1.22.1'
 
     input:
     tuple val(meta), path(input), path(index)
@@ -37,6 +39,7 @@ process SAMTOOLS_VIEW {
                 input.getExtension()
     readnames = qname ? "--qname-file ${qname} --output-unselected ${prefix}.unselected.${file_type}": ""
     if ("$input" == "${prefix}.${file_type}") error "Input and output names are the same, use \"task.ext.prefix\" to disambiguate!"
+
     """
     samtools \\
         view \\

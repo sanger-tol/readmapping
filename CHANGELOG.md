@@ -12,11 +12,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Switched to not merging alignments by specimen by default. Merged alignment can be reenabled with the new `--merge_output`.
 - Perform CRAM file reheadering after converting BAM to CRAM (previously done before conversion) to ensure provided headers are retained.
 - Compressed samtools stats files to reduce storage usage
+- Upgrade Samtools version to allow CRAM 3.1
 
 | Dependency     | Old version | New version |
 | -------------- | ----------- | ----------- |
 | `fastqc `      |             | 0.12.1      |
 | `blobtk depth` |             | 0.6.5       |
+| `samtools`     | 1.21        | 1.22.1      |
+
 
 ## [[1.3.4](https://github.com/sanger-tol/readmapping/releases/tag/1.3.4)] - Antipodean Opaleye (patch 4) - [2025-03-18]
 
