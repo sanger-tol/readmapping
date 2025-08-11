@@ -11,7 +11,7 @@
 
 include { INPUT_CHECK                   } from '../subworkflows/local/input_check'
 include { SAMTOOLS_COLLATETOFASTQ       } from '../modules/local/samtools_collatetofastq'
-include { FASTQC                        } from '../modules/nf-core/fastqc/main'
+include { FASTQC                        } from '../modules/nf-core/fastqc'
 include { PREPARE_GENOME                } from '../subworkflows/local/prepare_genome'
 include { ALIGN_SHORT as ALIGN_HIC      } from '../subworkflows/local/align_short'
 include { ALIGN_SHORT as ALIGN_ILLUMINA } from '../subworkflows/local/align_short'
@@ -19,6 +19,7 @@ include { ALIGN_PACBIO as ALIGN_HIFI    } from '../subworkflows/local/align_pacb
 include { ALIGN_PACBIO as ALIGN_CLR     } from '../subworkflows/local/align_pacbio'
 include { ALIGN_ONT                     } from '../subworkflows/local/align_ont'
 include { CONVERT_STATS                 } from '../subworkflows/local/convert_stats'
+include { MULTIQC                       } from '../modules/nf-core/multiqc'
 
 
 /*
@@ -53,6 +54,7 @@ workflow READMAPPING {
     main:
     // Initialize an empty versions channel
     ch_versions = Channel.empty()
+    ch_multiqc_files = Channel.empty()
 
     //
     // SUBWORKFLOW: Read in samplesheet, validate and stage input files
@@ -92,6 +94,8 @@ workflow READMAPPING {
 
     ch_fastqc_reads = ch_fastqc_reads.other.mix ( SAMTOOLS_COLLATETOFASTQ.out.interleaved )
     FASTQC ( ch_fastqc_reads )
+
+    ch_multiqc_files = ch_multiqc_files.mix( FASTQC.out.zip )
 
     ch_versions = ch_versions
     | mix ( FASTQC.out.versions )
@@ -156,6 +160,20 @@ workflow READMAPPING {
             sort: true,
             newLine: true
         ).set { ch_collated_versions }
+
+    ch_multiqc_files = ch_multiqc_files
+    .mix ( ALIGN_HIFI.out.post_qc )
+    .mix ( ALIGN_CLR.out.post_qc )
+    .mix ( CONVERT_STATS.out.stats )
+    .mix ( CONVERT_STATS.out.flagstat )
+    .mix ( CONVERT_STATS.out.idxstats )
+
+    ch_multiqc_files
+    .map { meta, file -> file }
+    .mix ( ch_collated_versions )
+    .set { ch_multiqc_files }
+
+    MULTIQC ( ch_multiqc_files.collect(), [], [], [], [], [] )
 
 
     emit:
