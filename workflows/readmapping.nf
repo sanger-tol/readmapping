@@ -172,8 +172,8 @@ workflow READMAPPING {
     .map { meta, file -> file }
     .mix ( ch_collated_versions )
     .set { ch_multiqc_files }
-
-    MULTIQC ( ch_multiqc_files.collect(), [], [], [], [], [] )
+    multiqc_config = "${projectDir}/assets/multiqc_config.yaml"
+    MULTIQC ( ch_multiqc_files.collect(), multiqc_config, [], [], [], []  )
 
 
     emit:
