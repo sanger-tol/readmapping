@@ -20,6 +20,7 @@ workflow CREATE_CRAM_FILTER_INPUT {
                 read_count: cram_id.read_count,
                 read_group: cram_id.read_group,
                 datatype: cram_id.datatype,
+                library: cram_id.library
             ],
             file(cram_info[0]),
             cram_info[1],
