@@ -9,7 +9,6 @@ include { BLAST_BLASTN                      } from '../../modules/nf-core/blast/
 include { PACBIO_FILTER                     } from '../../modules/local/pacbio_filter'
 include { SAMTOOLS_FILTERTOFASTQ            } from '../../modules/local/samtools_filtertofastq'
 
-
 workflow FILTER_PACBIO {
     take:
     reads    // channel: [ val(meta), /path/to/datafile ]
@@ -18,7 +17,7 @@ workflow FILTER_PACBIO {
     main:
     ch_versions = Channel.empty()
 
-    // Convert from PacBio CRAM to Samtools BAM
+    // Convert from PacBio CRAM to Samtools CRAM
     reads
     | map { meta, cram -> [ meta, cram, [] ] }
     | set { ch_pacbio }

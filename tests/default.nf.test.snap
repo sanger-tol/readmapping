@@ -52,6 +52,9 @@
                 "PACBIO_FILTER": {
                     "GNU Awk": "5.1.0"
                 },
+                "PACBIO_PBMARKDUP": {
+                    "pbmarkdup": "1.0.3"
+                },
                 "SAMTOOLS_ADDREPLACERG": {
                     "samtools": 1.2
                 },
@@ -169,6 +172,6 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-08-15T10:43:24.941624066"
+        "timestamp": "2025-08-05T13:26:13.056508764"
     }
 }
