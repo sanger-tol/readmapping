@@ -54,6 +54,21 @@
                     "default": "${projectDir}/assets/vectorDB.tar.gz",
                     "fa_icon": "fas fa-bezier-curve"
                 },
+                "uli_adapter": {
+                    "type": "string",
+                    "description": "Path to FASTA file containing the PacBio ULI adapter sequence.",
+                    "format": "file-path",
+                    "mimetype": "text/plain",
+                    "pattern": "^\\S+\\.fn?a(sta)?(\\.gz)?$",
+                    "fa_icon": "far fa-file-code"
+                },
+                "trim_uli_adapter": {
+                    "type": "boolean",
+                    "description": "Enable trimming of the PacBio ULI adapter from input reads.",
+                    "format": "path",
+                    "default": false,
+                    "fa_icon": "fas fa-scissors"
+                },
                 "email": {
                     "type": "string",
                     "description": "Email address for completion summary.",
