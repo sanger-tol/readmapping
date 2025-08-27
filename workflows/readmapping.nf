@@ -13,14 +13,12 @@ include { INPUT_CHECK                   } from '../subworkflows/local/input_chec
 include { SAMTOOLS_COLLATETOFASTQ       } from '../modules/local/samtools_collatetofastq'
 include { FASTQC                        } from '../modules/nf-core/fastqc/main'
 include { PREPARE_GENOME                } from '../subworkflows/local/prepare_genome'
-include { ALIGN_SHORT as ALIGN_HIC      } from '../subworkflows/local/align_short'
+include { HIC_MAPPING as ALIGN_HIC      } from '../subworkflows/sanger-tol/hic_mapping'
 include { ALIGN_SHORT as ALIGN_ILLUMINA } from '../subworkflows/local/align_short'
 include { ALIGN_PACBIO as ALIGN_HIFI    } from '../subworkflows/local/align_pacbio'
 include { ALIGN_PACBIO as ALIGN_CLR     } from '../subworkflows/local/align_pacbio'
 include { ALIGN_ONT                     } from '../subworkflows/local/align_ont'
 include { CONVERT_STATS                 } from '../subworkflows/local/convert_stats'
-
-
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT NF-CORE MODULES/SUBWORKFLOWS
@@ -118,12 +116,12 @@ workflow READMAPPING {
     //
     // SUBWORKFLOW: Align raw reads to genome
     //
-    ALIGN_HIC ( PREPARE_GENOME.out.fasta, PREPARE_GENOME.out.bwaidx, ch_reads.hic )
+    ALIGN_HIC ( PREPARE_GENOME.out.fasta, ch_reads.hic, params.short_aligner, params.chunk_size, true )
     ch_versions = ch_versions.mix ( ALIGN_HIC.out.versions )
 
     ALIGN_ILLUMINA ( PREPARE_GENOME.out.fasta, PREPARE_GENOME.out.bwaidx, ch_reads.illumina )
     ch_versions = ch_versions.mix ( ALIGN_ILLUMINA.out.versions )
-
+    
     ALIGN_HIFI ( PREPARE_GENOME.out.fasta, ch_reads.pacbio, ch_vector_db )
     ch_versions = ch_versions.mix ( ALIGN_HIFI.out.versions )
 

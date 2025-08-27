@@ -13,7 +13,7 @@
                     "bwamem2/index": {
                         "branch": "master",
                         "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
-                        "installed_by": ["modules"]
+                        "installed_by": ["hic_mapping", "modules"]
                     },
                     "bwamem2/mem": {
                         "branch": "master",
@@ -43,7 +43,12 @@
                     "minimap2/index": {
                         "branch": "master",
                         "git_sha": "72e277acfd9e61a9f1368eafb4a9e83f5bcaa9f5",
-                        "installed_by": ["modules"]
+                        "installed_by": ["hic_mapping", "modules"]
+                    },
+                    "samtools/faidx": {
+                        "branch": "master",
+                        "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
+                        "installed_by": ["hic_mapping"]
                     },
                     "samtools/flagstat": {
                         "branch": "master",
@@ -58,13 +63,18 @@
                     "samtools/index": {
                         "branch": "master",
                         "git_sha": "46eca555142d6e597729fcb682adcc791796f514",
-                        "installed_by": ["modules"],
+                        "installed_by": ["hic_mapping", "modules"],
                         "patch": "modules/nf-core/samtools/index/samtools-index.diff"
+                    },
+                    "samtools/markdup": {
+                        "branch": "master",
+                        "git_sha": "e89ff68a46b848c4d8aabb8569767516d46db319",
+                        "installed_by": ["hic_mapping"]
                     },
                     "samtools/merge": {
                         "branch": "master",
                         "git_sha": "b13f07be4c508d6ff6312d354d09f2493243e208",
-                        "installed_by": ["modules"],
+                        "installed_by": ["hic_mapping", "modules"],
                         "patch": "modules/nf-core/samtools/merge/samtools-merge.diff"
                     },
                     "samtools/stats": {
@@ -105,6 +115,36 @@
                     "utils_nfschema_plugin": {
                         "branch": "master",
                         "git_sha": "2fd2cd6d0e7b273747f32e465fdc6bcc3ae0814e",
+                        "installed_by": ["subworkflows"]
+                    }
+                }
+            }
+        },
+        "https://github.com/sanger-tol/nf-core-modules": {
+            "modules": {
+                "sanger-tol": {
+                    "hiccramalign/bwamem2align": {
+                        "branch": "main",
+                        "git_sha": "37dfa6e807cee605fbeac6c2be51a16cd60e0d27",
+                        "installed_by": ["hic_mapping"]
+                    },
+                    "hiccramalign/chunks": {
+                        "branch": "main",
+                        "git_sha": "ca3808e52e3cb978342f2cad64505bed08dbee57",
+                        "installed_by": ["hic_mapping"]
+                    },
+                    "hiccramalign/minimap2align": {
+                        "branch": "main",
+                        "git_sha": "37dfa6e807cee605fbeac6c2be51a16cd60e0d27",
+                        "installed_by": ["hic_mapping"]
+                    }
+                }
+            },
+            "subworkflows": {
+                "sanger-tol": {
+                    "hic_mapping": {
+                        "branch": "main",
+                        "git_sha": "170386669244a9b418b19c87715516b0ca947cef",
                         "installed_by": ["subworkflows"]
                     }
                 }
