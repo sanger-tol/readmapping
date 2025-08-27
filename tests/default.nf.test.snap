@@ -103,7 +103,7 @@
             },
             [
                 "pipeline_info",
-                "pipeline_info/readmapping_software_versions.yml",
+                "pipeline_info/readmapping_software_mqc_versions.yml",
                 "quality_control",
                 "quality_control/hic.mMelMel3_T1.fasta_fastqc.html",
                 "quality_control/hic.mMelMel3_T1.fasta_fastqc.zip",
