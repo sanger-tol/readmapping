@@ -1,7 +1,7 @@
 {
     "-profile test_uli": {
         "content": [
-            38,
+            41,
             {
                 "BGZIP_BEDGRAPH": {
                     "tabix": 1.21
@@ -89,10 +89,13 @@
             },
             [
                 "pipeline_info",
-                "pipeline_info/readmapping_software_versions.yml",
+                "pipeline_info/readmapping_software_mqc_versions.yml",
                 "quality_control",
-                "quality_control/jaAcrCerv1_T1.pacbio_fastqc.html",
-                "quality_control/jaAcrCerv1_T1.pacbio_fastqc.zip",
+                "quality_control/multiqc_report.html",
+                "quality_control/pacbio.jaAcrCerv1_T1.filtered_fastqc.html",
+                "quality_control/pacbio.jaAcrCerv1_T1.filtered_fastqc.zip",
+                "quality_control/pacbio.jaAcrCerv1_T1_fastqc.html",
+                "quality_control/pacbio.jaAcrCerv1_T1_fastqc.zip",
                 "read_mapping",
                 "read_mapping/pacbio",
                 "read_mapping/pacbio/GCA_964034985.1.unmasked.pacbio.jaAcrCerv1_T1.coverage.bedGraph.gz",
@@ -105,8 +108,8 @@
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
+            "nextflow": "25.04.2"
         },
-        "timestamp": "2025-08-05T13:22:48.913907961"
+        "timestamp": "2025-08-27T13:09:13.2303"
     }
 }

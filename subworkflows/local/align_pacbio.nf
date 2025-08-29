@@ -2,17 +2,18 @@
 // Align PacBio read files against the genome
 //
 
-include { FILTER_PACBIO                     } from '../../subworkflows/local/filter_pacbio'
-include { MINIMAP2_ALIGN                    } from '../../modules/nf-core/minimap2/align/main'
-include { MERGE_OUTPUT                      } from '../../subworkflows/local/merge_output'
-include { SAMTOOLS_MERGE                    } from '../../modules/nf-core/samtools/merge/main'
-include { SAMTOOLS_ADDREPLACERG             } from '../../modules/local/samtools_addreplacerg'
-include { SAMTOOLS_INDEX                    } from '../../modules/nf-core/samtools/index/main'
-include { GENERATE_CRAM_CSV                 } from '../../modules/local/generate_cram_csv'
-include { SAMTOOLS_SORMADUP as CONVERT_CRAM } from '../../modules/local/samtools_sormadup'
-include { CREATE_CRAM_FILTER_INPUT          } from '../../subworkflows/local/create_cram_filter_input'
 include { LIMA                              } from '../../modules/nf-core/lima'
 include { PACBIO_PBMARKDUP                  } from '../../modules/local/pbmarkdup'
+include { SAMTOOLS_SORMADUP as CONVERT_CRAM } from '../../modules/local/samtools_sormadup'
+include { SAMTOOLS_ADDREPLACERG             } from '../../modules/local/samtools_addreplacerg'
+include { SAMTOOLS_INDEX                    } from '../../modules/nf-core/samtools/index'
+include { GENERATE_CRAM_CSV                 } from '../../modules/local/generate_cram_csv'
+include { CREATE_CRAM_FILTER_INPUT          } from '../../subworkflows/local/create_cram_filter_input'
+include { FILTER_PACBIO                     } from '../../subworkflows/local/filter_pacbio'
+include { FASTQC as FASTQC_FILTERED         } from '../../modules/nf-core/fastqc'
+include { MINIMAP2_ALIGN                    } from '../../modules/nf-core/minimap2/align'
+include { SAMTOOLS_MERGE                    } from '../../modules/nf-core/samtools/merge'
+include { MERGE_OUTPUT                      } from '../../subworkflows/local/merge_output'
 
 workflow ALIGN_PACBIO {
     take:
@@ -74,6 +75,8 @@ workflow ALIGN_PACBIO {
     FILTER_PACBIO ( CREATE_CRAM_FILTER_INPUT.out.chunked_cram, db )
     ch_versions = ch_versions.mix ( FILTER_PACBIO.out.versions )
 
+    FASTQC_FILTERED ( FILTER_PACBIO.out.fastq )
+
     // Align without map reduce
     // Align Fastq to Genome with minimap2. bam_format is set to true, making the output a *sorted* BAM
     MINIMAP2_ALIGN ( FILTER_PACBIO.out.fastq, fasta, true, "csi", false, false )
@@ -104,5 +107,6 @@ workflow ALIGN_PACBIO {
 
     emit:
     bam      = ch_sort                       // channel: [ val(meta), /path/to/bam ]
+    post_qc  = FASTQC_FILTERED.out.zip       // channel: [ val(meta), /path/to/fastqc zip]
     versions = ch_versions                   // channel: [ versions.yml ]
 }
