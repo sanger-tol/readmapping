@@ -1,0 +1,28 @@
+Changes in component 'nf-core/samtools/stats'
+'modules/nf-core/samtools/stats/environment.yml' is unchanged
+'modules/nf-core/samtools/stats/meta.yml' is unchanged
+Changes in 'samtools/stats/main.nf':
+--- modules/nf-core/samtools/stats/main.nf
++++ modules/nf-core/samtools/stats/main.nf
+@@ -2,10 +2,12 @@
+     tag "$meta.id"
+     label 'process_single'
+ 
+-    conda "${moduleDir}/environment.yml"
+-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+-        'https://depot.galaxyproject.org/singularity/samtools:1.21--h50ea8bc_0' :
+-        'biocontainers/samtools:1.21--h50ea8bc_0' }"
++    // conda "${moduleDir}/environment.yml"
++    // container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
++    //     'https://depot.galaxyproject.org/singularity/samtools:1.21--h50ea8bc_0' :
++    //     'biocontainers/samtools:1.21--h50ea8bc_0' }"
++
++    container 'docker.io/staphb/samtools:1.22.1'
+ 
+     input:
+     tuple val(meta), path(input), path(input_index)
+
+'modules/nf-core/samtools/stats/tests/main.nf.test.snap' is unchanged
+'modules/nf-core/samtools/stats/tests/tags.yml' is unchanged
+'modules/nf-core/samtools/stats/tests/main.nf.test' is unchanged
+************************************************************

@@ -58,12 +58,14 @@
                     "samtools/flagstat": {
                         "branch": "master",
                         "git_sha": "2d20463181b1c38981a02e90d3084b5f9fa8d540",
-                        "installed_by": ["modules"]
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/samtools/flagstat/samtools-flagstat.diff"
                     },
                     "samtools/idxstats": {
                         "branch": "master",
                         "git_sha": "2d20463181b1c38981a02e90d3084b5f9fa8d540",
-                        "installed_by": ["modules"]
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/samtools/idxstats/samtools-idxstats.diff"
                     },
                     "samtools/index": {
                         "branch": "master",
@@ -80,7 +82,8 @@
                     "samtools/stats": {
                         "branch": "master",
                         "git_sha": "2d20463181b1c38981a02e90d3084b5f9fa8d540",
-                        "installed_by": ["modules"]
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/samtools/stats/samtools-stats.diff"
                     },
                     "samtools/view": {
                         "branch": "master",
