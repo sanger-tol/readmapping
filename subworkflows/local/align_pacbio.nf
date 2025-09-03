@@ -67,6 +67,7 @@ workflow ALIGN_PACBIO {
     SAMTOOLS_MERGE (
         collected_files_for_merge,
         fasta,
+        [ [], [] ],
         [ [], [] ]
     )
 

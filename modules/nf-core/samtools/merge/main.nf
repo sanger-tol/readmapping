@@ -11,6 +11,7 @@ process SAMTOOLS_MERGE {
     tuple val(meta), path(input_files, stageAs: "?/*")
     tuple val(meta2), path(fasta)
     tuple val(meta3), path(fai)
+    tuple val(meta4), path(gzi)
 
     output:
     tuple val(meta), path("${prefix}.bam") , optional:true, emit: bam
@@ -19,7 +20,6 @@ process SAMTOOLS_MERGE {
     tuple val(meta), path("*.crai")        , optional:true, emit: crai
     path  "versions.yml"                                  , emit: versions
 
-
     when:
     task.ext.when == null || task.ext.when
 
@@ -27,20 +27,16 @@ process SAMTOOLS_MERGE {
     def args = task.ext.args   ?: ''
     prefix   = task.ext.prefix ?: "${meta.id}"
     def file_type = input_files instanceof List ? input_files[0].getExtension() : input_files.getExtension()
-    if (input_files instanceof List) {
-        sorted_input_files = input_files.toSorted({it.name}).join(' ')
-    } else {
-        sorted_input_files = input_files
-    }
     def reference = fasta ? "--reference ${fasta}" : ""
     """
+    # Note: --threads value represents *additional* CPUs to allocate (total CPUs = 1 + --threads).
     samtools \\
         merge \\
         --threads ${task.cpus-1} \\
         $args \\
         ${reference} \\
         ${prefix}.${file_type} \\
-        $sorted_input_files
+        $input_files
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
