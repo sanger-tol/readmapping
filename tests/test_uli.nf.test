@@ -1,10 +1,11 @@
 nextflow_pipeline {
 
-    name "Test readmapping pipeline with minimap2 as short aligner"
+    name "Test readmapping pipeline with ULI PacBio data"
     script "../main.nf"
     tag "pipeline"
+    profile "test_uli"
 
-    test("-profile test") {
+    test("-profile test_uli") {
 
         when {
             params {

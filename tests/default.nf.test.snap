@@ -1,7 +1,7 @@
 {
     "-profile test": {
         "content": [
-            144,
+            150,
             {
                 "BGZIP_BEDGRAPH": {
                     "tabix": 1.21
@@ -16,7 +16,7 @@
                     "bwamem2": "2.2.1"
                 },
                 "CONVERT_CRAM": {
-                    "samtools": 1.21
+                    "samtools": "1.22.1"
                 },
                 "CRAM_FILTER": {
                     "samtools": 1.17,
@@ -52,44 +52,47 @@
                 "PACBIO_FILTER": {
                     "GNU Awk": "5.1.0"
                 },
+                "PACBIO_PBMARKDUP": {
+                    "pbmarkdup": "1.0.3"
+                },
                 "SAMTOOLS_ADDREPLACERG": {
-                    "samtools": 1.2
+                    "samtools": "1.22.1"
                 },
                 "SAMTOOLS_COLLATETOFASTA": {
-                    "samtools": 1.21
+                    "samtools": "1.22.1"
                 },
                 "SAMTOOLS_COLLATETOFASTQ": {
-                    "samtools": 1.21
+                    "samtools": "1.22.1"
                 },
                 "SAMTOOLS_CONVERT": {
-                    "samtools": 1.21
+                    "samtools": "1.22.1"
                 },
                 "SAMTOOLS_CRAM": {
-                    "samtools": 1.21
+                    "samtools": "1.22.1"
                 },
                 "SAMTOOLS_FILTERTOFASTQ": {
-                    "samtools": 1.21
+                    "samtools": "1.22.1"
                 },
                 "SAMTOOLS_FLAGSTAT": {
-                    "samtools": 1.21
+                    "samtools": "1.22.1"
                 },
                 "SAMTOOLS_IDXSTATS": {
-                    "samtools": 1.21
+                    "samtools": "1.22.1"
                 },
                 "SAMTOOLS_INDEX": {
                     "samtools": 1.2
                 },
                 "SAMTOOLS_MERGE": {
-                    "samtools": 1.21
+                    "samtools": "1.22.1"
                 },
                 "SAMTOOLS_REHEADER_CRAM": {
-                    "samtools": 1.21
+                    "samtools": "1.22.1"
                 },
                 "SAMTOOLS_SORMADUP": {
-                    "samtools": 1.21
+                    "samtools": "1.22.1"
                 },
                 "SAMTOOLS_STATS": {
-                    "samtools": 1.21
+                    "samtools": "1.22.1"
                 },
                 "UNMASK": {
                     "awk": "5.1.0"
@@ -103,20 +106,25 @@
             },
             [
                 "pipeline_info",
-                "pipeline_info/readmapping_software_versions.yml",
+                "pipeline_info/readmapping_software_mqc_versions.yml",
                 "quality_control",
-                "quality_control/mMelMel1_T1.illumina.fasta_fastqc.html",
-                "quality_control/mMelMel1_T1.illumina.fasta_fastqc.zip",
-                "quality_control/mMelMel2_T1.illumina_fastqc.html",
-                "quality_control/mMelMel2_T1.illumina_fastqc.zip",
-                "quality_control/mMelMel3_T1.hic.fasta_fastqc.html",
-                "quality_control/mMelMel3_T1.hic.fasta_fastqc.zip",
-                "quality_control/mMelMel3_T2.ont_fastqc.html",
-                "quality_control/mMelMel3_T2.ont_fastqc.zip",
-                "quality_control/mMelMel3_T3.pacbio_fastqc.html",
-                "quality_control/mMelMel3_T3.pacbio_fastqc.zip",
-                "quality_control/mMelMel3_T4.pacbio_fastqc.html",
-                "quality_control/mMelMel3_T4.pacbio_fastqc.zip",
+                "quality_control/hic.mMelMel3_T1.fasta_fastqc.html",
+                "quality_control/hic.mMelMel3_T1.fasta_fastqc.zip",
+                "quality_control/illumina.mMelMel1_T1.fasta_fastqc.html",
+                "quality_control/illumina.mMelMel1_T1.fasta_fastqc.zip",
+                "quality_control/illumina.mMelMel2_T1_fastqc.html",
+                "quality_control/illumina.mMelMel2_T1_fastqc.zip",
+                "quality_control/multiqc_report.html",
+                "quality_control/ont.mMelMel3_T2_fastqc.html",
+                "quality_control/ont.mMelMel3_T2_fastqc.zip",
+                "quality_control/pacbio.mMelMel3_T3.filtered_fastqc.html",
+                "quality_control/pacbio.mMelMel3_T3.filtered_fastqc.zip",
+                "quality_control/pacbio.mMelMel3_T3_fastqc.html",
+                "quality_control/pacbio.mMelMel3_T3_fastqc.zip",
+                "quality_control/pacbio.mMelMel3_T4.filtered_fastqc.html",
+                "quality_control/pacbio.mMelMel3_T4.filtered_fastqc.zip",
+                "quality_control/pacbio.mMelMel3_T4_fastqc.html",
+                "quality_control/pacbio.mMelMel3_T4_fastqc.zip",
                 "read_mapping",
                 "read_mapping/hic",
                 "read_mapping/hic/GCA_922984935.2.subset.unmasked.hic.mMelMel3_T1.coverage.bedGraph.gz",
@@ -164,6 +172,6 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.2"
         },
-        "timestamp": "2025-07-21T12:39:41.008711"
+        "timestamp": "2025-08-27T14:46:31.844796"
     }
 }

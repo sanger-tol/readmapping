@@ -2,10 +2,12 @@ process SAMTOOLS_FLAGSTAT {
     tag "$meta.id"
     label 'process_single'
 
-    conda "${moduleDir}/environment.yml"
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/samtools:1.21--h50ea8bc_0' :
-        'biocontainers/samtools:1.21--h50ea8bc_0' }"
+    // conda "${moduleDir}/environment.yml"
+    // container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+    //     'https://depot.galaxyproject.org/singularity/samtools:1.21--h50ea8bc_0' :
+    //     'biocontainers/samtools:1.21--h50ea8bc_0' }"
+
+    container 'docker.io/staphb/samtools:1.22.1'
 
     input:
     tuple val(meta), path(bam), path(bai)

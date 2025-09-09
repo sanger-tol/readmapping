@@ -2,15 +2,18 @@
 // Align PacBio read files against the genome
 //
 
-include { FILTER_PACBIO                     } from '../../subworkflows/local/filter_pacbio'
-include { SAMTOOLS_ADDREPLACERG             } from '../../modules/local/samtools_addreplacerg'
-include { SAMTOOLS_INDEX                    } from '../../modules/nf-core/samtools/index/main'
-include { GENERATE_CRAM_CSV                 } from '../../modules/local/generate_cram_csv'
+include { LIMA                              } from '../../modules/nf-core/lima'
+include { PACBIO_PBMARKDUP                  } from '../../modules/local/pbmarkdup'
 include { SAMTOOLS_SORMADUP as CONVERT_CRAM } from '../../modules/local/samtools_sormadup'
+include { SAMTOOLS_ADDREPLACERG             } from '../../modules/local/samtools_addreplacerg'
+include { SAMTOOLS_INDEX                    } from '../../modules/nf-core/samtools/index'
+include { GENERATE_CRAM_CSV                 } from '../../modules/local/generate_cram_csv'
 include { CREATE_CRAM_FILTER_INPUT          } from '../../subworkflows/local/create_cram_filter_input'
-include { MINIMAP2_ALIGN                    } from '../../modules/nf-core/minimap2/align/main'
+include { FILTER_PACBIO                     } from '../../subworkflows/local/filter_pacbio'
+include { FASTQC as FASTQC_FILTERED         } from '../../modules/nf-core/fastqc'
+include { MINIMAP2_ALIGN                    } from '../../modules/nf-core/minimap2/align'
+include { SAMTOOLS_MERGE                    } from '../../modules/nf-core/samtools/merge'
 include { MERGE_OUTPUT                      } from '../../subworkflows/local/merge_output'
-include { SAMTOOLS_MERGE                    } from '../../modules/nf-core/samtools/merge/main'
 
 workflow ALIGN_PACBIO {
     take:
@@ -23,8 +26,32 @@ workflow ALIGN_PACBIO {
     ch_versions = Channel.empty()
     ch_merged_bam   = Channel.empty()
 
+    // Branch for handling ultra low-input libraries
+    reads
+    | branch {
+        meta, reads ->
+            uli : meta.library == "uli"
+            other : true
+    }
+    | set { ch_reads_branched }
+
+    // Trim ULI adapter
+    bam_for_md = ch_reads_branched.uli
+    if ( params.trim_uli_adapter ) {
+        bam_for_md = LIMA ( ch_reads_branched.uli, params.uli_adapter ).bam
+        ch_versions = ch_versions.mix ( LIMA.out.versions.first() )
+    }
+
+    // Mark/remove duplicates
+    PACBIO_PBMARKDUP ( bam_for_md )
+    ch_versions = ch_versions.mix ( PACBIO_PBMARKDUP.out.versions.first() )
+
+    PACBIO_PBMARKDUP.out.output
+    | mix ( ch_reads_branched.other )
+    | set { ch_reads_all }
+
     // Convert input to CRAM
-    CONVERT_CRAM ( reads, fasta )
+    CONVERT_CRAM ( ch_reads_all, fasta )
     ch_versions = ch_versions.mix ( CONVERT_CRAM.out.versions )
 
     SAMTOOLS_ADDREPLACERG ( CONVERT_CRAM.out.bam )
@@ -47,6 +74,8 @@ workflow ALIGN_PACBIO {
     // Filter BAM and output as FASTQ
     FILTER_PACBIO ( CREATE_CRAM_FILTER_INPUT.out.chunked_cram, db )
     ch_versions = ch_versions.mix ( FILTER_PACBIO.out.versions )
+
+    FASTQC_FILTERED ( FILTER_PACBIO.out.fastq )
 
     // Align without map reduce
     // Align Fastq to Genome with minimap2. bam_format is set to true, making the output a *sorted* BAM
@@ -79,5 +108,6 @@ workflow ALIGN_PACBIO {
 
     emit:
     bam      = ch_sort                       // channel: [ val(meta), /path/to/bam ]
+    post_qc  = FASTQC_FILTERED.out.zip       // channel: [ val(meta), /path/to/fastqc zip]
     versions = ch_versions                   // channel: [ versions.yml ]
 }
