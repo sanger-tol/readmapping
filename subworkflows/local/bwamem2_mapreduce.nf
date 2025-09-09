@@ -82,5 +82,5 @@ workflow BWAMEM2_MAPREDUCE {
 
     emit:
     mergedbam           = SAMTOOLS_MERGE.out.bam
-    versions            = ch_versions.ifEmpty(null)
+    versions            = ch_versions
 }
