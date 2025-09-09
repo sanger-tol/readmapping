@@ -57,14 +57,6 @@ workflow HIC_MAPPING {
     ch_versions = ch_versions.mix(HICCRAMALIGN_CHUNKS.out.versions)
 
     //
-    // Logic: Count the total number of cram chunks for downstream grouping
-    //
-    ch_n_cram_chunks = HICCRAMALIGN_CHUNKS.out.cram_slices
-        | map { _meta, _cram, _crai, chunkn, _slices -> chunkn }
-        | collect
-        | map { chunkns -> chunkns.size() }
-
-    //
     // Logic: Begin alignment - fork depending on specified aligner
     //
     if(val_aligner == "bwamem2") {
@@ -77,13 +69,14 @@ workflow HIC_MAPPING {
         ch_assemblies_with_reference = ch_assemblies
             | combine(BWAMEM2_INDEX.out.index, by: 0)
 
+        // Keep sample meta as readmapping pipeline accepts multiple samples, 1 reference genome
         ch_cram_chunks = HICCRAMALIGN_CHUNKS.out.cram_slices
             | transpose()
             | combine(ch_assemblies_with_reference)
-            | map { _meta, cram, crai, chunkn, slices, meta_assembly, index, assembly ->
-                [ meta_assembly, cram, crai, chunkn, slices, index, assembly ]
+            | map { meta, cram, crai, chunkn, slices, meta_assembly, index, assembly ->
+                [ meta + [genome_size: meta_assembly.genome_size], cram, crai, chunkn, slices, index, assembly ] 
             }
-
+   
         HICCRAMALIGN_BWAMEM2ALIGN(ch_cram_chunks)
         ch_versions = ch_versions.mix(HICCRAMALIGN_BWAMEM2ALIGN.out.versions)
 
@@ -98,10 +91,10 @@ workflow HIC_MAPPING {
         ch_cram_chunks = HICCRAMALIGN_CHUNKS.out.cram_slices
             | transpose()
             | combine(MINIMAP2_INDEX.out.index)
-            | map { _meta, cram, crai, chunkn, slices, meta_assembly, index ->
-                [ meta_assembly, cram, crai, chunkn, slices, index ]
+            | map { meta, cram, crai, chunkn, slices, meta_assembly, index ->
+                [ meta + [genome_size: meta_assembly.genome_size], cram, crai, chunkn, slices, index ]
             }
-
+        
         HICCRAMALIGN_MINIMAP2ALIGN(ch_cram_chunks)
         ch_versions = ch_versions.mix(HICCRAMALIGN_MINIMAP2ALIGN.out.versions)
 
@@ -121,53 +114,33 @@ workflow HIC_MAPPING {
     ch_versions = ch_versions.mix(SAMTOOLS_FAIDX.out.versions)
 
     //
-    // Logic: Prepare input for merging bams.
-    //        We use the ch_n_cram_chunks to set a groupKey so that
-    //        we emit groups downstream ASAP once all bams have been made
+    // Prepare input for merging bams. 
+    // Readmapping pipeline process multiple samples with 1 reference genome
     //
+
     ch_samtools_merge_input = ch_mapped_bams
-        | combine(ch_n_cram_chunks)
-        | map { meta, bam, n_chunks ->
-            def key = groupKey(meta, n_chunks)
-            [key, bam]
-        }
         | groupTuple()
-        | map { key, bam -> [key.target, bam] } // Get meta back out of groupKey
-        | join(ch_assemblies, by: 0)
-        | join(SAMTOOLS_FAIDX.out.fai, by: 0)
-        | join(SAMTOOLS_FAIDX.out.gzi, by: 0, remainder: true)
-        | multiMap { meta, bams, assembly, fai, gzi ->
-            bam:   [meta, bams]
-            fasta: [meta, assembly]
-            fai:   [meta, fai]
-            gzi:   [meta, gzi ?: []]
-        }
 
     //
     // Module: Merge position-sorted bam files
     //
     SAMTOOLS_MERGE(
-        ch_samtools_merge_input.bam,
-        ch_samtools_merge_input.fasta,
-        ch_samtools_merge_input.fai,
-        ch_samtools_merge_input.gzi,
+        ch_samtools_merge_input,
+        ch_assemblies,
+        SAMTOOLS_FAIDX.out.gzi.ifEmpty{ [[],[]] },
+        SAMTOOLS_FAIDX.out.fai.ifEmpty{ [[],[]] },
     )
     ch_versions = ch_versions.mix(SAMTOOLS_MERGE.out.versions)
-
+    
     //
     // Module: Mark duplicates on the merged bam
     //
-    ch_samtools_markdup_input = SAMTOOLS_MERGE.out.bam
+    ch_samtools_markdup_bam = SAMTOOLS_MERGE.out.bam
         | filter { val_mark_duplicates }
-        | combine(ch_assemblies, by: 0)
-        | multiMap { meta, bam, assembly ->
-            bam:      [meta, bam]
-            assembly: [meta, assembly]
-        }
 
     SAMTOOLS_MARKDUP(
-        ch_samtools_markdup_input.bam,
-        ch_samtools_markdup_input.assembly
+        ch_samtools_markdup_bam,
+        ch_assemblies
     )
     ch_versions = ch_versions.mix(SAMTOOLS_MARKDUP.out.versions)
 

@@ -23,7 +23,7 @@ workflow MERGE_OUTPUT {
 
 
         // Merge, but only if there is more than 1 file
-        SAMTOOLS_MERGE ( ch_multi_bams, [ [], [] ], [ [], [] ] )
+        SAMTOOLS_MERGE ( ch_multi_bams, [ [], [] ], [ [], [] ], [ [], [] ] )
         ch_versions = ch_versions.mix ( SAMTOOLS_MERGE.out.versions )
 
 
