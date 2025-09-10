@@ -69,6 +69,12 @@
                     "default": false,
                     "fa_icon": "fas fa-scissors"
                 },
+                "hic_markdup": {
+                    "type": "boolean",
+                    "description": "Enable Hi-C duplicate marking (using 'samtools markdup').",
+                    "default": true,
+                    "fa_icon": "fas fa-clone"
+                },
                 "email": {
                     "type": "string",
                     "description": "Email address for completion summary.",

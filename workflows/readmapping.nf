@@ -125,7 +125,7 @@ workflow READMAPPING {
     //
     // SUBWORKFLOW: Align raw reads to genome
     //
-    ALIGN_HIC ( PREPARE_GENOME.out.fasta, ch_reads.hic, params.short_aligner, params.chunk_size, true )
+    ALIGN_HIC ( PREPARE_GENOME.out.fasta, ch_reads.hic, params.short_aligner, params.chunk_size, params.hic_markdup )
     HIC_MERGE_SAMPLES ( ALIGN_HIC.out.bam )
     ch_versions = ch_versions.mix ( ALIGN_HIC.out.versions )
                              .mix ( HIC_MERGE_SAMPLES.out.versions )
