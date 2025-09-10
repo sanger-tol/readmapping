@@ -132,7 +132,7 @@ workflow READMAPPING {
 
     ALIGN_ILLUMINA ( PREPARE_GENOME.out.fasta, PREPARE_GENOME.out.bwaidx, ch_reads.illumina )
     ch_versions = ch_versions.mix ( ALIGN_ILLUMINA.out.versions )
-    
+
     ALIGN_HIFI ( PREPARE_GENOME.out.fasta, ch_reads.pacbio, ch_vector_db )
     ch_versions = ch_versions.mix ( ALIGN_HIFI.out.versions )
     reports = reports.mix ( ALIGN_HIFI.out.post_qc )

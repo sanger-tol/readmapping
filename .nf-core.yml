@@ -25,6 +25,8 @@ lint:
     - .github/workflows/linting.yml
     - .github/PULL_REQUEST_TEMPLATE.md
   multiqc_config: false
+  subworkflow_changes:
+    - hic_mapping
   nextflow_config:
     - manifest.name
     - manifest.homePage

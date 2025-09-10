@@ -74,9 +74,9 @@ workflow HIC_MAPPING {
             | transpose()
             | combine(ch_assemblies_with_reference)
             | map { meta, cram, crai, chunkn, slices, meta_assembly, index, assembly ->
-                [ meta + [genome_size: meta_assembly.genome_size], cram, crai, chunkn, slices, index, assembly ] 
+                [ meta + [genome_size: meta_assembly.genome_size], cram, crai, chunkn, slices, index, assembly ]
             }
-   
+
         HICCRAMALIGN_BWAMEM2ALIGN(ch_cram_chunks)
         ch_versions = ch_versions.mix(HICCRAMALIGN_BWAMEM2ALIGN.out.versions)
 
@@ -94,7 +94,7 @@ workflow HIC_MAPPING {
             | map { meta, cram, crai, chunkn, slices, meta_assembly, index ->
                 [ meta + [genome_size: meta_assembly.genome_size], cram, crai, chunkn, slices, index ]
             }
-        
+
         HICCRAMALIGN_MINIMAP2ALIGN(ch_cram_chunks)
         ch_versions = ch_versions.mix(HICCRAMALIGN_MINIMAP2ALIGN.out.versions)
 
@@ -114,7 +114,7 @@ workflow HIC_MAPPING {
     ch_versions = ch_versions.mix(SAMTOOLS_FAIDX.out.versions)
 
     //
-    // Prepare input for merging bams. 
+    // Prepare input for merging bams.
     // Readmapping pipeline process multiple samples with 1 reference genome
     //
 
@@ -131,7 +131,7 @@ workflow HIC_MAPPING {
         SAMTOOLS_FAIDX.out.fai.ifEmpty{ [[],[]] },
     )
     ch_versions = ch_versions.mix(SAMTOOLS_MERGE.out.versions)
-    
+
     //
     // Module: Mark duplicates on the merged bam
     //
