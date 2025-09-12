@@ -1,12 +1,11 @@
 Changes in component 'sanger-tol/hic_mapping'
-'subworkflows/sanger-tol/hic_mapping/nextflow.config' is unchanged
 'subworkflows/sanger-tol/hic_mapping/meta.yml' is unchanged
 Changes in 'hic_mapping/main.nf':
 --- subworkflows/sanger-tol/hic_mapping/main.nf
 +++ subworkflows/sanger-tol/hic_mapping/main.nf
 @@ -57,14 +57,6 @@
      ch_versions = ch_versions.mix(HICCRAMALIGN_CHUNKS.out.versions)
-
+ 
      //
 -    // Logic: Count the total number of cram chunks for downstream grouping
 -    //
@@ -22,7 +21,7 @@ Changes in 'hic_mapping/main.nf':
 @@ -77,11 +69,12 @@
          ch_assemblies_with_reference = ch_assemblies
              | combine(BWAMEM2_INDEX.out.index, by: 0)
-
+ 
 +        // Keep sample meta as readmapping pipeline accepts multiple samples, 1 reference genome
          ch_cram_chunks = HICCRAMALIGN_CHUNKS.out.cram_slices
              | transpose()
@@ -32,7 +31,7 @@ Changes in 'hic_mapping/main.nf':
 +            | map { meta, cram, crai, chunkn, slices, meta_assembly, index, assembly ->
 +                [ meta + [genome_size: meta_assembly.genome_size], cram, crai, chunkn, slices, index, assembly ]
              }
-
+ 
          HICCRAMALIGN_BWAMEM2ALIGN(ch_cram_chunks)
 @@ -98,8 +91,8 @@
          ch_cram_chunks = HICCRAMALIGN_CHUNKS.out.cram_slices
@@ -43,11 +42,11 @@ Changes in 'hic_mapping/main.nf':
 +            | map { meta, cram, crai, chunkn, slices, meta_assembly, index ->
 +                [ meta + [genome_size: meta_assembly.genome_size], cram, crai, chunkn, slices, index ]
              }
-
+ 
          HICCRAMALIGN_MINIMAP2ALIGN(ch_cram_chunks)
 @@ -121,53 +114,33 @@
      ch_versions = ch_versions.mix(SAMTOOLS_FAIDX.out.versions)
-
+ 
      //
 -    // Logic: Prepare input for merging bams.
 -    //        We use the ch_n_cram_chunks to set a groupKey so that
@@ -73,7 +72,7 @@ Changes in 'hic_mapping/main.nf':
 -            fai:   [meta, fai]
 -            gzi:   [meta, gzi ?: []]
 -        }
-
+ 
      //
      // Module: Merge position-sorted bam files
      //
@@ -88,7 +87,7 @@ Changes in 'hic_mapping/main.nf':
 +        SAMTOOLS_FAIDX.out.fai.ifEmpty{ [[],[]] },
      )
      ch_versions = ch_versions.mix(SAMTOOLS_MERGE.out.versions)
-
+ 
      //
      // Module: Mark duplicates on the merged bam
      //
@@ -100,7 +99,7 @@ Changes in 'hic_mapping/main.nf':
 -            bam:      [meta, bam]
 -            assembly: [meta, assembly]
 -        }
-
+ 
      SAMTOOLS_MARKDUP(
 -        ch_samtools_markdup_input.bam,
 -        ch_samtools_markdup_input.assembly
@@ -108,9 +107,10 @@ Changes in 'hic_mapping/main.nf':
 +        ch_assemblies
      )
      ch_versions = ch_versions.mix(SAMTOOLS_MARKDUP.out.versions)
+ 
 
-
-'subworkflows/sanger-tol/hic_mapping/tests/main.nf.test.snap' is unchanged
-'subworkflows/sanger-tol/hic_mapping/tests/nextflow.config' is unchanged
+'subworkflows/sanger-tol/hic_mapping/nextflow.config' is unchanged
 'subworkflows/sanger-tol/hic_mapping/tests/main.nf.test' is unchanged
+'subworkflows/sanger-tol/hic_mapping/tests/nextflow.config' is unchanged
+'subworkflows/sanger-tol/hic_mapping/tests/main.nf.test.snap' is unchanged
 ************************************************************
