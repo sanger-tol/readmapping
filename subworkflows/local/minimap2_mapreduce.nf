@@ -39,7 +39,8 @@ workflow MINIMAP2_MAPREDUCE {
             tuple([
                     id: cram_id.id,
                     chunk_id: cram_id.id + "_" + cram_info[5],
-                    genome_size: ref_id.genome_size
+                    genome_size: ref_id.genome_size,
+                    datatype: cram_id.datatype
                     ],
                 file(cram_info[0]),
                 cram_info[1],
