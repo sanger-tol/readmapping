@@ -24,6 +24,19 @@ end_of_line = unset
 insert_final_newline = unset
 trim_trailing_whitespace = unset
 indent_style = unset
+# These files are edited and tested upstream in sanger-tol/nf-core-modules
+[/modules/sanger-tol/**]
+charset = unset
+end_of_line = unset
+insert_final_newline = unset
+trim_trailing_whitespace = unset
+indent_style = unset
+[/subworkflows/sanger-tol/**]
+charset = unset
+end_of_line = unset
+insert_final_newline = unset
+trim_trailing_whitespace = unset
+indent_style = unset
 
 [/assets/email*]
 indent_size = unset
