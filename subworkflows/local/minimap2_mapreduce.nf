@@ -91,6 +91,7 @@ workflow MINIMAP2_MAPREDUCE {
     SAMTOOLS_MERGE (
         collected_files_for_merge,
         fasta,
+        [ [], [] ],
         [ [], [] ]
     )
     ch_versions         = ch_versions.mix ( SAMTOOLS_MERGE.out.versions )
@@ -98,5 +99,5 @@ workflow MINIMAP2_MAPREDUCE {
 
     emit:
     mergedbam           = SAMTOOLS_MERGE.out.bam
-    versions            = ch_versions.ifEmpty(null)
+    versions            = ch_versions
 }

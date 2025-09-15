@@ -23,8 +23,8 @@
                     "staden_io": 1.15
                 },
                 "CRAM_FILTER_MINIMAP2_FILTER5END_FIXMATE_SORT": {
-                    "samtools": 1.17,
                     "minimap2": "2.24-r1122",
+                    "samtools": 1.17,
                     "staden_io": 1.15
                 },
                 "CRUMBLE": {
@@ -42,12 +42,20 @@
                 "GZIP_STATS": {
                     "gzip": 1.1
                 },
+                "HICCRAMALIGN_CHUNKS": {
+                    "hiccramalign_chunks": "1.0.1"
+                },
+                "HICCRAMALIGN_MINIMAP2ALIGN": {
+                    "gawk": "5.3.1",
+                    "minimap2": "2.30-r1287",
+                    "samtools": "1.22.1"
+                },
                 "MINIMAP2_ALIGN": {
                     "minimap2": "2.28-r1209",
                     "samtools": 1.2
                 },
                 "MINIMAP2_INDEX": {
-                    "minimap2": "2.28-r1209"
+                    "minimap2": "2.29-r1283"
                 },
                 "PACBIO_FILTER": {
                     "GNU Awk": "5.1.0"
@@ -70,6 +78,9 @@
                 "SAMTOOLS_CRAM": {
                     "samtools": "1.22.1"
                 },
+                "SAMTOOLS_FAIDX": {
+                    "samtools": 1.21
+                },
                 "SAMTOOLS_FILTERTOFASTQ": {
                     "samtools": "1.22.1"
                 },
@@ -80,7 +91,10 @@
                     "samtools": "1.22.1"
                 },
                 "SAMTOOLS_INDEX": {
-                    "samtools": 1.2
+                    "samtools": 1.21
+                },
+                "SAMTOOLS_MARKDUP": {
+                    "samtools": 1.21
                 },
                 "SAMTOOLS_MERGE": {
                     "samtools": "1.22.1"
@@ -172,6 +186,6 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.2"
         },
-        "timestamp": "2025-08-27T14:46:31.844796"
+        "timestamp": "2025-09-10T13:26:56.27823"
     }
 }
