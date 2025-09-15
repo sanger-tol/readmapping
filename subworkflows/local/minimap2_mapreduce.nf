@@ -70,21 +70,10 @@ workflow MINIMAP2_MAPREDUCE {
     //
     // LOGIC: PREPARING BAMS FOR MERGE
     //
-    mappedbam_ch
-        .map{ meta, file ->
-            tuple( file )
-        }
-        .collect()
-        .map { file ->
-            tuple (
-                [
-                id: file[0].toString().split('/')[-1].split('_')[0] + '_' + file[0].toString().split('/')[-1].split('_')[1]
-                ],
-                file
-            )
-        }
-        .set { collected_files_for_merge }
-
+    mappedbam_ch.map { meta, file -> [meta.id, meta, file] }
+    .groupTuple(by:0)
+    .map { id, meta, files -> [ meta[0] - [chunk_id: meta[0].chunk_id], files ] }
+    .set { collected_files_for_merge }
 
     //
     // MODULE: MERGE POSITION SORTED BAM FILES AND MARK DUPLICATES

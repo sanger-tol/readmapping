@@ -52,11 +52,14 @@ workflow ALIGN_ONT {
         GENERATE_CRAM_CSV.out.csv
     )
     ch_versions         = ch_versions.mix( MINIMAP2_MAPREDUCE.out.versions )
+    
     ch_merged_bam
     | mix(MINIMAP2_MAPREDUCE.out.mergedbam)
     | combine( ch_reads_cram_crai )
+    | filter { meta_bam, bam, meta_cram, cram, crai -> meta_bam.id == meta_cram.id }
     | map { meta_bam, bam, meta_cram, cram, crai -> [ meta_cram, bam ] }
     | set { ch_merged_bam }
+
 
     //
     // SUBWORKFLOW: Merge all alignment output by sample name
