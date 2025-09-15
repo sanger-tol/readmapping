@@ -24,7 +24,7 @@ process CRAM_FILTER_MINIMAP2_FILTER5END_FIXMATE_SORT {
     def args4 = task.ext.args4 ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     def VERSION = "1.15" // Staden_io versions break the pipeline
-    def hic_process = meta.datatype == "hic" ? 
+    def hic_process = meta.datatype == "hic" ?
         """ \\
         perl ${projectDir}/bin/filter_five_end.pl | \\
         ${projectDir}/bin/awk_filter_reads.sh | \

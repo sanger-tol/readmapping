@@ -52,7 +52,7 @@ workflow ALIGN_ONT {
         GENERATE_CRAM_CSV.out.csv
     )
     ch_versions         = ch_versions.mix( MINIMAP2_MAPREDUCE.out.versions )
-    
+
     ch_merged_bam
     | mix(MINIMAP2_MAPREDUCE.out.mergedbam)
     | combine( ch_reads_cram_crai )
