@@ -85,7 +85,7 @@ workflow ALIGN_PACBIO {
     MINIMAP2_ALIGN.out.bam
     | map { meta, bam -> [meta.id, meta, bam] }
     | groupTuple()
-    | map { id, meta, files -> [ meta[0] - [chunk_id: meta[0].chunk_id], files ] }
+    | map { id, metas, files -> [ metas[0] - [chunk_id: metas[0].chunk_id], files ] }
     | set { collected_files_for_merge }
 
     // Merge chunked aligned bams from minimap align

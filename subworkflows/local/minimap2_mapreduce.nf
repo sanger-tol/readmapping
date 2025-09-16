@@ -72,7 +72,7 @@ workflow MINIMAP2_MAPREDUCE {
     //
     mappedbam_ch.map { meta, file -> [meta.id, meta, file] }
     .groupTuple(by:0)
-    .map { id, meta, files -> [ meta[0] - [chunk_id: meta[0].chunk_id], files ] }
+    .map { id, metas, files -> [ metas[0] - [chunk_id: metas[0].chunk_id], files ] }
     .set { collected_files_for_merge }
 
     //
