@@ -99,7 +99,7 @@ workflow READMAPPING {
     ch_fastqc_reads = ch_fastqc_reads.other.mix ( SAMTOOLS_COLLATETOFASTQ.out.interleaved )
     FASTQC ( ch_fastqc_reads )
 
-    reports = reports.mix( FASTQC.out.zip )
+    reports = reports.mix ( FASTQC.out.zip )
 
     ch_versions = ch_versions
     | mix ( FASTQC.out.versions )
@@ -163,12 +163,13 @@ workflow READMAPPING {
     // Collate and save software versions
     //
     softwareVersionsToYAML(ch_versions)
-        .collectFile(
+    | collectFile (
             storeDir: "${params.outdir}/pipeline_info",
             name:  'readmapping_software_'  + 'mqc_versions.yml',
             sort: true,
             newLine: true
-        ).set { ch_collated_versions }
+    )
+    | set { ch_collated_versions }
 
     reports = reports.map { meta, file -> file }
 

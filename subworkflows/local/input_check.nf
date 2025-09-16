@@ -8,13 +8,14 @@ workflow INPUT_CHECK {
     take:
     ch_samplesheet    // channel: [ val(meta), /path/to/reads ]
 
+
     main:
     ch_versions = Channel.empty()
 
     // Prepare the samplesheet channel for SAMTOOLS_FLAGSTAT
     ch_samplesheet
-    .map { meta, file -> [meta, file, []] }
-    .set { samplesheet_rows }
+    | map { meta, file -> [meta, file, []] }
+    | set { samplesheet_rows }
 
     // Get stats from each input file
     SAMTOOLS_FLAGSTAT ( samplesheet_rows )

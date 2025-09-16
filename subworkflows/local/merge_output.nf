@@ -21,11 +21,9 @@ workflow MERGE_OUTPUT {
         | filter { it[1].size() > 1 }
         | set { ch_multi_bams }
 
-
         // Merge, but only if there is more than 1 file
         SAMTOOLS_MERGE ( ch_multi_bams, [ [], [] ], [ [], [] ] )
         ch_versions = ch_versions.mix ( SAMTOOLS_MERGE.out.versions )
-
 
         ch_bam = SAMTOOLS_MERGE.out.bam
         | map { meta, bam -> [meta.tap { it.merged = true }, bam] }

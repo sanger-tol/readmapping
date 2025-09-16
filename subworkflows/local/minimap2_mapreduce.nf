@@ -18,7 +18,6 @@ workflow MINIMAP2_MAPREDUCE {
     ch_versions         = Channel.empty()
     mappedbam_ch        = Channel.empty()
 
-
     //
     // MODULE: generate minimap2 mmi file
     //
@@ -27,56 +26,53 @@ workflow MINIMAP2_MAPREDUCE {
         )
     ch_versions         = ch_versions.mix( MINIMAP2_INDEX.out.versions )
 
-
     //
     // LOGIC: generate input channel for mapping
     //
     csv_ch
-        .splitCsv()
-        .combine ( fasta )
-        .combine ( MINIMAP2_INDEX.out.index )
-        .map{ cram_id, cram_info, ref_id, ref_dir, mmi_id, mmi_path->
-            tuple([
-                    id: cram_id.id,
-                    chunk_id: cram_id.id + "_" + cram_info[5],
-                    genome_size: ref_id.genome_size,
-                    datatype: cram_id.datatype
-                    ],
-                file(cram_info[0]),
-                cram_info[1],
-                cram_info[2],
-                cram_info[3],
-                cram_info[4],
-                cram_info[5],
-                cram_info[6],
-                mmi_path.toString(),
-                ref_dir
-            )
+    | splitCsv()
+    | combine ( fasta )
+    | combine ( MINIMAP2_INDEX.out.index )
+    | map{ cram_id, cram_info, ref_id, ref_dir, mmi_id, mmi_path->
+        tuple([
+                id: cram_id.id,
+                chunk_id: cram_id.id + "_" + cram_info[5],
+                genome_size: ref_id.genome_size,
+                datatype: cram_id.datatype
+                ],
+            file(cram_info[0]),
+            cram_info[1],
+            cram_info[2],
+            cram_info[3],
+            cram_info[4],
+            cram_info[5],
+            cram_info[6],
+            mmi_path.toString(),
+            ref_dir
+        )
     }
-    .set { ch_filtering_input }
-
+    | set { ch_filtering_input }
 
     //
-    // MODULE: map hic reads by 10,000 container per time
+    // MODULE: Map hic reads by 10,000 container per time
     //
     CRAM_FILTER_MINIMAP2_FILTER5END_FIXMATE_SORT (
         ch_filtering_input
-
     )
     ch_versions         = ch_versions.mix( CRAM_FILTER_MINIMAP2_FILTER5END_FIXMATE_SORT.out.versions )
     mappedbam_ch        = CRAM_FILTER_MINIMAP2_FILTER5END_FIXMATE_SORT.out.mappedbam
 
+    //
+    // LOGIC: Preparing BAMs for merging
+    //
+    mappedbam_ch
+    | map { meta, file -> [meta.id, meta, file] }
+    | groupTuple()
+    | map { id, metas, files -> [ metas[0] - [chunk_id: metas[0].chunk_id], files ] }
+    | set { collected_files_for_merge }
 
     //
-    // LOGIC: PREPARING BAMS FOR MERGE
-    //
-    mappedbam_ch.map { meta, file -> [meta.id, meta, file] }
-    .groupTuple(by:0)
-    .map { id, metas, files -> [ metas[0] - [chunk_id: metas[0].chunk_id], files ] }
-    .set { collected_files_for_merge }
-
-    //
-    // MODULE: MERGE POSITION SORTED BAM FILES AND MARK DUPLICATES
+    // MODULE: Merge position sorted BAM files and mark duplicates
     //
     SAMTOOLS_MERGE (
         collected_files_for_merge,

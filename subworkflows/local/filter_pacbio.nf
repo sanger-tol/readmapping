@@ -14,6 +14,7 @@ workflow FILTER_PACBIO {
     reads    // channel: [ val(meta), /path/to/datafile ]
     db       // channel: /path/to/vector_db
 
+
     main:
     ch_versions = Channel.empty()
 
@@ -57,6 +58,7 @@ workflow FILTER_PACBIO {
     // Merge filtered outputs as ch_output_fastq
     SAMTOOLS_FILTERTOFASTQ.out.fastq
     | set { ch_filtered_fastq }
+
 
     emit:
     fastq    = ch_filtered_fastq        // channel: [ meta, /path/to/fastq ]
