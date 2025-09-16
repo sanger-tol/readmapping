@@ -24,14 +24,20 @@ process CRAM_FILTER_MINIMAP2_FILTER5END_FIXMATE_SORT {
     def args4 = task.ext.args4 ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     def VERSION = "1.15" // Staden_io versions break the pipeline
+    def hic_agrs = meta.datatype == "hic" ?
+        """
+        ${projectDir}/bin/grep_pg.sh | \\
+        perl ${projectDir}/bin/filter_five_end.pl | \\
+        ${projectDir}/bin/awk_filter_reads.sh | \\
+        """ : ""
+    def shortread_args = meta.datatype in [ "hic", "illumina" ] ? "samtools fixmate ${args3} - - |" : ""
+
     """
     cram_filter -n ${from}-${to} ${cramfile} - | \\
         samtools fastq ${args1} - |  \\
-        minimap2 -t${task.cpus} -R '${rglines}' ${args2} ${ref} - |  \\
-        ${projectDir}/bin/grep_pg.sh |  \\
-        perl ${projectDir}/bin/filter_five_end.pl |  \\
-        ${projectDir}/bin/awk_filter_reads.sh |  \\
-        samtools fixmate ${args3} - - | \\
+        minimap2 -t${task.cpus} -R '${rglines}' ${args2} ${ref} - | \\
+        ${hic_agrs} \\
+        ${shortread_args} \\
         samtools sort ${args4} -@${task.cpus} -T ${base}_${chunkid}_sort_tmp -o ${prefix}_${base}_${chunkid}_mm.bam -
 
     cat <<-END_VERSIONS > versions.yml

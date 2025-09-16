@@ -26,9 +26,9 @@ workflow CONVERT_STATS {
     fasta    // channel: [ val(meta), /path/to/fasta ]
     header   // channel: /path/to/header.sam
 
+
     main:
     ch_versions = Channel.empty()
-
 
     // Split outfmt parameter into a list
     def outfmt_options = params.outfmt.split(',').collect { it.trim() }
@@ -49,11 +49,9 @@ workflow CONVERT_STATS {
         CRUMBLE.out.bam
         | mix( crumble_selector.no_crumble )
         | set { ch_bams_for_renaming }
-
     } else {
         ch_bams_for_renaming = bam
     }
-
 
     // Change name of BAM files to final name for publishing
     CHANGE_NAME ( ch_bams_for_renaming, fasta )
@@ -62,41 +60,38 @@ workflow CONVERT_STATS {
     | map { meta, bam -> [meta, bam, []] }
     | set { ch_renamed_bams }
 
-
     // (Optionally) convert to CRAM if it's specified in outfmt
     ch_cram = Channel.empty()
     ch_crai = Channel.empty()
 
-    if ("cram" in outfmt_options) {
+    if ( "cram" in outfmt_options ) {
         SAMTOOLS_CRAM ( ch_renamed_bams, fasta, [] )
-        ch_versions = ch_versions.mix( SAMTOOLS_CRAM.out.versions.first() )
+        ch_versions = ch_versions.mix ( SAMTOOLS_CRAM.out.versions.first() )
 
         // Combine CRAM and CRAI into one channel
         ch_cram = SAMTOOLS_CRAM.out.cram
         ch_crai = SAMTOOLS_CRAM.out.crai
-        ch_for_stats = ch_cram.join( ch_crai )
+        ch_for_stats = ch_cram.join ( ch_crai )
     }
-
 
     // Re-generate BAM index if BAM is in outfmt
     ch_bam = Channel.empty()
     ch_bai = Channel.empty()
 
-    if ("bam" in outfmt_options) {
+    if ( "bam" in outfmt_options ) {
         // Reindex BAM
         SAMTOOLS_INDEX ( CHANGE_NAME.out.file )
-        ch_versions = ch_versions.mix( SAMTOOLS_INDEX.out.versions.first() )
+        ch_versions = ch_versions.mix ( SAMTOOLS_INDEX.out.versions.first() )
 
         // Set the BAM and BAI channels for emission
         ch_bam = CHANGE_NAME.out.file
-        ch_bai = SAMTOOLS_INDEX.out.bai.mix(SAMTOOLS_INDEX.out.csi)
+        ch_bai = SAMTOOLS_INDEX.out.bai.mix ( SAMTOOLS_INDEX.out.csi )
 
         if ( !('cram' in outfmt_options) ) {
-            ch_for_stats = ch_bam.join( ch_bai )
+            ch_for_stats = ch_bam.join ( ch_bai )
         }
 
     }
-
 
     // Optionally insert params.header information to bams
     if ( params.header ) {
@@ -106,28 +101,27 @@ workflow CONVERT_STATS {
                                 .mix ( SAMTOOLS_REHEADER_CRAM.out.versions )
     }
 
-
     // Calculate read depth
     BLOBTK_DEPTH ( ch_renamed_bams )
-    ch_versions = ch_versions.mix( BLOBTK_DEPTH.out.versions.first() )
+    ch_versions = ch_versions.mix ( BLOBTK_DEPTH.out.versions.first() )
 
     BGZIP_BEDGRAPH ( BLOBTK_DEPTH.out.bedgraph )
-    ch_versions = ch_versions.mix( BGZIP_BEDGRAPH.out.versions.first() )
+    ch_versions = ch_versions.mix ( BGZIP_BEDGRAPH.out.versions.first() )
 
     // Calculate statistics
-    SAMTOOLS_STATS (ch_for_stats, [[], []] )
-    ch_versions = ch_versions.mix( SAMTOOLS_STATS.out.versions.first() )
+    SAMTOOLS_STATS ( ch_for_stats, [[], []] )
+    ch_versions = ch_versions.mix ( SAMTOOLS_STATS.out.versions.first() )
 
     GZIP_STATS  ( SAMTOOLS_STATS.out.stats )
-    ch_versions = ch_versions.mix( GZIP_STATS.out.versions.first() )
+    ch_versions = ch_versions.mix ( GZIP_STATS.out.versions.first() )
 
     // Calculate statistics based on flag values
     SAMTOOLS_FLAGSTAT ( ch_for_stats )
-    ch_versions = ch_versions.mix( SAMTOOLS_FLAGSTAT.out.versions.first() )
+    ch_versions = ch_versions.mix ( SAMTOOLS_FLAGSTAT.out.versions.first() )
 
     // Calculate index statistics
     SAMTOOLS_IDXSTATS ( ch_for_stats )
-    ch_versions = ch_versions.mix( SAMTOOLS_IDXSTATS.out.versions.first() )
+    ch_versions = ch_versions.mix ( SAMTOOLS_IDXSTATS.out.versions.first() )
 
 
     emit:

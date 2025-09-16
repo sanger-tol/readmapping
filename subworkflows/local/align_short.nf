@@ -80,6 +80,7 @@ workflow ALIGN_SHORT {
 
     ch_merged_bam
     | combine( ch_reads_cram_crai )
+    | filter { meta_bam, bam, meta_cram, cram, crai -> meta_bam.id == meta_cram.id }
     | map { meta_bam, bam, meta_cram, cram, crai -> [ meta_cram, bam ] }
     | set { ch_merged_bam }
 

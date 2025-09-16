@@ -17,59 +17,47 @@ workflow BWAMEM2_MAPREDUCE {
     ch_versions         = Channel.empty()
     mappedbam_ch        = Channel.empty()
 
-
     csv_ch
-        .splitCsv()
-        .map{ cram_id, cram_info ->
-            tuple([
-                    id: cram_id.id,
-                    chunk_id: cram_id.id + "_" + cram_info[5]
-                    ],
-                file(cram_info[0]),
-                cram_info[1],
-                cram_info[2],
-                cram_info[3],
-                cram_info[4],
-                cram_info[5],
-                cram_info[6]
-            )
+    | splitCsv()
+    | map{ cram_id, cram_info ->
+        tuple([
+                id: cram_id.id,
+                chunk_id: cram_id.id + "_" + cram_info[5]
+                ],
+            file(cram_info[0]),
+            cram_info[1],
+            cram_info[2],
+            cram_info[3],
+            cram_info[4],
+            cram_info[5],
+            cram_info[6]
+        )
     }
-    .set { ch_filtering_input }
+    | set { ch_filtering_input }
 
 
     //
-    // MODULE: map hic reads in each chunk using bwamem2
+    // MODULE: Map hic reads in each chunk using bwamem2
     //
     CRAM_FILTER_ALIGN_BWAMEM2_FIXMATE_SORT (
         ch_filtering_input,
         fasta,
         index
-
     )
-    ch_versions         = ch_versions.mix( CRAM_FILTER_ALIGN_BWAMEM2_FIXMATE_SORT.out.versions )
+    ch_versions         = ch_versions.mix ( CRAM_FILTER_ALIGN_BWAMEM2_FIXMATE_SORT.out.versions )
     mappedbam_ch        = CRAM_FILTER_ALIGN_BWAMEM2_FIXMATE_SORT.out.mappedbam
 
     //
-    // LOGIC: PREPARING BAMS FOR MERGE
+    // LOGIC: Preparing BAMs for merging
     //
     mappedbam_ch
-        .map{ meta, file ->
-            tuple( file )
-        }
-        .collect()
-        .map { file ->
-            tuple (
-                [
-                id: file[0].toString().split('/')[-1].split('_')[0] + '_' + file[0].toString().split('/')[-1].split('_')[1]
-                ],
-                file
-            )
-        }
-        .set { collected_files_for_merge }
-
+    | map { meta, file -> [meta.id, meta, file] }
+    | groupTuple()
+    | map { id, metas, files -> [ metas[0] - [chunk_id: metas[0].chunk_id], files ] }
+    | set { collected_files_for_merge }
 
     //
-    // MODULE: MERGE POSITION SORTED BAM FILES AND MARK DUPLICATES
+    // MODULE: Merge position sorted BAM files and mark duplicates
     //
     SAMTOOLS_MERGE (
         collected_files_for_merge,

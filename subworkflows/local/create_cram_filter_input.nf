@@ -5,14 +5,15 @@ workflow CREATE_CRAM_FILTER_INPUT {
     csv_ch
     fasta
 
+
     main:
     ch_versions = Channel.empty()
 
     // Generate input channel for CRAM_FILTER
     csv_ch
-    |splitCsv()
-    |combine(fasta)
-    |map { cram_id, cram_info, ref_id, ref_dir ->
+    | splitCsv()
+    | combine(fasta)
+    | map { cram_id, cram_info, ref_id, ref_dir ->
         tuple([
                 id: cram_id.id,
                 chunk_id: cram_id.id + "_" + cram_info[5],
@@ -34,8 +35,9 @@ workflow CREATE_CRAM_FILTER_INPUT {
     }
     | set { ch_cram_filter_input }
 
-    CRAM_FILTER(ch_cram_filter_input)
-    ch_versions = ch_versions.mix(CRAM_FILTER.out.versions)
+    CRAM_FILTER ( ch_cram_filter_input )
+    ch_versions = ch_versions.mix ( CRAM_FILTER.out.versions )
+
 
     emit:
     chunked_cram = CRAM_FILTER.out.cram

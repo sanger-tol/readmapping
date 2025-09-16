@@ -65,11 +65,11 @@ workflow ALIGN_PACBIO {
     | join ( SAMTOOLS_INDEX.out.crai )
     | set { ch_reads_cram }
 
-    GENERATE_CRAM_CSV( ch_reads_cram )
-    ch_versions = ch_versions.mix( GENERATE_CRAM_CSV.out.versions )
+    GENERATE_CRAM_CSV ( ch_reads_cram )
+    ch_versions = ch_versions.mix ( GENERATE_CRAM_CSV.out.versions )
 
     CREATE_CRAM_FILTER_INPUT ( GENERATE_CRAM_CSV.out.csv, fasta )
-    ch_versions = ch_versions.mix( CREATE_CRAM_FILTER_INPUT.out.versions )
+    ch_versions = ch_versions.mix ( CREATE_CRAM_FILTER_INPUT.out.versions )
 
     // Filter BAM and output as FASTQ
     FILTER_PACBIO ( CREATE_CRAM_FILTER_INPUT.out.chunked_cram, db )
@@ -83,16 +83,14 @@ workflow ALIGN_PACBIO {
     ch_versions = ch_versions.mix ( MINIMAP2_ALIGN.out.versions.first() )
 
     MINIMAP2_ALIGN.out.bam
-    |map { meta, bam -> [meta.id, meta, bam] }
-    |groupTuple()
-    |map { id, meta, bam ->
-        def newMeta = meta[0].findAll { key, value -> key != 'chunk_id' }
-        [newMeta, bam]
-    }
-    |set { collected_files_for_merge }
+    | map { meta, file -> [meta.id, meta, file] }
+    | groupTuple()
+    | map { id, metas, files -> [ metas[0] - [chunk_id: metas[0].chunk_id], files ] }
+    | set { collected_files_for_merge }
 
-
-    // Merge chunked aligned bams from minimap align
+    //
+    // MODULE: Merge chunked aligned bams
+    //
     SAMTOOLS_MERGE (
         collected_files_for_merge,
         fasta,
@@ -103,8 +101,9 @@ workflow ALIGN_PACBIO {
     //
     // SUBWORKFLOW: Merge all alignment output by sample name
     //
-    ch_sort  = MERGE_OUTPUT( SAMTOOLS_MERGE.out.bam ).bam
-    ch_versions = ch_versions.mix ( MERGE_OUTPUT.out.versions)
+    ch_sort  = MERGE_OUTPUT ( SAMTOOLS_MERGE.out.bam ).bam
+    ch_versions = ch_versions.mix ( MERGE_OUTPUT.out.versions )
+
 
     emit:
     bam      = ch_sort                       // channel: [ val(meta), /path/to/bam ]

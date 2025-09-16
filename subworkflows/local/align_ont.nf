@@ -41,8 +41,8 @@ workflow ALIGN_ONT {
     //
     // MODULE: generate a CRAM CSV file containing the required parametres for CRAM_FILTER_ALIGN_BWAMEM2_FIXMATE_SORT
     //
-    GENERATE_CRAM_CSV( ch_reads_cram_crai )
-    ch_versions = ch_versions.mix( GENERATE_CRAM_CSV.out.versions )
+    GENERATE_CRAM_CSV ( ch_reads_cram_crai )
+    ch_versions = ch_versions.mix ( GENERATE_CRAM_CSV.out.versions )
 
     //
     // SUBWORKFLOW: mapping hic reads using minimap2 or bwamem2
@@ -51,18 +51,20 @@ workflow ALIGN_ONT {
         fasta,
         GENERATE_CRAM_CSV.out.csv
     )
-    ch_versions         = ch_versions.mix( MINIMAP2_MAPREDUCE.out.versions )
+    ch_versions         = ch_versions.mix ( MINIMAP2_MAPREDUCE.out.versions )
+
     ch_merged_bam
-    | mix(MINIMAP2_MAPREDUCE.out.mergedbam)
-    | combine( ch_reads_cram_crai )
+    | mix ( MINIMAP2_MAPREDUCE.out.mergedbam )
+    | combine ( ch_reads_cram_crai )
+    | filter { meta_bam, bam, meta_cram, cram, crai -> meta_bam.id == meta_cram.id }
     | map { meta_bam, bam, meta_cram, cram, crai -> [ meta_cram, bam ] }
     | set { ch_merged_bam }
 
     //
     // SUBWORKFLOW: Merge all alignment output by sample name
     //
-    ch_sort  = MERGE_OUTPUT( ch_merged_bam ).bam
-    ch_versions = ch_versions.mix ( MERGE_OUTPUT.out.versions)
+    ch_sort  = MERGE_OUTPUT ( ch_merged_bam ).bam
+    ch_versions = ch_versions.mix ( MERGE_OUTPUT.out.versions )
 
 
     emit:
