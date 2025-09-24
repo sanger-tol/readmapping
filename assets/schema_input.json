@@ -31,6 +31,13 @@
                 "errorMessage": "Library information cannot contain spaces",
                 "default": "",
                 "meta": ["library"]
+            },
+            "barcode": {
+                "type": "string",
+                "pattern": "^\\S*$",
+                "errorMessage": "Sample barcode cannot contain spaces",
+                "default": "",
+                "meta": ["barcode"]
             }
         },
         "required": ["sample", "datatype", "datafile"]

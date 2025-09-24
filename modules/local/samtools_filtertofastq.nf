@@ -24,20 +24,15 @@ process SAMTOOLS_FILTERTOFASTQ {
     def args = task.ext.args ?: ''
     def args2 = task.ext.args2 ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
+    def filter_args = params.filter_pacbio ? "samtools view --threads $task.cpus --qname-file ${qname} --unoutput - $args -o /dev/null $input |" : ""
+    def fastq_input = params.filter_pacbio ? " - " : "$input"
     """
-    samtools view \\
-        --threads $task.cpus \\
-        --qname-file ${qname} \\
-        --unoutput - \\
-        $args \\
-        -o /dev/null \\
-        $input \\
-    | \\
+    $filter_args \\
     samtools fastq \\
         $args2 \\
         --threads $task.cpus \\
         -0 ${prefix}.fastq.gz \\
-        - \\
+        $fastq_input  \\
         > /dev/null
 
     cat <<-END_VERSIONS > versions.yml

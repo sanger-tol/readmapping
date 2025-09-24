@@ -1,0 +1,32 @@
+process HIFI_TRIMMER {
+    tag "$meta.id"
+
+    container "docker.io/sainsachiko/hifi_trimmer:1.2.2"
+
+    input:
+    tuple val(meta), path(bam), path(blast_out)
+    path(yaml)
+
+
+    output:
+    tuple val(meta), path("*.hifi_trimmer.fastq.gz"), emit: fastq
+    path  "versions.yml"                            , emit: versions
+
+    when:
+    task.ext.when == null || task.ext.when
+
+    script:
+    def prefix = task.ext.prefix ?: "${meta.id}"
+    def args = task.ext.args ? task.ext.args : ''
+    def barcode_sub = meta.barcode ? "sed -i \"s|SAMPLEBARCODE|${meta.barcode}|g\" ${yaml}" : ''
+    """
+    $barcode_sub
+    hifi_trimmer process_blast $blast_out $yaml
+    hifi_trimmer filter_bam $args $bam *.bed.gz ${prefix}.hifi_trimmer.fastq.gz -t $task.cpus
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+       hifi_trimmer --version | sed 's/, version/: /'
+    END_VERSIONS
+    """
+}
