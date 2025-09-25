@@ -2,24 +2,35 @@
 // Align PacBio read files against the genome
 //
 
-include { LIMA                              } from '../../modules/nf-core/lima'
+// Include local modules and subworkflows
 include { PACBIO_PBMARKDUP                  } from '../../modules/local/pbmarkdup'
+include { GENERATE_CRAM_CSV                 } from '../../modules/local/generate_cram_csv'
+include { HIFI_TRIMMER                      } from '../../modules/local/hifi_trimmer'
+include { SAMTOOLS_COLLATETOFASTA           } from '../../modules/local/samtools_collatetofasta'
 include { SAMTOOLS_SORMADUP as CONVERT_CRAM } from '../../modules/local/samtools_sormadup'
 include { SAMTOOLS_ADDREPLACERG             } from '../../modules/local/samtools_addreplacerg'
-include { SAMTOOLS_INDEX                    } from '../../modules/nf-core/samtools/index'
-include { GENERATE_CRAM_CSV                 } from '../../modules/local/generate_cram_csv'
+
 include { CREATE_CRAM_FILTER_INPUT          } from '../../subworkflows/local/create_cram_filter_input'
-include { FILTER_PACBIO                     } from '../../subworkflows/local/filter_pacbio'
+include { MERGE_OUTPUT                      } from '../../subworkflows/local/merge_output'
+
+// Include nf-core modules
+include { BLAST_BLASTN as BLASTN_HIFI       } from '../../modules/nf-core/blast/blastn/main'
+include { LIMA                              } from '../../modules/nf-core/lima'
+include { SAMTOOLS_INDEX                    } from '../../modules/nf-core/samtools/index'
 include { FASTQC as FASTQC_FILTERED         } from '../../modules/nf-core/fastqc'
 include { MINIMAP2_ALIGN                    } from '../../modules/nf-core/minimap2/align'
 include { SAMTOOLS_MERGE                    } from '../../modules/nf-core/samtools/merge'
-include { MERGE_OUTPUT                      } from '../../subworkflows/local/merge_output'
+include { SAMTOOLS_VIEW as SAMTOOLS_CONVERT } from '../../modules/nf-core/samtools/view/main'
+include { SAMTOOLS_FASTQ                    } from '../../modules/nf-core/samtools/fastq/main'
+include { TABIX_BGZIP as BGZIP_BLASTN       } from '../../modules/nf-core/tabix/bgzip/main'
 
 workflow ALIGN_PACBIO {
     take:
-    fasta    // channel: [ val(meta), /path/to/fasta ]
-    reads    // channel: [ val(meta), /path/to/datafile ]
-    db       // channel: /path/to/vector_db
+    fasta               // channel: [ val(meta), /path/to/fasta ]
+    reads               // channel: [ val(meta), /path/to/datafile ]
+    hifi_adapter_db     // channel: /path/to/hifi_adapter_db
+    hifi_adapter_yaml   // channel: /path/to/hifi_adapter_yaml
+    uli_adapter        // channel: /path/to/uli_adapter.fasta
 
 
     main:
@@ -38,7 +49,7 @@ workflow ALIGN_PACBIO {
     // Trim ULI adapter
     bam_for_md = ch_reads_branched.uli
     if ( params.trim_uli_adapter ) {
-        bam_for_md = LIMA ( ch_reads_branched.uli, params.uli_adapter ).bam
+        bam_for_md = LIMA ( ch_reads_branched.uli, uli_adapter ).bam
         ch_versions = ch_versions.mix ( LIMA.out.versions.first() )
     }
 
@@ -71,15 +82,48 @@ workflow ALIGN_PACBIO {
     CREATE_CRAM_FILTER_INPUT ( GENERATE_CRAM_CSV.out.csv, fasta )
     ch_versions = ch_versions.mix ( CREATE_CRAM_FILTER_INPUT.out.versions )
 
-    // Filter BAM and output as FASTQ
-    FILTER_PACBIO ( CREATE_CRAM_FILTER_INPUT.out.chunked_cram, db )
-    ch_versions = ch_versions.mix ( FILTER_PACBIO.out.versions )
+    //
+    // FILTER BAMs AND OUTPUT AS FASTQ
+    //
+    CREATE_CRAM_FILTER_INPUT.out.chunked_cram
+    | map { meta, cram -> [ meta, cram, [] ] }
+    | set { ch_pacbio }
 
-    FASTQC_FILTERED ( FILTER_PACBIO.out.fastq )
+    SAMTOOLS_CONVERT ( ch_pacbio, [ [], [] ], [] )
+    ch_versions = ch_versions.mix ( SAMTOOLS_CONVERT.out.versions )
+
+    if ( params.filter_pacbio ) {
+        // Collate BAM file to create interleaved FASTA
+        SAMTOOLS_COLLATETOFASTA ( SAMTOOLS_CONVERT.out.bam )
+
+        BLASTN_HIFI ( SAMTOOLS_COLLATETOFASTA.out.fasta, hifi_adapter_db )
+        BGZIP_BLASTN ( BLASTN_HIFI.out.txt )
+
+        bam_blast = SAMTOOLS_CONVERT.out.bam.join ( BGZIP_BLASTN.out.output )
+
+        // TO FIX: hifi_trimmer only run one when using channel hifi_adapter_yaml provided as input 
+        HIFI_TRIMMER ( bam_blast, params.hifi_adapter_yaml )
+
+        ch_reads_for_align =  HIFI_TRIMMER.out.fastq
+
+        // FastQC on filtered reads
+        FASTQC_FILTERED ( ch_reads_for_align )
+
+        ch_versions = ch_versions
+        | mix ( SAMTOOLS_COLLATETOFASTA.out.versions )
+        | mix ( BLASTN_HIFI.out.versions )
+        | mix ( BGZIP_BLASTN.out.versions )
+        | mix ( HIFI_TRIMMER.out.versions )
+        | mix ( FASTQC_FILTERED.out.versions )
+    } else {
+        SAMTOOLS_FASTQ ( ch_bam_reads, false )
+        ch_versions = ch_versions.mix ( SAMTOOLS_FASTQ.out.versions )
+        ch_reads_for_align = SAMTOOLS_FASTQ.out.other
+    }
 
     // Align without map reduce
     // Align Fastq to Genome with minimap2. bam_format is set to true, making the output a *sorted* BAM
-    MINIMAP2_ALIGN ( FILTER_PACBIO.out.fastq, fasta, true, "csi", false, false )
+    MINIMAP2_ALIGN ( ch_reads_for_align, fasta, true, "csi", false, false )
     ch_versions = ch_versions.mix ( MINIMAP2_ALIGN.out.versions.first() )
 
     MINIMAP2_ALIGN.out.bam

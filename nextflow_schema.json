@@ -47,12 +47,19 @@
                     "description": "Merge output alignment files by samples",
                     "fa_icon": "fas fa-layer-group"
                 },
-                "vector_db": {
+                "hifi_adapter_db": {
                     "type": "string",
-                    "description": "Path to directory or tar.gz archive for pre-built PacBio vector database.",
+                    "description": "Path to directory or tar.gz archive for pre-built PacBio adapter database.",
                     "format": "path",
-                    "default": "${projectDir}/assets/vectorDB.tar.gz",
+                    "default": "${projectDir}/assets/HiFi_adapter_DB.tar.gz",
                     "fa_icon": "fas fa-bezier-curve"
+                },
+                "hifi_adapter_yaml": {
+                    "type": "string",
+                    "description": "Path to YAML file containing guide for trimming/filtering PacBio data.",
+                    "format": "path",
+                    "default": "${projectDir}/assets/HiFi_adapter.yaml",
+                    "fa_icon": "far fa-file-code"
                 },
                 "uli_adapter": {
                     "type": "string",
@@ -74,6 +81,12 @@
                     "description": "Enable Hi-C duplicate marking (using 'samtools markdup').",
                     "default": true,
                     "fa_icon": "fas fa-clone"
+                },
+                "filter_pacbio": {
+                    "type": "boolean",
+                    "description": "Enable filtering and trimming for PacBio reads",
+                    "default": true,
+                    "fa_icon": "fas fa-filter"
                 },
                 "email": {
                     "type": "string",

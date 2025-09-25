@@ -72,7 +72,9 @@ workflow PIPELINE_INITIALISATION {
     def checkPathParamList = [
         params.input,
         params.fasta,
-        params.vector_db,
+        params.hifi_adapter_db,
+        params.hifi_adapter_yaml,
+        params.uli_adapter,
         params.bwamem2_index
     ]
 
