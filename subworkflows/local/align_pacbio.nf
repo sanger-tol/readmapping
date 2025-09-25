@@ -34,8 +34,9 @@ workflow ALIGN_PACBIO {
 
 
     main:
-    ch_versions = Channel.empty()
-    ch_merged_bam   = Channel.empty()
+    ch_versions    = Channel.empty()
+    ch_merged_bam  = Channel.empty()
+    ch_post_qc     = Channel.empty()
 
     // Branch for handling ultra low-input libraries
     reads
@@ -108,6 +109,7 @@ workflow ALIGN_PACBIO {
 
         // FastQC on filtered reads
         FASTQC_FILTERED ( ch_reads_for_align )
+        ch_post_qc = ch_post_qc.mix ( FASTQC_FILTERED.out.zip )
 
         ch_versions = ch_versions
         | mix ( SAMTOOLS_COLLATETOFASTA.out.versions )
@@ -116,7 +118,7 @@ workflow ALIGN_PACBIO {
         | mix ( HIFI_TRIMMER.out.versions )
         | mix ( FASTQC_FILTERED.out.versions )
     } else {
-        SAMTOOLS_FASTQ ( ch_bam_reads, false )
+        SAMTOOLS_FASTQ ( SAMTOOLS_CONVERT.out.bam, false )
         ch_versions = ch_versions.mix ( SAMTOOLS_FASTQ.out.versions )
         ch_reads_for_align = SAMTOOLS_FASTQ.out.other
     }
@@ -151,6 +153,6 @@ workflow ALIGN_PACBIO {
 
     emit:
     bam      = ch_sort                       // channel: [ val(meta), /path/to/bam ]
-    post_qc  = FASTQC_FILTERED.out.zip       // channel: [ val(meta), /path/to/fastqc zip]
+    post_qc  = ch_post_qc                    // channel: [ val(meta), /path/to/fastqc zip]
     versions = ch_versions                   // channel: [ versions.yml ]
 }
