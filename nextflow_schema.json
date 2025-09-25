@@ -56,7 +56,8 @@
                 },
                 "hifi_adapter_yaml": {
                     "type": "string",
-                    "description": "Path to YAML file containing guide for trimming/filtering PacBio data.",
+                    "description": "Path to YAML file containing guide for trimming/filtering PacBio data. See hifi-trimmer docs for details: https://github.com/sanger-tol/hifi-trimmer",
+                    "help_text": "YAML file containing adapter sequences and trimming parameters for PacBio HiFi data processing. This file guides hifi-trimmer in identifying and removing adapter contamination from HiFi reads. For more information about the expected format and configuration options, see the hifi-trimmer documentation: https://github.com/sanger-tol/hifi-trimmer",
                     "format": "path",
                     "default": "${projectDir}/assets/HiFi_adapter.yaml",
                     "fa_icon": "far fa-file-code"

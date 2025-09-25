@@ -120,7 +120,7 @@ workflow READMAPPING {
         }
     }
 
-    ch_hifi_adapter_yaml = Channel.fromPath ( params.hifi_adapter_yaml )
+    ch_hifi_adapter_yaml = Channel.fromPath ( params.hifi_adapter_yaml ).collect()
     ch_uli_adapter      = Channel.fromPath ( params.uli_adapter )
 
     //

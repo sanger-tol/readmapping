@@ -96,27 +96,26 @@ workflow ALIGN_PACBIO {
     if ( params.filter_pacbio ) {
         // Collate BAM file to create interleaved FASTA
         SAMTOOLS_COLLATETOFASTA ( SAMTOOLS_CONVERT.out.bam )
+        ch_versions = ch_versions.mix ( SAMTOOLS_COLLATETOFASTA.out.versions )
 
         BLASTN_HIFI ( SAMTOOLS_COLLATETOFASTA.out.fasta, hifi_adapter_db )
+        ch_versions = ch_versions.mix ( BLASTN_HIFI.out.versions )
+
         BGZIP_BLASTN ( BLASTN_HIFI.out.txt )
+        ch_versions = ch_versions.mix ( BGZIP_BLASTN.out.versions )
 
         bam_blast = SAMTOOLS_CONVERT.out.bam.join ( BGZIP_BLASTN.out.output )
 
         // TO FIX: hifi_trimmer only run one when using channel hifi_adapter_yaml provided as input
-        HIFI_TRIMMER ( bam_blast, params.hifi_adapter_yaml )
+        HIFI_TRIMMER ( bam_blast, hifi_adapter_yaml )
+        ch_versions = ch_versions.mix ( HIFI_TRIMMER.out.versions )
 
         ch_reads_for_align =  HIFI_TRIMMER.out.fastq
 
         // FastQC on filtered reads
         FASTQC_FILTERED ( ch_reads_for_align )
+        ch_versions = ch_versions.mix ( FASTQC_FILTERED.out.versions )
         ch_post_qc = ch_post_qc.mix ( FASTQC_FILTERED.out.zip )
-
-        ch_versions = ch_versions
-        | mix ( SAMTOOLS_COLLATETOFASTA.out.versions )
-        | mix ( BLASTN_HIFI.out.versions )
-        | mix ( BGZIP_BLASTN.out.versions )
-        | mix ( HIFI_TRIMMER.out.versions )
-        | mix ( FASTQC_FILTERED.out.versions )
     } else {
         SAMTOOLS_FASTQ ( SAMTOOLS_CONVERT.out.bam, false )
         ch_versions = ch_versions.mix ( SAMTOOLS_FASTQ.out.versions )

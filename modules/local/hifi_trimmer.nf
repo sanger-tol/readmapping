@@ -26,7 +26,18 @@ process HIFI_TRIMMER {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-       hifi_trimmer --version | sed 's/, version/: /'
+       \$(hifi_trimmer --version | sed 's/, version/: /')
+    END_VERSIONS
+    """
+
+    stub:
+    def prefix = task.ext.prefix ?: "${meta.id}"
+    """
+    touch ${prefix}.hifi_trimmer.fastq.gz
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+       \$(hifi_trimmer --version | sed 's/, version/: /')
     END_VERSIONS
     """
 }
