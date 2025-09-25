@@ -101,7 +101,7 @@ workflow ALIGN_PACBIO {
 
         bam_blast = SAMTOOLS_CONVERT.out.bam.join ( BGZIP_BLASTN.out.output )
 
-        // TO FIX: hifi_trimmer only run one when using channel hifi_adapter_yaml provided as input 
+        // TO FIX: hifi_trimmer only run one when using channel hifi_adapter_yaml provided as input
         HIFI_TRIMMER ( bam_blast, params.hifi_adapter_yaml )
 
         ch_reads_for_align =  HIFI_TRIMMER.out.fastq

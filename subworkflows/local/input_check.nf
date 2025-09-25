@@ -67,5 +67,3 @@ def create_data_channel ( LinkedHashMap row, datafile, stats ) {
 
     return [meta, datafile]
 }
-
-

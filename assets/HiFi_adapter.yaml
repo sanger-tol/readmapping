@@ -1,4 +1,4 @@
-- adapter: 'NGB00972'
+- adapter: "NGB00972"
   discard_middle: True
   discard_end: False
   trim_end: True
@@ -6,7 +6,7 @@
   middle_length: 44
   end_pident: 90
   end_length: 18
-- adapter: 'NGB00973'
+- adapter: "NGB00973"
   discard_middle: True
   discard_end: False
   trim_end: True
@@ -14,7 +14,7 @@
   middle_length: 34
   end_pident: 90
   end_length: 24
-- adapter: '^PacBio_ULI_adapter'
+- adapter: "^PacBio_ULI_adapter"
   discard_middle: True
   discard_end: True
   trim_end: False
@@ -22,7 +22,7 @@
   middle_length: 22
   end_pident: 90
   end_length: 22
-- adapter: '^TruSeq'
+- adapter: "^TruSeq"
   discard_middle: True
   discard_end: False
   trim_end: True
@@ -30,7 +30,7 @@
   middle_length: 28
   end_pident: 90
   end_length: 20
-- adapter: 'SAMPLEBARCODE'
+- adapter: "SAMPLEBARCODE"
   discard_middle: False
   discard_end: False
   trim_end: True
