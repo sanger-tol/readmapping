@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Add [Blobtk depth](https://github.com/genomehubs/blobtk/wiki/blobtk-depth) to calculate read coverage
 - Add [FastQC](https://github.com/s-andrews/FastQC/releases/tag/v0.12.1) for quality control of reads
+- Add [hifi-trimmer](https://github.com/sanger-tol/hifi-trimmer) instead of [HifiAdapterFilt](https://github.com/sheinasim-USDA/HiFiAdapterFilt) approach to filter PacBio reads
 - Add [Lima](https://github.com/PacificBiosciences/barcoding) to trim ULI adapter
 - Add [MultiQC](https://github.com/MultiQC/MultiQC) to aggregate quality control statistics
 - Add [pbmarkdup](https://github.com/PacificBiosciences/pbmarkdup) to remove ULI duplicates
@@ -21,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | -------------- | ----------- | ----------- |
 | `blobtk depth` |             | 0.6.5       |
 | `fastqc`       |             | 0.12.1      |
+| `hifi-trimmer` |             | 1.2.2       |
 | `lima`         |             | 2.12.0      |
 | `multiqc`      |             | 1.30        |
 | `pbmarkdup`    |             | 1.0.3       |

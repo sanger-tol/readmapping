@@ -84,7 +84,7 @@
                 },
                 "filter_pacbio": {
                     "type": "boolean",
-                    "description": "Enable filtering and trimming for PacBio reads",
+                    "description": "Enable filtering and trimming for PacBio reads with hifi-trimmer, if provided reads are already trimmed, please set to false.",
                     "default": true,
                     "fa_icon": "fas fa-filter"
                 },
