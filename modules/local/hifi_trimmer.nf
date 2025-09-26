@@ -1,7 +1,7 @@
 process HIFI_TRIMMER {
     tag "$meta.id"
 
-    container "docker.io/sainsachiko/hifi_trimmer:1.2.2"
+    container "sanger-tol/hifi_trimmer:1.2.2-c2"
 
     input:
     tuple val(meta), path(bam), path(blast_out)
