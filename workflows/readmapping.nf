@@ -121,7 +121,7 @@ workflow READMAPPING {
     }
 
     ch_hifi_adapter_yaml = Channel.fromPath ( params.hifi_adapter_yaml ).collect()
-    ch_uli_adapter      = Channel.fromPath ( params.uli_adapter )
+    ch_uli_adapter      = Channel.fromPath ( params.uli_adapter ).collect()
 
     //
     // SUBWORKFLOW: Align raw reads to genome

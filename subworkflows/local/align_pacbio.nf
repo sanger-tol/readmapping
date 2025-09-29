@@ -30,7 +30,7 @@ workflow ALIGN_PACBIO {
     reads               // channel: [ val(meta), /path/to/datafile ]
     hifi_adapter_db     // channel: /path/to/hifi_adapter_db
     hifi_adapter_yaml   // channel: /path/to/hifi_adapter_yaml
-    uli_adapter        // channel: /path/to/uli_adapter.fasta
+    uli_adapter         // channel: /path/to/uli_adapter.fasta
 
 
     main:
@@ -106,7 +106,6 @@ workflow ALIGN_PACBIO {
 
         bam_blast = SAMTOOLS_CONVERT.out.bam.join ( BGZIP_BLASTN.out.output )
 
-        // TO FIX: hifi_trimmer only run one when using channel hifi_adapter_yaml provided as input
         HIFI_TRIMMER ( bam_blast, hifi_adapter_yaml )
         ch_versions = ch_versions.mix ( HIFI_TRIMMER.out.versions )
 

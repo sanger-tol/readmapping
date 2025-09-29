@@ -22,7 +22,7 @@ workflow CREATE_CRAM_FILTER_INPUT {
                 read_group: cram_id.read_group,
                 datatype: cram_id.datatype,
                 library: cram_id.library,
-                barcode: cram_id.barcode
+                barcode: cram_id.barcode,
             ],
             file(cram_info[0]),
             cram_info[1],
