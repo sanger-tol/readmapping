@@ -1,7 +1,7 @@
 process HIFI_TRIMMER {
     tag "$meta.id"
 
-    container "sanger-tol/hifi_trimmer:1.2.2-c2"
+    container "biocontainers/hifi_trimmer:1.2.2--pyhdfd78af_0"
 
     input:
     tuple val(meta), path(bam), path(blast_out)
