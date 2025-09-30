@@ -15,14 +15,16 @@ include { MERGE_OUTPUT                      } from '../../subworkflows/local/mer
 
 // Include nf-core modules
 include { BLAST_BLASTN as BLASTN_HIFI       } from '../../modules/nf-core/blast/blastn/main'
-include { LIMA                              } from '../../modules/nf-core/lima'
-include { SAMTOOLS_INDEX                    } from '../../modules/nf-core/samtools/index'
-include { FASTQC as FASTQC_FILTERED         } from '../../modules/nf-core/fastqc'
+include { CAT_FASTQ                        } from '../../modules/nf-core/cat/fastq/main'
+include { FASTQC as FASTQC_FILTERED         } from '../../modules/nf-core/fastqc/main'
+include { LIMA                              } from '../../modules/nf-core/lima/main'
 include { MINIMAP2_ALIGN                    } from '../../modules/nf-core/minimap2/align'
+include { SAMTOOLS_FASTQ                    } from '../../modules/nf-core/samtools/fastq/main'
+include { SAMTOOLS_INDEX                    } from '../../modules/nf-core/samtools/index'
 include { SAMTOOLS_MERGE                    } from '../../modules/nf-core/samtools/merge'
 include { SAMTOOLS_VIEW as SAMTOOLS_CONVERT } from '../../modules/nf-core/samtools/view/main'
-include { SAMTOOLS_FASTQ                    } from '../../modules/nf-core/samtools/fastq/main'
 include { TABIX_BGZIP as BGZIP_BLASTN       } from '../../modules/nf-core/tabix/bgzip/main'
+include { TAR                               } from '../../modules/nf-core/tar/main'
 
 workflow ALIGN_PACBIO {
     take:
@@ -111,8 +113,30 @@ workflow ALIGN_PACBIO {
 
         ch_reads_for_align =  HIFI_TRIMMER.out.fastq
 
+        // ARCHIVE: chunked stat files (BED + JSON) by sample
+        ch_stats_to_archive = ch_reads_for_align
+        | map { meta, fastqs -> [ meta - [chunk_id: meta.chunk_id], fastqs ] }
+        | groupTuple()
+
+        TAR ( ch_stats_to_archive, ".gz"  )
+        ch_versions = ch_versions.mix ( TAR.out.versions )
+
+        // REMERGE: fastq before post FASTQC, single-end to enable merging without pairing
+        ch_reads_for_align
+        | map { meta, fastqs -> [ meta - [chunk_id: meta.chunk_id] + [ single_end: true ], fastqs ] }
+        | groupTuple()
+        | branch {
+            meta, fastqs ->
+                multi: fastqs.size() > 1
+                single : true
+        }
+        | set { ch_reads_to_remerge }
+
+        CAT_FASTQ ( ch_reads_to_remerge.multi )
+        ch_versions = ch_versions.mix ( CAT_FASTQ.out.versions )
+    
         // FastQC on filtered reads
-        FASTQC_FILTERED ( ch_reads_for_align )
+        FASTQC_FILTERED ( CAT_FASTQ.out.reads.mix( ch_reads_to_remerge.single ) )
         ch_versions = ch_versions.mix ( FASTQC_FILTERED.out.versions )
         ch_post_qc = ch_post_qc.mix ( FASTQC_FILTERED.out.zip )
     } else {
