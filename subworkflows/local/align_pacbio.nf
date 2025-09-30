@@ -134,7 +134,7 @@ workflow ALIGN_PACBIO {
 
         CAT_FASTQ ( ch_reads_to_remerge.multi )
         ch_versions = ch_versions.mix ( CAT_FASTQ.out.versions )
-    
+
         // FastQC on filtered reads
         FASTQC_FILTERED ( CAT_FASTQ.out.reads.mix( ch_reads_to_remerge.single ) )
         ch_versions = ch_versions.mix ( FASTQC_FILTERED.out.versions )
