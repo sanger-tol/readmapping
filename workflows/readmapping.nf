@@ -109,18 +109,19 @@ workflow READMAPPING {
     //
     // ***PacBio condition does not work - needs fixing***
     if ( ch_reads.pacbio || ch_reads.clr ) {
-        if ( params.vector_db.endsWith( '.tar.gz' ) ) {
-            UNTAR ( [ [:], params.vector_db ] ).untar
-            | set { ch_vector_db }
-
+        if ( params.hifi_adapter_db.endsWith( '.tar.gz' ) ) {
+            UNTAR ( [ [:], params.hifi_adapter_db ] ).untar
+            | set { ch_hifi_adapter_db }
             ch_versions = ch_versions.mix ( UNTAR.out.versions )
 
         } else {
-            Channel.fromPath ( params.vector_db )
-            | set { ch_vector_db }
+            Channel.fromPath ( params.hifi_adapter_db )
+            | set { ch_hifi_adapter_db }
         }
     }
 
+    ch_hifi_adapter_yaml = Channel.fromPath ( params.hifi_adapter_yaml ).collect()
+    ch_uli_adapter      = Channel.fromPath ( params.uli_adapter ).collect()
 
     //
     // SUBWORKFLOW: Align raw reads to genome
@@ -133,11 +134,11 @@ workflow READMAPPING {
     ALIGN_ILLUMINA ( PREPARE_GENOME.out.fasta, PREPARE_GENOME.out.bwaidx, ch_reads.illumina )
     ch_versions = ch_versions.mix ( ALIGN_ILLUMINA.out.versions )
 
-    ALIGN_HIFI ( PREPARE_GENOME.out.fasta, ch_reads.pacbio, ch_vector_db )
+    ALIGN_HIFI ( PREPARE_GENOME.out.fasta, ch_reads.pacbio, ch_hifi_adapter_db, ch_hifi_adapter_yaml, ch_uli_adapter )
     ch_versions = ch_versions.mix ( ALIGN_HIFI.out.versions )
     reports = reports.mix ( ALIGN_HIFI.out.post_qc )
 
-    ALIGN_CLR ( PREPARE_GENOME.out.fasta, ch_reads.clr, ch_vector_db )
+    ALIGN_CLR ( PREPARE_GENOME.out.fasta, ch_reads.clr, ch_hifi_adapter_db, ch_hifi_adapter_yaml, ch_uli_adapter )
     ch_versions = ch_versions.mix ( ALIGN_CLR.out.versions )
     reports = reports.mix ( ALIGN_CLR.out.post_qc )
 

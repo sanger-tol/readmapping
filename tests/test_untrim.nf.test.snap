@@ -1,25 +1,16 @@
 {
     "-profile test": {
         "content": [
-            153,
+            135,
             {
                 "BGZIP_BEDGRAPH": {
                     "tabix": 1.21
-                },
-                "BGZIP_BLASTN": {
-                    "tabix": 1.21
-                },
-                "BLASTN_HIFI": {
-                    "blast": "2.15.0+"
                 },
                 "BLOBTK_DEPTH": {
                     "blobtk": "0.6.5"
                 },
                 "BWAMEM2_INDEX": {
                     "bwamem2": "2.2.1"
-                },
-                "CAT_FASTQ": {
-                    "cat": 9.5
                 },
                 "CONVERT_CRAM": {
                     "samtools": "1.22.1"
@@ -39,9 +30,6 @@
                 "FASTQC": {
                     "fastqc": "0.12.1"
                 },
-                "FASTQC_FILTERED": {
-                    "fastqc": "0.12.1"
-                },
                 "GENERATE_CRAM_CSV": {
                     "samtools": 1.17
                 },
@@ -59,9 +47,6 @@
                     "minimap2": "2.30-r1287",
                     "samtools": "1.22.1"
                 },
-                "HIFI_TRIMMER": {
-                    "hifi_trimmer": "1.2.2"
-                },
                 "MINIMAP2_ALIGN": {
                     "minimap2": "2.28-r1209",
                     "samtools": 1.2
@@ -75,9 +60,6 @@
                 "SAMTOOLS_ADDREPLACERG": {
                     "samtools": "1.22.1"
                 },
-                "SAMTOOLS_COLLATETOFASTA": {
-                    "samtools": "1.22.1"
-                },
                 "SAMTOOLS_COLLATETOFASTQ": {
                     "samtools": "1.22.1"
                 },
@@ -89,6 +71,9 @@
                 },
                 "SAMTOOLS_FAIDX": {
                     "samtools": 1.21
+                },
+                "SAMTOOLS_FASTQ": {
+                    "samtools": "1.22.1"
                 },
                 "SAMTOOLS_FLAGSTAT": {
                     "samtools": "1.22.1"
@@ -114,9 +99,6 @@
                 "SAMTOOLS_STATS": {
                     "samtools": "1.22.1"
                 },
-                "TAR": {
-                    "tar": 1.34
-                },
                 "UNMASK": {
                     "awk": "5.1.0"
                 },
@@ -130,10 +112,6 @@
             [
                 "pipeline_info",
                 "pipeline_info/readmapping_software_mqc_versions.yml",
-                "preprocess",
-                "preprocess/pacbio_filter",
-                "preprocess/pacbio_filter/mMelMel3_T3_hifi_trimmer.tar.gz",
-                "preprocess/pacbio_filter/mMelMel3_T4_hifi_trimmer.tar.gz",
                 "quality_control",
                 "quality_control/hic.mMelMel3_T1.fasta_fastqc.html",
                 "quality_control/hic.mMelMel3_T1.fasta_fastqc.zip",
@@ -144,12 +122,8 @@
                 "quality_control/multiqc_report.html",
                 "quality_control/ont.mMelMel3_T2_fastqc.html",
                 "quality_control/ont.mMelMel3_T2_fastqc.zip",
-                "quality_control/pacbio.mMelMel3_T3.filtered_fastqc.html",
-                "quality_control/pacbio.mMelMel3_T3.filtered_fastqc.zip",
                 "quality_control/pacbio.mMelMel3_T3_fastqc.html",
                 "quality_control/pacbio.mMelMel3_T3_fastqc.zip",
-                "quality_control/pacbio.mMelMel3_T4.filtered_fastqc.html",
-                "quality_control/pacbio.mMelMel3_T4.filtered_fastqc.zip",
                 "quality_control/pacbio.mMelMel3_T4_fastqc.html",
                 "quality_control/pacbio.mMelMel3_T4_fastqc.zip",
                 "read_mapping",
@@ -199,6 +173,6 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.2"
         },
-        "timestamp": "2025-10-07T09:47:57.350451"
+        "timestamp": "2025-09-25T13:06:15.217364"
     }
 }

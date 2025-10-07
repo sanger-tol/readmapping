@@ -41,6 +41,7 @@ def create_data_channel ( LinkedHashMap row, datafile, stats ) {
     meta.id         = row.sample
     meta.datatype   = row.datatype
     meta.library    = row.library
+    meta.barcode    = row.barcode
 
     if ( meta.datatype == "hic" || meta.datatype == "illumina" ) {
         platform = "ILLUMINA"

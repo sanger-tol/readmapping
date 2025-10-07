@@ -20,6 +20,11 @@
                         "git_sha": "2d20463181b1c38981a02e90d3084b5f9fa8d540",
                         "installed_by": ["modules"]
                     },
+                    "cat/fastq": {
+                        "branch": "master",
+                        "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
+                        "installed_by": ["modules"]
+                    },
                     "crumble": {
                         "branch": "master",
                         "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
@@ -59,6 +64,11 @@
                         "branch": "master",
                         "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
                         "installed_by": ["hic_mapping"]
+                    },
+                    "samtools/fastq": {
+                        "branch": "master",
+                        "git_sha": "c8be52dba1166c678e74cda9c3a3c221635c8bb1",
+                        "installed_by": ["modules"]
                     },
                     "samtools/flagstat": {
                         "branch": "master",
@@ -104,6 +114,11 @@
                     "tabix/bgzip": {
                         "branch": "master",
                         "git_sha": "52a49a8807214ba93b0fdc9fa401876d9845f62a",
+                        "installed_by": ["modules"]
+                    },
+                    "tar": {
+                        "branch": "master",
+                        "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
                         "installed_by": ["modules"]
                     },
                     "untar": {
