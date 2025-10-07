@@ -132,8 +132,8 @@
                 "pipeline_info/readmapping_software_mqc_versions.yml",
                 "preprocess",
                 "preprocess/pacbio_filter",
-                "preprocess/pacbio_filter/mMelMel3_T3.tar.gz",
-                "preprocess/pacbio_filter/mMelMel3_T4.tar.gz",
+                "preprocess/pacbio_filter/mMelMel3_T3_hifi_trimmer.tar.gz",
+                "preprocess/pacbio_filter/mMelMel3_T4_hifi_trimmer.tar.gz",
                 "quality_control",
                 "quality_control/hic.mMelMel3_T1.fasta_fastqc.html",
                 "quality_control/hic.mMelMel3_T1.fasta_fastqc.zip",
@@ -199,6 +199,6 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.2"
         },
-        "timestamp": "2025-09-30T11:30:56.07881"
+        "timestamp": "2025-10-07T09:47:57.350451"
     }
 }

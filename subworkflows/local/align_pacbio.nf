@@ -114,8 +114,9 @@ workflow ALIGN_PACBIO {
         ch_reads_for_align =  HIFI_TRIMMER.out.fastq
 
         // ARCHIVE: chunked stat files (BED + JSON) by sample
-        ch_stats_to_archive = ch_reads_for_align
-        | map { meta, fastqs -> [ meta - [chunk_id: meta.chunk_id], fastqs ] }
+        ch_stats_to_archive = HIFI_TRIMMER.out.bed
+        | mix( HIFI_TRIMMER.out.json )
+        | map { meta, stats -> [ meta - [chunk_id: meta.chunk_id] + [archive: "${meta.id}_hifi_trimmer"], stats ] }
         | groupTuple()
 
         TAR ( ch_stats_to_archive, ".gz"  )

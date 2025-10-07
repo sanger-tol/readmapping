@@ -104,7 +104,7 @@
                 "pipeline_info/readmapping_software_mqc_versions.yml",
                 "preprocess",
                 "preprocess/pacbio_filter",
-                "preprocess/pacbio_filter/jaAcrCerv1_T1.tar.gz",
+                "preprocess/pacbio_filter/jaAcrCerv1_T1_hifi_trimmer.tar.gz",
                 "quality_control",
                 "quality_control/multiqc_report.html",
                 "quality_control/pacbio.jaAcrCerv1_T1.filtered_fastqc.html",
@@ -125,6 +125,6 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.2"
         },
-        "timestamp": "2025-09-30T12:04:43.232834"
+        "timestamp": "2025-10-07T10:13:27.275036"
     }
 }

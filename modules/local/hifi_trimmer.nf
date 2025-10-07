@@ -10,7 +10,8 @@ process HIFI_TRIMMER {
 
     output:
     tuple val(meta), path("*.hifi_trimmer.fastq.gz")          , emit: fastq
-    tuple val(meta), path("*.bed.gz"), path("*.summary.json") , emit: trim_stats
+    tuple val(meta), path("*.bed.gz")                         , emit: bed
+    tuple val(meta), path("*.summary.json")                   , emit: json
     path  "versions.yml"                                      , emit: versions
 
     when:
