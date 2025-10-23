@@ -25,6 +25,7 @@ process PACBIO_PBMARKDUP {
 
     """
     pbmarkdup \\
+        -j ${task.cpus} \\
         $input \\
         ${prefix}.${suffix} \\
         $args
