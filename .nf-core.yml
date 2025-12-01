@@ -29,8 +29,10 @@ lint:
     - manifest.name
     - manifest.homePage
     - config_defaults:
-        - params.vector_db
-nf_core_version: 3.3.1
+        - params.hifi_adapter_db
+        - params.hifi_adapter_yaml
+        - params.uli_adapter
+nf_core_version: 3.5.1
 repository_type: pipeline
 template:
   author: "@priyanka-surana"
