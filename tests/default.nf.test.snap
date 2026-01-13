@@ -1,7 +1,7 @@
 {
     "-profile test": {
         "content": [
-            153,
+            165,
             {
                 "BGZIP_BEDGRAPH": {
                     "tabix": 1.21
@@ -22,6 +22,14 @@
                     "cat": 9.5
                 },
                 "CONVERT_CRAM": {
+                    "samtools": "1.22.1"
+                },
+                "CRAMALIGN_GENCRAMCHUNKS": {
+                    "cramalign_gencramchunks": "1.1.0"
+                },
+                "CRAMALIGN_MINIMAP2ALIGNHIC": {
+                    "gawk": "5.3.1",
+                    "minimap2": "2.30-r1287",
                     "samtools": "1.22.1"
                 },
                 "CRAM_FILTER": {
@@ -51,14 +59,6 @@
                 "GZIP_STATS": {
                     "gzip": 1.1
                 },
-                "HICCRAMALIGN_CHUNKS": {
-                    "hiccramalign_chunks": "1.0.1"
-                },
-                "HICCRAMALIGN_MINIMAP2ALIGN": {
-                    "gawk": "5.3.1",
-                    "minimap2": "2.30-r1287",
-                    "samtools": "1.22.1"
-                },
                 "HIFI_TRIMMER": {
                     "hifi_trimmer": "1.2.2"
                 },
@@ -87,9 +87,6 @@
                 "SAMTOOLS_CRAM": {
                     "samtools": "1.22.1"
                 },
-                "SAMTOOLS_FAIDX": {
-                    "samtools": 1.21
-                },
                 "SAMTOOLS_FLAGSTAT": {
                     "samtools": "1.22.1"
                 },
@@ -99,16 +96,16 @@
                 "SAMTOOLS_INDEX": {
                     "samtools": 1.21
                 },
-                "SAMTOOLS_MARKDUP": {
-                    "samtools": 1.21
-                },
                 "SAMTOOLS_MERGE": {
+                    "samtools": "1.22.1"
+                },
+                "SAMTOOLS_MERGEDUP": {
                     "samtools": "1.22.1"
                 },
                 "SAMTOOLS_REHEADER_CRAM": {
                     "samtools": "1.22.1"
                 },
-                "SAMTOOLS_SORMADUP": {
+                "SAMTOOLS_SPLITHEADER": {
                     "samtools": "1.22.1"
                 },
                 "SAMTOOLS_STATS": {
@@ -192,13 +189,20 @@
                 "read_mapping/pacbio/GCA_922984935.2.subset.unmasked.pacbio.mMelMel3_T4.cram.crai",
                 "read_mapping/pacbio/GCA_922984935.2.subset.unmasked.pacbio.mMelMel3_T4.flagstat",
                 "read_mapping/pacbio/GCA_922984935.2.subset.unmasked.pacbio.mMelMel3_T4.idxstats",
-                "read_mapping/pacbio/GCA_922984935.2.subset.unmasked.pacbio.mMelMel3_T4.stats.gz"
+                "read_mapping/pacbio/GCA_922984935.2.subset.unmasked.pacbio.mMelMel3_T4.stats.gz",
+                "read_mapping/pacbio/merged",
+                "read_mapping/pacbio/merged/GCA_922984935.2.subset.unmasked.pacbio.mMelMel3.coverage.bedGraph.gz",
+                "read_mapping/pacbio/merged/GCA_922984935.2.subset.unmasked.pacbio.mMelMel3.cram",
+                "read_mapping/pacbio/merged/GCA_922984935.2.subset.unmasked.pacbio.mMelMel3.cram.crai",
+                "read_mapping/pacbio/merged/GCA_922984935.2.subset.unmasked.pacbio.mMelMel3.flagstat",
+                "read_mapping/pacbio/merged/GCA_922984935.2.subset.unmasked.pacbio.mMelMel3.idxstats",
+                "read_mapping/pacbio/merged/GCA_922984935.2.subset.unmasked.pacbio.mMelMel3.stats.gz"
             ]
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "25.04.2"
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2025-10-07T09:47:57.350451"
+        "timestamp": "2026-01-13T16:56:12.44514874"
     }
 }
