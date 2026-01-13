@@ -41,11 +41,9 @@ process CRAMALIGN_MINIMAP2ALIGNHIC {
             "-R '${l.replaceAll("\t", "\\\\t")}'"
         }.join(' ')
         : ''
+    def filter_5end = meta.datatype == 'hic' ? 
     """
-    samtools cat ${args1} -r "#:${range[0]}-${range[1]}" ${cram} |\\
-        samtools fastq ${args2} - |\\
-        minimap2 -t${task.cpus} ${args3} ${index} ${rg_arg} - |\\
-        gawk -F'\t' '
+            gawk -F'\t' '
             BEGIN { OFS="\\t" }
             \$1 ~ /^\\@/ { print \$0 }
             \$1 !~ /^\\@/ && and(\$2, 64) > 0 { print 1 \$0 }
@@ -57,6 +55,13 @@ process CRAMALIGN_MINIMAP2ALIGNHIC {
             \$1 ~ /^\\@/ { print \$0 }
             \$1 !~ /^\\@/ { \$2 = and(\$2, compl(2048)); print substr(\$0, 2) }
         ' |\\
+    """ : ''
+    
+    """
+    samtools cat ${args1} -r "#:${range[0]}-${range[1]}" ${cram} |\\
+        samtools fastq ${args2} - |\\
+        minimap2 -t${task.cpus} ${args3} ${index} ${rg_arg} - |\\
+        ${filter_5end} \\
         samtools fixmate ${args4} - - |\\
         samtools view -h ${args5} |\\
         samtools sort ${args6} -@${task.cpus} -T ${prefix}_tmp -o ${prefix}.bam -

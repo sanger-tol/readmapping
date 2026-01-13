@@ -130,16 +130,16 @@ workflow READMAPPING {
     // Prepare fasta channel
     ch_hic = ch_reads.hic
     .combine ( PREPARE_GENOME.out.fasta )
-    .multiMap { meta, read, meta_, fasta -> 
-        fasta: [ meta + meta_, fasta ]
-        read: [ meta + meta_ , read ]
+    .multiMap { meta, cram, meta_, fasta ->
+        cram: [ meta_ + meta + [ assembly_id: meta_.id ] , cram ]
+        fasta: [ meta_ + meta + [ assembly_id: meta_.id ] , fasta ]
     }
-    ALIGN_HIC ( ch_hic.fasta, ch_hic.read, params.short_aligner, params.chunk_size )
+    ALIGN_HIC ( ch_hic.fasta, ch_hic.cram, params.short_aligner, params.chunk_size )
     HIC_MERGE_SAMPLES ( ALIGN_HIC.out.bam )
     ch_versions = ch_versions.mix ( ALIGN_HIC.out.versions )
                              .mix ( HIC_MERGE_SAMPLES.out.versions )
 
-    ALIGN_ILLUMINA ( PREPARE_GENOME.out.fasta, PREPARE_GENOME.out.bwaidx, ch_reads.illumina )
+    ALIGN_ILLUMINA ( PREPARE_GENOME.out.fasta, PREPARE_GENOME.out.fasta, ch_reads.illumina )
     ch_versions = ch_versions.mix ( ALIGN_ILLUMINA.out.versions )
 
     ALIGN_HIFI ( PREPARE_GENOME.out.fasta, ch_reads.pacbio, ch_hifi_adapter_db, ch_hifi_adapter_yaml, ch_uli_adapter )
