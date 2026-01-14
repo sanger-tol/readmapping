@@ -24,6 +24,7 @@ lint:
     - .gitignore
     - .github/workflows/linting.yml
     - .github/PULL_REQUEST_TEMPLATE.md
+    - .gitattributes
   multiqc_config: false
   nextflow_config:
     - manifest.name
@@ -32,7 +33,7 @@ lint:
         - params.hifi_adapter_db
         - params.hifi_adapter_yaml
         - params.uli_adapter
-nf_core_version: 3.3.1
+nf_core_version: 3.5.1
 repository_type: pipeline
 template:
   author: "@priyanka-surana"

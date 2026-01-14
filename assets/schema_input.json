@@ -20,10 +20,11 @@
                 "meta": ["datatype"]
             },
             "datafile": {
-                "format": "string",
-                "pattern": "^\\S+$",
-                "errorMessage": "Data file for reads cannot contain spaces and must have extension 'cram', 'bam', '.fq.gz' or '.fastq.gz'",
-                "meta": ["datafile"]
+                "type": "string",
+                "format": "file-path",
+                "exists": true,
+                "pattern": "^\\S+\\.(bam|cram|fa|fa.gz|fasta|fasta.gz|fq|fq.gz|fastq|fastq.gz)$",
+                "errorMessage": "Data file for reads cannot contain spaces and must be BAM/CRAM/FASTQ/FASTA"
             },
             "library": {
                 "type": "string",

@@ -21,3 +21,7 @@ export_plots: true
 extra_fn_clean_exts:
   - type: regex
     pattern: ".*(?=(ont|illumina|pacbio|hic)\\.)"
+
+custom_plot_config:
+  samtools_alignment_plot:
+    cpswitch_c_active: false
