@@ -9,18 +9,18 @@
 // SUBWORKFLOW: Consisting of a mix of local and nf-core/modules
 //
 
-include { INPUT_CHECK                       } from '../subworkflows/local/input_check'
-include { SAMTOOLS_COLLATETOFASTQ           } from '../modules/local/samtools_collatetofastq'
-include { FASTQC                            } from '../modules/nf-core/fastqc'
-include { PREPARE_GENOME                    } from '../subworkflows/local/prepare_genome'
-include { HIC_MAPPING as ALIGN_HIC          } from '../subworkflows/sanger-tol/hic_mapping'
-include { ALIGN_SHORT as ALIGN_ILLUMINA     } from '../subworkflows/local/align_short'
-include { ALIGN_PACBIO as ALIGN_HIFI        } from '../subworkflows/local/align_pacbio'
-include { ALIGN_PACBIO as ALIGN_CLR         } from '../subworkflows/local/align_pacbio'
-include { ALIGN_ONT                         } from '../subworkflows/local/align_ont'
-include { CONVERT_STATS                     } from '../subworkflows/local/convert_stats'
-include { MULTIQC                       } from '../modules/nf-core/multiqc'
-include { MERGE_OUTPUT as HIC_MERGE_SAMPLES } from '../subworkflows/local/merge_output'
+include { INPUT_CHECK                        } from '../subworkflows/local/input_check'
+include { SAMTOOLS_COLLATETOFASTQ            } from '../modules/local/samtools_collatetofastq'
+include { FASTQC                             } from '../modules/nf-core/fastqc'
+include { PREPARE_GENOME                     } from '../subworkflows/local/prepare_genome'
+include { CRAM_MAP_ILLUMINA_HIC as ALIGN_HIC } from '../subworkflows/sanger-tol/cram_map_illumina_hic'
+include { ALIGN_SHORT as ALIGN_ILLUMINA      } from '../subworkflows/local/align_short'
+include { ALIGN_PACBIO as ALIGN_HIFI         } from '../subworkflows/local/align_pacbio'
+include { ALIGN_PACBIO as ALIGN_CLR          } from '../subworkflows/local/align_pacbio'
+include { ALIGN_ONT                          } from '../subworkflows/local/align_ont'
+include { CONVERT_STATS                      } from '../subworkflows/local/convert_stats'
+include { MULTIQC                            } from '../modules/nf-core/multiqc'
+include { MERGE_OUTPUT as HIC_MERGE_SAMPLES  } from '../subworkflows/local/merge_output'
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT NF-CORE MODULES/SUBWORKFLOWS
@@ -126,12 +126,20 @@ workflow READMAPPING {
     //
     // SUBWORKFLOW: Align raw reads to genome
     //
-    ALIGN_HIC ( PREPARE_GENOME.out.fasta, ch_reads.hic, params.short_aligner, params.chunk_size, params.hic_markdup )
+
+    // Prepare fasta channel
+    ch_hic = ch_reads.hic
+    .combine ( PREPARE_GENOME.out.fasta )
+    .multiMap { meta, cram, meta_, fasta ->
+        cram: [ meta_ + meta + [ assembly_id: meta_.id ] , cram ]
+        fasta: [ meta_ + meta + [ assembly_id: meta_.id ] , fasta ]
+    }
+    ALIGN_HIC ( ch_hic.fasta, ch_hic.cram, params.short_aligner, params.chunk_size )
     HIC_MERGE_SAMPLES ( ALIGN_HIC.out.bam )
     ch_versions = ch_versions.mix ( ALIGN_HIC.out.versions )
                              .mix ( HIC_MERGE_SAMPLES.out.versions )
 
-    ALIGN_ILLUMINA ( PREPARE_GENOME.out.fasta, PREPARE_GENOME.out.bwaidx, ch_reads.illumina )
+    ALIGN_ILLUMINA ( PREPARE_GENOME.out.fasta, PREPARE_GENOME.out.fasta, ch_reads.illumina )
     ch_versions = ch_versions.mix ( ALIGN_ILLUMINA.out.versions )
 
     ALIGN_HIFI ( PREPARE_GENOME.out.fasta, ch_reads.pacbio, ch_hifi_adapter_db, ch_hifi_adapter_yaml, ch_uli_adapter )
