@@ -20,10 +20,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 | Dependency     | Old version | New version |
 | -------------- | ----------- | ----------- |
+| `blastn`       | 2.15        | 2.17        |
+| `bwa-mem2`     | 2.2.1       | 2.3         |
 | `blobtk depth` |             | 0.6.5       |
 | `fastqc`       |             | 0.12.1      |
 | `hifi-trimmer` |             | 1.2.2       |
 | `lima`         |             | 2.12.0      |
+| `minimap2`     | 2.28        | 2.29        |
 | `multiqc`      |             | 1.30        |
 | `pbmarkdup`    |             | 1.0.3       |
 | `samtools`     | 1.21        | 1.22.1      |

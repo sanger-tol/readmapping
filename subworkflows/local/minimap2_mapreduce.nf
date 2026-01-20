@@ -80,7 +80,6 @@ workflow MINIMAP2_MAPREDUCE {
         [ [], [] ],
         [ [], [] ]
     )
-    ch_versions         = ch_versions.mix ( SAMTOOLS_MERGE.out.versions )
 
 
     emit:

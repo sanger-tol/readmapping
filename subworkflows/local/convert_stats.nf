@@ -65,8 +65,7 @@ workflow CONVERT_STATS {
     ch_crai = Channel.empty()
 
     if ( "cram" in outfmt_options ) {
-        SAMTOOLS_CRAM ( ch_renamed_bams, fasta, [] )
-        ch_versions = ch_versions.mix ( SAMTOOLS_CRAM.out.versions.first() )
+        SAMTOOLS_CRAM ( ch_renamed_bams, fasta, [], [] )
 
         // Combine CRAM and CRAI into one channel
         ch_cram = SAMTOOLS_CRAM.out.cram
@@ -110,7 +109,6 @@ workflow CONVERT_STATS {
 
     // Calculate statistics
     SAMTOOLS_STATS ( ch_for_stats, [[], []] )
-    ch_versions = ch_versions.mix ( SAMTOOLS_STATS.out.versions.first() )
 
     GZIP_STATS  ( SAMTOOLS_STATS.out.stats )
     ch_versions = ch_versions.mix ( GZIP_STATS.out.versions.first() )

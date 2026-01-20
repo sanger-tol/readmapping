@@ -128,7 +128,6 @@ workflow CRAM_MAP_ILLUMINA_HIC {
             ch_mapping_inputs.reference,
             ch_mapping_inputs.slices
         )
-        ch_versions = ch_versions.mix(CRAMALIGN_BWAMEM2ALIGNHIC.out.versions)
 
         ch_mapped_bams = CRAMALIGN_BWAMEM2ALIGNHIC.out.bam
     } else if(val_aligner == "minimap2") {
@@ -152,7 +151,6 @@ workflow CRAM_MAP_ILLUMINA_HIC {
             ch_mapping_inputs.reference,
             ch_mapping_inputs.slices
         )
-        ch_versions = ch_versions.mix(CRAMALIGN_MINIMAP2ALIGNHIC.out.versions)
 
         ch_mapped_bams = CRAMALIGN_MINIMAP2ALIGNHIC.out.bam
     } else {

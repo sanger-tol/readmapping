@@ -64,7 +64,6 @@ workflow ALIGN_ONT {
     // SUBWORKFLOW: Merge all alignment output by sample name
     //
     ch_sort  = MERGE_OUTPUT ( ch_merged_bam ).bam
-    ch_versions = ch_versions.mix ( MERGE_OUTPUT.out.versions )
 
 
     emit:

@@ -2,12 +2,10 @@ process SAMTOOLS_REHEADER {
     tag "$meta.id"
     label 'process_single'
 
-    // conda "bioconda::samtools=1.21"
-    // container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-    //     'https://depot.galaxyproject.org/singularity/samtools:1.21--h50ea8bc_0' :
-    //     'biocontainers/samtools:1.21--h50ea8bc_0' }"
-
-    container 'docker.io/staphb/samtools:1.22.1'
+    conda "${moduleDir}/environment.yml"
+    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+        'https://depot.galaxyproject.org/singularity/samtools:1.22.1--h96c455f_0' :
+        'biocontainers/samtools:1.22.1--h96c455f_0' }"
 
     input:
     tuple val(meta), path(file, stageAs: "input/*")
@@ -32,11 +30,11 @@ process SAMTOOLS_REHEADER {
     grep -v ^@SQ && grep ^@SQ ${header} ) > temp.header.sam
 
     # custom sort for readability (retain order of insertion but sort groups by tag)
-    ( grep ^@HD temp.header.sam || true && \
-    grep ^@SQ temp.header.sam || true && \
-    grep ^@RG temp.header.sam || true && \
-    grep ^@PG temp.header.sam || true && \
-    grep -v -E '^@HD|^@SQ|^@RG|^@PG' temp.header.sam || true; \
+    ( grep ^@HD temp.header.sam || true && \\
+    grep ^@SQ temp.header.sam || true && \\
+    grep ^@RG temp.header.sam || true && \\
+    grep ^@PG temp.header.sam || true && \\
+    grep -v -E '^@HD|^@SQ|^@RG|^@PG' temp.header.sam || true; \\
     ) > temp.sorted.header.sam
 
     # Insert new header into file

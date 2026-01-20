@@ -15,7 +15,7 @@ include { MERGE_OUTPUT                      } from '../../subworkflows/local/mer
 
 // Include nf-core modules
 include { BLAST_BLASTN as BLASTN_HIFI       } from '../../modules/nf-core/blast/blastn/main'
-include { CAT_FASTQ                        } from '../../modules/nf-core/cat/fastq/main'
+include { CAT_FASTQ                         } from '../../modules/nf-core/cat/fastq/main'
 include { FASTQC as FASTQC_FILTERED         } from '../../modules/nf-core/fastqc/main'
 include { LIMA                              } from '../../modules/nf-core/lima/main'
 include { MINIMAP2_ALIGN                    } from '../../modules/nf-core/minimap2/align'
@@ -92,15 +92,14 @@ workflow ALIGN_PACBIO {
     | map { meta, cram -> [ meta, cram, [] ] }
     | set { ch_pacbio }
 
-    SAMTOOLS_CONVERT ( ch_pacbio, [ [], [] ], [] )
-    ch_versions = ch_versions.mix ( SAMTOOLS_CONVERT.out.versions )
+    SAMTOOLS_CONVERT ( ch_pacbio, [ [], [] ], [], [] )
 
     if ( params.filter_pacbio ) {
         // Collate BAM file to create interleaved FASTA
         SAMTOOLS_COLLATETOFASTA ( SAMTOOLS_CONVERT.out.bam )
         ch_versions = ch_versions.mix ( SAMTOOLS_COLLATETOFASTA.out.versions )
 
-        BLASTN_HIFI ( SAMTOOLS_COLLATETOFASTA.out.fasta, hifi_adapter_db )
+        BLASTN_HIFI ( SAMTOOLS_COLLATETOFASTA.out.fasta, hifi_adapter_db, [], [], [] )
         ch_versions = ch_versions.mix ( BLASTN_HIFI.out.versions )
 
         BGZIP_BLASTN ( BLASTN_HIFI.out.txt )
@@ -134,11 +133,10 @@ workflow ALIGN_PACBIO {
         | set { ch_reads_to_remerge }
 
         CAT_FASTQ ( ch_reads_to_remerge.multi )
-        ch_versions = ch_versions.mix ( CAT_FASTQ.out.versions )
 
         // FastQC on filtered reads
         FASTQC_FILTERED ( CAT_FASTQ.out.reads.mix( ch_reads_to_remerge.single ) )
-        ch_versions = ch_versions.mix ( FASTQC_FILTERED.out.versions )
+
         ch_post_qc = ch_post_qc.mix ( FASTQC_FILTERED.out.zip )
     } else {
         SAMTOOLS_FASTQ ( SAMTOOLS_CONVERT.out.bam, false )
@@ -171,7 +169,6 @@ workflow ALIGN_PACBIO {
     // SUBWORKFLOW: Merge all alignment output by sample name
     //
     ch_sort  = MERGE_OUTPUT ( SAMTOOLS_MERGE.out.bam ).bam
-    ch_versions = ch_versions.mix ( MERGE_OUTPUT.out.versions )
 
 
     emit:
