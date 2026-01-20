@@ -30,11 +30,11 @@ process SAMTOOLS_REHEADER {
     grep -v ^@SQ && grep ^@SQ ${header} ) > temp.header.sam
 
     # custom sort for readability (retain order of insertion but sort groups by tag)
-    ( grep ^@HD temp.header.sam || true && \
-    grep ^@SQ temp.header.sam || true && \
-    grep ^@RG temp.header.sam || true && \
-    grep ^@PG temp.header.sam || true && \
-    grep -v -E '^@HD|^@SQ|^@RG|^@PG' temp.header.sam || true; \
+    ( grep ^@HD temp.header.sam || true && \\
+    grep ^@SQ temp.header.sam || true && \\
+    grep ^@RG temp.header.sam || true && \\
+    grep ^@PG temp.header.sam || true && \\
+    grep -v -E '^@HD|^@SQ|^@RG|^@PG' temp.header.sam || true; \\
     ) > temp.sorted.header.sam
 
     # Insert new header into file
