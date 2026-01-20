@@ -10,13 +10,10 @@
                     "tabix": 1.21
                 },
                 "BLASTN_HIFI": {
-                    "blast": "2.15.0+"
+                    "blast": "2.17.0+"
                 },
                 "BLOBTK_DEPTH": {
                     "blobtk": "0.6.5"
-                },
-                "CAT_FASTQ": {
-                    "cat": 9.5
                 },
                 "CONVERT_CRAM": {
                     "samtools": "1.22.1"
@@ -28,17 +25,11 @@
                 "CRUMBLE": {
                     "crumble": "0.9.1"
                 },
-                "FASTQC": {
-                    "fastqc": "0.12.1"
-                },
-                "FASTQC_FILTERED": {
-                    "fastqc": "0.12.1"
-                },
                 "GENERATE_CRAM_CSV": {
                     "samtools": 1.17
                 },
                 "GUNZIP": {
-                    "gunzip": 1.1
+                    "gunzip": 1.13
                 },
                 "GZIP_STATS": {
                     "gzip": 1.1
@@ -50,8 +41,8 @@
                     "lima": "2.12.0"
                 },
                 "MINIMAP2_ALIGN": {
-                    "minimap2": "2.28-r1209",
-                    "samtools": 1.2
+                    "minimap2": "2.29-r1283",
+                    "samtools": 1.21
                 },
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
@@ -65,12 +56,6 @@
                 "SAMTOOLS_COLLATETOFASTA": {
                     "samtools": "1.22.1"
                 },
-                "SAMTOOLS_CONVERT": {
-                    "samtools": "1.22.1"
-                },
-                "SAMTOOLS_CRAM": {
-                    "samtools": "1.22.1"
-                },
                 "SAMTOOLS_FLAGSTAT": {
                     "samtools": "1.22.1"
                 },
@@ -78,9 +63,6 @@
                     "samtools": "1.22.1"
                 },
                 "SAMTOOLS_INDEX": {
-                    "samtools": 1.21
-                },
-                "SAMTOOLS_STATS": {
                     "samtools": "1.22.1"
                 },
                 "TAR": {
@@ -119,9 +101,9 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.10.0"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.2"
         },
-        "timestamp": "2026-01-13T22:33:15.622709716"
+        "timestamp": "2026-01-20T12:08:39.538983161"
     }
 }
