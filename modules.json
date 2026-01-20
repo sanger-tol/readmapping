@@ -165,7 +165,7 @@
                     "samtools/mergedup": {
                         "branch": "main",
                         "git_sha": "fe57b32a304a149835e0fa829d4ca454b3b252e6",
-                        "installed_by": ["bam_samtools_merge_markdup"]
+                        "installed_by": ["bam_samtools_merge_markdup", "modules"]
                     }
                 }
             },
@@ -178,7 +178,7 @@
                     },
                     "cram_map_illumina_hic": {
                         "branch": "main",
-                        "git_sha": "3d708ba5f6d959da2fb814e51832c57664b57941",
+                        "git_sha": "1c601dc27bbfe9dfcc97033983463512da1d2f2e",
                         "installed_by": ["subworkflows"]
                     }
                 }
