@@ -104,8 +104,7 @@
                     "samtools/view": {
                         "branch": "master",
                         "git_sha": "5cb9a8694da0a0e550921636bb60bc8c56445fd7",
-                        "installed_by": ["modules"],
-                        "patch": "modules/nf-core/samtools/view/samtools-view.diff"
+                        "installed_by": ["modules"]
                     },
                     "tabix/bgzip": {
                         "branch": "master",
