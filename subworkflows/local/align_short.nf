@@ -52,7 +52,6 @@ workflow ALIGN_SHORT {
     //
     MERGE_OUTPUT( CRAM_MAP_ILLUMINA.out.bam )
     ch_sort = MERGE_OUTPUT.out.bam
-    ch_versions = ch_versions.mix ( MERGE_OUTPUT.out.versions)
 
     emit:
     bam      = MERGE_OUTPUT.out.bam     // channel: [ val(meta), /path/to/bam ]

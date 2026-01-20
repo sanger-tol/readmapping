@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/sanger-tol/nf-core-modules/master/modules/meta-schema.json
 name: "CRAMALIGN_GENCRAMCHUNKS"
 description: Determine the chunks to split a CRAM file into for alignment
 keywords:

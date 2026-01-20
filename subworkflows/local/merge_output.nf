@@ -10,7 +10,6 @@ workflow MERGE_OUTPUT {
 
 
     main:
-    ch_versions = Channel.empty()
     ch_bam = ch_bam.map{ meta, bam -> [ meta + [merged: false], bam ]}
 
     if ( params.merge_output ) {
@@ -23,7 +22,6 @@ workflow MERGE_OUTPUT {
 
         // Merge, but only if there is more than 1 file
         SAMTOOLS_MERGE ( ch_multi_bams, [ [], [] ], [ [], [] ], [ [], [] ] )
-        ch_versions = ch_versions.mix ( SAMTOOLS_MERGE.out.versions )
 
         ch_bam = SAMTOOLS_MERGE.out.bam
         | map { meta, bam -> [meta.tap { it.merged = true }, bam] }
@@ -33,5 +31,4 @@ workflow MERGE_OUTPUT {
 
     emit:
     bam = ch_bam                    // channel: [ val(meta), /path/to/bam ]
-    versions = ch_versions          // channel: [ versions.yml ]
 }

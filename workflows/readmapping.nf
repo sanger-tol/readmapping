@@ -101,7 +101,6 @@ workflow READMAPPING {
     reports = reports.mix ( FASTQC.out.zip )
 
     ch_versions = ch_versions
-    | mix ( FASTQC.out.versions )
     | mix ( SAMTOOLS_COLLATETOFASTQ.out.versions )
 
     //
@@ -136,8 +135,6 @@ workflow READMAPPING {
     }
     ALIGN_HIC ( ch_hic.fasta, ch_hic.cram, params.short_aligner, params.chunk_size )
     HIC_MERGE_SAMPLES ( ALIGN_HIC.out.bam )
-    ch_versions = ch_versions.mix ( ALIGN_HIC.out.versions )
-                             .mix ( HIC_MERGE_SAMPLES.out.versions )
 
     ALIGN_ILLUMINA ( PREPARE_GENOME.out.fasta, PREPARE_GENOME.out.fasta, ch_reads.illumina )
     ch_versions = ch_versions.mix ( ALIGN_ILLUMINA.out.versions )
