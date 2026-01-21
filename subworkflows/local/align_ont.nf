@@ -39,7 +39,7 @@ workflow ALIGN_ONT {
     | set { ch_reads_cram_crai }
 
     //
-    // MODULE: generate a CRAM CSV file containing the required parametres for CRAM_FILTER_ALIGN_BWAMEM2_FIXMATE_SORT
+    // MODULE: generate a CRAM CSV file containing the required parametres for CRAM_FILTER_MINIMAP2_FILTER5END_FIXMATE_SORT
     //
     GENERATE_CRAM_CSV ( ch_reads_cram_crai )
     ch_versions = ch_versions.mix ( GENERATE_CRAM_CSV.out.versions )
