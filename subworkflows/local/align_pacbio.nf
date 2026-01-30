@@ -41,12 +41,12 @@ workflow ALIGN_PACBIO {
 
     // Branch for handling ultra low-input libraries
     reads
-    | branch {
+    .branch {
         meta, _reads ->
             uli : meta.library == "uli"
             other : true
     }
-    | set { ch_reads_branched }
+    .set { ch_reads_branched }
 
     // Trim ULI adapter
     bam_for_md = ch_reads_branched.uli
@@ -60,8 +60,8 @@ workflow ALIGN_PACBIO {
     ch_versions = ch_versions.mix ( PACBIO_PBMARKDUP.out.versions.first() )
 
     PACBIO_PBMARKDUP.out.output
-    | mix ( ch_reads_branched.other )
-    | set { ch_reads_all }
+    .mix ( ch_reads_branched.other )
+    .set { ch_reads_all }
 
     // Convert input to CRAM
     CONVERT_CRAM ( ch_reads_all, fasta )
@@ -75,8 +75,8 @@ workflow ALIGN_PACBIO {
     ch_versions = ch_versions.mix( SAMTOOLS_INDEX.out.versions )
 
     SAMTOOLS_ADDREPLACERG.out.cram
-    | join ( SAMTOOLS_INDEX.out.crai )
-    | set { ch_reads_cram }
+    .join ( SAMTOOLS_INDEX.out.crai )
+    .set { ch_reads_cram }
 
     GENERATE_CRAM_CSV ( ch_reads_cram )
     ch_versions = ch_versions.mix ( GENERATE_CRAM_CSV.out.versions )
@@ -88,8 +88,8 @@ workflow ALIGN_PACBIO {
     // FILTER BAMs AND OUTPUT AS FASTQ
     //
     CREATE_CRAM_FILTER_INPUT.out.chunked_cram
-    | map { meta, cram -> [ meta, cram, [] ] }
-    | set { ch_pacbio }
+    .map { meta, cram -> [ meta, cram, [] ] }
+    .set { ch_pacbio }
 
     SAMTOOLS_CONVERT ( ch_pacbio, [ [], [] ], [], [] )
 
@@ -113,23 +113,23 @@ workflow ALIGN_PACBIO {
 
         // ARCHIVE: chunked stat files (BED + JSON) by sample
         ch_stats_to_archive = HIFI_TRIMMER.out.bed
-        | mix( HIFI_TRIMMER.out.json )
-        | map { meta, stats -> [ meta - [chunk_id: meta.chunk_id] + [archive: "${meta.id}_hifi_trimmer"], stats ] }
-        | groupTuple()
+        .mix( HIFI_TRIMMER.out.json )
+        .map { meta, stats -> [ meta - [chunk_id: meta.chunk_id] + [archive: "${meta.id}_hifi_trimmer"], stats ] }
+        .groupTuple()
 
         TAR ( ch_stats_to_archive, ".gz"  )
         ch_versions = ch_versions.mix ( TAR.out.versions )
 
         // REMERGE: fastq before post FASTQC, single-end to enable merging without pairing
         ch_reads_for_align
-        | map { meta, fastqs -> [ meta - [chunk_id: meta.chunk_id] + [ single_end: true ], fastqs ] }
-        | groupTuple()
-        | branch {
+        .map { meta, fastqs -> [ meta - [chunk_id: meta.chunk_id] + [ single_end: true ], fastqs ] }
+        .groupTuple()
+        .branch {
             _meta, fastqs ->
                 multi: fastqs.size() > 1
                 single : true
         }
-        | set { ch_reads_to_remerge }
+        .set { ch_reads_to_remerge }
 
         CAT_FASTQ ( ch_reads_to_remerge.multi )
 
@@ -148,10 +148,10 @@ workflow ALIGN_PACBIO {
     MINIMAP2_ALIGN ( ch_reads_for_align, fasta, true, "csi", false, false )
 
     MINIMAP2_ALIGN.out.bam
-    | map { meta, file -> [meta.id, meta, file] }
-    | groupTuple()
-    | map { _id, metas, files -> [ metas[0] - [chunk_id: metas[0].chunk_id], files ] }
-    | set { collected_files_for_merge }
+    .map { meta, file -> [meta.id, meta, file] }
+    .groupTuple()
+    .map { _id, metas, files -> [ metas[0] - [chunk_id: metas[0].chunk_id], files ] }
+    .set { collected_files_for_merge }
 
     //
     // MODULE: Merge chunked aligned bams
