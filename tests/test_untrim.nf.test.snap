@@ -15,6 +15,12 @@
                 "CONVERT_CRAM": {
                     "samtools": "1.22.1"
                 },
+                "CRAMALIGN_MINIMAP2ALIGNHIC": {
+                    "filter_five_end.pl": 1.0,
+                    "gawk": "5.3.1",
+                    "minimap2": "2.30-r1287",
+                    "samtools": "1.22.1"
+                },
                 "CRAM_FILTER": {
                     "samtools": 1.17,
                     "staden_io": 1.15
@@ -27,6 +33,9 @@
                 "CRUMBLE": {
                     "crumble": "0.9.1"
                 },
+                "FASTQC": {
+                    "fastqc": "0.12.1"
+                },
                 "GENERATE_CRAM_CSV": {
                     "samtools": 1.17
                 },
@@ -37,8 +46,7 @@
                     "gzip": 1.1
                 },
                 "MINIMAP2_ALIGN": {
-                    "minimap2": "2.29-r1283",
-                    "samtools": 1.21
+                    "minimap2": "2.29-r1283"
                 },
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
@@ -50,6 +58,15 @@
                     "samtools": "1.22.1"
                 },
                 "SAMTOOLS_COLLATETOFASTQ": {
+                    "samtools": "1.22.1"
+                },
+                "SAMTOOLS_CONVERT": {
+                    "samtools": "1.22.1"
+                },
+                "SAMTOOLS_CRAM": {
+                    "samtools": "1.22.1"
+                },
+                "SAMTOOLS_FAIDX": {
                     "samtools": "1.22.1"
                 },
                 "SAMTOOLS_FASTQ": {
@@ -64,7 +81,13 @@
                 "SAMTOOLS_INDEX": {
                     "samtools": "1.22.1"
                 },
+                "SAMTOOLS_MERGE": {
+                    "samtools": "1.22.1"
+                },
                 "SAMTOOLS_REHEADER_CRAM": {
+                    "samtools": "1.22.1"
+                },
+                "SAMTOOLS_STATS": {
                     "samtools": "1.22.1"
                 },
                 "UNMASK": {
@@ -146,8 +169,8 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2026-01-20T12:16:55.526900386"
+        "timestamp": "2026-01-30T19:07:30.792459271"
     }
 }
