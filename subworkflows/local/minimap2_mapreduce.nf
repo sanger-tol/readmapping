@@ -10,13 +10,13 @@ include { MINIMAP2_INDEX                                  } from '../../modules/
 
 workflow MINIMAP2_MAPREDUCE {
     take:
-    fasta    // Channel: tuple [ val(meta), path( file )      ]
+    fasta    // channel: tuple [ val(meta), path( file )      ]
     csv_ch
 
 
     main:
-    ch_versions         = Channel.empty()
-    mappedbam_ch        = Channel.empty()
+    ch_versions         = channel.empty()
+    mappedbam_ch        = channel.empty()
 
     //
     // MODULE: generate minimap2 mmi file

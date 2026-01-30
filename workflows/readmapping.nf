@@ -54,10 +54,10 @@ workflow READMAPPING {
 
     main:
     // Initialize an empty versions channel
-    ch_versions      = Channel.empty()
-    ch_multiqc_files = Channel.empty()
-    multiqc_report   = Channel.empty()
-    reports          = Channel.empty()
+    ch_versions      = channel.empty()
+    ch_multiqc_files = channel.empty()
+    multiqc_report   = channel.empty()
+    reports          = channel.empty()
 
     //
     // SUBWORKFLOW: Read in samplesheet, validate and stage input files
@@ -114,13 +114,13 @@ workflow READMAPPING {
             ch_versions = ch_versions.mix ( UNTAR.out.versions )
 
         } else {
-            Channel.fromPath ( params.hifi_adapter_db )
+            channel.fromPath ( params.hifi_adapter_db )
             | set { ch_hifi_adapter_db }
         }
     }
 
-    ch_hifi_adapter_yaml = Channel.fromPath ( params.hifi_adapter_yaml ).collect()
-    ch_uli_adapter      = Channel.fromPath ( params.uli_adapter ).collect()
+    ch_hifi_adapter_yaml = channel.fromPath ( params.hifi_adapter_yaml ).collect()
+    ch_uli_adapter      = channel.fromPath ( params.uli_adapter ).collect()
 
     //
     // SUBWORKFLOW: Align raw reads to genome
@@ -151,7 +151,7 @@ workflow READMAPPING {
     ch_versions = ch_versions.mix ( ALIGN_ONT.out.versions )
 
     // gather alignments
-    ch_aligned_bams = Channel.empty()
+    ch_aligned_bams = channel.empty()
     | mix( HIC_MERGE_SAMPLES.out.bam )
     | mix( ALIGN_ILLUMINA.out.bam )
     | mix( ALIGN_HIFI.out.bam )
@@ -179,13 +179,13 @@ workflow READMAPPING {
 
     reports = reports.map { meta, file -> file }
 
-    ch_multiqc_config                     = Channel.fromPath("$projectDir/assets/multiqc_config.yml", checkIfExists: true)
-    ch_multiqc_custom_config              = params.multiqc_config ? Channel.fromPath(params.multiqc_config, checkIfExists: true) : Channel.empty()
-    ch_multiqc_logo                       = params.multiqc_logo ? Channel.fromPath(params.multiqc_logo, checkIfExists: true) : Channel.empty()
+    ch_multiqc_config                     = channel.fromPath("$projectDir/assets/multiqc_config.yml", checkIfExists: true)
+    ch_multiqc_custom_config              = params.multiqc_config ? channel.fromPath(params.multiqc_config, checkIfExists: true) : channel.empty()
+    ch_multiqc_logo                       = params.multiqc_logo ? channel.fromPath(params.multiqc_logo, checkIfExists: true) : channel.empty()
     summary_params                        = paramsSummaryMap(workflow, parameters_schema: "nextflow_schema.json")
-    ch_workflow_summary                   = Channel.value(paramsSummaryMultiqc(summary_params))
+    ch_workflow_summary                   = channel.value(paramsSummaryMultiqc(summary_params))
     ch_multiqc_custom_methods_description = params.multiqc_methods_description ? file(params.multiqc_methods_description, checkIfExists: true) : file("$projectDir/assets/methods_description_template.yml", checkIfExists: true)
-    ch_methods_description                = Channel.value(methodsDescriptionText(ch_multiqc_custom_methods_description))
+    ch_methods_description                = channel.value(methodsDescriptionText(ch_multiqc_custom_methods_description))
     ch_multiqc_files                      = ch_multiqc_files.mix(ch_workflow_summary.collectFile(name: 'workflow_summary_mqc.yaml'))
     ch_multiqc_files                      = ch_multiqc_files.mix(ch_collated_versions)
     ch_multiqc_files                      = ch_multiqc_files.mix(reports)

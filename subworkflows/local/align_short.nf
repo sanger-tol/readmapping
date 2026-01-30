@@ -15,8 +15,8 @@ workflow ALIGN_SHORT {
 
 
     main:
-    ch_versions = Channel.empty()
-    ch_merged_bam   = Channel.empty()
+    ch_versions = channel.empty()
+    ch_merged_bam   = channel.empty()
 
     // Check file types and branch
     reads

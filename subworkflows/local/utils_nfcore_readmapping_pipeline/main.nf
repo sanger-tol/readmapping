@@ -116,15 +116,15 @@ workflow PIPELINE_INITIALISATION {
     }
 
     // Create channels from input paths
-    ch_fasta = params.fasta ? Channel.fromPath(params.fasta) : Channel.empty().tap { error 'Genome fasta file not specified!' }
-    ch_header = params.header ? Channel.fromPath(params.header) : Channel.empty()
+    ch_fasta = params.fasta ? channel.fromPath(params.fasta) : channel.empty().tap { error 'Genome fasta file not specified!' }
+    ch_header = params.header ? channel.fromPath(params.header) : channel.empty()
 
 
     //
     // Create channel from input file provided through params.input
     //
 
-    Channel
+    channel
         .fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
         .map { meta, datafile ->
             def new_meta = meta + [id: file(datafile).baseName]

@@ -33,19 +33,19 @@ output:
   - bam:
       type: file
       description: |
-        Channel containing merged and possibly duplicate-marked BAM files
+        channel containing merged and possibly duplicate-marked BAM files
         Structure: [ val(meta), path(bam) ]
       pattern: "*.bam"
   - bam_index:
       type: file
       description: |
-        Channel containing the index file(s) for the merged BAM
+        channel containing the index file(s) for the merged BAM
         Structure: [ val(meta), path(index) ]
       pattern: "*.{bai,csi,crai}"
   - metrics:
       type: file
       description: |
-        Channel containing markdup metrics, if duplicates marked
+        channel containing markdup metrics, if duplicates marked
         Structure: [ val(meta), path(index) ]
       pattern: "*.{bai,csi,crai}"
   - versions:

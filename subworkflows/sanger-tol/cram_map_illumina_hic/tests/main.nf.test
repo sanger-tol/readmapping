@@ -55,13 +55,13 @@ nextflow_workflow {
 
             workflow {
                 """
-                input[0] = Channel.of(
+                input[0] = channel.of(
                     [
                         [ id:'test' ], // meta map
                         file(params.modules_testdata_base_path + 'Meles_meles/assembly/release/mMelMel3.1_paternal_haplotype/GCA_922984935.2.subset.fasta.gz', checkIfExists: true)
                     ]
                 )
-                input[1] = Channel.of(
+                input[1] = channel.of(
                     [
                         [ id:'test' ],
                         file(params.modules_testdata_base_path + 'Meles_meles/genomic_data/mMelMel3/hic-arima2/35528_2%231_subset.cram', checkIfExists: true)
@@ -109,7 +109,7 @@ nextflow_workflow {
 
             workflow {
                 """
-                input[0] = Channel.of(
+                input[0] = channel.of(
                     [
                         [ id:'test' ], // meta map
                         file(params.modules_testdata_base_path + 'Meles_meles/assembly/release/mMelMel3.1_paternal_haplotype/GCA_922984935.2.subset.fasta.gz', checkIfExists: true)
@@ -119,7 +119,7 @@ nextflow_workflow {
                         file(params.modules_testdata_base_path + 'Zymo_D6311_Metagenome/assembly/xyTesTing1_metamdbg.contigs.fasta.gz', checkIfExists: true)
                     ]
                 )
-                input[1] = Channel.of(
+                input[1] = channel.of(
                     [
                         [ id:'test' ],
                         file(params.modules_testdata_base_path + 'Meles_meles/genomic_data/mMelMel3/hic-arima2/35528_2%231_subset.cram', checkIfExists: true)
@@ -174,7 +174,7 @@ nextflow_workflow {
 
             workflow {
                 """
-                input[0] = Channel.of(
+                input[0] = channel.of(
                     [
                         [ id:'test' ], // meta map
                         file(params.modules_testdata_base_path + 'Meles_meles/assembly/release/mMelMel3.1_paternal_haplotype/GCA_922984935.2.subset.fasta.gz', checkIfExists: true)
@@ -188,7 +188,7 @@ nextflow_workflow {
                         file(params.modules_testdata_base_path + 'Meles_meles/assembly/release/mMelMel3.1_paternal_haplotype/GCA_922984935.2.subset.fasta.gz', checkIfExists: true)
                     ]
                 )
-                input[1] = Channel.of(
+                input[1] = channel.of(
                     [
                         [ id:'test' ],
                         file(params.modules_testdata_base_path + 'Meles_meles/genomic_data/mMelMel3/hic-arima2/35528_2%231_subset.cram', checkIfExists: true)
@@ -248,13 +248,13 @@ nextflow_workflow {
 
             workflow {
                 """
-                input[0] = Channel.of(
+                input[0] = channel.of(
                     [
                         [ id:'test' ], // meta map
                         file( params.modules_testdata_base_path + 'Meles_meles/assembly/release/mMelMel3.1_paternal_haplotype/GCA_922984935.2.subset.fasta.gz', checkIfExists: true)
                     ]
                 )
-                input[1] = Channel.of(
+                input[1] = channel.of(
                     [
                         [ id:'test' ],
                         file( params.modules_testdata_base_path + 'Meles_meles/genomic_data/mMelMel3/hic-arima2/35528_2%231_subset.cram', checkIfExists: true)
@@ -303,13 +303,13 @@ nextflow_workflow {
 
             workflow {
                 """
-                input[0] = Channel.of(
+                input[0] = channel.of(
                     [
                         [ id:'test' ], // meta map
                         file( params.modules_testdata_base_path + 'Biemna_sp_UH_2024/assembly/release/GCA_965654295.1/insdc/GCA_965654295.1.fa.gz', checkIfExists: true)
                     ]
                 )
-                input[1] = Channel.of(
+                input[1] = channel.of(
                     [
                         [ id:'test' ],
                         file( params.modules_testdata_base_path + 'Biemna_sp_UH_2024/genomic_data/odBieUhxx1/hic-arima2/49103_5-6_5.subset.cram', checkIfExists: true)
@@ -357,13 +357,13 @@ nextflow_workflow {
 
             workflow {
                 """
-                input[0] = Channel.of(
+                input[0] = channel.of(
                     [
                         [ id:'test' ], // meta map
                         file( params.modules_testdata_base_path + 'Biemna_sp_UH_2024/assembly/release/GCA_965654295.1/insdc/GCA_965654295.1.fa.gz', checkIfExists: true)
                     ]
                 )
-                input[1] = Channel.of(
+                input[1] = channel.of(
                     [
                         [ id:'test' ],
                         file( params.modules_testdata_base_path + 'Biemna_sp_UH_2024/genomic_data/odBieUhxx1/hic-arima2/49103_5-6_5.subset.cram', checkIfExists: true)
