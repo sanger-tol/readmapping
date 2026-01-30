@@ -18,7 +18,6 @@ workflow PREPARE_GENOME {
     // Uncompress genome fasta file if required
     if ( params.fasta.endsWith('.gz') ) {
         ch_unzipped = GUNZIP ( fasta ).gunzip
-        ch_versions = ch_versions.mix ( GUNZIP.out.versions )
     } else {
         ch_unzipped = fasta
     }
@@ -36,7 +35,7 @@ workflow PREPARE_GENOME {
         if ( params.bwamem2_index ) {
             channel.fromPath ( params.bwamem2_index )
             | combine ( ch_fasta )
-            | map { bwa, meta, fa -> [ meta, bwa ] }
+            | map { bwa, meta, _fa -> [ meta, bwa ] }
             | set { ch_bwamem }
 
             if ( params.bwamem2_index.endsWith('.tar.gz') ) {
@@ -73,7 +72,7 @@ def checkShortReads(filePath, columnToCheck="datatype") {
 
     // Extract the header and find the index of the column
     def header = csvLines[0].split(',')
-    def columnIndex = header.findIndexOf { it == columnToCheck }
+    def columnIndex = header.findIndexOf { h -> h == columnToCheck }
 
     // Check if the column index was found
     if (columnIndex == -1) {

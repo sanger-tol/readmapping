@@ -24,7 +24,7 @@ workflow INPUT_CHECK {
     // Create the read channel for the rest of the pipeline
     samplesheet_rows
     | join( SAMTOOLS_FLAGSTAT.out.flagstat )
-    | map { meta, datafile, meta2, stats -> create_data_channel( meta, datafile, stats ) }
+    | map { meta, datafile, _meta, stats -> create_data_channel( meta, datafile, stats ) }
     | set { reads }
 
 
@@ -43,13 +43,9 @@ def create_data_channel ( LinkedHashMap row, datafile, stats ) {
     meta.library    = row.library
     meta.barcode    = row.barcode
 
-    if ( meta.datatype == "hic" || meta.datatype == "illumina" ) {
-        platform = "ILLUMINA"
-    } else if ( meta.datatype == "pacbio" || meta.datatype == "pacbio_clr" ) {
-        platform = "PACBIO"
-    } else if (meta.datatype == "ont") {
-        platform = "ONT"
-    }
+    def platform = (meta.datatype == "hic" || meta.datatype == "illumina") ? "ILLUMINA" :
+                (meta.datatype == "pacbio" || meta.datatype == "pacbio_clr") ? "PACBIO" :
+                (meta.datatype == "ont") ? "ONT" : "UNKNOWN"
 
     // Convert datafile to string path and then split
     def datafile_path = datafile.toString()
@@ -58,8 +54,8 @@ def create_data_channel ( LinkedHashMap row, datafile, stats ) {
     // Read the first line of the flagstat file
     // 3127898040 + 0 in total (QC-passed reads + QC-failed reads)
     // and make the sum of both integers
-    stats.withReader {
-        line = it.readLine()
+    stats.withReader { reader ->
+        def line = reader.readLine()
         def lspl = line.split()
         def read_count = lspl[0].toLong() + lspl[2].toLong()
         meta.read_count = read_count

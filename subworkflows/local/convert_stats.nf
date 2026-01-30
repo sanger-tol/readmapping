@@ -31,13 +31,13 @@ workflow CONVERT_STATS {
     ch_versions = channel.empty()
 
     // Split outfmt parameter into a list
-    def outfmt_options = params.outfmt.split(',').collect { it.trim() }
+    def outfmt_options = params.outfmt.split(',').collect { part -> part.trim() }
 
     // (Optionally) Compress the quality scores of Illumina and PacBio CCS alignments
     if ( params.compression == "crumble" ) {
         bam
         | branch {
-            meta, bam ->
+            meta, _bam ->
                 run_crumble: meta.datatype == "hic" || meta.datatype == "illumina" || meta.datatype == "pacbio"
                 no_crumble: true
         }
@@ -57,7 +57,7 @@ workflow CONVERT_STATS {
     CHANGE_NAME ( ch_bams_for_renaming, fasta )
 
     CHANGE_NAME.out.file
-    | map { meta, bam -> [meta, bam, []] }
+    | map { meta, _bam -> [meta, _bam, []] }
     | set { ch_renamed_bams }
 
     // (Optionally) convert to CRAM if it's specified in outfmt

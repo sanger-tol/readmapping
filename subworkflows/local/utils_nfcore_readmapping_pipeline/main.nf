@@ -29,10 +29,10 @@ workflow PIPELINE_INITIALISATION {
     take:
     version           // boolean: Display version and exit
     validate_params   // boolean: Boolean whether to validate parameters against the schema at runtime
-    monochrome_logs   // boolean: Do not use coloured log outputs
+    // monochrome_logs   // boolean: Do not use coloured log outputs
     nextflow_cli_args //   array: List of positional nextflow CLI args
     outdir            //  string: The output directory where the results will be saved
-    input             //  string: Path to input samplesheet
+    // input             //  string: Path to input samplesheet
     help              // boolean: Display help message and exit
     help_full         // boolean: Show the full help message
     show_hidden       // boolean: Show hidden parameters in the help message
@@ -111,8 +111,8 @@ workflow PIPELINE_INITIALISATION {
         params.bwamem2_index
     ]
 
-    for (param in checkPathParamList) {
-        if (param) { file(param, checkIfExists: true) }
+    checkPathParamList.findAll { it -> it }.each { param ->
+        file(param, checkIfExists: true)
     }
 
     // Create channels from input paths
@@ -207,9 +207,9 @@ def validateInputParameters() {
     if (!params.outfmt) {
         log.error "Output format not specified. Please specify '--outfmt bam', '--outfmt cram', or both separated by a comma."
     } else {
-        def outfmtOptions = params.outfmt.split(',').collect { it.trim() }
+        def outfmtOptions = params.outfmt.split(',').collect { it -> it.trim() }
         def validOutfmtOptions = ['bam', 'cram']
-        def invalidOptions = outfmtOptions.findAll { !(it in validOutfmtOptions) }
+        def invalidOptions = outfmtOptions.findAll { opt -> !(opt in validOutfmtOptions) }
 
         if (invalidOptions) {
             log.error "Invalid output format(s) specified: '${invalidOptions.join(', ')}'. Valid options are 'bam' or 'cram'."
@@ -238,7 +238,7 @@ def validateInputSamplesheet(channel) {
         meta.sample = meta.sample.replace(" ", "_")
 
         // Validate that the file path is non-empty and has a valid format
-        if (!file || !validFormats.any { file.toString().endsWith(it) }) {
+        if (!file || !validFormats.any { f -> file.toString().endsWith(f) }) {
             error("Data file is required and must have a valid extension: ${file}")
         }
 
@@ -321,4 +321,17 @@ def methodsDescriptionText(mqc_methods_yaml) {
     def description_html = engine.createTemplate(methods_text).make(meta)
 
     return description_html.toString()
+}
+
+// Modified logarithm function that doesn't return negative numbers
+def positive_log(value, base) {
+    if (value <= 1) {
+        return 0
+    } else {
+        return Math.log(value)/Math.log(base)
+    }
+}
+
+def log_increase_cpus(start, step, value, base) {
+    return start + step * (1 + Math.ceil(positive_log(value, base)))
 }

@@ -37,13 +37,12 @@ workflow ALIGN_PACBIO {
 
     main:
     ch_versions    = channel.empty()
-    ch_merged_bam  = channel.empty()
     ch_post_qc     = channel.empty()
 
     // Branch for handling ultra low-input libraries
     reads
     | branch {
-        meta, reads ->
+        meta, _reads ->
             uli : meta.library == "uli"
             other : true
     }
@@ -126,7 +125,7 @@ workflow ALIGN_PACBIO {
         | map { meta, fastqs -> [ meta - [chunk_id: meta.chunk_id] + [ single_end: true ], fastqs ] }
         | groupTuple()
         | branch {
-            meta, fastqs ->
+            _meta, fastqs ->
                 multi: fastqs.size() > 1
                 single : true
         }
@@ -147,12 +146,11 @@ workflow ALIGN_PACBIO {
     // Align without map reduce
     // Align Fastq to Genome with minimap2. bam_format is set to true, making the output a *sorted* BAM
     MINIMAP2_ALIGN ( ch_reads_for_align, fasta, true, "csi", false, false )
-    ch_versions = ch_versions.mix ( MINIMAP2_ALIGN.out.versions.first() )
 
     MINIMAP2_ALIGN.out.bam
     | map { meta, file -> [meta.id, meta, file] }
     | groupTuple()
-    | map { id, metas, files -> [ metas[0] - [chunk_id: metas[0].chunk_id], files ] }
+    | map { _id, metas, files -> [ metas[0] - [chunk_id: metas[0].chunk_id], files ] }
     | set { collected_files_for_merge }
 
     //

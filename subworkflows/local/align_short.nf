@@ -10,19 +10,17 @@ include { SAMTOOLS_SORMADUP as CONVERT_CRAM          } from '../../modules/local
 workflow ALIGN_SHORT {
     take:
     fasta    // channel: [ val(meta), /path/to/fasta ] reference_tuple
-    index    // channel: [ val(meta), /path/to/bwamem2/ ]
     reads    // channel: [ val(meta), /path/to/datafile ] hic_reads_path
 
 
     main:
     ch_versions = channel.empty()
-    ch_merged_bam   = channel.empty()
 
     // Check file types and branch
     reads
     .branch {
-        meta, reads ->
-            fastq : reads.findAll { it.getName().toLowerCase() =~ /.*f.*\.gz/ }
+        _meta, read ->
+            fastq : read.findAll { f -> f.getName().toLowerCase() =~ /.*f.*\.gz/ }
             cram : true
     }
     .set { ch_reads }
@@ -41,9 +39,9 @@ workflow ALIGN_SHORT {
 
     ch_illumina = ch_reads_cram
     .combine(fasta)
-    .multiMap { meta, cram, meta_, fasta ->
+    .multiMap { meta, cram, meta_, fasta_file ->
         cram: [ meta_ + meta + [ assembly_id: meta_.id ] , cram ]
-        fasta: [ meta_ + meta + [ assembly_id: meta_.id ] , fasta ]
+        fasta: [ meta_ + meta + [ assembly_id: meta_.id ] , fasta_file ]
     }
 
     CRAM_MAP_ILLUMINA( ch_illumina.fasta, ch_illumina.cram, params.short_aligner, params.chunk_size )
@@ -51,7 +49,6 @@ workflow ALIGN_SHORT {
     // SUBWORKFLOW: Merge all alignment output by sample name
     //
     MERGE_OUTPUT( CRAM_MAP_ILLUMINA.out.bam )
-    ch_sort = MERGE_OUTPUT.out.bam
 
     emit:
     bam      = MERGE_OUTPUT.out.bam     // channel: [ val(meta), /path/to/bam ]

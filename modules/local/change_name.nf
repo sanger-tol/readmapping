@@ -20,6 +20,8 @@ process CHANGE_NAME {
     """
 
     stub:
+    def prefix = task.ext.prefix ?: "${meta.id}"
+    def new_fn = "${prefix}.${file.extension}"
     """
     touch ${new_fn}
     """

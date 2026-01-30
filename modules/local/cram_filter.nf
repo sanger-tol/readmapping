@@ -21,7 +21,7 @@ process CRAM_FILTER {
     def prefix = task.ext.prefix ?: "${meta.id}"
     def VERSION = "1.15" // Staden_io versions break the pipeline
     """
-    cram_filter -n ${from}-${to} ${cramfile} ${prefix}_${base}_${chunkid}.cram
+    cram_filter ${args} -n ${from}-${to} ${cramfile} ${prefix}_${base}_${chunkid}.cram
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
@@ -32,8 +32,7 @@ process CRAM_FILTER {
 
     stub:
     def prefix  = task.ext.prefix ?: "${meta.id}"
-    def base    = "45022_3#2"
-    def chunkid = "1"
+    def VERSION = "1.15" // Staden_io versions break the pipeline
     """
     touch ${prefix}_${base}_${chunkid}_filtered.cram
 
