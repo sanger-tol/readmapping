@@ -78,3 +78,19 @@ jobs:
             lint_log.txt
             lint_results.md
             PR_number.txt
+  nextflow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out pipeline code
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+
+      - name: Install Nextflow
+        uses: nf-core/setup-nextflow@v2
+
+      - name: Run nextflow lint
+        if: ${{ github.base_ref != 'main' }}
+        env:
+          GITHUB_COMMENTS_URL: ${{ github.event.pull_request.comments_url }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_PR_COMMIT: ${{ github.event.pull_request.head.sha }}
+        run: nextflow lint -exclude nf-test.config ${GITHUB_WORKSPACE}
