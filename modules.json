@@ -8,118 +8,168 @@
                     "blast/blastn": {
                         "branch": "master",
                         "git_sha": "9da6f5cc5b9170943be764c0a6926e81ba1ed3b9",
-                        "installed_by": ["modules"]
+                        "installed_by": [
+                            "modules"
+                        ]
                     },
                     "bwamem2/index": {
                         "branch": "master",
                         "git_sha": "d86336f3e7ae0d5f76c67b0859409769cfeb2af2",
-                        "installed_by": ["cram_map_illumina_hic", "modules"]
+                        "installed_by": [
+                            "cram_map_illumina_hic",
+                            "modules"
+                        ]
                     },
                     "bwamem2/mem": {
                         "branch": "master",
                         "git_sha": "d86336f3e7ae0d5f76c67b0859409769cfeb2af2",
-                        "installed_by": ["modules"]
+                        "installed_by": [
+                            "modules"
+                        ]
                     },
                     "cat/fastq": {
                         "branch": "master",
                         "git_sha": "cf735af4433f2dc8e410f67012dff824ef9990eb",
-                        "installed_by": ["modules"]
+                        "installed_by": [
+                            "modules"
+                        ]
                     },
                     "crumble": {
                         "branch": "master",
                         "git_sha": "13aee4ec0cbc416c45e08bbac53977b7c9677a0f",
-                        "installed_by": ["modules"]
+                        "installed_by": [
+                            "modules"
+                        ]
                     },
                     "fastqc": {
                         "branch": "master",
                         "git_sha": "5bdb098216aaf5df9c3b6343e6204cd932503c16",
-                        "installed_by": ["modules"]
+                        "installed_by": [
+                            "modules"
+                        ]
                     },
                     "gunzip": {
                         "branch": "master",
                         "git_sha": "96c57dfd98a0641886a67bd449fe33ee2ec0e374",
-                        "installed_by": ["modules"]
+                        "installed_by": [
+                            "modules"
+                        ]
                     },
                     "lima": {
                         "branch": "master",
                         "git_sha": "e753770db613ce014b3c4bc94f6cba443427b726",
-                        "installed_by": ["modules"]
+                        "installed_by": [
+                            "modules"
+                        ]
                     },
                     "minimap2/align": {
                         "branch": "master",
                         "git_sha": "a1589a1910c7b19f9cb9db98b3641d883a45bf4b",
-                        "installed_by": ["modules"]
+                        "installed_by": [
+                            "modules"
+                        ]
                     },
                     "minimap2/index": {
                         "branch": "master",
                         "git_sha": "e753770db613ce014b3c4bc94f6cba443427b726",
-                        "installed_by": ["cram_map_illumina_hic", "modules"]
+                        "installed_by": [
+                            "cram_map_illumina_hic",
+                            "modules"
+                        ]
                     },
                     "multiqc": {
                         "branch": "master",
                         "git_sha": "80cba9452fb1e9bb79884976fa1ca0e671949aa2",
-                        "installed_by": ["modules"]
+                        "installed_by": [
+                            "modules"
+                        ]
                     },
                     "samtools/faidx": {
                         "branch": "master",
                         "git_sha": "9a48bce39a67e2cb34b8f125fc1d50f0ad98b616",
-                        "installed_by": ["bam_samtools_merge_markdup"]
+                        "installed_by": [
+                            "bam_samtools_merge_markdup"
+                        ]
                     },
                     "samtools/fastq": {
                         "branch": "master",
                         "git_sha": "c8be52dba1166c678e74cda9c3a3c221635c8bb1",
-                        "installed_by": ["modules"]
+                        "installed_by": [
+                            "modules"
+                        ]
                     },
                     "samtools/flagstat": {
                         "branch": "master",
                         "git_sha": "e334e12a1e985adc5ffc3fc78a68be1de711de45",
-                        "installed_by": ["modules"]
+                        "installed_by": [
+                            "modules"
+                        ]
                     },
                     "samtools/idxstats": {
                         "branch": "master",
                         "git_sha": "c8be52dba1166c678e74cda9c3a3c221635c8bb1",
-                        "installed_by": ["modules"]
+                        "installed_by": [
+                            "modules"
+                        ]
                     },
                     "samtools/index": {
                         "branch": "master",
                         "git_sha": "c8be52dba1166c678e74cda9c3a3c221635c8bb1",
-                        "installed_by": ["cram_map_illumina_hic", "modules"],
+                        "installed_by": [
+                            "cram_map_illumina_hic",
+                            "modules"
+                        ],
                         "patch": "modules/nf-core/samtools/index/samtools-index.diff"
                     },
                     "samtools/merge": {
                         "branch": "master",
                         "git_sha": "9a48bce39a67e2cb34b8f125fc1d50f0ad98b616",
-                        "installed_by": ["bam_samtools_merge_markdup", "modules"]
+                        "installed_by": [
+                            "bam_samtools_merge_markdup",
+                            "modules"
+                        ]
                     },
                     "samtools/splitheader": {
                         "branch": "master",
                         "git_sha": "96b96cd281550ea39f787c331dac5fac97d2c0c5",
-                        "installed_by": ["cram_map_illumina_hic"]
+                        "installed_by": [
+                            "cram_map_illumina_hic"
+                        ]
                     },
                     "samtools/stats": {
                         "branch": "master",
                         "git_sha": "fe93fde0845f907fc91ad7cc7d797930408824df",
-                        "installed_by": ["modules"]
+                        "installed_by": [
+                            "modules"
+                        ]
                     },
                     "samtools/view": {
                         "branch": "master",
                         "git_sha": "5cb9a8694da0a0e550921636bb60bc8c56445fd7",
-                        "installed_by": ["modules"]
+                        "installed_by": [
+                            "modules"
+                        ]
                     },
                     "tabix/bgzip": {
                         "branch": "master",
                         "git_sha": "f2cfcf9d3f6a2d123e6c44aefa788aa232204a7a",
-                        "installed_by": ["modules"]
+                        "installed_by": [
+                            "modules"
+                        ]
                     },
                     "tar": {
                         "branch": "master",
                         "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
-                        "installed_by": ["modules"]
+                        "installed_by": [
+                            "modules"
+                        ]
                     },
                     "untar": {
                         "branch": "master",
                         "git_sha": "00ee87ebb541af0008596400ce6d5f66d79d5408",
-                        "installed_by": ["modules"]
+                        "installed_by": [
+                            "modules"
+                        ]
                     }
                 }
             },
@@ -128,17 +178,23 @@
                     "utils_nextflow_pipeline": {
                         "branch": "master",
                         "git_sha": "05954dab2ff481bcb999f24455da29a5828af08d",
-                        "installed_by": ["subworkflows"]
+                        "installed_by": [
+                            "subworkflows"
+                        ]
                     },
                     "utils_nfcore_pipeline": {
                         "branch": "master",
                         "git_sha": "271e7fc14eb1320364416d996fb077421f3faed2",
-                        "installed_by": ["subworkflows"]
+                        "installed_by": [
+                            "subworkflows"
+                        ]
                     },
                     "utils_nfschema_plugin": {
                         "branch": "master",
                         "git_sha": "4b406a74dc0449c0401ed87d5bfff4252fd277fd",
-                        "installed_by": ["subworkflows"]
+                        "installed_by": [
+                            "subworkflows"
+                        ]
                     }
                 }
             }
@@ -149,23 +205,32 @@
                     "cramalign/bwamem2alignhic": {
                         "branch": "main",
                         "git_sha": "1c601dc27bbfe9dfcc97033983463512da1d2f2e",
-                        "installed_by": ["cram_map_illumina_hic"]
+                        "installed_by": [
+                            "cram_map_illumina_hic"
+                        ]
                     },
                     "cramalign/gencramchunks": {
                         "branch": "main",
                         "git_sha": "1c601dc27bbfe9dfcc97033983463512da1d2f2e",
-                        "installed_by": ["cram_map_illumina_hic"]
+                        "installed_by": [
+                            "cram_map_illumina_hic"
+                        ]
                     },
                     "cramalign/minimap2alignhic": {
                         "branch": "main",
                         "git_sha": "1c601dc27bbfe9dfcc97033983463512da1d2f2e",
-                        "installed_by": ["cram_map_illumina_hic"],
+                        "installed_by": [
+                            "cram_map_illumina_hic"
+                        ],
                         "patch": "modules/sanger-tol/cramalign/minimap2alignhic/cramalign-minimap2alignhic.diff"
                     },
                     "samtools/mergedup": {
                         "branch": "main",
                         "git_sha": "fe57b32a304a149835e0fa829d4ca454b3b252e6",
-                        "installed_by": ["bam_samtools_merge_markdup", "modules"]
+                        "installed_by": [
+                            "bam_samtools_merge_markdup",
+                            "modules"
+                        ]
                     }
                 }
             },
@@ -174,12 +239,16 @@
                     "bam_samtools_merge_markdup": {
                         "branch": "main",
                         "git_sha": "3d708ba5f6d959da2fb814e51832c57664b57941",
-                        "installed_by": ["cram_map_illumina_hic"]
+                        "installed_by": [
+                            "cram_map_illumina_hic"
+                        ]
                     },
                     "cram_map_illumina_hic": {
                         "branch": "main",
                         "git_sha": "61774812e4e01b4ed1bd546481959970f7e6725a",
-                        "installed_by": ["subworkflows"]
+                        "installed_by": [
+                            "subworkflows"
+                        ]
                     }
                 }
             }

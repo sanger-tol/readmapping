@@ -142,7 +142,7 @@ nextflow_process {
             }
             process {
                 """
-                input[0] = channel.of([
+                input[0] = Channel.of([
                     [ id:'test' ], // meta map
                     file(params.modules_testdata_base_path + 'genomics/sarscov2/genome/genome.fasta', checkIfExists: true)
                 ])
@@ -168,7 +168,7 @@ nextflow_process {
             }
             process {
                 """
-                input[0] = channel.of([
+                input[0] = Channel.of([
                     [ id:'test' ], // meta map
                     file(params.modules_testdata_base_path + 'genomics/sarscov2/genome/genome.fasta.gz', checkIfExists: true)
                 ])
@@ -196,7 +196,7 @@ nextflow_process {
             }
             process {
                 """
-                input[0] = channel.of([
+                input[0] = Channel.of([
                     [ id:'test' ], // meta map
                     file(params.modules_testdata_base_path + 'genomics/sarscov2/genome/genome.fasta', checkIfExists: true)
                 ])
@@ -224,7 +224,7 @@ nextflow_process {
             }
             process {
                 """
-                input[0] = channel.of([
+                input[0] = Channel.of([
                     [ id:'test' ], // meta map
                     file(params.modules_testdata_base_path + 'genomics/sarscov2/genome/genome.fasta.gz', checkIfExists: true)
                 ])

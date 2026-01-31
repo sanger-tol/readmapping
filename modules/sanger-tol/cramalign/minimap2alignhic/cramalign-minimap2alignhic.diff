@@ -1,4 +1,5 @@
 Changes in component 'sanger-tol/cramalign/minimap2alignhic'
+'modules/sanger-tol/cramalign/minimap2alignhic/meta.yml' is unchanged
 Changes in 'cramalign/minimap2alignhic/main.nf':
 --- modules/sanger-tol/cramalign/minimap2alignhic/main.nf
 +++ modules/sanger-tol/cramalign/minimap2alignhic/main.nf
@@ -30,11 +31,15 @@ Changes in 'cramalign/minimap2alignhic/main.nf':
          samtools fixmate ${args4} - - |\\
          samtools view -h ${args5} |\\
          samtools sort ${args6} -@${task.cpus} -T ${prefix}_tmp -o ${prefix}.bam -
-
-'modules/sanger-tol/cramalign/minimap2alignhic/meta.yml' is unchanged
+@@ -70,4 +75,4 @@
+     """
+     touch ${prefix}.bam
+     """
+-}
++}
 'modules/sanger-tol/cramalign/minimap2alignhic/environment.yml' is unchanged
-'modules/sanger-tol/cramalign/minimap2alignhic/tests/main.nf.test.snap' is unchanged
-'modules/sanger-tol/cramalign/minimap2alignhic/tests/nextflow.config' is unchanged
 'modules/sanger-tol/cramalign/minimap2alignhic/tests/main.nf.test' is unchanged
+'modules/sanger-tol/cramalign/minimap2alignhic/tests/nextflow.config' is unchanged
+'modules/sanger-tol/cramalign/minimap2alignhic/tests/main.nf.test.snap' is unchanged
 'modules/sanger-tol/cramalign/minimap2alignhic/resources/usr/bin/filter_five_end.pl' is unchanged
 ************************************************************

@@ -21,7 +21,7 @@ nextflow_process {
             script "../../../../nf-core/minimap2/index/main.nf"
             process {
                 """
-                input[0] = channel.of([
+                input[0] = Channel.of([
                     [ id: "test" ],
                     file(params.modules_testdata_base_path + 'Meles_meles/assembly/release/mMelMel3.1_paternal_haplotype/GCA_922984935.2.subset.fasta.gz', checkIfExists: true)
                 ])
@@ -46,7 +46,7 @@ nextflow_process {
 
             process {
                 """
-                input[0] = channel.of([
+                input[0] = Channel.of([
                     [ id:'test' ], // meta map
                     file(params.modules_testdata_base_path + 'Meles_meles/genomic_data/mMelMel3/hic-arima2/35528_2%231_subset.cram', checkIfExists: true),
                     file(params.modules_testdata_base_path + 'Meles_meles/genomic_data/mMelMel3/hic-arima2/35528_2%231_subset.cram.crai', checkIfExists: true),
@@ -97,7 +97,7 @@ nextflow_process {
 
             process {
                 """
-                input[0] = channel.of([
+                input[0] = Channel.of([
                     [ id:'test' ], // meta map
                     file(params.modules_testdata_base_path + 'Meles_meles/genomic_data/mMelMel3/hic-arima2/35528_2%231_subset.cram', checkIfExists: true),
                     file(params.modules_testdata_base_path + 'Meles_meles/genomic_data/mMelMel3/hic-arima2/35528_2%231_subset.cram.crai', checkIfExists: true),
@@ -139,7 +139,7 @@ nextflow_process {
         when {
             process {
                 """
-                input[0] = channel.of([
+                input[0] = Channel.of([
                     [ id:'test' ], // meta map
                     file(params.modules_testdata_base_path + 'Meles_meles/genomic_data/mMelMel3/hic-arima2/35528_2%231_subset.cram', checkIfExists: true),
                     file(params.modules_testdata_base_path + 'Meles_meles/genomic_data/mMelMel3/hic-arima2/35528_2%231_subset.cram.crai', checkIfExists: true),
