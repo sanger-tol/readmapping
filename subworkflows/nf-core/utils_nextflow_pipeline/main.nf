@@ -36,7 +36,7 @@ workflow UTILS_NEXTFLOW_PIPELINE {
     // When running with Conda, warn if channels have not been set-up appropriately
     //
     if (check_conda_channels) {
-        checkCondachannels()
+        checkCondaChannels()
     }
 
     emit:
@@ -84,7 +84,7 @@ def dumpParametersToJSON(outdir) {
 //
 // When running with -profile conda, warn if channels have not been set-up appropriately
 //
-def checkCondachannels() {
+def checkCondaChannels() {
     def parser = new org.yaml.snakeyaml.Yaml()
     def channels = []
     try {

@@ -178,7 +178,7 @@
                     },
                     "cram_map_illumina_hic": {
                         "branch": "main",
-                        "git_sha": "1c601dc27bbfe9dfcc97033983463512da1d2f2e",
+                        "git_sha": "61774812e4e01b4ed1bd546481959970f7e6725a",
                         "installed_by": ["subworkflows"]
                     }
                 }

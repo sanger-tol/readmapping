@@ -11,8 +11,8 @@ include { BAM_SAMTOOLS_MERGE_MARKDUP } from '../bam_samtools_merge_markdup/main'
 workflow CRAM_MAP_ILLUMINA_HIC {
 
     take:
-    ch_assemblies        // channel [meta, assembly]
-    ch_hic_cram          // channel [meta, cram] OR [meta, [cram1, cram2, ..., cram_n]]
+    ch_assemblies        // Channel [meta, assembly]
+    ch_hic_cram          // Channel [meta, cram] OR [meta, [cram1, cram2, ..., cram_n]]
     val_aligner          // string: [either "bwamem2" or "minimap2"]
     val_cram_chunk_size  // integer: Number of CRAM slices per chunk for mapping
 
@@ -169,7 +169,7 @@ workflow CRAM_MAP_ILLUMINA_HIC {
             [key, bam]
         }
         .groupTuple(by: 0)
-        .map { key, bam -> [key.target, bam] } // Get meta back out of groupKey
+        .map { key, bam -> [key.target, bam.sort { b -> b.getName() }] }
 
 
     //
