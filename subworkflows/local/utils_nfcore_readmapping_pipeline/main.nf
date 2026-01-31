@@ -322,16 +322,3 @@ def methodsDescriptionText(mqc_methods_yaml) {
 
     return description_html.toString()
 }
-
-// Modified logarithm function that doesn't return negative numbers
-def positive_log(value, base) {
-    if (value <= 1) {
-        return 0
-    } else {
-        return Math.log(value)/Math.log(base)
-    }
-}
-
-def log_increase_cpus(start, step, value, base) {
-    return start + step * (1 + Math.ceil(positive_log(value, base)))
-}
