@@ -18,7 +18,7 @@ chunk_cram() {
     local crai=$4
     local chunk_size=$5
 
-    local rgline=$(samtools view -H "${realcram}" | grep "@RG" | sed 's/\t/\\t/g' | sed "s/'//g")
+    local rgline=$(samtools view -H "${realcram}" | grep "^@RG" | sed 's/\t/\\t/g' | sed "s/'//g")
     local ncontainers=$(zcat "${realcrai}" | wc -l)
     local base=$(basename "${realcram}" .cram)
 
