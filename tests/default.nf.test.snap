@@ -18,7 +18,16 @@
                 "BWAMEM2_INDEX": {
                     "bwamem2": "2.2.1"
                 },
+                "CAT_FASTQ": {
+                    "cat": 9.5
+                },
                 "CONVERT_CRAM": {
+                    "samtools": "1.22.1"
+                },
+                "CRAMALIGN_MINIMAP2ALIGNHIC": {
+                    "filter_five_end.pl": 1.0,
+                    "gawk": "5.3.1",
+                    "minimap2": "2.30-r1287",
                     "samtools": "1.22.1"
                 },
                 "CRAM_FILTER": {
@@ -33,6 +42,12 @@
                 "CRUMBLE": {
                     "crumble": "0.9.1"
                 },
+                "FASTQC": {
+                    "fastqc": "0.12.1"
+                },
+                "FASTQC_FILTERED": {
+                    "fastqc": "0.12.1"
+                },
                 "GENERATE_CRAM_CSV": {
                     "samtools": 1.17
                 },
@@ -46,8 +61,7 @@
                     "hifi_trimmer": "1.2.2"
                 },
                 "MINIMAP2_ALIGN": {
-                    "minimap2": "2.29-r1283",
-                    "samtools": 1.21
+                    "minimap2": "2.29-r1283"
                 },
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
@@ -64,6 +78,15 @@
                 "SAMTOOLS_COLLATETOFASTQ": {
                     "samtools": "1.22.1"
                 },
+                "SAMTOOLS_CONVERT": {
+                    "samtools": "1.22.1"
+                },
+                "SAMTOOLS_CRAM": {
+                    "samtools": "1.22.1"
+                },
+                "SAMTOOLS_FAIDX": {
+                    "samtools": "1.22.1"
+                },
                 "SAMTOOLS_FLAGSTAT": {
                     "samtools": "1.22.1"
                 },
@@ -73,7 +96,13 @@
                 "SAMTOOLS_INDEX": {
                     "samtools": "1.22.1"
                 },
+                "SAMTOOLS_MERGE": {
+                    "samtools": "1.22.1"
+                },
                 "SAMTOOLS_REHEADER_CRAM": {
+                    "samtools": "1.22.1"
+                },
+                "SAMTOOLS_STATS": {
                     "samtools": "1.22.1"
                 },
                 "TAR": {
@@ -166,8 +195,8 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2026-01-20T11:59:43.657331785"
+        "timestamp": "2026-01-30T18:36:31.542603598"
     }
 }
