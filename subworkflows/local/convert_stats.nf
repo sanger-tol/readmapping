@@ -31,7 +31,7 @@ workflow CONVERT_STATS {
     ch_versions = channel.empty()
 
     // Split outfmt parameter into a list
-    def outfmt_options = params.outfmt.split(',').collect { it -> it.trim() }
+    def outfmt_options = params.outfmt.split(',').collect { fmt -> fmt.trim() }
 
     // (Optionally) Compress the quality scores of Illumina and PacBio CCS alignments
     if ( params.compression == "crumble" ) {

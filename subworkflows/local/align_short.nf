@@ -20,7 +20,7 @@ workflow ALIGN_SHORT {
     reads
     .branch {
         _meta, reads_files ->
-            fastq : reads_files.findAll { it -> it.getName().toLowerCase() =~ /.*f.*\.gz/ }
+            fastq : reads_files.findAll { file -> file.getName().toLowerCase() =~ /.*f.*\.gz/ }
             cram : true
     }
     .set { ch_reads }

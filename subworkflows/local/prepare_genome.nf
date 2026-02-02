@@ -73,7 +73,7 @@ def checkShortReads(filePath, columnToCheck="datatype") {
 
     // Extract the header and find the index of the column
     def header = csvLines[0].split(',')
-    def columnIndex = header.findIndexOf { it -> it == columnToCheck }
+    def columnIndex = header.findIndexOf { h -> h == columnToCheck }
 
     // Check if the column index was found
     if (columnIndex == -1) {
