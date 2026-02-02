@@ -63,7 +63,7 @@ workflow READMAPPING {
     // SUBWORKFLOW: Read in samplesheet, validate and stage input files
     //
     INPUT_CHECK ( ch_samplesheet ).reads
-    | branch {
+    .branch {
         meta, _reads ->
             hic : meta.datatype == "hic"
             illumina : meta.datatype == "illumina"
@@ -71,13 +71,13 @@ workflow READMAPPING {
             clr : meta.datatype == "pacbio_clr"
             ont : meta.datatype == "ont"
     }
-    | set { ch_reads }
+    .set { ch_reads }
 
     ch_versions = ch_versions.mix ( INPUT_CHECK.out.versions )
 
     ch_fasta
-    | map { it -> [ [ id: it.baseName ], it ] }
-    | set { ch_genome }
+    .map { it -> [ [ id: it.baseName ], it ] }
+    .set { ch_genome }
 
     PREPARE_GENOME ( ch_genome )
     ch_versions = ch_versions.mix ( PREPARE_GENOME.out.versions )
@@ -86,11 +86,11 @@ workflow READMAPPING {
     // Control quality of input files
     //
     INPUT_CHECK.out.reads
-    | branch { _meta, reads ->
+    .branch { _meta, reads ->
                 cram:  reads.getName().endsWith("cram")
                 other: true
     }
-    | set { ch_fastqc_reads }
+    .set { ch_fastqc_reads }
 
     // Convert cram to FASTQs
     SAMTOOLS_COLLATETOFASTQ ( ch_fastqc_reads.cram, true )
@@ -101,7 +101,7 @@ workflow READMAPPING {
     reports = reports.mix ( FASTQC.out.zip )
 
     ch_versions = ch_versions
-    | mix ( SAMTOOLS_COLLATETOFASTQ.out.versions )
+    .mix ( SAMTOOLS_COLLATETOFASTQ.out.versions )
 
     //
     // Create channel for vector DB
@@ -110,12 +110,12 @@ workflow READMAPPING {
     if ( ch_reads.pacbio || ch_reads.clr ) {
         if ( params.hifi_adapter_db.endsWith( '.tar.gz' ) ) {
             UNTAR ( [ [:], params.hifi_adapter_db ] ).untar
-            | set { ch_hifi_adapter_db }
+            .set { ch_hifi_adapter_db }
             ch_versions = ch_versions.mix ( UNTAR.out.versions )
 
         } else {
             channel.fromPath ( params.hifi_adapter_db )
-            | set { ch_hifi_adapter_db }
+            .set { ch_hifi_adapter_db }
         }
     }
 
@@ -152,11 +152,11 @@ workflow READMAPPING {
 
     // gather alignments
     ch_aligned_bams = channel.empty()
-    | mix( HIC_MERGE_SAMPLES.out.bam )
-    | mix( ALIGN_ILLUMINA.out.bam )
-    | mix( ALIGN_HIFI.out.bam )
-    | mix( ALIGN_CLR.out.bam )
-    | mix( ALIGN_ONT.out.bam )
+    .mix( HIC_MERGE_SAMPLES.out.bam )
+    .mix( ALIGN_ILLUMINA.out.bam )
+    .mix( ALIGN_HIFI.out.bam )
+    .mix( ALIGN_CLR.out.bam )
+    .mix( ALIGN_ONT.out.bam )
 
     // convert to cram and gather stats
     CONVERT_STATS ( ch_aligned_bams, PREPARE_GENOME.out.fasta, ch_header )

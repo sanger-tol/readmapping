@@ -30,10 +30,10 @@ workflow MINIMAP2_MAPREDUCE {
     // LOGIC: generate input channel for mapping
     //
     csv_ch
-    | splitCsv()
-    | combine ( fasta )
-    | combine ( MINIMAP2_INDEX.out.index )
-    | map{ cram_id, cram_info, ref_id, ref_dir, _mmi_id, mmi_path->
+    .splitCsv()
+    .combine ( fasta )
+    .combine ( MINIMAP2_INDEX.out.index )
+    .map{ cram_id, cram_info, ref_id, ref_dir, _mmi_id, mmi_path->
         tuple([
                 id: cram_id.id,
                 chunk_id: cram_id.id + "_" + cram_info[5],
@@ -51,7 +51,7 @@ workflow MINIMAP2_MAPREDUCE {
             ref_dir
         )
     }
-    | set { ch_filtering_input }
+    .set { ch_filtering_input }
 
     //
     // MODULE: Map hic reads by 10,000 container per time
@@ -66,10 +66,10 @@ workflow MINIMAP2_MAPREDUCE {
     // LOGIC: Preparing BAMs for merging
     //
     mappedbam_ch
-    | map { meta, file -> [meta.id, meta, file] }
-    | groupTuple()
-    | map { _id, metas, files -> [ metas[0] - [chunk_id: metas[0].chunk_id], files ] }
-    | set { collected_files_for_merge }
+    .map { meta, file -> [meta.id, meta, file] }
+    .groupTuple()
+    .map { _id, metas, files -> [ metas[0] - [chunk_id: metas[0].chunk_id], files ] }
+    .set { collected_files_for_merge }
 
     //
     // MODULE: Merge position sorted BAM files and mark duplicates

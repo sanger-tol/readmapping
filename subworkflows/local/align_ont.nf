@@ -28,15 +28,15 @@ workflow ALIGN_ONT {
     ch_versions = ch_versions.mix ( SAMTOOLS_ADDREPLACERG.out.versions )
 
     SAMTOOLS_ADDREPLACERG.out.cram
-    | set { ch_reads_cram }
+    .set { ch_reads_cram }
 
     // Index the CRAM file
     SAMTOOLS_INDEX ( ch_reads_cram )
     ch_versions = ch_versions.mix( SAMTOOLS_INDEX.out.versions )
 
     ch_reads_cram
-    | join ( SAMTOOLS_INDEX.out.crai )
-    | set { ch_reads_cram_crai }
+    .join ( SAMTOOLS_INDEX.out.crai )
+    .set { ch_reads_cram_crai }
 
     //
     // MODULE: generate a CRAM CSV file containing the required parametres for CRAM_FILTER_MINIMAP2_FILTER5END_FIXMATE_SORT
@@ -54,11 +54,11 @@ workflow ALIGN_ONT {
     ch_versions         = ch_versions.mix ( MINIMAP2_MAPREDUCE.out.versions )
 
     ch_merged_bam
-    | mix ( MINIMAP2_MAPREDUCE.out.mergedbam )
-    | combine ( ch_reads_cram_crai )
-    | filter { meta_bam, _bam, meta_cram, _cram, _crai -> meta_bam.id == meta_cram.id }
-    | map { _meta_bam, bam, meta_cram, _cram, _crai -> [ meta_cram, bam ] }
-    | set { ch_merged_bam }
+    .mix ( MINIMAP2_MAPREDUCE.out.mergedbam )
+    .combine ( ch_reads_cram_crai )
+    .filter { meta_bam, _bam, meta_cram, _cram, _crai -> meta_bam.id == meta_cram.id }
+    .map { _meta_bam, bam, meta_cram, _cram, _crai -> [ meta_cram, bam ] }
+    .set { ch_merged_bam }
 
     //
     // SUBWORKFLOW: Merge all alignment output by sample name

@@ -14,8 +14,8 @@ workflow INPUT_CHECK {
 
     // Prepare the samplesheet channel for SAMTOOLS_FLAGSTAT
     ch_samplesheet
-    | map { meta, file -> [meta, file, []] }
-    | set { samplesheet_rows }
+    .map { meta, file -> [meta, file, []] }
+    .set { samplesheet_rows }
 
     // Get stats from each input file
     SAMTOOLS_FLAGSTAT ( samplesheet_rows )
@@ -23,9 +23,9 @@ workflow INPUT_CHECK {
 
     // Create the read channel for the rest of the pipeline
     samplesheet_rows
-    | join( SAMTOOLS_FLAGSTAT.out.flagstat )
-    | map { meta, datafile, _meta2, stats -> create_data_channel( meta, datafile, stats ) }
-    | set { reads }
+    .join( SAMTOOLS_FLAGSTAT.out.flagstat )
+    .map { meta, datafile, _meta2, stats -> create_data_channel( meta, datafile, stats ) }
+    .set { reads }
 
 
     emit:
