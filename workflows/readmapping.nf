@@ -13,8 +13,7 @@ include { INPUT_CHECK                        } from '../subworkflows/local/input
 include { SAMTOOLS_COLLATETOFASTQ            } from '../modules/local/samtools_collatetofastq'
 include { FASTQC                             } from '../modules/nf-core/fastqc'
 include { PREPARE_GENOME                     } from '../subworkflows/local/prepare_genome'
-include { ALIGN_SHORT as ALIGN_HIC           } from '../subworkflows/local/align_short'
-include { ALIGN_SHORT as ALIGN_ILLUMINA      } from '../subworkflows/local/align_short'
+include { ALIGN_SHORT                        } from '../subworkflows/local/align_short'
 include { ALIGN_PACBIO as ALIGN_HIFI         } from '../subworkflows/local/align_pacbio'
 include { ALIGN_PACBIO as ALIGN_CLR          } from '../subworkflows/local/align_pacbio'
 include { ALIGN_ONT                          } from '../subworkflows/local/align_ont'
@@ -64,8 +63,7 @@ workflow READMAPPING {
     INPUT_CHECK ( ch_samplesheet ).reads
     .branch {
         meta, _reads ->
-            hic : meta.datatype == "hic"
-            illumina : meta.datatype == "illumina"
+            short_ : meta.datatype == "hic" || meta.datatype == "illumina"
             pacbio : meta.datatype == "pacbio"
             clr : meta.datatype == "pacbio_clr"
             ont : meta.datatype == "ont"
@@ -125,11 +123,8 @@ workflow READMAPPING {
     // SUBWORKFLOW: Align raw reads to genome
     //
 
-    ALIGN_HIC( PREPARE_GENOME.out.fasta, ch_reads.hic)
-    ch_versions = ch_versions.mix ( ALIGN_HIC.out.versions )
-
-    ALIGN_ILLUMINA ( PREPARE_GENOME.out.fasta, ch_reads.illumina )
-    ch_versions = ch_versions.mix ( ALIGN_ILLUMINA.out.versions )
+    ALIGN_SHORT ( PREPARE_GENOME.out.fasta, ch_reads.short_ )
+    ch_versions = ch_versions.mix ( ALIGN_SHORT.out.versions )
 
     ALIGN_HIFI ( PREPARE_GENOME.out.fasta, ch_reads.pacbio, ch_hifi_adapter_db, ch_hifi_adapter_yaml, ch_uli_adapter )
     ch_versions = ch_versions.mix ( ALIGN_HIFI.out.versions )
@@ -144,8 +139,7 @@ workflow READMAPPING {
 
     // gather alignments
     ch_aligned_bams = channel.empty()
-    .mix( ALIGN_HIC.out.bam )
-    .mix( ALIGN_ILLUMINA.out.bam )
+    .mix( ALIGN_SHORT.out.bam )
     .mix( ALIGN_HIFI.out.bam )
     .mix( ALIGN_CLR.out.bam )
     .mix( ALIGN_ONT.out.bam )
