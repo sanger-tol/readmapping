@@ -24,7 +24,7 @@ workflow MERGE_OUTPUT {
         SAMTOOLS_MERGE ( ch_multi_bams, [ [], [] ], [ [], [] ], [ [], [] ] )
 
         ch_bam = SAMTOOLS_MERGE.out.bam
-        .map { meta, bam -> [meta.tap { m -> m.merged = true }, bam] }
+        .map { meta, bam -> [meta + [merged: true], bam] }
         .mix ( ch_bam )
     }
 
