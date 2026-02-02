@@ -111,8 +111,8 @@ workflow PIPELINE_INITIALISATION {
         params.bwamem2_index
     ]
 
-    for (param in checkPathParamList) {
-        if (param) { file(param, checkIfExists: true) }
+    checkPathParamList.findAll { it -> it }.each { param ->
+        file(param, checkIfExists: true)
     }
 
     // Create channels from input paths

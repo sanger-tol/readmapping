@@ -46,7 +46,6 @@ process SAMTOOLS_ADDREPLACERG {
 
     """
     touch ${prefix}.${file_type}
-    ${index}
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

@@ -50,6 +50,7 @@ process CRAM_FILTER_MINIMAP2_FILTER5END_FIXMATE_SORT {
 
     stub:
     def prefix  = task.ext.prefix ?: "${meta.id}"
+    def VERSION = "1.15" // Staden_io versions break the pipeline
     def base    = "45022_3#2"
     def chunkid = "1"
     """
