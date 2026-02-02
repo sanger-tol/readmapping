@@ -43,7 +43,7 @@ workflow ALIGN_PACBIO {
     // Branch for handling ultra low-input libraries
     reads
     | branch {
-        meta, reads ->
+        meta, _reads ->
             uli : meta.library == "uli"
             other : true
     }

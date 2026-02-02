@@ -27,7 +27,7 @@
                     },
                     "crumble": {
                         "branch": "master",
-                        "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
+                        "git_sha": "13aee4ec0cbc416c45e08bbac53977b7c9677a0f",
                         "installed_by": ["modules"]
                     },
                     "fastqc": {

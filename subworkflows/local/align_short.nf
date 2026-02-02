@@ -21,7 +21,7 @@ workflow ALIGN_SHORT {
     // Check file types and branch
     reads
     .branch {
-        meta, reads ->
+        meta, _reads ->
             fastq : reads.findAll { it.getName().toLowerCase() =~ /.*f.*\.gz/ }
             cram : true
     }
@@ -41,9 +41,9 @@ workflow ALIGN_SHORT {
 
     ch_illumina = ch_reads_cram
     .combine(fasta)
-    .multiMap { meta, cram, meta_, fasta ->
+    .multiMap { meta, cram, meta_, fasta_file ->
         cram: [ meta_ + meta + [ assembly_id: meta_.id ] , cram ]
-        fasta: [ meta_ + meta + [ assembly_id: meta_.id ] , fasta ]
+        fasta: [ meta_ + meta + [ assembly_id: meta_.id ] , fasta_file ]
     }
 
     CRAM_MAP_ILLUMINA( ch_illumina.fasta, ch_illumina.cram, params.short_aligner, params.chunk_size )
