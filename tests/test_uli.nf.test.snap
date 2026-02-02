@@ -50,7 +50,8 @@
                     "lima": "2.12.0"
                 },
                 "MINIMAP2_ALIGN": {
-                    "minimap2": "2.29-r1283"
+                    "minimap2": "2.29-r1283",
+                    "samtools": 1.21
                 },
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
