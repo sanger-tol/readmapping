@@ -26,9 +26,9 @@ process CRAM_FILTER_MINIMAP2_FILTER5END_FIXMATE_SORT {
     def VERSION = "1.15" // Staden_io versions break the pipeline
     def hic_agrs = meta.datatype == "hic" ?
         """
-        ${projectDir}/bin/grep_pg.sh | \\
-        perl ${projectDir}/bin/filter_five_end.pl | \\
-        ${projectDir}/bin/awk_filter_reads.sh | \\
+        grep_pg.sh | \\
+        filter_five_end.pl | \\
+        awk_filter_reads.sh | \\
         """ : ""
     def shortread_args = meta.datatype in [ "hic", "illumina" ] ? "samtools fixmate ${args3} - - |" : ""
 
