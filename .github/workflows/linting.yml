@@ -89,9 +89,4 @@ jobs:
         uses: nf-core/setup-nextflow@v2
 
       - name: Run nextflow lint
-        if: ${{ github.base_ref != 'main' }}
-        env:
-          GITHUB_COMMENTS_URL: ${{ github.event.pull_request.comments_url }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_PR_COMMIT: ${{ github.event.pull_request.head.sha }}
         run: nextflow lint -exclude nf-test.config ${GITHUB_WORKSPACE}
