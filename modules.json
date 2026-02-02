@@ -164,7 +164,7 @@
                     },
                     "samtools/mergedup": {
                         "branch": "main",
-                        "git_sha": "fe57b32a304a149835e0fa829d4ca454b3b252e6",
+                        "git_sha": "c60fb5411fa3c0347eb7aeafc3ebf2d9566b7136",
                         "installed_by": ["bam_samtools_merge_markdup", "modules"]
                     }
                 }

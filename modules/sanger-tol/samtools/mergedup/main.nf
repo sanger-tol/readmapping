@@ -53,7 +53,6 @@ process SAMTOOLS_MERGEDUP {
     """
 
     stub:
-    def args      = task.ext.args  ?: ''
     def args2     = task.ext.args2 ?: ''
     def prefix    = task.ext.prefix ?: "${meta.id}"
     def extension = args2.contains("--output-fmt sam") ? "sam" :

@@ -17,7 +17,6 @@ process CRAM_FILTER_MINIMAP2_FILTER5END_FIXMATE_SORT {
     task.ext.when == null || task.ext.when
 
     script:
-    def args = task.ext.args ?: ''
     def args1 = task.ext.args1 ?: ''
     def args2 = task.ext.args2 ?: ''
     def args3 = task.ext.args3 ?: ''

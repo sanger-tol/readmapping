@@ -36,7 +36,7 @@ workflow PREPARE_GENOME {
         if ( params.bwamem2_index ) {
             Channel.fromPath ( params.bwamem2_index )
             | combine ( ch_fasta )
-            | map { bwa, meta, fa -> [ meta, bwa ] }
+            | map { bwa, meta, _fa -> [ meta, bwa ] }
             | set { ch_bwamem }
 
             if ( params.bwamem2_index.endsWith('.tar.gz') ) {

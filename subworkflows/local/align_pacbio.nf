@@ -37,7 +37,6 @@ workflow ALIGN_PACBIO {
 
     main:
     ch_versions    = Channel.empty()
-    ch_merged_bam  = Channel.empty()
     ch_post_qc     = Channel.empty()
 
     // Branch for handling ultra low-input libraries
@@ -126,7 +125,7 @@ workflow ALIGN_PACBIO {
         | map { meta, fastqs -> [ meta - [chunk_id: meta.chunk_id] + [ single_end: true ], fastqs ] }
         | groupTuple()
         | branch {
-            meta, fastqs ->
+            _meta, fastqs ->
                 multi: fastqs.size() > 1
                 single : true
         }
@@ -152,7 +151,7 @@ workflow ALIGN_PACBIO {
     MINIMAP2_ALIGN.out.bam
     | map { meta, file -> [meta.id, meta, file] }
     | groupTuple()
-    | map { id, metas, files -> [ metas[0] - [chunk_id: metas[0].chunk_id], files ] }
+    | map { _id, metas, files -> [ metas[0] - [chunk_id: metas[0].chunk_id], files ] }
     | set { collected_files_for_merge }
 
     //

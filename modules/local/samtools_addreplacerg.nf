@@ -39,7 +39,6 @@ process SAMTOOLS_ADDREPLACERG {
     """
 
     stub:
-    def args = task.ext.args ?: ''
     prefix = task.ext.prefix ?: "${meta.id}"
     file_type = input.getExtension()
     if ("$input" == "${prefix}.${file_type}") error "Input and output names are the same, use \"task.ext.prefix\" to disambiguate!"

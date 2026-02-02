@@ -64,7 +64,7 @@ workflow READMAPPING {
     //
     INPUT_CHECK ( ch_samplesheet ).reads
     | branch {
-        meta, reads ->
+        meta, _reads ->
             hic : meta.datatype == "hic"
             illumina : meta.datatype == "illumina"
             pacbio : meta.datatype == "pacbio"
@@ -86,7 +86,7 @@ workflow READMAPPING {
     // Control quality of input files
     //
     INPUT_CHECK.out.reads
-    | branch { meta, reads ->
+    | branch { _meta, reads ->
                 cram:  reads.getName().endsWith("cram")
                 other: true
     }
@@ -136,7 +136,7 @@ workflow READMAPPING {
     ALIGN_HIC ( ch_hic.fasta, ch_hic.cram, params.short_aligner, params.chunk_size )
     HIC_MERGE_SAMPLES ( ALIGN_HIC.out.bam )
 
-    ALIGN_ILLUMINA ( PREPARE_GENOME.out.fasta, PREPARE_GENOME.out.fasta, ch_reads.illumina )
+    ALIGN_ILLUMINA ( PREPARE_GENOME.out.fasta, ch_reads.illumina )
     ch_versions = ch_versions.mix ( ALIGN_ILLUMINA.out.versions )
 
     ALIGN_HIFI ( PREPARE_GENOME.out.fasta, ch_reads.pacbio, ch_hifi_adapter_db, ch_hifi_adapter_yaml, ch_uli_adapter )
@@ -177,7 +177,7 @@ workflow READMAPPING {
     )
     | set { ch_collated_versions }
 
-    reports = reports.map { meta, file -> file }
+    reports = reports.map { _meta, file -> file }
 
     ch_multiqc_config                     = Channel.fromPath("$projectDir/assets/multiqc_config.yml", checkIfExists: true)
     ch_multiqc_custom_config              = params.multiqc_config ? Channel.fromPath(params.multiqc_config, checkIfExists: true) : Channel.empty()

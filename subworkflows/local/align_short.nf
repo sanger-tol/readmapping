@@ -10,19 +10,17 @@ include { SAMTOOLS_SORMADUP as CONVERT_CRAM          } from '../../modules/local
 workflow ALIGN_SHORT {
     take:
     fasta    // channel: [ val(meta), /path/to/fasta ] reference_tuple
-    index    // channel: [ val(meta), /path/to/bwamem2/ ]
     reads    // channel: [ val(meta), /path/to/datafile ] hic_reads_path
 
 
     main:
     ch_versions = Channel.empty()
-    ch_merged_bam   = Channel.empty()
 
     // Check file types and branch
     reads
     .branch {
-        meta, _reads ->
-            fastq : reads.findAll { it.getName().toLowerCase() =~ /.*f.*\.gz/ }
+        _meta, reads_files ->
+            fastq : reads_files.findAll { it.getName().toLowerCase() =~ /.*f.*\.gz/ }
             cram : true
     }
     .set { ch_reads }
@@ -51,7 +49,6 @@ workflow ALIGN_SHORT {
     // SUBWORKFLOW: Merge all alignment output by sample name
     //
     MERGE_OUTPUT( CRAM_MAP_ILLUMINA.out.bam )
-    ch_sort = MERGE_OUTPUT.out.bam
 
     emit:
     bam      = MERGE_OUTPUT.out.bam     // channel: [ val(meta), /path/to/bam ]

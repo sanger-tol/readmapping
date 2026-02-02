@@ -33,7 +33,7 @@ workflow MINIMAP2_MAPREDUCE {
     | splitCsv()
     | combine ( fasta )
     | combine ( MINIMAP2_INDEX.out.index )
-    | map{ cram_id, cram_info, ref_id, ref_dir, mmi_id, mmi_path->
+    | map{ cram_id, cram_info, ref_id, ref_dir, _mmi_id, mmi_path->
         tuple([
                 id: cram_id.id,
                 chunk_id: cram_id.id + "_" + cram_info[5],
@@ -68,7 +68,7 @@ workflow MINIMAP2_MAPREDUCE {
     mappedbam_ch
     | map { meta, file -> [meta.id, meta, file] }
     | groupTuple()
-    | map { id, metas, files -> [ metas[0] - [chunk_id: metas[0].chunk_id], files ] }
+    | map { _id, metas, files -> [ metas[0] - [chunk_id: metas[0].chunk_id], files ] }
     | set { collected_files_for_merge }
 
     //
