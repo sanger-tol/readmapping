@@ -13,14 +13,13 @@ include { INPUT_CHECK                        } from '../subworkflows/local/input
 include { SAMTOOLS_COLLATETOFASTQ            } from '../modules/local/samtools_collatetofastq'
 include { FASTQC                             } from '../modules/nf-core/fastqc'
 include { PREPARE_GENOME                     } from '../subworkflows/local/prepare_genome'
-include { CRAM_MAP_ILLUMINA_HIC as ALIGN_HIC } from '../subworkflows/sanger-tol/cram_map_illumina_hic'
+include { ALIGN_SHORT as ALIGN_HIC           } from '../subworkflows/local/align_short'
 include { ALIGN_SHORT as ALIGN_ILLUMINA      } from '../subworkflows/local/align_short'
 include { ALIGN_PACBIO as ALIGN_HIFI         } from '../subworkflows/local/align_pacbio'
 include { ALIGN_PACBIO as ALIGN_CLR          } from '../subworkflows/local/align_pacbio'
 include { ALIGN_ONT                          } from '../subworkflows/local/align_ont'
 include { CONVERT_STATS                      } from '../subworkflows/local/convert_stats'
 include { MULTIQC                            } from '../modules/nf-core/multiqc'
-include { MERGE_OUTPUT as HIC_MERGE_SAMPLES  } from '../subworkflows/local/merge_output'
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT NF-CORE MODULES/SUBWORKFLOWS
@@ -126,15 +125,8 @@ workflow READMAPPING {
     // SUBWORKFLOW: Align raw reads to genome
     //
 
-    // Prepare fasta channel
-    ch_hic = ch_reads.hic
-    .combine ( PREPARE_GENOME.out.fasta )
-    .multiMap { meta, cram, meta_, fasta ->
-        cram: [ meta_ + meta + [ assembly_id: meta_.id ] , cram ]
-        fasta: [ meta_ + meta + [ assembly_id: meta_.id ] , fasta ]
-    }
-    ALIGN_HIC ( ch_hic.fasta, ch_hic.cram, params.short_aligner, params.chunk_size )
-    HIC_MERGE_SAMPLES ( ALIGN_HIC.out.bam )
+    ALIGN_HIC( PREPARE_GENOME.out.fasta, ch_reads.hic)
+    ch_versions = ch_versions.mix ( ALIGN_HIC.out.versions )
 
     ALIGN_ILLUMINA ( PREPARE_GENOME.out.fasta, ch_reads.illumina )
     ch_versions = ch_versions.mix ( ALIGN_ILLUMINA.out.versions )
@@ -152,7 +144,7 @@ workflow READMAPPING {
 
     // gather alignments
     ch_aligned_bams = channel.empty()
-    .mix( HIC_MERGE_SAMPLES.out.bam )
+    .mix( ALIGN_HIC.out.bam )
     .mix( ALIGN_ILLUMINA.out.bam )
     .mix( ALIGN_HIFI.out.bam )
     .mix( ALIGN_CLR.out.bam )
