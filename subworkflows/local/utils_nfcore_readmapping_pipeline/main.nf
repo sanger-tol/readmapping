@@ -207,9 +207,9 @@ def validateInputParameters() {
     if (!params.outfmt) {
         log.error "Output format not specified. Please specify '--outfmt bam', '--outfmt cram', or both separated by a comma."
     } else {
-        def outfmtOptions = params.outfmt.split(',').collect { it.trim() }
+        def outfmtOptions = params.outfmt.split(',').collect { it -> it.trim() }
         def validOutfmtOptions = ['bam', 'cram']
-        def invalidOptions = outfmtOptions.findAll { !(it in validOutfmtOptions) }
+        def invalidOptions = outfmtOptions.findAll { it -> !(it in validOutfmtOptions) }
 
         if (invalidOptions) {
             log.error "Invalid output format(s) specified: '${invalidOptions.join(', ')}'. Valid options are 'bam' or 'cram'."
@@ -238,7 +238,7 @@ def validateInputSamplesheet(channel) {
         meta.sample = meta.sample.replace(" ", "_")
 
         // Validate that the file path is non-empty and has a valid format
-        if (!file || !validFormats.any { file.toString().endsWith(it) }) {
+        if (!file || !validFormats.any { it -> file.toString().endsWith(it) }) {
             error("Data file is required and must have a valid extension: ${file}")
         }
 

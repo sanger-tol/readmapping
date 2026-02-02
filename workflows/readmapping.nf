@@ -76,7 +76,7 @@ workflow READMAPPING {
     ch_versions = ch_versions.mix ( INPUT_CHECK.out.versions )
 
     ch_fasta
-    | map { [ [ id: it.baseName ], it ] }
+    | map { it -> [ [ id: it.baseName ], it ] }
     | set { ch_genome }
 
     PREPARE_GENOME ( ch_genome )
