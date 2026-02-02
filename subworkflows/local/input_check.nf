@@ -10,7 +10,7 @@ workflow INPUT_CHECK {
 
 
     main:
-    ch_versions = Channel.empty()
+    ch_versions = channel.empty()
 
     // Prepare the samplesheet channel for SAMTOOLS_FLAGSTAT
     ch_samplesheet

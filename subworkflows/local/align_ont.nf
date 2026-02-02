@@ -17,8 +17,8 @@ workflow ALIGN_ONT {
 
 
     main:
-    ch_versions = Channel.empty()
-    ch_merged_bam   = Channel.empty()
+    ch_versions = channel.empty()
+    ch_merged_bam   = channel.empty()
 
     // Convert FASTQ to CRAM
     CONVERT_CRAM ( reads, fasta )

@@ -28,7 +28,7 @@ workflow CONVERT_STATS {
 
 
     main:
-    ch_versions = Channel.empty()
+    ch_versions = channel.empty()
 
     // Split outfmt parameter into a list
     def outfmt_options = params.outfmt.split(',').collect { it.trim() }
@@ -61,8 +61,8 @@ workflow CONVERT_STATS {
     | set { ch_renamed_bams }
 
     // (Optionally) convert to CRAM if it's specified in outfmt
-    ch_cram = Channel.empty()
-    ch_crai = Channel.empty()
+    ch_cram = channel.empty()
+    ch_crai = channel.empty()
 
     if ( "cram" in outfmt_options ) {
         SAMTOOLS_CRAM ( ch_renamed_bams, fasta, [], [] )
@@ -74,8 +74,8 @@ workflow CONVERT_STATS {
     }
 
     // Re-generate BAM index if BAM is in outfmt
-    ch_bam = Channel.empty()
-    ch_bai = Channel.empty()
+    ch_bam = channel.empty()
+    ch_bai = channel.empty()
 
     if ( "bam" in outfmt_options ) {
         // Reindex BAM

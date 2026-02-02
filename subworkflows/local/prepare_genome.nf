@@ -13,7 +13,7 @@ workflow PREPARE_GENOME {
     fasta    // channel: [ meta, /path/to/fasta ]
 
     main:
-    ch_versions = Channel.empty()
+    ch_versions = channel.empty()
 
     // Uncompress genome fasta file if required
     if ( params.fasta.endsWith('.gz') ) {
@@ -34,7 +34,7 @@ workflow PREPARE_GENOME {
     // Generate BWA index
     if ( checkShortReads( params.input ) ) {
         if ( params.bwamem2_index ) {
-            Channel.fromPath ( params.bwamem2_index )
+            channel.fromPath ( params.bwamem2_index )
             | combine ( ch_fasta )
             | map { bwa, meta, _fa -> [ meta, bwa ] }
             | set { ch_bwamem }
@@ -51,7 +51,7 @@ workflow PREPARE_GENOME {
             ch_versions      = ch_versions.mix ( BWAMEM2_INDEX.out.versions )
         }
     } else {
-        ch_bwamem2_index = Channel.empty()
+        ch_bwamem2_index = channel.empty()
     }
 
 

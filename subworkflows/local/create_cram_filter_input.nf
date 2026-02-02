@@ -7,7 +7,7 @@ workflow CREATE_CRAM_FILTER_INPUT {
 
 
     main:
-    ch_versions = Channel.empty()
+    ch_versions = channel.empty()
 
     // Generate input channel for CRAM_FILTER
     csv_ch

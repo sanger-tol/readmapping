@@ -36,8 +36,8 @@ workflow ALIGN_PACBIO {
 
 
     main:
-    ch_versions    = Channel.empty()
-    ch_post_qc     = Channel.empty()
+    ch_versions    = channel.empty()
+    ch_post_qc     = channel.empty()
 
     // Branch for handling ultra low-input libraries
     reads

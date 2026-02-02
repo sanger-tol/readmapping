@@ -15,8 +15,8 @@ workflow MINIMAP2_MAPREDUCE {
 
 
     main:
-    ch_versions         = Channel.empty()
-    mappedbam_ch        = Channel.empty()
+    ch_versions         = channel.empty()
+    mappedbam_ch        = channel.empty()
 
     //
     // MODULE: generate minimap2 mmi file
