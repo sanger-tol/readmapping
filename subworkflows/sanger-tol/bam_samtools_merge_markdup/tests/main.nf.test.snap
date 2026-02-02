@@ -1,0 +1,66 @@
+{
+    "Undibacterium unclassified - hap1 - no markdup": {
+        "content": [
+            [
+                {
+                    "maxReadLength": 151,
+                    "minReadLength": 151,
+                    "meanReadLength": 151,
+                    "maxQuality": 60,
+                    "minQuality": 10,
+                    "meanQuality": 50,
+                    "readCount": 11583,
+                    "duplicateReadCount": 0,
+                    "sorted": false
+                }
+            ],
+            [
+                "test.bam.csi"
+            ],
+            [
+                
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
+        },
+        "timestamp": "2026-01-09T11:59:21.93944"
+    },
+    "Undibacterium unclassified - hap1 - markdup": {
+        "content": [
+            [
+                {
+                    "maxReadLength": 151,
+                    "minReadLength": 151,
+                    "meanReadLength": 151,
+                    "maxQuality": 60,
+                    "minQuality": 10,
+                    "meanQuality": 50,
+                    "readCount": 11583,
+                    "duplicateReadCount": 508,
+                    "sorted": false
+                }
+            ],
+            [
+                "test.bam.csi"
+            ],
+            [
+                [
+                    {
+                        "id": "test"
+                    },
+                    "test.metrics:md5,7816ccaa9f01adce0ee1a5e620e933a1"
+                ]
+            ],
+            [
+                "versions.yml:md5,f33b351589ee358c1d3e5252b2cb3ec8"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
+        },
+        "timestamp": "2026-01-09T11:59:42.592158"
+    }
+}

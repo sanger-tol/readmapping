@@ -11,23 +11,36 @@
                 "type": "string",
                 "pattern": "^\\S+$",
                 "errorMessage": "Sample name must be provided and cannot contain spaces",
-                "meta": ["id"]
+                "meta": ["sample"]
             },
-            "fastq_1": {
+            "datatype": {
+                "type": "string",
+                "enum": ["hic", "illumina", "pacbio", "pacbio_clr", "ont"],
+                "errorMessage": "Datatype must be one of: hic, illumina, pacbio, pacbio_clr, ont",
+                "meta": ["datatype"]
+            },
+            "datafile": {
                 "type": "string",
                 "format": "file-path",
                 "exists": true,
-                "pattern": "^([\\S\\s]*\\/)?[^\\s\\/]+\\.f(ast)?q\\.gz$",
-                "errorMessage": "FastQ file for reads 1 must be provided, cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
+                "pattern": "^\\S+\\.(bam|cram|fa|fa.gz|fasta|fasta.gz|fq|fq.gz|fastq|fastq.gz)$",
+                "errorMessage": "Data file for reads cannot contain spaces and must be BAM/CRAM/FASTQ/FASTA"
             },
-            "fastq_2": {
+            "library": {
                 "type": "string",
-                "format": "file-path",
-                "exists": true,
-                "pattern": "^([\\S\\s]*\\/)?[^\\s\\/]+\\.f(ast)?q\\.gz$",
-                "errorMessage": "FastQ file for reads 2 cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
+                "pattern": "^\\S*$",
+                "errorMessage": "Library information cannot contain spaces",
+                "default": "",
+                "meta": ["library"]
+            },
+            "barcode": {
+                "type": "string",
+                "pattern": "^\\S*$",
+                "errorMessage": "Sample barcode cannot contain spaces",
+                "default": "",
+                "meta": ["barcode"]
             }
         },
-        "required": ["sample", "fastq_1"]
+        "required": ["sample", "datatype", "datafile"]
     }
 }

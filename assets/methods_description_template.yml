@@ -1,0 +1,23 @@
+id: "sanger-tol-readmapping-methods-description"
+description: "Suggested text and references to use when describing the sanger-tol/readmapping pipeline in the methods section of a publication."
+section_name: "sanger-tol/readmapping Methods Description"
+section_href: "https://github.com/sanger-tol/readmapping"
+plot_type: "html"
+data: |
+  <h4>Methods</h4>
+  <p>Raw sequencing data were processed using the sanger-tol/readmapping pipeline v${workflow.manifest.version} ${doi_text}, part of the sanger-tol collection of workflows, developed using nf-core/tools (<a href="https://doi.org/10.1038/s41587-020-0439-x">Ewels et al., 2020</a>).</p>
+  <p>The pipeline aligns short and long reads from Illumina, HiC, PacBio, and Nanopore technologies to a genome assembly. Built with Nextflow v${workflow.nextflow.version} (<a href="https://doi.org/10.1038/nbt.3820">Di Tommaso et al., 2017</a>), it utilizes Docker/Singularity containers for reproducibility and portability. The pipeline was executed with the following command:</p>
+  <pre><code>${workflow.commandLine}</code></pre>
+  <h4>References</h4>
+  <ul>
+    <li>Di Tommaso, P., Chatzou, M., Floden, E. W., Barja, P. P., Palumbo, E., & Notredame, C. (2017). Nextflow enables reproducible computational workflows. Nature Biotechnology, 35(4), 316-319. <a href="https://doi.org/10.1038/nbt.3820">https://doi.org/10.1038/nbt.3820</a></li>
+    <li>Ewels, P. A., Peltzer, A., Fillinger, S., Patel, H., Alneberg, J., Wilm, A., Garcia, M. U., Di Tommaso, P., & Nahnsen, S. (2020). The nf-core framework for community-curated bioinformatics pipelines. Nature Biotechnology, 38(3), 276-278. <a href="https://doi.org/10.1038/s41587-020-0439-x">https://doi.org/10.1038/s41587-020-0439-x</a></li>
+  </ul>
+  <div class="alert alert-info">
+    <h5>Notes:</h5>
+    <ul>
+      ${nodoi_text}
+      <li>The command above does not include parameters contained in any configs or profiles that may have been used. Ensure the config file is also uploaded with your publication!</li>
+      <li>All software used during this run should be cited. Check the "Software Versions" section of this report to obtain accurate version information.</li>
+    </ul>
+  </div>
