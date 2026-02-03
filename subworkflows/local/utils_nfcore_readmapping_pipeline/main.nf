@@ -29,10 +29,10 @@ workflow PIPELINE_INITIALISATION {
     take:
     version           // boolean: Display version and exit
     validate_params   // boolean: Boolean whether to validate parameters against the schema at runtime
-    monochrome_logs   // boolean: Do not use coloured log outputs
+    // monochrome_logs   // boolean: Do not use coloured log outputs
     nextflow_cli_args //   array: List of positional nextflow CLI args
     outdir            //  string: The output directory where the results will be saved
-    input             //  string: Path to input samplesheet
+    // input             //  string: Path to input samplesheet
     help              // boolean: Display help message and exit
     help_full         // boolean: Show the full help message
     show_hidden       // boolean: Show hidden parameters in the help message
@@ -111,20 +111,20 @@ workflow PIPELINE_INITIALISATION {
         params.bwamem2_index
     ]
 
-    for (param in checkPathParamList) {
-        if (param) { file(param, checkIfExists: true) }
+    checkPathParamList.findAll { param -> param }.each { param ->
+        file(param, checkIfExists: true)
     }
 
     // Create channels from input paths
-    ch_fasta = params.fasta ? Channel.fromPath(params.fasta) : Channel.empty().tap { error 'Genome fasta file not specified!' }
-    ch_header = params.header ? Channel.fromPath(params.header) : Channel.empty()
+    ch_fasta = params.fasta ? channel.fromPath(params.fasta) : channel.empty().tap { error 'Genome fasta file not specified!' }
+    ch_header = params.header ? channel.fromPath(params.header) : channel.empty()
 
 
     //
     // Create channel from input file provided through params.input
     //
 
-    Channel
+    channel
         .fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
         .map { meta, datafile ->
             def new_meta = meta + [id: file(datafile).baseName]
@@ -207,9 +207,9 @@ def validateInputParameters() {
     if (!params.outfmt) {
         log.error "Output format not specified. Please specify '--outfmt bam', '--outfmt cram', or both separated by a comma."
     } else {
-        def outfmtOptions = params.outfmt.split(',').collect { it.trim() }
+        def outfmtOptions = params.outfmt.split(',').collect { fmt -> fmt.trim() }
         def validOutfmtOptions = ['bam', 'cram']
-        def invalidOptions = outfmtOptions.findAll { !(it in validOutfmtOptions) }
+        def invalidOptions = outfmtOptions.findAll { fmt -> !(fmt in validOutfmtOptions) }
 
         if (invalidOptions) {
             log.error "Invalid output format(s) specified: '${invalidOptions.join(', ')}'. Valid options are 'bam' or 'cram'."
@@ -238,7 +238,7 @@ def validateInputSamplesheet(channel) {
         meta.sample = meta.sample.replace(" ", "_")
 
         // Validate that the file path is non-empty and has a valid format
-        if (!file || !validFormats.any { file.toString().endsWith(it) }) {
+        if (!file || !validFormats.any { fmt -> file.toString().endsWith(fmt) }) {
             error("Data file is required and must have a valid extension: ${file}")
         }
 

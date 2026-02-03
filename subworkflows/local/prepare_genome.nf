@@ -13,7 +13,7 @@ workflow PREPARE_GENOME {
     fasta    // channel: [ meta, /path/to/fasta ]
 
     main:
-    ch_versions = Channel.empty()
+    ch_versions = channel.empty()
 
     // Uncompress genome fasta file if required
     if ( params.fasta.endsWith('.gz') ) {
@@ -24,8 +24,8 @@ workflow PREPARE_GENOME {
     }
 
     ch_unzipped
-    | map { meta, fa -> [ meta + [id: fa.baseName, genome_size: fa.size()], fa] }
-    | set { ch_fasta }
+    .map { meta, fa -> [ meta + [id: fa.baseName, genome_size: fa.size()], fa] }
+    .set { ch_fasta }
 
     // Unmask genome fasta
     UNMASK ( ch_fasta )
@@ -34,10 +34,10 @@ workflow PREPARE_GENOME {
     // Generate BWA index
     if ( checkShortReads( params.input ) ) {
         if ( params.bwamem2_index ) {
-            Channel.fromPath ( params.bwamem2_index )
-            | combine ( ch_fasta )
-            | map { bwa, meta, fa -> [ meta, bwa ] }
-            | set { ch_bwamem }
+            channel.fromPath ( params.bwamem2_index )
+            .combine ( ch_fasta )
+            .map { bwa, meta, _fa -> [ meta, bwa ] }
+            .set { ch_bwamem }
 
             if ( params.bwamem2_index.endsWith('.tar.gz') ) {
                 ch_bwamem2_index = UNTAR ( ch_bwamem ).untar
@@ -51,7 +51,7 @@ workflow PREPARE_GENOME {
             ch_versions      = ch_versions.mix ( BWAMEM2_INDEX.out.versions )
         }
     } else {
-        ch_bwamem2_index = Channel.empty()
+        ch_bwamem2_index = channel.empty()
     }
 
 
@@ -73,7 +73,7 @@ def checkShortReads(filePath, columnToCheck="datatype") {
 
     // Extract the header and find the index of the column
     def header = csvLines[0].split(',')
-    def columnIndex = header.findIndexOf { it == columnToCheck }
+    def columnIndex = header.findIndexOf { h -> h == columnToCheck }
 
     // Check if the column index was found
     if (columnIndex == -1) {

@@ -28,27 +28,27 @@ workflow CONVERT_STATS {
 
 
     main:
-    ch_versions = Channel.empty()
+    ch_versions = channel.empty()
 
     // Split outfmt parameter into a list
-    def outfmt_options = params.outfmt.split(',').collect { it.trim() }
+    def outfmt_options = params.outfmt.split(',').collect { fmt -> fmt.trim() }
 
     // (Optionally) Compress the quality scores of Illumina and PacBio CCS alignments
     if ( params.compression == "crumble" ) {
         bam
-        | branch {
-            meta, bam ->
+        .branch {
+            meta, _bam ->
                 run_crumble: meta.datatype == "hic" || meta.datatype == "illumina" || meta.datatype == "pacbio"
                 no_crumble: true
         }
-        | set { crumble_selector }
+        .set { crumble_selector }
 
         CRUMBLE ( crumble_selector.run_crumble, [], [] )
         ch_versions = ch_versions.mix( CRUMBLE.out.versions )
 
         CRUMBLE.out.bam
-        | mix( crumble_selector.no_crumble )
-        | set { ch_bams_for_renaming }
+        .mix( crumble_selector.no_crumble )
+        .set { ch_bams_for_renaming }
     } else {
         ch_bams_for_renaming = bam
     }
@@ -57,12 +57,12 @@ workflow CONVERT_STATS {
     CHANGE_NAME ( ch_bams_for_renaming, fasta )
 
     CHANGE_NAME.out.file
-    | map { meta, bam -> [meta, bam, []] }
-    | set { ch_renamed_bams }
+    .map { meta, bam_file -> [meta, bam_file, []] }
+    .set { ch_renamed_bams }
 
     // (Optionally) convert to CRAM if it's specified in outfmt
-    ch_cram = Channel.empty()
-    ch_crai = Channel.empty()
+    ch_cram = channel.empty()
+    ch_crai = channel.empty()
 
     if ( "cram" in outfmt_options ) {
         SAMTOOLS_CRAM ( ch_renamed_bams, fasta, [], [] )
@@ -74,8 +74,8 @@ workflow CONVERT_STATS {
     }
 
     // Re-generate BAM index if BAM is in outfmt
-    ch_bam = Channel.empty()
-    ch_bai = Channel.empty()
+    ch_bam = channel.empty()
+    ch_bai = channel.empty()
 
     if ( "bam" in outfmt_options ) {
         // Reindex BAM

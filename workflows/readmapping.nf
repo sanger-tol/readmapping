@@ -54,30 +54,30 @@ workflow READMAPPING {
 
     main:
     // Initialize an empty versions channel
-    ch_versions      = Channel.empty()
-    ch_multiqc_files = Channel.empty()
-    multiqc_report   = Channel.empty()
-    reports          = Channel.empty()
+    ch_versions      = channel.empty()
+    ch_multiqc_files = channel.empty()
+    multiqc_report   = channel.empty()
+    reports          = channel.empty()
 
     //
     // SUBWORKFLOW: Read in samplesheet, validate and stage input files
     //
     INPUT_CHECK ( ch_samplesheet ).reads
-    | branch {
-        meta, reads ->
+    .branch {
+        meta, _reads ->
             hic : meta.datatype == "hic"
             illumina : meta.datatype == "illumina"
             pacbio : meta.datatype == "pacbio"
             clr : meta.datatype == "pacbio_clr"
             ont : meta.datatype == "ont"
     }
-    | set { ch_reads }
+    .set { ch_reads }
 
     ch_versions = ch_versions.mix ( INPUT_CHECK.out.versions )
 
     ch_fasta
-    | map { [ [ id: it.baseName ], it ] }
-    | set { ch_genome }
+    .map { fasta -> [ [ id: fasta.baseName ], fasta ] }
+    .set { ch_genome }
 
     PREPARE_GENOME ( ch_genome )
     ch_versions = ch_versions.mix ( PREPARE_GENOME.out.versions )
@@ -86,11 +86,11 @@ workflow READMAPPING {
     // Control quality of input files
     //
     INPUT_CHECK.out.reads
-    | branch { meta, reads ->
+    .branch { _meta, reads ->
                 cram:  reads.getName().endsWith("cram")
                 other: true
     }
-    | set { ch_fastqc_reads }
+    .set { ch_fastqc_reads }
 
     // Convert cram to FASTQs
     SAMTOOLS_COLLATETOFASTQ ( ch_fastqc_reads.cram, true )
@@ -101,7 +101,7 @@ workflow READMAPPING {
     reports = reports.mix ( FASTQC.out.zip )
 
     ch_versions = ch_versions
-    | mix ( SAMTOOLS_COLLATETOFASTQ.out.versions )
+    .mix ( SAMTOOLS_COLLATETOFASTQ.out.versions )
 
     //
     // Create channel for vector DB
@@ -110,17 +110,17 @@ workflow READMAPPING {
     if ( ch_reads.pacbio || ch_reads.clr ) {
         if ( params.hifi_adapter_db.endsWith( '.tar.gz' ) ) {
             UNTAR ( [ [:], params.hifi_adapter_db ] ).untar
-            | set { ch_hifi_adapter_db }
+            .set { ch_hifi_adapter_db }
             ch_versions = ch_versions.mix ( UNTAR.out.versions )
 
         } else {
-            Channel.fromPath ( params.hifi_adapter_db )
-            | set { ch_hifi_adapter_db }
+            channel.fromPath ( params.hifi_adapter_db )
+            .set { ch_hifi_adapter_db }
         }
     }
 
-    ch_hifi_adapter_yaml = Channel.fromPath ( params.hifi_adapter_yaml ).collect()
-    ch_uli_adapter      = Channel.fromPath ( params.uli_adapter ).collect()
+    ch_hifi_adapter_yaml = channel.fromPath ( params.hifi_adapter_yaml ).collect()
+    ch_uli_adapter      = channel.fromPath ( params.uli_adapter ).collect()
 
     //
     // SUBWORKFLOW: Align raw reads to genome
@@ -136,7 +136,7 @@ workflow READMAPPING {
     ALIGN_HIC ( ch_hic.fasta, ch_hic.cram, params.short_aligner, params.chunk_size )
     HIC_MERGE_SAMPLES ( ALIGN_HIC.out.bam )
 
-    ALIGN_ILLUMINA ( PREPARE_GENOME.out.fasta, PREPARE_GENOME.out.fasta, ch_reads.illumina )
+    ALIGN_ILLUMINA ( PREPARE_GENOME.out.fasta, ch_reads.illumina )
     ch_versions = ch_versions.mix ( ALIGN_ILLUMINA.out.versions )
 
     ALIGN_HIFI ( PREPARE_GENOME.out.fasta, ch_reads.pacbio, ch_hifi_adapter_db, ch_hifi_adapter_yaml, ch_uli_adapter )
@@ -151,12 +151,12 @@ workflow READMAPPING {
     ch_versions = ch_versions.mix ( ALIGN_ONT.out.versions )
 
     // gather alignments
-    ch_aligned_bams = Channel.empty()
-    | mix( HIC_MERGE_SAMPLES.out.bam )
-    | mix( ALIGN_ILLUMINA.out.bam )
-    | mix( ALIGN_HIFI.out.bam )
-    | mix( ALIGN_CLR.out.bam )
-    | mix( ALIGN_ONT.out.bam )
+    ch_aligned_bams = channel.empty()
+    .mix( HIC_MERGE_SAMPLES.out.bam )
+    .mix( ALIGN_ILLUMINA.out.bam )
+    .mix( ALIGN_HIFI.out.bam )
+    .mix( ALIGN_CLR.out.bam )
+    .mix( ALIGN_ONT.out.bam )
 
     // convert to cram and gather stats
     CONVERT_STATS ( ch_aligned_bams, PREPARE_GENOME.out.fasta, ch_header )
@@ -168,24 +168,41 @@ workflow READMAPPING {
     //
     // Collate and save software versions
     //
-    softwareVersionsToYAML(ch_versions)
-    | collectFile (
+    def topic_versions = channel.topic("versions")
+        .distinct()
+        .branch { entry ->
+            versions_file: entry instanceof Path
+            versions_tuple: true
+        }
+
+    def topic_versions_string = topic_versions.versions_tuple
+        .map { process, tool, version ->
+            [ process[process.lastIndexOf(':')+1..-1], "  ${tool}: ${version}" ]
+        }
+        .groupTuple(by:0)
+        .map { process, tool_versions ->
+            tool_versions.unique().sort()
+            "${process}:\n${tool_versions.join('\n')}"
+        }
+
+    softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
+        .mix(topic_versions_string)
+        .collectFile(
             storeDir: "${params.outdir}/pipeline_info",
-            name:  'readmapping_software_'  + 'mqc_versions.yml',
+            name:  'readmapping_software_mqc_'  + 'versions.yml',
             sort: true,
             newLine: true
-    )
-    | set { ch_collated_versions }
+        ).set { ch_collated_versions }
 
-    reports = reports.map { meta, file -> file }
+    reports = reports.map { _meta, file -> file }
 
-    ch_multiqc_config                     = Channel.fromPath("$projectDir/assets/multiqc_config.yml", checkIfExists: true)
-    ch_multiqc_custom_config              = params.multiqc_config ? Channel.fromPath(params.multiqc_config, checkIfExists: true) : Channel.empty()
-    ch_multiqc_logo                       = params.multiqc_logo ? Channel.fromPath(params.multiqc_logo, checkIfExists: true) : Channel.empty()
+    ch_multiqc_config                     = channel.fromPath("$projectDir/assets/multiqc_config.yml", checkIfExists: true)
+    ch_multiqc_custom_config              = params.multiqc_config ? channel.fromPath(params.multiqc_config, checkIfExists: true) : channel.empty()
+    ch_multiqc_logo                       = params.multiqc_logo ? channel.fromPath(params.multiqc_logo, checkIfExists: true) : channel.empty()
     summary_params                        = paramsSummaryMap(workflow, parameters_schema: "nextflow_schema.json")
-    ch_workflow_summary                   = Channel.value(paramsSummaryMultiqc(summary_params))
+    ch_workflow_summary                   = channel.value(paramsSummaryMultiqc(summary_params))
     ch_multiqc_custom_methods_description = params.multiqc_methods_description ? file(params.multiqc_methods_description, checkIfExists: true) : file("$projectDir/assets/methods_description_template.yml", checkIfExists: true)
-    ch_methods_description                = Channel.value(methodsDescriptionText(ch_multiqc_custom_methods_description))
+    ch_methods_description                = channel.value(methodsDescriptionText(ch_multiqc_custom_methods_description))
     ch_multiqc_files                      = ch_multiqc_files.mix(ch_workflow_summary.collectFile(name: 'workflow_summary_mqc.yaml'))
     ch_multiqc_files                      = ch_multiqc_files.mix(ch_collated_versions)
     ch_multiqc_files                      = ch_multiqc_files.mix(reports)
@@ -203,7 +220,7 @@ workflow READMAPPING {
 
 
     emit:
-    versions       = ch_versions                 // channel: [ path(versions.yml) ]
+    versions       = ch_collated_versions                 // channel: [ path(versions.yml) ]
 
 }
 

@@ -17,7 +17,6 @@ process CRAM_FILTER_MINIMAP2_FILTER5END_FIXMATE_SORT {
     task.ext.when == null || task.ext.when
 
     script:
-    def args = task.ext.args ?: ''
     def args1 = task.ext.args1 ?: ''
     def args2 = task.ext.args2 ?: ''
     def args3 = task.ext.args3 ?: ''
@@ -26,9 +25,9 @@ process CRAM_FILTER_MINIMAP2_FILTER5END_FIXMATE_SORT {
     def VERSION = "1.15" // Staden_io versions break the pipeline
     def hic_agrs = meta.datatype == "hic" ?
         """
-        ${projectDir}/bin/grep_pg.sh | \\
-        perl ${projectDir}/bin/filter_five_end.pl | \\
-        ${projectDir}/bin/awk_filter_reads.sh | \\
+        grep_pg.sh | \\
+        filter_five_end.pl | \\
+        awk_filter_reads.sh | \\
         """ : ""
     def shortread_args = meta.datatype in [ "hic", "illumina" ] ? "samtools fixmate ${args3} - - |" : ""
 
@@ -50,8 +49,7 @@ process CRAM_FILTER_MINIMAP2_FILTER5END_FIXMATE_SORT {
 
     stub:
     def prefix  = task.ext.prefix ?: "${meta.id}"
-    def base    = "45022_3#2"
-    def chunkid = "1"
+    def VERSION = "1.15" // Staden_io versions break the pipeline
     """
     touch ${prefix}_${base}_${chunkid}_mm.bam
 

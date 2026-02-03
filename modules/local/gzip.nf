@@ -30,7 +30,6 @@ process GUNZIP {
     """
 
     stub:
-    def args = task.ext.args ?: ''
     """
     touch "${input}.gz"
     cat <<-END_VERSIONS > versions.yml
