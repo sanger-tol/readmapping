@@ -6,7 +6,7 @@ include { SAMTOOLS_ADDREPLACERG             } from '../../modules/local/samtools
 include { SAMTOOLS_INDEX                    } from '../../modules/nf-core/samtools/index/main'
 include { GENERATE_CRAM_CSV                 } from '../../modules/local/generate_cram_csv'
 include { MINIMAP2_MAPREDUCE                } from '../../subworkflows/local/minimap2_mapreduce'
-include { SAMTOOLS_SORMADUP as CONVERT_CRAM } from '../../modules/local/samtools_sormadup'
+include { SAMTOOLS_VIEW as CONVERT_CRAM     } from '../../modules/nf-core/samtools/view/main'
 include { MERGE_OUTPUT                      } from '../../subworkflows/local/merge_output'
 
 
@@ -21,10 +21,10 @@ workflow ALIGN_ONT {
     ch_merged_bam   = channel.empty()
 
     // Convert FASTQ to CRAM
-    CONVERT_CRAM ( reads, fasta )
-    ch_versions = ch_versions.mix ( CONVERT_CRAM.out.versions )
+    reads_with_dummy_index = reads.map { meta, file -> [ meta, file, [] ] }
+    CONVERT_CRAM ( reads_with_dummy_index, fasta, [], [] )
 
-    SAMTOOLS_ADDREPLACERG ( CONVERT_CRAM.out.bam )
+    SAMTOOLS_ADDREPLACERG ( CONVERT_CRAM.out.cram )
     ch_versions = ch_versions.mix ( SAMTOOLS_ADDREPLACERG.out.versions )
 
     SAMTOOLS_ADDREPLACERG.out.cram

@@ -1,5 +1,5 @@
 {
-    "-profile test": {
+    "-profile test --filter_pacbio false": {
         "content": [
             404,
             {
