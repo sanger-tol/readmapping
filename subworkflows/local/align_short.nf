@@ -5,7 +5,7 @@
 include { CRAM_MAP_ILLUMINA_HIC as CRAM_MAP_ILLUMINA } from '../../subworkflows/sanger-tol/cram_map_illumina_hic'
 include { MERGE_OUTPUT                               } from '../../subworkflows/local/merge_output'
 include { SAMTOOLS_ADDREPLACERG                      } from '../../modules/local/samtools_addreplacerg'
-include { SAMTOOLS_SORMADUP as CONVERT_CRAM          } from '../../modules/local/samtools_sormadup'
+include { SAMTOOLS_VIEW as CONVERT_CRAM              } from '../../modules/nf-core/samtools/view/main'
 
 workflow ALIGN_SHORT {
     take:
@@ -27,10 +27,10 @@ workflow ALIGN_SHORT {
 
 
     // Convert FASTQ to CRAM only if FASTQ were provided as input
-    CONVERT_CRAM ( ch_reads.fastq, fasta )
-    ch_versions = ch_versions.mix ( CONVERT_CRAM.out.versions )
+    reads_with_dummy_index = ch_reads.fastq.map { meta, file -> [ meta, file, [] ] }
+    CONVERT_CRAM ( reads_with_dummy_index, fasta, [], [] )
 
-    SAMTOOLS_ADDREPLACERG ( CONVERT_CRAM.out.bam )
+    SAMTOOLS_ADDREPLACERG ( CONVERT_CRAM.out.cram )
     ch_versions = ch_versions.mix ( SAMTOOLS_ADDREPLACERG.out.versions )
 
     SAMTOOLS_ADDREPLACERG.out.cram
