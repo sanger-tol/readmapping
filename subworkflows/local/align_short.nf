@@ -17,13 +17,12 @@ workflow ALIGN_SHORT {
     ch_versions = channel.empty()
 
     // Check file types and branch
-    reads
+    ch_reads = reads
     .branch {
         _meta, reads_files ->
             fastq : reads_files.findAll { file -> file.getName().toLowerCase() =~ /.*f.*\.gz/ }
             cram : true
     }
-    .set { ch_reads }
 
 
     // Convert FASTQ to CRAM only if FASTQ were provided as input
@@ -33,9 +32,8 @@ workflow ALIGN_SHORT {
     SAMTOOLS_ADDREPLACERG ( CONVERT_CRAM.out.cram )
     ch_versions = ch_versions.mix ( SAMTOOLS_ADDREPLACERG.out.versions )
 
-    SAMTOOLS_ADDREPLACERG.out.cram
+    ch_reads_cram = SAMTOOLS_ADDREPLACERG.out.cram
     .mix ( ch_reads.cram )
-    .set { ch_reads_cram }
 
     ch_illumina = ch_reads_cram
     .combine(fasta)

@@ -13,12 +13,11 @@ workflow MERGE_OUTPUT {
     ch_bam = ch_bam.map{ meta, bam -> [ meta + [merged: false], bam ]}
 
     if ( params.merge_output ) {
-        ch_bam
+        ch_multi_bams = ch_bam
         .map { meta, bam -> [['id': meta.id.split('_')[0..-2].join('_'), 'datatype': meta.datatype], meta.read_count, bam] }
         .groupTuple( by: [0] )
         .map { meta, read_counts, bams -> [meta + [read_count: read_counts.sum()], bams] }
         .filter { _meta, bams -> bams.size() > 1 }
-        .set { ch_multi_bams }
 
         // Merge, but only if there is more than 1 file
         SAMTOOLS_MERGE ( ch_multi_bams, [ [], [] ], [ [], [] ], [ [], [] ] )

@@ -10,7 +10,7 @@ workflow CREATE_CRAM_FILTER_INPUT {
     ch_versions = channel.empty()
 
     // Generate input channel for CRAM_FILTER
-    csv_ch
+    ch_cram_filter_input = csv_ch
     .splitCsv()
     .combine(fasta)
     .map { cram_id, cram_info, ref_id, ref_dir ->
@@ -34,7 +34,6 @@ workflow CREATE_CRAM_FILTER_INPUT {
             ref_dir
         )
     }
-    .set { ch_cram_filter_input }
 
     CRAM_FILTER ( ch_cram_filter_input )
     ch_versions = ch_versions.mix ( CRAM_FILTER.out.versions )

@@ -22,9 +22,8 @@ workflow PREPARE_GENOME {
         ch_unzipped = fasta
     }
 
-    ch_unzipped
+    ch_fasta = ch_unzipped
     .map { meta, fa -> [ meta + [id: fa.baseName, genome_size: fa.size()], fa] }
-    .set { ch_fasta }
 
     // Unmask genome fasta
     UNMASK ( ch_fasta )
@@ -33,10 +32,9 @@ workflow PREPARE_GENOME {
     // Generate BWA index
     if ( checkShortReads( params.input ) ) {
         if ( params.bwamem2_index ) {
-            channel.fromPath ( params.bwamem2_index )
+            ch_bwamem = channel.fromPath ( params.bwamem2_index )
             .combine ( ch_fasta )
             .map { bwa, meta, _fa -> [ meta, bwa ] }
-            .set { ch_bwamem }
 
             if ( params.bwamem2_index.endsWith('.tar.gz') ) {
                 ch_bwamem2_index = UNTAR ( ch_bwamem ).untar
