@@ -18,7 +18,6 @@ workflow PREPARE_GENOME {
     // Uncompress genome fasta file if required
     if ( params.fasta.endsWith('.gz') ) {
         ch_unzipped = GUNZIP ( fasta ).gunzip
-        ch_versions = ch_versions.mix ( GUNZIP.out.versions )
     } else {
         ch_unzipped = fasta
     }

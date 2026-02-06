@@ -146,7 +146,6 @@ workflow ALIGN_PACBIO {
     // Align without map reduce
     // Align Fastq to Genome with minimap2. bam_format is set to true, making the output a *sorted* BAM
     MINIMAP2_ALIGN ( ch_reads_for_align, fasta, true, "csi", false, false )
-    ch_versions = ch_versions.mix ( MINIMAP2_ALIGN.out.versions.first() )
 
     MINIMAP2_ALIGN.out.bam
     .map { meta, file -> [meta.id, meta, file] }
