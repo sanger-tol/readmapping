@@ -41,7 +41,7 @@
                     "gunzip": 1.13
                 },
                 "GZIP_STATS": {
-                    "gzip": 1.1
+                    "pigz": 2.8
                 },
                 "HIFI_TRIMMER": {
                     "hifi_trimmer": "1.2.2"
@@ -124,6 +124,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-02-07T19:07:38.796279284"
+        "timestamp": "2026-02-07T19:44:37.987643026"
     }
 }
