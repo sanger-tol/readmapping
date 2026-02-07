@@ -43,7 +43,7 @@
                     "gunzip": 1.13
                 },
                 "GZIP_STATS": {
-                    "gzip": 1.1
+                    "pigz": 2.8
                 },
                 "MINIMAP2_ALIGN": {
                     "minimap2": "2.29-r1283"
@@ -171,6 +171,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-02-07T19:17:46.827757961"
+        "timestamp": "2026-02-07T19:53:18.730797404"
     }
 }
