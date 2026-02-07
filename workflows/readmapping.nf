@@ -60,7 +60,7 @@ workflow READMAPPING {
     //
     // SUBWORKFLOW: Read in samplesheet, validate and stage input files
     //
-    INPUT_CHECK ( ch_samplesheet ).reads
+    ch_reads = INPUT_CHECK ( ch_samplesheet ).reads
     .branch {
         meta, _reads ->
             short_ : meta.datatype == "hic" || meta.datatype == "illumina"
@@ -68,13 +68,11 @@ workflow READMAPPING {
             clr : meta.datatype == "pacbio_clr"
             ont : meta.datatype == "ont"
     }
-    .set { ch_reads }
 
     ch_versions = ch_versions.mix ( INPUT_CHECK.out.versions )
 
-    ch_fasta
+    ch_genome = ch_fasta
     .map { fasta -> [ [ id: fasta.baseName ], fasta ] }
-    .set { ch_genome }
 
     PREPARE_GENOME ( ch_genome )
     ch_versions = ch_versions.mix ( PREPARE_GENOME.out.versions )
@@ -82,12 +80,11 @@ workflow READMAPPING {
     //
     // Control quality of input files
     //
-    INPUT_CHECK.out.reads
+    ch_fastqc_reads = INPUT_CHECK.out.reads
     .branch { _meta, reads ->
                 cram:  reads.getName().endsWith("cram")
                 other: true
     }
-    .set { ch_fastqc_reads }
 
     // Convert cram to FASTQs
     SAMTOOLS_COLLATETOFASTQ ( ch_fastqc_reads.cram, true )
@@ -106,13 +103,11 @@ workflow READMAPPING {
     // ***PacBio condition does not work - needs fixing***
     if ( ch_reads.pacbio || ch_reads.clr ) {
         if ( params.hifi_adapter_db.endsWith( '.tar.gz' ) ) {
-            UNTAR ( [ [:], params.hifi_adapter_db ] ).untar
-            .set { ch_hifi_adapter_db }
+            ch_hifi_adapter_db = UNTAR ( [ [:], params.hifi_adapter_db ] ).untar
             ch_versions = ch_versions.mix ( UNTAR.out.versions )
 
         } else {
-            channel.fromPath ( params.hifi_adapter_db )
-            .set { ch_hifi_adapter_db }
+            ch_hifi_adapter_db = channel.fromPath ( params.hifi_adapter_db )
         }
     }
 
@@ -171,14 +166,14 @@ workflow READMAPPING {
             "${process}:\n${tool_versions.join('\n')}"
         }
 
-    softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
+    ch_collated_versions = softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
         .mix(topic_versions_string)
         .collectFile(
             storeDir: "${params.outdir}/pipeline_info",
             name:  'readmapping_software_mqc_'  + 'versions.yml',
             sort: true,
             newLine: true
-        ).set { ch_collated_versions }
+        )
 
     reports = reports.map { _meta, file -> file }
 
