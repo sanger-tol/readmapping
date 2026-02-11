@@ -40,7 +40,6 @@ workflow ALIGN_ONT {
     // SUBWORKFLOW: mapping long reads using minimap2 or bwamem2
     //
     CRAM_MAP_LONG_READS ( ch_align_input.fasta, ch_align_input.cram, params.chunk_size )
-    ch_versions = ch_versions.mix ( CRAM_MAP_LONG_READS.out.versions )
 
     //
     // SUBWORKFLOW: Merge all alignment output by specimen

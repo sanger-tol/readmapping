@@ -72,7 +72,6 @@ workflow ALIGN_PACBIO {
 
     // Index the CRAM file
     SAMTOOLS_INDEX ( SAMTOOLS_ADDREPLACERG.out.cram )
-    ch_versions = ch_versions.mix( SAMTOOLS_INDEX.out.versions )
 
     SAMTOOLS_ADDREPLACERG.out.cram
     .join ( SAMTOOLS_INDEX.out.crai )
@@ -159,9 +158,7 @@ workflow ALIGN_PACBIO {
     //
     SAMTOOLS_MERGE (
         collected_files_for_merge,
-        fasta,
-        [ [], [] ],
-        [ [], [] ]
+        fasta + [ [], [] ]
     )
 
     //

@@ -21,7 +21,7 @@ workflow MERGE_OUTPUT {
         .set { ch_multi_bams }
 
         // Merge, but only if there is more than 1 file
-        SAMTOOLS_MERGE ( ch_multi_bams, [ [], [] ], [ [], [] ], [ [], [] ] )
+        SAMTOOLS_MERGE ( ch_multi_bams, [[],[],[],[]] )
 
         ch_bam = SAMTOOLS_MERGE.out.bam
         .map { meta, bam -> [meta + [merged: true], bam] }
