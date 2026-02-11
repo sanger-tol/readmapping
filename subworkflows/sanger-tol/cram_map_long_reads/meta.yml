@@ -42,12 +42,6 @@ output:
         Channel containing the BAM files describing long-read alignments to the input assemblies
         Structure: [ val(meta), path(bam) ]
       pattern: "*.bam"
-  - versions:
-      type: file
-      description: |
-        File containing software versions
-        Structure: [ path(versions.yml) ]
-      pattern: "versions.yml"
 authors:
   - "@prototaxites"
   - "@sainsachiko"
