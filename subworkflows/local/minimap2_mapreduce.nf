@@ -29,7 +29,7 @@ workflow MINIMAP2_MAPREDUCE {
     //
     // LOGIC: generate input channel for mapping
     //
-    csv_ch
+    ch_filtering_input = csv_ch
     .splitCsv()
     .combine ( fasta )
     .combine ( MINIMAP2_INDEX.out.index )
@@ -51,7 +51,6 @@ workflow MINIMAP2_MAPREDUCE {
             ref_dir
         )
     }
-    .set { ch_filtering_input }
 
     //
     // MODULE: Map hic reads by 10,000 container per time
@@ -65,11 +64,10 @@ workflow MINIMAP2_MAPREDUCE {
     //
     // LOGIC: Preparing BAMs for merging
     //
-    mappedbam_ch
+    collected_files_for_merge = mappedbam_ch
     .map { meta, file -> [meta.id, meta, file] }
     .groupTuple()
     .map { _id, metas, files -> [ metas[0] - [chunk_id: metas[0].chunk_id], files ] }
-    .set { collected_files_for_merge }
 
     //
     // MODULE: Merge position sorted BAM files and mark duplicates

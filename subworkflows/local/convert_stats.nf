@@ -17,7 +17,7 @@ include { SAMTOOLS_FLAGSTAT                 } from '../../modules/nf-core/samtoo
 include { SAMTOOLS_IDXSTATS                 } from '../../modules/nf-core/samtools/idxstats/main'
 include { BLOBTK_DEPTH                      } from '../../modules/local/blobtk_depth'
 include { TABIX_BGZIP as BGZIP_BEDGRAPH     } from '../../modules/nf-core/tabix/bgzip/main'
-include { GUNZIP as GZIP_STATS              } from '../../modules/local/gzip'
+include { PIGZ_COMPRESS as GZIP_STATS       } from '../../modules/nf-core/pigz/compress/main'
 
 
 workflow CONVERT_STATS {
@@ -35,20 +35,18 @@ workflow CONVERT_STATS {
 
     // (Optionally) Compress the quality scores of Illumina and PacBio CCS alignments
     if ( params.compression == "crumble" ) {
-        bam
+        crumble_selector = bam
         .branch {
             meta, _bam ->
                 run_crumble: meta.datatype == "hic" || meta.datatype == "illumina" || meta.datatype == "pacbio"
                 no_crumble: true
         }
-        .set { crumble_selector }
 
         CRUMBLE ( crumble_selector.run_crumble, [], [] )
         ch_versions = ch_versions.mix( CRUMBLE.out.versions )
 
-        CRUMBLE.out.bam
+        ch_bams_for_renaming = CRUMBLE.out.bam
         .mix( crumble_selector.no_crumble )
-        .set { ch_bams_for_renaming }
     } else {
         ch_bams_for_renaming = bam
     }
@@ -56,9 +54,8 @@ workflow CONVERT_STATS {
     // Change name of BAM files to final name for publishing
     CHANGE_NAME ( ch_bams_for_renaming, fasta )
 
-    CHANGE_NAME.out.file
+    ch_renamed_bams = CHANGE_NAME.out.file
     .map { meta, bam_file -> [meta, bam_file, []] }
-    .set { ch_renamed_bams }
 
     // (Optionally) convert to CRAM if it's specified in outfmt
     ch_cram = channel.empty()
@@ -111,7 +108,6 @@ workflow CONVERT_STATS {
     SAMTOOLS_STATS ( ch_for_stats, [[], []] )
 
     GZIP_STATS  ( SAMTOOLS_STATS.out.stats )
-    ch_versions = ch_versions.mix ( GZIP_STATS.out.versions.first() )
 
     // Calculate statistics based on flag values
     SAMTOOLS_FLAGSTAT ( ch_for_stats )

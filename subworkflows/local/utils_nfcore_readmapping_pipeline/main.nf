@@ -124,15 +124,13 @@ workflow PIPELINE_INITIALISATION {
     // Create channel from input file provided through params.input
     //
 
-    channel
+    ch_samplesheet = channel
         .fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
         .map { meta, datafile ->
             def new_meta = meta + [id: file(datafile).baseName]
             return [new_meta, datafile]
         }
-        .set { ch_samplesheet }
-    validateInputSamplesheet(ch_samplesheet)
-        .set { ch_validated_samplesheet }
+    ch_validated_samplesheet = validateInputSamplesheet(ch_samplesheet)
 
     emit:
     samplesheet = ch_validated_samplesheet

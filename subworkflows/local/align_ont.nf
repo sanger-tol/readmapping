@@ -26,8 +26,7 @@ workflow ALIGN_ONT {
     SAMTOOLS_ADDREPLACERG ( CONVERT_CRAM.out.cram )
     ch_versions = ch_versions.mix ( SAMTOOLS_ADDREPLACERG.out.versions )
 
-    SAMTOOLS_ADDREPLACERG.out.cram
-    .set { ch_reads_cram }
+    ch_reads_cram = SAMTOOLS_ADDREPLACERG.out.cram
 
     ch_align_input = ch_reads_cram
     .combine( fasta )
