@@ -7,7 +7,7 @@
                 "nf-core": {
                     "blast/blastn": {
                         "branch": "master",
-                        "git_sha": "9da6f5cc5b9170943be764c0a6926e81ba1ed3b9",
+                        "git_sha": "051e7c60dbdcc5d96ce7814c31426ce776f5319b",
                         "installed_by": ["modules"]
                     },
                     "bwamem2/index": {
@@ -47,7 +47,7 @@
                     },
                     "minimap2/align": {
                         "branch": "master",
-                        "git_sha": "a1589a1910c7b19f9cb9db98b3641d883a45bf4b",
+                        "git_sha": "5c9f8d5b7671237c906abadc9ff732b301ca15ca",
                         "installed_by": ["modules"]
                     },
                     "minimap2/index": {
@@ -62,7 +62,7 @@
                     },
                     "pigz/compress": {
                         "branch": "master",
-                        "git_sha": "447f7bc0fa41dfc2400c8cad4c0291880dc060cf",
+                        "git_sha": "c908ccaf0a5c802b6f8e814d8c5cf85da2364222",
                         "installed_by": ["modules"]
                     },
                     "samtools/faidx": {
@@ -118,7 +118,7 @@
                     },
                     "tar": {
                         "branch": "master",
-                        "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
+                        "git_sha": "5c9f8d5b7671237c906abadc9ff732b301ca15ca",
                         "installed_by": ["modules"]
                     },
                     "untar": {
