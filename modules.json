@@ -40,6 +40,11 @@
                         "git_sha": "5bdb098216aaf5df9c3b6343e6204cd932503c16",
                         "installed_by": ["modules"]
                     },
+                    "gawk": {
+                        "branch": "master",
+                        "git_sha": "76b1f53edcf72798d8515c82f4728ad44b3dd902",
+                        "installed_by": ["modules"]
+                    },
                     "gunzip": {
                         "branch": "master",
                         "git_sha": "96c57dfd98a0641886a67bd449fe33ee2ec0e374",
