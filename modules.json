@@ -7,7 +7,7 @@
                 "nf-core": {
                     "blast/blastn": {
                         "branch": "master",
-                        "git_sha": "051e7c60dbdcc5d96ce7814c31426ce776f5319b",
+                        "git_sha": "4da6a2662e7a5f62dd9c456fde7161ed34b59d1e",
                         "installed_by": ["modules"]
                     },
                     "bwamem2/index": {

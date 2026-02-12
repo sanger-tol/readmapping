@@ -95,7 +95,6 @@ workflow ALIGN_PACBIO {
         ch_versions = ch_versions.mix ( SAMTOOLS_COLLATETOFASTA.out.versions )
 
         BLASTN_HIFI ( SAMTOOLS_COLLATETOFASTA.out.fasta, hifi_adapter_db, [], [], [] )
-        ch_versions = ch_versions.mix ( BLASTN_HIFI.out.versions )
 
         BGZIP_BLASTN ( BLASTN_HIFI.out.txt )
         ch_versions = ch_versions.mix ( BGZIP_BLASTN.out.versions )
