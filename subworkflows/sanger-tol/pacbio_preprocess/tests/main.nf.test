@@ -100,8 +100,7 @@ nextflow_workflow {
                         workflow.out.hifitrimmer_bed,
                         workflow.out.lima_report,
                         workflow.out.lima_summary,
-                        workflow.out.pbmarkdup_stat,
-                        workflow.out.versions
+                        workflow.out.pbmarkdup_stat
                     ).match()
                 }
             )
@@ -178,8 +177,7 @@ nextflow_workflow {
                         workflow.out.hifitrimmer_bed,
                         workflow.out.lima_report,
                         workflow.out.lima_summary,
-                        workflow.out.pbmarkdup_stat,
-                        workflow.out.versions
+                        workflow.out.pbmarkdup_stat
                     ).match()
                 }
             )
@@ -243,8 +241,7 @@ nextflow_workflow {
                         workflow.out.hifitrimmer_bed,
                         workflow.out.lima_report,
                         workflow.out.lima_summary,
-                        workflow.out.pbmarkdup_stat,
-                        workflow.out.versions
+                        workflow.out.pbmarkdup_stat
                     ).match()
                 }
             )
@@ -307,8 +304,7 @@ nextflow_workflow {
                         workflow.out.hifitrimmer_bed,
                         workflow.out.lima_report,
                         workflow.out.lima_summary,
-                        workflow.out.pbmarkdup_stat,
-                        workflow.out.versions
+                        workflow.out.pbmarkdup_stat
                     ).match()
                 }
             )

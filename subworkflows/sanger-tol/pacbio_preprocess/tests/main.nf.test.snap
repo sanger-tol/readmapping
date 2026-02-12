@@ -79,11 +79,6 @@
             ],
             [
                 
-            ],
-            [
-                "versions.yml:md5,69cee3cfe024119268f7e87888a6e077",
-                "versions.yml:md5,69cee3cfe024119268f7e87888a6e077",
-                "versions.yml:md5,69cee3cfe024119268f7e87888a6e077"
             ]
         ],
         "meta": {
@@ -762,19 +757,13 @@
                     },
                     "test_fastq_pbmarkdup.pbmarkdup.log:md5,f685238e8c170c886d7dfb3c22623faf"
                 ]
-            ],
-            [
-                "versions.yml:md5,69cee3cfe024119268f7e87888a6e077",
-                "versions.yml:md5,69cee3cfe024119268f7e87888a6e077",
-                "versions.yml:md5,69cee3cfe024119268f7e87888a6e077",
-                "versions.yml:md5,aed9e2e288889b37196c8d0fd980910c"
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2026-02-10T14:51:02.273117612"
+        "timestamp": "2026-02-12T11:20:53.166861604"
     },
     "acropora cervicornis - non-uli - pbmarkdup - trim": {
         "content": [
@@ -1226,16 +1215,13 @@
                     },
                     "test_fastq_pbmarkdup.pbmarkdup.log:md5,8c2b2839e7af4e8342dcc6480cb2b1b8"
                 ]
-            ],
-            [
-                "versions.yml:md5,aed9e2e288889b37196c8d0fd980910c"
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2026-02-10T11:38:14.192138484"
+        "timestamp": "2026-02-12T13:02:47.038453182"
     },
     "acropora cervicornis - uli - no pbmarkdup - no trim": {
         "content": [
@@ -1317,11 +1303,6 @@
             ],
             [
                 
-            ],
-            [
-                "versions.yml:md5,69cee3cfe024119268f7e87888a6e077",
-                "versions.yml:md5,69cee3cfe024119268f7e87888a6e077",
-                "versions.yml:md5,69cee3cfe024119268f7e87888a6e077"
             ]
         ],
         "meta": {
