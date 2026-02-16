@@ -15,7 +15,6 @@ include { FASTQC                             } from '../modules/nf-core/fastqc'
 include { PREPARE_GENOME                     } from '../subworkflows/local/prepare_genome'
 include { ALIGN_SHORT                        } from '../subworkflows/local/align_short'
 include { ALIGN_LONG                         } from '../subworkflows/local/align_long'
-include { ALIGN_ONT                          } from '../subworkflows/local/align_ont'
 include { CONVERT_STATS                      } from '../subworkflows/local/convert_stats'
 include { MULTIQC                            } from '../modules/nf-core/multiqc'
 /*
@@ -105,12 +104,12 @@ workflow READMAPPING {
     ch_versions = ch_versions.mix ( ALIGN_SHORT.out.versions )
 
 
-    ALIGN_LONG ( 
-        PREPARE_GENOME.out.fasta, 
-        ch_reads.long_, 
+    ALIGN_LONG (
+        PREPARE_GENOME.out.fasta,
+        ch_reads.long_,
         val_pacbio_adapter_fasta,
-        val_pacbio_adapter_yaml, 
-        val_pacbio_uli_adapter, 
+        val_pacbio_adapter_yaml,
+        val_pacbio_uli_adapter,
         params.pacbio_pbmarkdup
     )
 

@@ -13,7 +13,7 @@ include { CRAM_MAP_LONG_READS                        } from '../../subworkflows/
 
 // Include nf-core modules
 include { FASTQC as FASTQC_FILTERED                    } from '../../modules/nf-core/fastqc/main'
-include { GAWK                                         } from '../../modules/nf-core/gawk/main'                                                                                                  
+include { GAWK                                         } from '../../modules/nf-core/gawk/main'
 include { SAMTOOLS_FASTQ                               } from '../../modules/nf-core/samtools/fastq/main'
 include { SAMTOOLS_VIEW as CONVERT_CRAM                } from '../../modules/nf-core/samtools/view/main'
 
@@ -33,32 +33,32 @@ workflow ALIGN_LONG {
 
     if (val_pacbio_adapter_fasta || val_pacbio_adapter_yaml || val_pacbio_uli_adapter || val_pacbio_pbmarkdup) { // pacbio_adapter_fasta, pacbio_adapter_yaml, pacbio_uli_adapter always provided
         ch_reads = reads
-            .branch { meta, reads ->
+            .branch { meta, _reads ->
                 pacbio: meta.datatype == "pacbio"
                 other: true
             }
-       // 
+       //
         // PREPARE INPUT FOR ADAPTER TRIMMING WITH HIFITRIMMER
         //
         // If adapter fasta provided but not yaml, throw error as yaml is needed for adapter trimming with hifitrimmer
-        if ( (val_pacbio_adapter_fasta && !val_pacbio_adapter_yaml) || (!val_pacbio_adapter_fasta && val_pacbio_adapter_yaml) ) { 
+        if ( (val_pacbio_adapter_fasta && !val_pacbio_adapter_yaml) || (!val_pacbio_adapter_fasta && val_pacbio_adapter_yaml) ) {
             log.error("""
             To trim PacBio adapters, please ensure providing both val_pacbio_adapter_fasta and val_pacbio_adapter_yaml for PacBio adapter trimming.
             To skip trimming, please set both val_pacbio_adapter_fasta and val_pacbio_adapter_yaml to false.
-            """) 
+            """)
         }
 
         if (val_pacbio_adapter_fasta && val_pacbio_adapter_yaml) {
             ch_yaml_meta = ch_reads.pacbio
                 .combine( channel.fromPath(val_pacbio_adapter_yaml, checkIfExists: true) )
-                .map { meta, reads, yaml -> [ meta, yaml ] 
+                .map { meta, _reads, yaml -> [ meta, yaml ]
                 }
 
             GAWK( ch_yaml_meta, [], false )
             ch_pacbio_read_yaml = ch_reads.pacbio.combine(GAWK.out.output, by: 0)
             adapter_fasta_for_preprocess = [[id:file( val_pacbio_adapter_fasta ).baseName], val_pacbio_adapter_fasta]
         } else {
-            ch_pacbio_read_yaml = ch_reads.pacbio.map { meta, reads -> [ meta, reads, [] ] } //PacBio reads with dummy yaml
+            ch_pacbio_read_yaml = ch_reads.pacbio.map { meta, read_files -> [ meta, read_files, [] ] } //PacBio reads with dummy yaml
             adapter_fasta_for_preprocess = false
         }
 
@@ -67,23 +67,23 @@ workflow ALIGN_LONG {
         //
         // Branch reads by library type (ULI vs non-ULI)
         ch_pacbio_branched = ch_pacbio_read_yaml
-                .branch { meta, reads, yaml ->
+                .branch { meta, _reads, _yaml ->
                 uli: meta.library == "uli"
                 other: true
             }
         // Preprocess ULI, if ch_uli is empty, this will be skipped
         ch_uli = ch_pacbio_branched.uli
-            .multiMap { meta, reads, yaml ->
-                reads: [ meta, reads ] 
+            .multiMap { meta, read_files, yaml ->
+                reads: [ meta, read_files ]
                 yaml: [ meta, yaml ]
             }
         // As ULI is read-file-level, preprocessing has to be called twice for ULI and non-ULI reads separately
         PACBIO_PREPROCESS_ULI( ch_uli.reads, ch_uli.yaml, adapter_fasta_for_preprocess, val_pacbio_uli_adapter, val_pacbio_pbmarkdup )
 
-        // Preprocess non-ULI 
+        // Preprocess non-ULI
         ch_other = ch_pacbio_branched.other
-            .multiMap { meta, reads, yaml ->
-                reads: [ meta, reads ] 
+            .multiMap { meta, read_files, yaml ->
+                reads: [ meta, read_files ]
                 yaml: [ meta, yaml ]
             }
 
@@ -115,7 +115,7 @@ workflow ALIGN_LONG {
     }
 
     // readmapping take only 1 FASTA
-    CONVERT_CRAM ( reads_to_cram.map{ meta, reads -> [ meta, reads, [] ] }, fasta, [], [] )
+    CONVERT_CRAM ( reads_to_cram.map{ meta, read_files -> [ meta, read_files, [] ] }, fasta, [], [] )
     SAMTOOLS_ADDREPLACERG ( CONVERT_CRAM.out.cram )
     ch_versions = ch_versions.mix ( SAMTOOLS_ADDREPLACERG.out.versions )
 
@@ -124,9 +124,9 @@ workflow ALIGN_LONG {
     // Prepare input for alignment
     ch_align_input = ch_reads_cram
     .combine( fasta )
-    .multiMap { meta, cram, meta_fasta, fasta ->
+    .multiMap { meta, cram, meta_fasta, fasta_file ->
         cram: [ meta_fasta + meta + [ assembly_id: meta_fasta.id ] , cram ]
-        fasta: [ meta_fasta + meta + [ assembly_id: meta_fasta.id ] , fasta ]
+        fasta: [ meta_fasta + meta + [ assembly_id: meta_fasta.id ] , fasta_file ]
     }
 
     CRAM_MAP_LONG_READS ( ch_align_input.fasta, ch_align_input.cram, params.chunk_size )
