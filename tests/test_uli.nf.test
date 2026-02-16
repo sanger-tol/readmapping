@@ -10,14 +10,22 @@ nextflow_pipeline {
         when {
             params {
                 outdir = "$outputDir"
+                short_aligner = "bwamem2"
             }
         }
 
         then {
             // stable_name: All files + folders in ${params.outdir}/ with a stable name
             def stable_name = getAllFilesFromDir("${params.outdir}", relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}'])
+
             // stable_path: All files in ${params.outdir}/ with stable content
-            def stable_path = getAllFilesFromDir("${params.outdir}", ignoreFile: 'tests/.nftignore')
+            //def stable_path = getAllFilesFromDir("${params.outdir}", ignoreFile: 'tests/.nftignore')
+
+            // Path to CRAM and BAM files:
+            def cram_path = getAllFilesFromDir(params.outdir, include: ['**/*.cram'], relative: true, includeDir: false)
+            def bam_path = getAllFilesFromDir(params.outdir, include: ['**/*.bam'], relative: true, includeDir: false)
+            def fasta = 'https://tolit.cog.sanger.ac.uk/test-data/Acropora_cervicornis/assembly/release/reference/insdc/GCA_964034985.1.subset.fasta'
+
             assertAll(
                 { assert workflow.success},
                 { assert snapshot(
@@ -27,8 +35,9 @@ nextflow_pipeline {
                     removeNextflowVersion("$outputDir/pipeline_info/readmapping_software_mqc_versions.yml"),
                     // All stable path name, with a relative path
                     stable_name,
-                    // All files with stable contents
-                    //stable_path
+                    // Stable mapping files
+                    bam_path.collect{ file -> new File(file).getName() + ":md5," + bam("${params.outdir}/${file}").getStatistics() }.sort(),
+                    cram_path.collect{ file -> new File(file).getName() + ":md5," + cram("${params.outdir}/${file}", fasta).getStatistics() }.sort()
                 ).match() }
             )
         }
