@@ -47,14 +47,14 @@
                     "description": "Merge output alignment files by samples",
                     "fa_icon": "fas fa-layer-group"
                 },
-                "hifi_adapter_db": {
+                "pacbio_adapter_fasta": {
                     "type": "string",
-                    "description": "Path to directory or tar.gz archive for pre-built PacBio adapter database.",
+                    "description": "Path to FASTA file contains adapter sequences for PacBio HiFi reads.",
                     "format": "path",
-                    "default": "${projectDir}/assets/HiFi_adapter_DB.tar.gz",
+                    "default": "${projectDir}/assets/HiFi_adapter.fasta",
                     "fa_icon": "fas fa-bezier-curve"
                 },
-                "hifi_adapter_yaml": {
+                "pacbio_adapter_yaml": {
                     "type": "string",
                     "description": "Path to YAML file containing guide for trimming/filtering PacBio data. See hifi-trimmer docs for details: https://github.com/sanger-tol/hifi-trimmer",
                     "help_text": "YAML file containing adapter sequences and trimming parameters for PacBio HiFi data processing. This file guides hifi-trimmer in identifying and removing adapter contamination from HiFi reads. For more information about the expected format and configuration options, see the hifi-trimmer documentation: https://github.com/sanger-tol/hifi-trimmer",
@@ -62,7 +62,7 @@
                     "default": "${projectDir}/assets/HiFi_adapter.yaml",
                     "fa_icon": "far fa-file-code"
                 },
-                "uli_adapter": {
+                "pacbio_uli_adapter": {
                     "type": "string",
                     "description": "Path to FASTA file containing the PacBio ULI adapter sequence.",
                     "format": "path",
@@ -70,24 +70,12 @@
                     "pattern": "^\\S+\\.fn?a(sta)?(\\.gz)?$",
                     "fa_icon": "far fa-file-code"
                 },
-                "trim_uli_adapter": {
+                "pacbio_pbmarkdup": {
                     "type": "boolean",
-                    "description": "Enable trimming of the PacBio ULI adapter from input reads.",
+                    "description": "Enable marking of PacBio duplicates using pbmarkdup.",
                     "format": "path",
                     "default": false,
                     "fa_icon": "fas fa-scissors"
-                },
-                "hic_markdup": {
-                    "type": "boolean",
-                    "description": "Enable Hi-C duplicate marking (using 'samtools markdup').",
-                    "default": true,
-                    "fa_icon": "fas fa-clone"
-                },
-                "filter_pacbio": {
-                    "type": "boolean",
-                    "description": "Enable filtering and trimming for PacBio reads with hifi-trimmer, if provided reads are already trimmed, please set to false.",
-                    "default": true,
-                    "fa_icon": "fas fa-filter"
                 },
                 "email": {
                     "type": "string",

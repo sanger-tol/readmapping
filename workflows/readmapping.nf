@@ -14,8 +14,7 @@ include { SAMTOOLS_COLLATETOFASTQ            } from '../modules/local/samtools_c
 include { FASTQC                             } from '../modules/nf-core/fastqc'
 include { PREPARE_GENOME                     } from '../subworkflows/local/prepare_genome'
 include { ALIGN_SHORT                        } from '../subworkflows/local/align_short'
-include { ALIGN_PACBIO as ALIGN_HIFI         } from '../subworkflows/local/align_pacbio'
-include { ALIGN_PACBIO as ALIGN_CLR          } from '../subworkflows/local/align_pacbio'
+include { ALIGN_LONG                         } from '../subworkflows/local/align_long'
 include { ALIGN_ONT                          } from '../subworkflows/local/align_ont'
 include { CONVERT_STATS                      } from '../subworkflows/local/convert_stats'
 include { MULTIQC                            } from '../modules/nf-core/multiqc'
@@ -56,7 +55,10 @@ workflow READMAPPING {
     ch_multiqc_files = channel.empty()
     multiqc_report   = channel.empty()
     reports          = channel.empty()
-
+    // Initialize input values for PAcBio read preprocessing
+    val_pacbio_adapter_fasta = params.pacbio_adapter_fasta ?: []
+    val_pacbio_adapter_yaml = params.pacbio_adapter_yaml ?: []
+    val_pacbio_uli_adapter  = params.pacbio_uli_adapter ?: []
     //
     // SUBWORKFLOW: Read in samplesheet, validate and stage input files
     //
@@ -64,9 +66,7 @@ workflow READMAPPING {
     .branch {
         meta, _reads ->
             short_ : meta.datatype == "hic" || meta.datatype == "illumina"
-            pacbio : meta.datatype == "pacbio"
-            clr : meta.datatype == "pacbio_clr"
-            ont : meta.datatype == "ont"
+            long_ : true
     }
 
     ch_versions = ch_versions.mix ( INPUT_CHECK.out.versions )
@@ -98,46 +98,29 @@ workflow READMAPPING {
     .mix ( SAMTOOLS_COLLATETOFASTQ.out.versions )
 
     //
-    // Create channel for vector DB
-    //
-    // ***PacBio condition does not work - needs fixing***
-    if ( ch_reads.pacbio || ch_reads.clr ) {
-        if ( params.hifi_adapter_db.endsWith( '.tar.gz' ) ) {
-            ch_hifi_adapter_db = UNTAR ( [ [:], params.hifi_adapter_db ] ).untar
-            ch_versions = ch_versions.mix ( UNTAR.out.versions )
-
-        } else {
-            ch_hifi_adapter_db = channel.fromPath ( params.hifi_adapter_db )
-        }
-    }
-
-    ch_hifi_adapter_yaml = channel.fromPath ( params.hifi_adapter_yaml ).collect()
-    ch_uli_adapter      = channel.fromPath ( params.uli_adapter ).collect()
-
-    //
     // SUBWORKFLOW: Align raw reads to genome
     //
 
     ALIGN_SHORT ( PREPARE_GENOME.out.fasta, ch_reads.short_ )
     ch_versions = ch_versions.mix ( ALIGN_SHORT.out.versions )
 
-    ALIGN_HIFI ( PREPARE_GENOME.out.fasta, ch_reads.pacbio, ch_hifi_adapter_db, ch_hifi_adapter_yaml, ch_uli_adapter )
-    ch_versions = ch_versions.mix ( ALIGN_HIFI.out.versions )
-    reports = reports.mix ( ALIGN_HIFI.out.post_qc )
 
-    ALIGN_CLR ( PREPARE_GENOME.out.fasta, ch_reads.clr, ch_hifi_adapter_db, ch_hifi_adapter_yaml, ch_uli_adapter )
-    ch_versions = ch_versions.mix ( ALIGN_CLR.out.versions )
-    reports = reports.mix ( ALIGN_CLR.out.post_qc )
+    ALIGN_LONG ( 
+        PREPARE_GENOME.out.fasta, 
+        ch_reads.long_, 
+        val_pacbio_adapter_fasta,
+        val_pacbio_adapter_yaml, 
+        val_pacbio_uli_adapter, 
+        params.pacbio_pbmarkdup
+    )
 
-    ALIGN_ONT ( PREPARE_GENOME.out.fasta, ch_reads.ont )
-    ch_versions = ch_versions.mix ( ALIGN_ONT.out.versions )
+    ch_versions = ch_versions.mix ( ALIGN_LONG.out.versions )
+    reports = reports.mix ( ALIGN_LONG.out.mqc_files )
 
     // gather alignments
     ch_aligned_bams = channel.empty()
     .mix( ALIGN_SHORT.out.bam )
-    .mix( ALIGN_HIFI.out.bam )
-    .mix( ALIGN_CLR.out.bam )
-    .mix( ALIGN_ONT.out.bam )
+    .mix( ALIGN_LONG.out.bam )
 
     // convert to cram and gather stats
     CONVERT_STATS ( ch_aligned_bams, PREPARE_GENOME.out.fasta, ch_header )
