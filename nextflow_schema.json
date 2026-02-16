@@ -74,7 +74,7 @@
                     "type": "boolean",
                     "description": "Enable marking of PacBio duplicates using pbmarkdup.",
                     "format": "path",
-                    "default": false,
+                    "default": true,
                     "fa_icon": "fas fa-scissors"
                 },
                 "email": {

@@ -8,186 +8,128 @@
                     "blast/makeblastdb": {
                         "branch": "master",
                         "git_sha": "4da6a2662e7a5f62dd9c456fde7161ed34b59d1e",
-                        "installed_by": [
-                            "pacbio_preprocess"
-                        ]
+                        "installed_by": ["pacbio_preprocess"]
                     },
                     "bwamem2/index": {
                         "branch": "master",
                         "git_sha": "5dd46a36fca68d6ad1a6b22ec47adc8c6863717d",
-                        "installed_by": [
-                            "cram_map_illumina_hic",
-                            "modules"
-                        ]
+                        "installed_by": ["cram_map_illumina_hic", "modules"]
                     },
                     "bwamem2/mem": {
                         "branch": "master",
                         "git_sha": "d86336f3e7ae0d5f76c67b0859409769cfeb2af2",
-                        "installed_by": [
-                            "modules"
-                        ]
+                        "installed_by": ["modules"]
                     },
                     "crumble": {
                         "branch": "master",
                         "git_sha": "13aee4ec0cbc416c45e08bbac53977b7c9677a0f",
-                        "installed_by": [
-                            "modules"
-                        ]
+                        "installed_by": ["modules"]
                     },
                     "fastqc": {
                         "branch": "master",
                         "git_sha": "3009f27c4e4b6e99da4eeebe82799e13924a4a1f",
-                        "installed_by": [
-                            "modules"
-                        ]
+                        "installed_by": ["modules"]
                     },
                     "gawk": {
                         "branch": "master",
                         "git_sha": "76b1f53edcf72798d8515c82f4728ad44b3dd902",
-                        "installed_by": [
-                            "modules"
-                        ]
+                        "installed_by": ["modules"]
                     },
                     "gunzip": {
                         "branch": "master",
                         "git_sha": "96c57dfd98a0641886a67bd449fe33ee2ec0e374",
-                        "installed_by": [
-                            "modules"
-                        ]
+                        "installed_by": ["modules"]
                     },
                     "hifitrimmer/filterbam": {
                         "branch": "master",
                         "git_sha": "360d6f90f13957ad9bbcbdb841f774cc2f3505ca",
-                        "installed_by": [
-                            "pacbio_preprocess"
-                        ]
+                        "installed_by": ["pacbio_preprocess"]
                     },
                     "hifitrimmer/processblast": {
                         "branch": "master",
                         "git_sha": "dbc43f924a7410a2b828f2a022305f1d6e71ed84",
-                        "installed_by": [
-                            "pacbio_preprocess"
-                        ]
+                        "installed_by": ["pacbio_preprocess"]
                     },
                     "lima": {
                         "branch": "master",
                         "git_sha": "712db0be6a466b42a84526e545c77fb6e711b425",
-                        "installed_by": [
-                            "modules",
-                            "pacbio_preprocess"
-                        ]
+                        "installed_by": ["modules", "pacbio_preprocess"]
                     },
                     "minimap2/index": {
                         "branch": "master",
                         "git_sha": "14980f759266eec42dac401fcafeb83d6c957b41",
-                        "installed_by": [
-                            "cram_map_illumina_hic",
-                            "cram_map_long_reads",
-                            "modules"
-                        ]
+                        "installed_by": ["cram_map_illumina_hic", "cram_map_long_reads", "modules"]
                     },
                     "multiqc": {
                         "branch": "master",
                         "git_sha": "80cba9452fb1e9bb79884976fa1ca0e671949aa2",
-                        "installed_by": [
-                            "modules"
-                        ]
+                        "installed_by": ["modules"]
                     },
                     "pbmarkdup": {
                         "branch": "master",
                         "git_sha": "51d33d0ed74c5342a370e6c465e6168cf1037da4",
-                        "installed_by": [
-                            "pacbio_preprocess"
-                        ]
+                        "installed_by": ["pacbio_preprocess"]
                     },
                     "pigz/compress": {
                         "branch": "master",
                         "git_sha": "c908ccaf0a5c802b6f8e814d8c5cf85da2364222",
-                        "installed_by": [
-                            "modules"
-                        ]
+                        "installed_by": ["modules"]
                     },
                     "samtools/faidx": {
                         "branch": "master",
                         "git_sha": "b2e78932ef01165fd85829513eaca29eff8e640a",
-                        "installed_by": [
-                            "bam_samtools_merge_markdup"
-                        ]
+                        "installed_by": ["bam_samtools_merge_markdup"]
                     },
                     "samtools/fastq": {
                         "branch": "master",
                         "git_sha": "1d2fbdcbca677bbe8da0f9d0d2bb7c02f2cab1c9",
-                        "installed_by": [
-                            "modules"
-                        ]
+                        "installed_by": ["modules"]
                     },
                     "samtools/flagstat": {
                         "branch": "master",
                         "git_sha": "e334e12a1e985adc5ffc3fc78a68be1de711de45",
-                        "installed_by": [
-                            "modules"
-                        ]
+                        "installed_by": ["modules"]
                     },
                     "samtools/idxstats": {
                         "branch": "master",
                         "git_sha": "c8be52dba1166c678e74cda9c3a3c221635c8bb1",
-                        "installed_by": [
-                            "modules"
-                        ]
+                        "installed_by": ["modules"]
                     },
                     "samtools/index": {
                         "branch": "master",
                         "git_sha": "1d2fbdcbca677bbe8da0f9d0d2bb7c02f2cab1c9",
-                        "installed_by": [
-                            "cram_map_illumina_hic",
-                            "cram_map_long_reads",
-                            "modules"
-                        ],
+                        "installed_by": ["cram_map_illumina_hic", "cram_map_long_reads", "modules"],
                         "patch": "modules/nf-core/samtools/index/samtools-index.diff"
                     },
                     "samtools/merge": {
                         "branch": "master",
                         "git_sha": "b2e78932ef01165fd85829513eaca29eff8e640a",
-                        "installed_by": [
-                            "bam_samtools_merge_markdup",
-                            "modules"
-                        ]
+                        "installed_by": ["bam_samtools_merge_markdup", "modules"]
                     },
                     "samtools/splitheader": {
                         "branch": "master",
                         "git_sha": "b4962f11d1bf66aa3949695d7e35c1491d8c21dc",
-                        "installed_by": [
-                            "cram_map_illumina_hic",
-                            "cram_map_long_reads"
-                        ]
+                        "installed_by": ["cram_map_illumina_hic", "cram_map_long_reads"]
                     },
                     "samtools/stats": {
                         "branch": "master",
                         "git_sha": "fe93fde0845f907fc91ad7cc7d797930408824df",
-                        "installed_by": [
-                            "modules"
-                        ]
+                        "installed_by": ["modules"]
                     },
                     "samtools/view": {
                         "branch": "master",
                         "git_sha": "5cb9a8694da0a0e550921636bb60bc8c56445fd7",
-                        "installed_by": [
-                            "modules"
-                        ]
+                        "installed_by": ["modules"]
                     },
                     "tabix/bgzip": {
                         "branch": "master",
                         "git_sha": "f2cfcf9d3f6a2d123e6c44aefa788aa232204a7a",
-                        "installed_by": [
-                            "modules"
-                        ]
+                        "installed_by": ["modules"]
                     },
                     "untar": {
                         "branch": "master",
                         "git_sha": "00ee87ebb541af0008596400ce6d5f66d79d5408",
-                        "installed_by": [
-                            "modules"
-                        ]
+                        "installed_by": ["modules"]
                     }
                 }
             },
@@ -196,23 +138,17 @@
                     "utils_nextflow_pipeline": {
                         "branch": "master",
                         "git_sha": "05954dab2ff481bcb999f24455da29a5828af08d",
-                        "installed_by": [
-                            "subworkflows"
-                        ]
+                        "installed_by": ["subworkflows"]
                     },
                     "utils_nfcore_pipeline": {
                         "branch": "master",
                         "git_sha": "271e7fc14eb1320364416d996fb077421f3faed2",
-                        "installed_by": [
-                            "subworkflows"
-                        ]
+                        "installed_by": ["subworkflows"]
                     },
                     "utils_nfschema_plugin": {
                         "branch": "master",
                         "git_sha": "fdc08b8b1ae74f56686ce21f7ea11ad11990ce57",
-                        "installed_by": [
-                            "subworkflows"
-                        ]
+                        "installed_by": ["subworkflows"]
                     }
                 }
             }
@@ -223,45 +159,32 @@
                     "blast/blastn": {
                         "branch": "main",
                         "git_sha": "515f9ac988210ea6c8540cbd6f5d3c6339736873",
-                        "installed_by": [
-                            "pacbio_preprocess"
-                        ]
+                        "installed_by": ["pacbio_preprocess"]
                     },
                     "cramalign/bwamem2alignhic": {
                         "branch": "main",
                         "git_sha": "1c601dc27bbfe9dfcc97033983463512da1d2f2e",
-                        "installed_by": [
-                            "cram_map_illumina_hic"
-                        ]
+                        "installed_by": ["cram_map_illumina_hic"]
                     },
                     "cramalign/gencramchunks": {
                         "branch": "main",
                         "git_sha": "d4ca71bc08dc21d68af38c147cbd972c8e25c3e0",
-                        "installed_by": [
-                            "cram_map_illumina_hic",
-                            "cram_map_long_reads"
-                        ]
+                        "installed_by": ["cram_map_illumina_hic", "cram_map_long_reads"]
                     },
                     "cramalign/minimap2align": {
                         "branch": "main",
                         "git_sha": "1c601dc27bbfe9dfcc97033983463512da1d2f2e",
-                        "installed_by": [
-                            "cram_map_long_reads"
-                        ]
+                        "installed_by": ["cram_map_long_reads"]
                     },
                     "cramalign/minimap2alignhic": {
                         "branch": "main",
                         "git_sha": "1c601dc27bbfe9dfcc97033983463512da1d2f2e",
-                        "installed_by": [
-                            "cram_map_illumina_hic"
-                        ]
+                        "installed_by": ["cram_map_illumina_hic"]
                     },
                     "samtools/mergedup": {
                         "branch": "main",
                         "git_sha": "bfafdec38274f327e61618187b9a73cb81e82147",
-                        "installed_by": [
-                            "bam_samtools_merge_markdup"
-                        ]
+                        "installed_by": ["bam_samtools_merge_markdup"]
                     }
                 }
             },
@@ -270,31 +193,22 @@
                     "bam_samtools_merge_markdup": {
                         "branch": "main",
                         "git_sha": "bfafdec38274f327e61618187b9a73cb81e82147",
-                        "installed_by": [
-                            "cram_map_illumina_hic",
-                            "cram_map_long_reads"
-                        ]
+                        "installed_by": ["cram_map_illumina_hic", "cram_map_long_reads"]
                     },
                     "cram_map_illumina_hic": {
                         "branch": "main",
                         "git_sha": "d4ca71bc08dc21d68af38c147cbd972c8e25c3e0",
-                        "installed_by": [
-                            "subworkflows"
-                        ]
+                        "installed_by": ["subworkflows"]
                     },
                     "cram_map_long_reads": {
                         "branch": "main",
                         "git_sha": "d4ca71bc08dc21d68af38c147cbd972c8e25c3e0",
-                        "installed_by": [
-                            "subworkflows"
-                        ]
+                        "installed_by": ["subworkflows"]
                     },
                     "pacbio_preprocess": {
                         "branch": "main",
                         "git_sha": "c4da783c3182fc1afa576d6d83424a71febf5246",
-                        "installed_by": [
-                            "subworkflows"
-                        ]
+                        "installed_by": ["subworkflows"]
                     }
                 }
             }
