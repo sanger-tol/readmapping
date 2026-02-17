@@ -1,7 +1,7 @@
 {
     "-profile test_uli": {
         "content": [
-            103,
+            39,
             {
                 "BGZIP_BEDGRAPH": {
                     "tabix": 1.21
@@ -10,6 +10,9 @@
                     "blastn": "2.17.0+",
                     "samtools": 1.23,
                     "seqkit": "2.12.0"
+                },
+                "BLAST_MAKEBLASTDB": {
+                    "makeblastdb": "2.17.0+"
                 },
                 "BLOBTK_DEPTH": {
                     "blobtk": "0.6.5"
@@ -121,6 +124,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2026-02-16T15:55:55.166190794"
+        "timestamp": "2026-02-17T09:14:26.152655023"
     }
 }
