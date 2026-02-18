@@ -127,7 +127,13 @@
                     "description": "Alignment method to use for short-reads (options are: \"minimap2\" or \"bwamem2\"",
                     "enum": ["minimap2", "bwamem2"]
                 },
-                "chunk_size": {
+                "fastx_chunk_size": {
+                    "type": "integer",
+                    "default": 10000,
+                    "description": "Chunk size for parallel processing of FASTX files, in number of sequences",
+                    "minimum": 1
+                },
+                "cram_chunk_size": {
                     "type": "integer",
                     "default": 10000,
                     "description": "Chunk size for parallel processing of CRAM files, in number of containers",
