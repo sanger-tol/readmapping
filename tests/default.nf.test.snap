@@ -217,8 +217,6 @@
                 "GCA_922984935.2.subset.unmasked.pacbio.mMelMel3_T4.idxstats:md5,fe8b829d5241701b172cf4ff55cbf4f6",
                 "GCA_922984935.2.subset.unmasked.pacbio.mMelMel3_T4.stats.gz:md5,87ceac8792fdf946da2b1f7ed201b04b",
                 "GCA_922984935.2.subset.unmasked.pacbio.mMelMel3.coverage.bedGraph.gz:md5,5f0bf291d798e6c82899aaaa9cf4f793",
-                "GCA_922984935.2.subset.unmasked.pacbio.mMelMel3.cram:md5,5a27a5116984abecd5b99fdc4a5a9e07",
-                "GCA_922984935.2.subset.unmasked.pacbio.mMelMel3.cram.crai:md5,bacee5ad6eafb3d3a9335651fb49eb19",
                 "GCA_922984935.2.subset.unmasked.pacbio.mMelMel3.flagstat:md5,da9dcde0937f27935637db67c14c9928",
                 "GCA_922984935.2.subset.unmasked.pacbio.mMelMel3.idxstats:md5,ee312e0f5e6053bc81b737ae5805807f",
                 "GCA_922984935.2.subset.unmasked.pacbio.mMelMel3.stats.gz:md5,7e9da1100c68c1ea9a494bd2ac116ec6"

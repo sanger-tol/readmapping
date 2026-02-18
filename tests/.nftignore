@@ -2,4 +2,5 @@
 pipeline_info/*.{html,json,txt,yml}
 quality_control/*.{html,zip}
 read_mapping/*/*.{cram,crai,bam,bai,csi}
+read_mapping/*/*/*.{cram,crai,bam,bai,csi}
 preprocess/*summary.json
