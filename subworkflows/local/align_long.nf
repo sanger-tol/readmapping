@@ -1,7 +1,6 @@
 //
 // Align PacBio read files against the genome
 //
-params.fastx_chunk_size = 10000
 
 // Include local modules and subworkflows
 include { SAMTOOLS_ADDREPLACERG                      } from '../../modules/local/samtools_addreplacerg'
