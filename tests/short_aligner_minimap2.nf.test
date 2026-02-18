@@ -1,6 +1,6 @@
 nextflow_pipeline {
 
-    name "Test readmapping pipeline with default settings"
+    name "Test short-read mapping with minimap2 as short aligner"
     script "../main.nf"
     tag "pipeline"
 
@@ -9,6 +9,8 @@ nextflow_pipeline {
         when {
             params {
                 outdir = "$outputDir"
+                input = "${projectDir}/assets/samplesheet_short_reads.csv"
+                short_aligner = "minimap2"
             }
         }
 
@@ -18,7 +20,6 @@ nextflow_pipeline {
 
             // stable_path: All files in ${params.outdir}/ with stable content
             def stable_path = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore')
-
             // path to hifi-trimmer summary
             def hifitrimmer_json = getAllFilesFromDir("${params.outdir}", include: ['**/*.summary.json'], relative: true, includeDir: false)
 

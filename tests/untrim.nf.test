@@ -1,6 +1,6 @@
 nextflow_pipeline {
 
-    name "Test readmapping pipeline with default settings"
+    name "Test readmapping pipeline without trimming PacBio data"
     script "../main.nf"
     tag "pipeline"
 
@@ -9,6 +9,10 @@ nextflow_pipeline {
         when {
             params {
                 outdir = "$outputDir"
+                input = "${projectDir}/assets/samplesheet_long_read.csv"
+                pacbio_adapter_fasta = false
+                pacbio_adapter_yaml = false
+                chunk_size = 5
             }
         }
 

@@ -1,14 +1,16 @@
 nextflow_pipeline {
 
-    name "Test readmapping pipeline with default settings"
+    name "Test ULI PacBio mapping without marking duplicates"
     script "../main.nf"
     tag "pipeline"
+    profile "test_uli"
 
-    test("-profile test") {
+    test("-profile test_uli") {
 
         when {
             params {
                 outdir = "$outputDir"
+                pacbio_pbmarkdup = false
             }
         }
 
@@ -18,7 +20,6 @@ nextflow_pipeline {
 
             // stable_path: All files in ${params.outdir}/ with stable content
             def stable_path = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore')
-
             // path to hifi-trimmer summary
             def hifitrimmer_json = getAllFilesFromDir("${params.outdir}", include: ['**/*.summary.json'], relative: true, includeDir: false)
 

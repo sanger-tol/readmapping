@@ -1,0 +1,551 @@
+{
+    "-profile test_uli": {
+        "content": [
+            65,
+            {
+                "BGZIP_BEDGRAPH": {
+                    "tabix": 1.21
+                },
+                "BLAST_BLASTN": {
+                    "blastn": "2.17.0+",
+                    "samtools": 1.23,
+                    "seqkit": "2.12.0"
+                },
+                "BLAST_MAKEBLASTDB": {
+                    "makeblastdb": "2.17.0+"
+                },
+                "BLOBTK_DEPTH": {
+                    "blobtk": "0.6.5"
+                },
+                "CONVERT_CRAM": {
+                    "samtools": "1.22.1"
+                },
+                "CRAMALIGN_GENCRAMCHUNKS": {
+                    "cramchunks": "1.1.0"
+                },
+                "CRAMALIGN_MINIMAP2ALIGN": {
+                    "minimap2": "2.30-r1287",
+                    "samtools": "1.22.1"
+                },
+                "CRUMBLE": {
+                    "crumble": "0.9.1"
+                },
+                "FASTQC": {
+                    "fastqc": "0.12.1"
+                },
+                "FASTQC_FILTERED": {
+                    "fastqc": "0.12.1"
+                },
+                "GAWK": {
+                    "gawk": "5.3.0"
+                },
+                "GUNZIP": {
+                    "gunzip": 1.13
+                },
+                "GZIP_STATS": {
+                    "pigz": 2.8
+                },
+                "HIFITRIMMER_FILTERBAM": {
+                    "hifi_trimmer": "2.1.0",
+                    "samtools": 1.23
+                },
+                "HIFITRIMMER_PROCESSBLAST": {
+                    "hifi_trimmer": "2.1.0"
+                },
+                "LIMA": {
+                    "lima": "2.12.0"
+                },
+                "MINIMAP2_INDEX": {
+                    "minimap2": "2.29-r1283"
+                },
+                "PBMARKDUP": {
+                    "pbmarkdup": "1.2.0"
+                },
+                "SAMTOOLS_ADDREPLACERG": {
+                    "samtools": "1.22.1"
+                },
+                "SAMTOOLS_CRAM": {
+                    "samtools": "1.22.1"
+                },
+                "SAMTOOLS_FAIDX": {
+                    "samtools": "1.22.1"
+                },
+                "SAMTOOLS_FLAGSTAT": {
+                    "samtools": "1.22.1"
+                },
+                "SAMTOOLS_IDXSTATS": {
+                    "samtools": "1.22.1"
+                },
+                "SAMTOOLS_INDEX": {
+                    "samtools": "1.22.1"
+                },
+                "SAMTOOLS_MERGE": {
+                    "samtools": "1.22.1"
+                },
+                "SAMTOOLS_SPLITHEADER": {
+                    "samtools": "1.22.1"
+                },
+                "SAMTOOLS_STATS": {
+                    "samtools": "1.22.1"
+                },
+                "UNMASK": {
+                    "awk": "5.1.0"
+                },
+                "Workflow": {
+                    "sanger-tol/readmapping": "v1.4.0dev"
+                }
+            },
+            [
+                "pipeline_info",
+                "pipeline_info/readmapping_software_mqc_versions.yml",
+                "preprocess",
+                "preprocess/jaAcrCerv1_T1.dedup.pbmarkdup.log",
+                "preprocess/jaAcrCerv1_T1.hifitrimmer.bed.gz",
+                "preprocess/jaAcrCerv1_T1.hifitrimmer.summary.json",
+                "preprocess/jaAcrCerv2_T1.dedup.pbmarkdup.log",
+                "preprocess/jaAcrCerv2_T1.hifitrimmer.bed.gz",
+                "preprocess/jaAcrCerv2_T1.hifitrimmer.summary.json",
+                "quality_control",
+                "quality_control/multiqc_report.html",
+                "quality_control/pacbio.jaAcrCerv1_T1.filtered_fastqc.html",
+                "quality_control/pacbio.jaAcrCerv1_T1.filtered_fastqc.zip",
+                "quality_control/pacbio.jaAcrCerv1_T1_fastqc.html",
+                "quality_control/pacbio.jaAcrCerv1_T1_fastqc.zip",
+                "quality_control/pacbio.jaAcrCerv2_T1.filtered_fastqc.html",
+                "quality_control/pacbio.jaAcrCerv2_T1.filtered_fastqc.zip",
+                "quality_control/pacbio.jaAcrCerv2_T1_fastqc.html",
+                "quality_control/pacbio.jaAcrCerv2_T1_fastqc.zip",
+                "read_mapping",
+                "read_mapping/pacbio",
+                "read_mapping/pacbio/GCA_964034985.1.subset.unmasked.pacbio.jaAcrCerv1_T1.coverage.bedGraph.gz",
+                "read_mapping/pacbio/GCA_964034985.1.subset.unmasked.pacbio.jaAcrCerv1_T1.cram",
+                "read_mapping/pacbio/GCA_964034985.1.subset.unmasked.pacbio.jaAcrCerv1_T1.cram.crai",
+                "read_mapping/pacbio/GCA_964034985.1.subset.unmasked.pacbio.jaAcrCerv1_T1.flagstat",
+                "read_mapping/pacbio/GCA_964034985.1.subset.unmasked.pacbio.jaAcrCerv1_T1.idxstats",
+                "read_mapping/pacbio/GCA_964034985.1.subset.unmasked.pacbio.jaAcrCerv1_T1.stats.gz",
+                "read_mapping/pacbio/GCA_964034985.1.subset.unmasked.pacbio.jaAcrCerv2_T1.coverage.bedGraph.gz",
+                "read_mapping/pacbio/GCA_964034985.1.subset.unmasked.pacbio.jaAcrCerv2_T1.cram",
+                "read_mapping/pacbio/GCA_964034985.1.subset.unmasked.pacbio.jaAcrCerv2_T1.cram.crai",
+                "read_mapping/pacbio/GCA_964034985.1.subset.unmasked.pacbio.jaAcrCerv2_T1.flagstat",
+                "read_mapping/pacbio/GCA_964034985.1.subset.unmasked.pacbio.jaAcrCerv2_T1.idxstats",
+                "read_mapping/pacbio/GCA_964034985.1.subset.unmasked.pacbio.jaAcrCerv2_T1.stats.gz"
+            ],
+            [
+                "jaAcrCerv1_T1.dedup.pbmarkdup.log:md5,02efc656c114d8029ad4e8e79e778e35",
+                "jaAcrCerv1_T1.hifitrimmer.bed.gz:md5,cb45e59936b15a601ab41df4a32e30d6",
+                "jaAcrCerv2_T1.dedup.pbmarkdup.log:md5,b0f9657238ccc2feb3701b156e03b837",
+                "jaAcrCerv2_T1.hifitrimmer.bed.gz:md5,c88ccab95c5c4b9a71a1c659af74673e",
+                "GCA_964034985.1.subset.unmasked.pacbio.jaAcrCerv1_T1.coverage.bedGraph.gz:md5,5a97361a433bf23af386653dcbeb7bd8",
+                "GCA_964034985.1.subset.unmasked.pacbio.jaAcrCerv1_T1.flagstat:md5,64341a288816774ffde9c3137c68d2ee",
+                "GCA_964034985.1.subset.unmasked.pacbio.jaAcrCerv1_T1.idxstats:md5,f0102d624656f7673a7567baadf2fdf9",
+                "GCA_964034985.1.subset.unmasked.pacbio.jaAcrCerv1_T1.stats.gz:md5,bfa07b6b4ac7f93ce4252113bdb5de03",
+                "GCA_964034985.1.subset.unmasked.pacbio.jaAcrCerv2_T1.coverage.bedGraph.gz:md5,3bedcd1f5e5fb254a25f956a06ea7ad6",
+                "GCA_964034985.1.subset.unmasked.pacbio.jaAcrCerv2_T1.flagstat:md5,0c28e76bdd020bb1485746de33ce9252",
+                "GCA_964034985.1.subset.unmasked.pacbio.jaAcrCerv2_T1.idxstats:md5,9d2ad4c54b1cefb73d70e576f2e89650",
+                "GCA_964034985.1.subset.unmasked.pacbio.jaAcrCerv2_T1.stats.gz:md5,942ce0f916a87c4aabdf2a257950b5ed"
+            ],
+            {
+                
+            },
+            {
+                "GCA_964034985.1.subset.unmasked.pacbio.jaAcrCerv1_T1.cram": {
+                    "maxReadLength": 17907,
+                    "minReadLength": 0,
+                    "meanReadLength": 8205,
+                    "maxQuality": 60,
+                    "minQuality": 0,
+                    "meanQuality": 1,
+                    "readCount": 43787,
+                    "duplicateReadCount": 0,
+                    "sorted": false
+                },
+                "GCA_964034985.1.subset.unmasked.pacbio.jaAcrCerv2_T1.cram": {
+                    "maxReadLength": 12807,
+                    "minReadLength": 0,
+                    "meanReadLength": 8481,
+                    "maxQuality": 4,
+                    "minQuality": 0,
+                    "meanQuality": 0,
+                    "readCount": 41,
+                    "duplicateReadCount": 0,
+                    "sorted": false
+                }
+            },
+            {
+                "jaAcrCerv1_T1.hifitrimmer.summary.json": {
+                    "detections": [
+                        {
+                            "adapter": "gnl|uv|NGB00973.1:1-35",
+                            "n_hits": 14340
+                        },
+                        {
+                            "adapter": "PacBio_ULI_adapter",
+                            "n_hits": 1160
+                        },
+                        {
+                            "adapter": "TruSeq_i7s_UDI003",
+                            "n_hits": 10
+                        },
+                        {
+                            "adapter": "TruSeq_i7_UDP003",
+                            "n_hits": 10
+                        },
+                        {
+                            "adapter": "gnl|uv|NGB00972.1:1-45",
+                            "n_hits": 49
+                        },
+                        {
+                            "adapter": "TruSeq_i7_UDP009",
+                            "n_hits": 4
+                        },
+                        {
+                            "adapter": "TruSeq_i5_UDP009",
+                            "n_hits": 6
+                        },
+                        {
+                            "adapter": "TruSeq_D706",
+                            "n_hits": 6
+                        },
+                        {
+                            "adapter": "TruSeq_i7s_UDI004",
+                            "n_hits": 3
+                        },
+                        {
+                            "adapter": "TruSeq_i7_UDP010",
+                            "n_hits": 2
+                        },
+                        {
+                            "adapter": "TruSeq_i7_UDP004",
+                            "n_hits": 3
+                        },
+                        {
+                            "adapter": "TruSeq_i5_UDP002",
+                            "n_hits": 4
+                        },
+                        {
+                            "adapter": "bc2092",
+                            "n_hits": 2
+                        },
+                        {
+                            "adapter": "TruSeq_D705",
+                            "n_hits": 4
+                        },
+                        {
+                            "adapter": "TruSeq_i7s_UDI006",
+                            "n_hits": 2
+                        },
+                        {
+                            "adapter": "TruSeq_i7_UDP006",
+                            "n_hits": 6
+                        },
+                        {
+                            "adapter": "TruSeq_i7_UDP011",
+                            "n_hits": 2
+                        },
+                        {
+                            "adapter": "TruSeq_i5_UDP012",
+                            "n_hits": 4
+                        },
+                        {
+                            "adapter": "TruSeq_D508",
+                            "n_hits": 4
+                        },
+                        {
+                            "adapter": "TruSeq_D704",
+                            "n_hits": 2
+                        },
+                        {
+                            "adapter": "TruSeq_D707",
+                            "n_hits": 1
+                        },
+                        {
+                            "adapter": "bc2035",
+                            "n_hits": 2
+                        },
+                        {
+                            "adapter": "TruSeq_i7_UDP001",
+                            "n_hits": 3
+                        },
+                        {
+                            "adapter": "bc2025",
+                            "n_hits": 2
+                        },
+                        {
+                            "adapter": "TruSeq_D506",
+                            "n_hits": 2
+                        },
+                        {
+                            "adapter": "TruSeq_i5s_UDI004",
+                            "n_hits": 2
+                        },
+                        {
+                            "adapter": "TruSeq_i5_UDP004",
+                            "n_hits": 2
+                        },
+                        {
+                            "adapter": "bc2076",
+                            "n_hits": 1
+                        },
+                        {
+                            "adapter": "bc2083",
+                            "n_hits": 6
+                        },
+                        {
+                            "adapter": "TruSeq_i5_UDP011",
+                            "n_hits": 4
+                        },
+                        {
+                            "adapter": "TruSeq_D502",
+                            "n_hits": 2
+                        },
+                        {
+                            "adapter": "TruSeq_D503",
+                            "n_hits": 1
+                        },
+                        {
+                            "adapter": "TruSeq_D702",
+                            "n_hits": 1
+                        },
+                        {
+                            "adapter": "TruSeq_D708",
+                            "n_hits": 1
+                        },
+                        {
+                            "adapter": "bc2055",
+                            "n_hits": 1
+                        },
+                        {
+                            "adapter": "bc2028",
+                            "n_hits": 2
+                        },
+                        {
+                            "adapter": "TruSeq_D504",
+                            "n_hits": 1
+                        },
+                        {
+                            "adapter": "TruSeq_i5_UDP005",
+                            "n_hits": 1
+                        },
+                        {
+                            "adapter": "TruSeq_i5_UDP007",
+                            "n_hits": 2
+                        },
+                        {
+                            "adapter": "bc2082",
+                            "n_hits": 1
+                        },
+                        {
+                            "adapter": "TruSeq_i5_UDP008",
+                            "n_hits": 1
+                        }
+                    ],
+                    "hits": [
+                        {
+                            "adapter": "PacBio_ULI_adapter",
+                            "action": "discard",
+                            "n_hits": 1083,
+                            "n_reads": 249,
+                            "bases_removed": 2193582
+                        }
+                    ],
+                    "summary": {
+                        "total_reads_discarded": 249,
+                        "total_reads_trimmed": 0,
+                        "total_bases_removed": 2193582
+                    }
+                },
+                "jaAcrCerv2_T1.hifitrimmer.summary.json": {
+                    "detections": [
+                        {
+                            "adapter": "PacBio_ULI_adapter",
+                            "n_hits": 83335
+                        },
+                        {
+                            "adapter": "gnl|uv|NGB00973.1:1-35",
+                            "n_hits": 14347
+                        },
+                        {
+                            "adapter": "TruSeq_i7s_UDI003",
+                            "n_hits": 10
+                        },
+                        {
+                            "adapter": "TruSeq_i7_UDP003",
+                            "n_hits": 10
+                        },
+                        {
+                            "adapter": "bc2028",
+                            "n_hits": 27
+                        },
+                        {
+                            "adapter": "gnl|uv|NGB00972.1:1-45",
+                            "n_hits": 49
+                        },
+                        {
+                            "adapter": "TruSeq_i7_UDP009",
+                            "n_hits": 4
+                        },
+                        {
+                            "adapter": "TruSeq_i5_UDP009",
+                            "n_hits": 6
+                        },
+                        {
+                            "adapter": "TruSeq_D706",
+                            "n_hits": 6
+                        },
+                        {
+                            "adapter": "TruSeq_i7s_UDI004",
+                            "n_hits": 3
+                        },
+                        {
+                            "adapter": "TruSeq_i7_UDP010",
+                            "n_hits": 2
+                        },
+                        {
+                            "adapter": "TruSeq_i7_UDP004",
+                            "n_hits": 3
+                        },
+                        {
+                            "adapter": "TruSeq_i5_UDP002",
+                            "n_hits": 4
+                        },
+                        {
+                            "adapter": "bc2092",
+                            "n_hits": 2
+                        },
+                        {
+                            "adapter": "TruSeq_D705",
+                            "n_hits": 4
+                        },
+                        {
+                            "adapter": "TruSeq_i7s_UDI006",
+                            "n_hits": 2
+                        },
+                        {
+                            "adapter": "TruSeq_i7_UDP006",
+                            "n_hits": 6
+                        },
+                        {
+                            "adapter": "TruSeq_i7_UDP011",
+                            "n_hits": 2
+                        },
+                        {
+                            "adapter": "TruSeq_i5_UDP012",
+                            "n_hits": 4
+                        },
+                        {
+                            "adapter": "TruSeq_D508",
+                            "n_hits": 4
+                        },
+                        {
+                            "adapter": "TruSeq_D704",
+                            "n_hits": 2
+                        },
+                        {
+                            "adapter": "TruSeq_D707",
+                            "n_hits": 1
+                        },
+                        {
+                            "adapter": "bc2035",
+                            "n_hits": 2
+                        },
+                        {
+                            "adapter": "TruSeq_i7_UDP001",
+                            "n_hits": 3
+                        },
+                        {
+                            "adapter": "bc2025",
+                            "n_hits": 2
+                        },
+                        {
+                            "adapter": "TruSeq_D506",
+                            "n_hits": 2
+                        },
+                        {
+                            "adapter": "TruSeq_i5s_UDI004",
+                            "n_hits": 2
+                        },
+                        {
+                            "adapter": "TruSeq_i5_UDP004",
+                            "n_hits": 2
+                        },
+                        {
+                            "adapter": "bc2076",
+                            "n_hits": 1
+                        },
+                        {
+                            "adapter": "bc2083",
+                            "n_hits": 6
+                        },
+                        {
+                            "adapter": "TruSeq_i5_UDP011",
+                            "n_hits": 4
+                        },
+                        {
+                            "adapter": "TruSeq_D502",
+                            "n_hits": 2
+                        },
+                        {
+                            "adapter": "TruSeq_D503",
+                            "n_hits": 1
+                        },
+                        {
+                            "adapter": "TruSeq_D702",
+                            "n_hits": 1
+                        },
+                        {
+                            "adapter": "TruSeq_D708",
+                            "n_hits": 1
+                        },
+                        {
+                            "adapter": "bc2055",
+                            "n_hits": 1
+                        },
+                        {
+                            "adapter": "bc2078",
+                            "n_hits": 1
+                        },
+                        {
+                            "adapter": "TruSeq_D504",
+                            "n_hits": 1
+                        },
+                        {
+                            "adapter": "TruSeq_i5_UDP005",
+                            "n_hits": 1
+                        },
+                        {
+                            "adapter": "TruSeq_i5_UDP007",
+                            "n_hits": 2
+                        },
+                        {
+                            "adapter": "bc2082",
+                            "n_hits": 1
+                        },
+                        {
+                            "adapter": "TruSeq_i5_UDP008",
+                            "n_hits": 1
+                        }
+                    ],
+                    "hits": [
+                        {
+                            "adapter": "PacBio_ULI_adapter",
+                            "action": "discard",
+                            "n_hits": 82744,
+                            "n_reads": 42501,
+                            "bases_removed": 362139516
+                        }
+                    ],
+                    "summary": {
+                        "total_reads_discarded": 42501,
+                        "total_reads_trimmed": 0,
+                        "total_bases_removed": 362139516
+                    }
+                }
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
+        },
+        "timestamp": "2026-02-18T00:42:54.707642414"
+    }
+}
