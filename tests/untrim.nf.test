@@ -12,7 +12,6 @@ nextflow_pipeline {
                 input = "${projectDir}/assets/samplesheet_long_read.csv"
                 pacbio_adapter_fasta = false
                 pacbio_adapter_yaml = false
-                chunk_size = 5
             }
         }
 
