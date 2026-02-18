@@ -5,7 +5,7 @@ nextflow_pipeline {
     tag "pipeline"
     profile "test_uli"
 
-    test("-profile test_uli") {
+    test("-profile test_uli --pacbio_pbmarkdup false") {
 
         when {
             params {

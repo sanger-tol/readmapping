@@ -1,5 +1,5 @@
 {
-    "-profile test": {
+    "-profile test --pacbio_adapter_fasta false --pacbio_adapter_yaml false": {
         "content": [
             96,
             {

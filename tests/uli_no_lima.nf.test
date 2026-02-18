@@ -1,11 +1,11 @@
 nextflow_pipeline {
 
-    name "Test PScBio mapping without LIMA for trimming ULI adapter"
+    name "Test PacBio mapping without LIMA for trimming ULI adapter"
     script "../main.nf"
     tag "pipeline"
     profile "test_uli"
 
-    test("-profile test_uli") {
+    test("-profile test_uli --pacbio_uli_adapter false") {
 
         when {
             params {

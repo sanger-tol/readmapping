@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add [Lima](https://github.com/PacificBiosciences/barcoding) to trim ULI adapter and demultiplex ULI reads
 - Add [MultiQC](https://github.com/MultiQC/MultiQC) to aggregate quality control statistics
 - Add [pbmarkdup](https://github.com/PacificBiosciences/pbmarkdup) to remove ULI duplicates
-- Replace chunking alignment with [sanger-tol/cram_map_long_read](https://github.com/sanger-tol/nf-core-modules/blob/main/subworkflows/sanger-tol/cram_map_long_reads) and [sanger-tol/cram_map_illumina_hic](https://github.com/sanger-tol/nf-core-modules/blob/main/subworkflows/sanger-tol/cram_map_illumina_hic)
+- Align data in chunks with [sanger-tol/cram_map_long_read](https://github.com/sanger-tol/nf-core-modules/blob/main/subworkflows/sanger-tol/cram_map_long_reads) and [sanger-tol/cram_map_illumina_hic](https://github.com/sanger-tol/nf-core-modules/blob/main/subworkflows/sanger-tol/cram_map_illumina_hic)
 - Upgrade Samtools version to allow CRAM 3.1, archive, level 8
 - Switched to not merging alignments by specimen by default. Merged alignment can be re-enabled with the new `--merge_output`.
 - Perform CRAM file reheadering after converting BAM to CRAM (previously done before conversion) to ensure provided headers are retained

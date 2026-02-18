@@ -1,5 +1,5 @@
 {
-    "-profile test": {
+    "-profile test --short_aligner minimap2": {
         "content": [
             70,
             {

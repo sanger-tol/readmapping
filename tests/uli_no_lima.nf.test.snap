@@ -1,5 +1,5 @@
 {
-    "-profile test_uli": {
+    "-profile test_uli --pacbio_uli_adapter false": {
         "content": [
             57,
             {
