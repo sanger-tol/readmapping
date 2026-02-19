@@ -36,7 +36,7 @@ workflow ALIGN_LONG {
     ch_reads_branch = reads
         .map { meta, read_files -> [meta + [read_group: "-y -R $meta.read_group"], read_files] }
         .branch { _meta, read_files ->
-            bam: read_files.endsWith("bam")
+            bam: read_files.name.endsWith("bam")
             fastq: true
         }
 
@@ -58,6 +58,7 @@ workflow ALIGN_LONG {
             :  meta.read_group
             [ meta + [read_group:rg_args], bam ]
         }
+    ch_bam_rg.view()
 
     ch_reads_rg = ch_bam_rg.mix( ch_reads_branch.fastq )
 
