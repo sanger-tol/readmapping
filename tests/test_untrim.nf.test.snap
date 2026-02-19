@@ -15,6 +15,9 @@
                 "CONVERT_CRAM": {
                     "samtools": "1.22.1"
                 },
+                "CRAMALIGN_GENCRAMCHUNKS": {
+                    "cramalign_gencramchunks": "1.1.0"
+                },
                 "CRAMALIGN_MINIMAP2ALIGNHIC": {
                     "filter_five_end.pl": 1.0,
                     "gawk": "5.3.1",
@@ -84,7 +87,13 @@
                 "SAMTOOLS_MERGE": {
                     "samtools": "1.22.1"
                 },
+                "SAMTOOLS_MERGEDUP": {
+                    "samtools": "1.22.1"
+                },
                 "SAMTOOLS_REHEADER_CRAM": {
+                    "samtools": "1.22.1"
+                },
+                "SAMTOOLS_SPLITHEADER": {
                     "samtools": "1.22.1"
                 },
                 "SAMTOOLS_STATS": {
@@ -171,6 +180,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-02-07T19:53:18.730797404"
+        "timestamp": "2026-02-18T18:23:13.03609261"
     }
 }
