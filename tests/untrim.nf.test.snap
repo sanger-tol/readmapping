@@ -1,7 +1,7 @@
 {
     "-profile test --pacbio_adapter_fasta false --pacbio_adapter_yaml false": {
         "content": [
-            70,
+            71,
             {
                 "BGZIP_BEDGRAPH": {
                     "tabix": 1.21
@@ -60,6 +60,9 @@
                     "samtools": "1.22.1"
                 },
                 "SAMTOOLS_REHEADER_CRAM": {
+                    "samtools": "1.22.1"
+                },
+                "SAMTOOLS_SPLITHEADER": {
                     "samtools": "1.22.1"
                 },
                 "SAMTOOLS_STATS": {

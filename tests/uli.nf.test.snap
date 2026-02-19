@@ -1,7 +1,7 @@
 {
     "-profile test_uli": {
         "content": [
-            54,
+            56,
             {
                 "BGZIP_BEDGRAPH": {
                     "tabix": 1.21
@@ -72,6 +72,9 @@
                     "samtools": "1.22.1"
                 },
                 "SAMTOOLS_MERGE": {
+                    "samtools": "1.22.1"
+                },
+                "SAMTOOLS_SPLITHEADER": {
                     "samtools": "1.22.1"
                 },
                 "SAMTOOLS_STATS": {
@@ -535,6 +538,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2026-02-18T21:37:22.779189452"
+        "timestamp": "2026-02-19T10:48:55.613155336"
     }
 }

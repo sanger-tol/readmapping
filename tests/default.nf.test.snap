@@ -1,7 +1,7 @@
 {
     "-profile test": {
         "content": [
-            143,
+            144,
             {
                 "BGZIP_BEDGRAPH": {
                     "tabix": 1.21

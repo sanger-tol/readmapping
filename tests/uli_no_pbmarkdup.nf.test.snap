@@ -1,7 +1,7 @@
 {
     "-profile test_uli --pacbio_pbmarkdup false": {
         "content": [
-            52,
+            54,
             {
                 "BGZIP_BEDGRAPH": {
                     "tabix": 1.21
@@ -69,6 +69,9 @@
                     "samtools": "1.22.1"
                 },
                 "SAMTOOLS_MERGE": {
+                    "samtools": "1.22.1"
+                },
+                "SAMTOOLS_SPLITHEADER": {
                     "samtools": "1.22.1"
                 },
                 "SAMTOOLS_STATS": {

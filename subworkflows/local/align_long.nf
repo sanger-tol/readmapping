@@ -58,7 +58,6 @@ workflow ALIGN_LONG {
             :  meta.read_group
             [ meta + [read_group:rg_args], bam ]
         }
-    ch_bam_rg.view()
 
     ch_reads_rg = ch_bam_rg.mix( ch_reads_branch.fastq )
 
