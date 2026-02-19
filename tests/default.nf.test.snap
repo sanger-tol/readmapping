@@ -104,6 +104,9 @@
                 "SAMTOOLS_SPLITHEADER": {
                     "samtools": "1.22.1"
                 },
+                "SAMTOOLS_SPLITHEADER": {
+                    "samtools": "1.22.1"
+                },
                 "SAMTOOLS_STATS": {
                     "samtools": "1.22.1"
                 },

@@ -64,9 +64,12 @@
                     "samtools": "1.22.1"
                 },
                 "SAMTOOLS_MERGEDUP": {
-                    "samtools": 1.23
+                    "samtools": "1.22.1"
                 },
                 "SAMTOOLS_REHEADER_CRAM": {
+                    "samtools": "1.22.1"
+                },
+                "SAMTOOLS_SPLITHEADER": {
                     "samtools": "1.22.1"
                 },
                 "SAMTOOLS_SPLITHEADER": {
