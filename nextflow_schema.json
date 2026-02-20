@@ -127,16 +127,16 @@
                     "description": "Alignment method to use for short-reads (options are: \"minimap2\" or \"bwamem2\"",
                     "enum": ["minimap2", "bwamem2"]
                 },
-                "fastx_chunk_size": {
+                "long_reads_map_chunk_size": {
                     "type": "integer",
                     "default": 10000,
-                    "description": "Chunk size for parallel processing of PacBio FASTX files, in number of sequences",
+                    "description": "Chunk size for parallel alignment of long read data, in number of sequences",
                     "minimum": 1
                 },
-                "cram_chunk_size": {
+                "short_reads_map_chunk_size": {
                     "type": "integer",
                     "default": 10000,
-                    "description": "Chunk size for parallel processing of CRAM files, in number of containers",
+                    "description": "Chunk size for parallel alignment of short read data, in number of cram containers",
                     "minimum": 1
                 }
             }

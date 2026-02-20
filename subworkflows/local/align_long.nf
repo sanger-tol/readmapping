@@ -159,7 +159,7 @@ workflow ALIGN_LONG {
         fasta: [ meta_fasta + meta + [ assembly_id: meta_fasta.id ] , fasta_file ]
     }
 
-    FASTX_MAP_LONG_READS ( ch_align_input.fasta, ch_align_input.cram, params.fastx_chunk_size, true )
+    FASTX_MAP_LONG_READS ( ch_align_input.fasta, ch_align_input.cram, params.long_reads_map_chunk_size, true )
 
     //
     // SUBWORKFLOW: Merge all alignment output by sample name
