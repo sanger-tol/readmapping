@@ -68,8 +68,8 @@ workflow ALIGN_LONG {
         ch_reads = ch_reads_rg
             .branch { meta, read_files ->
                 pacbio: meta.datatype == "pacbio"
-                non_pacbio_bam: (meta.datatype != "pacbio") && (read_files.endsWith(".bam"))
-                non_pacbio_fastx: (meta.datatype != "pacbio") && (!read_files.endsWith(".bam"))
+                non_pacbio_bam: (meta.datatype != "pacbio") && (read_files.name.endsWith(".bam"))
+                non_pacbio_fastx: (meta.datatype != "pacbio") && (!read_files.name.endsWith(".bam"))
             }
         //
         // PREPARE INPUT FOR ADAPTER TRIMMING WITH HIFITRIMMER
@@ -147,7 +147,6 @@ workflow ALIGN_LONG {
         bam_to_fastx = ch_bam_rg
         fastx = ch_reads_branch.fastq
     }
-
     // readmapping take only 1 FASTA as reference
     SAMTOOLS_FASTQ ( bam_to_fastx, false )
     ch_reads_fastx = SAMTOOLS_FASTQ.out.other.mix( fastx )
