@@ -68,8 +68,8 @@ workflow ALIGN_LONG {
         ch_reads = ch_reads_rg
             .branch { meta, read_files ->
                 pacbio: meta.datatype == "pacbio"
-                non_pacbio_bam: (meta.datatype != "pacbio") && (read_files.name.endsWith(".bam"))
-                non_pacbio_fastx: (meta.datatype != "pacbio") && (!read_files.name.endsWith(".bam"))
+                non_pacbio_bam: read_files.name.endsWith(".bam")
+                non_pacbio_fastx: true
             }
         //
         // PREPARE INPUT FOR ADAPTER TRIMMING WITH HIFITRIMMER

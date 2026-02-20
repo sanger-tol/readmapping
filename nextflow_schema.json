@@ -130,7 +130,7 @@
                 "fastx_chunk_size": {
                     "type": "integer",
                     "default": 10000,
-                    "description": "Chunk size for parallel processing of FASTX files, in number of sequences",
+                    "description": "Chunk size for parallel processing of PacBio FASTX files, in number of sequences",
                     "minimum": 1
                 },
                 "cram_chunk_size": {
