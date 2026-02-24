@@ -42,12 +42,12 @@
                     },
                     "hifitrimmer/filterbam": {
                         "branch": "master",
-                        "git_sha": "360d6f90f13957ad9bbcbdb841f774cc2f3505ca",
+                        "git_sha": "738aa1bca8800ea5e683271189a1d6575be46827",
                         "installed_by": ["pacbio_preprocess"]
                     },
                     "hifitrimmer/processblast": {
                         "branch": "master",
-                        "git_sha": "dbc43f924a7410a2b828f2a022305f1d6e71ed84",
+                        "git_sha": "738aa1bca8800ea5e683271189a1d6575be46827",
                         "installed_by": ["pacbio_preprocess"]
                     },
                     "lima": {
