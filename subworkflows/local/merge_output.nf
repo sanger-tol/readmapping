@@ -14,7 +14,7 @@ workflow MERGE_OUTPUT {
 
     if ( params.merge_output ) {
         ch_multi_bams = ch_bam
-        .map { meta, bam -> [['id': meta.id.split('_')[0..-2].join('_'), 'datatype': meta.datatype], meta.read_count, bam] }
+        .map { meta, bam -> [['id': meta.specimen, 'specimen':meta.specimen, 'datatype': meta.datatype], meta.read_count, bam] }
         .groupTuple( by: [0] )
         .map { meta, read_counts, bams -> [meta + [read_count: read_counts.sum()], bams] }
         .filter { _meta, bams -> bams.size() > 1 }

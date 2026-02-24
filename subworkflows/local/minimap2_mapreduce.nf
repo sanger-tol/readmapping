@@ -36,6 +36,10 @@ workflow MINIMAP2_MAPREDUCE {
     .map{ cram_id, cram_info, ref_id, ref_dir, _mmi_id, mmi_path->
         tuple([
                 id: cram_id.id,
+                specimen: cram_id.specimen,
+                library: cram_id.library,
+                sample: cram_id.sample,
+                run_accession: cram_id.run_accession,
                 chunk_id: cram_id.id + "_" + cram_info[5],
                 genome_size: ref_id.genome_size,
                 datatype: cram_id.datatype

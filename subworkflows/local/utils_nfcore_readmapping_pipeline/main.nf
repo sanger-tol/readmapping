@@ -225,29 +225,22 @@ def validateInputParameters() {
 // Validate channels from input samplesheet
 //
 def validateInputSamplesheet(channel) {
-    def seen = [:].withDefault { 0 }
     def uniquePairs = new HashSet()
     def validFormats = [".fq.gz", ".fastq.gz", ".cram", ".bam"]
 
     return channel.map { sample ->
         def (meta, file) = sample
 
-        // Replace spaces with underscores in sample names
-        meta.sample = meta.sample.replace(" ", "_")
-
         // Validate that the file path is non-empty and has a valid format
         if (!file || !validFormats.any { fmt -> file.toString().endsWith(fmt) }) {
             error("Data file is required and must have a valid extension: ${file}")
         }
 
-        def pair = [meta.sample, file.toString()].toString()
+        def pair = [meta.run_accession, file.toString()].toString()
 
         if (!uniquePairs.add(pair)) {
-            error("The pair of sample name and read file must be unique: ${pair}")
+            error("The pair of run accession and read file must be unique: ${pair}")
         }
-
-        seen[meta.sample] += 1
-        meta.sample = "${meta.sample}_T${seen[meta.sample]}"
 
         return [meta, file]
     }

@@ -1,2 +1,2 @@
-sample,datatype,datafile,library,barcode
-jaAcrCerv1,pacbio,/nfs/treeoflife-01/resources/nextflow/test-data/Acropora_cervicornis/genomic_data/m84093_241116_151316_s2.hifi_reads.bc2028.subset.bam,uli,bc2028
+specimen,run_accesion,datatype,datafile,library,barcode
+SAMEA114784749,ERR14209104,/nfs/treeoflife-01/resources/nextflow/test-data/Acropora_cervicornis/genomic_data/m84093_241116_151316_s2.hifi_reads.bc2028.subset.bam,uli,bc2028
