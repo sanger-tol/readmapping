@@ -1,7 +1,7 @@
 {
     "-profile test": {
         "content": [
-            172,
+            170,
             {
                 "BGZIP_BEDGRAPH": {
                     "tabix": 1.21
@@ -59,17 +59,14 @@
                     "pigz": 2.8
                 },
                 "HIFITRIMMER_FILTERBAM": {
-                    "hifi_trimmer": "2.1.0",
+                    "hifi_trimmer": "2.2.0",
                     "samtools": 1.23
                 },
                 "HIFITRIMMER_PROCESSBLAST": {
-                    "hifi_trimmer": "2.1.0"
+                    "hifi_trimmer": "2.2.0"
                 },
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
-                },
-                "PBMARKDUP": {
-                    "pbmarkdup": "1.2.0"
                 },
                 "SAMTOOLS_ADDREPLACERG": {
                     "samtools": "1.22.1"
@@ -121,10 +118,8 @@
                 "pipeline_info",
                 "pipeline_info/readmapping_software_mqc_versions.yml",
                 "preprocess",
-                "preprocess/mMelMel3_T4.dedup.pbmarkdup.log",
                 "preprocess/mMelMel3_T4.hifitrimmer.bed.gz",
                 "preprocess/mMelMel3_T4.hifitrimmer.summary.json",
-                "preprocess/mMelMel3_T5.dedup.pbmarkdup.log",
                 "preprocess/mMelMel3_T5.hifitrimmer.bed.gz",
                 "preprocess/mMelMel3_T5.hifitrimmer.summary.json",
                 "quality_control",
@@ -210,9 +205,7 @@
                 "read_mapping/pacbio/merged/GCA_922984935.2.subset.unmasked.pacbio.mMelMel3.stats.gz"
             ],
             [
-                "mMelMel3_T4.dedup.pbmarkdup.log:md5,152d6c4827d93954ac4a2a803cffc8bc",
                 "mMelMel3_T4.hifitrimmer.bed.gz:md5,0fe5fe224b52d743066bb3e03fecd982",
-                "mMelMel3_T5.dedup.pbmarkdup.log:md5,7b44eefa75c313a63c907b56a254a0d5",
                 "mMelMel3_T5.hifitrimmer.bed.gz:md5,16e8458843c0a6e1736f19c297088c32",
                 "GCA_922984935.2.subset.unmasked.hic.mMelMel3_T1.coverage.bedGraph.gz:md5,79848febc8a62315b937987120e92d15",
                 "GCA_922984935.2.subset.unmasked.hic.mMelMel3_T1.flagstat:md5,06518c1c7dc52fbb8e4e0b528cca346a",
@@ -787,6 +780,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2026-02-20T10:57:53.853096651"
+        "timestamp": "2026-02-24T15:59:46.636541003"
     }
 }

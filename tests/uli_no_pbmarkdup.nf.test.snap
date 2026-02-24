@@ -44,11 +44,11 @@
                     "pigz": 2.8
                 },
                 "HIFITRIMMER_FILTERBAM": {
-                    "hifi_trimmer": "2.1.0",
+                    "hifi_trimmer": "2.2.0",
                     "samtools": 1.23
                 },
                 "HIFITRIMMER_PROCESSBLAST": {
-                    "hifi_trimmer": "2.1.0"
+                    "hifi_trimmer": "2.2.0"
                 },
                 "LIMA": {
                     "lima": "2.12.0"
@@ -531,6 +531,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2026-02-18T21:35:59.043097781"
+        "timestamp": "2026-02-24T15:59:09.835746602"
     }
 }

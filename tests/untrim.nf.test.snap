@@ -1,7 +1,7 @@
 {
     "-profile test --pacbio_adapter_fasta false --pacbio_adapter_yaml false": {
         "content": [
-            99,
+            97,
             {
                 "BGZIP_BEDGRAPH": {
                     "tabix": 1.21
@@ -34,9 +34,6 @@
                 },
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
-                },
-                "PBMARKDUP": {
-                    "pbmarkdup": "1.2.0"
                 },
                 "SAMTOOLS_CRAM": {
                     "samtools": "1.22.1"
@@ -78,9 +75,6 @@
             [
                 "pipeline_info",
                 "pipeline_info/readmapping_software_mqc_versions.yml",
-                "preprocess",
-                "preprocess/mMelMel3_T3.dedup.pbmarkdup.log",
-                "preprocess/mMelMel3_T4.dedup.pbmarkdup.log",
                 "quality_control",
                 "quality_control/multiqc_report.html",
                 "quality_control/ont.mMelMel3_T1_fastqc.html",
@@ -138,8 +132,6 @@
                 "read_mapping/pacbio/merged/GCA_922984935.2.subset.unmasked.pacbio.mMelMel3.stats.gz"
             ],
             [
-                "mMelMel3_T3.dedup.pbmarkdup.log:md5,152d6c4827d93954ac4a2a803cffc8bc",
-                "mMelMel3_T4.dedup.pbmarkdup.log:md5,7b44eefa75c313a63c907b56a254a0d5",
                 "GCA_922984935.2.subset.unmasked.ont.mMelMel3_T1.coverage.bedGraph.gz:md5,85ffcf5fa35869be78198b750ae7184a",
                 "GCA_922984935.2.subset.unmasked.ont.mMelMel3_T1.flagstat:md5,9a975d9cca35785dc8044aa06a63e7b5",
                 "GCA_922984935.2.subset.unmasked.ont.mMelMel3_T1.idxstats:md5,f176a0ddb87700171fa3f88525b94272",
@@ -244,6 +236,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2026-02-20T10:59:04.735939643"
+        "timestamp": "2026-02-24T16:05:43.133747165"
     }
 }

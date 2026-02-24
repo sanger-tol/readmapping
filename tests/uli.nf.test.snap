@@ -1,7 +1,7 @@
 {
     "-profile test_uli": {
         "content": [
-            56,
+            55,
             {
                 "BGZIP_BEDGRAPH": {
                     "tabix": 1.21
@@ -44,11 +44,11 @@
                     "pigz": 2.8
                 },
                 "HIFITRIMMER_FILTERBAM": {
-                    "hifi_trimmer": "2.1.0",
+                    "hifi_trimmer": "2.2.0",
                     "samtools": 1.23
                 },
                 "HIFITRIMMER_PROCESSBLAST": {
-                    "hifi_trimmer": "2.1.0"
+                    "hifi_trimmer": "2.2.0"
                 },
                 "LIMA": {
                     "lima": "2.12.0"
@@ -94,7 +94,6 @@
                 "preprocess/jaAcrCerv1_T1.dedup.pbmarkdup.log",
                 "preprocess/jaAcrCerv1_T1.hifitrimmer.bed.gz",
                 "preprocess/jaAcrCerv1_T1.hifitrimmer.summary.json",
-                "preprocess/jaAcrCerv2_T1.dedup.pbmarkdup.log",
                 "preprocess/jaAcrCerv2_T1.hifitrimmer.bed.gz",
                 "preprocess/jaAcrCerv2_T1.hifitrimmer.summary.json",
                 "quality_control",
@@ -125,8 +124,7 @@
             [
                 "jaAcrCerv1_T1.dedup.pbmarkdup.log:md5,02efc656c114d8029ad4e8e79e778e35",
                 "jaAcrCerv1_T1.hifitrimmer.bed.gz:md5,cb45e59936b15a601ab41df4a32e30d6",
-                "jaAcrCerv2_T1.dedup.pbmarkdup.log:md5,b0f9657238ccc2feb3701b156e03b837",
-                "jaAcrCerv2_T1.hifitrimmer.bed.gz:md5,c88ccab95c5c4b9a71a1c659af74673e",
+                "jaAcrCerv2_T1.hifitrimmer.bed.gz:md5,45c78d87eee0433dd4e0300c04c3bd64",
                 "GCA_964034985.1.subset.unmasked.pacbio.jaAcrCerv1_T1.coverage.bedGraph.gz:md5,5a97361a433bf23af386653dcbeb7bd8",
                 "GCA_964034985.1.subset.unmasked.pacbio.jaAcrCerv1_T1.flagstat:md5,64341a288816774ffde9c3137c68d2ee",
                 "GCA_964034985.1.subset.unmasked.pacbio.jaAcrCerv1_T1.idxstats:md5,f0102d624656f7673a7567baadf2fdf9",
@@ -350,7 +348,7 @@
                     "detections": [
                         {
                             "adapter": "PacBio_ULI_adapter",
-                            "n_hits": 83335
+                            "n_hits": 83353
                         },
                         {
                             "adapter": "gnl|uv|NGB00973.1:1-35",
@@ -521,15 +519,15 @@
                         {
                             "adapter": "PacBio_ULI_adapter",
                             "action": "discard",
-                            "n_hits": 82744,
-                            "n_reads": 42501,
-                            "bases_removed": 362139516
+                            "n_hits": 82762,
+                            "n_reads": 42510,
+                            "bases_removed": 362209796
                         }
                     ],
                     "summary": {
-                        "total_reads_discarded": 42501,
+                        "total_reads_discarded": 42510,
                         "total_reads_trimmed": 0,
-                        "total_bases_removed": 362139516
+                        "total_bases_removed": 362209796
                     }
                 }
             }
@@ -538,6 +536,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2026-02-19T10:48:55.613155336"
+        "timestamp": "2026-02-24T16:01:40.661967078"
     }
 }
