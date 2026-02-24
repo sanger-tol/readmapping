@@ -121,7 +121,7 @@ workflow ALIGN_LONG {
                 yaml: [ meta, yaml ]
             }
 
-        PACBIO_PREPROCESS( ch_other.reads, ch_other.yaml, adapter_fasta_for_preprocess, [], val_pacbio_pbmarkdup )
+        PACBIO_PREPROCESS( ch_other.reads, ch_other.yaml, adapter_fasta_for_preprocess, [], false ) // No pbmarkdup for non-ULI
 
         pacbio_fastx = fastx.mix( PACBIO_PREPROCESS.out.trimmed_fastx )
             .mix( PACBIO_PREPROCESS.out.untrimmed_fastx )
