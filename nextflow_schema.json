@@ -42,9 +42,9 @@
                     "fa_icon": "fas fa-file-archive"
                 },
                 "merge_output": {
-                    "type": "boolean",
-                    "default": true,
-                    "description": "Merge output alignment files by samples",
+                    "type": "string",
+                    "default": "1",
+                    "description": "Merge output alignment files by specimens",
                     "fa_icon": "fas fa-layer-group"
                 },
                 "hifi_adapter_db": {
