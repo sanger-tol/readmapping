@@ -42,7 +42,11 @@ nextflow_pipeline {
                     cram_path.collect{ f -> [(new File(f).getName()): cram("${params.outdir}/${f}", fasta).getStatistics()] }.collectEntries{ it }.sort(),
 
                      // Stable trimming json
-                    hifitrimmer_json.collect{ f -> [(new File(f).getName()): path("${params.outdir}/${f}").json.tap{ it.remove('run_info') }] }.collectEntries{ it }.sort()
+                    hifitrimmer_json.collect{ f ->
+                        def obj = path("${params.outdir}/${f}").json
+                        obj.remove('run_info')
+                        new File(f).getName() + ":md5," + groovy.json.JsonOutput.toJson(new TreeMap(obj)).md5().toString()
+                    }.sort()
                 ).match() }
             )
         }
