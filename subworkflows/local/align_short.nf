@@ -44,7 +44,7 @@ workflow ALIGN_SHORT {
 
     CRAM_MAP_ILLUMINA( ch_illumina.fasta, ch_illumina.cram, params.short_aligner, params.short_reads_map_chunk_size )
     //
-    // SUBWORKFLOW: Merge all alignment output by sample name
+    // SUBWORKFLOW: Merge all alignment outputs by specimen
     //
     MERGE_OUTPUT( CRAM_MAP_ILLUMINA.out.bam )
 

@@ -161,7 +161,7 @@ workflow ALIGN_LONG {
     FASTX_MAP_LONG_READS ( ch_align_input.fasta, ch_align_input.cram, params.long_reads_map_chunk_size, true )
 
     //
-    // SUBWORKFLOW: Merge all alignment output by sample name
+    // SUBWORKFLOW: Merge all alignment outputs by specimen
     //
     ch_sort  = MERGE_OUTPUT ( FASTX_MAP_LONG_READS.out.bam ).bam
 
