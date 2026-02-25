@@ -76,8 +76,8 @@ workflow ALIGN_LONG {
         // If adapter fasta provided but not yaml, throw error as yaml is needed for adapter trimming with hifitrimmer
         if ( (val_pacbio_adapter_fasta && !val_pacbio_adapter_yaml) || (!val_pacbio_adapter_fasta && val_pacbio_adapter_yaml) ) {
             log.error("""
-            To trim PacBio adapters, please ensure providing both val_pacbio_adapter_fasta and val_pacbio_adapter_yaml for PacBio adapter trimming.
-            To skip trimming, please set both val_pacbio_adapter_fasta and val_pacbio_adapter_yaml to false.
+            Adapter trimming configuration is invalid. Please provide BOTH parameters: pacbio_adapter_fasta & pacbio_adapter_yaml.
+            Or set BOTH to false to disable adapter trimming for PacBio reads.
             """)
         }
 
