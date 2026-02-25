@@ -11,7 +11,7 @@ include { FASTX_MAP_LONG_READS                       } from '../../subworkflows/
 
 // Include nf-core modules
 include { FASTQC as FASTQC_FILTERED                    } from '../../modules/nf-core/fastqc/main'
-include { GAWK                                         } from '../../modules/nf-core/gawk/main'
+include { GAWK as GAWK_MODIFY_YAML_BARCODE             } from '../../modules/nf-core/gawk/main'
 include { SAMTOOLS_SPLITHEADER                         } from '../../modules/nf-core/samtools/splitheader/main'
 include { SAMTOOLS_FASTQ                               } from '../../modules/nf-core/samtools/fastq/main'
 include { SAMTOOLS_FASTQ as SAMTOOLS_FASTQ_QC          } from '../../modules/nf-core/samtools/fastq/main'
@@ -87,8 +87,8 @@ workflow ALIGN_LONG {
                 .map { meta, _reads, yaml -> [ meta, yaml ]
                 }
 
-            GAWK( ch_yaml_meta, [], false )
-            ch_pacbio_read_yaml = ch_reads.pacbio.combine(GAWK.out.output, by: 0)
+            GAWK_MODIFY_YAML_BARCODE( ch_yaml_meta, [], false )
+            ch_pacbio_read_yaml = ch_reads.pacbio.combine(GAWK_MODIFY_YAML_BARCODE.out.output, by: 0)
             adapter_fasta_for_preprocess = [[id:file( val_pacbio_adapter_fasta ).baseName], val_pacbio_adapter_fasta]
         } else {
             ch_pacbio_read_yaml = ch_reads.pacbio.map { meta, read_files -> [ meta, read_files, [] ] } //PacBio reads with dummy yaml
