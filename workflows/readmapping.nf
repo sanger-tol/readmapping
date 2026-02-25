@@ -64,8 +64,8 @@ workflow READMAPPING {
     ch_reads = INPUT_CHECK ( ch_samplesheet ).reads
     .branch {
         meta, _reads ->
-            short_ : meta.datatype == "hic" || meta.datatype == "illumina"
-            long_ : true
+            short_reads : meta.datatype == "hic" || meta.datatype == "illumina"
+            long_reads : true
     }
 
     ch_versions = ch_versions.mix ( INPUT_CHECK.out.versions )
@@ -100,13 +100,13 @@ workflow READMAPPING {
     // SUBWORKFLOW: Align raw reads to genome
     //
 
-    ALIGN_SHORT ( PREPARE_GENOME.out.fasta, ch_reads.short_ )
+    ALIGN_SHORT ( PREPARE_GENOME.out.fasta, ch_reads.short_reads )
     ch_versions = ch_versions.mix ( ALIGN_SHORT.out.versions )
 
 
     ALIGN_LONG (
         PREPARE_GENOME.out.fasta,
-        ch_reads.long_,
+        ch_reads.long_reads,
         val_pacbio_adapter_fasta,
         val_pacbio_adapter_yaml,
         val_pacbio_uli_adapter,
