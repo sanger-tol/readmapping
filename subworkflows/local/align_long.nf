@@ -23,7 +23,6 @@ workflow ALIGN_LONG {
     val_pacbio_adapter_fasta       // channel: /path/to/pacbio_adapter_fasta for blastn database (produce blast input for hifi_trimmer_processblast)
     val_pacbio_adapter_yaml        // channel: /path/to/pacbio_adapter_yaml for hifitrimmer to process blast output for adapter trimming
     val_pacbio_uli_adapter         // channel: /path/to/pacbio_uli_adapter for lima demultiplexing
-    val_pacbio_pbmarkdup           // channel: true/false to run pbmarkdup
 
     main:
     ch_versions    = channel.empty()
@@ -64,7 +63,7 @@ workflow ALIGN_LONG {
     //
     // PACBIO READ PREPROCESSING
     //
-    if (val_pacbio_adapter_fasta || val_pacbio_adapter_yaml || val_pacbio_uli_adapter || val_pacbio_pbmarkdup) { // pacbio_adapter_fasta, pacbio_adapter_yaml, pacbio_uli_adapter always provided
+    if (val_pacbio_adapter_fasta || val_pacbio_adapter_yaml || val_pacbio_uli_adapter) { // pacbio_adapter_fasta, pacbio_adapter_yaml, pacbio_uli_adapter always provided
         ch_reads = ch_reads_rg
             .branch { meta, read_files ->
                 pacbio: meta.datatype == "pacbio"
@@ -112,7 +111,7 @@ workflow ALIGN_LONG {
                 yaml: [ meta, yaml ]
             }
         // As ULI is read-file-level, preprocessing has to be called twice for ULI and non-ULI reads separately
-        PACBIO_PREPROCESS_ULI( ch_uli.reads, ch_uli.yaml, adapter_fasta_for_preprocess, val_pacbio_uli_adapter, val_pacbio_pbmarkdup )
+        PACBIO_PREPROCESS_ULI( ch_uli.reads, ch_uli.yaml, adapter_fasta_for_preprocess, val_pacbio_uli_adapter, true )
 
         // Preprocess non-ULI
         ch_other = ch_pacbio_branched.other

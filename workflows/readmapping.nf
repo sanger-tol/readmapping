@@ -110,7 +110,6 @@ workflow READMAPPING {
         val_pacbio_adapter_fasta,
         val_pacbio_adapter_yaml,
         val_pacbio_uli_adapter,
-        params.pacbio_pbmarkdup
     )
 
     ch_versions = ch_versions.mix ( ALIGN_LONG.out.versions )

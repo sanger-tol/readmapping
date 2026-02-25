@@ -70,13 +70,6 @@
                     "pattern": "^\\S+\\.fn?a(sta)?(\\.gz)?$",
                     "fa_icon": "far fa-file-code"
                 },
-                "pacbio_pbmarkdup": {
-                    "type": "boolean",
-                    "description": "Enable marking of PacBio duplicates using pbmarkdup.",
-                    "format": "path",
-                    "default": true,
-                    "fa_icon": "fas fa-scissors"
-                },
                 "email": {
                     "type": "string",
                     "description": "Email address for completion summary.",
