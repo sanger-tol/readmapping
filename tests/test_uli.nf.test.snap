@@ -106,9 +106,9 @@
                 "read_mapping/pacbio",
                 "read_mapping/pacbio/SAMEA114784749",
                 "read_mapping/pacbio/SAMEA114784749/ERR14209104",
-                "read_mapping/pacbio/SAMEA114784749/ERR14209104/GCA_964034985.1.unmasked.pacbio.SAMEA114784749.ERR14209104.coverage.bedGraph.gz",
-                "read_mapping/pacbio/SAMEA114784749/ERR14209104/GCA_964034985.1.unmasked.pacbio.SAMEA114784749.ERR14209104.cram",
-                "read_mapping/pacbio/SAMEA114784749/ERR14209104/GCA_964034985.1.unmasked.pacbio.SAMEA114784749.ERR14209104.cram.crai",
+                "read_mapping/pacbio/SAMEA114784749/ERR14209104/GCA_964034985.1.unmasked.pacbio.SAMEA114784749.ERR14209104.minimap2.coverage.bedGraph.gz",
+                "read_mapping/pacbio/SAMEA114784749/ERR14209104/GCA_964034985.1.unmasked.pacbio.SAMEA114784749.ERR14209104.minimap2.cram",
+                "read_mapping/pacbio/SAMEA114784749/ERR14209104/GCA_964034985.1.unmasked.pacbio.SAMEA114784749.ERR14209104.minimap2.cram.crai",
                 "read_mapping/pacbio/SAMEA114784749/ERR14209104/qc",
                 "read_mapping/pacbio/SAMEA114784749/ERR14209104/qc/SAMEA114784749.ERR14209104_hifi_trimmer.tar.gz",
                 "read_mapping/pacbio/SAMEA114784749/ERR14209104/qc/pacbio.SAMEA114784749.ERR14209104.filtered_fastqc.html",
@@ -116,15 +116,15 @@
                 "read_mapping/pacbio/SAMEA114784749/ERR14209104/qc/pacbio.SAMEA114784749.ERR14209104_fastqc.html",
                 "read_mapping/pacbio/SAMEA114784749/ERR14209104/qc/pacbio.SAMEA114784749.ERR14209104_fastqc.zip",
                 "read_mapping/pacbio/SAMEA114784749/ERR14209104/stats",
-                "read_mapping/pacbio/SAMEA114784749/ERR14209104/stats/GCA_964034985.1.unmasked.pacbio.SAMEA114784749.ERR14209104.flagstat",
-                "read_mapping/pacbio/SAMEA114784749/ERR14209104/stats/GCA_964034985.1.unmasked.pacbio.SAMEA114784749.ERR14209104.idxstats",
-                "read_mapping/pacbio/SAMEA114784749/ERR14209104/stats/GCA_964034985.1.unmasked.pacbio.SAMEA114784749.ERR14209104.stats.gz"
+                "read_mapping/pacbio/SAMEA114784749/ERR14209104/stats/GCA_964034985.1.unmasked.pacbio.SAMEA114784749.ERR14209104.minimap2.flagstat",
+                "read_mapping/pacbio/SAMEA114784749/ERR14209104/stats/GCA_964034985.1.unmasked.pacbio.SAMEA114784749.ERR14209104.minimap2.idxstats",
+                "read_mapping/pacbio/SAMEA114784749/ERR14209104/stats/GCA_964034985.1.unmasked.pacbio.SAMEA114784749.ERR14209104.minimap2.stats.gz"
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2026-02-25T11:03:38.927304042"
+        "timestamp": "2026-02-26T16:31:50.636437847"
     }
 }
