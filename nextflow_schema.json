@@ -43,7 +43,6 @@
                 },
                 "merge_output": {
                     "type": "string",
-                    "default": "",
                     "description": "Set to a non-empty string to merge output alignment files by specimens. The string is used to name the output directory",
                     "fa_icon": "fas fa-layer-group"
                 },
