@@ -14,9 +14,9 @@ workflow MERGE_OUTPUT {
 
     if ( params.merge_output ) {
         ch_multi_bams = ch_bam
-        .map { meta, bam -> [['specimen':meta.specimen, 'datatype': meta.datatype], meta.run_accession, meta.read_count, bam] }
+        .map { meta, bam -> [['specimen':meta.specimen, 'datatype': meta.datatype], meta.run, meta.read_count, bam] }
         .groupTuple( by: [0] )
-        .map { meta, run_accessions, read_counts, bams -> [meta + [id: run_accessions.sort().join("."), merge_source: run_accessions.sort().join("\n"), read_count: read_counts.sum()], bams] }
+        .map { meta, runs, read_counts, bams -> [meta + [id: runs.sort().join("."), merge_source: runs.sort().join("\n"), read_count: read_counts.sum()], bams] }
         .filter { _meta, bams -> bams.size() > 1 }
         .map { meta, bam -> [meta + [merged: true], bam] }
 

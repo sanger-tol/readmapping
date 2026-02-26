@@ -13,11 +13,11 @@
                 "errorMessage": "specimen must be provided and cannot contain spaces",
                 "meta": ["specimen"]
             },
-            "run_accession": {
+            "run": {
                 "type": "string",
                 "pattern": "^\\S+$",
-                "errorMessage": "run_accession must be provided and cannot contain spaces",
-                "meta": ["run_accession"]
+                "errorMessage": "run must be provided and cannot contain spaces",
+                "meta": ["run"]
             },
             "datatype": {
                 "type": "string",
@@ -47,7 +47,7 @@
                 "meta": ["barcode"]
             }
         },
-        "required": ["specimen", "run_accession", "datatype", "datafile"]
+        "required": ["specimen", "run", "datatype", "datafile"]
     },
-    "uniqueEntries": ["run_accession"]
+    "uniqueEntries": ["run"]
 }

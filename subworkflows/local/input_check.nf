@@ -37,8 +37,8 @@ def create_data_channel ( LinkedHashMap row, datafile, stats ) {
     // create meta map
     def meta = [:]
     meta.specimen      = row.specimen
-    meta.run_accession = row.run_accession.replaceAll("#", "_")
-    meta.id            = "${meta.specimen}.${meta.run_accession}".replaceAll("#", "_")
+    meta.run           = row.run.replaceAll("#", "_")
+    meta.id            = "${meta.specimen}.${meta.run}".replaceAll("#", "_")
     meta.sample        = meta.specimen
     meta.datatype      = row.datatype
     meta.library       = row.library
