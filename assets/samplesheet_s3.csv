@@ -1,7 +1,7 @@
 specimen,run_accession,datatype,datafile,library,barcode
-SAMEA7524438,31231_3_1,illumina,https://tolit.cog.sanger.ac.uk/test-data/Meles_meles/genomic_data/mMelMel1/illumina/31231_3_1.subset.cram,,
-SAMEA7524439,31231_4_1,illumina,https://tolit.cog.sanger.ac.uk/test-data/Meles_meles/genomic_data/mMelMel2/illumina/31231_4_1.subset.fastq.gz,,
-SAMEA7524440,35528_2_1,hic,https://tolit.cog.sanger.ac.uk/test-data/Meles_meles/genomic_data/mMelMel3/hic/35528_2_1.subset.cram,,
-SAMEA7524440,SAMEA7524440,ont,https://tolit.cog.sanger.ac.uk/test-data/Meles_meles/genomic_data/mMelMel3/ont/PAE35587_pass_1f1f0707_115.subset.fastq.gz,,
+SAMEA7524438,ERR6688599,illumina,https://tolit.cog.sanger.ac.uk/test-data/Meles_meles/genomic_data/mMelMel1/illumina/31231_3_1.subset.cram,,
+SAMEA7524439,ERR6688600,illumina,https://tolit.cog.sanger.ac.uk/test-data/Meles_meles/genomic_data/mMelMel2/illumina/31231_4_1.subset.fastq.gz,,
+SAMEA7524440,ERR6688402,hic,https://tolit.cog.sanger.ac.uk/test-data/Meles_meles/genomic_data/mMelMel3/hic/35528_2_1.subset.cram,,
+SAMEA7524440,PAE35587,ont,https://tolit.cog.sanger.ac.uk/test-data/Meles_meles/genomic_data/mMelMel3/ont/PAE35587_pass_1f1f0707_115.subset.fastq.gz,,
 SAMEA7524440,ERR6939248,pacbio,https://tolit.cog.sanger.ac.uk/test-data/Meles_meles/genomic_data/mMelMel3/pacbio/m64094_200910_173211.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.subset.bam,uli,bc1022
 SAMEA7524440,ERR6939249,pacbio,https://tolit.cog.sanger.ac.uk/test-data/Meles_meles/genomic_data/mMelMel3/pacbio/m64094_200911_174739.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.subset.fastq.gz,,bc1022

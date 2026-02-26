@@ -1,7 +1,0 @@
-specimen,run_accession,datatype,datafile,library,barcode
-SAMEA7524438,ERR6688599,illumina,/nfs/treeoflife-01/resources/nextflow/test-data/Meles_meles/genomic_data/mMelMel1/illumina/31231_3_1.subset.cram,,
-SAMEA7524439,ERR6688600,illumina,/nfs/treeoflife-01/resources/nextflow/test-data/Meles_meles/genomic_data/mMelMel2/illumina/31231_4_1.subset.fastq.gz,,
-SAMEA7524440,ERR6688402,hic,/nfs/treeoflife-01/resources/nextflow/test-data/Meles_meles/genomic_data/mMelMel3/hic/35528_2_1.subset.cram,,
-SAMEA7524440,PAE35587,ont,/nfs/treeoflife-01/resources/nextflow/test-data/Meles_meles/genomic_data/mMelMel3/ont/PAE35587_pass_1f1f0707_115.subset.fastq.gz,,
-SAMEA7524440,ERR6939248,pacbio,/nfs/treeoflife-01/resources/nextflow/test-data/Meles_meles/genomic_data/mMelMel3/pacbio/m64094_200910_173211.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.subset.bam,,bc1022
-SAMEA7524440,ERR6939249,pacbio,/nfs/treeoflife-01/resources/nextflow/test-data/Meles_meles/genomic_data/mMelMel3/pacbio/m64094_200911_174739.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.subset.bam,,bc1022
