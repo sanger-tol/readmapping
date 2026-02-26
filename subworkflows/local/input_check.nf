@@ -50,7 +50,7 @@ def create_data_channel ( LinkedHashMap row, datafile, stats ) {
 
     // Convert datafile to string path and then split
     def datafile_path = datafile.toString()
-    meta.read_group  = "\'@RG\\tID:" + datafile_path.split('/')[-1].split('\\.')[0] + "\\tPL:" + platform + "\\tSM:" + meta.specimen + "\'"
+    meta.read_group  = "\'@RG\\tID:" + datafile_path.simpleName + "\\tPL:" + platform + "\\tSM:" + meta.specimen + "\'"
 
     // Read the first line of the flagstat file
     // 3127898040 + 0 in total (QC-passed reads + QC-failed reads)

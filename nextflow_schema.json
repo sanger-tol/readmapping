@@ -43,8 +43,8 @@
                 },
                 "merge_output": {
                     "type": "string",
-                    "default": "1",
-                    "description": "Merge output alignment files by specimens",
+                    "default": "",
+                    "description": "Set to a non-empty string to merge output alignment files by specimens. The string is used to name the output directory",
                     "fa_icon": "fas fa-layer-group"
                 },
                 "hifi_adapter_db": {
