@@ -48,5 +48,6 @@
             }
         },
         "required": ["specimen", "run_accession", "datatype", "datafile"]
-    }
+    },
+    "uniqueEntries": ["run_accession"]
 }
