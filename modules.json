@@ -10,6 +10,11 @@
                         "git_sha": "4da6a2662e7a5f62dd9c456fde7161ed34b59d1e",
                         "installed_by": ["modules"]
                     },
+                    "blobtk/depth": {
+                        "branch": "master",
+                        "git_sha": "f0ee15907fcece823c1cd5129902405d36108191",
+                        "installed_by": ["modules"]
+                    },
                     "bwamem2/index": {
                         "branch": "master",
                         "git_sha": "d86336f3e7ae0d5f76c67b0859409769cfeb2af2",

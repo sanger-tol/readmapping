@@ -15,8 +15,7 @@ include { SAMTOOLS_INDEX                    } from '../../modules/nf-core/samtoo
 include { SAMTOOLS_STATS                    } from '../../modules/nf-core/samtools/stats/main'
 include { SAMTOOLS_FLAGSTAT                 } from '../../modules/nf-core/samtools/flagstat/main'
 include { SAMTOOLS_IDXSTATS                 } from '../../modules/nf-core/samtools/idxstats/main'
-include { BLOBTK_DEPTH                      } from '../../modules/local/blobtk_depth'
-include { TABIX_BGZIP as BGZIP_BEDGRAPH     } from '../../modules/nf-core/tabix/bgzip/main'
+include { BLOBTK_DEPTH                      } from '../../modules/nf-core/blobtk/depth/main'
 include { PIGZ_COMPRESS as GZIP_STATS       } from '../../modules/nf-core/pigz/compress/main'
 
 
@@ -99,10 +98,6 @@ workflow CONVERT_STATS {
 
     // Calculate read depth
     BLOBTK_DEPTH ( ch_renamed_bams )
-    ch_versions = ch_versions.mix ( BLOBTK_DEPTH.out.versions.first() )
-
-    BGZIP_BEDGRAPH ( BLOBTK_DEPTH.out.bedgraph )
-    ch_versions = ch_versions.mix ( BGZIP_BEDGRAPH.out.versions.first() )
 
     // Calculate statistics
     SAMTOOLS_STATS ( ch_for_stats, [[], []] )
