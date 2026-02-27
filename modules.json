@@ -167,6 +167,11 @@
                         "installed_by": ["cram_map_illumina_hic"],
                         "patch": "modules/sanger-tol/cramalign/minimap2alignhic/cramalign-minimap2alignhic.diff"
                     },
+                    "mask/unmask": {
+                        "branch": "main",
+                        "git_sha": "ace57f272f7fb447c21b881b4c9bba9ec4ef6656",
+                        "installed_by": ["modules"]
+                    },
                     "samtools/mergedup": {
                         "branch": "main",
                         "git_sha": "c60fb5411fa3c0347eb7aeafc3ebf2d9566b7136",
