@@ -1,0 +1,4 @@
+specimen,run,datatype,datafile,library,barcode
+SAMEA7524438,ERR6688599,illumina,https://tolit.cog.sanger.ac.uk/test-data/Meles_meles/genomic_data/mMelMel1/illumina/31231_3_1.subset.cram,,
+SAMEA7524439,ERR6688600,illumina,https://tolit.cog.sanger.ac.uk/test-data/Meles_meles/genomic_data/mMelMel2/illumina/31231_4_1.subset.fastq.gz,,
+SAMEA7524440,ERR6688402,hic,https://tolit.cog.sanger.ac.uk/test-data/Meles_meles/genomic_data/mMelMel3/hic/35528_2_1.subset.cram,,

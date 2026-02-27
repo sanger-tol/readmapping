@@ -10,9 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add [Blobtk depth](https://github.com/genomehubs/blobtk/wiki/blobtk-depth) to calculate read coverage
 - Add [FastQC](https://github.com/s-andrews/FastQC/releases/tag/v0.12.1) for quality control of reads
 - Add [hifi-trimmer](https://github.com/sanger-tol/hifi-trimmer) instead of [HifiAdapterFilt](https://github.com/sheinasim-USDA/HiFiAdapterFilt) approach to filter PacBio reads
-- Add [Lima](https://github.com/PacificBiosciences/barcoding) to trim ULI adapter
+- Add [Lima](https://github.com/PacificBiosciences/barcoding) to trim ULI adapter and demultiplex ULI reads
 - Add [MultiQC](https://github.com/MultiQC/MultiQC) to aggregate quality control statistics
 - Add [pbmarkdup](https://github.com/PacificBiosciences/pbmarkdup) to remove ULI duplicates
+- Align data in chunks with [sanger-tol/cram_map_long_read](https://github.com/sanger-tol/nf-core-modules/blob/main/subworkflows/sanger-tol/cram_map_long_reads) and [sanger-tol/cram_map_illumina_hic](https://github.com/sanger-tol/nf-core-modules/blob/main/subworkflows/sanger-tol/cram_map_illumina_hic)
 - Upgrade Samtools version to allow CRAM 3.1, archive, level 8
 - Switched to not merging alignments by specimen by default. Merged alignment can be re-enabled with the new `--merge_output`.
 - Perform CRAM file reheadering after converting BAM to CRAM (previously done before conversion) to ensure provided headers are retained
@@ -24,11 +25,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | `bwa-mem2`     | 2.2.1       | 2.3         |
 | `blobtk depth` |             | 0.6.5       |
 | `fastqc`       |             | 0.12.1      |
-| `hifi-trimmer` |             | 1.2.2       |
+| `gawk`         |             | 5.3.0       |
+| `hifi-trimmer` |             | 2.1.0       |
 | `lima`         |             | 2.12.0      |
-| `minimap2`     | 2.28        | 2.29        |
+| `minimap2`     | 2.28        | 2.30        |
 | `multiqc`      |             | 1.30        |
-| `pbmarkdup`    |             | 1.0.3       |
+| `pbmarkdup`    |             | 1.2.0       |
 | `samtools`     | 1.21        | 1.22.1      |
 
 ## [[1.3.4](https://github.com/sanger-tol/readmapping/releases/tag/1.3.4)] - Antipodean Opaleye (patch 4) - [2025-03-18]

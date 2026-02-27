@@ -46,47 +46,28 @@
                     "description": "Set to a non-empty string to merge output alignment files by specimens. The string is used to name the output directory",
                     "fa_icon": "fas fa-layer-group"
                 },
-                "hifi_adapter_db": {
+                "pacbio_adapter_fasta": {
                     "type": "string",
-                    "description": "Path to directory or tar.gz archive for pre-built PacBio adapter database.",
-                    "format": "path",
-                    "default": "${projectDir}/assets/HiFi_adapter_DB.tar.gz",
+                    "description": "Path to FASTA file contains adapter sequences for PacBio HiFi reads.",
+                    "format": "file-path",
+                    "default": "${projectDir}/assets/HiFi_adapter.fasta",
                     "fa_icon": "fas fa-bezier-curve"
                 },
-                "hifi_adapter_yaml": {
+                "pacbio_adapter_yaml": {
                     "type": "string",
                     "description": "Path to YAML file containing guide for trimming/filtering PacBio data. See hifi-trimmer docs for details: https://github.com/sanger-tol/hifi-trimmer",
                     "help_text": "YAML file containing adapter sequences and trimming parameters for PacBio HiFi data processing. This file guides hifi-trimmer in identifying and removing adapter contamination from HiFi reads. For more information about the expected format and configuration options, see the hifi-trimmer documentation: https://github.com/sanger-tol/hifi-trimmer",
-                    "format": "path",
+                    "format": "file-path",
                     "default": "${projectDir}/assets/HiFi_adapter.yaml",
                     "fa_icon": "far fa-file-code"
                 },
-                "uli_adapter": {
+                "pacbio_uli_adapter": {
                     "type": "string",
                     "description": "Path to FASTA file containing the PacBio ULI adapter sequence.",
-                    "format": "path",
+                    "format": "file-path",
                     "mimetype": "text/plain",
                     "pattern": "^\\S+\\.fn?a(sta)?(\\.gz)?$",
                     "fa_icon": "far fa-file-code"
-                },
-                "trim_uli_adapter": {
-                    "type": "boolean",
-                    "description": "Enable trimming of the PacBio ULI adapter from input reads.",
-                    "format": "path",
-                    "default": false,
-                    "fa_icon": "fas fa-scissors"
-                },
-                "hic_markdup": {
-                    "type": "boolean",
-                    "description": "Enable Hi-C duplicate marking (using 'samtools markdup').",
-                    "default": true,
-                    "fa_icon": "fas fa-clone"
-                },
-                "filter_pacbio": {
-                    "type": "boolean",
-                    "description": "Enable filtering and trimming for PacBio reads with hifi-trimmer, if provided reads are already trimmed, please set to false.",
-                    "default": true,
-                    "fa_icon": "fas fa-filter"
                 },
                 "email": {
                     "type": "string",
@@ -138,10 +119,16 @@
                     "description": "Alignment method to use for short-reads (options are: \"minimap2\" or \"bwamem2\"",
                     "enum": ["minimap2", "bwamem2"]
                 },
-                "chunk_size": {
+                "long_reads_map_chunk_size": {
                     "type": "integer",
                     "default": 10000,
-                    "description": "Chunk size for parallel processing of CRAM files, in number of containers",
+                    "description": "Chunk size for parallel alignment of long read data, in number of sequences",
+                    "minimum": 1
+                },
+                "short_reads_map_chunk_size": {
+                    "type": "integer",
+                    "default": 10000,
+                    "description": "Chunk size for parallel alignment of short read data, in number of cram containers",
                     "minimum": 1
                 }
             }

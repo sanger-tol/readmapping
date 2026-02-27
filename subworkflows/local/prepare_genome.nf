@@ -45,7 +45,6 @@ workflow PREPARE_GENOME {
 
         } else {
             ch_bwamem2_index = BWAMEM2_INDEX ( UNMASK.out.fasta ).index
-            ch_versions      = ch_versions.mix ( BWAMEM2_INDEX.out.versions )
         }
     } else {
         ch_bwamem2_index = channel.empty()
