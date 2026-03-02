@@ -1,16 +1,13 @@
 {
     "-profile test --short_aligner minimap2": {
         "content": [
-            70,
+            67,
             {
-                "BGZIP_BEDGRAPH": {
-                    "tabix": 1.21
-                },
                 "BLAST_MAKEBLASTDB": {
                     "makeblastdb": "2.17.0+"
                 },
                 "BLOBTK_DEPTH": {
-                    "blobtk": "0.6.5"
+                    "blobtk": "0.7.1"
                 },
                 "BWAMEM2_INDEX": {
                     "bwamem2": "2.2.1"
@@ -39,19 +36,23 @@
                 "GZIP_STATS": {
                     "pigz": 2.8
                 },
+                "MASK_UNMASK": {
+                    "gawk": "5.3.1",
+                    "unmask": 1.0
+                },
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
                 },
                 "SAMTOOLS_ADDREPLACERG": {
                     "samtools": "1.22.1"
                 },
-                "SAMTOOLS_COLLATETOFASTQ": {
-                    "samtools": "1.22.1"
-                },
                 "SAMTOOLS_CRAM": {
                     "samtools": "1.22.1"
                 },
                 "SAMTOOLS_FAIDX": {
+                    "samtools": "1.22.1"
+                },
+                "SAMTOOLS_FASTQ": {
                     "samtools": "1.22.1"
                 },
                 "SAMTOOLS_FLAGSTAT": {
@@ -75,9 +76,6 @@
                 "SAMTOOLS_STATS": {
                     "samtools": "1.22.1"
                 },
-                "UNMASK": {
-                    "awk": "5.1.0"
-                },
                 "Workflow": {
                     "sanger-tol/readmapping": "v1.4.0dev"
                 }
@@ -86,10 +84,10 @@
                 "pipeline_info",
                 "pipeline_info/readmapping_software_mqc_versions.yml",
                 "quality_control",
-                "quality_control/hic.mMelMel3_T1.fasta_fastqc.html",
-                "quality_control/hic.mMelMel3_T1.fasta_fastqc.zip",
-                "quality_control/illumina.mMelMel1_T1.fasta_fastqc.html",
-                "quality_control/illumina.mMelMel1_T1.fasta_fastqc.zip",
+                "quality_control/hic.mMelMel3_T1_fastqc.html",
+                "quality_control/hic.mMelMel3_T1_fastqc.zip",
+                "quality_control/illumina.mMelMel1_T1_fastqc.html",
+                "quality_control/illumina.mMelMel1_T1_fastqc.zip",
                 "quality_control/illumina.mMelMel2_T1_fastqc.html",
                 "quality_control/illumina.mMelMel2_T1_fastqc.zip",
                 "quality_control/multiqc_report.html",
@@ -175,6 +173,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2026-02-25T15:49:25.709819516"
+        "timestamp": "2026-03-02T18:47:09.236541014"
     }
 }

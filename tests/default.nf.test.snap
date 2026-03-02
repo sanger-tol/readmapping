@@ -1,11 +1,8 @@
 {
     "-profile test": {
         "content": [
-            170,
+            161,
             {
-                "BGZIP_BEDGRAPH": {
-                    "tabix": 1.21
-                },
                 "BLAST_BLASTN": {
                     "blastn": "2.17.0+",
                     "samtools": 1.23,
@@ -15,7 +12,7 @@
                     "makeblastdb": "2.17.0+"
                 },
                 "BLOBTK_DEPTH": {
-                    "blobtk": "0.6.5"
+                    "blobtk": "0.7.1"
                 },
                 "BWAMEM2_INDEX": {
                     "bwamem2": "2.2.1"
@@ -65,13 +62,14 @@
                 "HIFITRIMMER_PROCESSBLAST": {
                     "hifi_trimmer": "2.2.0"
                 },
+                "MASK_UNMASK": {
+                    "gawk": "5.3.1",
+                    "unmask": 1.0
+                },
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
                 },
                 "SAMTOOLS_ADDREPLACERG": {
-                    "samtools": "1.22.1"
-                },
-                "SAMTOOLS_COLLATETOFASTQ": {
                     "samtools": "1.22.1"
                 },
                 "SAMTOOLS_CRAM": {
@@ -107,9 +105,6 @@
                 "SAMTOOLS_STATS": {
                     "samtools": "1.22.1"
                 },
-                "UNMASK": {
-                    "awk": "5.1.0"
-                },
                 "Workflow": {
                     "sanger-tol/readmapping": "v1.4.0dev"
                 }
@@ -123,10 +118,10 @@
                 "preprocess/mMelMel3_T5.hifitrimmer.bed.gz",
                 "preprocess/mMelMel3_T5.hifitrimmer.summary.json",
                 "quality_control",
-                "quality_control/hic.mMelMel3_T1.fasta_fastqc.html",
-                "quality_control/hic.mMelMel3_T1.fasta_fastqc.zip",
-                "quality_control/illumina.mMelMel1_T1.fasta_fastqc.html",
-                "quality_control/illumina.mMelMel1_T1.fasta_fastqc.zip",
+                "quality_control/hic.mMelMel3_T1_fastqc.html",
+                "quality_control/hic.mMelMel3_T1_fastqc.zip",
+                "quality_control/illumina.mMelMel1_T1_fastqc.html",
+                "quality_control/illumina.mMelMel1_T1_fastqc.zip",
                 "quality_control/illumina.mMelMel2_T1_fastqc.html",
                 "quality_control/illumina.mMelMel2_T1_fastqc.zip",
                 "quality_control/multiqc_report.html",
@@ -357,6 +352,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2026-02-25T16:05:05.576335996"
+        "timestamp": "2026-03-02T19:05:36.288159742"
     }
 }

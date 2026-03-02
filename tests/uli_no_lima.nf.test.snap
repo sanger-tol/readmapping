@@ -1,11 +1,8 @@
 {
     "-profile test_uli --pacbio_uli_adapter false": {
         "content": [
-            50,
+            48,
             {
-                "BGZIP_BEDGRAPH": {
-                    "tabix": 1.21
-                },
                 "BLAST_BLASTN": {
                     "blastn": "2.17.0+",
                     "samtools": 1.23,
@@ -15,7 +12,7 @@
                     "makeblastdb": "2.17.0+"
                 },
                 "BLOBTK_DEPTH": {
-                    "blobtk": "0.6.5"
+                    "blobtk": "0.7.1"
                 },
                 "CRUMBLE": {
                     "crumble": "0.9.1"
@@ -50,6 +47,10 @@
                 "HIFITRIMMER_PROCESSBLAST": {
                     "hifi_trimmer": "2.2.0"
                 },
+                "MASK_UNMASK": {
+                    "gawk": "5.3.1",
+                    "unmask": 1.0
+                },
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
                 },
@@ -76,9 +77,6 @@
                 },
                 "SAMTOOLS_STATS": {
                     "samtools": "1.22.1"
-                },
-                "UNMASK": {
-                    "awk": "5.1.0"
                 },
                 "Workflow": {
                     "sanger-tol/readmapping": "v1.4.0dev"
@@ -167,6 +165,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2026-02-25T15:42:12.366279342"
+        "timestamp": "2026-03-02T18:46:07.193996347"
     }
 }
