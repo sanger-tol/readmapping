@@ -75,6 +75,11 @@
                         "git_sha": "c908ccaf0a5c802b6f8e814d8c5cf85da2364222",
                         "installed_by": ["modules"]
                     },
+                    "samtools/addreplacerg": {
+                        "branch": "master",
+                        "git_sha": "59bde94edaf0d9e75e0c5d6fe9a900f2eeda0c7b",
+                        "installed_by": ["modules"]
+                    },
                     "samtools/faidx": {
                         "branch": "master",
                         "git_sha": "b2e78932ef01165fd85829513eaca29eff8e640a",
