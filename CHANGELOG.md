@@ -23,14 +23,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | -------------- | ----------- | ----------- |
 | `blastn`       | 2.15        | 2.17        |
 | `bwa-mem2`     | 2.2.1       | 2.3         |
-| `blobtk depth` |             | 0.6.5       |
+| `blobtk depth` |             | 0.7.1       |
 | `fastqc`       |             | 0.12.1      |
 | `gawk`         |             | 5.3.0       |
-| `hifi-trimmer` |             | 2.1.0       |
+| `hifi-trimmer` |             | 2.2.0       |
 | `lima`         |             | 2.12.0      |
 | `minimap2`     | 2.28        | 2.30        |
 | `multiqc`      |             | 1.30        |
 | `pbmarkdup`    |             | 1.2.0       |
+| `pigz`         |             | 2.8         |
 | `samtools`     | 1.21        | 1.22.1      |
 
 ## [[1.3.4](https://github.com/sanger-tol/readmapping/releases/tag/1.3.4)] - Antipodean Opaleye (patch 4) - [2025-03-18]
