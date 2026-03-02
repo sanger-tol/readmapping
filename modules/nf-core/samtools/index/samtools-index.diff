@@ -1,4 +1,6 @@
 Changes in component 'nf-core/samtools/index'
+'modules/nf-core/samtools/index/environment.yml' is unchanged
+'modules/nf-core/samtools/index/meta.yml' is unchanged
 Changes in 'samtools/index/main.nf':
 --- modules/nf-core/samtools/index/main.nf
 +++ modules/nf-core/samtools/index/main.nf
@@ -11,8 +13,6 @@ Changes in 'samtools/index/main.nf':
      tuple val(meta), path("*.csi") , optional:true, emit: csi
      tuple val(meta), path("*.crai"), optional:true, emit: crai
 
-'modules/nf-core/samtools/index/meta.yml' is unchanged
-'modules/nf-core/samtools/index/environment.yml' is unchanged
 'modules/nf-core/samtools/index/tests/main.nf.test.snap' is unchanged
 'modules/nf-core/samtools/index/tests/csi.nextflow.config' is unchanged
 'modules/nf-core/samtools/index/tests/main.nf.test' is unchanged

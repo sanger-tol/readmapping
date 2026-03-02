@@ -1,7 +1,8 @@
 sample,datatype,datafile,library,barcode
-mMelMel1,illumina,/nfs/treeoflife-01/resources/nextflow/test-data/Meles_meles/genomic_data/mMelMel1/illumina/31231_3_1.subset.cram,,
-mMelMel2,illumina,/nfs/treeoflife-01/resources/nextflow/test-data/Meles_meles/genomic_data/mMelMel2/illumina/31231_4_1.subset.fastq.gz,,
-mMelMel3,hic,/nfs/treeoflife-01/resources/nextflow/test-data/Meles_meles/genomic_data/mMelMel3/hic/35528_2_1.subset.cram,,
-mMelMel3,ont,/nfs/treeoflife-01/resources/nextflow/test-data/Meles_meles/genomic_data/mMelMel3/ont/PAE35587_pass_1f1f0707_115.subset.fastq.gz,,
-mMelMel3,pacbio,/nfs/treeoflife-01/resources/nextflow/test-data/Meles_meles/genomic_data/mMelMel3/pacbio/m64094_200910_173211.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.subset.bam,,bc1022
-mMelMel3,pacbio,/nfs/treeoflife-01/resources/nextflow/test-data/Meles_meles/genomic_data/mMelMel3/pacbio/m64094_200911_174739.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.subset.bam,,bc1022
+mMelMel1,illumina,https://tolit.cog.sanger.ac.uk/test-data/Meles_meles/genomic_data/mMelMel1/illumina/31231_3_1.subset.cram,,
+mMelMel2,illumina,https://tolit.cog.sanger.ac.uk/test-data/Meles_meles/genomic_data/mMelMel2/illumina/31231_4_1.subset.fastq.gz,,
+mMelMel3,hic,https://tolit.cog.sanger.ac.uk/test-data/Meles_meles/genomic_data/mMelMel3/hic/35528_2_1.subset.cram,,
+mMelMel3,ont,https://tolit.cog.sanger.ac.uk/test-data/Meles_meles/genomic_data/mMelMel3/ont/PAE35587_pass_1f1f0707_115.subset.fastq.gz,,
+mMelMel3,ont,https://tolit.cog.sanger.ac.uk/test-data/Meles_meles/genomic_data/mMelMel3/ont/PAE35587_pass_1f1f0707_115.subset.addrg.bam,,
+mMelMel3,pacbio,https://tolit.cog.sanger.ac.uk/test-data/Meles_meles/genomic_data/mMelMel3/pacbio/m64094_200910_173211.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.subset.bam,,bc1022
+mMelMel3,pacbio,https://tolit.cog.sanger.ac.uk/test-data/Meles_meles/genomic_data/mMelMel3/pacbio/m64094_200911_174739.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.subset.fastq.gz,,bc1022

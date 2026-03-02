@@ -24,19 +24,13 @@
                     },
                     "test.metrics:md5,7038a36e37a5b93331ffe618fe771795"
                 ]
-            ],
-            [
-                "versions.yml:md5,21cd01daa785b5d5aecbd5a75b752c41",
-                "versions.yml:md5,57921e27b2a928b57e3419eb0e2cdfae",
-                "versions.yml:md5,8a7b8447a53edc0d6d66d3e2078f76f0",
-                "versions.yml:md5,be4d3d855b43aa0e9e99f54298de977f"
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2026-01-15T14:59:27.431255"
+        "timestamp": "2026-02-10T10:43:38.748216"
     },
     "meles meles - bwamem2": {
         "content": [
@@ -63,19 +57,13 @@
                     },
                     "test.metrics:md5,51755ba7077cd444be19d1fd07569cb6"
                 ]
-            ],
-            [
-                "versions.yml:md5,21cd01daa785b5d5aecbd5a75b752c41",
-                "versions.yml:md5,6506bd5d600b4c2b5c9d51ab1e559772",
-                "versions.yml:md5,8a7b8447a53edc0d6d66d3e2078f76f0",
-                "versions.yml:md5,be4d3d855b43aa0e9e99f54298de977f"
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2026-01-15T14:55:36.29632"
+        "timestamp": "2026-02-10T10:39:34.946622"
     },
     "meles meles - minimap2": {
         "content": [
@@ -102,19 +90,13 @@
                     },
                     "test.metrics:md5,bc737c10e07175ea468040b952538e50"
                 ]
-            ],
-            [
-                "versions.yml:md5,21cd01daa785b5d5aecbd5a75b752c41",
-                "versions.yml:md5,57921e27b2a928b57e3419eb0e2cdfae",
-                "versions.yml:md5,8a7b8447a53edc0d6d66d3e2078f76f0",
-                "versions.yml:md5,be4d3d855b43aa0e9e99f54298de977f"
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2026-01-15T14:58:44.722084"
+        "timestamp": "2026-02-10T10:42:47.872589"
     },
     "meles meles - zymo - bwamem2 - multiple samples - double files": {
         "content": [
@@ -159,26 +141,13 @@
                     },
                     "test.metrics:md5,75db11ef6694d30a041ce3ef5325dd19"
                 ]
-            ],
-            [
-                "versions.yml:md5,21cd01daa785b5d5aecbd5a75b752c41",
-                "versions.yml:md5,21cd01daa785b5d5aecbd5a75b752c41",
-                "versions.yml:md5,6506bd5d600b4c2b5c9d51ab1e559772",
-                "versions.yml:md5,6506bd5d600b4c2b5c9d51ab1e559772",
-                "versions.yml:md5,823323453cd1252e06e2d115039f5eed",
-                "versions.yml:md5,8a7b8447a53edc0d6d66d3e2078f76f0",
-                "versions.yml:md5,8a7b8447a53edc0d6d66d3e2078f76f0",
-                "versions.yml:md5,8a7b8447a53edc0d6d66d3e2078f76f0",
-                "versions.yml:md5,be4d3d855b43aa0e9e99f54298de977f",
-                "versions.yml:md5,be4d3d855b43aa0e9e99f54298de977f",
-                "versions.yml:md5,be4d3d855b43aa0e9e99f54298de977f"
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2026-01-15T14:57:12.059508"
+        "timestamp": "2026-02-10T10:41:09.214803"
     },
     "meles meles - multiple read groups - bwamem2": {
         "content": [
@@ -205,19 +174,13 @@
                     },
                     "test.metrics:md5,93c67967f457e5689c86e071339e9514"
                 ]
-            ],
-            [
-                "versions.yml:md5,21cd01daa785b5d5aecbd5a75b752c41",
-                "versions.yml:md5,6506bd5d600b4c2b5c9d51ab1e559772",
-                "versions.yml:md5,8a7b8447a53edc0d6d66d3e2078f76f0",
-                "versions.yml:md5,be4d3d855b43aa0e9e99f54298de977f"
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2026-01-15T15:00:55.009286"
+        "timestamp": "2026-02-10T10:45:13.292929"
     },
     "meles meles - bwamem2 - multiple samples - meta mismatch": {
         "content": [
@@ -266,26 +229,12 @@
                     },
                     "test.metrics:md5,51755ba7077cd444be19d1fd07569cb6"
                 ]
-            ],
-            [
-                "versions.yml:md5,21cd01daa785b5d5aecbd5a75b752c41",
-                "versions.yml:md5,21cd01daa785b5d5aecbd5a75b752c41",
-                "versions.yml:md5,6506bd5d600b4c2b5c9d51ab1e559772",
-                "versions.yml:md5,6506bd5d600b4c2b5c9d51ab1e559772",
-                "versions.yml:md5,6506bd5d600b4c2b5c9d51ab1e559772",
-                "versions.yml:md5,823323453cd1252e06e2d115039f5eed",
-                "versions.yml:md5,8a7b8447a53edc0d6d66d3e2078f76f0",
-                "versions.yml:md5,8a7b8447a53edc0d6d66d3e2078f76f0",
-                "versions.yml:md5,8a7b8447a53edc0d6d66d3e2078f76f0",
-                "versions.yml:md5,be4d3d855b43aa0e9e99f54298de977f",
-                "versions.yml:md5,be4d3d855b43aa0e9e99f54298de977f",
-                "versions.yml:md5,be4d3d855b43aa0e9e99f54298de977f"
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.3"
         },
-        "timestamp": "2026-01-15T14:58:06.391511"
+        "timestamp": "2026-02-10T10:42:06.647189"
     }
 }

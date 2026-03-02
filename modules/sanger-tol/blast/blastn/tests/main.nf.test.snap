@@ -1,0 +1,347 @@
+{
+    "Should search for nucleotide hits against a blast db": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.txt.gz:md5,f92e8d01e6f5542b6da7f0b9d107a488"
+                    ]
+                ],
+                "1": [
+                    [
+                        "BLAST_BLASTN",
+                        "blastn",
+                        "2.17.0+"
+                    ]
+                ],
+                "2": [
+                    [
+                        "BLAST_BLASTN",
+                        "samtools",
+                        "1.23"
+                    ]
+                ],
+                "3": [
+                    [
+                        "BLAST_BLASTN",
+                        "seqkit",
+                        "2.12.0"
+                    ]
+                ],
+                "txtgz": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.txt.gz:md5,f92e8d01e6f5542b6da7f0b9d107a488"
+                    ]
+                ],
+                "versions_blast": [
+                    [
+                        "BLAST_BLASTN",
+                        "blastn",
+                        "2.17.0+"
+                    ]
+                ],
+                "versions_samtools": [
+                    [
+                        "BLAST_BLASTN",
+                        "samtools",
+                        "1.23"
+                    ]
+                ],
+                "versions_seqkit": [
+                    [
+                        "BLAST_BLASTN",
+                        "seqkit",
+                        "2.12.0"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
+        },
+        "timestamp": "2026-02-09T03:01:10.775381888"
+    },
+    "FASTQ as an input": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.txt.gz:md5,3bb356b76bfd4c307a154180f9dd7c5e"
+                    ]
+                ],
+                "1": [
+                    [
+                        "BLAST_BLASTN",
+                        "blastn",
+                        "2.17.0+"
+                    ]
+                ],
+                "2": [
+                    [
+                        "BLAST_BLASTN",
+                        "samtools",
+                        "1.23"
+                    ]
+                ],
+                "3": [
+                    [
+                        "BLAST_BLASTN",
+                        "seqkit",
+                        "2.12.0"
+                    ]
+                ],
+                "txtgz": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.txt.gz:md5,3bb356b76bfd4c307a154180f9dd7c5e"
+                    ]
+                ],
+                "versions_blast": [
+                    [
+                        "BLAST_BLASTN",
+                        "blastn",
+                        "2.17.0+"
+                    ]
+                ],
+                "versions_samtools": [
+                    [
+                        "BLAST_BLASTN",
+                        "samtools",
+                        "1.23"
+                    ]
+                ],
+                "versions_seqkit": [
+                    [
+                        "BLAST_BLASTN",
+                        "seqkit",
+                        "2.12.0"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
+        },
+        "timestamp": "2026-02-09T03:03:42.814810114"
+    },
+    "BAM file as an input": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.txt.gz:md5,3bb356b76bfd4c307a154180f9dd7c5e"
+                    ]
+                ],
+                "1": [
+                    [
+                        "BLAST_BLASTN",
+                        "blastn",
+                        "2.17.0+"
+                    ]
+                ],
+                "2": [
+                    [
+                        "BLAST_BLASTN",
+                        "samtools",
+                        "1.23"
+                    ]
+                ],
+                "3": [
+                    [
+                        "BLAST_BLASTN",
+                        "seqkit",
+                        "2.12.0"
+                    ]
+                ],
+                "txtgz": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.txt.gz:md5,3bb356b76bfd4c307a154180f9dd7c5e"
+                    ]
+                ],
+                "versions_blast": [
+                    [
+                        "BLAST_BLASTN",
+                        "blastn",
+                        "2.17.0+"
+                    ]
+                ],
+                "versions_samtools": [
+                    [
+                        "BLAST_BLASTN",
+                        "samtools",
+                        "1.23"
+                    ]
+                ],
+                "versions_seqkit": [
+                    [
+                        "BLAST_BLASTN",
+                        "seqkit",
+                        "2.12.0"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
+        },
+        "timestamp": "2026-02-09T03:04:35.106904634"
+    },
+    "Should search for zipped nucleotide hits against a blast db": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.txt.gz:md5,3bb356b76bfd4c307a154180f9dd7c5e"
+                    ]
+                ],
+                "1": [
+                    [
+                        "BLAST_BLASTN",
+                        "blastn",
+                        "2.17.0+"
+                    ]
+                ],
+                "2": [
+                    [
+                        "BLAST_BLASTN",
+                        "samtools",
+                        "1.23"
+                    ]
+                ],
+                "3": [
+                    [
+                        "BLAST_BLASTN",
+                        "seqkit",
+                        "2.12.0"
+                    ]
+                ],
+                "txtgz": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.txt.gz:md5,3bb356b76bfd4c307a154180f9dd7c5e"
+                    ]
+                ],
+                "versions_blast": [
+                    [
+                        "BLAST_BLASTN",
+                        "blastn",
+                        "2.17.0+"
+                    ]
+                ],
+                "versions_samtools": [
+                    [
+                        "BLAST_BLASTN",
+                        "samtools",
+                        "1.23"
+                    ]
+                ],
+                "versions_seqkit": [
+                    [
+                        "BLAST_BLASTN",
+                        "seqkit",
+                        "2.12.0"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
+        },
+        "timestamp": "2026-02-09T03:02:03.670066237"
+    },
+    "BAM file as an input - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.txt.gz:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    [
+                        "BLAST_BLASTN",
+                        "blastn",
+                        "2.17.0+"
+                    ]
+                ],
+                "2": [
+                    [
+                        "BLAST_BLASTN",
+                        "samtools",
+                        "1.23"
+                    ]
+                ],
+                "3": [
+                    [
+                        "BLAST_BLASTN",
+                        "seqkit",
+                        "2.12.0"
+                    ]
+                ],
+                "txtgz": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.txt.gz:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions_blast": [
+                    [
+                        "BLAST_BLASTN",
+                        "blastn",
+                        "2.17.0+"
+                    ]
+                ],
+                "versions_samtools": [
+                    [
+                        "BLAST_BLASTN",
+                        "samtools",
+                        "1.23"
+                    ]
+                ],
+                "versions_seqkit": [
+                    [
+                        "BLAST_BLASTN",
+                        "seqkit",
+                        "2.12.0"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
+        },
+        "timestamp": "2026-02-09T03:36:29.061181939"
+    }
+}

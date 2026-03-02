@@ -1,0 +1,160 @@
+nextflow_process {
+
+    name "Test Process BLAST_BLASTN"
+    script "../main.nf"
+    process "BLAST_BLASTN"
+    config "./nextflow.config"
+    tag "modules"
+    tag "modules_sangertol"
+    tag "blast"
+    tag "blast/blastn"
+    tag "nf-core/blast/makeblastdb"
+
+    setup {
+
+        nfcoreInitialise("${launchDir}/library/")
+        nfcoreInstall("${launchDir}/library/", ["blast/makeblastdb"])
+        nfcoreLink("${launchDir}/library/", "${baseDir}/modules/")
+
+        run("BLAST_MAKEBLASTDB") {
+            script "../../../../nf-core/blast/makeblastdb/main.nf"
+            process {
+                """
+                input[0] = [ [id:'test2'], file(params.modules_testdata_base_path + 'resources/modules/pacbio_preprocess/HiFi_adapter_DB.fasta', checkIfExists: true) ]
+                """
+            }
+        }
+    }
+
+    test("Should search for nucleotide hits against a blast db") {
+
+        when {
+            params {
+                outdir = "$outputDir"
+            }
+            process {
+                """
+                input[0] = [ [id:'test'], file(params.modules_testdata_base_path + 'resources/modules/pacbio_preprocess/HiFi_adapter_DB.fasta', checkIfExists: true) ]
+                input[1] = BLAST_MAKEBLASTDB.out.db
+                input[2] = []
+                input[3] = []
+                input[4] = []
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+    test("Should search for zipped nucleotide hits against a blast db") {
+
+        when {
+            params {
+                outdir = "$outputDir"
+            }
+            process {
+                """
+                input[0] = [ [id:'test'], file(params.modules_testdata_base_path + 'Acropora_cervicornis/genomic_data/m84093_241116_151316_s2.hifi_reads.bc2028.subset.fasta.gz', checkIfExists: true) ]
+                input[1] = BLAST_MAKEBLASTDB.out.db
+                input[2] = []
+                input[3] = []
+                input[4] = []
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+    test("FASTQ as an input") {
+
+        when {
+            params {
+                outdir = "$outputDir"
+            }
+            process {
+                """
+                input[0] = [ [id:'test'], file(params.modules_testdata_base_path + 'Acropora_cervicornis/genomic_data/m84093_241116_151316_s2.hifi_reads.bc2028.subset.fastq', checkIfExists: true) ]
+                input[1] = BLAST_MAKEBLASTDB.out.db
+                input[2] = []
+                input[3] = []
+                input[4] = []
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+    test("BAM file as an input") {
+
+        when {
+            params {
+                outdir = "$outputDir"
+            }
+            process {
+                """
+                input[0] = [ [id:'test'], file(params.modules_testdata_base_path + 'Acropora_cervicornis/genomic_data/m84093_241116_151316_s2.hifi_reads.bc2028.subset.bam', checkIfExists: true) ]
+                input[1] = BLAST_MAKEBLASTDB.out.db
+                input[2] = []
+                input[3] = []
+                input[4] = []
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+    test("BAM file as an input - stub") {
+    options "-stub"
+
+        when {
+            params {
+                outdir = "$outputDir"
+            }
+            process {
+                """
+                input[0] = [ [id:'test'], file(params.modules_testdata_base_path + 'Acropora_cervicornis/genomic_data/m84093_241116_151316_s2.hifi_reads.bc2028.subset.bam', checkIfExists: true) ]
+                input[1] = BLAST_MAKEBLASTDB.out.db
+                input[2] = []
+                input[3] = []
+                input[4] = []
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+}

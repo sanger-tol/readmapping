@@ -42,11 +42,9 @@ workflow ALIGN_SHORT {
         fasta: [ meta_ + meta + [ assembly_id: meta_.id ] , fasta_file ]
     }
 
-    CRAM_MAP_ILLUMINA( ch_illumina.fasta, ch_illumina.cram, params.short_aligner, params.chunk_size )
-    ch_versions = ch_versions.mix ( CRAM_MAP_ILLUMINA.out.versions )
-
+    CRAM_MAP_ILLUMINA( ch_illumina.fasta, ch_illumina.cram, params.short_aligner, params.short_reads_map_chunk_size )
     //
-    // SUBWORKFLOW: Merge all alignment output by sample name
+    // SUBWORKFLOW: Merge all alignment outputs by specimen
     //
     MERGE_OUTPUT( CRAM_MAP_ILLUMINA.out.bam )
 
