@@ -127,7 +127,6 @@
                 "read_mapping/illumina/SAMEA7524439/ERR6688600/stats/GCA_922984935.2.subset.unmasked.illumina.SAMEA7524439.ERR6688600.minimap2.stats.gz"
             ],
             [
-                "multiqc_report.html:md5,39599ebc1498381785af088be5c0a1a0",
                 "GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.minimap2.coverage.bedGraph.gz:md5,79848febc8a62315b937987120e92d15",
                 "GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.minimap2.flagstat:md5,06518c1c7dc52fbb8e4e0b528cca346a",
                 "GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.minimap2.idxstats:md5,972cde7ea3591c9926b75994b7a41706",
@@ -187,6 +186,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2026-03-02T10:44:49.432791069"
+        "timestamp": "2026-03-02T11:27:11.376360709"
     }
 }

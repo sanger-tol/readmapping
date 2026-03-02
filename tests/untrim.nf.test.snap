@@ -97,10 +97,10 @@
                 "read_mapping/pacbio/SAMEA7524440/ERR6939248/GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.ERR6939248.minimap2.cram",
                 "read_mapping/pacbio/SAMEA7524440/ERR6939248/GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.ERR6939248.minimap2.cram.crai",
                 "read_mapping/pacbio/SAMEA7524440/ERR6939248/qc",
-                "read_mapping/pacbio/SAMEA7524440/ERR6939248/qc/pacbio.SAMEA7524440.ERR6939248.filtered.fastqc.html",
-                "read_mapping/pacbio/SAMEA7524440/ERR6939248/qc/pacbio.SAMEA7524440.ERR6939248.filtered.fastqc.zip",
                 "read_mapping/pacbio/SAMEA7524440/ERR6939248/qc/pacbio.SAMEA7524440.ERR6939248.fastqc.html",
                 "read_mapping/pacbio/SAMEA7524440/ERR6939248/qc/pacbio.SAMEA7524440.ERR6939248.fastqc.zip",
+                "read_mapping/pacbio/SAMEA7524440/ERR6939248/qc/pacbio.SAMEA7524440.ERR6939248.filtered.fastqc.html",
+                "read_mapping/pacbio/SAMEA7524440/ERR6939248/qc/pacbio.SAMEA7524440.ERR6939248.filtered.fastqc.zip",
                 "read_mapping/pacbio/SAMEA7524440/ERR6939248/stats",
                 "read_mapping/pacbio/SAMEA7524440/ERR6939248/stats/GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.ERR6939248.minimap2.flagstat",
                 "read_mapping/pacbio/SAMEA7524440/ERR6939248/stats/GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.ERR6939248.minimap2.idxstats",
@@ -110,26 +110,25 @@
                 "read_mapping/pacbio/SAMEA7524440/ERR6939249/GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.ERR6939249.minimap2.cram",
                 "read_mapping/pacbio/SAMEA7524440/ERR6939249/GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.ERR6939249.minimap2.cram.crai",
                 "read_mapping/pacbio/SAMEA7524440/ERR6939249/qc",
-                "read_mapping/pacbio/SAMEA7524440/ERR6939249/qc/pacbio.SAMEA7524440.ERR6939249.filtered.fastqc.html",
-                "read_mapping/pacbio/SAMEA7524440/ERR6939249/qc/pacbio.SAMEA7524440.ERR6939249.filtered.fastqc.zip",
                 "read_mapping/pacbio/SAMEA7524440/ERR6939249/qc/pacbio.SAMEA7524440.ERR6939249.fastqc.html",
                 "read_mapping/pacbio/SAMEA7524440/ERR6939249/qc/pacbio.SAMEA7524440.ERR6939249.fastqc.zip",
+                "read_mapping/pacbio/SAMEA7524440/ERR6939249/qc/pacbio.SAMEA7524440.ERR6939249.filtered.fastqc.html",
+                "read_mapping/pacbio/SAMEA7524440/ERR6939249/qc/pacbio.SAMEA7524440.ERR6939249.filtered.fastqc.zip",
                 "read_mapping/pacbio/SAMEA7524440/ERR6939249/stats",
                 "read_mapping/pacbio/SAMEA7524440/ERR6939249/stats/GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.ERR6939249.minimap2.flagstat",
                 "read_mapping/pacbio/SAMEA7524440/ERR6939249/stats/GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.ERR6939249.minimap2.idxstats",
                 "read_mapping/pacbio/SAMEA7524440/ERR6939249/stats/GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.ERR6939249.minimap2.stats.gz",
                 "read_mapping/pacbio/SAMEA7524440/merged_1",
-                "read_mapping/pacbio/SAMEA7524440/merged_1/GCA_922984935.2.subset.unmasked.pacbio.ERR6939248.ERR6939249.minimap2.merged_1.coverage.bedGraph.gz",
-                "read_mapping/pacbio/SAMEA7524440/merged_1/GCA_922984935.2.subset.unmasked.pacbio.ERR6939248.ERR6939249.minimap2.merged_1.cram",
-                "read_mapping/pacbio/SAMEA7524440/merged_1/GCA_922984935.2.subset.unmasked.pacbio.ERR6939248.ERR6939249.minimap2.merged_1.cram.crai",
+                "read_mapping/pacbio/SAMEA7524440/merged_1/GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.minimap2.merged_1.coverage.bedGraph.gz",
+                "read_mapping/pacbio/SAMEA7524440/merged_1/GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.minimap2.merged_1.cram",
+                "read_mapping/pacbio/SAMEA7524440/merged_1/GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.minimap2.merged_1.cram.crai",
                 "read_mapping/pacbio/SAMEA7524440/merged_1/SOURCE.txt",
                 "read_mapping/pacbio/SAMEA7524440/merged_1/stats",
-                "read_mapping/pacbio/SAMEA7524440/merged_1/stats/GCA_922984935.2.subset.unmasked.pacbio.ERR6939248.ERR6939249.minimap2.merged_1.flagstat",
-                "read_mapping/pacbio/SAMEA7524440/merged_1/stats/GCA_922984935.2.subset.unmasked.pacbio.ERR6939248.ERR6939249.minimap2.merged_1.idxstats",
-                "read_mapping/pacbio/SAMEA7524440/merged_1/stats/GCA_922984935.2.subset.unmasked.pacbio.ERR6939248.ERR6939249.minimap2.merged_1.stats.gz"
+                "read_mapping/pacbio/SAMEA7524440/merged_1/stats/GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.minimap2.merged_1.flagstat",
+                "read_mapping/pacbio/SAMEA7524440/merged_1/stats/GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.minimap2.merged_1.idxstats",
+                "read_mapping/pacbio/SAMEA7524440/merged_1/stats/GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.minimap2.merged_1.stats.gz"
             ],
             [
-                "multiqc_report.html:md5,4fb4eb15f4dc9496e582b8d8cb1f9fbc",
                 "GCA_922984935.2.subset.unmasked.ont.SAMEA7524440.PAE35587.minimap2.coverage.bedGraph.gz:md5,85ffcf5fa35869be78198b750ae7184a",
                 "GCA_922984935.2.subset.unmasked.ont.SAMEA7524440.PAE35587.minimap2.flagstat:md5,9a975d9cca35785dc8044aa06a63e7b5",
                 "GCA_922984935.2.subset.unmasked.ont.SAMEA7524440.PAE35587.minimap2.idxstats:md5,f176a0ddb87700171fa3f88525b94272",
@@ -142,11 +141,11 @@
                 "GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.ERR6939249.minimap2.flagstat:md5,81a2332a3cdcc6b37dd2687d2cc77752",
                 "GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.ERR6939249.minimap2.idxstats:md5,fe8b829d5241701b172cf4ff55cbf4f6",
                 "GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.ERR6939249.minimap2.stats.gz:md5,645ace11980873d2a66909552ff46923",
-                "GCA_922984935.2.subset.unmasked.pacbio.ERR6939248.ERR6939249.minimap2.merged_1.coverage.bedGraph.gz:md5,5f0bf291d798e6c82899aaaa9cf4f793",
-                "SOURCE.txt:md5,f40a5248ea26cdd947e8b3a7219a185a",
-                "GCA_922984935.2.subset.unmasked.pacbio.ERR6939248.ERR6939249.minimap2.merged_1.flagstat:md5,da9dcde0937f27935637db67c14c9928",
-                "GCA_922984935.2.subset.unmasked.pacbio.ERR6939248.ERR6939249.minimap2.merged_1.idxstats:md5,ee312e0f5e6053bc81b737ae5805807f",
-                "GCA_922984935.2.subset.unmasked.pacbio.ERR6939248.ERR6939249.minimap2.merged_1.stats.gz:md5,4cab0e0317407f0cf7e0231e4da06db2"
+                "GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.minimap2.merged_1.coverage.bedGraph.gz:md5,5f0bf291d798e6c82899aaaa9cf4f793",
+                "SOURCE.txt:md5,343a5205e5b93005576ee69a0869dad3",
+                "GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.minimap2.merged_1.flagstat:md5,da9dcde0937f27935637db67c14c9928",
+                "GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.minimap2.merged_1.idxstats:md5,ee312e0f5e6053bc81b737ae5805807f",
+                "GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.minimap2.merged_1.stats.gz:md5,64266032e9dd8e2e325ce3a9be207c76"
             ],
             {
 
@@ -160,17 +159,6 @@
                     "minQuality": 0,
                     "meanQuality": 3,
                     "readCount": 16265,
-                    "duplicateReadCount": 0,
-                    "sorted": false
-                },
-                "GCA_922984935.2.subset.unmasked.pacbio.ERR6939248.ERR6939249.minimap2.merged_1.cram": {
-                    "maxReadLength": 32471,
-                    "minReadLength": 0,
-                    "meanReadLength": 5870,
-                    "maxQuality": 60,
-                    "minQuality": 0,
-                    "meanQuality": 3,
-                    "readCount": 53808,
                     "duplicateReadCount": 0,
                     "sorted": false
                 },
@@ -195,6 +183,17 @@
                     "readCount": 27031,
                     "duplicateReadCount": 0,
                     "sorted": false
+                },
+                "GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.minimap2.merged_1.cram": {
+                    "maxReadLength": 32471,
+                    "minReadLength": 0,
+                    "meanReadLength": 5870,
+                    "maxQuality": 60,
+                    "minQuality": 0,
+                    "meanQuality": 3,
+                    "readCount": 53808,
+                    "duplicateReadCount": 0,
+                    "sorted": false
                 }
             },
             [
@@ -205,6 +204,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2026-02-28T02:14:49.495383557"
+        "timestamp": "2026-03-02T11:42:01.493481376"
     }
 }
