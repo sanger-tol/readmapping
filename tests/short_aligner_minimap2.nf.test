@@ -29,7 +29,7 @@ nextflow_pipeline {
             def fasta = 'https://tolit.cog.sanger.ac.uk/test-data/Meles_meles/assembly/release/mMelMel3.1_paternal_haplotype/GCA_922984935.2.subset.fasta'
 
             assertAll(
-                { assert workflow.success},
+                { assert workflow.success },
                 { assert snapshot(
                     // Number of successful tasks
                     workflow.trace.succeeded().size(),
@@ -40,7 +40,14 @@ nextflow_pipeline {
                     stable_path,
                     // Stable mapping files
                     bam_path.collect{ f -> [(new File(f).getName()): bam("${params.outdir}/${f}").getStatistics()] }.collectEntries{ it }.sort(),
-                    cram_path.collect{ f -> [(new File(f).getName()): cram("${params.outdir}/${f}", fasta).getStatistics()] }.collectEntries{ it }.sort()
+                    cram_path.collect{ f -> [(new File(f).getName()): cram("${params.outdir}/${f}", fasta).getStatistics()] }.collectEntries{ it }.sort(),
+
+                     // Stable trimming json
+                    hifitrimmer_json.collect{ f ->
+                        def obj = path("${params.outdir}/${f}").json
+                        obj.remove('run_info')
+                        new File(f).getName() + ":md5," + groovy.json.JsonOutput.toJson(new TreeMap(obj)).md5().toString()
+                    }.sort()
                  ).match() }
             )
         }
