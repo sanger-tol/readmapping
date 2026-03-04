@@ -14,8 +14,6 @@ workflow ALIGN_SHORT {
 
 
     main:
-    ch_versions = channel.empty()
-
     // Check file types and branch
     ch_reads = reads
     .branch {
@@ -52,5 +50,4 @@ workflow ALIGN_SHORT {
 
     emit:
     bam      = MERGE_OUTPUT.out.bam     // channel: [ val(meta), /path/to/bam ]
-    versions = ch_versions                   // channel: [ versions.yml ]
 }

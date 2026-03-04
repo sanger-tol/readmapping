@@ -12,8 +12,6 @@ workflow PREPARE_GENOME {
     fasta    // channel: [ meta, /path/to/fasta ]
 
     main:
-    ch_versions = channel.empty()
-
     // Uncompress genome fasta file if required
     if ( params.fasta.endsWith('.gz') ) {
         ch_unzipped = GUNZIP ( fasta ).gunzip
@@ -36,7 +34,6 @@ workflow PREPARE_GENOME {
 
             if ( params.bwamem2_index.endsWith('.tar.gz') ) {
                 ch_bwamem2_index = UNTAR ( ch_bwamem ).untar
-                ch_versions      = ch_versions.mix ( UNTAR.out.versions )
             } else {
                 ch_bwamem2_index = ch_bwamem
             }
@@ -52,7 +49,6 @@ workflow PREPARE_GENOME {
     emit:
     fasta    = MASK_UNMASK.out.unmasked.first()    // channel: [ meta, /path/to/fasta ]
     bwaidx   = ch_bwamem2_index.first()            // channel: [ meta, /path/to/bwamem2/index_dir/ ]
-    versions = ch_versions                         // channel: [ versions.yml ]
 }
 
 //

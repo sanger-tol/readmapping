@@ -25,7 +25,6 @@ workflow ALIGN_LONG {
     val_pacbio_uli_adapter         // channel: /path/to/pacbio_uli_adapter for lima demultiplexing
 
     main:
-    ch_versions    = channel.empty()
     fastx          = channel.empty()
     mqc_files      = channel.empty()
 
@@ -168,5 +167,4 @@ workflow ALIGN_LONG {
     emit:
     bam        = ch_sort                      // channel: [ val(meta), /path/to/bam ]
     mqc_files  = mqc_files                    // channel: [ val(meta), /path/to/fastqc zip]
-    versions   = ch_versions                  // channel: [ versions.yml ]
 }

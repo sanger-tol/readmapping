@@ -68,13 +68,10 @@ workflow READMAPPING {
             long_reads : true
     }
 
-    ch_versions = ch_versions.mix ( INPUT_CHECK.out.versions )
-
     ch_genome = ch_fasta
     .map { fasta -> [ [ id: fasta.baseName ], fasta ] }
 
     PREPARE_GENOME ( ch_genome )
-    ch_versions = ch_versions.mix ( PREPARE_GENOME.out.versions )
 
     //
     // Control quality of input files
@@ -97,8 +94,6 @@ workflow READMAPPING {
     //
 
     ALIGN_SHORT ( PREPARE_GENOME.out.fasta, ch_reads.short_reads )
-    ch_versions = ch_versions.mix ( ALIGN_SHORT.out.versions )
-
 
     ALIGN_LONG (
         PREPARE_GENOME.out.fasta,
@@ -108,7 +103,6 @@ workflow READMAPPING {
         val_pacbio_uli_adapter,
     )
 
-    ch_versions = ch_versions.mix ( ALIGN_LONG.out.versions )
     reports = reports.mix ( ALIGN_LONG.out.mqc_files )
 
     // gather alignments

@@ -77,7 +77,6 @@ workflow CONVERT_STATS {
     if ( "bam" in outfmt_options ) {
         // Reindex BAM
         SAMTOOLS_INDEX ( CHANGE_NAME.out.file )
-        ch_versions = ch_versions.mix ( SAMTOOLS_INDEX.out.versions.first() )
 
         // Set the BAM and BAI channels for emission
         ch_bam = CHANGE_NAME.out.file
@@ -106,11 +105,9 @@ workflow CONVERT_STATS {
 
     // Calculate statistics based on flag values
     SAMTOOLS_FLAGSTAT ( ch_for_stats )
-    ch_versions = ch_versions.mix ( SAMTOOLS_FLAGSTAT.out.versions.first() )
 
     // Calculate index statistics
     SAMTOOLS_IDXSTATS ( ch_for_stats )
-    ch_versions = ch_versions.mix ( SAMTOOLS_IDXSTATS.out.versions.first() )
 
 
     emit:
