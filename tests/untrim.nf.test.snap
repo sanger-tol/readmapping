@@ -1,8 +1,11 @@
 {
     "-profile test --pacbio_adapter_fasta false --pacbio_adapter_yaml false": {
         "content": [
-            91,
+            97,
             {
+                "BGZIP_BEDGRAPH": {
+                    "samtools": "1.22.1"
+                },
                 "BLOBTK_DEPTH": {
                     "blobtk": "0.7.1"
                 },
@@ -234,6 +237,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2026-03-02T18:58:25.22193428"
+        "timestamp": "2026-03-04T12:18:09.999000134"
     }
 }
