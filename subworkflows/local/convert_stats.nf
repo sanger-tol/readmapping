@@ -9,14 +9,15 @@ include { SAMTOOLS_REHEADER as SAMTOOLS_REHEADER_CRAM   } from '../../modules/lo
 include { CHANGE_NAME                                   } from '../../modules/local/change_name'
 
 // MODULE: nf-core modules
+include { BLOBTK_DEPTH                      } from '../../modules/nf-core/blobtk/depth/main'
+include { PIGZ_COMPRESS as GZIP_STATS       } from '../../modules/nf-core/pigz/compress/main'
 include { CRUMBLE                           } from '../../modules/nf-core/crumble/main'
 include { SAMTOOLS_VIEW as SAMTOOLS_CRAM    } from '../../modules/nf-core/samtools/view/main'
 include { SAMTOOLS_INDEX                    } from '../../modules/nf-core/samtools/index/main'
 include { SAMTOOLS_STATS                    } from '../../modules/nf-core/samtools/stats/main'
 include { SAMTOOLS_FLAGSTAT                 } from '../../modules/nf-core/samtools/flagstat/main'
 include { SAMTOOLS_IDXSTATS                 } from '../../modules/nf-core/samtools/idxstats/main'
-include { BLOBTK_DEPTH                      } from '../../modules/nf-core/blobtk/depth/main'
-include { PIGZ_COMPRESS as GZIP_STATS       } from '../../modules/nf-core/pigz/compress/main'
+include { SAMTOOLS_BGZIP as BGZIP_BEDGRAPH  } from '../../modules/nf-core/samtools/bgzip/main'
 
 
 workflow CONVERT_STATS {
@@ -96,6 +97,7 @@ workflow CONVERT_STATS {
 
     // Calculate read depth
     BLOBTK_DEPTH ( ch_renamed_bams )
+    BGZIP_BEDGRAPH ( BLOBTK_DEPTH.out.bed )
 
     // Calculate statistics
     SAMTOOLS_STATS ( ch_for_stats, [[], []] )
