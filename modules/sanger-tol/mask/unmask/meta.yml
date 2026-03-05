@@ -1,0 +1,88 @@
+name: mask_unmask
+description: |
+  Remove all soft-masking from a Fasta file by turning all lower-case
+  sequence characters to upper case.
+keywords:
+  - fasta
+  - masking
+  - genomics
+tools:
+  - gawk:
+      description: "GNU awk"
+      homepage: "https://www.gnu.org/software/gawk/"
+      documentation: "https://www.gnu.org/software/gawk/manual/"
+      tool_dev_url: "https://www.gnu.org/prep/ftp.html"
+      licence: ["GPL v3"]
+      identifier: ""
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'sample1' ]`
+    - fasta:
+        type: file
+        description: Fasta file, possibly compressed
+        pattern: "*.fa(sta)?(.gz)?"
+        ontologies:
+          - edam: "http://edamontology.org/format_1929" # FASTA
+
+output:
+  unmasked:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1' ]`
+      - "*.unmasked.fa":
+          type: file
+          description: Unmasked FASTA file
+          pattern: "*.unmasked.fa"
+          ontologies:
+            - edam: "http://edamontology.org/format_1929" # FASTA
+  versions_unmask:
+    - - ${task.process}:
+          type: string
+          description: The name of the process
+      - unmask:
+          type: string
+          description: The name of the tool
+      - echo 1.0:
+          type: eval
+          description: The expression to obtain the version of the tool
+  versions_gawk:
+    - - ${task.process}:
+          type: string
+          description: The name of the process
+      - gawk:
+          type: string
+          description: The name of the tool
+      - gawk --version | grep -o -E "[0-9]+(.[0-9]+)+" | head -n1:
+          type: eval
+          description: The expression to obtain the version of the tool
+
+topics:
+  versions:
+    - - ${task.process}:
+          type: string
+          description: The name of the process
+      - unmask:
+          type: string
+          description: The name of the tool
+      - echo 1.0:
+          type: eval
+          description: The expression to obtain the version of the tool
+    - - ${task.process}:
+          type: string
+          description: The name of the process
+      - gawk:
+          type: string
+          description: The name of the tool
+      - gawk --version | grep -o -E "[0-9]+(.[0-9]+)+" | head -n1:
+          type: eval
+          description: The expression to obtain the version of the tool
+
+authors:
+  - "@muffato"
+maintainers:
+  - "@muffato"

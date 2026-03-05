@@ -1,0 +1,277 @@
+{
+    "soft-masked gzipped": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.unmasked.fa:md5,ff98400802da0754ba3bd834bc8ae229"
+                    ]
+                ],
+                "1": [
+                    [
+                        "MASK_UNMASK",
+                        "unmask",
+                        "1.0"
+                    ]
+                ],
+                "2": [
+                    [
+                        "MASK_UNMASK",
+                        "gawk",
+                        "5.3.1"
+                    ]
+                ],
+                "unmasked": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.unmasked.fa:md5,ff98400802da0754ba3bd834bc8ae229"
+                    ]
+                ],
+                "versions_gawk": [
+                    [
+                        "MASK_UNMASK",
+                        "gawk",
+                        "5.3.1"
+                    ]
+                ],
+                "versions_unmask": [
+                    [
+                        "MASK_UNMASK",
+                        "unmask",
+                        "1.0"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.2"
+        },
+        "timestamp": "2026-02-16T12:17:31.0699275"
+    },
+    "soft-masked": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.unmasked.fa:md5,180be8e1506ddab3aec29e31b3a9358b"
+                    ]
+                ],
+                "1": [
+                    [
+                        "MASK_UNMASK",
+                        "unmask",
+                        "1.0"
+                    ]
+                ],
+                "2": [
+                    [
+                        "MASK_UNMASK",
+                        "gawk",
+                        "5.3.1"
+                    ]
+                ],
+                "unmasked": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.unmasked.fa:md5,180be8e1506ddab3aec29e31b3a9358b"
+                    ]
+                ],
+                "versions_gawk": [
+                    [
+                        "MASK_UNMASK",
+                        "gawk",
+                        "5.3.1"
+                    ]
+                ],
+                "versions_unmask": [
+                    [
+                        "MASK_UNMASK",
+                        "unmask",
+                        "1.0"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.2"
+        },
+        "timestamp": "2026-01-26T17:06:47.532406854"
+    },
+    "hard-masked": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.unmasked.fa:md5,ad699c56ed38566c7d3e9579486b1706"
+                    ]
+                ],
+                "1": [
+                    [
+                        "MASK_UNMASK",
+                        "unmask",
+                        "1.0"
+                    ]
+                ],
+                "2": [
+                    [
+                        "MASK_UNMASK",
+                        "gawk",
+                        "5.3.1"
+                    ]
+                ],
+                "unmasked": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.unmasked.fa:md5,ad699c56ed38566c7d3e9579486b1706"
+                    ]
+                ],
+                "versions_gawk": [
+                    [
+                        "MASK_UNMASK",
+                        "gawk",
+                        "5.3.1"
+                    ]
+                ],
+                "versions_unmask": [
+                    [
+                        "MASK_UNMASK",
+                        "unmask",
+                        "1.0"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.2"
+        },
+        "timestamp": "2026-02-16T12:42:17.424267183"
+    },
+    "unmask - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.unmasked.fa:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    [
+                        "MASK_UNMASK",
+                        "unmask",
+                        "1.0"
+                    ]
+                ],
+                "2": [
+                    [
+                        "MASK_UNMASK",
+                        "gawk",
+                        "5.3.1"
+                    ]
+                ],
+                "unmasked": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.unmasked.fa:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions_gawk": [
+                    [
+                        "MASK_UNMASK",
+                        "gawk",
+                        "5.3.1"
+                    ]
+                ],
+                "versions_unmask": [
+                    [
+                        "MASK_UNMASK",
+                        "unmask",
+                        "1.0"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.2"
+        },
+        "timestamp": "2026-01-26T17:07:00.63189566"
+    },
+    "hard-masked gzipped": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.unmasked.fa:md5,1c68f15dc7e63f017cbc606dcf44ee5c"
+                    ]
+                ],
+                "1": [
+                    [
+                        "MASK_UNMASK",
+                        "unmask",
+                        "1.0"
+                    ]
+                ],
+                "2": [
+                    [
+                        "MASK_UNMASK",
+                        "gawk",
+                        "5.3.1"
+                    ]
+                ],
+                "unmasked": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.unmasked.fa:md5,1c68f15dc7e63f017cbc606dcf44ee5c"
+                    ]
+                ],
+                "versions_gawk": [
+                    [
+                        "MASK_UNMASK",
+                        "gawk",
+                        "5.3.1"
+                    ]
+                ],
+                "versions_unmask": [
+                    [
+                        "MASK_UNMASK",
+                        "unmask",
+                        "1.0"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.2"
+        },
+        "timestamp": "2026-02-16T21:27:31.590380866"
+    }
+}

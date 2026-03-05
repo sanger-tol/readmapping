@@ -4,13 +4,13 @@
             70,
             {
                 "BGZIP_BEDGRAPH": {
-                    "tabix": 1.21
+                    "samtools": "1.22.1"
                 },
                 "BLAST_MAKEBLASTDB": {
                     "makeblastdb": "2.17.0+"
                 },
                 "BLOBTK_DEPTH": {
-                    "blobtk": "0.6.5"
+                    "blobtk": "0.7.1"
                 },
                 "BWAMEM2_INDEX": {
                     "bwamem2": "2.2.1"
@@ -39,19 +39,23 @@
                 "GZIP_STATS": {
                     "pigz": 2.8
                 },
+                "MASK_UNMASK": {
+                    "gawk": "5.3.1",
+                    "unmask": 1.0
+                },
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
                 },
                 "SAMTOOLS_ADDREPLACERG": {
                     "samtools": "1.22.1"
                 },
-                "SAMTOOLS_COLLATETOFASTQ": {
-                    "samtools": "1.22.1"
-                },
                 "SAMTOOLS_CRAM": {
                     "samtools": "1.22.1"
                 },
                 "SAMTOOLS_FAIDX": {
+                    "samtools": "1.22.1"
+                },
+                "SAMTOOLS_FASTQ": {
                     "samtools": "1.22.1"
                 },
                 "SAMTOOLS_FLAGSTAT": {
@@ -75,9 +79,6 @@
                 "SAMTOOLS_STATS": {
                     "samtools": "1.22.1"
                 },
-                "UNMASK": {
-                    "awk": "5.1.0"
-                },
                 "Workflow": {
                     "sanger-tol/readmapping": "v1.4.0dev"
                 }
@@ -94,8 +95,8 @@
                 "read_mapping/hic/SAMEA7524440/ERR6688402/GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.minimap2.cram",
                 "read_mapping/hic/SAMEA7524440/ERR6688402/GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.minimap2.cram.crai",
                 "read_mapping/hic/SAMEA7524440/ERR6688402/qc",
-                "read_mapping/hic/SAMEA7524440/ERR6688402/qc/hic.SAMEA7524440.ERR6688402.fasta.fastqc.html",
-                "read_mapping/hic/SAMEA7524440/ERR6688402/qc/hic.SAMEA7524440.ERR6688402.fasta.fastqc.zip",
+                "read_mapping/hic/SAMEA7524440/ERR6688402/qc/hic.SAMEA7524440.ERR6688402.fastqc.html",
+                "read_mapping/hic/SAMEA7524440/ERR6688402/qc/hic.SAMEA7524440.ERR6688402.fastqc.zip",
                 "read_mapping/hic/SAMEA7524440/ERR6688402/stats",
                 "read_mapping/hic/SAMEA7524440/ERR6688402/stats/GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.minimap2.flagstat",
                 "read_mapping/hic/SAMEA7524440/ERR6688402/stats/GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.minimap2.idxstats",
@@ -107,8 +108,8 @@
                 "read_mapping/illumina/SAMEA7524438/ERR6688599/GCA_922984935.2.subset.unmasked.illumina.SAMEA7524438.ERR6688599.minimap2.cram",
                 "read_mapping/illumina/SAMEA7524438/ERR6688599/GCA_922984935.2.subset.unmasked.illumina.SAMEA7524438.ERR6688599.minimap2.cram.crai",
                 "read_mapping/illumina/SAMEA7524438/ERR6688599/qc",
-                "read_mapping/illumina/SAMEA7524438/ERR6688599/qc/illumina.SAMEA7524438.ERR6688599.fasta.fastqc.html",
-                "read_mapping/illumina/SAMEA7524438/ERR6688599/qc/illumina.SAMEA7524438.ERR6688599.fasta.fastqc.zip",
+                "read_mapping/illumina/SAMEA7524438/ERR6688599/qc/illumina.SAMEA7524438.ERR6688599.fastqc.html",
+                "read_mapping/illumina/SAMEA7524438/ERR6688599/qc/illumina.SAMEA7524438.ERR6688599.fastqc.zip",
                 "read_mapping/illumina/SAMEA7524438/ERR6688599/stats",
                 "read_mapping/illumina/SAMEA7524438/ERR6688599/stats/GCA_922984935.2.subset.unmasked.illumina.SAMEA7524438.ERR6688599.minimap2.flagstat",
                 "read_mapping/illumina/SAMEA7524438/ERR6688599/stats/GCA_922984935.2.subset.unmasked.illumina.SAMEA7524438.ERR6688599.minimap2.idxstats",
@@ -141,7 +142,7 @@
                 "GCA_922984935.2.subset.unmasked.illumina.SAMEA7524439.ERR6688600.minimap2.stats.gz:md5,ce1e4180387c655031fd5251944b3728"
             ],
             {
-
+                
             },
             {
                 "GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.minimap2.cram": {
@@ -179,13 +180,13 @@
                 }
             },
             [
-
+                
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2026-03-02T11:27:11.376360709"
+        "timestamp": "2026-03-05T09:19:51.521558764"
     }
 }
