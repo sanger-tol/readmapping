@@ -114,7 +114,8 @@
                     "samtools/merge": {
                         "branch": "master",
                         "git_sha": "b2e78932ef01165fd85829513eaca29eff8e640a",
-                        "installed_by": ["bam_samtools_merge_markdup", "modules"]
+                        "installed_by": ["bam_samtools_merge_markdup", "modules"],
+                        "patch": "modules/nf-core/samtools/merge/samtools-merge.diff"
                     },
                     "samtools/splitheader": {
                         "branch": "master",

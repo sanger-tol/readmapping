@@ -29,7 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | `hifi-trimmer` |             | 2.2.0       |
 | `lima`         |             | 2.12.0      |
 | `minimap2`     | 2.28        | 2.30        |
-| `multiqc`      |             | 1.30        |
+| `multiqc`      |             | 1.33        |
 | `pbmarkdup`    |             | 1.2.0       |
 | `pigz`         |             | 2.8         |
 | `samtools`     | 1.21        | 1.22.1      |

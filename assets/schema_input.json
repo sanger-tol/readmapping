@@ -7,11 +7,17 @@
     "items": {
         "type": "object",
         "properties": {
-            "sample": {
+            "specimen": {
                 "type": "string",
                 "pattern": "^\\S+$",
-                "errorMessage": "Sample name must be provided and cannot contain spaces",
-                "meta": ["sample"]
+                "errorMessage": "specimen must be provided and cannot contain spaces",
+                "meta": ["specimen"]
+            },
+            "run": {
+                "type": "string",
+                "pattern": "^\\S+$",
+                "errorMessage": "run must be provided and cannot contain spaces",
+                "meta": ["run"]
             },
             "datatype": {
                 "type": "string",
@@ -41,6 +47,7 @@
                 "meta": ["barcode"]
             }
         },
-        "required": ["sample", "datatype", "datafile"]
-    }
+        "required": ["specimen", "run", "datatype", "datafile"]
+    },
+    "uniqueEntries": ["run"]
 }

@@ -32,18 +32,20 @@ workflow INPUT_CHECK {
 def create_data_channel ( LinkedHashMap row, datafile, stats ) {
     // create meta map
     def meta = [:]
-    meta.id         = row.sample
-    meta.datatype   = row.datatype
-    meta.library    = row.library
-    meta.barcode    = row.barcode
+    meta.specimen      = row.specimen
+    meta.run           = row.run.replaceAll("#", "_")
+    meta.id            = "${meta.specimen}.${meta.run}".replaceAll("#", "_")
+    meta.sample        = meta.specimen
+    meta.datatype      = row.datatype
+    meta.library       = row.library
+    meta.barcode       = row.barcode
 
     def platform = (meta.datatype == "hic" || meta.datatype == "illumina") ? "ILLUMINA" :
                 (meta.datatype == "pacbio" || meta.datatype == "pacbio_clr") ? "PACBIO" :
                 (meta.datatype == "ont") ? "ONT" : "UNKNOWN"
 
     // Convert datafile to string path and then split
-    def datafile_path = datafile.toString()
-    meta.read_group  = "\'@RG\\tID:" + datafile_path.split('/')[-1].split('\\.')[0] + "\\tPL:" + platform + "\\tSM:" + meta.id.split('_')[0..-2].join('_') + "\'"
+    meta.read_group  = "\'@RG\\tID:" + datafile.simpleName + "\\tPL:" + platform + "\\tSM:" + meta.specimen + "\'"
 
     // Read the first line of the flagstat file
     // 3127898040 + 0 in total (QC-passed reads + QC-failed reads)

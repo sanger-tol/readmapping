@@ -93,6 +93,17 @@ output:
           description: CRAM index file (optional)
           pattern: "*.crai"
           ontologies: []
+  source_txt:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "SOURCE.txt":
+          type: file
+          description: Source file listing merged input files
+          pattern: "SOURCE.txt"
+          ontologies: []
   versions_samtools:
     - - ${task.process}:
           type: string

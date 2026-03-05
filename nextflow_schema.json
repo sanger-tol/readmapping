@@ -42,9 +42,8 @@
                     "fa_icon": "fas fa-file-archive"
                 },
                 "merge_output": {
-                    "type": "boolean",
-                    "default": true,
-                    "description": "Merge output alignment files by samples",
+                    "type": "string",
+                    "description": "Set to a non-empty string to merge output alignment files by specimens. The string is used to name the output directory",
                     "fa_icon": "fas fa-layer-group"
                 },
                 "pacbio_adapter_fasta": {

@@ -84,57 +84,68 @@
                 }
             },
             [
+                "multiqc_report.html",
                 "pipeline_info",
                 "pipeline_info/readmapping_software_mqc_versions.yml",
-                "quality_control",
-                "quality_control/hic.mMelMel3_T1_fastqc.html",
-                "quality_control/hic.mMelMel3_T1_fastqc.zip",
-                "quality_control/illumina.mMelMel1_T1_fastqc.html",
-                "quality_control/illumina.mMelMel1_T1_fastqc.zip",
-                "quality_control/illumina.mMelMel2_T1_fastqc.html",
-                "quality_control/illumina.mMelMel2_T1_fastqc.zip",
-                "quality_control/multiqc_report.html",
                 "read_mapping",
                 "read_mapping/hic",
-                "read_mapping/hic/GCA_922984935.2.subset.unmasked.hic.mMelMel3_T1.coverage.bedGraph.gz",
-                "read_mapping/hic/GCA_922984935.2.subset.unmasked.hic.mMelMel3_T1.cram",
-                "read_mapping/hic/GCA_922984935.2.subset.unmasked.hic.mMelMel3_T1.cram.crai",
-                "read_mapping/hic/GCA_922984935.2.subset.unmasked.hic.mMelMel3_T1.flagstat",
-                "read_mapping/hic/GCA_922984935.2.subset.unmasked.hic.mMelMel3_T1.idxstats",
-                "read_mapping/hic/GCA_922984935.2.subset.unmasked.hic.mMelMel3_T1.stats.gz",
+                "read_mapping/hic/SAMEA7524440",
+                "read_mapping/hic/SAMEA7524440/ERR6688402",
+                "read_mapping/hic/SAMEA7524440/ERR6688402/GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.minimap2.coverage.bedGraph.gz",
+                "read_mapping/hic/SAMEA7524440/ERR6688402/GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.minimap2.cram",
+                "read_mapping/hic/SAMEA7524440/ERR6688402/GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.minimap2.cram.crai",
+                "read_mapping/hic/SAMEA7524440/ERR6688402/qc",
+                "read_mapping/hic/SAMEA7524440/ERR6688402/qc/hic.SAMEA7524440.ERR6688402.fastqc.html",
+                "read_mapping/hic/SAMEA7524440/ERR6688402/qc/hic.SAMEA7524440.ERR6688402.fastqc.zip",
+                "read_mapping/hic/SAMEA7524440/ERR6688402/stats",
+                "read_mapping/hic/SAMEA7524440/ERR6688402/stats/GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.minimap2.flagstat",
+                "read_mapping/hic/SAMEA7524440/ERR6688402/stats/GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.minimap2.idxstats",
+                "read_mapping/hic/SAMEA7524440/ERR6688402/stats/GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.minimap2.stats.gz",
                 "read_mapping/illumina",
-                "read_mapping/illumina/GCA_922984935.2.subset.unmasked.illumina.mMelMel1_T1.coverage.bedGraph.gz",
-                "read_mapping/illumina/GCA_922984935.2.subset.unmasked.illumina.mMelMel1_T1.cram",
-                "read_mapping/illumina/GCA_922984935.2.subset.unmasked.illumina.mMelMel1_T1.cram.crai",
-                "read_mapping/illumina/GCA_922984935.2.subset.unmasked.illumina.mMelMel1_T1.flagstat",
-                "read_mapping/illumina/GCA_922984935.2.subset.unmasked.illumina.mMelMel1_T1.idxstats",
-                "read_mapping/illumina/GCA_922984935.2.subset.unmasked.illumina.mMelMel1_T1.stats.gz",
-                "read_mapping/illumina/GCA_922984935.2.subset.unmasked.illumina.mMelMel2_T1.coverage.bedGraph.gz",
-                "read_mapping/illumina/GCA_922984935.2.subset.unmasked.illumina.mMelMel2_T1.cram",
-                "read_mapping/illumina/GCA_922984935.2.subset.unmasked.illumina.mMelMel2_T1.cram.crai",
-                "read_mapping/illumina/GCA_922984935.2.subset.unmasked.illumina.mMelMel2_T1.flagstat",
-                "read_mapping/illumina/GCA_922984935.2.subset.unmasked.illumina.mMelMel2_T1.idxstats",
-                "read_mapping/illumina/GCA_922984935.2.subset.unmasked.illumina.mMelMel2_T1.stats.gz"
+                "read_mapping/illumina/SAMEA7524438",
+                "read_mapping/illumina/SAMEA7524438/ERR6688599",
+                "read_mapping/illumina/SAMEA7524438/ERR6688599/GCA_922984935.2.subset.unmasked.illumina.SAMEA7524438.ERR6688599.minimap2.coverage.bedGraph.gz",
+                "read_mapping/illumina/SAMEA7524438/ERR6688599/GCA_922984935.2.subset.unmasked.illumina.SAMEA7524438.ERR6688599.minimap2.cram",
+                "read_mapping/illumina/SAMEA7524438/ERR6688599/GCA_922984935.2.subset.unmasked.illumina.SAMEA7524438.ERR6688599.minimap2.cram.crai",
+                "read_mapping/illumina/SAMEA7524438/ERR6688599/qc",
+                "read_mapping/illumina/SAMEA7524438/ERR6688599/qc/illumina.SAMEA7524438.ERR6688599.fastqc.html",
+                "read_mapping/illumina/SAMEA7524438/ERR6688599/qc/illumina.SAMEA7524438.ERR6688599.fastqc.zip",
+                "read_mapping/illumina/SAMEA7524438/ERR6688599/stats",
+                "read_mapping/illumina/SAMEA7524438/ERR6688599/stats/GCA_922984935.2.subset.unmasked.illumina.SAMEA7524438.ERR6688599.minimap2.flagstat",
+                "read_mapping/illumina/SAMEA7524438/ERR6688599/stats/GCA_922984935.2.subset.unmasked.illumina.SAMEA7524438.ERR6688599.minimap2.idxstats",
+                "read_mapping/illumina/SAMEA7524438/ERR6688599/stats/GCA_922984935.2.subset.unmasked.illumina.SAMEA7524438.ERR6688599.minimap2.stats.gz",
+                "read_mapping/illumina/SAMEA7524439",
+                "read_mapping/illumina/SAMEA7524439/ERR6688600",
+                "read_mapping/illumina/SAMEA7524439/ERR6688600/GCA_922984935.2.subset.unmasked.illumina.SAMEA7524439.ERR6688600.minimap2.coverage.bedGraph.gz",
+                "read_mapping/illumina/SAMEA7524439/ERR6688600/GCA_922984935.2.subset.unmasked.illumina.SAMEA7524439.ERR6688600.minimap2.cram",
+                "read_mapping/illumina/SAMEA7524439/ERR6688600/GCA_922984935.2.subset.unmasked.illumina.SAMEA7524439.ERR6688600.minimap2.cram.crai",
+                "read_mapping/illumina/SAMEA7524439/ERR6688600/qc",
+                "read_mapping/illumina/SAMEA7524439/ERR6688600/qc/illumina.SAMEA7524439.ERR6688600.fastqc.html",
+                "read_mapping/illumina/SAMEA7524439/ERR6688600/qc/illumina.SAMEA7524439.ERR6688600.fastqc.zip",
+                "read_mapping/illumina/SAMEA7524439/ERR6688600/stats",
+                "read_mapping/illumina/SAMEA7524439/ERR6688600/stats/GCA_922984935.2.subset.unmasked.illumina.SAMEA7524439.ERR6688600.minimap2.flagstat",
+                "read_mapping/illumina/SAMEA7524439/ERR6688600/stats/GCA_922984935.2.subset.unmasked.illumina.SAMEA7524439.ERR6688600.minimap2.idxstats",
+                "read_mapping/illumina/SAMEA7524439/ERR6688600/stats/GCA_922984935.2.subset.unmasked.illumina.SAMEA7524439.ERR6688600.minimap2.stats.gz"
             ],
             [
-                "GCA_922984935.2.subset.unmasked.hic.mMelMel3_T1.coverage.bedGraph.gz:md5,79848febc8a62315b937987120e92d15",
-                "GCA_922984935.2.subset.unmasked.hic.mMelMel3_T1.flagstat:md5,06518c1c7dc52fbb8e4e0b528cca346a",
-                "GCA_922984935.2.subset.unmasked.hic.mMelMel3_T1.idxstats:md5,972cde7ea3591c9926b75994b7a41706",
-                "GCA_922984935.2.subset.unmasked.hic.mMelMel3_T1.stats.gz:md5,d79697602cfa39e9a9749e2bb873a89e",
-                "GCA_922984935.2.subset.unmasked.illumina.mMelMel1_T1.coverage.bedGraph.gz:md5,23a3139aea8cec16b12ee8e77908c08e",
-                "GCA_922984935.2.subset.unmasked.illumina.mMelMel1_T1.flagstat:md5,6aef65e71669eb57e00a700c4b1bafe2",
-                "GCA_922984935.2.subset.unmasked.illumina.mMelMel1_T1.idxstats:md5,de6f6d0db3099aab74d2ab97e3474d70",
-                "GCA_922984935.2.subset.unmasked.illumina.mMelMel1_T1.stats.gz:md5,3bd066e4d610499eec6aba663b181fcf",
-                "GCA_922984935.2.subset.unmasked.illumina.mMelMel2_T1.coverage.bedGraph.gz:md5,23a3139aea8cec16b12ee8e77908c08e",
-                "GCA_922984935.2.subset.unmasked.illumina.mMelMel2_T1.flagstat:md5,dccc7b15c51de2f1e64be281837c1e92",
-                "GCA_922984935.2.subset.unmasked.illumina.mMelMel2_T1.idxstats:md5,8cf0310d38bdc5f2ccf5e911e8c41f60",
-                "GCA_922984935.2.subset.unmasked.illumina.mMelMel2_T1.stats.gz:md5,dc753b1ce0f26fcbb40260e6bab75813"
+                "GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.minimap2.coverage.bedGraph.gz:md5,79848febc8a62315b937987120e92d15",
+                "GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.minimap2.flagstat:md5,06518c1c7dc52fbb8e4e0b528cca346a",
+                "GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.minimap2.idxstats:md5,972cde7ea3591c9926b75994b7a41706",
+                "GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.minimap2.stats.gz:md5,b24403f1cccacbfa8f74c9ee7982eea5",
+                "GCA_922984935.2.subset.unmasked.illumina.SAMEA7524438.ERR6688599.minimap2.coverage.bedGraph.gz:md5,23a3139aea8cec16b12ee8e77908c08e",
+                "GCA_922984935.2.subset.unmasked.illumina.SAMEA7524438.ERR6688599.minimap2.flagstat:md5,6aef65e71669eb57e00a700c4b1bafe2",
+                "GCA_922984935.2.subset.unmasked.illumina.SAMEA7524438.ERR6688599.minimap2.idxstats:md5,de6f6d0db3099aab74d2ab97e3474d70",
+                "GCA_922984935.2.subset.unmasked.illumina.SAMEA7524438.ERR6688599.minimap2.stats.gz:md5,c3e21c4aa8327c9d38f07e0a0d073da2",
+                "GCA_922984935.2.subset.unmasked.illumina.SAMEA7524439.ERR6688600.minimap2.coverage.bedGraph.gz:md5,23a3139aea8cec16b12ee8e77908c08e",
+                "GCA_922984935.2.subset.unmasked.illumina.SAMEA7524439.ERR6688600.minimap2.flagstat:md5,dccc7b15c51de2f1e64be281837c1e92",
+                "GCA_922984935.2.subset.unmasked.illumina.SAMEA7524439.ERR6688600.minimap2.idxstats:md5,8cf0310d38bdc5f2ccf5e911e8c41f60",
+                "GCA_922984935.2.subset.unmasked.illumina.SAMEA7524439.ERR6688600.minimap2.stats.gz:md5,ce1e4180387c655031fd5251944b3728"
             ],
             {
                 
             },
             {
-                "GCA_922984935.2.subset.unmasked.hic.mMelMel3_T1.cram": {
+                "GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.minimap2.cram": {
                     "maxReadLength": 151,
                     "minReadLength": 25,
                     "meanReadLength": 150,
@@ -145,7 +156,7 @@
                     "duplicateReadCount": 24,
                     "sorted": false
                 },
-                "GCA_922984935.2.subset.unmasked.illumina.mMelMel1_T1.cram": {
+                "GCA_922984935.2.subset.unmasked.illumina.SAMEA7524438.ERR6688599.minimap2.cram": {
                     "maxReadLength": 151,
                     "minReadLength": 27,
                     "meanReadLength": 150,
@@ -156,7 +167,7 @@
                     "duplicateReadCount": 19,
                     "sorted": false
                 },
-                "GCA_922984935.2.subset.unmasked.illumina.mMelMel2_T1.cram": {
+                "GCA_922984935.2.subset.unmasked.illumina.SAMEA7524439.ERR6688600.minimap2.cram": {
                     "maxReadLength": 151,
                     "minReadLength": 25,
                     "meanReadLength": 150,
@@ -176,6 +187,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2026-03-04T12:07:07.255884111"
+        "timestamp": "2026-03-05T09:19:51.521558764"
     }
 }
