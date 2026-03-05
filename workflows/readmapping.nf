@@ -8,15 +8,13 @@
 //
 // SUBWORKFLOW: Consisting of a mix of local and nf-core/modules
 //
-
-include { INPUT_CHECK                        } from '../subworkflows/local/input_check'
-include { SAMTOOLS_COLLATETOFASTQ            } from '../modules/local/samtools_collatetofastq'
-include { FASTQC                             } from '../modules/nf-core/fastqc'
-include { PREPARE_GENOME                     } from '../subworkflows/local/prepare_genome'
 include { ALIGN_SHORT                        } from '../subworkflows/local/align_short'
 include { ALIGN_LONG                         } from '../subworkflows/local/align_long'
 include { CONVERT_STATS                      } from '../subworkflows/local/convert_stats'
-include { MULTIQC                            } from '../modules/nf-core/multiqc'
+include { INPUT_CHECK                        } from '../subworkflows/local/input_check'
+include { PREPARE_GENOME                     } from '../subworkflows/local/prepare_genome'
+
+
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT NF-CORE MODULES/SUBWORKFLOWS
@@ -27,8 +25,10 @@ include { MULTIQC                            } from '../modules/nf-core/multiqc'
 // MODULE: Installed directly from nf-core/modules
 //
 
-include { UNTAR                  } from '../modules/nf-core/untar'
-
+include { UNTAR          } from '../modules/nf-core/untar'
+include { FASTQC         } from '../modules/nf-core/fastqc'
+include { SAMTOOLS_FASTQ } from '../modules/nf-core/samtools/fastq'
+include { MULTIQC        } from '../modules/nf-core/multiqc'
 
 include { paramsSummaryMap                                  } from 'plugin/nf-schema'
 include { paramsSummaryMultiqc                              } from '../subworkflows/nf-core/utils_nfcore_pipeline'
@@ -68,13 +68,10 @@ workflow READMAPPING {
             long_reads : true
     }
 
-    ch_versions = ch_versions.mix ( INPUT_CHECK.out.versions )
-
     ch_genome = ch_fasta
     .map { fasta -> [ [ id: fasta.baseName ], fasta ] }
 
     PREPARE_GENOME ( ch_genome )
-    ch_versions = ch_versions.mix ( PREPARE_GENOME.out.versions )
 
     //
     // Control quality of input files
@@ -86,23 +83,17 @@ workflow READMAPPING {
     }
 
     // Convert cram to FASTQs
-    SAMTOOLS_COLLATETOFASTQ ( ch_fastqc_reads.cram, true )
+    SAMTOOLS_FASTQ ( ch_fastqc_reads.cram, true )
+    ch_fastqc_reads = ch_fastqc_reads.other.mix ( SAMTOOLS_FASTQ.out.interleaved )
 
-    ch_fastqc_reads = ch_fastqc_reads.other.mix ( SAMTOOLS_COLLATETOFASTQ.out.interleaved )
     FASTQC ( ch_fastqc_reads )
-
     reports = reports.mix ( FASTQC.out.zip )
-
-    ch_versions = ch_versions
-    .mix ( SAMTOOLS_COLLATETOFASTQ.out.versions )
 
     //
     // SUBWORKFLOW: Align raw reads to genome
     //
 
     ALIGN_SHORT ( PREPARE_GENOME.out.fasta, ch_reads.short_reads )
-    ch_versions = ch_versions.mix ( ALIGN_SHORT.out.versions )
-
 
     ALIGN_LONG (
         PREPARE_GENOME.out.fasta,
@@ -112,7 +103,6 @@ workflow READMAPPING {
         val_pacbio_uli_adapter,
     )
 
-    ch_versions = ch_versions.mix ( ALIGN_LONG.out.versions )
     reports = reports.mix ( ALIGN_LONG.out.mqc_files )
 
     // gather alignments

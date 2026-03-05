@@ -1,20 +1,17 @@
 //
 // Uncompress and prepare reference genome files
 //
-
-include { GUNZIP        } from '../../modules/nf-core/gunzip/main'
-include { UNMASK        } from '../../modules/local/unmask'
-include { UNTAR         } from '../../modules/nf-core/untar/main'
 include { BWAMEM2_INDEX } from '../../modules/nf-core/bwamem2/index/main'
+include { GUNZIP        } from '../../modules/nf-core/gunzip/main'
+include { UNTAR         } from '../../modules/nf-core/untar/main'
 
+include { MASK_UNMASK   } from '../../modules/sanger-tol/mask/unmask/main'
 
 workflow PREPARE_GENOME {
     take:
     fasta    // channel: [ meta, /path/to/fasta ]
 
     main:
-    ch_versions = channel.empty()
-
     // Uncompress genome fasta file if required
     if ( params.fasta.endsWith('.gz') ) {
         ch_unzipped = GUNZIP ( fasta ).gunzip
@@ -25,9 +22,8 @@ workflow PREPARE_GENOME {
     ch_fasta = ch_unzipped
     .map { meta, fa -> [ meta + [id: fa.baseName, genome_size: fa.size()], fa] }
 
-    // Unmask genome fasta
-    UNMASK ( ch_fasta )
-    ch_versions = ch_versions.mix ( UNMASK.out.versions )
+    // MASK_UNMASK genome fasta
+    MASK_UNMASK ( ch_fasta )
 
     // Generate BWA index
     if ( checkShortReads( params.input ) ) {
@@ -38,13 +34,12 @@ workflow PREPARE_GENOME {
 
             if ( params.bwamem2_index.endsWith('.tar.gz') ) {
                 ch_bwamem2_index = UNTAR ( ch_bwamem ).untar
-                ch_versions      = ch_versions.mix ( UNTAR.out.versions )
             } else {
                 ch_bwamem2_index = ch_bwamem
             }
 
         } else {
-            ch_bwamem2_index = BWAMEM2_INDEX ( UNMASK.out.fasta ).index
+            ch_bwamem2_index = BWAMEM2_INDEX ( MASK_UNMASK.out.unmasked ).index
         }
     } else {
         ch_bwamem2_index = channel.empty()
@@ -52,9 +47,8 @@ workflow PREPARE_GENOME {
 
 
     emit:
-    fasta    = UNMASK.out.fasta.first()    // channel: [ meta, /path/to/fasta ]
-    bwaidx   = ch_bwamem2_index.first()    // channel: [ meta, /path/to/bwamem2/index_dir/ ]
-    versions = ch_versions                 // channel: [ versions.yml ]
+    fasta    = MASK_UNMASK.out.unmasked.first()    // channel: [ meta, /path/to/fasta ]
+    bwaidx   = ch_bwamem2_index.first()            // channel: [ meta, /path/to/bwamem2/index_dir/ ]
 }
 
 //

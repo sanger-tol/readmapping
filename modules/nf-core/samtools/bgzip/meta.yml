@@ -1,13 +1,9 @@
-name: samtools_flagstat
-description: Counts the number of alignments in a BAM/CRAM/SAM file for each
-  FLAG type
+name: samtools_bgzip
+description: Outputs a FASTA file compressed with the BGZF algorithm
 keywords:
-  - stats
-  - mapping
-  - counts
-  - bam
-  - sam
-  - cram
+  - fasta
+  - BGZF
+  - bgzip
 tools:
   - samtools:
       description: |
@@ -24,30 +20,27 @@ input:
   - - meta:
         type: map
         description: |
-          Groovy Map containing sample information
-          e.g. [ id:'test', single_end:false ]
-    - bam:
+          Groovy Map containing reference information
+          e.g. [ id:'test' ]
+    - fasta:
         type: file
-        description: BAM/CRAM/SAM file
-        pattern: "*.{bam,cram,sam}"
-        ontologies: []
-    - bai:
-        type: file
-        description: Index for BAM/CRAM/SAM file
-        pattern: "*.{bai,crai,sai}"
+        description: FASTA file, compressed or not.
+        pattern: "*.{fa,fa.gz,fa.bz2,fa.xz,fasta,fasta.gz,fasta.bz2,fasta.xz}"
         ontologies: []
 output:
-  flagstat:
+  fasta:
     - - meta:
           type: map
           description: |
             Groovy Map containing sample information
             e.g. [ id:'test', single_end:false ]
-      - "*.flagstat":
-          type: file
-          description: File containing samtools flagstat output
-          pattern: "*.{flagstat}"
-          ontologies: []
+          pattern: "*.{fa.gz,fasta.gz}"
+      - ${output}:
+          type: map
+          description: |
+            A FASTA file compressed with the BGZF algorithm.  It will be
+            the original file if it was already BGZF-compressed.
+          pattern: "*.{fa.gz,fasta.gz}"
   versions_samtools:
     - - ${task.process}:
           type: string
@@ -70,6 +63,6 @@ topics:
           type: eval
           description: The expression to obtain the version of the tool
 authors:
-  - "@drpatelh"
+  - "@charles-plessy"
 maintainers:
-  - "@drpatelh"
+  - "@charles-plessy"

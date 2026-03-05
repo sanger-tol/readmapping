@@ -10,15 +10,12 @@ workflow INPUT_CHECK {
 
 
     main:
-    ch_versions = channel.empty()
-
     // Prepare the samplesheet channel for SAMTOOLS_FLAGSTAT
     samplesheet_rows = ch_samplesheet
     .map { meta, file -> [meta, file, []] }
 
     // Get stats from each input file
     SAMTOOLS_FLAGSTAT ( samplesheet_rows )
-    ch_versions = ch_versions.mix ( SAMTOOLS_FLAGSTAT.out.versions.first() )
 
     // Create the read channel for the rest of the pipeline
     reads = samplesheet_rows
@@ -28,7 +25,6 @@ workflow INPUT_CHECK {
 
     emit:
     reads                                        // channel: [ val(meta), /path/to/datafile ]
-    versions = ch_versions                       // channel: [ versions.yml ]
 }
 
 

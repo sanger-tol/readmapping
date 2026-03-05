@@ -10,6 +10,11 @@
                         "git_sha": "4da6a2662e7a5f62dd9c456fde7161ed34b59d1e",
                         "installed_by": ["pacbio_preprocess"]
                     },
+                    "blobtk/depth": {
+                        "branch": "master",
+                        "git_sha": "f0ee15907fcece823c1cd5129902405d36108191",
+                        "installed_by": ["modules"]
+                    },
                     "bwamem2/index": {
                         "branch": "master",
                         "git_sha": "5dd46a36fca68d6ad1a6b22ec47adc8c6863717d",
@@ -17,7 +22,7 @@
                     },
                     "crumble": {
                         "branch": "master",
-                        "git_sha": "13aee4ec0cbc416c45e08bbac53977b7c9677a0f",
+                        "git_sha": "e657cdd0198cc26f2e501325eb7f70fbd740b6ee",
                         "installed_by": ["modules"]
                     },
                     "fastqc": {
@@ -70,6 +75,16 @@
                         "git_sha": "c908ccaf0a5c802b6f8e814d8c5cf85da2364222",
                         "installed_by": ["modules"]
                     },
+                    "samtools/addreplacerg": {
+                        "branch": "master",
+                        "git_sha": "59bde94edaf0d9e75e0c5d6fe9a900f2eeda0c7b",
+                        "installed_by": ["modules"]
+                    },
+                    "samtools/bgzip": {
+                        "branch": "master",
+                        "git_sha": "ddbe2bd3747d20106ef667a5c2aba63a0d9db52d",
+                        "installed_by": ["modules"]
+                    },
                     "samtools/faidx": {
                         "branch": "master",
                         "git_sha": "b2e78932ef01165fd85829513eaca29eff8e640a",
@@ -82,12 +97,12 @@
                     },
                     "samtools/flagstat": {
                         "branch": "master",
-                        "git_sha": "e334e12a1e985adc5ffc3fc78a68be1de711de45",
+                        "git_sha": "1d2fbdcbca677bbe8da0f9d0d2bb7c02f2cab1c9",
                         "installed_by": ["modules"]
                     },
                     "samtools/idxstats": {
                         "branch": "master",
-                        "git_sha": "c8be52dba1166c678e74cda9c3a3c221635c8bb1",
+                        "git_sha": "1d2fbdcbca677bbe8da0f9d0d2bb7c02f2cab1c9",
                         "installed_by": ["modules"]
                     },
                     "samtools/index": {
@@ -114,11 +129,6 @@
                     "samtools/view": {
                         "branch": "master",
                         "git_sha": "5cb9a8694da0a0e550921636bb60bc8c56445fd7",
-                        "installed_by": ["modules"]
-                    },
-                    "tabix/bgzip": {
-                        "branch": "master",
-                        "git_sha": "f2cfcf9d3f6a2d123e6c44aefa788aa232204a7a",
                         "installed_by": ["modules"]
                     },
                     "untar": {
@@ -180,6 +190,11 @@
                         "branch": "main",
                         "git_sha": "d4ca71bc08dc21d68af38c147cbd972c8e25c3e0",
                         "installed_by": ["fastx_map_long_reads"]
+                    },
+                    "mask/unmask": {
+                        "branch": "main",
+                        "git_sha": "ace57f272f7fb447c21b881b4c9bba9ec4ef6656",
+                        "installed_by": ["modules"]
                     },
                     "samtools/mergedup": {
                         "branch": "main",
