@@ -40,9 +40,9 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 - `read_mapping`
 - `${datatype}/${specimen}`
   - `${run}/`
-    - `${assembly}.${type}.${specimen}.${run}.${aligner}.cram`: Aligned CRAM file (or `.bam` depending on `--outfmt`)
-    - `${assembly}.${type}.${specimen}.${run}.${aligner}.cram.crai`: Index for the alignment
-    - `${assembly}.${type}.${specimen}.${run}.${aligner}.coverage.bedGraph.gz`: Read coverage in bedGraph format
+    - `${assembly}.${datatype}.${specimen}.${run}.${aligner}.cram`: Aligned CRAM file (or `.bam` depending on `--outfmt`)
+    - `${assembly}.${datatype}.${specimen}.${run}.${aligner}.cram.crai`: Index for the alignment
+    - `${assembly}.${datatype}.${specimen}.${run}.${aligner}.coverage.bedGraph.gz`: Read coverage in bedGraph format
     - `qc/`
       - `${datatype}.${specimen}.${run}.fastqc.html`: FASTQC report of reads
       - `${datatype}.${specimen}.${run}.fastqc.zip`: FASTQC archive of reads
@@ -63,7 +63,14 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
     - `stats/`
       - `${assembly}.${datatype}.${specimen}.merged.${#}.${aligner}.flagstat`: Number of alignments for each FLAG type
       - `${assembly}.${datatype}.${specimen}.merged.${#}.${aligner}.idxstats`: Merged alignment summary statistics
-      - `${assembly}.${datatype}.${specimen}.merged.${#}.${aligner}.stats.gz`: Comprehensive statistics for merged alignment
+  - `merged_${#}/` (optional if `params.merged_output` is specified)
+    - `${assembly}.${datatype}.${specimen}.merged_${#}.${aligner}.cram`: Merged aligned CRAM file
+    - `${assembly}.${datatype}.${specimen}.merged_${#}.${aligner}.cram.crai`: Index for the merged alignment
+    - `${assembly}.${datatype}.${specimen}.merged_${#}.${aligner}.coverage.bedGraph.gz`: Read coverage for merged file
+    - `stats/`
+      - `${assembly}.${datatype}.${specimen}.merged_${#}.${aligner}.flagstat`: Number of alignments for each FLAG type
+      - `${assembly}.${datatype}.${specimen}.merged_${#}.${aligner}.idxstats`: Merged alignment summary statistics
+      - `${assembly}.${datatype}.${specimen}.merged_${#}.${aligner}.stats.gz`: Comprehensive statistics for merged alignment
   - `multiqc_report.html`: Interactive HTML report summarizing quality metrics from FastQC, alignment statistics, and other quality control data across all samples
 
 ## Preprocessing
@@ -75,9 +82,9 @@ Input files undergo quality assessment using FASTQC, a widely-used tool for eval
 <details markdown="1">
 <summary>Output files</summary>
 
-- `read_mapping/${type}/${specimen}/${run}/qc/`
-  - `${type}.${specimen}.${run}.fastqc.html`: An interactive HTML report summarizing key read quality metrics
-  - `${type}.${specimen}.${run}.fastqc.zip`: A compressed archive containing the full set of FASTQC output files
+- `read_mapping/${datatype}/${specimen}/${run}/qc/`
+  - `${datatype}.${specimen}.${run}.fastqc.html`: An interactive HTML report summarizing key read quality metrics
+  - `${datatype}.${specimen}.${run}.fastqc.zip`: A compressed archive containing the full set of FASTQC output files
 
 </details>
 
@@ -89,8 +96,8 @@ PacBio ULI read (`library`:`uli`) are demultiplexed with LIMA and mark duplicate
 <summary>Output files</summary>
 
 - `read_mapping/pacbio/${specimen}/${run}/qc/`
-  - `${datatype}.${specimen}.${run}.pbmarkdup.log`: BED format file with trimming coordinates
-  - `${datatype}.${specimen}.${run}.lima.report`: Statistics of demultiplexing & ULI adpater trimming
+  - `pacbio.${specimen}.${run}.pbmarkdup.log`: BED format file with trimming coordinates
+  - `pacbio.${specimen}.${run}.lima.report`: Statistics of demultiplexing & ULI adpater trimming
 
 </details>
 
@@ -102,10 +109,10 @@ PacBio reads generated using both CLR and CCS technology are filtered using `HIF
 <summary>Output files</summary>
 
 - `read_mapping/pacbio/${specimen}/${run}/qc/`
-  - `${datatype}.${specimen}.${run}.hifitrimmer.bed.gz`: BED format file with trimming coordinates
-  - `${datatype}.${specimen}.${run}.hifitrimmer.summary.json`: Summary statistics of trimming results
-  - `${datatype}.${specimen}.${run}.filtered.fastqc.html`: FASTQC report of filtered reads
-  - `${datatype}.${specimen}.${run}.filtered.fastqc.zip`: FASTQC archive of filtered reads
+  - `pacbio.${specimen}.${run}.hifitrimmer.bed.gz`: BED format file with trimming coordinates
+  - `pacbio.${specimen}.${run}.hifitrimmer.summary.json`: Summary statistics of trimming results
+  - `pacbio.${specimen}.${run}.filtered.fastqc.html`: FASTQC report of filtered reads
+  - `pacbio.${specimen}.${run}.filtered.fastqc.zip`: FASTQC archive of filtered reads
 
 </details>
 
@@ -129,9 +136,9 @@ Short read data from HiC and Illumina technologies is aligned with `BWAMEM2_MEM`
 - `read_mapping`
   - `${datatype}/${specimen}`
     - `${run}/`
-      - `${assembly}.${type}.${specimen}.${run}.${aligner}.cram`: Aligned CRAM file (or `.bam` depending on `--outfmt`)
-      - `${assembly}.${type}.${specimen}.${run}.${aligner}.cram.crai`: Index for the alignment
-      - `${assembly}.${type}.${specimen}.${run}.${aligner}.coverage.bedGraph.gz`: Read coverage in bedGraph format
+      - `${assembly}.${datatype}.${specimen}.${run}.${aligner}.cram`: Aligned CRAM file (or `.bam` depending on `--outfmt`)
+      - `${assembly}.${datatype}.${specimen}.${run}.${aligner}.cram.crai`: Index for the alignment
+      - `${assembly}.${datatype}.${specimen}.${run}.${aligner}.coverage.bedGraph.gz`: Read coverage in bedGraph format
     - `merged.${#}/` - if params `merge_output`, merged output files with same structure as individual runs, without `qc` folder
 
 </details>
@@ -144,7 +151,12 @@ Reads generated using Oxford Nanopore technology are aligned with `MINIMAP2_ALIG
 <summary>Output files</summary>
 
 - `read_mapping`
-  - `ont/${specimen}` - `${run}/` - `${assembly}.ont.${specimen}.${run}.${aligner}.cram`: Aligned CRAM file (or `.bam` depending on `--outfmt`) - `${assembly}.ont.${specimen}.${run}.${aligner}.cram.crai`: Index for the alignment - `${assembly}.ont.${specimen}.${run}.${aligner}.coverage.bedGraph.gz`: Read coverage in bedGraph format - `merged.${#}/` - if params `merge_output`.
+  - `ont/${specimen}`
+    - `${run}/`
+      - `${assembly}.ont.${specimen}.${run}.${aligner}.cram`: Aligned CRAM file (or `.bam` depending on `--outfmt`)
+      - `${assembly}.ont.${specimen}.${run}.${aligner}.cram.crai`: Index for the alignment
+      - `${assembly}.ont.${specimen}.${run}.${aligner}.coverage.bedGraph.gz`: Read coverage in bedGraph format
+    - `merged_${#}/` - if params `merge_output`.
   </details>
 
 ### PacBio reads
@@ -160,7 +172,7 @@ The filtered PacBio reads are aligned with `MINIMAP2_ALIGN`. The sorted alignmen
       - `${assembly}.pacbio.${specimen}.${run}.${aligner}.cram`: Aligned CRAM file (or `.bam` depending on `--outfmt`)
       - `${assembly}.pacbio.${specimen}.${run}.${aligner}.cram.crai`: Index for the alignment
       - `${assembly}.pacbio.${specimen}.${run}.${aligner}.coverage.bedGraph.gz`: Read coverage in bedGraph format
-    - `merged.${#}/` - if params `merge_output`.
+    - `merged_${#}/` - if params `merge_output`.
 
 </details>
 
@@ -182,9 +194,9 @@ The output alignments are used to calculate mapping statistics. Output files are
 
 **File naming:**
 
-- `${assembly}.${type}.${specimen}.${run}.${aligner}.flagstat`: Number of alignments for each FLAG type
-- `${assembly}.${type}.${specimen}.${run}.${aligner}.idxstats`: Alignment summary statistics
-- `${assembly}.${type}.${specimen}.${run}.${aligner}.stats.gz`: Comprehensive statistics
+- `${assembly}.${datatype}.${specimen}.${run}.${aligner}.flagstat`: Number of alignments for each FLAG type
+- `${assembly}.${datatype}.${specimen}.${run}.${aligner}.idxstats`: Alignment summary statistics
+- `${assembly}.${datatype}.${specimen}.${run}.${aligner}.stats.gz`: Comprehensive statistics
 
 For merged output (when `merge_output` is enabled), replace `${run}` with `merged.${#}` in the filenames.
 
