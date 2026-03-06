@@ -9,12 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Add [Blobtk depth](https://github.com/genomehubs/blobtk/wiki/blobtk-depth) to calculate read coverage
 - Add [FastQC](https://github.com/s-andrews/FastQC/releases/tag/v0.12.1) for quality control of reads
-- Add [hifi-trimmer](https://github.com/sanger-tol/hifi-trimmer) instead of [HifiAdapterFilt](https://github.com/sheinasim-USDA/HiFiAdapterFilt) approach to filter PacBio reads
-- Add [Lima](https://github.com/PacificBiosciences/barcoding) to trim ULI adapter and demultiplex ULI reads
+- Add [hifi-trimmer](https://github.com/sanger-tol/hifi-trimmer) instead of [HifiAdapterFilt](https://github.com/sheinasim-USDA/HiFiAdapterFilt) approach to filter PacBio reads. Disable by setting `--pacbio_adapter_fasta` and `--pacbio_adapter_yaml` to `false`
+- Add [Lima](https://github.com/PacificBiosciences/barcoding) to trim ULI adapter and demultiplex ULI reads. In case the reads are already trimmed/demultiplexed, this process can be skipped by setting `--pacbio_uli_adapter` to `false`.
 - Add [MultiQC](https://github.com/MultiQC/MultiQC) to aggregate quality control statistics
 - Add [pbmarkdup](https://github.com/PacificBiosciences/pbmarkdup) to remove ULI duplicates
 - Align data in chunks with [sanger-tol/cram_map_long_read](https://github.com/sanger-tol/nf-core-modules/blob/main/subworkflows/sanger-tol/cram_map_long_reads) and [sanger-tol/cram_map_illumina_hic](https://github.com/sanger-tol/nf-core-modules/blob/main/subworkflows/sanger-tol/cram_map_illumina_hic)
-- Upgrade Samtools version to allow CRAM 3.1, archive, level 8
+- Upgrade Samtools version to allow CRAM, archive, level 8
 - Switched to not merging alignments by specimen by default. Merged alignment can be re-enabled with the new `--merge_output`.
 - Perform CRAM file reheadering after converting BAM to CRAM (previously done before conversion) to ensure provided headers are retained
 - Compressed samtools stats files to reduce storage usage
