@@ -150,7 +150,8 @@ Reads generated using Oxford Nanopore technology are aligned with `MINIMAP2_ALIG
       - `${assembly}.ont.${specimen}.${run}.${aligner}.cram.crai`: Index for the alignment
       - `${assembly}.ont.${specimen}.${run}.${aligner}.coverage.bedGraph.gz`: Read coverage in bedGraph format
     - `merged_${#}/` - if params `merge_output`.
-  </details>
+
+</details>
 
 ### PacBio reads
 
