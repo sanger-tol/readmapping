@@ -164,7 +164,6 @@ The [Nextflow DSL2](https://www.nextflow.io/docs/latest/dsl2.html) implementatio
 1. Check the default version used by the pipeline in the module file for [Samtools](https://github.com/sanger-tol/readmapping/blob/main/modules/nf-core/samtools/view/main.nf#L5-L8)
 2. Find the latest version of the Biocontainer available on [Quay.io](https://quay.io/repository/biocontainers/samtools?tag=latest&tab=tags)
 3. Create the custom config accordingly:
-
    - For Docker:
 
      ```nextflow
