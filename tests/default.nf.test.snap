@@ -193,12 +193,12 @@
                 "read_mapping/pacbio/SAMEA7524440/ERR6939248/GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.ERR6939248.minimap2.cram",
                 "read_mapping/pacbio/SAMEA7524440/ERR6939248/GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.ERR6939248.minimap2.cram.crai",
                 "read_mapping/pacbio/SAMEA7524440/ERR6939248/qc",
-                "read_mapping/pacbio/SAMEA7524440/ERR6939248/qc/SAMEA7524440.ERR6939248.hifitrimmer.bed.gz",
-                "read_mapping/pacbio/SAMEA7524440/ERR6939248/qc/SAMEA7524440.ERR6939248.hifitrimmer.summary.json",
                 "read_mapping/pacbio/SAMEA7524440/ERR6939248/qc/pacbio.SAMEA7524440.ERR6939248.fastqc.html",
                 "read_mapping/pacbio/SAMEA7524440/ERR6939248/qc/pacbio.SAMEA7524440.ERR6939248.fastqc.zip",
                 "read_mapping/pacbio/SAMEA7524440/ERR6939248/qc/pacbio.SAMEA7524440.ERR6939248.filtered.fastqc.html",
                 "read_mapping/pacbio/SAMEA7524440/ERR6939248/qc/pacbio.SAMEA7524440.ERR6939248.filtered.fastqc.zip",
+                "read_mapping/pacbio/SAMEA7524440/ERR6939248/qc/pacbio.SAMEA7524440.ERR6939248.hifitrimmer.bed.gz",
+                "read_mapping/pacbio/SAMEA7524440/ERR6939248/qc/pacbio.SAMEA7524440.ERR6939248.hifitrimmer.summary.json",
                 "read_mapping/pacbio/SAMEA7524440/ERR6939248/stats",
                 "read_mapping/pacbio/SAMEA7524440/ERR6939248/stats/GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.ERR6939248.minimap2.flagstat",
                 "read_mapping/pacbio/SAMEA7524440/ERR6939248/stats/GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.ERR6939248.minimap2.idxstats",
@@ -208,12 +208,12 @@
                 "read_mapping/pacbio/SAMEA7524440/ERR6939249/GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.ERR6939249.minimap2.cram",
                 "read_mapping/pacbio/SAMEA7524440/ERR6939249/GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.ERR6939249.minimap2.cram.crai",
                 "read_mapping/pacbio/SAMEA7524440/ERR6939249/qc",
-                "read_mapping/pacbio/SAMEA7524440/ERR6939249/qc/SAMEA7524440.ERR6939249.hifitrimmer.bed.gz",
-                "read_mapping/pacbio/SAMEA7524440/ERR6939249/qc/SAMEA7524440.ERR6939249.hifitrimmer.summary.json",
                 "read_mapping/pacbio/SAMEA7524440/ERR6939249/qc/pacbio.SAMEA7524440.ERR6939249.fastqc.html",
                 "read_mapping/pacbio/SAMEA7524440/ERR6939249/qc/pacbio.SAMEA7524440.ERR6939249.fastqc.zip",
                 "read_mapping/pacbio/SAMEA7524440/ERR6939249/qc/pacbio.SAMEA7524440.ERR6939249.filtered.fastqc.html",
                 "read_mapping/pacbio/SAMEA7524440/ERR6939249/qc/pacbio.SAMEA7524440.ERR6939249.filtered.fastqc.zip",
+                "read_mapping/pacbio/SAMEA7524440/ERR6939249/qc/pacbio.SAMEA7524440.ERR6939249.hifitrimmer.bed.gz",
+                "read_mapping/pacbio/SAMEA7524440/ERR6939249/qc/pacbio.SAMEA7524440.ERR6939249.hifitrimmer.summary.json",
                 "read_mapping/pacbio/SAMEA7524440/ERR6939249/stats",
                 "read_mapping/pacbio/SAMEA7524440/ERR6939249/stats/GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.ERR6939249.minimap2.flagstat",
                 "read_mapping/pacbio/SAMEA7524440/ERR6939249/stats/GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.ERR6939249.minimap2.idxstats",
@@ -255,12 +255,12 @@
                 "GCA_922984935.2.subset.unmasked.ont.SAMEA7524440.merged_1.minimap2.idxstats:md5,5e872e9487a31f09266c6a73b3dbbd38",
                 "GCA_922984935.2.subset.unmasked.ont.SAMEA7524440.merged_1.minimap2.stats.gz:md5,4cef1ac9abdfaa6c034c1618e934cc52",
                 "GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.ERR6939248.minimap2.coverage.bedGraph.gz:md5,24d333148f4c53b6f8bd6535a93dbe20",
-                "SAMEA7524440.ERR6939248.hifitrimmer.bed.gz:md5,0fe5fe224b52d743066bb3e03fecd982",
+                "pacbio.SAMEA7524440.ERR6939248.hifitrimmer.bed.gz:md5,0fe5fe224b52d743066bb3e03fecd982",
                 "GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.ERR6939248.minimap2.flagstat:md5,db1610f3490d314de7e60f10d404178d",
                 "GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.ERR6939248.minimap2.idxstats:md5,f757bd37fc1461e576348525ae0ba087",
                 "GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.ERR6939248.minimap2.stats.gz:md5,dd03ce848d203f81a34e2555b683e40c",
                 "GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.ERR6939249.minimap2.coverage.bedGraph.gz:md5,586961f7b8fb27776e0957e00ecb7b6b",
-                "SAMEA7524440.ERR6939249.hifitrimmer.bed.gz:md5,16e8458843c0a6e1736f19c297088c32",
+                "pacbio.SAMEA7524440.ERR6939249.hifitrimmer.bed.gz:md5,16e8458843c0a6e1736f19c297088c32",
                 "GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.ERR6939249.minimap2.flagstat:md5,81a2332a3cdcc6b37dd2687d2cc77752",
                 "GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.ERR6939249.minimap2.idxstats:md5,fe8b829d5241701b172cf4ff55cbf4f6",
                 "GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.ERR6939249.minimap2.stats.gz:md5,560328d1f2fde8945e2add2c529d7df5",
@@ -271,7 +271,7 @@
                 "GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.merged_1.minimap2.stats.gz:md5,6a566a8d8ebc769f5d1ec67c73ad68a2"
             ],
             {
-
+                
             },
             {
                 "GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.bwamem2.cram": {
@@ -375,14 +375,14 @@
                 }
             },
             [
-                "SAMEA7524440.ERR6939248.hifitrimmer.summary.json:md5,81572321148a5e77738af902fa5f9e71",
-                "SAMEA7524440.ERR6939249.hifitrimmer.summary.json:md5,83d9985a6d7a4477df704d8f4a23852c"
+                "pacbio.SAMEA7524440.ERR6939248.hifitrimmer.summary.json:md5,81572321148a5e77738af902fa5f9e71",
+                "pacbio.SAMEA7524440.ERR6939249.hifitrimmer.summary.json:md5,83d9985a6d7a4477df704d8f4a23852c"
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2026-03-05T09:36:51.668272591"
+        "timestamp": "2026-03-06T16:11:31.791149961"
     }
 }
