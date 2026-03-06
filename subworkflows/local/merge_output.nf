@@ -18,7 +18,7 @@ workflow MERGE_OUTPUT {
         .groupTuple( by: [0] )
         .map { meta, runs, read_counts, bams -> [meta + [id: meta.specimen, merge_source: runs.sort().join("\n") + "\n", read_count: read_counts.sum()], bams] }
         .filter { _meta, bams -> bams.size() > 1 }
-        .map { meta, bam -> [meta + [merged: true], bam] }
+        .map { meta, bam -> [meta + [merged: true], bam, []] }
 
         // Merge, but only if there is more than 1 file
         SAMTOOLS_MERGE ( ch_multi_bams, [[],[],[],[]] )
