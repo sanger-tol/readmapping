@@ -146,10 +146,10 @@
                 "SOURCE.txt:md5,343a5205e5b93005576ee69a0869dad3",
                 "GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.merged_1.minimap2.flagstat:md5,da9dcde0937f27935637db67c14c9928",
                 "GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.merged_1.minimap2.idxstats:md5,ee312e0f5e6053bc81b737ae5805807f",
-                "GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.merged_1.minimap2.stats.gz:md5,64266032e9dd8e2e325ce3a9be207c76"
+                "GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.merged_1.minimap2.stats.gz:md5,4ceb4077389e7b662c230af41b016ad7"
             ],
             {
-
+                
             },
             {
                 "GCA_922984935.2.subset.unmasked.ont.SAMEA7524440.PAE35587.minimap2.cram": {
@@ -198,13 +198,13 @@
                 }
             },
             [
-
+                
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2026-03-02T11:42:01.493481376"
+        "timestamp": "2026-03-06T10:41:45.060615807"
     }
 }

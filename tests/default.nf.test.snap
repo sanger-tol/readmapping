@@ -253,7 +253,7 @@
                 "SOURCE.txt:md5,21b2344ef9fcd3b506888828b12a853e",
                 "GCA_922984935.2.subset.unmasked.ont.SAMEA7524440.merged_1.minimap2.flagstat:md5,ec6aaeb8be068f8b35a56d091d38c8b0",
                 "GCA_922984935.2.subset.unmasked.ont.SAMEA7524440.merged_1.minimap2.idxstats:md5,5e872e9487a31f09266c6a73b3dbbd38",
-                "GCA_922984935.2.subset.unmasked.ont.SAMEA7524440.merged_1.minimap2.stats.gz:md5,d60a85efe572bf79b2900b6e63b0a4ca",
+                "GCA_922984935.2.subset.unmasked.ont.SAMEA7524440.merged_1.minimap2.stats.gz:md5,4cef1ac9abdfaa6c034c1618e934cc52",
                 "GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.ERR6939248.minimap2.coverage.bedGraph.gz:md5,24d333148f4c53b6f8bd6535a93dbe20",
                 "SAMEA7524440.ERR6939248.hifitrimmer.bed.gz:md5,0fe5fe224b52d743066bb3e03fecd982",
                 "GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.ERR6939248.minimap2.flagstat:md5,db1610f3490d314de7e60f10d404178d",
@@ -268,7 +268,7 @@
                 "SOURCE.txt:md5,343a5205e5b93005576ee69a0869dad3",
                 "GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.merged_1.minimap2.flagstat:md5,da9dcde0937f27935637db67c14c9928",
                 "GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.merged_1.minimap2.idxstats:md5,ee312e0f5e6053bc81b737ae5805807f",
-                "GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.merged_1.minimap2.stats.gz:md5,76bc7ca259d01ac29819223202afeb58"
+                "GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.merged_1.minimap2.stats.gz:md5,6a566a8d8ebc769f5d1ec67c73ad68a2"
             ],
             {
 
