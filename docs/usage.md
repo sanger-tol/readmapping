@@ -19,10 +19,10 @@ You will need to create a samplesheet with information about the samples you wou
 The `sample` identifiers have to be the same when you have re-sequenced the same sample more than once e.g. to increase sequencing depth. The pipeline will analyse the raw reads individually and then merge them by sample and datatype, before performing any downstream analysis. Below is an example for the same sample sequenced across 3 lanesi of HiC:
 
 ```console
-sample,datatype,datafile,library
-sample1,hic,hic1.cram,lib1
-sample1,hic,hic2.cram,lib2
-sample1,hic,hic3.cram,lib3
+specimen,run,datatype,datafile,library
+specimen1,run1,hic,hic1.cram,
+specimen1,run2,hic,hic2.cram,
+specimen2,run1,hic,hic3.cram,
 ```
 
 ### Full samplesheet
@@ -32,17 +32,18 @@ The samplesheet can have as many columns as you desire, however, there is a stri
 A final samplesheet file consisting of both HiC and PacBio data may look something like the one below.
 
 ```console
-sample,datatype,datafile,library
-sample1_T1,hic,hic1.cram,lib1
-sample1_T2,hic,hic2.cram,lib2
-sample1_T3,hic,hic3.cram,lib3
-sample1_T4,pacbio,pacbio1.bam,pacbio1
-sample1_T5,pacbio,pacbio2.bam,pacbio2
+specimen,run,datatype,datafile,library
+specimen1,run1,hic1.cram,
+specimen1,run2,hic2.cram,
+specimen2,run3,hic3.cram,
+specimen2,run4,pacbio,pacbio1.bam,uli
+specimen3,run5,pacbio,pacbio2.bam,
 ```
 
 | Column     | Description                                                                                                                                                                                                                           |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `sample`   | Custom sample name. This entry will be identical for multiple sequencing libraries/runs from the same sample. Spaces in sample names are automatically converted to underscores (\_).                                                 |
+| `specimen` | Identifier of the specimen. Usually a BioSpecimen accession, i,e. `SAMEA7521529`.                                                                                                                                                     |
+| `run`      | Identifier of the sequencing run. Usually the accession number of the data in INSDC. For example,`ERR9248445` (hic), `ERR9284044` (pacbio).                                                                                           |
 | `datatype` | Type of sequencing data. Must be one of `hic`, `Illumina`, `pacbio`, or `ont`.                                                                                                                                                        |
 | `datafile` | Full path to read data file. Must be `bam`, `cram`, `fastq.gz` or `fq.gz` for `Illumina` and `HiC`. Must be `bam`, `fastq.gz` or `fq.gz` for `pacbio`. Must be `fastq.gz` or `fq.gz` for `ont`.                                       |
 | `library`  | (Optional) The library value is a unique identifier which is assigned to read group (`@RG`) ID. If the library name is not specified, the pipeline will auto-create library name using the data filename provided in the samplesheet. |

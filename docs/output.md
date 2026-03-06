@@ -10,22 +10,61 @@ The directories comply with Tree of Life's canonical directory structure.
 
 ## Pipeline overview
 
+### Process overview
+
 The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes data using the following steps:
 
-- [Quality control](#quality-control) - Check quality of input reads
+- [Quality control](#quality-control) - Check quality of input reads before and after filtering with FASTQC
 - [Preprocessing](#preprocessing)
-  - [Filtering](#filtering) – Filtering PacBio data before alignment
+  - [ULI preprocessing](#uli_preprocessing)
+    - Demultiplexing and trimming ULI adapters with LIMA
+    - Mark duplicates with PBMARKDUP
+  - [Filtering](#filtering) – Filtering PacBio data before alignment with HIFI_TRIMMER
 - [Alignment and Mark duplicates](#alignment-and-mark-duplicates)
-  - [Output options](#outfmt) – Output options for all read types
-  - [Short reads](#short-reads) – Aligning HiC and Illumina reads using BWAMEM2
+  - [Output options](#output-options) – Output options for all read types
+  - [Short reads](#short-reads) – Aligning HiC and Illumina reads using BWAMEM2 (by default) or MINIMAP2
   - [Oxford Nanopore reads](#oxford-nanopore-reads) – Aligning ONT reads using MINIMAP2
   - [PacBio reads](#pacbio-reads) – Aligning PacBio CLR and CCS filtered reads using MINIMAP2
 - [Alignment post-processing](#alignment-post-processing)
+  - [Merge by speciemen](#merge-by-speciment) - Merge aligned reads by specimens
+  - [External metadata](#external-metadata) – Additional metadata in alignments
+  - [Read coverage](#read-coverage) – Read coverage calculations
   - [Statistics](#statistics) – Alignment statistics
-- [Workflow reporting and genomes](#workflow-reporting-and-genomes)
-  - [Reference genome files](#reference-genome-files) - Reference genome indices/files
+- [Workflow reporting](#workflow-reporting)
   - [Pipeline information](#pipeline-information) - Report metrics generated during the workflow execution
-  - [MultiQC report](#multiqc-report) – Combined input/output QC summary (`*.html`)
+  - [MultiQC report](#multiqc-report) – Combined input/output QC summary
+
+### Output overview
+
+- `pipeline_info` - execution information of run
+- `read_mapping`
+- `${datatype}/${specimen}`
+  - `${run}/`
+    - `${assembly}.${type}.${specimen}.${run}.${aligner}.cram`: Aligned CRAM file (or `.bam` depending on `--outfmt`)
+    - `${assembly}.${type}.${specimen}.${run}.${aligner}.cram.crai`: Index for the alignment
+    - `${assembly}.${type}.${specimen}.${run}.${aligner}.coverage.bedGraph.gz`: Read coverage in bedGraph format
+    - `qc/`
+      - `${datatype}.${specimen}.${run}.fastqc.html`: FASTQC report of reads
+      - `${datatype}.${specimen}.${run}.fastqc.zip`: FASTQC archive of reads
+      - `pacbio.${specimen}.${run}.rmdup.pbmarkdup.log`: if `library: uli`, PBMARKDUP report of markduplicated PacBio reads (optional)
+      - `pacbio.${specimen}.${run}.lima.report`: if `library: uli`, LIMA report of adapter trimming and demultiplexing (optional)
+      - `pacbio.${specimen}.${run}.filtered.fastqc.html`: FASTQC report of filtered reads (optional, if filtered reads)
+      - `pacbio.${specimen}.${run}.filtered.fastqc.zip`: FASTQC archive of filtered reads (optional, if filtered reads )
+      - `pacbio.${specimen}.${run}.hifitrimmer.bed.gz`: HiFi trimmer trimming regions (optional, if filtered reads)
+      - `pacbio.${specimen}.${run}.hifitrimmer.summary.json`: HiFi trimmer trimming summary (optional, if filtered reads)
+    - `stats/`
+      - `${assembly}.${datatype}.${specimen}.${run}.${aligner}.flagstat`: Number of alignments for each FLAG type
+      - `${assembly}.${datatype}.${specimen}.${run}.${aligner}.idxstats`: Alignment summary statistics
+      - `${assembly}.${datatype}.${specimen}.${run}.${aligner}.stats.gz`: Comprehensive statistics
+  - `merged.${#}/` (optional if `params.merged_output` is specified)
+    - `${assembly}.${datatype}.${specimen}.merged.${#}.${aligner}.cram`: Merged aligned CRAM file
+    - `${assembly}.${datatype}.${specimen}.merged.${#}.${aligner}.cram.crai`: Index for the merged alignment
+    - `${assembly}.${datatype}.${specimen}.merged.${#}.${aligner}.coverage.bedGraph.gz`: Read coverage for merged file
+    - `stats/`
+      - `${assembly}.${datatype}.${specimen}.merged.${#}.${aligner}.flagstat`: Number of alignments for each FLAG type
+      - `${assembly}.${datatype}.${specimen}.merged.${#}.${aligner}.idxstats`: Merged alignment summary statistics
+      - `${assembly}.${datatype}.${specimen}.merged.${#}.${aligner}.stats.gz`: Comprehensive statistics for merged alignment
+  - `multiqc_report.html`: Interactive HTML report summarizing quality metrics from FastQC, alignment statistics, and other quality control data across all samples
 
 ## Preprocessing
 
@@ -36,17 +75,43 @@ Input files undergo quality assessment using FASTQC, a widely-used tool for eval
 <details markdown="1">
 <summary>Output files</summary>
 
-- `Quality_control`
-  - `*_fastqc.html`: An interactive HTML report summarizing key read quality metrics
-  - `*_fastqc.zip`: A compressed archive containing the full set of FASTQC output files, including raw data and plots, suitable for further automated parsing or archival.
+- `read_mapping/${type}/${specimen}/${run}/qc/`
+  - `${type}.${specimen}.${run}.fastqc.html`: An interactive HTML report summarizing key read quality metrics
+  - `${type}.${specimen}.${run}.fastqc.zip`: A compressed archive containing the full set of FASTQC output files
+
+</details>
+
+### ULI preprocessing
+
+PacBio ULI read (`library`:`uli`) are demultiplexed with LIMA and mark duplicated with PBMARKDUP.
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `read_mapping/pacbio/${specimen}/${run}/qc/`
+  - `${datatype}.${specimen}.${run}.pbmarkdup.log`: BED format file with trimming coordinates
+  - `${datatype}.${specimen}.${run}.lima.report`: Statistics of demultiplexing & ULI adpater trimming
 
 </details>
 
 ### Filtering
 
-PacBio reads generated using both CLR and CCS technology are filtered using `BLAST_BLASTN` against a database of adapter sequences. The collated FASTQ of the filtered reads is required by the downstream alignment step. The results from the PacBio filtering subworkflow are currently not set to output.
+PacBio reads generated using both CLR and CCS technology are filtered using `HIFITRIMMER`. Additional quality control is performed to check the filtered reads.
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `read_mapping/pacbio/${specimen}/${run}/qc/`
+  - `${datatype}.${specimen}.${run}.hifitrimmer.bed.gz`: BED format file with trimming coordinates
+  - `${datatype}.${specimen}.${run}.hifitrimmer.summary.json`: Summary statistics of trimming results
+  - `${datatype}.${specimen}.${run}.filtered.fastqc.html`: FASTQC report of filtered reads
+  - `${datatype}.${specimen}.${run}.filtered.fastqc.zip`: FASTQC archive of filtered reads
+
+</details>
 
 ## Alignment and Mark duplicates
+
+This section documents the output files from alignment and duplicate marking steps of the pipeline. These files are generated after the Preprocessing step completes.
 
 ### Output options
 
@@ -56,58 +121,46 @@ PacBio reads generated using both CLR and CCS technology are filtered using `BLA
 
 ### Short reads
 
-Short read data from HiC and Illumina technologies is aligned with `BWAMEM2_MEM`. The sorted and merged alignment files are processed using the `SAMTOOLS` [mark-duplicate workflow](https://www.htslib.org/algorithms/duplicate.html#workflow). The marked duplicate alignments are output in the CRAM or BAM format, along with the index.
+Short read data from HiC and Illumina technologies is aligned with `BWAMEM2_MEM` (by default) or `MINIMAP2`. The sorted alignment files are processed using the `SAMTOOLS` [mark-duplicate workflow](https://www.htslib.org/algorithms/duplicate.html#workflow). The marked duplicate alignments are output in the CRAM or BAM format.
 
 <details markdown="1">
 <summary>Output files</summary>
 
 - `read_mapping`
-  - `hic`
-    - `merged`
-      - `<gca_accession>.unmasked.hic.<sample_id>.[cr|b]am`: Sorted and merged BAM or CRAM file at the individual level
-      - `<gca_accession>.unmasked.hic.<sample_id>.[cr|b]am.[cr|c]si`: Index for the alignment (as either .csi or .crai)
-    - `<gca_accession>.unmasked.hic.<sample_id><T1>.[cr|b]am`: Unmerged sorted BAM or CRAM
-    - `<gca_accession>.unmasked.hic.<sample_id><T1>.[cr|b]am.[cr|c]si`: Index for the alignment (as either .csi or .crai)
-  - `illumina`
-    - `merged`
-      - `<gca_accession>.unmasked.hic.<sample_id>.[cr|b]am`: Sorted and merged BAM or CRAM file at the individual level
-      - `<gca_accession>.unmasked.hic.<sample_id>.[cr|b]am.[cr|c]si`: Index for the alignment (as either .csi or .crai)
-    - `<gca_accession>.unmasked.hic.<sample_id>_T<number>.[cr|b]am`: Unmerged BAM or CRAM. `T<number` is sample identifier with occurrence number, i.e., T1 indicates the first occurrence of that sample name, T2 indicates the second occurrence.
-    - `<gca_accession>.unmasked.hic.<sample_id>_T<number>.[cr|b]am.[cr|c]si`: Corresponding index for the alignment (as either .csi or .crai)
+  - `${datatype}/${specimen}`
+    - `${run}/`
+      - `${assembly}.${type}.${specimen}.${run}.${aligner}.cram`: Aligned CRAM file (or `.bam` depending on `--outfmt`)
+      - `${assembly}.${type}.${specimen}.${run}.${aligner}.cram.crai`: Index for the alignment
+      - `${assembly}.${type}.${specimen}.${run}.${aligner}.coverage.bedGraph.gz`: Read coverage in bedGraph format
+    - `merged.${#}/` - if params `merge_output`, merged output files with same structure as individual runs, without `qc` folder
 
 </details>
 
 ### Oxford Nanopore reads
 
-Reads generated using Oxford Nanopore technology are aligned with `MINIMAP2_ALIGN`. The sorted and merged alignment is output in the CRAM or BAM format, along with the index.
+Reads generated using Oxford Nanopore technology are aligned with `MINIMAP2_ALIGN`. The sorted alignment is output in the CRAM or BAM format.
 
 <details markdown="1">
 <summary>Output files</summary>
 
 - `read_mapping`
-  - `ont`
-    - `merged`
-      - `<gca_accession>.unmasked.ont.<sample_id>.[cr|b]am`: Sorted and merged BAM or CRAM file at the individual level
-      - `<gca_accession>.unmasked.ont.<sample_id>.[cr|b]am.[cr|c]si`: Index for the alignment (as either .csi or .crai)
-    - `<gca_accession>.unmasked.ont.<sample_id>_T<number>.[cr|b]am`: Unmerged BAM or CRAM. `T<number` is sample identifier with occurrence number, i.e., T1 indicates the first occurrence of that sample name, T2 indicates the second occurrence.
-    - `<gca_accession>.unmasked.ont.<sample_id>_T<number>.[cr|b]am.[cr|c]si`: Corresponding index for the alignment (as either .csi or .crai)
-
-</details>
+  - `ont/${specimen}` - `${run}/` - `${assembly}.ont.${specimen}.${run}.${aligner}.cram`: Aligned CRAM file (or `.bam` depending on `--outfmt`) - `${assembly}.ont.${specimen}.${run}.${aligner}.cram.crai`: Index for the alignment - `${assembly}.ont.${specimen}.${run}.${aligner}.coverage.bedGraph.gz`: Read coverage in bedGraph format - `merged.${#}/` - if params `merge_output`.
+  </details>
 
 ### PacBio reads
 
-The filtered PacBio reads are aligned with `MINIMAP2_ALIGN`. The sorted and merged alignment is output in the CRAM or BAM format, along with the index.
+The filtered PacBio reads are aligned with `MINIMAP2_ALIGN`. The sorted alignment is output in the CRAM or BAM format.
 
 <details markdown="1">
 <summary>Output files</summary>
 
 - `read_mapping`
-  - `pacbio`
-    - `merged`
-      - `<gca_accession>.unmasked.pacbio.<sample_id>.[cr|b]am`: Sorted and merged BAM or CRAM file at the individual level
-      - `<gca_accession>.unmasked.pacbio.<sample_id>.[cr|b]am.[cr|c]si`: Index for the alignment (as either .csi or .crai)
-    - `<gca_accession>.unmasked.pacbio.<sample_id>_T<number>.[cr|b]am`: Unmerged BAM or CRAM. `T<number` is sample identifier with occurrence number, i.e., T1 indicates the first occurrence of that sample name, T2 indicates the second occurrence.
-    - `<gca_accession>.unmasked.pacbio.<sample_id>_T<number>.[cr|b]am.[cr|c]si`: Corresponding index for the alignment (as either .csi or .crai)
+  - `pacbio/${specimen}`
+    - `${run}/`
+      - `${assembly}.pacbio.${specimen}.${run}.${aligner}.cram`: Aligned CRAM file (or `.bam` depending on `--outfmt`)
+      - `${assembly}.pacbio.${specimen}.${run}.${aligner}.cram.crai`: Index for the alignment
+      - `${assembly}.pacbio.${specimen}.${run}.${aligner}.coverage.bedGraph.gz`: Read coverage in bedGraph format
+    - `merged.${#}/` - if params `merge_output`.
 
 </details>
 
@@ -119,74 +172,45 @@ If provided using the `--header` option, all output alignments (`*.cram` or `*.b
 
 ### Read coverage
 
-Read coverage of the output alignment file is calculated with [blobtk depth](https://github.com/genomehubs/blobtk/wiki/blobtk-depth).
+Read coverage of the output alignment file is calculated with [blobtk depth](https://github.com/genomehubs/blobtk/wiki/blobtk-depth) and output alongside the alignment files.
 
-<details markdown="1">
-<summary>Output files</summary>
-
-- `read_mapping`
-  - `<sequence-type>`
-    - `<gca_accession>.unmasked.<sequence-type>.<sample_id>.[cr|b]am.coverage.bedGraph.gz`: Read coverage in bedGraph format
-
-</details>
+**File naming:** `${assembly}.${type}.${specimen}.${run}.${aligner}.coverage.bedGraph.gz`
 
 ### Statistics
 
-The output alignments, along with the index, are used to calculate mapping statistics. Output files are generated using `SAMTOOLS_STATS`, `SAMTOOLS_FLAGSTAT` and `SAMTOOLS_IDXSTATS`.
+The output alignments are used to calculate mapping statistics. Output files are generated using `SAMTOOLS_STATS`, `SAMTOOLS_FLAGSTAT` and `SAMTOOLS_IDXSTATS` and are organized in `stats/` subdirectories of each run or merged specimen:
 
-<details markdown="1">
-<summary>Output files</summary>
+**File naming:**
 
-- `read_mapping`
-  - `hic`
-    - `merged`
-      - `<gca_accession>.unmasked.hic.<sample_id>.stats.gz`: Comprehensive statistics from merged alignment file
-      - `<gca_accession>.unmasked.hic.<sample_id>.flagstat`: Number of merged alignments for each FLAG type
-      - `<gca_accession>.unmasked.hic.<sample_id>.idxstats`: Merged alignment summary statistics
-    - `<gca_accession>.unmasked.hic.<sample_id>_T<number>.stats.gz`: Comprehensive statistics from each alignment file
-    - `<gca_accession>.unmasked.hic.<sample_id>_T<number>.flagstat`: Number of alignments for each FLAG type
-    - `<gca_accession>.unmasked.hic.<sample_id>_T<number>.idxstats`: Alignment summary statistics
-  - `ont`
-    - `merged`
-      - `<gca_accession>.unmasked.ont.<sample_id>.stats.gz`: Comprehensive statistics from merged alignment file
-      - `<gca_accession>.unmasked.ont.<sample_id>.flagstat`: Number of alignments for each FLAG type
-      - `<gca_accession>.unmasked.ont.<sample_id>.idxstats`: Merged alignment summary statistics
-    - `<gca_accession>.unmasked.ont.<sample_id>_T<number>.stats.gz`: Comprehensive statistics from each alignment file
-    - `<gca_accession>.unmasked.ont.<sample_id>_T<number>.flagstat`: Number of alignments for each FLAG type
-    - `<gca_accession>.unmasked.ont.<sample_id>_T<number>.idxstats`: Alignment summary statistics
-  - `pacbio`
-    - `merged`
-      - `<gca_accession>.unmasked.pacbio.<sample_id>.stats.gz`: Comprehensive statistics from alignment file
-      - `<gca_accession>.unmasked.pacbio.<sample_id>.flagstat`: Number of merged alignments for each FLAG type
-      - `<gca_accession>.unmasked.pacbio.<sample_id>.idxstats`: Merged alignment summary statistics
-    - `<gca_accession>.unmasked.pacbio.<sample_id>_T<number>.stats.gz`: Comprehensive statistics from each alignment file
-    - `<gca_accession>.unmasked.pacbio.<sample_id>_T<number>.flagstat`: Number of alignments for each FLAG type
-    - `<gca_accession>.unmasked.pacbio.<sample_id>_T<number>.idxstats`: Alignment summary statistics
+- `${assembly}.${type}.${specimen}.${run}.${aligner}.flagstat`: Number of alignments for each FLAG type
+- `${assembly}.${type}.${specimen}.${run}.${aligner}.idxstats`: Alignment summary statistics
+- `${assembly}.${type}.${specimen}.${run}.${aligner}.stats.gz`: Comprehensive statistics
 
-</details>
+For merged output (when `merge_output` is enabled), replace `${run}` with `merged.${#}` in the filenames.
 
-## Workflow reporting and genomes
-
-### Reference genome files
-
-A number of genome-specific files are generated by the pipeline because they are required for the downstream processing of the results. These include an unmasked version of the genome by process `UNMASK` and an index by `BWAMEM2_INDEX`. They are currently not set to output.
+## Workflow reporting
 
 ### Pipeline information
 
 <details markdown="1">
 <summary>Output files</summary>
 
-- `pipeline_info/readmapping/`
-  - Reports generated by Nextflow: `execution_report.html`, `execution_timeline.html`, `execution_trace.txt` and `pipeline_dag.dot`/`pipeline_dag.svg`.
-  - Reports generated by the pipeline: `pipeline_report.html`, `pipeline_report.txt` and `software_versions.yml`. The `pipeline_report*` files will only be present if the `--email` / `--email_on_fail` parameter's are used when running the pipeline.
-  - Reformatted samplesheet files used as input to the pipeline: `samplesheet.valid.csv`.
+- `pipeline_info/`
+  - `execution_report_<timestamp>.html`: Nextflow execution report
+  - `execution_timeline_<timestamp>.html`: Nextflow execution timeline visualization
+  - `execution_trace_<timestamp>.txt`: Nextflow execution trace with resource usage details
+  - `pipeline_dag_<timestamp>.html`: Pipeline DAG (Directed Acyclic Graph) visualization
+  - `params_<timestamp>.json`: Parameters used in the pipeline run
+  - `readmapping_software_mqc_versions.yml`: Software versions used in the workflow
 
 ### MultiQC report
 
 The workflow generates a MultiQC summary report that aggregates and visualises statistics (e.g., FastQC, alignment statistics).
 
-- `Quality_control`
-  - `*multiqc_report.html`: An interactive HTML report summarizing key quality metrics
+<details markdown="1">
+<summary>Output files</summary>
+
+- `multiqc_report.html`: Interactive HTML report summarizing quality metrics from FastQC, alignment statistics, and other quality control data across all samples
 
 </details>
 
