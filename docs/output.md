@@ -132,7 +132,7 @@ Short read data from HiC and Illumina technologies is aligned with `BWAMEM2_MEM`
       - `${assembly}.${datatype}.${specimen}.${run}.${aligner}.cram`: Aligned CRAM file (or `.bam` depending on `--outfmt`)
       - `${assembly}.${datatype}.${specimen}.${run}.${aligner}.cram.crai`: Index for the alignment
       - `${assembly}.${datatype}.${specimen}.${run}.${aligner}.coverage.bedGraph.gz`: Read coverage in bedGraph format
-    - `merged.${#}/` - if params `merge_output`, merged output files with same structure as individual runs, without `qc` folder
+    - `merged_${#}/` - if params `merge_output`, merged output files with same structure as individual runs, without `qc` folder
 
 </details>
 
@@ -191,7 +191,7 @@ The output alignments are used to calculate mapping statistics. Output files are
 - `${assembly}.${datatype}.${specimen}.${run}.${aligner}.idxstats`: Alignment summary statistics
 - `${assembly}.${datatype}.${specimen}.${run}.${aligner}.stats.gz`: Comprehensive statistics
 
-For merged output (when `merge_output` is enabled), replace `${run}` with `merged.${#}` in the filenames.
+For merged output (when `merge_output` is enabled), replace `${run}` with `merged_${#}` in the filenames.
 
 ## Workflow reporting
 
