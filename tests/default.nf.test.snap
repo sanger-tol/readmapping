@@ -178,14 +178,14 @@
                 "read_mapping/ont/SAMEA7524440/PAE35587_test/stats/GCA_922984935.2.subset.unmasked.ont.SAMEA7524440.PAE35587_test.minimap2.idxstats",
                 "read_mapping/ont/SAMEA7524440/PAE35587_test/stats/GCA_922984935.2.subset.unmasked.ont.SAMEA7524440.PAE35587_test.minimap2.stats.gz",
                 "read_mapping/ont/SAMEA7524440/merged_1",
-                "read_mapping/ont/SAMEA7524440/merged_1/GCA_922984935.2.subset.unmasked.ont.SAMEA7524440.minimap2.merged_1.coverage.bedGraph.gz",
-                "read_mapping/ont/SAMEA7524440/merged_1/GCA_922984935.2.subset.unmasked.ont.SAMEA7524440.minimap2.merged_1.cram",
-                "read_mapping/ont/SAMEA7524440/merged_1/GCA_922984935.2.subset.unmasked.ont.SAMEA7524440.minimap2.merged_1.cram.crai",
+                "read_mapping/ont/SAMEA7524440/merged_1/GCA_922984935.2.subset.unmasked.ont.SAMEA7524440.merged_1.minimap2.coverage.bedGraph.gz",
+                "read_mapping/ont/SAMEA7524440/merged_1/GCA_922984935.2.subset.unmasked.ont.SAMEA7524440.merged_1.minimap2.cram",
+                "read_mapping/ont/SAMEA7524440/merged_1/GCA_922984935.2.subset.unmasked.ont.SAMEA7524440.merged_1.minimap2.cram.crai",
                 "read_mapping/ont/SAMEA7524440/merged_1/SOURCE.txt",
                 "read_mapping/ont/SAMEA7524440/merged_1/stats",
-                "read_mapping/ont/SAMEA7524440/merged_1/stats/GCA_922984935.2.subset.unmasked.ont.SAMEA7524440.minimap2.merged_1.flagstat",
-                "read_mapping/ont/SAMEA7524440/merged_1/stats/GCA_922984935.2.subset.unmasked.ont.SAMEA7524440.minimap2.merged_1.idxstats",
-                "read_mapping/ont/SAMEA7524440/merged_1/stats/GCA_922984935.2.subset.unmasked.ont.SAMEA7524440.minimap2.merged_1.stats.gz",
+                "read_mapping/ont/SAMEA7524440/merged_1/stats/GCA_922984935.2.subset.unmasked.ont.SAMEA7524440.merged_1.minimap2.flagstat",
+                "read_mapping/ont/SAMEA7524440/merged_1/stats/GCA_922984935.2.subset.unmasked.ont.SAMEA7524440.merged_1.minimap2.idxstats",
+                "read_mapping/ont/SAMEA7524440/merged_1/stats/GCA_922984935.2.subset.unmasked.ont.SAMEA7524440.merged_1.minimap2.stats.gz",
                 "read_mapping/pacbio",
                 "read_mapping/pacbio/SAMEA7524440",
                 "read_mapping/pacbio/SAMEA7524440/ERR6939248",
@@ -219,14 +219,14 @@
                 "read_mapping/pacbio/SAMEA7524440/ERR6939249/stats/GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.ERR6939249.minimap2.idxstats",
                 "read_mapping/pacbio/SAMEA7524440/ERR6939249/stats/GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.ERR6939249.minimap2.stats.gz",
                 "read_mapping/pacbio/SAMEA7524440/merged_1",
-                "read_mapping/pacbio/SAMEA7524440/merged_1/GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.minimap2.merged_1.coverage.bedGraph.gz",
-                "read_mapping/pacbio/SAMEA7524440/merged_1/GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.minimap2.merged_1.cram",
-                "read_mapping/pacbio/SAMEA7524440/merged_1/GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.minimap2.merged_1.cram.crai",
+                "read_mapping/pacbio/SAMEA7524440/merged_1/GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.merged_1.minimap2.coverage.bedGraph.gz",
+                "read_mapping/pacbio/SAMEA7524440/merged_1/GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.merged_1.minimap2.cram",
+                "read_mapping/pacbio/SAMEA7524440/merged_1/GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.merged_1.minimap2.cram.crai",
                 "read_mapping/pacbio/SAMEA7524440/merged_1/SOURCE.txt",
                 "read_mapping/pacbio/SAMEA7524440/merged_1/stats",
-                "read_mapping/pacbio/SAMEA7524440/merged_1/stats/GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.minimap2.merged_1.flagstat",
-                "read_mapping/pacbio/SAMEA7524440/merged_1/stats/GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.minimap2.merged_1.idxstats",
-                "read_mapping/pacbio/SAMEA7524440/merged_1/stats/GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.minimap2.merged_1.stats.gz"
+                "read_mapping/pacbio/SAMEA7524440/merged_1/stats/GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.merged_1.minimap2.flagstat",
+                "read_mapping/pacbio/SAMEA7524440/merged_1/stats/GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.merged_1.minimap2.idxstats",
+                "read_mapping/pacbio/SAMEA7524440/merged_1/stats/GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.merged_1.minimap2.stats.gz"
             ],
             [
                 "GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.bwamem2.coverage.bedGraph.gz:md5,6b4c0b4967b3551b84586acfd1288eac",
@@ -249,11 +249,11 @@
                 "GCA_922984935.2.subset.unmasked.ont.SAMEA7524440.PAE35587_test.minimap2.flagstat:md5,9a975d9cca35785dc8044aa06a63e7b5",
                 "GCA_922984935.2.subset.unmasked.ont.SAMEA7524440.PAE35587_test.minimap2.idxstats:md5,f176a0ddb87700171fa3f88525b94272",
                 "GCA_922984935.2.subset.unmasked.ont.SAMEA7524440.PAE35587_test.minimap2.stats.gz:md5,9a81a0e8b60a95a2bdbc2f57c638fd8b",
-                "GCA_922984935.2.subset.unmasked.ont.SAMEA7524440.minimap2.merged_1.coverage.bedGraph.gz:md5,bc939428742527654ae4b147e5cf369b",
+                "GCA_922984935.2.subset.unmasked.ont.SAMEA7524440.merged_1.minimap2.coverage.bedGraph.gz:md5,bc939428742527654ae4b147e5cf369b",
                 "SOURCE.txt:md5,21b2344ef9fcd3b506888828b12a853e",
-                "GCA_922984935.2.subset.unmasked.ont.SAMEA7524440.minimap2.merged_1.flagstat:md5,ec6aaeb8be068f8b35a56d091d38c8b0",
-                "GCA_922984935.2.subset.unmasked.ont.SAMEA7524440.minimap2.merged_1.idxstats:md5,5e872e9487a31f09266c6a73b3dbbd38",
-                "GCA_922984935.2.subset.unmasked.ont.SAMEA7524440.minimap2.merged_1.stats.gz:md5,d60a85efe572bf79b2900b6e63b0a4ca",
+                "GCA_922984935.2.subset.unmasked.ont.SAMEA7524440.merged_1.minimap2.flagstat:md5,ec6aaeb8be068f8b35a56d091d38c8b0",
+                "GCA_922984935.2.subset.unmasked.ont.SAMEA7524440.merged_1.minimap2.idxstats:md5,5e872e9487a31f09266c6a73b3dbbd38",
+                "GCA_922984935.2.subset.unmasked.ont.SAMEA7524440.merged_1.minimap2.stats.gz:md5,d60a85efe572bf79b2900b6e63b0a4ca",
                 "GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.ERR6939248.minimap2.coverage.bedGraph.gz:md5,24d333148f4c53b6f8bd6535a93dbe20",
                 "SAMEA7524440.ERR6939248.hifitrimmer.bed.gz:md5,0fe5fe224b52d743066bb3e03fecd982",
                 "GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.ERR6939248.minimap2.flagstat:md5,db1610f3490d314de7e60f10d404178d",
@@ -264,14 +264,14 @@
                 "GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.ERR6939249.minimap2.flagstat:md5,81a2332a3cdcc6b37dd2687d2cc77752",
                 "GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.ERR6939249.minimap2.idxstats:md5,fe8b829d5241701b172cf4ff55cbf4f6",
                 "GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.ERR6939249.minimap2.stats.gz:md5,560328d1f2fde8945e2add2c529d7df5",
-                "GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.minimap2.merged_1.coverage.bedGraph.gz:md5,5f0bf291d798e6c82899aaaa9cf4f793",
+                "GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.merged_1.minimap2.coverage.bedGraph.gz:md5,5f0bf291d798e6c82899aaaa9cf4f793",
                 "SOURCE.txt:md5,343a5205e5b93005576ee69a0869dad3",
-                "GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.minimap2.merged_1.flagstat:md5,da9dcde0937f27935637db67c14c9928",
-                "GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.minimap2.merged_1.idxstats:md5,ee312e0f5e6053bc81b737ae5805807f",
-                "GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.minimap2.merged_1.stats.gz:md5,76bc7ca259d01ac29819223202afeb58"
+                "GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.merged_1.minimap2.flagstat:md5,da9dcde0937f27935637db67c14c9928",
+                "GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.merged_1.minimap2.idxstats:md5,ee312e0f5e6053bc81b737ae5805807f",
+                "GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.merged_1.minimap2.stats.gz:md5,76bc7ca259d01ac29819223202afeb58"
             ],
             {
-                
+
             },
             {
                 "GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.bwamem2.cram": {
@@ -329,7 +329,7 @@
                     "duplicateReadCount": 0,
                     "sorted": false
                 },
-                "GCA_922984935.2.subset.unmasked.ont.SAMEA7524440.minimap2.merged_1.cram": {
+                "GCA_922984935.2.subset.unmasked.ont.SAMEA7524440.merged_1.minimap2.cram": {
                     "maxReadLength": 96980,
                     "minReadLength": 0,
                     "meanReadLength": 4840,
@@ -362,7 +362,7 @@
                     "duplicateReadCount": 0,
                     "sorted": false
                 },
-                "GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.minimap2.merged_1.cram": {
+                "GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.merged_1.minimap2.cram": {
                     "maxReadLength": 32471,
                     "minReadLength": 0,
                     "meanReadLength": 5870,
