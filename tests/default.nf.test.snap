@@ -122,8 +122,8 @@
                 "read_mapping/hic/SAMEA7524440/ERR6688402/GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.bwamem2.cram",
                 "read_mapping/hic/SAMEA7524440/ERR6688402/GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.bwamem2.cram.crai",
                 "read_mapping/hic/SAMEA7524440/ERR6688402/qc",
-                "read_mapping/hic/SAMEA7524440/ERR6688402/qc/hic.SAMEA7524440.ERR6688402.fastqc.html",
-                "read_mapping/hic/SAMEA7524440/ERR6688402/qc/hic.SAMEA7524440.ERR6688402.fastqc.zip",
+                "read_mapping/hic/SAMEA7524440/ERR6688402/qc/hic.SAMEA7524440.ERR6688402.cram.fastqc.html",
+                "read_mapping/hic/SAMEA7524440/ERR6688402/qc/hic.SAMEA7524440.ERR6688402.cram.fastqc.zip",
                 "read_mapping/hic/SAMEA7524440/ERR6688402/stats",
                 "read_mapping/hic/SAMEA7524440/ERR6688402/stats/GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.bwamem2.flagstat",
                 "read_mapping/hic/SAMEA7524440/ERR6688402/stats/GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.bwamem2.idxstats",
@@ -271,7 +271,7 @@
                 "GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.merged_1.minimap2.stats.gz:md5,6a566a8d8ebc769f5d1ec67c73ad68a2"
             ],
             {
-                
+
             },
             {
                 "GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.bwamem2.cram": {
