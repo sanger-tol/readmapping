@@ -27,7 +27,6 @@ include { PREPARE_GENOME                     } from '../subworkflows/local/prepa
 
 include { UNTAR          } from '../modules/nf-core/untar'
 include { FASTQC         } from '../modules/nf-core/fastqc'
-include { SAMTOOLS_FASTQ } from '../modules/nf-core/samtools/fastq'
 include { MULTIQC        } from '../modules/nf-core/multiqc'
 
 include { paramsSummaryMap                                  } from 'plugin/nf-schema'
@@ -76,17 +75,8 @@ workflow READMAPPING {
     //
     // Control quality of input files
     //
-    ch_fastqc_reads = INPUT_CHECK.out.reads
-    .branch { _meta, reads ->
-                cram:  reads.getName().endsWith("cram")
-                other: true
-    }
 
-    // Convert cram to FASTQs
-    SAMTOOLS_FASTQ ( ch_fastqc_reads.cram, true )
-    ch_fastqc_reads = ch_fastqc_reads.other.mix ( SAMTOOLS_FASTQ.out.interleaved )
-
-    FASTQC ( ch_fastqc_reads )
+    FASTQC ( INPUT_CHECK.out.reads )
     reports = reports.mix ( FASTQC.out.zip )
 
     //

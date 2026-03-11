@@ -1,7 +1,7 @@
 {
     "-profile test": {
         "content": [
-            170,
+            168,
             {
                 "BGZIP_BEDGRAPH": {
                     "samtools": "1.22.1"
@@ -271,7 +271,7 @@
                 "GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.merged_1.minimap2.stats.gz:md5,6a566a8d8ebc769f5d1ec67c73ad68a2"
             ],
             {
-                
+
             },
             {
                 "GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.bwamem2.cram": {

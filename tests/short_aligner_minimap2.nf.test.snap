@@ -1,7 +1,7 @@
 {
     "-profile test --short_aligner minimap2": {
         "content": [
-            70,
+            68,
             {
                 "BGZIP_BEDGRAPH": {
                     "samtools": "1.22.1"
@@ -53,9 +53,6 @@
                     "samtools": "1.22.1"
                 },
                 "SAMTOOLS_FAIDX": {
-                    "samtools": "1.22.1"
-                },
-                "SAMTOOLS_FASTQ": {
                     "samtools": "1.22.1"
                 },
                 "SAMTOOLS_FLAGSTAT": {
@@ -142,7 +139,7 @@
                 "GCA_922984935.2.subset.unmasked.illumina.SAMEA7524439.ERR6688600.minimap2.stats.gz:md5,ce1e4180387c655031fd5251944b3728"
             ],
             {
-                
+
             },
             {
                 "GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.minimap2.cram": {
@@ -180,7 +177,7 @@
                 }
             },
             [
-                
+
             ]
         ],
         "meta": {
