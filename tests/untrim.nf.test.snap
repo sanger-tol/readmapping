@@ -1,7 +1,7 @@
 {
     "-profile test --pacbio_adapter_fasta false --pacbio_adapter_yaml false": {
         "content": [
-            69,
+            68,
             {
                 "BGZIP_BEDGRAPH": {
                     "samtools": "1.22.1"
@@ -46,9 +46,6 @@
                     "samtools": "1.22.1"
                 },
                 "SAMTOOLS_FASTQ": {
-                    "samtools": "1.22.1"
-                },
-                "SAMTOOLS_FASTQ_QC": {
                     "samtools": "1.22.1"
                 },
                 "SAMTOOLS_FLAGSTAT": {
@@ -149,7 +146,7 @@
                 "GCA_922984935.2.subset.unmasked.pacbio.SAMEA7524440.merged_1.minimap2.stats.gz:md5,4ceb4077389e7b662c230af41b016ad7"
             ],
             {
-                
+
             },
             {
                 "GCA_922984935.2.subset.unmasked.ont.SAMEA7524440.PAE35587.minimap2.cram": {
@@ -198,7 +195,7 @@
                 }
             },
             [
-                
+
             ]
         ],
         "meta": {

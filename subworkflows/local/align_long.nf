@@ -14,7 +14,6 @@ include { FASTQC as FASTQC_FILTERED                    } from '../../modules/nf-
 include { GAWK as GAWK_MODIFY_YAML_BARCODE             } from '../../modules/nf-core/gawk/main'
 include { SAMTOOLS_SPLITHEADER                         } from '../../modules/nf-core/samtools/splitheader/main'
 include { SAMTOOLS_FASTQ                               } from '../../modules/nf-core/samtools/fastq/main'
-include { SAMTOOLS_FASTQ as SAMTOOLS_FASTQ_QC          } from '../../modules/nf-core/samtools/fastq/main'
 
 workflow ALIGN_LONG {
     take:
@@ -128,8 +127,7 @@ workflow ALIGN_LONG {
 
         // QC for preprocessed fastx files
         untrimmed_bam = PACBIO_PREPROCESS.out.untrimmed_bam.mix(PACBIO_PREPROCESS_ULI.out.untrimmed_bam)
-        SAMTOOLS_FASTQ_QC( untrimmed_bam, false )
-        FASTQC_FILTERED ( pacbio_fastx.mix( SAMTOOLS_FASTQ_QC.out.other ) )
+        FASTQC_FILTERED ( pacbio_fastx.mix( untrimmed_bam ) )
 
         mqc_files = mqc_files.mix( FASTQC_FILTERED.out.zip )
             .mix( PACBIO_PREPROCESS_ULI.out.lima_report )
