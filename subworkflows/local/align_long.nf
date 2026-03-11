@@ -148,6 +148,7 @@ workflow ALIGN_LONG {
     // readmapping take only 1 FASTA as reference
     SAMTOOLS_FASTQ ( bam_to_fastx, false )
     ch_reads_fastx = SAMTOOLS_FASTQ.out.other.mix( fastx )
+    .map{ meta, fastx_file -> [ meta + [ reads_size: fastx_file.size() ] , fastx_file ] }
 
     // Prepare input for alignment
     ch_align_input = ch_reads_fastx

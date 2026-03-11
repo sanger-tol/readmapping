@@ -34,6 +34,7 @@ workflow ALIGN_SHORT {
 
     ch_reads_cram = SAMTOOLS_ADDREPLACERG.out.cram
     .mix ( ch_reads.cram )
+    .map{ meta, cram_file -> [ meta + [ reads_size: cram_file.size() ] , cram_file ] }
 
     ch_illumina = ch_reads_cram
     .combine(fasta)
