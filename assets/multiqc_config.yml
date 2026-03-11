@@ -19,6 +19,8 @@ report_section_order:
 export_plots: true
 
 extra_fn_clean_exts:
+  - ".bwamem2"
+  - ".minimap2"
   - type: regex
     pattern: ".*(?=(ont|illumina|pacbio|hic)\\.)"
 
