@@ -18,13 +18,13 @@ workflow ALIGN_SHORT {
     ch_reads = reads
     .branch {
         _meta, reads_files ->
-            fastq : reads_files.findAll { file -> file.getName().toLowerCase() =~ /.*f.*\.gz/ }
-            cram : true
+            cram : reads_files.findAll { file -> file.name.endsWith(".cram") }
+            not_cram: true
     }
 
 
     // Convert FASTQ to CRAM only if FASTQ were provided as input
-    reads_with_dummy_index = ch_reads.fastq.map { meta, file -> [ meta, file, [] ] }
+    reads_with_dummy_index = ch_reads.not_cram.map { meta, file -> [ meta, file, [] ] }
     CONVERT_CRAM ( reads_with_dummy_index, fasta, [], [] )
 
     SAMTOOLS_ADDREPLACERG (
