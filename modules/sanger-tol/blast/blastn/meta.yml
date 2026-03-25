@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/sanger-tol/nf-core-modules/master/modules/meta-schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/sanger-tol/nf-core-modules/main/modules/meta-schema.json
 name: blast_blastn
 description: Queries a BLAST DNA database from a FASTA/FASTQ/BAM file containing query sequences.
 keywords:
