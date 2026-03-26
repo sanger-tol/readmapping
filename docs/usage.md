@@ -45,7 +45,7 @@ specimen3,run5,pacbio,pacbio2.bam,
 | `specimen` | Identifier of the specimen. Usually a BioSpecimen accession, i,e. `SAMEA7521529`.                                                                                                                                                     |
 | `run`      | Identifier of the sequencing run. Usually the accession number of the data in INSDC. For example,`ERR9248445` (hic), `ERR9284044` (pacbio).                                                                                           |
 | `datatype` | Type of sequencing data. Must be one of `hic`, `Illumina`, `pacbio`, or `ont`.                                                                                                                                                        |
-| `datafile` | Full path to read data file. Must be `bam`, `cram`, `fastq.gz` or `fq.gz` for `Illumina` and `HiC`. Must be `bam`, `fastq.gz` or `fq.gz` for `pacbio`. Must be `fastq.gz` or `fq.gz` for `ont`.                                       |
+| `datafile` | Full path to read data file. Must be `bam`, `cram`, `fastq.gz` or `fq.gz` for `Illumina` and `HiC`. Must be `bam`, `fastq.gz` or `fq.gz` for `pacbio` and `ont`.                                                                      |
 | `library`  | (Optional) The library value is a unique identifier which is assigned to read group (`@RG`) ID. If the library name is not specified, the pipeline will auto-create library name using the data filename provided in the samplesheet. |
 
 An [example samplesheet](../assets/samplesheet.csv) has been provided with the pipeline.
