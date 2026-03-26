@@ -12,7 +12,6 @@ include { ALIGN_SHORT                        } from '../subworkflows/local/align
 include { ALIGN_LONG                         } from '../subworkflows/local/align_long'
 include { CONVERT_STATS                      } from '../subworkflows/local/convert_stats'
 include { INPUT_CHECK                        } from '../subworkflows/local/input_check'
-include { PREPARE_GENOME                     } from '../subworkflows/local/prepare_genome'
 
 
 /*
@@ -53,24 +52,23 @@ workflow READMAPPING {
     ch_multiqc_files = channel.empty()
     multiqc_report   = channel.empty()
     reports          = channel.empty()
-    // Initialize input values for PAcBio read preprocessing
+
+    // Initialize input values for PacBio read preprocessing
     val_pacbio_adapter_fasta = params.pacbio_adapter_fasta ?: []
     val_pacbio_adapter_yaml = params.pacbio_adapter_yaml ?: []
     val_pacbio_uli_adapter  = params.pacbio_uli_adapter ?: []
+
     //
-    // SUBWORKFLOW: Read in samplesheet, validate and stage input files
+    // SUBWORKFLOW: Prepare the reads and the genome
     //
-    ch_reads = INPUT_CHECK ( ch_samplesheet ).reads
-    .branch {
+    ch_genome = ch_fasta.map { fasta -> [[id: fasta.baseName], fasta] }
+
+    INPUT_CHECK(ch_genome, ch_samplesheet)
+    ch_reads = INPUT_CHECK.out.reads.branch {
         meta, _reads ->
             short_reads : meta.datatype == "hic" || meta.datatype == "illumina"
             long_reads : true
     }
-
-    ch_genome = ch_fasta
-    .map { fasta -> [ [ id: fasta.baseName ], fasta ] }
-
-    PREPARE_GENOME ( ch_genome )
 
     //
     // Control quality of input files
@@ -83,10 +81,10 @@ workflow READMAPPING {
     // SUBWORKFLOW: Align raw reads to genome
     //
 
-    ALIGN_SHORT ( PREPARE_GENOME.out.fasta, ch_reads.short_reads )
+    ALIGN_SHORT ( INPUT_CHECK.out.fasta, ch_reads.short_reads )
 
     ALIGN_LONG (
-        PREPARE_GENOME.out.fasta,
+        INPUT_CHECK.out.fasta,
         ch_reads.long_reads,
         val_pacbio_adapter_fasta,
         val_pacbio_adapter_yaml,
@@ -101,7 +99,7 @@ workflow READMAPPING {
     .mix( ALIGN_LONG.out.bam )
 
     // convert to cram and gather stats
-    CONVERT_STATS ( ch_aligned_bams, PREPARE_GENOME.out.fasta, ch_header )
+    CONVERT_STATS ( ch_aligned_bams, INPUT_CHECK.out.fasta, ch_header )
     ch_versions = ch_versions.mix ( CONVERT_STATS.out.versions )
     reports = reports.mix ( CONVERT_STATS.out.stats )
                      .mix ( CONVERT_STATS.out.flagstat )
