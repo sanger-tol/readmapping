@@ -6,8 +6,8 @@ process BLAST_BLASTN {
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/6d/6daff9692203a560ac963c14eb1dd77190be4191e08702b2311e9a6175892748/data':
-        'community.wave.seqera.io/library/blast_htslib_samtools_seqkit:45ece1dc474127e2' }"
+        'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/53/531cf3beb1d695a35e4aae5b80c80ce45d8d46b6128fbe9d07c268cc84956894/data':
+        'community.wave.seqera.io/library/blast_htslib_samtools_seqkit:07b64cc4a2210347' }"
 
     input:
     tuple val(meta) , path(input)
@@ -39,10 +39,10 @@ process BLAST_BLASTN {
     }
 
     // Convert input to fasta if needed
-    def args1 = task.ext.args1 ?: ""
     def args2 = task.ext.args2 ?: ""
-    def input_content = input.name.endsWith('bam') ? "<(samtools fasta ${args1} --threads ${task.cpus} ${input})" :
-                    (input.name ==~ /.*\.(fastq|fq)(\.gz)?$/) ? "<(seqkit fq2fa ${args2} -j ${task.cpus} ${input})" :
+    def args3 = task.ext.args3 ?: ""
+    def input_content = (input.name.endsWith('bam') || input.name.endsWith('cram')) ? "<(samtools fasta ${args2} --threads ${task.cpus} ${input})" :
+                    (input.name ==~ /.*\.(fastq|fq)(\.gz)?$/) ? "<(seqkit fq2fa ${args3} -j ${task.cpus} ${input})" :
                     fasta_name
 
 

@@ -8,7 +8,7 @@
                 },
                 "BLAST_BLASTN": {
                     "blastn": "2.17.0+",
-                    "samtools": 1.23,
+                    "samtools": "1.23.1",
                     "seqkit": "2.12.0"
                 },
                 "BLAST_MAKEBLASTDB": {
@@ -383,6 +383,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-03-26T17:42:51.191567614"
+        "timestamp": "2026-03-26T18:13:43.41510921"
     }
 }

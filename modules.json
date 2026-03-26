@@ -164,7 +164,7 @@
                 "sanger-tol": {
                     "blast/blastn": {
                         "branch": "main",
-                        "git_sha": "2e28234fb0e2970767dab28310c7eb553ad40081",
+                        "git_sha": "a4798f6a4c641ae7b4f482053b2ea5a0a87ed3f6",
                         "installed_by": ["pacbio_preprocess"]
                     },
                     "cramalign/bwamem2alignhic": {

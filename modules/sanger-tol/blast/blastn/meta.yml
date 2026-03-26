@@ -1,10 +1,11 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/sanger-tol/nf-core-modules/main/modules/meta-schema.json
 name: blast_blastn
-description: Queries a BLAST DNA database from a FASTA/FASTQ/BAM file containing query sequences.
+description: Queries a BLAST DNA database from a FASTA/FASTQ/BAM/CRAM file containing query sequences.
 keywords:
   - fasta
   - fastq
   - bam
+  - cram
   - blast
   - blastn
   - DNA sequence
@@ -28,6 +29,7 @@ tools:
       doi: 10.1093/bioinformatics/btp352
       licence: ["MIT"]
       identifier: biotools:samtools
+      args_id: "$args2"
   - seqkit:
       description: "Cross-platform and ultrafast toolkit for FASTA/Q file manipulation,
         written by Wei Shen."
@@ -36,6 +38,7 @@ tools:
       doi: "10.1371/journal.pone.0163962"
       licence: ["MIT"]
       identifier: biotools:seqkit
+      args_id: "$args3"
 
 input:
   - - meta:
@@ -45,8 +48,8 @@ input:
           e.g. [ id:'test', single_end:false ]
     - input:
         type: file
-        description: Input FASTA/FASTQ/BAM file containing queries sequences
-        pattern: "*.{fa,fasta,fa.gz,fasta.gz,bam,fastq,fq,fastq.gz,fq.gz}"
+        description: Input FASTA/FASTQ/BAM/CRAM file containing queries sequences
+        pattern: "*.{fa,fasta,fa.gz,fasta.gz,bam,cram,fastq,fq,fastq.gz,fq.gz}"
         ontologies: []
   - - meta2:
         type: map
