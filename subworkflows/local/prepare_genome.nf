@@ -1,7 +1,6 @@
 //
 // Uncompress and prepare reference genome files
 //
-include { BWAMEM2_INDEX } from '../../modules/nf-core/bwamem2/index/main'
 include { GUNZIP        } from '../../modules/nf-core/gunzip/main'
 include { UNTAR         } from '../../modules/nf-core/untar/main'
 
@@ -25,56 +24,6 @@ workflow PREPARE_GENOME {
     // MASK_UNMASK genome fasta
     MASK_UNMASK ( ch_fasta )
 
-    // Generate BWA index
-    if ( checkShortReads( params.input ) ) {
-        if ( params.bwamem2_index ) {
-            ch_bwamem = channel.fromPath ( params.bwamem2_index )
-            .combine ( ch_fasta )
-            .map { bwa, meta, _fa -> [ meta, bwa ] }
-
-            if ( params.bwamem2_index.endsWith('.tar.gz') ) {
-                ch_bwamem2_index = UNTAR ( ch_bwamem ).untar
-            } else {
-                ch_bwamem2_index = ch_bwamem
-            }
-
-        } else {
-            ch_bwamem2_index = BWAMEM2_INDEX ( MASK_UNMASK.out.unmasked ).index
-        }
-    } else {
-        ch_bwamem2_index = channel.empty()
-    }
-
-
     emit:
     fasta    = MASK_UNMASK.out.unmasked.first()    // channel: [ meta, /path/to/fasta ]
-    bwaidx   = ch_bwamem2_index.first()            // channel: [ meta, /path/to/bwamem2/index_dir/ ]
-}
-
-//
-// Check for short reads in the samplesheet
-//
-def checkShortReads(filePath, columnToCheck="datatype") {
-    // Define the target values to check
-    def valuesToCheck = ['illumina', 'hic']
-
-    // Read the CSV file
-    def csvLines = new File(filePath).readLines()
-
-    // Extract the header and find the index of the column
-    def header = csvLines[0].split(',')
-    def columnIndex = header.findIndexOf { h -> h == columnToCheck }
-
-    // Check if the column index was found
-    if (columnIndex == -1) {
-        error("Column '${columnToCheck}' not found in the CSV header.")
-    }
-
-    // Check for the values in the specified column and return true if found
-    def containsValues = csvLines[1..-1].any { line ->
-        def columns = line.split(',')
-        valuesToCheck.contains(columns[columnIndex].toLowerCase())
-    }
-
-    return containsValues
 }

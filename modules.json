@@ -18,7 +18,7 @@
                     "bwamem2/index": {
                         "branch": "master",
                         "git_sha": "5dd46a36fca68d6ad1a6b22ec47adc8c6863717d",
-                        "installed_by": ["cram_map_illumina_hic", "modules"]
+                        "installed_by": ["cram_map_illumina_hic"]
                     },
                     "crumble": {
                         "branch": "master",
