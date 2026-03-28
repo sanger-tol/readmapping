@@ -1,7 +1,7 @@
 {
     "-profile test --short_aligner minimap2": {
         "content": [
-            70,
+            69,
             {
                 "BGZIP_BEDGRAPH": {
                     "samtools": "1.22.1"
@@ -184,6 +184,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-03-26T16:38:37.928439317"
+        "timestamp": "2026-03-28T09:20:23.031730881"
     }
 }
