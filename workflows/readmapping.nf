@@ -24,7 +24,6 @@ include { INPUT_CHECK                        } from '../subworkflows/local/input
 // MODULE: Installed directly from nf-core/modules
 //
 
-include { UNTAR          } from '../modules/nf-core/untar'
 include { FASTQC         } from '../modules/nf-core/fastqc'
 include { MULTIQC        } from '../modules/nf-core/multiqc'
 
