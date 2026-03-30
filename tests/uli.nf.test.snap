@@ -8,7 +8,7 @@
                 },
                 "BLAST_BLASTN": {
                     "blastn": "2.17.0+",
-                    "samtools": 1.23,
+                    "samtools": "1.23.1",
                     "seqkit": "2.12.0"
                 },
                 "BLAST_MAKEBLASTDB": {
@@ -45,7 +45,7 @@
                 },
                 "HIFITRIMMER_FILTERBAM": {
                     "hifi_trimmer": "2.2.0",
-                    "samtools": 1.23
+                    "samtools": "1.23.1"
                 },
                 "HIFITRIMMER_PROCESSBLAST": {
                     "hifi_trimmer": "2.2.0"
@@ -176,8 +176,8 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
+            "nextflow": "25.10.2"
         },
-        "timestamp": "2026-03-25T15:44:56.700306886"
+        "timestamp": "2026-03-26T18:21:16.060866918"
     }
 }

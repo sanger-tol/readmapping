@@ -683,19 +683,19 @@
                     {
                         "id": "test_bam"
                     },
-                    "test_bam.txt.bed.gz:md5,c09824ea744da47e1190a207a24db950"
+                    "test_bam.bed.gz:md5,c09824ea744da47e1190a207a24db950"
                 ],
                 [
                     {
                         "id": "test_fasta"
                     },
-                    "test_fasta.txt.bed.gz:md5,cb45e59936b15a601ab41df4a32e30d6"
+                    "test_fasta.bed.gz:md5,cb45e59936b15a601ab41df4a32e30d6"
                 ],
                 [
                     {
                         "id": "test_fastq"
                     },
-                    "test_fastq.txt.bed.gz:md5,cb45e59936b15a601ab41df4a32e30d6"
+                    "test_fastq.bed.gz:md5,cb45e59936b15a601ab41df4a32e30d6"
                 ]
             ],
             [
@@ -761,9 +761,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.2"
         },
-        "timestamp": "2026-02-12T11:20:53.166861604"
+        "timestamp": "2026-02-27T14:11:52.790373707"
     },
     "acropora cervicornis - non-uli - pbmarkdup - trim": {
         "content": [
@@ -1181,13 +1181,13 @@
                     {
                         "id": "test_bam"
                     },
-                    "test_bam.txt.bed.gz:md5,c88ccab95c5c4b9a71a1c659af74673e"
+                    "test_bam.bed.gz:md5,c88ccab95c5c4b9a71a1c659af74673e"
                 ],
                 [
                     {
                         "id": "test_fastq"
                     },
-                    "test_fastq.txt.bed.gz:md5,c88ccab95c5c4b9a71a1c659af74673e"
+                    "test_fastq.bed.gz:md5,c88ccab95c5c4b9a71a1c659af74673e"
                 ]
             ],
             [
@@ -1219,9 +1219,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.2"
         },
-        "timestamp": "2026-02-12T13:02:47.038453182"
+        "timestamp": "2026-02-27T14:15:01.259857743"
     },
     "acropora cervicornis - uli - no pbmarkdup - no trim": {
         "content": [
