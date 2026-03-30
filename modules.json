@@ -18,7 +18,7 @@
                     "bwamem2/index": {
                         "branch": "master",
                         "git_sha": "5dd46a36fca68d6ad1a6b22ec47adc8c6863717d",
-                        "installed_by": ["cram_map_illumina_hic", "modules"]
+                        "installed_by": ["cram_map_illumina_hic"]
                     },
                     "crumble": {
                         "branch": "master",
@@ -130,11 +130,6 @@
                     "samtools/view": {
                         "branch": "master",
                         "git_sha": "5cb9a8694da0a0e550921636bb60bc8c56445fd7",
-                        "installed_by": ["modules"]
-                    },
-                    "untar": {
-                        "branch": "master",
-                        "git_sha": "00ee87ebb541af0008596400ce6d5f66d79d5408",
                         "installed_by": ["modules"]
                     }
                 }

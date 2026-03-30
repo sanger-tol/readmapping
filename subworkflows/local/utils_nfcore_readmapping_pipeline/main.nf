@@ -108,7 +108,6 @@ workflow PIPELINE_INITIALISATION {
         params.pacbio_adapter_fasta,
         params.pacbio_adapter_yaml,
         params.pacbio_uli_adapter,
-        params.bwamem2_index
     ]
 
     checkPathParamList.findAll { param -> param }.each { param ->

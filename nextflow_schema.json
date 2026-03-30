@@ -100,12 +100,6 @@
                     "pattern": "^\\S+\\.fn?a(sta)?(\\.gz)?$",
                     "fa_icon": "far fa-file-code"
                 },
-                "bwamem2_index": {
-                    "type": "string",
-                    "description": "Path to directory or tar.gz archive for pre-built BWAMEM2 index.",
-                    "format": "path",
-                    "fa_icon": "fas fa-bezier-curve"
-                },
                 "header": {
                     "type": "string",
                     "format": "path",

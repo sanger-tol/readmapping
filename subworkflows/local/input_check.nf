@@ -2,14 +2,18 @@
 // Check input samplesheet and get read channels
 //
 
+include { GUNZIP        } from '../../modules/nf-core/gunzip/main'
 include { SAMTOOLS_FLAGSTAT } from '../../modules/nf-core/samtools/flagstat/main'
+include { MASK_UNMASK   } from '../../modules/sanger-tol/mask/unmask/main'
 
 workflow INPUT_CHECK {
     take:
+    ch_fasta    // channel: [ meta, /path/to/fasta ]
     ch_samplesheet    // channel: [ val(meta), /path/to/reads ]
 
 
     main:
+
     // Prepare the samplesheet channel for SAMTOOLS_FLAGSTAT
     samplesheet_rows = ch_samplesheet
     .map { meta, file -> [meta, file, []] }
@@ -22,9 +26,21 @@ workflow INPUT_CHECK {
     .join( SAMTOOLS_FLAGSTAT.out.flagstat )
     .map { meta, datafile, _meta2, stats -> create_data_channel( meta, datafile, stats ) }
 
+    // Uncompress genome fasta file if required
+    ch_named_fasta = ch_fasta.branch { _meta, file ->
+        gz: file.name.endsWith('.gz')
+        fa: true
+    }
+    GUNZIP ( ch_named_fasta.gz )
+
+    ch_fasta_for_unmask = ch_named_fasta.fa
+        .mix( GUNZIP.out.gunzip )
+        .map { meta, fa -> [ meta + [id: fa.baseName, genome_size: fa.size()], fa] }
+    MASK_UNMASK ( ch_fasta_for_unmask )
 
     emit:
     reads                                        // channel: [ val(meta), /path/to/datafile ]
+    fasta    = MASK_UNMASK.out.unmasked.first()    // channel: [ meta, /path/to/fasta ]
 }
 
 
