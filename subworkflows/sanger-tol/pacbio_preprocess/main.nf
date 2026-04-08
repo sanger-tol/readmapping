@@ -77,7 +77,7 @@ workflow PACBIO_PREPROCESS {
             .map { meta, reads, _yaml -> [meta, reads] }
 
         // Make adapter database
-        BLAST_MAKEBLASTDB( val_adapter_fasta )
+        BLAST_MAKEBLASTDB( val_adapter_fasta, [] )
 
         //
         // ADAPTER SEARCH WITH BLASTN

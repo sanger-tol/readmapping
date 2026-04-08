@@ -17,22 +17,34 @@ workflow ALIGN_SHORT {
     // Check file types and branch
     ch_reads = reads
     .branch {
-        _meta, reads_files ->
-            fastq : reads_files.findAll { file -> file.getName().toLowerCase() =~ /.*f.*\.gz/ }
-            cram : true
+        meta, reads_files ->
+            cram : reads_files.findAll { file -> file.name.endsWith(".cram") }
+                [meta + [from: "cram"], reads_files]
+            bam: reads_files.findAll { file -> file.name.endsWith(".bam") }
+                [meta + [from: "bam"], reads_files]
+            fastx: true
+                [meta + [from: "fastx"], reads_files]
     }
 
 
     // Convert FASTQ to CRAM only if FASTQ were provided as input
-    reads_with_dummy_index = ch_reads.fastq.map { meta, file -> [ meta, file, [] ] }
-    CONVERT_CRAM ( reads_with_dummy_index, fasta, [], [] )
+    ch_reads_non_crams = ch_reads.fastx
+        .mix ( ch_reads.bam )
+        .map { meta, file -> [ meta, file, [] ] }
+    CONVERT_CRAM ( ch_reads_non_crams, fasta, [], [] )
 
+    ch_converted_crams = CONVERT_CRAM.out.cram
+        .branch { meta, cram ->
+            with_rg: meta.from == "bam"
+            without_rg: true
+        }
     SAMTOOLS_ADDREPLACERG (
-        CONVERT_CRAM.out.cram.map{ meta, cram -> [ meta, cram, [], meta.read_group ] },
+        ch_converted_crams.without_rg.map{ meta, cram -> [ meta, cram, [], meta.read_group ] },
         [[],[],[],[]]
     )
 
     ch_reads_cram = SAMTOOLS_ADDREPLACERG.out.cram
+    .mix ( ch_converted_crams.with_rg )
     .mix ( ch_reads.cram )
     .map{ meta, cram_file -> [ meta + [ reads_size: cram_file.size() ] , cram_file ] }
 

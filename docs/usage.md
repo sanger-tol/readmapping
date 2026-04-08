@@ -16,7 +16,7 @@ You will need to create a samplesheet with information about the samples you wou
 
 ### Multiple runs of the same sample
 
-The `sample` identifiers have to be the same when you have re-sequenced the same sample more than once e.g. to increase sequencing depth. The pipeline will analyse the raw reads individually and then merge them by sample and datatype, before performing any downstream analysis. Below is an example for the same sample sequenced across 3 lanesi of HiC:
+The `sample` identifiers have to be the same when you have re-sequenced the same sample more than once e.g. to increase sequencing depth. The pipeline will analyse the raw reads individually and then merge them by sample and datatype, before performing any downstream analysis. Below is an example for the same sample sequenced across 3 lanes of HiC:
 
 ```console
 specimen,run,datatype,datafile,library
@@ -44,8 +44,8 @@ specimen3,run5,pacbio,pacbio2.bam,
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `specimen` | Identifier of the specimen. Usually a BioSpecimen accession, i,e. `SAMEA7521529`.                                                                                                                                                     |
 | `run`      | Identifier of the sequencing run. Usually the accession number of the data in INSDC. For example,`ERR9248445` (hic), `ERR9284044` (pacbio).                                                                                           |
-| `datatype` | Type of sequencing data. Must be one of `hic`, `Illumina`, `pacbio`, or `ont`.                                                                                                                                                        |
-| `datafile` | Full path to read data file. Must be `bam`, `cram`, `fastq.gz` or `fq.gz` for `Illumina` and `HiC`. Must be `bam`, `fastq.gz` or `fq.gz` for `pacbio`. Must be `fastq.gz` or `fq.gz` for `ont`.                                       |
+| `datatype` | Type of sequencing data. Must be one of `hic`, `illumina`, `pacbio`, or `ont`.                                                                                                                                                        |
+| `datafile` | Full path to read data file. Must be `bam`, `cram`, `fastq.gz` or `fq.gz` for `illumina` and `hic`. Must be `bam`, `fastq.gz` or `fq.gz` for `pacbio` and `ont`.                                                                      |
 | `library`  | (Optional) The library value is a unique identifier which is assigned to read group (`@RG`) ID. If the library name is not specified, the pipeline will auto-create library name using the data filename provided in the samplesheet. |
 
 An [example samplesheet](../assets/samplesheet.csv) has been provided with the pipeline.

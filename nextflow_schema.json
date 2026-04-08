@@ -46,6 +46,13 @@
                     "description": "Set to a non-empty string to merge output alignment files by specimens. The string is used to name the output directory",
                     "fa_icon": "fas fa-layer-group"
                 },
+                "coverage_binsize": {
+                    "type": "integer",
+                    "default": 1000,
+                    "description": "Bin size (in bp) used for computing coverage depth in the output bedGraph file.",
+                    "fa_icon": "fas fa-chart-bar",
+                    "minimum": 1
+                },
                 "pacbio_adapter_fasta": {
                     "type": "string",
                     "description": "Path to FASTA file contains adapter sequences for PacBio HiFi reads.",
@@ -92,12 +99,6 @@
                     "mimetype": "text/plain",
                     "pattern": "^\\S+\\.fn?a(sta)?(\\.gz)?$",
                     "fa_icon": "far fa-file-code"
-                },
-                "bwamem2_index": {
-                    "type": "string",
-                    "description": "Path to directory or tar.gz archive for pre-built BWAMEM2 index.",
-                    "format": "path",
-                    "fa_icon": "fas fa-bezier-curve"
                 },
                 "header": {
                     "type": "string",

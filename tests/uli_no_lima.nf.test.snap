@@ -8,7 +8,7 @@
                 },
                 "BLAST_BLASTN": {
                     "blastn": "2.17.0+",
-                    "samtools": 1.23,
+                    "samtools": "1.23.1",
                     "seqkit": "2.12.0"
                 },
                 "BLAST_MAKEBLASTDB": {
@@ -45,7 +45,7 @@
                 },
                 "HIFITRIMMER_FILTERBAM": {
                     "hifi_trimmer": "2.2.0",
-                    "samtools": 1.23
+                    "samtools": "1.23.1"
                 },
                 "HIFITRIMMER_PROCESSBLAST": {
                     "hifi_trimmer": "2.2.0"
@@ -93,7 +93,7 @@
                 "read_mapping/pacbio",
                 "read_mapping/pacbio/SAMEA114784749",
                 "read_mapping/pacbio/SAMEA114784749/ERR14209104",
-                "read_mapping/pacbio/SAMEA114784749/ERR14209104/GCA_964034985.1.subset.unmasked.pacbio.SAMEA114784749.ERR14209104.minimap2.coverage.bedGraph.gz",
+                "read_mapping/pacbio/SAMEA114784749/ERR14209104/GCA_964034985.1.subset.unmasked.pacbio.SAMEA114784749.ERR14209104.minimap2.coverage.1k.bedGraph.gz",
                 "read_mapping/pacbio/SAMEA114784749/ERR14209104/GCA_964034985.1.subset.unmasked.pacbio.SAMEA114784749.ERR14209104.minimap2.cram",
                 "read_mapping/pacbio/SAMEA114784749/ERR14209104/GCA_964034985.1.subset.unmasked.pacbio.SAMEA114784749.ERR14209104.minimap2.cram.crai",
                 "read_mapping/pacbio/SAMEA114784749/ERR14209104/qc",
@@ -109,7 +109,7 @@
                 "read_mapping/pacbio/SAMEA114784749/ERR14209104/stats/GCA_964034985.1.subset.unmasked.pacbio.SAMEA114784749.ERR14209104.minimap2.idxstats",
                 "read_mapping/pacbio/SAMEA114784749/ERR14209104/stats/GCA_964034985.1.subset.unmasked.pacbio.SAMEA114784749.ERR14209104.minimap2.stats.gz",
                 "read_mapping/pacbio/SAMEA114784749/ERR14209104_test",
-                "read_mapping/pacbio/SAMEA114784749/ERR14209104_test/GCA_964034985.1.subset.unmasked.pacbio.SAMEA114784749.ERR14209104_test.minimap2.coverage.bedGraph.gz",
+                "read_mapping/pacbio/SAMEA114784749/ERR14209104_test/GCA_964034985.1.subset.unmasked.pacbio.SAMEA114784749.ERR14209104_test.minimap2.coverage.1k.bedGraph.gz",
                 "read_mapping/pacbio/SAMEA114784749/ERR14209104_test/GCA_964034985.1.subset.unmasked.pacbio.SAMEA114784749.ERR14209104_test.minimap2.cram",
                 "read_mapping/pacbio/SAMEA114784749/ERR14209104_test/GCA_964034985.1.subset.unmasked.pacbio.SAMEA114784749.ERR14209104_test.minimap2.cram.crai",
                 "read_mapping/pacbio/SAMEA114784749/ERR14209104_test/qc",
@@ -125,13 +125,13 @@
                 "read_mapping/pacbio/SAMEA114784749/ERR14209104_test/stats/GCA_964034985.1.subset.unmasked.pacbio.SAMEA114784749.ERR14209104_test.minimap2.stats.gz"
             ],
             [
-                "GCA_964034985.1.subset.unmasked.pacbio.SAMEA114784749.ERR14209104.minimap2.coverage.bedGraph.gz:md5,3bedcd1f5e5fb254a25f956a06ea7ad6",
+                "GCA_964034985.1.subset.unmasked.pacbio.SAMEA114784749.ERR14209104.minimap2.coverage.1k.bedGraph.gz:md5,91d8507d7cea42e6b85e1c9dc7cab12d",
                 "pacbio.SAMEA114784749.ERR14209104.hifitrimmer.bed.gz:md5,c88ccab95c5c4b9a71a1c659af74673e",
                 "pacbio.SAMEA114784749.ERR14209104.rmdup.pbmarkdup.log:md5,b0f9657238ccc2feb3701b156e03b837",
                 "GCA_964034985.1.subset.unmasked.pacbio.SAMEA114784749.ERR14209104.minimap2.flagstat:md5,0c28e76bdd020bb1485746de33ce9252",
                 "GCA_964034985.1.subset.unmasked.pacbio.SAMEA114784749.ERR14209104.minimap2.idxstats:md5,9d2ad4c54b1cefb73d70e576f2e89650",
                 "GCA_964034985.1.subset.unmasked.pacbio.SAMEA114784749.ERR14209104.minimap2.stats.gz:md5,c7c01173dc412efe60fa49c13a89e2ac",
-                "GCA_964034985.1.subset.unmasked.pacbio.SAMEA114784749.ERR14209104_test.minimap2.coverage.bedGraph.gz:md5,3bedcd1f5e5fb254a25f956a06ea7ad6",
+                "GCA_964034985.1.subset.unmasked.pacbio.SAMEA114784749.ERR14209104_test.minimap2.coverage.1k.bedGraph.gz:md5,91d8507d7cea42e6b85e1c9dc7cab12d",
                 "pacbio.SAMEA114784749.ERR14209104_test.hifitrimmer.bed.gz:md5,45c78d87eee0433dd4e0300c04c3bd64",
                 "GCA_964034985.1.subset.unmasked.pacbio.SAMEA114784749.ERR14209104_test.minimap2.flagstat:md5,0c28e76bdd020bb1485746de33ce9252",
                 "GCA_964034985.1.subset.unmasked.pacbio.SAMEA114784749.ERR14209104_test.minimap2.idxstats:md5,9d2ad4c54b1cefb73d70e576f2e89650",
@@ -171,8 +171,8 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.2"
         },
-        "timestamp": "2026-03-06T16:10:32.955613152"
+        "timestamp": "2026-03-26T18:23:52.662140952"
     }
 }
