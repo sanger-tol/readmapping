@@ -76,38 +76,16 @@ output:
           description: CRAM file
           pattern: "*.{cram}"
           ontologies: []
-  csi:
+  index:
     - - meta:
           type: map
           description: |
             Groovy Map containing sample information
             e.g. [ id:'test', single_end:false ]
-      - "*.csi":
+      - "*.{bai,crai,csi}":
           type: file
           description: BAM index file (optional)
-          pattern: "*.csi"
-          ontologies: []
-  crai:
-    - - meta:
-          type: map
-          description: |
-            Groovy Map containing sample information
-            e.g. [ id:'test', single_end:false ]
-      - "*.crai":
-          type: file
-          description: CRAM index file (optional)
-          pattern: "*.crai"
-          ontologies: []
-  source_txt:
-    - - meta:
-          type: map
-          description: |
-            Groovy Map containing sample information
-            e.g. [ id:'test', single_end:false ]
-      - "SOURCE.txt":
-          type: file
-          description: Source file listing merged input files
-          pattern: "SOURCE.txt"
+          pattern: "*.{bai,crai,csi}"
           ontologies: []
   versions_samtools:
     - - ${task.process}:
@@ -141,3 +119,4 @@ maintainers:
   - "@maxulysse"
   - "@FriederikeHanssen"
   - "@ramprasadn"
+  - "@matthdsm"

@@ -80,7 +80,7 @@ workflow CONVERT_STATS {
 
         // Set the BAM and BAI channels for emission
         ch_bam = CHANGE_NAME.out.file
-        ch_bai = SAMTOOLS_INDEX.out.bai.mix ( SAMTOOLS_INDEX.out.csi )
+        ch_bai = SAMTOOLS_INDEX.out.index
 
         if ( !('cram' in outfmt_options) ) {
             ch_for_stats = ch_bam.join ( ch_bai )
