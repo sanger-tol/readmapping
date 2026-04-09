@@ -32,7 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | `multiqc`      |             | 1.33        |
 | `pbmarkdup`    |             | 1.2.0       |
 | `pigz`         |             | 2.8         |
-| `samtools`     | 1.21        | 1.22.1      |
+| `samtools`     | 1.21        | 1.23.1      |
 
 ## [[1.3.4](https://github.com/sanger-tol/readmapping/releases/tag/1.3.4)] - Antipodean Opaleye (patch 4) - [2025-03-18]
 
