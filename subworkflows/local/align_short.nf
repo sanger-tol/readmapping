@@ -31,7 +31,9 @@ workflow ALIGN_SHORT {
     ch_reads_non_crams = ch_reads.fastx
         .mix ( ch_reads.bam )
         .map { meta, file -> [ meta, file, [] ] }
-    CONVERT_CRAM ( ch_reads_non_crams, fasta, [], [] )
+
+    fasta_dummy_idx = fasta.map { meta, fasta_file -> [ meta, fasta_file, [] ] }
+    CONVERT_CRAM ( ch_reads_non_crams, fasta_dummy_idx, [[],[]], [[],[]], "" )
 
     ch_converted_crams = CONVERT_CRAM.out.cram
         .branch { meta, cram ->

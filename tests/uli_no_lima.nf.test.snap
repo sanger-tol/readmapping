@@ -4,7 +4,7 @@
             50,
             {
                 "BGZIP_BEDGRAPH": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23.1"
                 },
                 "BLAST_BLASTN": {
                     "blastn": "2.17.0+",
@@ -61,25 +61,25 @@
                     "pbmarkdup": "1.2.0"
                 },
                 "SAMTOOLS_CRAM": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23.1"
                 },
                 "SAMTOOLS_FAIDX": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23.1"
                 },
                 "SAMTOOLS_FLAGSTAT": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23.1"
                 },
                 "SAMTOOLS_IDXSTATS": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23.1"
                 },
                 "SAMTOOLS_MERGE": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23.1"
                 },
                 "SAMTOOLS_SPLITHEADER": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23.1"
                 },
                 "SAMTOOLS_STATS": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23.1"
                 },
                 "Workflow": {
                     "sanger-tol/readmapping": "v1.4.0dev"
@@ -130,12 +130,12 @@
                 "pacbio.SAMEA114784749.ERR14209104.rmdup.pbmarkdup.log:md5,b0f9657238ccc2feb3701b156e03b837",
                 "GCA_964034985.1.subset.unmasked.pacbio.SAMEA114784749.ERR14209104.minimap2.flagstat:md5,0c28e76bdd020bb1485746de33ce9252",
                 "GCA_964034985.1.subset.unmasked.pacbio.SAMEA114784749.ERR14209104.minimap2.idxstats:md5,9d2ad4c54b1cefb73d70e576f2e89650",
-                "GCA_964034985.1.subset.unmasked.pacbio.SAMEA114784749.ERR14209104.minimap2.stats.gz:md5,c7c01173dc412efe60fa49c13a89e2ac",
+                "GCA_964034985.1.subset.unmasked.pacbio.SAMEA114784749.ERR14209104.minimap2.stats.gz:md5,75e54c334814fbbd3f532a694c419e49",
                 "GCA_964034985.1.subset.unmasked.pacbio.SAMEA114784749.ERR14209104_test.minimap2.coverage.1k.bedGraph.gz:md5,91d8507d7cea42e6b85e1c9dc7cab12d",
                 "pacbio.SAMEA114784749.ERR14209104_test.hifitrimmer.bed.gz:md5,45c78d87eee0433dd4e0300c04c3bd64",
                 "GCA_964034985.1.subset.unmasked.pacbio.SAMEA114784749.ERR14209104_test.minimap2.flagstat:md5,0c28e76bdd020bb1485746de33ce9252",
                 "GCA_964034985.1.subset.unmasked.pacbio.SAMEA114784749.ERR14209104_test.minimap2.idxstats:md5,9d2ad4c54b1cefb73d70e576f2e89650",
-                "GCA_964034985.1.subset.unmasked.pacbio.SAMEA114784749.ERR14209104_test.minimap2.stats.gz:md5,be0eb6ab986a0fd12770942edb060f00"
+                "GCA_964034985.1.subset.unmasked.pacbio.SAMEA114784749.ERR14209104_test.minimap2.stats.gz:md5,96ce91d5ef8c3941b865fb94422eaaf9"
             ],
             {
                 
@@ -171,8 +171,8 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
+            "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-26T18:23:52.662140952"
+        "timestamp": "2026-04-09T19:05:47.206727881"
     }
 }

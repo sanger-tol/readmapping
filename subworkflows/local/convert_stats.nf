@@ -61,8 +61,9 @@ workflow CONVERT_STATS {
     ch_cram = channel.empty()
     ch_crai = channel.empty()
 
+    fasta_dummy_idx = fasta.map { meta, fasta_file -> [ meta, fasta_file, [] ] }
     if ( "cram" in outfmt_options ) {
-        SAMTOOLS_CRAM ( ch_renamed_bams, fasta, [], [] )
+        SAMTOOLS_CRAM ( ch_renamed_bams, fasta_dummy_idx, [[],[]], [[],[]], "" )
 
         // Combine CRAM and CRAI into one channel
         ch_cram = SAMTOOLS_CRAM.out.cram
@@ -80,7 +81,7 @@ workflow CONVERT_STATS {
 
         // Set the BAM and BAI channels for emission
         ch_bam = CHANGE_NAME.out.file
-        ch_bai = SAMTOOLS_INDEX.out.bai.mix ( SAMTOOLS_INDEX.out.csi )
+        ch_bai = SAMTOOLS_INDEX.out.index
 
         if ( !('cram' in outfmt_options) ) {
             ch_for_stats = ch_bam.join ( ch_bai )
@@ -99,7 +100,7 @@ workflow CONVERT_STATS {
     BGZIP_BEDGRAPH ( BLOBTK_DEPTH.out.bed )
 
     // Calculate statistics
-    SAMTOOLS_STATS ( ch_for_stats, [[], []] )
+    SAMTOOLS_STATS ( ch_for_stats, fasta_dummy_idx )
 
     GZIP_STATS  ( SAMTOOLS_STATS.out.stats )
 
