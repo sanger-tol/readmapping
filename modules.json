@@ -77,59 +77,59 @@
                     },
                     "samtools/addreplacerg": {
                         "branch": "master",
-                        "git_sha": "59bde94edaf0d9e75e0c5d6fe9a900f2eeda0c7b",
+                        "git_sha": "156feda0cb6589cd29c04902004fa3b53bc00205",
                         "installed_by": ["modules"]
                     },
                     "samtools/bgzip": {
                         "branch": "master",
-                        "git_sha": "ddbe2bd3747d20106ef667a5c2aba63a0d9db52d",
+                        "git_sha": "156feda0cb6589cd29c04902004fa3b53bc00205",
                         "installed_by": ["modules"]
                     },
                     "samtools/faidx": {
                         "branch": "master",
-                        "git_sha": "b2e78932ef01165fd85829513eaca29eff8e640a",
+                        "git_sha": "156feda0cb6589cd29c04902004fa3b53bc00205",
                         "installed_by": ["bam_samtools_merge_markdup"]
                     },
                     "samtools/fastq": {
                         "branch": "master",
-                        "git_sha": "1d2fbdcbca677bbe8da0f9d0d2bb7c02f2cab1c9",
+                        "git_sha": "156feda0cb6589cd29c04902004fa3b53bc00205",
                         "installed_by": ["modules"]
                     },
                     "samtools/flagstat": {
                         "branch": "master",
-                        "git_sha": "1d2fbdcbca677bbe8da0f9d0d2bb7c02f2cab1c9",
+                        "git_sha": "156feda0cb6589cd29c04902004fa3b53bc00205",
                         "installed_by": ["modules"]
                     },
                     "samtools/idxstats": {
                         "branch": "master",
-                        "git_sha": "1d2fbdcbca677bbe8da0f9d0d2bb7c02f2cab1c9",
+                        "git_sha": "156feda0cb6589cd29c04902004fa3b53bc00205",
                         "installed_by": ["modules"]
                     },
                     "samtools/index": {
                         "branch": "master",
-                        "git_sha": "1d2fbdcbca677bbe8da0f9d0d2bb7c02f2cab1c9",
+                        "git_sha": "156feda0cb6589cd29c04902004fa3b53bc00205",
                         "installed_by": ["cram_map_illumina_hic", "modules"],
                         "patch": "modules/nf-core/samtools/index/samtools-index.diff"
                     },
                     "samtools/merge": {
                         "branch": "master",
-                        "git_sha": "440edf75d8782913115a7b72a88392a227f72cc1",
+                        "git_sha": "156feda0cb6589cd29c04902004fa3b53bc00205",
                         "installed_by": ["bam_samtools_merge_markdup", "modules"],
                         "patch": "modules/nf-core/samtools/merge/samtools-merge.diff"
                     },
                     "samtools/splitheader": {
                         "branch": "master",
-                        "git_sha": "b4962f11d1bf66aa3949695d7e35c1491d8c21dc",
+                        "git_sha": "156feda0cb6589cd29c04902004fa3b53bc00205",
                         "installed_by": ["cram_map_illumina_hic", "modules"]
                     },
                     "samtools/stats": {
                         "branch": "master",
-                        "git_sha": "fe93fde0845f907fc91ad7cc7d797930408824df",
+                        "git_sha": "156feda0cb6589cd29c04902004fa3b53bc00205",
                         "installed_by": ["modules"]
                     },
                     "samtools/view": {
                         "branch": "master",
-                        "git_sha": "5cb9a8694da0a0e550921636bb60bc8c56445fd7",
+                        "git_sha": "2057a0a8dbd67000d08613a556570aa7184a7c89",
                         "installed_by": ["modules"]
                     }
                 }
@@ -195,7 +195,7 @@
                     },
                     "samtools/mergedup": {
                         "branch": "main",
-                        "git_sha": "55f3dd54f274c9648207a82bf68d257945d27053",
+                        "git_sha": "729e9c8cfa83bc64c95ea6024dd5477c936e305e",
                         "installed_by": ["bam_samtools_merge_markdup"]
                     }
                 }
@@ -204,12 +204,12 @@
                 "sanger-tol": {
                     "bam_samtools_merge_markdup": {
                         "branch": "main",
-                        "git_sha": "55f3dd54f274c9648207a82bf68d257945d27053",
+                        "git_sha": "dabc24fcfd9184c4bc95c6f48745c92aeee94c24",
                         "installed_by": ["cram_map_illumina_hic", "fastx_map_long_reads"]
                     },
                     "cram_map_illumina_hic": {
                         "branch": "main",
-                        "git_sha": "55f3dd54f274c9648207a82bf68d257945d27053",
+                        "git_sha": "fcfc2688aa0f1b50ad2bf013ceebc347d44487b3",
                         "installed_by": ["subworkflows"]
                     },
                     "fastx_map_long_reads": {

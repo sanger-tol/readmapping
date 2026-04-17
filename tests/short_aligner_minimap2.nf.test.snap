@@ -4,7 +4,7 @@
             68,
             {
                 "BGZIP_BEDGRAPH": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23.1"
                 },
                 "BLAST_MAKEBLASTDB": {
                     "makeblastdb": "2.17.0+"
@@ -13,7 +13,7 @@
                     "blobtk": "0.7.1"
                 },
                 "CONVERT_CRAM": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23.1"
                 },
                 "CRAMALIGN_GENCRAMCHUNKS": {
                     "cramchunks": "1.1.0"
@@ -44,34 +44,34 @@
                     "minimap2": "2.29-r1283"
                 },
                 "SAMTOOLS_ADDREPLACERG": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23.1"
                 },
                 "SAMTOOLS_CRAM": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23.1"
                 },
                 "SAMTOOLS_FAIDX": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23.1"
                 },
                 "SAMTOOLS_FLAGSTAT": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23.1"
                 },
                 "SAMTOOLS_IDXSTATS": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23.1"
                 },
                 "SAMTOOLS_INDEX": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23.1"
                 },
                 "SAMTOOLS_MERGEDUP": {
-                    "samtools": 1.23
+                    "samtools": "1.23.1"
                 },
                 "SAMTOOLS_REHEADER_CRAM": {
                     "samtools": "1.22.1"
                 },
                 "SAMTOOLS_SPLITHEADER": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23.1"
                 },
                 "SAMTOOLS_STATS": {
-                    "samtools": "1.22.1"
+                    "samtools": "1.23.1"
                 },
                 "Workflow": {
                     "sanger-tol/readmapping": "v1.4.0dev"
@@ -125,15 +125,15 @@
                 "GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.minimap2.coverage.1k.bedGraph.gz:md5,ff7769269a41dcaf0ae5fac79146ac55",
                 "GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.minimap2.flagstat:md5,06518c1c7dc52fbb8e4e0b528cca346a",
                 "GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.minimap2.idxstats:md5,972cde7ea3591c9926b75994b7a41706",
-                "GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.minimap2.stats.gz:md5,b24403f1cccacbfa8f74c9ee7982eea5",
+                "GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.minimap2.stats.gz:md5,5f42f37fca68c05d350e8fff60cd2ab0",
                 "GCA_922984935.2.subset.unmasked.illumina.SAMEA7524438.ERR6688599.minimap2.coverage.1k.bedGraph.gz:md5,85fc279b81c45542a473379ca9727f7e",
                 "GCA_922984935.2.subset.unmasked.illumina.SAMEA7524438.ERR6688599.minimap2.flagstat:md5,6aef65e71669eb57e00a700c4b1bafe2",
                 "GCA_922984935.2.subset.unmasked.illumina.SAMEA7524438.ERR6688599.minimap2.idxstats:md5,de6f6d0db3099aab74d2ab97e3474d70",
-                "GCA_922984935.2.subset.unmasked.illumina.SAMEA7524438.ERR6688599.minimap2.stats.gz:md5,c3e21c4aa8327c9d38f07e0a0d073da2",
+                "GCA_922984935.2.subset.unmasked.illumina.SAMEA7524438.ERR6688599.minimap2.stats.gz:md5,4f9cae4dcd73893323e37ae284715906",
                 "GCA_922984935.2.subset.unmasked.illumina.SAMEA7524439.ERR6688600.minimap2.coverage.1k.bedGraph.gz:md5,0a8bfd18cdbe804150348222b99da612",
                 "GCA_922984935.2.subset.unmasked.illumina.SAMEA7524439.ERR6688600.minimap2.flagstat:md5,dccc7b15c51de2f1e64be281837c1e92",
                 "GCA_922984935.2.subset.unmasked.illumina.SAMEA7524439.ERR6688600.minimap2.idxstats:md5,8cf0310d38bdc5f2ccf5e911e8c41f60",
-                "GCA_922984935.2.subset.unmasked.illumina.SAMEA7524439.ERR6688600.minimap2.stats.gz:md5,ce1e4180387c655031fd5251944b3728"
+                "GCA_922984935.2.subset.unmasked.illumina.SAMEA7524439.ERR6688600.minimap2.stats.gz:md5,8f2a8128a2eadbde88cf658d93bbc5f5"
             ],
             {
                 
@@ -179,8 +179,8 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
+            "nextflow": "25.10.4"
         },
-        "timestamp": "2026-03-30T16:00:23.031730881"
+        "timestamp": "2026-04-09T18:58:42.862500564"
     }
 }

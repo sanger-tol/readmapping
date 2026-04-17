@@ -1,11 +1,10 @@
 Changes in component 'nf-core/samtools/merge'
-'modules/nf-core/samtools/merge/environment.yml' is unchanged
 Changes in 'samtools/merge/meta.yml':
 --- modules/nf-core/samtools/merge/meta.yml
 +++ modules/nf-core/samtools/merge/meta.yml
-@@ -98,6 +98,17 @@
-           description: CRAM index file (optional)
-           pattern: "*.crai"
+@@ -87,6 +87,17 @@
+           description: BAM index file (optional)
+           pattern: "*.{bai,crai,csi}"
            ontologies: []
 +  source_txt:
 +    - - meta:
@@ -22,36 +21,36 @@ Changes in 'samtools/merge/meta.yml':
      - - ${task.process}:
            type: string
 
+'modules/nf-core/samtools/merge/environment.yml' is unchanged
 Changes in 'samtools/merge/main.nf':
 --- modules/nf-core/samtools/merge/main.nf
 +++ modules/nf-core/samtools/merge/main.nf
-@@ -16,6 +16,7 @@
-     tuple val(meta), path("${prefix}.cram"), optional:true, emit: cram
-     tuple val(meta), path("*.csi")         , optional:true, emit: csi
-     tuple val(meta), path("*.crai")        , optional:true, emit: crai
-+    tuple val(meta), path("SOURCE.txt")    , optional:true, emit: source_txt
+@@ -15,6 +15,7 @@
+     tuple val(meta), path("${prefix}.bam"), optional: true, emit: bam
+     tuple val(meta), path("${prefix}.cram"), optional: true, emit: cram
+     tuple val(meta), path("*.{bai,crai,csi}"), optional: true, emit: index
++    tuple val(meta), path("SOURCE.txt"), optional: true, emit: source_txt
      tuple val("${task.process}"), val('samtools'), eval("samtools version | sed '1!d;s/.* //'"), topic: versions, emit: versions_samtools
  
      when:
-@@ -26,6 +27,8 @@
-     prefix   = task.ext.prefix ?: "${meta.id}"
+@@ -25,6 +26,7 @@
+     prefix = task.ext.prefix ?: "${meta.id}"
      def file_type = input_files instanceof List ? input_files[0].getExtension() : input_files.getExtension()
      def reference = fasta ? "--reference ${fasta}" : ""
-+    def source_files_args = meta.merge_source ? "printf \"%s\" \"${meta.merge_source}\" > SOURCE.txt" : ""    
-+
++    def source_files_args = meta.merge_source ? "printf \"%s\" \"${meta.merge_source}\" > SOURCE.txt" : ""
      """
      # Note: --threads value represents *additional* CPUs to allocate (total CPUs = 1 + --threads).
      samtools \\
-@@ -35,6 +38,7 @@
+@@ -34,6 +36,7 @@
          ${reference} \\
          ${prefix}.${file_type} \\
-         $input_files
+         ${input_files}
 +    ${source_files_args}
      """
  
      stub:
 
-'modules/nf-core/samtools/merge/tests/main.nf.test.snap' is unchanged
 'modules/nf-core/samtools/merge/tests/nextflow.config' is unchanged
 'modules/nf-core/samtools/merge/tests/main.nf.test' is unchanged
+'modules/nf-core/samtools/merge/tests/main.nf.test.snap' is unchanged
 ************************************************************
