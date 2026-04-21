@@ -59,7 +59,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
   - `merged_${#}/` (optional if `params.merged_output` is specified)
     - `${assembly}.${datatype}.${specimen}.merged_${#}.${aligner}.cram`: Merged aligned CRAM file
     - `${assembly}.${datatype}.${specimen}.merged_${#}.${aligner}.cram.crai`: Index for the merged alignment
-    - `${assembly}.${datatype}.${specimen}.merged_${#}.${aligner}.coverage.${window_size}.bedGraph.gz`: Read coverage for merged file. The `<window_size>` is formatted as `<N>k` when the window size for coverage calculation (params.window_size) is divisible by 1000 (for example `1k`) and `<N>bp` otherwise (for example `1500bp`).
+    - `${assembly}.${datatype}.${specimen}.merged_${#}.${aligner}.coverage.${window_size}.bedGraph.gz`: Read coverage for merged file
     - `stats/`
       - `${assembly}.${datatype}.${specimen}.merged_${#}.${aligner}.flagstat`: Number of alignments for each FLAG type
       - `${assembly}.${datatype}.${specimen}.merged_${#}.${aligner}.idxstats`: Merged alignment summary statistics
@@ -181,6 +181,8 @@ If provided using the `--header` option, all output alignments (`*.cram` or `*.b
 Read coverage of the output alignment file is calculated with [blobtk depth](https://github.com/genomehubs/blobtk/wiki/blobtk-depth) and output alongside the alignment files.
 
 **File naming:** `${assembly}.${type}.${specimen}.${run}.${aligner}.coverage.${window_size}.bedGraph.gz`
+
+The `${window_size}` is formatted as `<N>k` when the window size for coverage calculation (`params.window_size`) is divisible by 1000 (for example `1k`) and `<N>bp` otherwise (for example `1500bp`).
 
 ### Statistics
 
