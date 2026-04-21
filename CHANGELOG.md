@@ -14,8 +14,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add [hifi-trimmer](https://github.com/sanger-tol/hifi-trimmer) instead of [HifiAdapterFilt](https://github.com/sheinasim-USDA/HiFiAdapterFilt) approach to filter PacBio reads. Disable by setting `--pacbio_adapter_fasta` and `--pacbio_adapter_yaml` to `false`
 - Align data in chunks with [sanger-tol/cram_map_long_read](https://github.com/sanger-tol/nf-core-modules/blob/main/subworkflows/sanger-tol/cram_map_long_reads) and [sanger-tol/cram_map_illumina_hic](https://github.com/sanger-tol/nf-core-modules/blob/main/subworkflows/sanger-tol/cram_map_illumina_hic)
 - Add [MultiQC](https://github.com/MultiQC/MultiQC) to aggregate quality control statistics
+- Migrate local modules to [nf-core](https://nf-co.re/modules/) and [sanger-tol](https://github.com/sanger-tol/nf-core-modules/tree/main) central modules repository
 - Upgrade Samtools version to allow CRAM, archive, level 8
-- Remove read names in output CRAM files to reduce file size
+- Remove read names in output short-read CRAM files to reduce file size
 - Compress samtools stats files to reduce storage usage
 - Switched to not merging alignments by specimen by default. Merged alignment can be re-enabled with the new `--merge_output`.
 - Perform CRAM file reheadering after converting BAM to CRAM (previously done before conversion) to ensure provided headers are retained
