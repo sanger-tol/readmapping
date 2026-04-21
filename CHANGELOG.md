@@ -15,7 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Align data in chunks with [sanger-tol/cram_map_long_read](https://github.com/sanger-tol/nf-core-modules/blob/main/subworkflows/sanger-tol/cram_map_long_reads) and [sanger-tol/cram_map_illumina_hic](https://github.com/sanger-tol/nf-core-modules/blob/main/subworkflows/sanger-tol/cram_map_illumina_hic)
 - Add [MultiQC](https://github.com/MultiQC/MultiQC) to aggregate quality control statistics
 - Migrate local modules to [nf-core](https://nf-co.re/modules/) and [sanger-tol](https://github.com/sanger-tol/nf-core-modules/tree/main) central modules repository
-- Replace `sample` column in samplesheet with with `specimen` & `run`; and update output structures accordingly (see [outputs.md](/docs/output.md))
+- Replace `sample` column in samplesheet with `specimen` & `run`; and update output structures accordingly (see [outputs.md](/docs/output.md))
 - Upgrade Samtools version to allow CRAM, archive, level 8
 - Remove read names in output short-read CRAM files to reduce file size
 - Compress samtools stats files to reduce storage usage
