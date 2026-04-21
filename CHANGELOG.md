@@ -22,6 +22,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Switched to not merging alignments by specimen by default. Merged alignment can be re-enabled with the new `--merge_output`.
 - Perform CRAM file reheadering after converting BAM to CRAM (previously done before conversion) to ensure provided headers are retained
 
+### Parameters
+
+| Old parameter     | New parameter                  |
+| ----------------- | ------------------------------ |
+| `--vector_db`     |                                |
+| `--bwamem2_index` |                                |
+|                   | `--pacbio_adapter_fasta`       |
+|                   | `--pacbio_adapter_yaml`        |
+|                   | `--pacbio_uli_adapter`         |
+|                   | `--short_aligner`              |
+|                   | `--long_reads_map_chunk_size`  |
+|                   | `--short_reads_map_chunk_size` |
+|                   | `--merge_output`               |
+|                   | `--window_size`                |
+
+> **NB:** Parameter has been **updated** if both old and new parameter information is present. </br> **NB:** Parameter has been **added** if just the new parameter information is present. </br> **NB:** Parameter has been **removed** if new parameter information isn't present.
+
+### Software dependencies
+
+Note, since the pipeline is using Nextflow DSL2, each process will be run with its own [Biocontainer](https://biocontainers.pro/#/registry). This means that on occasion it is entirely possible for the pipeline to be using different versions of the same tool. However, the overall software dependency changes compared to the last release have been listed below for reference.
+
 | Dependency     | Old version | New version |
 | -------------- | ----------- | ----------- |
 | `blastn`       | 2.15        | 2.17        |
@@ -36,6 +57,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | `pbmarkdup`    |             | 1.2.0       |
 | `pigz`         |             | 2.8         |
 | `samtools`     | 1.21        | 1.23.1      |
+
+> **NB:** Dependency has been **updated** if both old and new version information is present. </br> **NB:** Dependency has been **added** if just the new version information is present. </br> **NB:** Dependency has been **removed** if version information isn't present.
 
 ## [[1.3.4](https://github.com/sanger-tol/readmapping/releases/tag/1.3.4)] - Antipodean Opaleye (patch 4) - [2025-03-18]
 
@@ -56,10 +79,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dependency version updates
 - Remove references to Anaconda channels
 
+### Software dependencies
+
+Note, since the pipeline is using Nextflow DSL2, each process will be run with its own [Biocontainer](https://biocontainers.pro/#/registry). This means that on occasion it is entirely possible for the pipeline to be using different versions of the same tool. However, the overall software dependency changes compared to the last release have been listed below for reference.
+
 | Dependency | Old version | New version |
 | ---------- | ----------- | ----------- |
 | `bbtools`  | 39.01       | 39.10       |
 | `samtools` | 1.20        | 1.21        |
+
+> **NB:** Dependency has been **updated** if both old and new version information is present. </br> **NB:** Dependency has been **added** if just the new version information is present. </br> **NB:** Dependency has been **removed** if version information isn't present.
 
 ## [[1.3.1](https://github.com/sanger-tol/readmapping/releases/tag/1.3.1)] - Antipodean Opaleye (patch 1) - [2024-09-24]
 
@@ -68,10 +97,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed bug in handling CRAM HiC inputs introduced in 1.1.0
 - Fixed bug in handling PacBio FASTQ inputs introduced in 1.3.0
 
+### Software dependencies
+
+Note, since the pipeline is using Nextflow DSL2, each process will be run with its own [Biocontainer](https://biocontainers.pro/#/registry). This means that on occasion it is entirely possible for the pipeline to be using different versions of the same tool. However, the overall software dependency changes compared to the last release have been listed below for reference.
+
 | Dependency | Old version | New version |
 | ---------- | ----------- | ----------- |
 | `bbtools`  |             | 39.01       |
 | `seqtk`    | 1.4         |             |
+
+> **NB:** Dependency has been **updated** if both old and new version information is present. </br> **NB:** Dependency has been **added** if just the new version information is present. </br> **NB:** Dependency has been **removed** if version information isn't present.
 
 ## [[1.3.0](https://github.com/sanger-tol/readmapping/releases/tag/1.3.0)] - Antipodean Opaleye - [2024-08-23]
 
