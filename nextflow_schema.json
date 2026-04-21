@@ -102,7 +102,7 @@
                 },
                 "header": {
                     "type": "string",
-                    "format": "path",
+                    "format": "file-path",
                     "description": "Optional template header file for BAM/CRAM outputs",
                     "fa_icon": "far fa-file-code"
                 }
