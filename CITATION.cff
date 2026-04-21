@@ -57,7 +57,7 @@ license: MIT
 message: If you use this software, please cite it using the metadata from this file
   and all references from CITATIONS.md .
 repository-code: https://github.com/sanger-tol/readmapping
-title: sanger-tol/readmapping v1.4.0dev
+title: sanger-tol/readmapping v2.0.0
 type: software
 url: https://pipelines.tol.sanger.ac.uk/readmapping
-version: 1.4.0dev
+version: 2.0.0
