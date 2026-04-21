@@ -42,7 +42,7 @@
 
 - [Lima](https://github.com/PacificBiosciences/barcoding)
 
-  > Pacific Biosciences. lima (SMRT Link barcoding tools). Computer software. https://github.com/PacificBiosciences/barcoding
+  > Pacific Biosciences. lima – Demultiplex Barcoded PacBio Samples. Computer software. https://lima.how/
 
 - [Minimap2](https://pubmed.ncbi.nlm.nih.gov/34623391/)
 
