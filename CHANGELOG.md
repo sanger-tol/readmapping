@@ -101,11 +101,11 @@ Note, since the pipeline is using Nextflow DSL2, each process will be run with i
 
 ### Parameters
 
-| Old parameter | New parameter  |
-| ------------- | -------------- |
-|               | '--header'     |
-|               | '--outfmt'     |
-|               | '--compression |
+| Old parameter | New parameter   |
+| ------------- | --------------- |
+|               | `--header`      |
+|               | `--outfmt`      |
+|               | `--compression` |
 
 > **NB:** Parameter has been **updated** if both old and new parameter information is present. </br> **NB:** Parameter has been **added** if just the new parameter information is present. </br> **NB:** Parameter has been **removed** if new parameter information isn't present.
 
