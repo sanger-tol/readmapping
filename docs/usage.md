@@ -179,11 +179,13 @@ For example, if the sanger-tol/readmapping pipeline is failing after multiple re
 A first step to bypass this error, you could try to increase the amount of CPUs, memory, and time for the whole pipeline. Therefor you can try to increase the resourceLimits, i.e:
 
 ```nextflow
+process {
   resourceLimits = [
     cpus: 32,
     memory: 256.GB,
     time: 24.h
   ]
+}
 ```
 
 For more information, please see the [resource configuration](https://nf-co.re/docs/running/configuration/nextflow-for-your-system) in the nf-core website.
