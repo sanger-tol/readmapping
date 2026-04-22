@@ -42,17 +42,17 @@
                     },
                     "hifitrimmer/filterbam": {
                         "branch": "master",
-                        "git_sha": "55ec1685b0e72d51b519d8bab0f805f6aacc91d9",
+                        "git_sha": "9cdbf8acf1dc8848c6e1733beb25572db7c74ba7",
                         "installed_by": ["pacbio_preprocess"]
                     },
                     "hifitrimmer/processblast": {
                         "branch": "master",
-                        "git_sha": "738aa1bca8800ea5e683271189a1d6575be46827",
+                        "git_sha": "9cdbf8acf1dc8848c6e1733beb25572db7c74ba7",
                         "installed_by": ["pacbio_preprocess"]
                     },
                     "lima": {
                         "branch": "master",
-                        "git_sha": "712db0be6a466b42a84526e545c77fb6e711b425",
+                        "git_sha": "21e4662ae927fdbc5fc04eec9bde38b0689d4954",
                         "installed_by": ["pacbio_preprocess"]
                     },
                     "minimap2/index": {
@@ -67,7 +67,7 @@
                     },
                     "pbmarkdup": {
                         "branch": "master",
-                        "git_sha": "51d33d0ed74c5342a370e6c465e6168cf1037da4",
+                        "git_sha": "21e4662ae927fdbc5fc04eec9bde38b0689d4954",
                         "installed_by": ["pacbio_preprocess"]
                     },
                     "pigz/compress": {
