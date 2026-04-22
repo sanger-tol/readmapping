@@ -170,15 +170,80 @@ Specify the path to a specific config file (this is a core Nextflow command). Se
 
 ### Resource requests
 
-Whilst the default requirements set within the pipeline will hopefully work for most people and with most input data, you may find that you want to customise the compute resources that the pipeline requests. Each step in the pipeline has a default set of requirements for number of CPUs, memory and time. For most of the pipeline steps, if the job exits with any of the error codes specified [here](https://github.com/nf-core/rnaseq/blob/4c27ef5610c87db00c3c5a3eed10b1d161abf575/conf/base.config#L18) it will automatically be resubmitted with higher resources request (2 x original, then 3 x original). If it still fails after the third attempt then the pipeline execution is stopped.
+Whilst the default requirements set within the pipeline will hopefully work for most people and with most input data, you may find that you want to customise the compute resources that the pipeline requests. Each step in the pipeline has a default set of requirements for number of CPUs, memory and time. For most pipeline steps, if a job exits with one of the retryable error codes defined in this pipeline's [`conf/base.config`](../conf/base.config), it will automatically be resubmitted with increased resource requests. In most cases these increases scale with `task.attempt`, so the exact increase depends on the process definition rather than being limited to fixed 2x and 3x bumps. The pipeline is configured with `maxRetries = 5`, meaning that after the initial submission a task can be retried up to 5 times (6 total attempts) before pipeline execution is stopped.
 
-To change the resource requests, please see the [max resources](https://nf-co.re/docs/usage/configuration#max-resources) and [tuning workflow resources](https://nf-co.re/docs/usage/configuration#tuning-workflow-resources) section of the nf-core website.
+For example, if the sanger-tol/readmapping pipeline is failing after multiple re-submissions of the BWA-MEM2 alignment process due to an exit code of `137` this often indicates that the task was killed, commonly due to an out of memory issue. Check the `.command.err` file and any scheduler logs to confirm the exact cause.
 
-### Custom Containers
+#### For beginners
 
-In some cases, you may wish to change the container or conda environment used by a pipeline steps for a particular tool. By default, nf-core pipelines use containers and software from the [biocontainers](https://biocontainers.pro/) or [bioconda](https://bioconda.github.io/) projects. However, in some cases the pipeline specified version maybe out of date.
+A first step to bypass this error, you could try to increase the amount of CPUs, memory, and time for the whole pipeline. You can do this by increasing the `resourceLimits` setting:
 
-To use a different container from the default container or conda environment specified in a pipeline, please see the [updating tool versions](https://nf-co.re/docs/usage/configuration#updating-tool-versions) section of the nf-core website.
+```nextflow
+process {
+  resourceLimits = [
+    cpus: 32,
+    memory: 256.GB,
+    time: 24.h
+  ]
+}
+```
+
+For more information, please see the [resource configuration](https://nf-co.re/docs/running/configuration/nextflow-for-your-system) on the nf-core website.
+
+#### Advanced option on process level
+
+To bypass this error you first need to check which resources are set for the Hi-C BWA-MEM2 alignment step in this pipeline. In `readmapping` this is handled by the local process `CRAMALIGN_BWAMEM2ALIGNHIC` in `modules/sanger-tol/cramalign/bwamem2alignhic/main.nf`, which is labelled [`process_high`](https://github.com/sanger-tol/readmapping/blob/main/modules/sanger-tol/cramalign/bwamem2alignhic/main.nf#L3). The actual resource settings are then overridden in [`conf/base.config`](https://github.com/sanger-tol/readmapping/blob/main/conf/base.config), where the full selector `.*:ALIGN_SHORT:.*:CRAMALIGN_BWAMEM2ALIGNHIC` sets `cpus = 16`, `time = 4.h * task.attempt`, and `memory = 50.GB` for references smaller than 2 Gb or approximately `20.GB` per Gb of reference for larger genomes, scaled by retry attempt. If that still is not sufficient for your data, you can provide a custom config file via the [`-c`](#-c) parameter to override the process-level memory setting, for example increasing it to 100 GB as shown below.
+
+```nextflow
+process {
+    withName: ".*:ALIGN_SHORT:.*:CRAMALIGN_BWAMEM2ALIGNHIC"  {
+      memory = 100.GB
+    }
+}
+```
+
+> **NB:** We specify the full process name i.e. `.*:ALIGN_SHORT:.*:CRAMALIGN_BWAMEM2ALIGNHIC` in the config file because this takes priority over the short process name (`CRAMALIGN_BWAMEM2ALIGNHIC`) and allows existing configuration using the full process name to be correctly overridden.
+>
+> If you get a warning suggesting that the process selector isn't recognised check that the process name has been specified correctly.
+
+### Custom Containers (advanced users)
+
+The [Nextflow DSL2](https://www.nextflow.io/docs/latest/dsl2.html) implementation of this pipeline uses one container per process which makes it much easier to maintain and update software dependencies. If for some reason you need to use a different version of a particular tool with the pipeline then you just need to identify the `process` name and override the Nextflow `container` definition for that process using the `withName` declaration. You can override the default container used by the pipeline by creating a custom config file and passing it as a command-line argument via `-c custom.config`.
+
+1. Check the default version used by the pipeline in the module file for [Samtools](https://github.com/sanger-tol/readmapping/blob/main/modules/nf-core/samtools/view/main.nf#L5-L8)
+2. Find the latest version of the Biocontainer available on [Quay.io](https://quay.io/repository/biocontainers/samtools?tag=latest&tab=tags)
+3. Create the custom config accordingly:
+   - For Docker:
+
+     ```nextflow
+     process {
+         withName: SAMTOOLS_VIEW {
+             container = 'quay.io/biocontainers/samtools:1.16.1--h6899075_1'
+         }
+     }
+     ```
+
+   - For Singularity:
+
+     ```nextflow
+     process {
+         withName: SAMTOOLS_VIEW {
+             container = 'https://depot.galaxyproject.org/singularity/samtools:1.16.1--h6899075_1'
+         }
+     }
+     ```
+
+   - For Conda:
+
+     ```nextflow
+     process {
+         withName: SAMTOOLS_VIEW {
+             conda = 'bioconda::samtools=1.16.1'
+         }
+     }
+     ```
+
+> **NB:** If you wish to periodically update individual tool-specific results (e.g. Samtools) generated by the pipeline then you must ensure to keep the `work/` directory otherwise the `-resume` ability of the pipeline will be compromised and it will restart from scratch.
 
 ### Custom Tool Arguments
 
