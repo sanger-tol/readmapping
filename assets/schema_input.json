@@ -30,7 +30,7 @@
                 "format": "file-path",
                 "exists": true,
                 "pattern": "^\\S+\\.(bam|cram|fa|fa.gz|fasta|fasta.gz|fq|fq.gz|fastq|fastq.gz)$",
-                "errorMessage": "Data file for reads cannot contain spaces and must be BAM/CRAM/FASTQ/FASTA"
+                "errorMessage": "Data file for reads cannot contain spaces and must be BAM/CRAM/FASTQ format. Note that FASTQ inputs should be interleaved if paired-end."
             },
             "library": {
                 "type": "string",

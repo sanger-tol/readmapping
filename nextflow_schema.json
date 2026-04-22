@@ -46,7 +46,7 @@
                     "description": "Set to a non-empty string to merge output alignment files by specimens. The string is used to name the output directory",
                     "fa_icon": "fas fa-layer-group"
                 },
-                "coverage_binsize": {
+                "window_size": {
                     "type": "integer",
                     "default": 1000,
                     "description": "Bin size (in bp) used for computing coverage depth in the output bedGraph file.",
@@ -102,7 +102,7 @@
                 },
                 "header": {
                     "type": "string",
-                    "format": "path",
+                    "format": "file-path",
                     "description": "Optional template header file for BAM/CRAM outputs",
                     "fa_icon": "far fa-file-code"
                 }

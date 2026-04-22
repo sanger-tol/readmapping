@@ -42,7 +42,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
   - `${run}/`
     - `${assembly}.${datatype}.${specimen}.${run}.${aligner}.cram`: Aligned CRAM file (or `.bam` depending on `--outfmt`)
     - `${assembly}.${datatype}.${specimen}.${run}.${aligner}.cram.crai`: Index for the alignment
-    - `${assembly}.${datatype}.${specimen}.${run}.${aligner}.coverage.bedGraph.gz`: Read coverage in bedGraph format
+    - `${assembly}.${datatype}.${specimen}.${run}.${aligner}.coverage.${window_size}.bedGraph.gz`: Read coverage in bedGraph format
     - `qc/`
       - `${datatype}.${specimen}.${run}.fastqc.html`: FASTQC report of reads
       - `${datatype}.${specimen}.${run}.fastqc.zip`: FASTQC archive of reads
@@ -59,7 +59,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
   - `merged_${#}/` (optional if `params.merged_output` is specified)
     - `${assembly}.${datatype}.${specimen}.merged_${#}.${aligner}.cram`: Merged aligned CRAM file
     - `${assembly}.${datatype}.${specimen}.merged_${#}.${aligner}.cram.crai`: Index for the merged alignment
-    - `${assembly}.${datatype}.${specimen}.merged_${#}.${aligner}.coverage.bedGraph.gz`: Read coverage for merged file
+    - `${assembly}.${datatype}.${specimen}.merged_${#}.${aligner}.coverage.${window_size}.bedGraph.gz`: Read coverage for merged file
     - `stats/`
       - `${assembly}.${datatype}.${specimen}.merged_${#}.${aligner}.flagstat`: Number of alignments for each FLAG type
       - `${assembly}.${datatype}.${specimen}.merged_${#}.${aligner}.idxstats`: Merged alignment summary statistics
@@ -131,7 +131,7 @@ Short read data from HiC and Illumina technologies is aligned with `BWAMEM2_MEM`
     - `${run}/`
       - `${assembly}.${datatype}.${specimen}.${run}.${aligner}.cram`: Aligned CRAM file (or `.bam` depending on `--outfmt`)
       - `${assembly}.${datatype}.${specimen}.${run}.${aligner}.cram.crai`: Index for the alignment
-      - `${assembly}.${datatype}.${specimen}.${run}.${aligner}.coverage.bedGraph.gz`: Read coverage in bedGraph format
+      - `${assembly}.${datatype}.${specimen}.${run}.${aligner}.coverage.${window_size}.bedGraph.gz`: Read coverage in bedGraph format
     - `merged_${#}/` - if params `merge_output`, merged output files with same structure as individual runs, without `qc` folder
 
 </details>
@@ -148,7 +148,7 @@ Reads generated using Oxford Nanopore technology are aligned with `MINIMAP2_ALIG
     - `${run}/`
       - `${assembly}.ont.${specimen}.${run}.${aligner}.cram`: Aligned CRAM file (or `.bam` depending on `--outfmt`)
       - `${assembly}.ont.${specimen}.${run}.${aligner}.cram.crai`: Index for the alignment
-      - `${assembly}.ont.${specimen}.${run}.${aligner}.coverage.bedGraph.gz`: Read coverage in bedGraph format
+      - `${assembly}.ont.${specimen}.${run}.${aligner}.coverage.${window_size}.bedGraph.gz`: Read coverage in bedGraph format
     - `merged_${#}/` - if params `merge_output`.
 
 </details>
@@ -165,7 +165,7 @@ The filtered PacBio reads are aligned with `MINIMAP2_ALIGN`. The sorted alignmen
     - `${run}/`
       - `${assembly}.pacbio.${specimen}.${run}.${aligner}.cram`: Aligned CRAM file (or `.bam` depending on `--outfmt`)
       - `${assembly}.pacbio.${specimen}.${run}.${aligner}.cram.crai`: Index for the alignment
-      - `${assembly}.pacbio.${specimen}.${run}.${aligner}.coverage.bedGraph.gz`: Read coverage in bedGraph format
+      - `${assembly}.pacbio.${specimen}.${run}.${aligner}.coverage.${window_size}.bedGraph.gz`: Read coverage in bedGraph format
     - `merged_${#}/` - if params `merge_output`.
 
 </details>
@@ -180,7 +180,9 @@ If provided using the `--header` option, all output alignments (`*.cram` or `*.b
 
 Read coverage of the output alignment file is calculated with [blobtk depth](https://github.com/genomehubs/blobtk/wiki/blobtk-depth) and output alongside the alignment files.
 
-**File naming:** `${assembly}.${type}.${specimen}.${run}.${aligner}.coverage.bedGraph.gz`
+**File naming:** `${assembly}.${type}.${specimen}.${run}.${aligner}.coverage.${window_size}.bedGraph.gz`
+
+The `${window_size}` is formatted as `<N>k` when the window size for coverage calculation (`params.window_size`) is divisible by 1000 (for example `1k`) and `<N>bp` otherwise (for example `1500bp`).
 
 ### Statistics
 

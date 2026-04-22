@@ -26,9 +26,39 @@
 
   > Bonfield JK, McCarthy SA, Durbin R. Crumble: reference free lossy compression of sequence quality values. Bioinformatics. 2019 Jan;35(2):337-339. doi: 10.1093/bioinformatics/bty608. PubMed PMID: 29992288; PMCID: PMC6330002.
 
+- [BlobTk](https://github.com/genomehubs/blobtk)
+
+- [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
+
+  > Andrews, S. (2010). FastQC: A Quality Control Tool for High Throughput Sequence Data [Online].
+
+- [GNU Awk (gawk)](https://www.gnu.org/software/gawk/)
+
+  > Free Software Foundation. GNU Awk User's Guide. https://www.gnu.org/software/gawk/manual/
+
+- [hifi-trimmer](https://github.com/sanger-tol/hifi-trimmer)
+
+  > sanger-tol. hifi-trimmer. Computer software. https://github.com/sanger-tol/hifi-trimmer
+
+- [Lima](https://github.com/PacificBiosciences/barcoding)
+
+  > Pacific Biosciences. lima – Demultiplex Barcoded PacBio Samples. Computer software. https://lima.how/
+
 - [Minimap2](https://pubmed.ncbi.nlm.nih.gov/34623391/)
 
   > Li H. New strategies to improve minimap2 alignment accuracy. Bioinformatics. 2021 Oct 8;37(23):4572–4. doi: 10.1093/bioinformatics/btab705. Epub ahead of print. PMID: 34623391; PMCID: PMC8652018.
+
+- [MultiQC](https://pubmed.ncbi.nlm.nih.gov/27312411/)
+
+  > Ewels P, Magnusson M, Lundin S, Käller M. MultiQC: summarize analysis results for multiple tools and samples in a single report. Bioinformatics. 2016 Oct 1;32(19):3047-8. doi: 10.1093/bioinformatics/btw354. Epub 2016 Jun 16. PubMed PMID: 27312411; PubMed Central PMCID: PMC5039924.
+
+- [pbmarkdup](https://github.com/PacificBiosciences/pbmarkdup)
+
+  > Pacific Biosciences. pbmarkdup. Computer software. https://github.com/PacificBiosciences/pbmarkdup
+
+- [pigz](https://zlib.net/pigz/)
+
+  > Adler M. pigz: a parallel implementation of gzip for modern multi-processor, multi-core machines. Computer software. https://zlib.net/pigz/
 
 - [Samtools](https://pubmed.ncbi.nlm.nih.gov/33590861/)
 

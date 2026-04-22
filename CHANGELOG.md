@@ -3,21 +3,45 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## v1.4.0dev - [date]
+## [[v2.0.0](https://github.com/sanger-tol/readmapping/releases/tag/2.0.0)] - Hungarian Horntail - [2026-04-22]
 
 ### Enhancements & fixes
 
 - Add [Blobtk depth](https://github.com/genomehubs/blobtk/wiki/blobtk-depth) to calculate read coverage
 - Add [FastQC](https://github.com/s-andrews/FastQC/releases/tag/v0.12.1) for quality control of reads
-- Add [hifi-trimmer](https://github.com/sanger-tol/hifi-trimmer) instead of [HifiAdapterFilt](https://github.com/sheinasim-USDA/HiFiAdapterFilt) approach to filter PacBio reads. Disable by setting `--pacbio_adapter_fasta` and `--pacbio_adapter_yaml` to `false`
 - Add [Lima](https://github.com/PacificBiosciences/barcoding) to trim ULI adapter and demultiplex ULI reads. In case the reads are already trimmed/demultiplexed, this process can be skipped by setting `--pacbio_uli_adapter` to `false`.
-- Add [MultiQC](https://github.com/MultiQC/MultiQC) to aggregate quality control statistics
 - Add [pbmarkdup](https://github.com/PacificBiosciences/pbmarkdup) to remove ULI duplicates
+- Add [hifi-trimmer](https://github.com/sanger-tol/hifi-trimmer) instead of [HifiAdapterFilt](https://github.com/sheinasim-USDA/HiFiAdapterFilt) approach to filter PacBio reads. Disable by setting `--pacbio_adapter_fasta` and `--pacbio_adapter_yaml` to `false`
 - Align data in chunks with [sanger-tol/cram_map_long_read](https://github.com/sanger-tol/nf-core-modules/blob/main/subworkflows/sanger-tol/cram_map_long_reads) and [sanger-tol/cram_map_illumina_hic](https://github.com/sanger-tol/nf-core-modules/blob/main/subworkflows/sanger-tol/cram_map_illumina_hic)
+- Add [MultiQC](https://github.com/MultiQC/MultiQC) to aggregate quality control statistics
+- Migrate local modules to [nf-core](https://nf-co.re/modules/) and [sanger-tol](https://github.com/sanger-tol/nf-core-modules/tree/main) central modules repository
+- Replace `sample` column in samplesheet with `specimen` & `run`; and update output structures accordingly (see [outputs.md](/docs/output.md))
 - Upgrade Samtools version to allow CRAM, archive, level 8
+- Remove read names in output short-read CRAM files to reduce file size
+- Compress samtools stats files to reduce storage usage
 - Switched to not merging alignments by specimen by default. Merged alignment can be re-enabled with the new `--merge_output`.
 - Perform CRAM file reheadering after converting BAM to CRAM (previously done before conversion) to ensure provided headers are retained
-- Compressed samtools stats files to reduce storage usage
+
+### Parameters
+
+| Old parameter     | New parameter                  |
+| ----------------- | ------------------------------ |
+| `--vector_db`     |                                |
+| `--bwamem2_index` |                                |
+|                   | `--pacbio_adapter_fasta`       |
+|                   | `--pacbio_adapter_yaml`        |
+|                   | `--pacbio_uli_adapter`         |
+|                   | `--short_aligner`              |
+|                   | `--long_reads_map_chunk_size`  |
+|                   | `--short_reads_map_chunk_size` |
+|                   | `--merge_output`               |
+|                   | `--window_size`                |
+
+> **NB:** Parameter has been **updated** if both old and new parameter information is present. </br> **NB:** Parameter has been **added** if just the new parameter information is present. </br> **NB:** Parameter has been **removed** if new parameter information isn't present.
+
+### Software dependencies
+
+Note, since the pipeline is using Nextflow DSL2, each process will be run with its own [Biocontainer](https://biocontainers.pro/#/registry). This means that on occasion it is entirely possible for the pipeline to be using different versions of the same tool. However, the overall software dependency changes compared to the last release have been listed below for reference.
 
 | Dependency     | Old version | New version |
 | -------------- | ----------- | ----------- |
@@ -33,6 +57,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | `pbmarkdup`    |             | 1.2.0       |
 | `pigz`         |             | 2.8         |
 | `samtools`     | 1.21        | 1.23.1      |
+
+> **NB:** Dependency has been **updated** if both old and new version information is present. </br> **NB:** Dependency has been **added** if just the new version information is present. </br> **NB:** Dependency has been **removed** if version information isn't present.
 
 ## [[1.3.4](https://github.com/sanger-tol/readmapping/releases/tag/1.3.4)] - Antipodean Opaleye (patch 4) - [2025-03-18]
 
@@ -53,10 +79,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dependency version updates
 - Remove references to Anaconda channels
 
+### Software dependencies
+
+Note, since the pipeline is using Nextflow DSL2, each process will be run with its own [Biocontainer](https://biocontainers.pro/#/registry). This means that on occasion it is entirely possible for the pipeline to be using different versions of the same tool. However, the overall software dependency changes compared to the last release have been listed below for reference.
+
 | Dependency | Old version | New version |
 | ---------- | ----------- | ----------- |
 | `bbtools`  | 39.01       | 39.10       |
 | `samtools` | 1.20        | 1.21        |
+
+> **NB:** Dependency has been **updated** if both old and new version information is present. </br> **NB:** Dependency has been **added** if just the new version information is present. </br> **NB:** Dependency has been **removed** if version information isn't present.
 
 ## [[1.3.1](https://github.com/sanger-tol/readmapping/releases/tag/1.3.1)] - Antipodean Opaleye (patch 1) - [2024-09-24]
 
@@ -65,10 +97,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed bug in handling CRAM HiC inputs introduced in 1.1.0
 - Fixed bug in handling PacBio FASTQ inputs introduced in 1.3.0
 
+### Software dependencies
+
+Note, since the pipeline is using Nextflow DSL2, each process will be run with its own [Biocontainer](https://biocontainers.pro/#/registry). This means that on occasion it is entirely possible for the pipeline to be using different versions of the same tool. However, the overall software dependency changes compared to the last release have been listed below for reference.
+
 | Dependency | Old version | New version |
 | ---------- | ----------- | ----------- |
 | `bbtools`  |             | 39.01       |
 | `seqtk`    | 1.4         |             |
+
+> **NB:** Dependency has been **updated** if both old and new version information is present. </br> **NB:** Dependency has been **added** if just the new version information is present. </br> **NB:** Dependency has been **removed** if version information isn't present.
 
 ## [[1.3.0](https://github.com/sanger-tol/readmapping/releases/tag/1.3.0)] - Antipodean Opaleye - [2024-08-23]
 
@@ -98,11 +136,11 @@ Note, since the pipeline is using Nextflow DSL2, each process will be run with i
 
 ### Parameters
 
-| Old parameter | New parameter  |
-| ------------- | -------------- |
-|               | '--header'     |
-|               | '--outfmt'     |
-|               | '--compression |
+| Old parameter | New parameter   |
+| ------------- | --------------- |
+|               | `--header`      |
+|               | `--outfmt`      |
+|               | `--compression` |
 
 > **NB:** Parameter has been **updated** if both old and new parameter information is present. </br> **NB:** Parameter has been **added** if just the new parameter information is present. </br> **NB:** Parameter has been **removed** if new parameter information isn't present.
 

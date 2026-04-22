@@ -100,7 +100,8 @@ workflow CONVERT_STATS {
     BGZIP_BEDGRAPH ( BLOBTK_DEPTH.out.bed )
 
     // Calculate statistics
-    SAMTOOLS_STATS ( ch_for_stats, fasta_dummy_idx )
+    // Samtools stats does not need fasta for embed_ref CRAM
+    SAMTOOLS_STATS ( ch_for_stats, [[],[],[]] )
 
     GZIP_STATS  ( SAMTOOLS_STATS.out.stats )
 

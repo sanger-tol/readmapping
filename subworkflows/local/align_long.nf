@@ -65,6 +65,7 @@ workflow ALIGN_LONG {
         ch_reads = ch_reads_rg
             .branch { meta, read_files ->
                 pacbio: meta.datatype == "pacbio"
+                // non pacbio includes ONT and pacbio clr
                 non_pacbio_bam: read_files.name.endsWith(".bam")
                 non_pacbio_fastx: true
             }

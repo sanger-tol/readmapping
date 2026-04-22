@@ -85,7 +85,7 @@
                     "samtools": "1.23.1"
                 },
                 "Workflow": {
-                    "sanger-tol/readmapping": "v1.4.0dev"
+                    "sanger-tol/readmapping": "v2.0.0"
                 }
             },
             [
@@ -135,12 +135,12 @@
                 "pacbio.SAMEA114784749.ERR14209104.rmdup.pbmarkdup.log:md5,02efc656c114d8029ad4e8e79e778e35",
                 "GCA_964034985.1.subset.unmasked.pacbio.SAMEA114784749.ERR14209104.minimap2.flagstat:md5,64341a288816774ffde9c3137c68d2ee",
                 "GCA_964034985.1.subset.unmasked.pacbio.SAMEA114784749.ERR14209104.minimap2.idxstats:md5,f0102d624656f7673a7567baadf2fdf9",
-                "GCA_964034985.1.subset.unmasked.pacbio.SAMEA114784749.ERR14209104.minimap2.stats.gz:md5,14e6df62455b594bb1ebe87a63ecf90e",
+                "GCA_964034985.1.subset.unmasked.pacbio.SAMEA114784749.ERR14209104.minimap2.stats.gz:md5,6282e8d3b09fbac755341751e033b705",
                 "GCA_964034985.1.subset.unmasked.pacbio.SAMEA114784749.ERR14209104_test.minimap2.coverage.1k.bedGraph.gz:md5,91d8507d7cea42e6b85e1c9dc7cab12d",
                 "pacbio.SAMEA114784749.ERR14209104_test.hifitrimmer.bed.gz:md5,45c78d87eee0433dd4e0300c04c3bd64",
                 "GCA_964034985.1.subset.unmasked.pacbio.SAMEA114784749.ERR14209104_test.minimap2.flagstat:md5,0c28e76bdd020bb1485746de33ce9252",
                 "GCA_964034985.1.subset.unmasked.pacbio.SAMEA114784749.ERR14209104_test.minimap2.idxstats:md5,9d2ad4c54b1cefb73d70e576f2e89650",
-                "GCA_964034985.1.subset.unmasked.pacbio.SAMEA114784749.ERR14209104_test.minimap2.stats.gz:md5,96ce91d5ef8c3941b865fb94422eaaf9"
+                "GCA_964034985.1.subset.unmasked.pacbio.SAMEA114784749.ERR14209104_test.minimap2.stats.gz:md5,ff5713a4193b37bbbf7d4f6281f22e12"
             ],
             {
                 
@@ -178,6 +178,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-04-09T19:05:05.579212323"
+        "timestamp": "2026-04-21T13:11:16.759779343"
     }
 }
