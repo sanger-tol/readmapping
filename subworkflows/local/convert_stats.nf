@@ -4,8 +4,8 @@
 
 
 // MODULE: local modules
-include { SAMTOOLS_REHEADER as SAMTOOLS_REHEADER_BAM    } from '../../modules/local/samtools_replaceheader'
-include { SAMTOOLS_REHEADER as SAMTOOLS_REHEADER_CRAM   } from '../../modules/local/samtools_replaceheader'
+include { SAMTOOLS_REHEADER as SAMTOOLS_REHEADER_BAM    } from '../../modules/local/samtools/reheader/samtools_replaceheader'
+include { SAMTOOLS_REHEADER as SAMTOOLS_REHEADER_CRAM   } from '../../modules/local/samtools/reheader/samtools_replaceheader'
 include { CHANGE_NAME                                   } from '../../modules/local/change_name'
 
 // MODULE: nf-core modules
