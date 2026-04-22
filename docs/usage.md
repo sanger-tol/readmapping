@@ -172,7 +172,7 @@ Specify the path to a specific config file (this is a core Nextflow command). Se
 
 Whilst the default requirements set within the pipeline will hopefully work for most people and with most input data, you may find that you want to customise the compute resources that the pipeline requests. Each step in the pipeline has a default set of requirements for number of CPUs, memory and time. For most pipeline steps, if a job exits with one of the retryable error codes defined in this pipeline's [`conf/base.config`](../conf/base.config), it will automatically be resubmitted with increased resource requests. In most cases these increases scale with `task.attempt`, so the exact increase depends on the process definition rather than being limited to fixed 2x and 3x bumps. The pipeline is configured with `maxRetries = 5`, meaning that after the initial submission a task can be retried up to 5 times (6 total attempts) before pipeline execution is stopped.
 
-For example, if the sanger-tol/readmapping pipeline is failing after multiple re-submissions of the `BWAMEM2_MEM` process due to an exit code of `137` this often indicates that the task was killed, commonly due to an out of memory issue. Check the `.command.err` file and any scheduler logs to confirm the exact cause.
+For example, if the sanger-tol/readmapping pipeline is failing after multiple re-submissions of the BWA-MEM2 alignment process due to an exit code of `137` this often indicates that the task was killed, commonly due to an out of memory issue. Check the `.command.err` file and any scheduler logs to confirm the exact cause.
 
 #### For beginners
 
