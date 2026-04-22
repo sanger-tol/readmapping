@@ -188,7 +188,7 @@ process {
 }
 ```
 
-For more information, please see the [resource configuration](https://nf-co.re/docs/running/configuration/nextflow-for-your-system) in the nf-core website.
+For more information, please see the [resource configuration](https://nf-co.re/docs/running/configuration/nextflow-for-your-system) on the nf-core website.
 
 #### Advanced option on process level
 
