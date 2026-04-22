@@ -176,7 +176,7 @@ For example, if the sanger-tol/readmapping pipeline is failing after multiple re
 
 #### For beginners
 
-A first step to bypass this error, you could try to increase the amount of CPUs, memory, and time for the whole pipeline. Therefor you can try to increase the resourceLimits, i.e:
+A first step to bypass this error, you could try to increase the amount of CPUs, memory, and time for the whole pipeline. Therefore you can try to increase the resourceLimits, i.e:
 
 ```nextflow
 process {
