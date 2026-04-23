@@ -28,7 +28,7 @@
                 },
                 "FASTXALIGN_MINIMAP2ALIGN": {
                     "minimap2": "2.30-r1287",
-                    "samtools": 1.23,
+                    "samtools": "1.23.1",
                     "slice_fasta.py": "1.0.0"
                 },
                 "FASTXALIGN_PYFASTXINDEX": {
@@ -58,7 +58,7 @@
                     "unmask": 1.0
                 },
                 "MINIMAP2_INDEX": {
-                    "minimap2": "2.29-r1283"
+                    "minimap2": "2.30-r1287",
                 },
                 "PBMARKDUP": {
                     "pbmarkdup": "1.2.0"
@@ -178,6 +178,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-04-21T13:11:16.759779343"
+        "timestamp": "2026-04-23T15:42:54.159192309"
     }
 }

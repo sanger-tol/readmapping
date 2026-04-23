@@ -4,13 +4,14 @@ nextflow_pipeline {
     script "../main.nf"
     tag "pipeline"
 
-    test("-profile test --short_aligner minimap2") {
+    test("-profile test --short_aligner minimap2 --outfmt 'bam,cram'") {
 
         when {
             params {
                 outdir = "$outputDir"
                 input = "${projectDir}/assets/samplesheet_short_reads.csv"
                 short_aligner = "minimap2"
+                outfmt = "bam,cram"
             }
         }
 

@@ -9,15 +9,16 @@ include { SAMTOOLS_REHEADER as SAMTOOLS_REHEADER_CRAM   } from '../../modules/lo
 include { CHANGE_NAME                                   } from '../../modules/local/change_name'
 
 // MODULE: nf-core modules
-include { BLOBTK_DEPTH                      } from '../../modules/nf-core/blobtk/depth/main'
-include { PIGZ_COMPRESS as GZIP_STATS       } from '../../modules/nf-core/pigz/compress/main'
-include { CRUMBLE                           } from '../../modules/nf-core/crumble/main'
-include { SAMTOOLS_VIEW as SAMTOOLS_CRAM    } from '../../modules/nf-core/samtools/view/main'
-include { SAMTOOLS_INDEX                    } from '../../modules/nf-core/samtools/index/main'
-include { SAMTOOLS_STATS                    } from '../../modules/nf-core/samtools/stats/main'
-include { SAMTOOLS_FLAGSTAT                 } from '../../modules/nf-core/samtools/flagstat/main'
-include { SAMTOOLS_IDXSTATS                 } from '../../modules/nf-core/samtools/idxstats/main'
-include { SAMTOOLS_BGZIP as BGZIP_BEDGRAPH  } from '../../modules/nf-core/samtools/bgzip/main'
+include { BLOBTK_DEPTH                              } from '../../modules/nf-core/blobtk/depth/main'
+include { CRUMBLE                                   } from '../../modules/nf-core/crumble/main'
+include { PIGZ_COMPRESS as GZIP_STATS               } from '../../modules/nf-core/pigz/compress/main'
+include { SAMTOOLS_VIEW as SAMTOOLS_CRAM            } from '../../modules/nf-core/samtools/view/main'
+include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_BAM      } from '../../modules/nf-core/samtools/index/main'
+include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_CRAM     } from '../../modules/nf-core/samtools/index/main'
+include { SAMTOOLS_STATS                            } from '../../modules/nf-core/samtools/stats/main'
+include { SAMTOOLS_FLAGSTAT                         } from '../../modules/nf-core/samtools/flagstat/main'
+include { SAMTOOLS_IDXSTATS                         } from '../../modules/nf-core/samtools/idxstats/main'
+include { SAMTOOLS_BGZIP as BGZIP_BEDGRAPH          } from '../../modules/nf-core/samtools/bgzip/main'
 
 
 workflow CONVERT_STATS {
@@ -64,10 +65,17 @@ workflow CONVERT_STATS {
     fasta_dummy_idx = fasta.map { meta, fasta_file -> [ meta, fasta_file, [] ] }
     if ( "cram" in outfmt_options ) {
         SAMTOOLS_CRAM ( ch_renamed_bams, fasta_dummy_idx, [[],[]], [[],[]], "" )
-
-        // Combine CRAM and CRAI into one channel
         ch_cram = SAMTOOLS_CRAM.out.cram
         ch_crai = SAMTOOLS_CRAM.out.crai
+
+        if ( params.header ) {
+            SAMTOOLS_REHEADER_CRAM ( SAMTOOLS_CRAM.out.cram, header.first() )
+            SAMTOOLS_INDEX_CRAM ( SAMTOOLS_REHEADER_CRAM.out.cram )
+            ch_cram = SAMTOOLS_INDEX_CRAM.out.input
+            ch_crai = SAMTOOLS_INDEX_CRAM.out.index
+        }
+
+        // Combine CRAM and CRAI into one channel
         ch_for_stats = ch_cram.join ( ch_crai )
     }
 
@@ -77,22 +85,17 @@ workflow CONVERT_STATS {
 
     if ( "bam" in outfmt_options ) {
         // Reindex BAM
-        SAMTOOLS_INDEX ( CHANGE_NAME.out.file )
+        ch_bam = params.header ? SAMTOOLS_REHEADER_BAM ( CHANGE_NAME.out.file, header.first() ).bam : CHANGE_NAME.out.file
+        SAMTOOLS_INDEX_BAM ( ch_bam )
 
         // Set the BAM and BAI channels for emission
-        ch_bam = CHANGE_NAME.out.file
-        ch_bai = SAMTOOLS_INDEX.out.index
+        ch_bam = SAMTOOLS_INDEX_BAM.out.input
+        ch_bai = SAMTOOLS_INDEX_BAM.out.index
 
         if ( !('cram' in outfmt_options) ) {
             ch_for_stats = ch_bam.join ( ch_bai )
         }
 
-    }
-
-    // Optionally insert params.header information to bams
-    if ( params.header ) {
-        ch_bam = SAMTOOLS_REHEADER_BAM ( ch_bam, header.first() ).bam
-        ch_cram = SAMTOOLS_REHEADER_CRAM ( ch_cram, header.first() ).cram
     }
 
     // Calculate read depth

@@ -4,7 +4,7 @@ nextflow_pipeline {
     script "../main.nf"
     tag "pipeline"
 
-    test("-profile test --pacbio_adapter_fasta false --pacbio_adapter_yaml false") {
+    test("-profile test --pacbio_adapter_fasta false --pacbio_adapter_yaml false --outfmt bam") {
 
         when {
             params {
@@ -12,6 +12,7 @@ nextflow_pipeline {
                 input = "${projectDir}/assets/samplesheet_long_read.csv"
                 pacbio_adapter_fasta = false
                 pacbio_adapter_yaml = false
+                outfmt = "bam"
             }
         }
 
