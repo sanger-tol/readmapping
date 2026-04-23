@@ -1,7 +1,7 @@
 {
-    "-profile test --short_aligner minimap2": {
+    "-profile test --short_aligner minimap2 --outfmt 'bam,cram'": {
         "content": [
-            68,
+            77,
             {
                 "BGZIP_BEDGRAPH": {
                     "samtools": "1.23.1"
@@ -61,7 +61,16 @@
                 "SAMTOOLS_INDEX": {
                     "samtools": "1.23.1"
                 },
+                "SAMTOOLS_INDEX_BAM": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_INDEX_CRAM": {
+                    "samtools": "1.23.1"
+                },
                 "SAMTOOLS_MERGEDUP": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_REHEADER_BAM": {
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_REHEADER_CRAM": {
@@ -85,6 +94,8 @@
                 "read_mapping/hic",
                 "read_mapping/hic/SAMEA7524440",
                 "read_mapping/hic/SAMEA7524440/ERR6688402",
+                "read_mapping/hic/SAMEA7524440/ERR6688402/GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.minimap2.bam",
+                "read_mapping/hic/SAMEA7524440/ERR6688402/GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.minimap2.bam.bai",
                 "read_mapping/hic/SAMEA7524440/ERR6688402/GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.minimap2.coverage.1k.bedGraph.gz",
                 "read_mapping/hic/SAMEA7524440/ERR6688402/GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.minimap2.cram",
                 "read_mapping/hic/SAMEA7524440/ERR6688402/GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.minimap2.cram.crai",
@@ -98,6 +109,8 @@
                 "read_mapping/illumina",
                 "read_mapping/illumina/SAMEA7524438",
                 "read_mapping/illumina/SAMEA7524438/ERR6688599",
+                "read_mapping/illumina/SAMEA7524438/ERR6688599/GCA_922984935.2.subset.unmasked.illumina.SAMEA7524438.ERR6688599.minimap2.bam",
+                "read_mapping/illumina/SAMEA7524438/ERR6688599/GCA_922984935.2.subset.unmasked.illumina.SAMEA7524438.ERR6688599.minimap2.bam.bai",
                 "read_mapping/illumina/SAMEA7524438/ERR6688599/GCA_922984935.2.subset.unmasked.illumina.SAMEA7524438.ERR6688599.minimap2.coverage.1k.bedGraph.gz",
                 "read_mapping/illumina/SAMEA7524438/ERR6688599/GCA_922984935.2.subset.unmasked.illumina.SAMEA7524438.ERR6688599.minimap2.cram",
                 "read_mapping/illumina/SAMEA7524438/ERR6688599/GCA_922984935.2.subset.unmasked.illumina.SAMEA7524438.ERR6688599.minimap2.cram.crai",
@@ -110,6 +123,8 @@
                 "read_mapping/illumina/SAMEA7524438/ERR6688599/stats/GCA_922984935.2.subset.unmasked.illumina.SAMEA7524438.ERR6688599.minimap2.stats.gz",
                 "read_mapping/illumina/SAMEA7524439",
                 "read_mapping/illumina/SAMEA7524439/ERR6688600",
+                "read_mapping/illumina/SAMEA7524439/ERR6688600/GCA_922984935.2.subset.unmasked.illumina.SAMEA7524439.ERR6688600.minimap2.bam",
+                "read_mapping/illumina/SAMEA7524439/ERR6688600/GCA_922984935.2.subset.unmasked.illumina.SAMEA7524439.ERR6688600.minimap2.bam.bai",
                 "read_mapping/illumina/SAMEA7524439/ERR6688600/GCA_922984935.2.subset.unmasked.illumina.SAMEA7524439.ERR6688600.minimap2.coverage.1k.bedGraph.gz",
                 "read_mapping/illumina/SAMEA7524439/ERR6688600/GCA_922984935.2.subset.unmasked.illumina.SAMEA7524439.ERR6688600.minimap2.cram",
                 "read_mapping/illumina/SAMEA7524439/ERR6688600/GCA_922984935.2.subset.unmasked.illumina.SAMEA7524439.ERR6688600.minimap2.cram.crai",
@@ -136,7 +151,39 @@
                 "GCA_922984935.2.subset.unmasked.illumina.SAMEA7524439.ERR6688600.minimap2.stats.gz:md5,2e0beb5debecbf82c33e03ecbab1c012"
             ],
             {
-                
+                "GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.minimap2.bam": {
+                    "maxReadLength": 151,
+                    "minReadLength": 25,
+                    "meanReadLength": 150,
+                    "maxQuality": 60,
+                    "minQuality": 0,
+                    "meanQuality": 0,
+                    "readCount": 19984,
+                    "duplicateReadCount": 24,
+                    "sorted": false
+                },
+                "GCA_922984935.2.subset.unmasked.illumina.SAMEA7524438.ERR6688599.minimap2.bam": {
+                    "maxReadLength": 151,
+                    "minReadLength": 27,
+                    "meanReadLength": 150,
+                    "maxQuality": 60,
+                    "minQuality": 0,
+                    "meanQuality": 0,
+                    "readCount": 20077,
+                    "duplicateReadCount": 19,
+                    "sorted": false
+                },
+                "GCA_922984935.2.subset.unmasked.illumina.SAMEA7524439.ERR6688600.minimap2.bam": {
+                    "maxReadLength": 151,
+                    "minReadLength": 25,
+                    "meanReadLength": 150,
+                    "maxQuality": 60,
+                    "minQuality": 0,
+                    "meanQuality": 0,
+                    "readCount": 20076,
+                    "duplicateReadCount": 20,
+                    "sorted": false
+                }
             },
             {
                 "GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.minimap2.cram": {
@@ -181,6 +228,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-04-21T13:04:48.456658928"
+        "timestamp": "2026-04-23T16:32:24.442352579"
     }
 }
