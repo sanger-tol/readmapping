@@ -1,7 +1,7 @@
 {
     "-profile test": {
         "content": [
-            167,
+            176,
             {
                 "BGZIP_BEDGRAPH": {
                     "samtools": "1.23.1"
@@ -89,6 +89,9 @@
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_INDEX": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_INDEX_CRAM": {
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_MERGE": {
@@ -383,6 +386,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-04-21T13:19:01.660359836"
+        "timestamp": "2026-04-23T15:27:29.940623409"
     }
 }
