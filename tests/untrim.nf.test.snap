@@ -37,7 +37,7 @@
                     "unmask": 1.0
                 },
                 "MINIMAP2_INDEX": {
-                    "minimap2": "2.29-r1283"
+                    "minimap2": "2.30-r1287",
                 },
                 "SAMTOOLS_FAIDX": {
                     "samtools": "1.23.1"
