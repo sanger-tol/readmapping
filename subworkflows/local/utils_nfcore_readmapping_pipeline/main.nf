@@ -8,39 +8,38 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { UTILS_NFVALIDATION_PLUGIN } from '../../nf-core/utils_nfvalidation_plugin'
-include { paramsSummaryMap          } from 'plugin/nf-validation'
-include { fromSamplesheet           } from 'plugin/nf-validation'
-include { UTILS_NEXTFLOW_PIPELINE   } from '../../nf-core/utils_nextflow_pipeline'
+include { UTILS_NFSCHEMA_PLUGIN     } from '../../nf-core/utils_nfschema_plugin'
+include { paramsSummaryMap          } from 'plugin/nf-schema'
+include { samplesheetToList         } from 'plugin/nf-schema'
+include { paramsHelp                } from 'plugin/nf-schema'
 include { completionEmail           } from '../../nf-core/utils_nfcore_pipeline'
 include { completionSummary         } from '../../nf-core/utils_nfcore_pipeline'
-include { logColours                } from '../../nf-core/utils_nfcore_pipeline'
-include { getWorkflowVersion        } from '../../nf-core/utils_nfcore_pipeline'
-include { dashedLine                } from '../../nf-core/utils_nfcore_pipeline'
 include { imNotification            } from '../../nf-core/utils_nfcore_pipeline'
 include { UTILS_NFCORE_PIPELINE     } from '../../nf-core/utils_nfcore_pipeline'
-include { workflowCitation          } from '../../nf-core/utils_nfcore_pipeline'
+include { UTILS_NEXTFLOW_PIPELINE   } from '../../nf-core/utils_nextflow_pipeline'
 
 /*
-========================================================================================
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     SUBWORKFLOW TO INITIALISE PIPELINE
-========================================================================================
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
 workflow PIPELINE_INITIALISATION {
 
     take:
     version           // boolean: Display version and exit
-    help              // boolean: Display help text
     validate_params   // boolean: Boolean whether to validate parameters against the schema at runtime
-    monochrome_logs   // boolean: Do not use coloured log outputs
+    // monochrome_logs   // boolean: Do not use coloured log outputs
     nextflow_cli_args //   array: List of positional nextflow CLI args
-    outdir
-    input
+    outdir            //  string: The output directory where the results will be saved
+    // input             //  string: Path to input samplesheet
+    help              // boolean: Display help message and exit
+    help_full         // boolean: Show the full help message
+    show_hidden       // boolean: Show hidden parameters in the help message
 
     main:
 
-    ch_versions = Channel.empty()
+    ch_versions = channel.empty()
 
     //
     // Print version and exit if required and dump pipeline parameters to JSON file
@@ -55,16 +54,39 @@ workflow PIPELINE_INITIALISATION {
     //
     // Validate parameters and generate parameter summary to stdout
     //
-    pre_help_text = sangerTolLogo(monochrome_logs)
-    post_help_text = '\n' + workflowCitation() + '\n' + dashedLine(monochrome_logs)
-    def String workflow_command = "nextflow run ${workflow.manifest.name} -profile <docker/singularity/.../institute> --input samplesheet.csv --outdir <OUTDIR>"
-    UTILS_NFVALIDATION_PLUGIN (
-        help,
-        workflow_command,
-        pre_help_text,
-        post_help_text,
+
+    before_text = """
+-\033[2m----------------------------------------------------\033[0m-
+\033[0;34m   _____                               \033[0;32m _______   \033[0;31m _\033[0m
+\033[0;34m  / ____|                              \033[0;32m|__   __|  \033[0;31m| |\033[0m
+\033[0;34m | (___   __ _ _ __   __ _  ___ _ __ \033[0m ___ \033[0;32m| |\033[0;33m ___ \033[0;31m| |\033[0m
+\033[0;34m  \\___ \\ / _` | '_ \\ / _` |/ _ \\ '__|\033[0m|___|\033[0;32m| |\033[0;33m/ _ \\\033[0;31m| |\033[0m
+\033[0;34m  ____) | (_| | | | | (_| |  __/ |        \033[0;32m| |\033[0;33m (_) \033[0;31m| |____\033[0m
+\033[0;34m |_____/ \\__,_|_| |_|\\__, |\\___|_|        \033[0;32m|_|\033[0;33m\\___/\033[0;31m|______|\033[0m
+\033[0;34m                      __/ |\033[0m
+\033[0;34m                     |___/\033[0m
+\033[0;35m  ${workflow.manifest.name} ${workflow.manifest.version}\033[0m
+-\033[2m----------------------------------------------------\033[0m-
+        """
+    after_text = """${workflow.manifest.doi ? "\n* The pipeline\n" : ""}${workflow.manifest.doi.tokenize(",").collect { doi -> "    https://doi.org/${doi.trim().replace('https://doi.org/', '')}" }.join("\n")}${workflow.manifest.doi ? "\n" : ""}
+* The nf-core framework
+    https://doi.org/10.1038/s41587-020-0439-x
+
+* Software dependencies
+    https://github.com/sanger-tol/readmapping/blob/main/CITATIONS.md
+"""
+    command = "nextflow run ${workflow.manifest.name} -profile <docker/singularity/.../institute> --input samplesheet.csv --outdir <OUTDIR>"
+
+    UTILS_NFSCHEMA_PLUGIN (
+        workflow,
         validate_params,
-        "nextflow_schema.json"
+        null,
+        help,
+        help_full,
+        show_hidden,
+        before_text,
+        after_text,
+        command
     )
 
     //
@@ -83,31 +105,31 @@ workflow PIPELINE_INITIALISATION {
     def checkPathParamList = [
         params.input,
         params.fasta,
-        params.vector_db,
-        params.bwamem2_index
+        params.pacbio_adapter_fasta,
+        params.pacbio_adapter_yaml,
+        params.pacbio_uli_adapter,
     ]
 
-    for (param in checkPathParamList) {
-        if (param) { file(param, checkIfExists: true) }
+    checkPathParamList.findAll { param -> param }.each { param ->
+        file(param, checkIfExists: true)
     }
 
     // Create channels from input paths
-    ch_fasta = params.fasta ? Channel.fromPath(params.fasta) : Channel.empty().tap { error 'Genome fasta file not specified!' }
-    ch_header = params.header ? Channel.fromPath(params.header) : Channel.empty()
+    ch_fasta = params.fasta ? channel.fromPath(params.fasta) : channel.empty().tap { error 'Genome fasta file not specified!' }
+    ch_header = params.header ? channel.fromPath(params.header) : channel.empty()
 
 
     //
-    // Create channel from input samplesheet
+    // Create channel from input file provided through params.input
     //
-    Channel
-        .fromSamplesheet("input")
-        .map { row ->
-            def meta = row[0] + [id: file(row[0].datafile).baseName]
-            return [meta, file(row[0].datafile, checkIfExists: true)]
+
+    ch_samplesheet = channel
+        .fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
+        .map { meta, datafile ->
+            def new_meta = meta + [id: file(datafile).baseName]
+            return [new_meta, datafile]
         }
-        .set { ch_samplesheet }
-    validateInputSamplesheet(ch_samplesheet)
-        .set { ch_validated_samplesheet }
+    ch_validated_samplesheet = validateInputSamplesheet(ch_samplesheet)
 
     emit:
     samplesheet = ch_validated_samplesheet
@@ -117,9 +139,9 @@ workflow PIPELINE_INITIALISATION {
 }
 
 /*
-========================================================================================
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     SUBWORKFLOW FOR PIPELINE COMPLETION
-========================================================================================
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
 workflow PIPELINE_COMPLETION {
@@ -131,10 +153,8 @@ workflow PIPELINE_COMPLETION {
     outdir          //    path: Path to output directory where results will be published
     monochrome_logs // boolean: Disable ANSI colour codes in log output
     hook_url        //  string: hook URL for notifications
-    multiqc_report  //  string: Path to MultiQC report
 
     main:
-
     summary_params = paramsSummaryMap(workflow, parameters_schema: "nextflow_schema.json")
 
     //
@@ -142,11 +162,18 @@ workflow PIPELINE_COMPLETION {
     //
     workflow.onComplete {
         if (email || email_on_fail) {
-            completionEmail(summary_params, email, email_on_fail, plaintext_email, outdir, monochrome_logs, multiqc_report.toList())
+            completionEmail(
+                summary_params,
+                email,
+                email_on_fail,
+                plaintext_email,
+                outdir,
+                monochrome_logs,
+                []
+            )
         }
 
         completionSummary(monochrome_logs)
-
         if (hook_url) {
             imNotification(summary_params, hook_url)
         }
@@ -158,9 +185,9 @@ workflow PIPELINE_COMPLETION {
 }
 
 /*
-========================================================================================
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     FUNCTIONS
-========================================================================================
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
 
@@ -177,9 +204,9 @@ def validateInputParameters() {
     if (!params.outfmt) {
         log.error "Output format not specified. Please specify '--outfmt bam', '--outfmt cram', or both separated by a comma."
     } else {
-        def outfmtOptions = params.outfmt.split(',').collect { it.trim() }
+        def outfmtOptions = params.outfmt.split(',').collect { fmt -> fmt.trim() }
         def validOutfmtOptions = ['bam', 'cram']
-        def invalidOptions = outfmtOptions.findAll { !(it in validOutfmtOptions) }
+        def invalidOptions = outfmtOptions.findAll { fmt -> !(fmt in validOutfmtOptions) }
 
         if (invalidOptions) {
             log.error "Invalid output format(s) specified: '${invalidOptions.join(', ')}'. Valid options are 'bam' or 'cram'."
@@ -197,54 +224,18 @@ def validateInputParameters() {
 // Validate channels from input samplesheet
 //
 def validateInputSamplesheet(channel) {
-    def seen = [:].withDefault { 0 }
-    def uniquePairs = new HashSet()
     def validFormats = [".fq.gz", ".fastq.gz", ".cram", ".bam"]
 
     return channel.map { sample ->
         def (meta, file) = sample
 
-        // Replace spaces with underscores in sample names
-        meta.sample = meta.sample.replace(" ", "_")
-
         // Validate that the file path is non-empty and has a valid format
-        if (!file || !validFormats.any { file.toString().endsWith(it) }) {
+        if (!file || !validFormats.any { fmt -> file.toString().endsWith(fmt) }) {
             error("Data file is required and must have a valid extension: ${file}")
         }
 
-        def pair = [meta.sample, file.toString()].toString()
-
-        if (!uniquePairs.add(pair)) {
-            error("The pair of sample name and read file must be unique: ${pair}")
-        }
-
-        seen[meta.sample] += 1
-        meta.sample = "${meta.sample}_T${seen[meta.sample]}"
-
         return [meta, file]
     }
-}
-
-//
-// Sanger-ToL logo
-//
-def sangerTolLogo(monochrome_logs=true) {
-    Map colors = logColours(monochrome_logs)
-    String.format(
-        """\n
-        ${dashedLine(monochrome_logs)}
-        ${colors.blue}   _____                               ${colors.green} _______   ${colors.red} _${colors.reset}
-        ${colors.blue}  / ____|                              ${colors.green}|__   __|  ${colors.red}| |${colors.reset}
-        ${colors.blue} | (___   __ _ _ __   __ _  ___ _ __ ${colors.reset} ___ ${colors.green}| |${colors.yellow} ___ ${colors.red}| |${colors.reset}
-        ${colors.blue}  \\___ \\ / _` | '_ \\ / _` |/ _ \\ '__|${colors.reset}|___|${colors.green}| |${colors.yellow}/ _ \\${colors.red}| |${colors.reset}
-        ${colors.blue}  ____) | (_| | | | | (_| |  __/ |        ${colors.green}| |${colors.yellow} (_) ${colors.red}| |____${colors.reset}
-        ${colors.blue} |_____/ \\__,_|_| |_|\\__, |\\___|_|        ${colors.green}|_|${colors.yellow}\\___/${colors.red}|______|${colors.reset}
-        ${colors.blue}                      __/ |${colors.reset}
-        ${colors.blue}                     |___/${colors.reset}
-        ${colors.purple}  ${workflow.manifest.name} ${getWorkflowVersion()}${colors.reset}
-        ${dashedLine(monochrome_logs)}
-        """.stripIndent()
-    )
 }
 
 
@@ -281,8 +272,9 @@ def toolBibliographyText() {
 
     return reference_text
 }
+
 def methodsDescriptionText(mqc_methods_yaml) {
-    // Convert  to a named map so can be used as with familar NXF ${workflow} variable syntax in the MultiQC YML file
+    // Convert  to a named map so can be used as with familiar NXF ${workflow} variable syntax in the MultiQC YML file
     def meta = [:]
     meta.workflow = workflow.toMap()
     meta["manifest_map"] = workflow.manifest.toMap()
@@ -293,8 +285,10 @@ def methodsDescriptionText(mqc_methods_yaml) {
         // Removing `https://doi.org/` to handle pipelines using DOIs vs DOI resolvers
         // Removing ` ` since the manifest.doi is a string and not a proper list
         def temp_doi_ref = ""
-        String[] manifest_doi = meta.manifest_map.doi.tokenize(",")
-        for (String doi_ref: manifest_doi) temp_doi_ref += "(doi: <a href=\'https://doi.org/${doi_ref.replace("https://doi.org/", "").replace(" ", "")}\'>${doi_ref.replace("https://doi.org/", "").replace(" ", "")}</a>), "
+        def manifest_doi = meta.manifest_map.doi.tokenize(",")
+        manifest_doi.each { doi_ref ->
+            temp_doi_ref += "(doi: <a href=\'https://doi.org/${doi_ref.replace("https://doi.org/", "").replace(" ", "")}\'>${doi_ref.replace("https://doi.org/", "").replace(" ", "")}</a>), "
+        }
         meta["doi_text"] = temp_doi_ref.substring(0, temp_doi_ref.length() - 2)
     } else meta["doi_text"] = ""
     meta["nodoi_text"] = meta.manifest_map.doi ? "" : "<li>If available, make sure to update the text to include the Zenodo DOI of version of the pipeline used. </li>"

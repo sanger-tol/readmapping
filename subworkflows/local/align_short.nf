@@ -2,75 +2,67 @@
 // Align short read (HiC and Illumina) data against the genome
 //
 
-include { SAMTOOLS_COLLATETOFASTQ } from '../../modules/local/samtools_collatetofastq'
-include { BWAMEM2_MEM             } from '../../modules/nf-core/bwamem2/mem/main'
-include { SAMTOOLS_MERGE          } from '../../modules/nf-core/samtools/merge/main'
-include { SAMTOOLS_SORMADUP       } from '../../modules/local/samtools_sormadup'
-
+include { CRAM_MAP_ILLUMINA_HIC as CRAM_MAP_ILLUMINA } from '../../subworkflows/sanger-tol/cram_map_illumina_hic'
+include { MERGE_OUTPUT                               } from '../../subworkflows/local/merge_output'
+include { SAMTOOLS_ADDREPLACERG                      } from '../../modules/nf-core/samtools/addreplacerg/main'
+include { SAMTOOLS_VIEW as CONVERT_CRAM              } from '../../modules/nf-core/samtools/view/main'
 
 workflow ALIGN_SHORT {
     take:
-    fasta    // channel: [ val(meta), /path/to/fasta ]
-    index    // channel: [ val(meta), /path/to/bwamem2/ ]
-    reads    // channel: [ val(meta), /path/to/datafile ]
+    fasta    // channel: [ val(meta), /path/to/fasta ] reference_tuple
+    reads    // channel: [ val(meta), /path/to/datafile ] hic_reads_path
 
 
     main:
-    ch_versions = Channel.empty()
-
     // Check file types and branch
-    reads
-    | branch {
-        meta, reads ->
-            fastq : reads.findAll { it.getName().toLowerCase() =~ /.*f.*\.gz/ }
-            cram : true
+    ch_reads = reads
+    .branch {
+        meta, reads_files ->
+            cram : reads_files.findAll { file -> file.name.endsWith(".cram") }
+                [meta + [from: "cram"], reads_files]
+            bam: reads_files.findAll { file -> file.name.endsWith(".bam") }
+                [meta + [from: "bam"], reads_files]
+            fastx: true
+                [meta + [from: "fastx"], reads_files]
     }
-    | set { ch_reads }
 
 
-    // Convert from CRAM to FASTQ only if CRAM files were provided as input
-    SAMTOOLS_COLLATETOFASTQ ( ch_reads.cram, true )
-    ch_versions = ch_versions.mix ( SAMTOOLS_COLLATETOFASTQ.out.versions.first() )
+    // Convert FASTQ to CRAM only if FASTQ were provided as input
+    ch_reads_non_crams = ch_reads.fastx
+        .mix ( ch_reads.bam )
+        .map { meta, file -> [ meta, file, [] ] }
 
+    fasta_dummy_idx = fasta.map { meta, fasta_file -> [ meta, fasta_file, [] ] }
+    CONVERT_CRAM ( ch_reads_non_crams, fasta_dummy_idx, [[],[]], [[],[]], "" )
 
-    SAMTOOLS_COLLATETOFASTQ.out.interleaved
-    | mix ( ch_reads.fastq )
-    | set { ch_reads_fastq }
+    ch_converted_crams = CONVERT_CRAM.out.cram
+        .branch { meta, cram ->
+            with_rg: meta.from == "bam"
+            without_rg: true
+        }
+    SAMTOOLS_ADDREPLACERG (
+        ch_converted_crams.without_rg.map{ meta, cram -> [ meta, cram, [], meta.read_group ] },
+        [[],[],[],[]]
+    )
 
+    ch_reads_cram = SAMTOOLS_ADDREPLACERG.out.cram
+    .mix ( ch_converted_crams.with_rg )
+    .mix ( ch_reads.cram )
+    .map{ meta, cram_file -> [ meta + [ reads_size: cram_file.size() ] , cram_file ] }
 
-    // Align Fastq to Genome and output sorted BAM
-    BWAMEM2_MEM ( ch_reads_fastq, index, fasta, true )
-    ch_versions = ch_versions.mix ( BWAMEM2_MEM.out.versions.first() )
-
-
-    // Collect all BWAMEM2 output by sample name
-    BWAMEM2_MEM.out.bam
-    | map { meta, bam -> [['id': meta.id.split('_')[0..-2].join('_'), 'datatype': meta.datatype], meta.read_count, bam] }
-    | groupTuple( by: [0] )
-    | map { meta, read_counts, bams -> [meta + [read_count: read_counts.sum()], bams] }
-    | branch {
-        meta, bams ->
-            single_bam: bams.size() == 1
-            multi_bams: true
+    ch_illumina = ch_reads_cram
+    .combine(fasta)
+    .multiMap { meta, cram, meta_, fasta_file ->
+        cram: [ meta_ + meta + [ assembly_id: meta_.id ] , cram ]
+        fasta: [ meta_ + meta + [ assembly_id: meta_.id ] , fasta_file ]
     }
-    | set { ch_bams }
 
-
-    // Merge, but only if there is more than 1 file
-    SAMTOOLS_MERGE ( ch_bams.multi_bams, [ [], [] ], [ [], [] ] )
-    ch_versions = ch_versions.mix ( SAMTOOLS_MERGE.out.versions.first() )
-
-
-    SAMTOOLS_MERGE.out.bam
-    | mix ( ch_bams.single_bam )
-    | set { ch_bam }
-
-
-    // Mark duplicates
-    SAMTOOLS_SORMADUP ( ch_bam, fasta )
-    ch_versions = ch_versions.mix ( SAMTOOLS_SORMADUP.out.versions )
+    CRAM_MAP_ILLUMINA( ch_illumina.fasta, ch_illumina.cram, params.short_aligner, params.short_reads_map_chunk_size )
+    //
+    // SUBWORKFLOW: Merge all alignment outputs by specimen
+    //
+    MERGE_OUTPUT( CRAM_MAP_ILLUMINA.out.bam )
 
     emit:
-    bam      = SAMTOOLS_SORMADUP.out.bam     // channel: [ val(meta), /path/to/bam ]
-    versions = ch_versions                   // channel: [ versions.yml ]
+    bam      = MERGE_OUTPUT.out.bam     // channel: [ val(meta), /path/to/bam ]
 }

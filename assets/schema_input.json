@@ -1,17 +1,23 @@
 {
-    "$schema": "http://json-schema.org/draft-07/schema",
-    "$id": "https://raw.githubusercontent.com/sanger-tol/readmapping/master/assets/schema_input.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://raw.githubusercontent.com/sanger-tol/readmapping/main/assets/schema_input.json",
     "title": "sanger-tol/readmapping pipeline - params.input schema",
     "description": "Schema for the file provided with params.input",
     "type": "array",
     "items": {
         "type": "object",
         "properties": {
-            "sample": {
+            "specimen": {
                 "type": "string",
                 "pattern": "^\\S+$",
-                "errorMessage": "Sample name must be provided and cannot contain spaces",
-                "meta": ["sample"]
+                "errorMessage": "specimen must be provided and cannot contain spaces",
+                "meta": ["specimen"]
+            },
+            "run": {
+                "type": "string",
+                "pattern": "^\\S+$",
+                "errorMessage": "run must be provided and cannot contain spaces",
+                "meta": ["run"]
             },
             "datatype": {
                 "type": "string",
@@ -20,10 +26,11 @@
                 "meta": ["datatype"]
             },
             "datafile": {
-                "format": "string",
-                "pattern": "^\\S+$",
-                "errorMessage": "Data file for reads cannot contain spaces and must have extension 'cram', 'bam', '.fq.gz' or '.fastq.gz'",
-                "meta": ["datafile"]
+                "type": "string",
+                "format": "file-path",
+                "exists": true,
+                "pattern": "^\\S+\\.(bam|cram|fa|fa.gz|fasta|fasta.gz|fq|fq.gz|fastq|fastq.gz)$",
+                "errorMessage": "Data file for reads cannot contain spaces and must be BAM/CRAM/FASTQ format. Note that FASTQ inputs should be interleaved if paired-end."
             },
             "library": {
                 "type": "string",
@@ -31,8 +38,16 @@
                 "errorMessage": "Library information cannot contain spaces",
                 "default": "",
                 "meta": ["library"]
+            },
+            "barcode": {
+                "type": "string",
+                "pattern": "^\\S*$",
+                "errorMessage": "Sample barcode cannot contain spaces",
+                "default": "",
+                "meta": ["barcode"]
             }
         },
-        "required": ["sample", "datatype", "datafile"]
-    }
+        "required": ["specimen", "run", "datatype", "datafile"]
+    },
+    "uniqueEntries": ["run"]
 }

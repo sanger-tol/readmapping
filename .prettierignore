@@ -10,4 +10,9 @@ testing/
 testing*
 *.pyc
 bin/
-docs/parameters.md
+.nf-test/
+ro-crate-metadata.json
+modules/nf-core/
+subworkflows/nf-core/
+modules/sanger-tol/
+subworkflows/sanger-tol/

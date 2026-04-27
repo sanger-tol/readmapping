@@ -1,0 +1,3 @@
+specimen,run,datatype,datafile,library,barcode
+SAMEA114784749,ERR14209104,pacbio,https://tolit.cog.sanger.ac.uk/test-data/Acropora_cervicornis/genomic_data/m84093_241116_151316_s2.hifi_reads.bc2028.subset.bam,uli,bc2028
+SAMEA114784749,ERR14209104_test,pacbio,https://tolit.cog.sanger.ac.uk/test-data/Acropora_cervicornis/genomic_data/m84093_241116_151316_s2.hifi_reads.bc2028.subset.bam,,bc2028

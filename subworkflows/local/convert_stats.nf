@@ -2,107 +2,118 @@
 // Convert BAM to CRAM, create index and calculate statistics
 //
 
-include { CRUMBLE                           } from '../../modules/nf-core/crumble/main'
-include { SAMTOOLS_VIEW as SAMTOOLS_CRAM    } from '../../modules/nf-core/samtools/view/main'
-include { SAMTOOLS_VIEW as SAMTOOLS_REINDEX } from '../../modules/nf-core/samtools/view/main'
-include { SAMTOOLS_STATS                    } from '../../modules/nf-core/samtools/stats/main'
-include { SAMTOOLS_FLAGSTAT                 } from '../../modules/nf-core/samtools/flagstat/main'
-include { SAMTOOLS_IDXSTATS                 } from '../../modules/nf-core/samtools/idxstats/main'
+
+// MODULE: local modules
+include { SAMTOOLS_REHEADER as SAMTOOLS_REHEADER_BAM    } from '../../modules/local/samtools/reheader/samtools_replaceheader'
+include { SAMTOOLS_REHEADER as SAMTOOLS_REHEADER_CRAM   } from '../../modules/local/samtools/reheader/samtools_replaceheader'
+include { CHANGE_NAME                                   } from '../../modules/local/change_name'
+
+// MODULE: nf-core modules
+include { BLOBTK_DEPTH                              } from '../../modules/nf-core/blobtk/depth/main'
+include { CRUMBLE                                   } from '../../modules/nf-core/crumble/main'
+include { PIGZ_COMPRESS as GZIP_STATS               } from '../../modules/nf-core/pigz/compress/main'
+include { SAMTOOLS_VIEW as SAMTOOLS_CRAM            } from '../../modules/nf-core/samtools/view/main'
+include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_BAM      } from '../../modules/nf-core/samtools/index/main'
+include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_CRAM     } from '../../modules/nf-core/samtools/index/main'
+include { SAMTOOLS_STATS                            } from '../../modules/nf-core/samtools/stats/main'
+include { SAMTOOLS_FLAGSTAT                         } from '../../modules/nf-core/samtools/flagstat/main'
+include { SAMTOOLS_IDXSTATS                         } from '../../modules/nf-core/samtools/idxstats/main'
+include { SAMTOOLS_BGZIP as BGZIP_BEDGRAPH          } from '../../modules/nf-core/samtools/bgzip/main'
 
 
 workflow CONVERT_STATS {
     take:
     bam      // channel: [ val(meta), /path/to/bam, /path/to/bai ]
     fasta    // channel: [ val(meta), /path/to/fasta ]
+    header   // channel: /path/to/header.sam
+
 
     main:
-    ch_versions = Channel.empty()
-
+    ch_versions = channel.empty()
 
     // Split outfmt parameter into a list
-    def outfmt_options = params.outfmt.split(',').collect { it.trim() }
-
+    def outfmt_options = params.outfmt.split(',').collect { fmt -> fmt.trim() }
 
     // (Optionally) Compress the quality scores of Illumina and PacBio CCS alignments
     if ( params.compression == "crumble" ) {
-        bam
-        | branch {
-            meta, bam ->
+        crumble_selector = bam
+        .branch {
+            meta, _bam ->
                 run_crumble: meta.datatype == "hic" || meta.datatype == "illumina" || meta.datatype == "pacbio"
                 no_crumble: true
         }
-        | set { ch_bams }
 
-        CRUMBLE ( ch_bams.run_crumble, [], [] )
+        CRUMBLE ( crumble_selector.run_crumble, [], [] )
         ch_versions = ch_versions.mix( CRUMBLE.out.versions )
 
-        // Convert BAM to CRAM
-        CRUMBLE.out.bam
-        | mix( ch_bams.no_crumble )
-        | map { meta, bam -> [meta, bam, []] }
-        | set { ch_bams_for_conversion }
-
+        ch_bams_for_renaming = CRUMBLE.out.bam
+        .mix( crumble_selector.no_crumble )
     } else {
-        bam
-        | map { meta, bam -> [meta, bam, []] }
-        | set { ch_bams_for_conversion }
+        ch_bams_for_renaming = bam
     }
 
+    // Change name of BAM files to final name for publishing
+    CHANGE_NAME ( ch_bams_for_renaming, fasta )
+
+    ch_renamed_bams = CHANGE_NAME.out.file
+    .map { meta, bam_file -> [meta, bam_file, []] }
 
     // (Optionally) convert to CRAM if it's specified in outfmt
-    ch_cram = Channel.empty()
-    ch_crai = Channel.empty()
+    ch_cram = channel.empty()
+    ch_crai = channel.empty()
 
-    if ("cram" in outfmt_options) {
-        SAMTOOLS_CRAM ( ch_bams_for_conversion, fasta, [] )
-        ch_versions = ch_versions.mix( SAMTOOLS_CRAM.out.versions.first() )
-
-        // Combine CRAM and CRAI into one channel
+    fasta_dummy_idx = fasta.map { meta, fasta_file -> [ meta, fasta_file, [] ] }
+    if ( "cram" in outfmt_options ) {
+        SAMTOOLS_CRAM ( ch_renamed_bams, fasta_dummy_idx, [[],[]], [[],[]], "" )
         ch_cram = SAMTOOLS_CRAM.out.cram
         ch_crai = SAMTOOLS_CRAM.out.crai
-    }
 
+        if ( params.header ) {
+            SAMTOOLS_REHEADER_CRAM ( SAMTOOLS_CRAM.out.cram, header.first() )
+            SAMTOOLS_INDEX_CRAM ( SAMTOOLS_REHEADER_CRAM.out.cram )
+            ch_cram = SAMTOOLS_INDEX_CRAM.out.input
+            ch_crai = SAMTOOLS_INDEX_CRAM.out.index
+        }
+
+        // Combine CRAM and CRAI into one channel
+        ch_for_stats = ch_cram.join ( ch_crai )
+    }
 
     // Re-generate BAM index if BAM is in outfmt
-    def ch_data_for_stats
-    if ("cram" in outfmt_options) {
-        ch_data_for_stats = ch_cram.join( ch_crai )
-    } else {
-        ch_data_for_stats = ch_bams_for_conversion
-    }
+    ch_bam = channel.empty()
+    ch_bai = channel.empty()
 
-    ch_bam = Channel.empty()
-    ch_bai = Channel.empty()
-
-    if ("bam" in outfmt_options) {
-        // Re-generate BAM index
-        SAMTOOLS_REINDEX ( ch_bams_for_conversion, fasta, [] )
-        ch_versions = ch_versions.mix( SAMTOOLS_REINDEX.out.versions.first() )
+    if ( "bam" in outfmt_options ) {
+        // Reindex BAM
+        ch_bam = params.header ? SAMTOOLS_REHEADER_BAM ( CHANGE_NAME.out.file, header.first() ).bam : CHANGE_NAME.out.file
+        SAMTOOLS_INDEX_BAM ( ch_bam )
 
         // Set the BAM and BAI channels for emission
-        ch_bam = SAMTOOLS_REINDEX.out.bam
-        ch_bai = SAMTOOLS_REINDEX.out.bai
+        ch_bam = SAMTOOLS_INDEX_BAM.out.input
+        ch_bai = SAMTOOLS_INDEX_BAM.out.index
 
-        // If using BAM for stats, use the reindexed BAM
-        if ( !("cram" in outfmt_options) ) {
-            ch_data_for_stats = ch_bam.join ( ch_bai )
+        if ( !('cram' in outfmt_options) ) {
+            ch_for_stats = ch_bam.join ( ch_bai )
         }
+
     }
 
+    // Calculate read depth
+    BLOBTK_DEPTH ( ch_renamed_bams )
+    BGZIP_BEDGRAPH ( BLOBTK_DEPTH.out.bed )
 
     // Calculate statistics
-    SAMTOOLS_STATS ( ch_data_for_stats, fasta )
-    ch_versions = ch_versions.mix( SAMTOOLS_STATS.out.versions.first() )
+    // Samtools stats does not need fasta for embed_ref CRAM
+    SAMTOOLS_STATS ( ch_for_stats, [[],[],[]] )
 
+    GZIP_STATS  ( SAMTOOLS_STATS.out.stats )
 
     // Calculate statistics based on flag values
-    SAMTOOLS_FLAGSTAT ( ch_data_for_stats )
-    ch_versions = ch_versions.mix( SAMTOOLS_FLAGSTAT.out.versions.first() )
-
+    SAMTOOLS_FLAGSTAT ( ch_for_stats )
 
     // Calculate index statistics
-    SAMTOOLS_IDXSTATS ( ch_data_for_stats )
-    ch_versions = ch_versions.mix( SAMTOOLS_IDXSTATS.out.versions.first() )
+    SAMTOOLS_IDXSTATS ( ch_for_stats )
+
 
     emit:
     bam      = ch_bam                               // channel: [ val(meta), /path/to/bam ] (optional)

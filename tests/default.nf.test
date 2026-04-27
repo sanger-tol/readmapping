@@ -1,0 +1,54 @@
+nextflow_pipeline {
+
+    name "Test readmapping pipeline with default settings"
+    script "../main.nf"
+    tag "pipeline"
+
+    test("-profile test") {
+
+        when {
+            params {
+                outdir = "$outputDir"
+            }
+        }
+
+        then {
+            // stable_name: All files + folders in ${params.outdir}/ with a stable name
+            def stable_name = getAllFilesFromDir("${params.outdir}", relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}'])
+
+            // stable_path: All files in ${params.outdir}/ with stable content
+            def stable_path = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore')
+
+            // path to hifi-trimmer summary
+            def hifitrimmer_json = getAllFilesFromDir("${params.outdir}", include: ['**/*.summary.json'], relative: true, includeDir: false)
+
+            // Path to CRAM and BAM files
+            def cram_path = getAllFilesFromDir(params.outdir, include: ['**/*.cram'], relative: true, includeDir: false)
+            def bam_path = getAllFilesFromDir(params.outdir, include: ['**/*.bam'], relative: true, includeDir: false)
+            def fasta = 'https://tolit.cog.sanger.ac.uk/test-data/Meles_meles/assembly/release/mMelMel3.1_paternal_haplotype/GCA_922984935.2.subset.fasta'
+
+            assertAll(
+                { assert workflow.success},
+                { assert snapshot(
+                    // Number of successful tasks
+                    workflow.trace.succeeded().size(),
+                    // pipeline versions.yml file for multiqc from which Nextflow version is removed because we test pipelines on multiple Nextflow versions
+                    removeNextflowVersion("$outputDir/pipeline_info/readmapping_software_mqc_versions.yml"),
+                    // All stable path name, with a relative path
+                    stable_name,
+                    stable_path,
+                    // Stable mapping files
+                    bam_path.collect{ f -> [(new File(f).getName()): bam("${params.outdir}/${f}").getStatistics()] }.collectEntries{ it }.sort(),
+                    cram_path.collect{ f -> [(new File(f).getName()): cram("${params.outdir}/${f}", fasta).getStatistics()] }.collectEntries{ it }.sort(),
+
+                     // Stable trimming json
+                    hifitrimmer_json.collect{ f ->
+                        def obj = path("${params.outdir}/${f}").json
+                        obj.remove('run_info')
+                        new File(f).getName() + ":md5," + groovy.json.JsonOutput.toJson(new TreeMap(obj)).md5().toString()
+                    }.sort()
+                ).match() }
+            )
+        }
+    }
+}

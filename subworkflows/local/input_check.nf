@@ -2,34 +2,45 @@
 // Check input samplesheet and get read channels
 //
 
+include { GUNZIP        } from '../../modules/nf-core/gunzip/main'
 include { SAMTOOLS_FLAGSTAT } from '../../modules/nf-core/samtools/flagstat/main'
+include { MASK_UNMASK   } from '../../modules/sanger-tol/mask/unmask/main'
 
 workflow INPUT_CHECK {
     take:
+    ch_fasta    // channel: [ meta, /path/to/fasta ]
     ch_samplesheet    // channel: [ val(meta), /path/to/reads ]
 
+
     main:
-    ch_versions = Channel.empty()
 
     // Prepare the samplesheet channel for SAMTOOLS_FLAGSTAT
-    ch_samplesheet
+    samplesheet_rows = ch_samplesheet
     .map { meta, file -> [meta, file, []] }
-    .set { samplesheet_rows }
 
     // Get stats from each input file
     SAMTOOLS_FLAGSTAT ( samplesheet_rows )
-    ch_versions = ch_versions.mix ( SAMTOOLS_FLAGSTAT.out.versions.first() )
 
     // Create the read channel for the rest of the pipeline
-    samplesheet_rows
-    | join( SAMTOOLS_FLAGSTAT.out.flagstat )
-    | map { meta, datafile, meta2, stats -> create_data_channel( meta, datafile, stats ) }
-    | set { reads }
+    reads = samplesheet_rows
+    .join( SAMTOOLS_FLAGSTAT.out.flagstat )
+    .map { meta, datafile, _meta2, stats -> create_data_channel( meta, datafile, stats ) }
 
+    // Uncompress genome fasta file if required
+    ch_named_fasta = ch_fasta.branch { _meta, file ->
+        gz: file.name.endsWith('.gz')
+        fa: true
+    }
+    GUNZIP ( ch_named_fasta.gz )
+
+    ch_fasta_for_unmask = ch_named_fasta.fa
+        .mix( GUNZIP.out.gunzip )
+        .map { meta, fa -> [ meta + [id: fa.baseName, genome_size: fa.size()], fa] }
+    MASK_UNMASK ( ch_fasta_for_unmask )
 
     emit:
     reads                                        // channel: [ val(meta), /path/to/datafile ]
-    versions = ch_versions                       // channel: [ versions.yml ]
+    fasta    = MASK_UNMASK.out.unmasked.first()    // channel: [ meta, /path/to/fasta ]
 }
 
 
@@ -37,26 +48,26 @@ workflow INPUT_CHECK {
 def create_data_channel ( LinkedHashMap row, datafile, stats ) {
     // create meta map
     def meta = [:]
-    meta.id         = row.sample
-    meta.datatype   = row.datatype
+    meta.specimen      = row.specimen
+    meta.run           = row.run.replaceAll("#", "_")
+    meta.id            = "${meta.specimen}.${meta.run}".replaceAll("#", "_")
+    meta.sample        = meta.specimen
+    meta.datatype      = row.datatype
+    meta.library       = row.library
+    meta.barcode       = row.barcode
 
-    if ( meta.datatype == "hic" || meta.datatype == "illumina" ) {
-        platform = "ILLUMINA"
-    } else if ( meta.datatype == "pacbio" || meta.datatype == "pacbio_clr" ) {
-        platform = "PACBIO"
-    } else if (meta.datatype == "ont") {
-        platform = "ONT"
-    }
+    def platform = (meta.datatype == "hic" || meta.datatype == "illumina") ? "ILLUMINA" :
+                (meta.datatype == "pacbio" || meta.datatype == "pacbio_clr") ? "PACBIO" :
+                (meta.datatype == "ont") ? "ONT" : "UNKNOWN"
 
     // Convert datafile to string path and then split
-    def datafile_path = datafile.toString()
-    meta.read_group  = "\'@RG\\tID:" + datafile_path.split('/')[-1].split('\\.')[0] + "\\tPL:" + platform + "\\tSM:" + meta.id.split('_')[0..-2].join('_') + "\'"
+    meta.read_group  = "\'@RG\\tID:" + datafile.simpleName + "\\tPL:" + platform + "\\tSM:" + meta.specimen + "\'"
 
     // Read the first line of the flagstat file
     // 3127898040 + 0 in total (QC-passed reads + QC-failed reads)
     // and make the sum of both integers
-    stats.withReader {
-        line = it.readLine()
+    stats.withReader { reader ->
+        def line = reader.readLine()
         def lspl = line.split()
         def read_count = lspl[0].toLong() + lspl[2].toLong()
         meta.read_count = read_count

@@ -1,0 +1,19 @@
+Changes in component 'nf-core/samtools/index'
+'modules/nf-core/samtools/index/meta.yml' is unchanged
+'modules/nf-core/samtools/index/environment.yml' is unchanged
+Changes in 'samtools/index/main.nf':
+--- modules/nf-core/samtools/index/main.nf
++++ modules/nf-core/samtools/index/main.nf
+@@ -11,6 +11,7 @@
+     tuple val(meta), path(input)
+ 
+     output:
++    tuple val(meta), path("${input}"), emit: input
+     tuple val(meta), path("*.{bai,csi,crai}"), emit: index
+     tuple val("${task.process}"), val('samtools'), eval("samtools version | sed '1!d;s/.* //'"), emit: versions_samtools, topic: versions
+ 
+
+'modules/nf-core/samtools/index/tests/main.nf.test' is unchanged
+'modules/nf-core/samtools/index/tests/main.nf.test.snap' is unchanged
+'modules/nf-core/samtools/index/tests/csi.nextflow.config' is unchanged
+************************************************************

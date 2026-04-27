@@ -1,0 +1,233 @@
+{
+    "-profile test --short_aligner minimap2 --outfmt 'bam,cram'": {
+        "content": [
+            77,
+            {
+                "BGZIP_BEDGRAPH": {
+                    "samtools": "1.23.1"
+                },
+                "BLAST_MAKEBLASTDB": {
+                    "makeblastdb": "2.17.0+"
+                },
+                "BLOBTK_DEPTH": {
+                    "blobtk": "0.7.1"
+                },
+                "CONVERT_CRAM": {
+                    "samtools": "1.23.1"
+                },
+                "CRAMALIGN_GENCRAMCHUNKS": {
+                    "cramchunks": "1.1.0"
+                },
+                "CRAMALIGN_MINIMAP2ALIGNHIC": {
+                    "filter_five_end.pl": 1.0,
+                    "gawk": "5.3.1",
+                    "minimap2": "2.30-r1287",
+                    "samtools": "1.22.1"
+                },
+                "CRUMBLE": {
+                    "crumble": "0.9.1"
+                },
+                "FASTQC": {
+                    "fastqc": "0.12.1"
+                },
+                "GUNZIP": {
+                    "gunzip": 1.13
+                },
+                "GZIP_STATS": {
+                    "pigz": 2.8
+                },
+                "MASK_UNMASK": {
+                    "gawk": "5.3.1",
+                    "unmask": 1.0
+                },
+                "MINIMAP2_INDEX": {
+                    "minimap2": "2.30-r1287",
+                },
+                "SAMTOOLS_ADDREPLACERG": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_CRAM": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_FAIDX": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_FLAGSTAT": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_IDXSTATS": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_INDEX": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_INDEX_BAM": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_INDEX_CRAM": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_MERGEDUP": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_REHEADER_BAM": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_REHEADER_CRAM": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_SPLITHEADER": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_STATS": {
+                    "samtools": "1.23.1"
+                },
+                "Workflow": {
+                    "sanger-tol/readmapping": "v2.0.0"
+                }
+            },
+            [
+                "multiqc_report.html",
+                "pipeline_info",
+                "pipeline_info/readmapping_software_mqc_versions.yml",
+                "read_mapping",
+                "read_mapping/hic",
+                "read_mapping/hic/SAMEA7524440",
+                "read_mapping/hic/SAMEA7524440/ERR6688402",
+                "read_mapping/hic/SAMEA7524440/ERR6688402/GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.minimap2.bam",
+                "read_mapping/hic/SAMEA7524440/ERR6688402/GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.minimap2.bam.bai",
+                "read_mapping/hic/SAMEA7524440/ERR6688402/GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.minimap2.coverage.1k.bedGraph.gz",
+                "read_mapping/hic/SAMEA7524440/ERR6688402/GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.minimap2.cram",
+                "read_mapping/hic/SAMEA7524440/ERR6688402/GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.minimap2.cram.crai",
+                "read_mapping/hic/SAMEA7524440/ERR6688402/qc",
+                "read_mapping/hic/SAMEA7524440/ERR6688402/qc/hic.SAMEA7524440.ERR6688402.fastqc.html",
+                "read_mapping/hic/SAMEA7524440/ERR6688402/qc/hic.SAMEA7524440.ERR6688402.fastqc.zip",
+                "read_mapping/hic/SAMEA7524440/ERR6688402/stats",
+                "read_mapping/hic/SAMEA7524440/ERR6688402/stats/GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.minimap2.flagstat",
+                "read_mapping/hic/SAMEA7524440/ERR6688402/stats/GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.minimap2.idxstats",
+                "read_mapping/hic/SAMEA7524440/ERR6688402/stats/GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.minimap2.stats.gz",
+                "read_mapping/illumina",
+                "read_mapping/illumina/SAMEA7524438",
+                "read_mapping/illumina/SAMEA7524438/ERR6688599",
+                "read_mapping/illumina/SAMEA7524438/ERR6688599/GCA_922984935.2.subset.unmasked.illumina.SAMEA7524438.ERR6688599.minimap2.bam",
+                "read_mapping/illumina/SAMEA7524438/ERR6688599/GCA_922984935.2.subset.unmasked.illumina.SAMEA7524438.ERR6688599.minimap2.bam.bai",
+                "read_mapping/illumina/SAMEA7524438/ERR6688599/GCA_922984935.2.subset.unmasked.illumina.SAMEA7524438.ERR6688599.minimap2.coverage.1k.bedGraph.gz",
+                "read_mapping/illumina/SAMEA7524438/ERR6688599/GCA_922984935.2.subset.unmasked.illumina.SAMEA7524438.ERR6688599.minimap2.cram",
+                "read_mapping/illumina/SAMEA7524438/ERR6688599/GCA_922984935.2.subset.unmasked.illumina.SAMEA7524438.ERR6688599.minimap2.cram.crai",
+                "read_mapping/illumina/SAMEA7524438/ERR6688599/qc",
+                "read_mapping/illumina/SAMEA7524438/ERR6688599/qc/illumina.SAMEA7524438.ERR6688599.fastqc.html",
+                "read_mapping/illumina/SAMEA7524438/ERR6688599/qc/illumina.SAMEA7524438.ERR6688599.fastqc.zip",
+                "read_mapping/illumina/SAMEA7524438/ERR6688599/stats",
+                "read_mapping/illumina/SAMEA7524438/ERR6688599/stats/GCA_922984935.2.subset.unmasked.illumina.SAMEA7524438.ERR6688599.minimap2.flagstat",
+                "read_mapping/illumina/SAMEA7524438/ERR6688599/stats/GCA_922984935.2.subset.unmasked.illumina.SAMEA7524438.ERR6688599.minimap2.idxstats",
+                "read_mapping/illumina/SAMEA7524438/ERR6688599/stats/GCA_922984935.2.subset.unmasked.illumina.SAMEA7524438.ERR6688599.minimap2.stats.gz",
+                "read_mapping/illumina/SAMEA7524439",
+                "read_mapping/illumina/SAMEA7524439/ERR6688600",
+                "read_mapping/illumina/SAMEA7524439/ERR6688600/GCA_922984935.2.subset.unmasked.illumina.SAMEA7524439.ERR6688600.minimap2.bam",
+                "read_mapping/illumina/SAMEA7524439/ERR6688600/GCA_922984935.2.subset.unmasked.illumina.SAMEA7524439.ERR6688600.minimap2.bam.bai",
+                "read_mapping/illumina/SAMEA7524439/ERR6688600/GCA_922984935.2.subset.unmasked.illumina.SAMEA7524439.ERR6688600.minimap2.coverage.1k.bedGraph.gz",
+                "read_mapping/illumina/SAMEA7524439/ERR6688600/GCA_922984935.2.subset.unmasked.illumina.SAMEA7524439.ERR6688600.minimap2.cram",
+                "read_mapping/illumina/SAMEA7524439/ERR6688600/GCA_922984935.2.subset.unmasked.illumina.SAMEA7524439.ERR6688600.minimap2.cram.crai",
+                "read_mapping/illumina/SAMEA7524439/ERR6688600/qc",
+                "read_mapping/illumina/SAMEA7524439/ERR6688600/qc/illumina.SAMEA7524439.ERR6688600.fastqc.html",
+                "read_mapping/illumina/SAMEA7524439/ERR6688600/qc/illumina.SAMEA7524439.ERR6688600.fastqc.zip",
+                "read_mapping/illumina/SAMEA7524439/ERR6688600/stats",
+                "read_mapping/illumina/SAMEA7524439/ERR6688600/stats/GCA_922984935.2.subset.unmasked.illumina.SAMEA7524439.ERR6688600.minimap2.flagstat",
+                "read_mapping/illumina/SAMEA7524439/ERR6688600/stats/GCA_922984935.2.subset.unmasked.illumina.SAMEA7524439.ERR6688600.minimap2.idxstats",
+                "read_mapping/illumina/SAMEA7524439/ERR6688600/stats/GCA_922984935.2.subset.unmasked.illumina.SAMEA7524439.ERR6688600.minimap2.stats.gz"
+            ],
+            [
+                "GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.minimap2.coverage.1k.bedGraph.gz:md5,ff7769269a41dcaf0ae5fac79146ac55",
+                "GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.minimap2.flagstat:md5,06518c1c7dc52fbb8e4e0b528cca346a",
+                "GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.minimap2.idxstats:md5,972cde7ea3591c9926b75994b7a41706",
+                "GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.minimap2.stats.gz:md5,fc316fa546caed31dc8cd47aa12c61d8",
+                "GCA_922984935.2.subset.unmasked.illumina.SAMEA7524438.ERR6688599.minimap2.coverage.1k.bedGraph.gz:md5,85fc279b81c45542a473379ca9727f7e",
+                "GCA_922984935.2.subset.unmasked.illumina.SAMEA7524438.ERR6688599.minimap2.flagstat:md5,6aef65e71669eb57e00a700c4b1bafe2",
+                "GCA_922984935.2.subset.unmasked.illumina.SAMEA7524438.ERR6688599.minimap2.idxstats:md5,de6f6d0db3099aab74d2ab97e3474d70",
+                "GCA_922984935.2.subset.unmasked.illumina.SAMEA7524438.ERR6688599.minimap2.stats.gz:md5,695c2e0183e992912391cec46287df03",
+                "GCA_922984935.2.subset.unmasked.illumina.SAMEA7524439.ERR6688600.minimap2.coverage.1k.bedGraph.gz:md5,0a8bfd18cdbe804150348222b99da612",
+                "GCA_922984935.2.subset.unmasked.illumina.SAMEA7524439.ERR6688600.minimap2.flagstat:md5,dccc7b15c51de2f1e64be281837c1e92",
+                "GCA_922984935.2.subset.unmasked.illumina.SAMEA7524439.ERR6688600.minimap2.idxstats:md5,8cf0310d38bdc5f2ccf5e911e8c41f60",
+                "GCA_922984935.2.subset.unmasked.illumina.SAMEA7524439.ERR6688600.minimap2.stats.gz:md5,2e0beb5debecbf82c33e03ecbab1c012"
+            ],
+            {
+                "GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.minimap2.bam": {
+                    "maxReadLength": 151,
+                    "minReadLength": 25,
+                    "meanReadLength": 150,
+                    "maxQuality": 60,
+                    "minQuality": 0,
+                    "meanQuality": 0,
+                    "readCount": 19984,
+                    "duplicateReadCount": 24,
+                    "sorted": false
+                },
+                "GCA_922984935.2.subset.unmasked.illumina.SAMEA7524438.ERR6688599.minimap2.bam": {
+                    "maxReadLength": 151,
+                    "minReadLength": 27,
+                    "meanReadLength": 150,
+                    "maxQuality": 60,
+                    "minQuality": 0,
+                    "meanQuality": 0,
+                    "readCount": 20077,
+                    "duplicateReadCount": 19,
+                    "sorted": false
+                },
+                "GCA_922984935.2.subset.unmasked.illumina.SAMEA7524439.ERR6688600.minimap2.bam": {
+                    "maxReadLength": 151,
+                    "minReadLength": 25,
+                    "meanReadLength": 150,
+                    "maxQuality": 60,
+                    "minQuality": 0,
+                    "meanQuality": 0,
+                    "readCount": 20076,
+                    "duplicateReadCount": 20,
+                    "sorted": false
+                }
+            },
+            {
+                "GCA_922984935.2.subset.unmasked.hic.SAMEA7524440.ERR6688402.minimap2.cram": {
+                    "maxReadLength": 151,
+                    "minReadLength": 25,
+                    "meanReadLength": 150,
+                    "maxQuality": 60,
+                    "minQuality": 0,
+                    "meanQuality": 0,
+                    "readCount": 19984,
+                    "duplicateReadCount": 24,
+                    "sorted": false
+                },
+                "GCA_922984935.2.subset.unmasked.illumina.SAMEA7524438.ERR6688599.minimap2.cram": {
+                    "maxReadLength": 151,
+                    "minReadLength": 27,
+                    "meanReadLength": 150,
+                    "maxQuality": 60,
+                    "minQuality": 0,
+                    "meanQuality": 0,
+                    "readCount": 20077,
+                    "duplicateReadCount": 19,
+                    "sorted": false
+                },
+                "GCA_922984935.2.subset.unmasked.illumina.SAMEA7524439.ERR6688600.minimap2.cram": {
+                    "maxReadLength": 151,
+                    "minReadLength": 25,
+                    "meanReadLength": 150,
+                    "maxQuality": 60,
+                    "minQuality": 0,
+                    "meanQuality": 0,
+                    "readCount": 20076,
+                    "duplicateReadCount": 20,
+                    "sorted": false
+                }
+            },
+            [
+                
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-04-23T16:32:24.442352579"
+    }
+}
