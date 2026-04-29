@@ -57,7 +57,7 @@ license: MIT
 message: If you use this software, please cite it using the metadata from this file
   and all references from CITATIONS.md .
 repository-code: https://github.com/sanger-tol/readmapping
-title: sanger-tol/readmapping v2.0.0 - Hungarian Horntail
+title: sanger-tol/readmapping v2.0.1 - Hungarian Horntail (patch 1)
 type: software
 url: https://pipelines.tol.sanger.ac.uk/readmapping
-version: 2.0.0
+version: 2.0.1

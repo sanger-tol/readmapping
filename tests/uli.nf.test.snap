@@ -58,7 +58,7 @@
                     "unmask": 1.0
                 },
                 "MINIMAP2_INDEX": {
-                    "minimap2": "2.30-r1287",
+                    "minimap2": "2.30-r1287"
                 },
                 "PBMARKDUP": {
                     "pbmarkdup": "1.2.0"
@@ -85,7 +85,7 @@
                     "samtools": "1.23.1"
                 },
                 "Workflow": {
-                    "sanger-tol/readmapping": "v2.0.0"
+                    "sanger-tol/readmapping": "v2.0.1"
                 }
             },
             [
@@ -135,12 +135,12 @@
                 "pacbio.SAMEA114784749.ERR14209104.rmdup.pbmarkdup.log:md5,02efc656c114d8029ad4e8e79e778e35",
                 "GCA_964034985.1.subset.pacbio.SAMEA114784749.ERR14209104.minimap2.flagstat:md5,64341a288816774ffde9c3137c68d2ee",
                 "GCA_964034985.1.subset.pacbio.SAMEA114784749.ERR14209104.minimap2.idxstats:md5,f0102d624656f7673a7567baadf2fdf9",
-                "GCA_964034985.1.subset.pacbio.SAMEA114784749.ERR14209104.minimap2.stats.gz:md5,6282e8d3b09fbac755341751e033b705",
+                "GCA_964034985.1.subset.pacbio.SAMEA114784749.ERR14209104.minimap2.stats.gz:md5,c9040ed0c3204f9512b0325d08150b3f",
                 "GCA_964034985.1.subset.pacbio.SAMEA114784749.ERR14209104_test.minimap2.coverage.1k.bedGraph.gz:md5,91d8507d7cea42e6b85e1c9dc7cab12d",
                 "pacbio.SAMEA114784749.ERR14209104_test.hifitrimmer.bed.gz:md5,45c78d87eee0433dd4e0300c04c3bd64",
                 "GCA_964034985.1.subset.pacbio.SAMEA114784749.ERR14209104_test.minimap2.flagstat:md5,0c28e76bdd020bb1485746de33ce9252",
                 "GCA_964034985.1.subset.pacbio.SAMEA114784749.ERR14209104_test.minimap2.idxstats:md5,9d2ad4c54b1cefb73d70e576f2e89650",
-                "GCA_964034985.1.subset.pacbio.SAMEA114784749.ERR14209104_test.minimap2.stats.gz:md5,ff5713a4193b37bbbf7d4f6281f22e12"
+                "GCA_964034985.1.subset.pacbio.SAMEA114784749.ERR14209104_test.minimap2.stats.gz:md5,4f5930c586e221b776fdd20394b18700"
             ],
             {
                 
@@ -178,6 +178,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-04-23T15:42:54.159192309"
+        "timestamp": "2026-04-29T19:20:07.06121781"
     }
 }

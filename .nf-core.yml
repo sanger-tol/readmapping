@@ -37,8 +37,7 @@ nf_core_version: 3.5.2
 repository_type: pipeline
 template:
   author: "@priyanka-surana"
-  description: Pipeline to map reads generated using different sequencing technologies
-    against a genome assembly.
+  description: Pipeline to map reads generated using different sequencing technologies against a genome assembly.
   force: false
   is_nfcore: false
   name: readmapping
@@ -48,4 +47,4 @@ template:
     - igenomes
     - multiqc
     - fastqc
-  version: 2.0.0
+  version: 2.0.1
