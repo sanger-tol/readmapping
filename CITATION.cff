@@ -51,7 +51,7 @@ authors:
     orcid: https://orcid.org/0000-0003-1658-1762
     website: https://github.com/BethYates
 cff-version: 1.2.0
-date-released: "2026-04-29"
+date-released: "2026-04-30"
 doi: 10.5281/zenodo.6563577
 license: MIT
 message: If you use this software, please cite it using the metadata from this file
