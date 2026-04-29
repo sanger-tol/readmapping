@@ -40,6 +40,8 @@ jobs:
     steps:
       - name: Install Nextflow
         uses: nf-core/setup-nextflow@v2
+        with:
+          version: "25.10.4" # pipeline hasn't supported version 26x yet
 
       - name: Disk space cleanup
         uses: jlumbroso/free-disk-space@54081f138730dfa15788a46383842cd2f914a1be # v1.3.1
