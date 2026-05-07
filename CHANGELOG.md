@@ -3,6 +3,12 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [[v2.0.2](https://github.com/sanger-tol/readmapping/releases/tag/2.0.2)] - Hungarian Horntail (patch 2) - [2026-05-07]
+
+### Enhancements & fixes
+
+- Chaining command to avoid ambiguous error if samtools/merge fail
+
 ## [[v2.0.1](https://github.com/sanger-tol/readmapping/releases/tag/2.0.1)] - Hungarian Horntail (patch 1) - [2026-04-30]
 
 ### Enhancements & fixes
