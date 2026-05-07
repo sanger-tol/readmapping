@@ -36,7 +36,7 @@ workflow ALIGN_SHORT {
     CONVERT_CRAM ( ch_reads_non_crams, fasta_dummy_idx, [[],[]], [[],[]], "" )
 
     ch_converted_crams = CONVERT_CRAM.out.cram
-        .branch { meta, cram ->
+        .branch { meta, _cram ->
             with_rg: meta.from == "bam"
             without_rg: true
         }
