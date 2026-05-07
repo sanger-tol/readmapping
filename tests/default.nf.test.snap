@@ -110,7 +110,7 @@
                     "samtools": "1.23.1"
                 },
                 "Workflow": {
-                    "sanger-tol/readmapping": "v2.0.1"
+                    "sanger-tol/readmapping": "v2.0.2"
                 }
             },
             [
@@ -274,7 +274,7 @@
                 "GCA_922984935.2.subset.pacbio.SAMEA7524440.merged_1.minimap2.stats.gz:md5,9ac83c1939cdee8e020cfba523c89f33"
             ],
             {
-                
+
             },
             {
                 "GCA_922984935.2.subset.hic.SAMEA7524440.ERR6688402.bwamem2.cram": {

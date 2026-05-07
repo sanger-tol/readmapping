@@ -82,7 +82,7 @@
                     "samtools": "1.23.1"
                 },
                 "Workflow": {
-                    "sanger-tol/readmapping": "v2.0.1"
+                    "sanger-tol/readmapping": "v2.0.2"
                 }
             },
             [
@@ -162,7 +162,7 @@
                 }
             },
             {
-                
+
             },
             [
                 "pacbio.SAMEA114784749.ERR14209104.hifitrimmer.summary.json:md5,f8d293d48de8a48ba7b1bffa56b5ab89",
