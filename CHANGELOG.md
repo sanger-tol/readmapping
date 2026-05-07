@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Enhancements & fixes
 
-- Chaining command to avoid ambiguous error if samtools/merge fail
+- Chaining command to avoid ambiguous error if samtools/merge fail (#239)
 
 ## [[v2.0.1](https://github.com/sanger-tol/readmapping/releases/tag/2.0.1)] - Hungarian Horntail (patch 1) - [2026-04-30]
 
