@@ -82,7 +82,7 @@
                     "samtools": "1.23.1"
                 },
                 "Workflow": {
-                    "sanger-tol/readmapping": "v2.0.2"
+                    "sanger-tol/readmapping": "v2.0.3"
                 }
             },
             [

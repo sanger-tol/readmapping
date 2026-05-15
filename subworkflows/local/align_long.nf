@@ -83,11 +83,14 @@ workflow ALIGN_LONG {
         if (val_pacbio_adapter_fasta && val_pacbio_adapter_yaml) {
             ch_yaml_meta = ch_reads.pacbio
                 .combine( channel.fromPath(val_pacbio_adapter_yaml, checkIfExists: true) )
-                .map { meta, _reads, yaml -> [ meta, yaml ]
+                .map{ meta, _reads, yaml -> [ meta, yaml ]}
+                .branch { meta, yaml ->
+                    has_barcode: meta.barcode != null && !meta.barcode.isEmpty()
+                    no_barcode: true
                 }
-
-            GAWK_MODIFY_YAML_BARCODE( ch_yaml_meta, [], false )
-            ch_pacbio_read_yaml = ch_reads.pacbio.combine(GAWK_MODIFY_YAML_BARCODE.out.output, by: 0)
+            GAWK_MODIFY_YAML_BARCODE( ch_yaml_meta.has_barcode, [], false )
+            ch_yml_barcoded = GAWK_MODIFY_YAML_BARCODE.out.output.mix( ch_yaml_meta.no_barcode )
+            ch_pacbio_read_yaml = ch_reads.pacbio.combine(ch_yml_barcoded, by: 0)
             adapter_fasta_for_preprocess = [[id:file( val_pacbio_adapter_fasta ).baseName], val_pacbio_adapter_fasta]
         } else {
             ch_pacbio_read_yaml = ch_reads.pacbio.map { meta, read_files -> [ meta, read_files, [] ] } //PacBio reads with dummy yaml
