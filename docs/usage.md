@@ -47,7 +47,7 @@ specimen3,run5,pacbio,pacbio2.bam,,
 | `datatype` | Type of sequencing data. Must be one of `hic`, `illumina`, `pacbio`, `pacbio_clr`, or `ont`.                                                                                                                                                |
 | `datafile` | Full path to read data file. Must be `bam`, `cram`, `fastq.gz` or `fq.gz` for `illumina` and `hic`. Must be `bam`, `fastq.gz` or `fq.gz` for `pacbio`, `pacbio_clr`, and `ont`. Note that FASTQ inputs should be interleaved if paired-end. |
 | `library`  | (Optional) The library value is a unique identifier which is assigned to read group (`@RG`) ID. If the library name is not specified, the pipeline will auto-create library name using the data filename provided in the samplesheet.       |
-| `barcode`  | (Optional) Barcode identifier used to trim barcode adapater for PacBio reads                                                                                                                                                                |
+| `barcode`  | (Optional) Barcode identifier used to trim barcode adapter for PacBio reads                                                                                                                                                                 |
 
 An [example samplesheet](../assets/samplesheet.csv) has been provided with the pipeline.
 
