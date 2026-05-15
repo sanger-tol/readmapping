@@ -8,7 +8,7 @@ This pipeline aligns raw reads from various technolgies (such as HiC, Illumina, 
 
 ## Samplesheet input
 
-You will need to create a samplesheet with information about the samples you would like to analyse before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 6 columns, and a header row as shown in the examples below.
+You will need to create a samplesheet with information about the samples you would like to analyse before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with a header row as shown in the examples below. The first 4 columns are required (`specimen`, `run`, `datatype`, `datafile`), while `library` and `barcode` are optional.
 
 ```bash
 --input '[path to samplesheet file]'
@@ -33,9 +33,9 @@ A final samplesheet file consisting of both HiC and PacBio data may look somethi
 
 ```console
 specimen,run,datatype,datafile,library,barcode
-specimen1,run1,hic1.cram,,
-specimen1,run2,hic2.cram,,
-specimen2,run3,hic3.cram,,
+specimen1,run1,hic,hic1.cram,,
+specimen1,run2,hic,hic2.cram,,
+specimen2,run3,hic,hic3.cram,,
 specimen2,run4,pacbio,pacbio1.bam,uli,
 specimen3,run5,pacbio,pacbio2.bam,,
 ```
