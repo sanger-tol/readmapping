@@ -8,7 +8,7 @@ This pipeline aligns raw reads from various technolgies (such as HiC, Illumina, 
 
 ## Samplesheet input
 
-You will need to create a samplesheet with information about the samples you would like to analyse before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 4 columns, and a header row as shown in the examples below.
+You will need to create a samplesheet with information about the samples you would like to analyse before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 6 columns, and a header row as shown in the examples below.
 
 ```bash
 --input '[path to samplesheet file]'
@@ -32,12 +32,12 @@ The samplesheet can have as many columns as you desire, however, there is a stri
 A final samplesheet file consisting of both HiC and PacBio data may look something like the one below.
 
 ```console
-specimen,run,datatype,datafile,library
-specimen1,run1,hic1.cram,
-specimen1,run2,hic2.cram,
-specimen2,run3,hic3.cram,
-specimen2,run4,pacbio,pacbio1.bam,uli
-specimen3,run5,pacbio,pacbio2.bam,
+specimen,run,datatype,datafile,library,barcode
+specimen1,run1,hic1.cram,,
+specimen1,run2,hic2.cram,,
+specimen2,run3,hic3.cram,,
+specimen2,run4,pacbio,pacbio1.bam,uli,
+specimen3,run5,pacbio,pacbio2.bam,,
 ```
 
 | Column     | Description                                                                                                                                                                                                                                 |
@@ -47,6 +47,7 @@ specimen3,run5,pacbio,pacbio2.bam,
 | `datatype` | Type of sequencing data. Must be one of `hic`, `illumina`, `pacbio`, `pacbio_clr`, or `ont`.                                                                                                                                                |
 | `datafile` | Full path to read data file. Must be `bam`, `cram`, `fastq.gz` or `fq.gz` for `illumina` and `hic`. Must be `bam`, `fastq.gz` or `fq.gz` for `pacbio`, `pacbio_clr`, and `ont`. Note that FASTQ inputs should be interleaved if paired-end. |
 | `library`  | (Optional) The library value is a unique identifier which is assigned to read group (`@RG`) ID. If the library name is not specified, the pipeline will auto-create library name using the data filename provided in the samplesheet.       |
+| `barcode`  | (Optional) Barcode identifier used to trim barcode adapater for PacBio reads                                                                                                                                                                |
 
 An [example samplesheet](../assets/samplesheet.csv) has been provided with the pipeline.
 
