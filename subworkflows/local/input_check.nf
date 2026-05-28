@@ -55,6 +55,7 @@ def create_data_channel ( LinkedHashMap row, datafile, stats ) {
     meta.datatype      = row.datatype
     meta.library       = row.library
     meta.barcode       = row.barcode
+    meta.extra_header  = row.extra_header ? file(row.extra_header, checkExists:true) : []
 
     def platform = (meta.datatype == "hic" || meta.datatype == "illumina") ? "ILLUMINA" :
                 (meta.datatype == "pacbio" || meta.datatype == "pacbio_clr") ? "PACBIO" :

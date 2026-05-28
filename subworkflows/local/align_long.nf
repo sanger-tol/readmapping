@@ -4,6 +4,7 @@
 
 // Include local modules and subworkflows
 include { MERGE_OUTPUT                               } from '../../subworkflows/local/merge_output'
+include { PREPARE_READ_GROUPS                        } from '../../subworkflows/local/prepare_read_groups'
 
 include { PACBIO_PREPROCESS                          } from '../../subworkflows/sanger-tol/pacbio_preprocess/main'
 include { PACBIO_PREPROCESS as PACBIO_PREPROCESS_ULI } from '../../subworkflows/sanger-tol/pacbio_preprocess/main'
@@ -12,7 +13,6 @@ include { FASTX_MAP_LONG_READS                       } from '../../subworkflows/
 // Include nf-core modules
 include { FASTQC as FASTQC_FILTERED                    } from '../../modules/nf-core/fastqc/main'
 include { GAWK as GAWK_MODIFY_YAML_BARCODE             } from '../../modules/nf-core/gawk/main'
-include { SAMTOOLS_SPLITHEADER                         } from '../../modules/nf-core/samtools/splitheader/main'
 include { SAMTOOLS_FASTQ                               } from '../../modules/nf-core/samtools/fastq/main'
 
 workflow ALIGN_LONG {
@@ -30,39 +30,18 @@ workflow ALIGN_LONG {
     //
     // PRESERVE READ GROUP INFORMATION
     //
-    ch_reads_branch = reads
-        .map { meta, read_files -> [meta + [read_group: "-y -R $meta.read_group"], read_files] }
-        .branch { _meta, read_files ->
-            bam: read_files.name.endsWith("bam")
-            fastq: true
-        }
-
-    // Extract read group information from BAM files if BAM files are provided as input
-    SAMTOOLS_SPLITHEADER(ch_reads_branch.bam)
-
-    // Replace constructed read group information with the one extracted from BAM header
-    ch_bam_rg = SAMTOOLS_SPLITHEADER.out.readgroup
-        .join (ch_reads_branch.bam, by:0)
-        .map { meta, rg_file, bam ->
-            def rglines = file(rg_file).readLines()
-            def rg_args = rglines ? '-y ' + rglines.collect { line ->
-                // Add SM when not present to avoid errors from downstream tool (e.g. variant callers)
-                def l = line.contains("SM:") ? line
-                        : meta.sample ? "${line}\tSM:${meta.sample}"
-                        : "${line}\tSM:${meta.id}"
-                    "-R '${l.replaceAll("\t", "\\\\t")}'"
-            }.join(' ')
-            :  meta.read_group
-            [ meta + [read_group:rg_args], bam ]
-        }
-
-    ch_reads_rg = ch_bam_rg.mix( ch_reads_branch.fastq )
+    PREPARE_READ_GROUPS(reads, 'long')
+    ch_read_rg = PREPARE_READ_GROUPS.out.reads
+    ch_read_rg_branch = ch_read_rg.branch { _meta, read_files ->
+        bam: read_files.name.endsWith("bam")
+        fastq: true
+    }
 
     //
     // PACBIO READ PREPROCESSING
     //
     if (val_pacbio_adapter_fasta || val_pacbio_adapter_yaml || val_pacbio_uli_adapter) { // pacbio_adapter_fasta, pacbio_adapter_yaml, pacbio_uli_adapter always provided
-        ch_reads = ch_reads_rg
+        ch_reads = ch_read_rg
             .branch { meta, read_files ->
                 pacbio: meta.datatype == "pacbio"
                 // non pacbio includes ONT and pacbio clr
@@ -144,8 +123,8 @@ workflow ALIGN_LONG {
         fastx = pacbio_fastx.mix( ch_reads.non_pacbio_fastx )
     } else {
         // if no processing needed at all, prepare CRAM for alignment directly from original reads (both pacbio and non-pacbio reads)
-        bam_to_fastx = ch_bam_rg
-        fastx = ch_reads_branch.fastq
+        bam_to_fastx = ch_read_rg_branch.bam
+        fastx = ch_read_rg_branch.fastq
     }
     // readmapping take only 1 FASTA as reference
     SAMTOOLS_FASTQ ( bam_to_fastx, false )

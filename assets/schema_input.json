@@ -45,6 +45,14 @@
                 "errorMessage": "Sample barcode cannot contain spaces",
                 "default": "",
                 "meta": ["barcode"]
+            },
+            "extra_header": {
+                "type": "string",
+                "format": "file-path",
+                "exists": true,
+                "pattern": "^\\S+\\.(sam|sam.gz)$",
+                "errorMessage": "SAM header file cannot contain spaces and must be in SAM format",
+                "meta": ["extra_header"]
             }
         },
         "required": ["specimen", "run", "datatype", "datafile"]
