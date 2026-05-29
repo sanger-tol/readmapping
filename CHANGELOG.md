@@ -3,6 +3,13 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+
+## [[v2.1.0-dev](https://github.com/sanger-tol/readmapping/releases/tag/2.1.0-dev)] - 2.1.0-dev - [release-date]
+
+### Enhancements & fixes
+
+- Support extra_header at read-file level to provide `@RG` and `@PG` lines (see [usage](docs/usage.md))
+
 ## [[v2.0.3](https://github.com/sanger-tol/readmapping/releases/tag/2.0.3)] - Hungarian Horntail (patch 3) - [2026-05-15]
 
 ### Enhancements & fixes

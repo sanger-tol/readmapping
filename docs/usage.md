@@ -32,12 +32,12 @@ The samplesheet can have as many columns as you desire, however, there is a stri
 A final samplesheet file consisting of both HiC and PacBio data may look something like the one below.
 
 ```console
-specimen,run,datatype,datafile,library,barcode
-specimen1,run1,hic,hic1.cram,,
-specimen1,run2,hic,hic2.cram,,
-specimen2,run3,hic,hic3.cram,,
-specimen2,run4,pacbio,pacbio1.bam,uli,
-specimen3,run5,pacbio,pacbio2.bam,,
+specimen,run,datatype,datafile,library,barcode,extra_header
+specimen1,run1,hic,hic1.cram,,,
+specimen1,run2,hic,hic2.cram,,,
+specimen2,run3,hic,hic3.cram,,,
+specimen2,run4,pacbio,pacbio1.bam,uli,,headers/pacbio_rg.sam
+specimen3,run5,pacbio,pacbio2.bam,,,
 ```
 
 | Column     | Description                                                                                                                                                                                                                                 |
@@ -48,6 +48,7 @@ specimen3,run5,pacbio,pacbio2.bam,,
 | `datafile` | Full path to read data file. Must be `bam`, `cram`, `fastq.gz` or `fq.gz` for `illumina` and `hic`. Must be `bam`, `fastq.gz` or `fq.gz` for `pacbio`, `pacbio_clr`, and `ont`. Note that FASTQ inputs should be interleaved if paired-end. |
 | `library`  | (Optional) The library value is a unique identifier which is assigned to read group (`@RG`) ID. If the library name is not specified, the pipeline will auto-create library name using the data filename provided in the samplesheet.       |
 | `barcode`  | (Optional) Barcode identifier used to trim barcode adapter for PacBio reads. If empty, barcode-specific adapter sequences will not be trimmed.                                                                                              |
+| `extra_header` | (Optional) Path to a SAM file containing additional SAM header lines including `@RG`, `@PG`. These information will be injected into output BAM/CRAM headers. `@RG` lines are overwritten, while `@PG` lines are added to the existing headers (auto add `.extra_header` to `@PG ID`). |
 
 An [example samplesheet](../assets/samplesheet.csv) has been provided with the pipeline.
 
