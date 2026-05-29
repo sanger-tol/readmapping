@@ -8,8 +8,8 @@ process SAMTOOLS_REHEADER {
         : 'community.wave.seqera.io/library/htslib_samtools:1.23.1--5b6bb4ede7e612e5'}"
 
     input:
-    tuple val(meta), path(file, stageAs: "input/*")
-    path(header)
+    tuple val(meta), path(file, stageAs: "input/*"), path(sample_extra_header, stageAs: "extra_header/*")
+    path(header_template)
 
     output:
     tuple val(meta), path("${prefix}.bam") , optional:true, emit: bam
@@ -22,17 +22,23 @@ process SAMTOOLS_REHEADER {
     script:
     prefix = task.ext.prefix ?: "${meta.id}"
     suffix = file.getExtension()
+    def sq_template = header_template ? " | grep -v ^@SQ && grep '^@SQ' ${header_template}" : ""
+    // Suffix all PG IDs from sample extra_header to keep them distinct from native file-header PG IDs.
+    def pg_extra = sample_extra_header ? "grep '^@PG' ${sample_extra_header} | awk 'BEGIN { FS = OFS = \"\\t\" } { for (i = 1; i <= NF; i++) if (\$i ~ /^ID:/) { \$i = \$i \".extra_header\"; break } print }' || true" : "true"
 
     if ("$file" == "${prefix}.${suffix}") error "Input and output names are the same, use \"task.ext.prefix\" to disambiguate!"
     """
     # Replace SQ lines with those from external template
-    ( samtools view --no-PG --header-only ${file} | \\
-    grep -v ^@SQ && grep ^@SQ ${header} ) > temp.header.sam
+    ( samtools view --no-PG --header-only ${file} \\
+        ${sq_template} ) > temp.header.sam
 
     # custom sort for readability (retain order of insertion but sort groups by tag)
+    # Add PG lines from sample header
+    # Sort order: HD, SQ, RG, extra PG, PG, other
     ( grep ^@HD temp.header.sam || true && \\
     grep ^@SQ temp.header.sam || true && \\
     grep ^@RG temp.header.sam || true && \\
+    ${pg_extra} && \\
     grep ^@PG temp.header.sam || true && \\
     grep -v -E '^@HD|^@SQ|^@RG|^@PG' temp.header.sam || true; \\
     ) > temp.sorted.header.sam

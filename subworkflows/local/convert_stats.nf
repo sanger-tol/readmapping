@@ -4,9 +4,10 @@
 
 
 // MODULE: local modules
+include { CHANGE_NAME                                   } from '../../modules/local/change_name'
+include { SAMTOOLS_REHEADER as SAMTOOLS_ADD_PG          } from '../../modules/local/samtools/reheader/samtools_replaceheader'
 include { SAMTOOLS_REHEADER as SAMTOOLS_REHEADER_BAM    } from '../../modules/local/samtools/reheader/samtools_replaceheader'
 include { SAMTOOLS_REHEADER as SAMTOOLS_REHEADER_CRAM   } from '../../modules/local/samtools/reheader/samtools_replaceheader'
-include { CHANGE_NAME                                   } from '../../modules/local/change_name'
 
 // MODULE: nf-core modules
 include { BLOBTK_DEPTH                              } from '../../modules/nf-core/blobtk/depth/main'
@@ -34,6 +35,7 @@ workflow CONVERT_STATS {
     // Split outfmt parameter into a list
     def outfmt_options = params.outfmt.split(',').collect { fmt -> fmt.trim() }
 
+
     // (Optionally) Compress the quality scores of Illumina and PacBio CCS alignments
     if ( params.compression == "crumble" ) {
         crumble_selector = bam
@@ -56,7 +58,16 @@ workflow CONVERT_STATS {
     CHANGE_NAME ( ch_bams_for_renaming, fasta )
 
     ch_renamed_bams = CHANGE_NAME.out.file
-    .map { meta, bam_file -> [meta, bam_file, []] }
+    .branch { meta, bam_file ->
+        extra_header: meta.add_pg
+            return [ meta, bam_file, meta.extra_header ]
+        no_extra_header: true
+    }
+
+    SAMTOOLS_ADD_PG( ch_renamed_bams.extra_header, [] )
+    ch_bams_add_pg = SAMTOOLS_ADD_PG.out.bam
+    .mix( ch_renamed_bams.no_extra_header )
+    .map { meta, bam_file -> [ meta, bam_file, [] ] }
 
     // (Optionally) convert to CRAM if it's specified in outfmt
     ch_cram = channel.empty()
@@ -64,12 +75,12 @@ workflow CONVERT_STATS {
 
     fasta_dummy_idx = fasta.map { meta, fasta_file -> [ meta, fasta_file, [] ] }
     if ( "cram" in outfmt_options ) {
-        SAMTOOLS_CRAM ( ch_renamed_bams, fasta_dummy_idx, [[],[]], [[],[]], "" )
+        SAMTOOLS_CRAM ( ch_bams_add_pg, fasta_dummy_idx, [[],[]], [[],[]], "" )
         ch_cram = SAMTOOLS_CRAM.out.cram
         ch_crai = SAMTOOLS_CRAM.out.crai
 
         if ( params.header ) {
-            SAMTOOLS_REHEADER_CRAM ( SAMTOOLS_CRAM.out.cram, header.first() )
+            SAMTOOLS_REHEADER_CRAM ( SAMTOOLS_CRAM.out.cram.map{ meta, cram -> [ meta, cram, []] }, header.first() )
             SAMTOOLS_INDEX_CRAM ( SAMTOOLS_REHEADER_CRAM.out.cram )
             ch_cram = SAMTOOLS_INDEX_CRAM.out.input
             ch_crai = SAMTOOLS_INDEX_CRAM.out.index
@@ -84,8 +95,8 @@ workflow CONVERT_STATS {
     ch_bai = channel.empty()
 
     if ( "bam" in outfmt_options ) {
-        // Reindex BAM
-        ch_bam = params.header ? SAMTOOLS_REHEADER_BAM ( CHANGE_NAME.out.file, header.first() ).bam : CHANGE_NAME.out.file
+        // Re-header && reindex BAM
+        ch_bam = params.header ? SAMTOOLS_REHEADER_BAM ( ch_bams_add_pg, header.first() ).bam : ch_bams_add_pg.map{ meta, bam, _empty-> [ meta, bam ] }
         SAMTOOLS_INDEX_BAM ( ch_bam )
 
         // Set the BAM and BAI channels for emission
@@ -99,7 +110,7 @@ workflow CONVERT_STATS {
     }
 
     // Calculate read depth
-    BLOBTK_DEPTH ( ch_renamed_bams )
+    BLOBTK_DEPTH ( ch_bams_add_pg )
     BGZIP_BEDGRAPH ( BLOBTK_DEPTH.out.bed )
 
     // Calculate statistics
