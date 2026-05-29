@@ -22,7 +22,7 @@ workflow INPUT_CHECK {
     SAMTOOLS_FLAGSTAT ( samplesheet_rows )
 
     // Create the read channel for the rest of the pipeline
-    reads = samplesheet_rows
+    ch_reads = samplesheet_rows
     .join( SAMTOOLS_FLAGSTAT.out.flagstat )
     .map { meta, datafile, _meta2, stats -> create_data_channel( meta, datafile, stats ) }
 
@@ -39,7 +39,7 @@ workflow INPUT_CHECK {
     MASK_UNMASK ( ch_fasta_for_unmask )
 
     emit:
-    reads                                        // channel: [ val(meta), /path/to/datafile ]
+    reads    = ch_reads                            // channel: [ val(meta), /path/to/datafile ]
     fasta    = MASK_UNMASK.out.unmasked.first()    // channel: [ meta, /path/to/fasta ]
 }
 
@@ -55,7 +55,7 @@ def create_data_channel ( LinkedHashMap row, datafile, stats ) {
     meta.datatype      = row.datatype
     meta.library       = row.library
     meta.barcode       = row.barcode
-    meta.extra_header  = row.extra_header ? file(row.extra_header, checkExists:true) : []
+    meta.extra_header  = row.extra_header ? file(row.extra_header, checkIfExists: true) : []
 
     def platform = (meta.datatype == "hic" || meta.datatype == "illumina") ? "ILLUMINA" :
                 (meta.datatype == "pacbio" || meta.datatype == "pacbio_clr") ? "PACBIO" :

@@ -22,10 +22,10 @@ workflow ALIGN_SHORT {
     reads_with_rg = PREPARE_READ_GROUPS.out.reads
 
     //
-    // LOGIC: Convert FASTQ to CRAM adn add RG information if needed
+    // LOGIC: Convert FASTQ to CRAM and add RG information if needed
     //
     // Check file types and branch
-    ch_reads = reads_with_rg.branch { meta, read_files ->
+    ch_reads = reads_with_rg.branch { _meta, read_files ->
         cram: read_files.name.endsWith(".cram")
         non_cram: true
     }
@@ -39,7 +39,7 @@ workflow ALIGN_SHORT {
     // Add read group information to CRAMs if not already present, and merge with CRAMs that already have RG information
     ch_crams_to_addrg = CONVERT_CRAM.out.cram
         .mix ( ch_reads.cram )
-        .branch { meta, cram ->
+        .branch { meta, _cram ->
             replace_rg: meta.replace_rg == true
             not_replace_rg: true
         }

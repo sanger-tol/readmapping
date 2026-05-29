@@ -63,7 +63,7 @@ workflow ALIGN_LONG {
             ch_yaml_meta = ch_reads.pacbio
                 .combine( channel.fromPath(val_pacbio_adapter_yaml, checkIfExists: true) )
                 .map{ meta, _reads, yaml -> [ meta, yaml ]}
-                .branch { meta, yaml ->
+                .branch { meta, _yaml ->
                     has_barcode: meta.barcode != null && !meta.barcode.isEmpty()
                     no_barcode: true
                 }

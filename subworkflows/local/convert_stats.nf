@@ -96,7 +96,7 @@ workflow CONVERT_STATS {
 
     if ( "bam" in outfmt_options ) {
         // Re-header && reindex BAM
-        ch_bam = params.header ? SAMTOOLS_REHEADER_BAM ( ch_bams_add_pg, header.first() ).bam : ch_bams_add_pg.map{ meta, bam, _empty-> [ meta, bam ] }
+        ch_bam = params.header ? SAMTOOLS_REHEADER_BAM ( ch_bams_add_pg, header.first() ).bam : ch_bams_add_pg.map{ meta, bam_file, _empty -> [ meta, bam_file ] }
         SAMTOOLS_INDEX_BAM ( ch_bam )
 
         // Set the BAM and BAI channels for emission

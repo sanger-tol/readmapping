@@ -46,7 +46,7 @@ workflow PREPARE_READ_GROUPS {
                             : "${line}\tSM:${meta.id}"
                     "${rg_flag} '${l.replaceAll("\t", "\\\\t")}'"
                 }.join(' ')
-            ].findAll { it }.join(' ')
+            ].findAll { value -> value }.join(' ')
             : (meta.read_group ?: '')
 
             def output_read_files = meta.read_file ?: read_files
@@ -60,5 +60,5 @@ workflow PREPARE_READ_GROUPS {
         .mix(ch_reads_extra_header.no_extra_header_fastq)
 
     emit:
-    reads = ch_reads_with_rg       // channel: [ val(meta), /path/to/read_file ]
+    reads = ch_reads_with_rg               // channel: [ val(meta), /path/to/read_file ]
 }
