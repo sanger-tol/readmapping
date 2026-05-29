@@ -175,10 +175,10 @@
             {
                 "GCA_964034985.1.subset.pacbio.SAMEA114784749.ERR14209104.minimap2.cram": [
                     "@HD\tVN:1.6\tSO:coordinate",
-                    "@SQ\tSN:CAXIUN010000020.1\tLN:15094\tM5:eb4b4e09fa2962e012fc983eeb6b65dc\tUR:/lustre/scratch124/tol/<ABS_PATH>",
-                    "@SQ\tSN:CAXIUN010000038.1\tLN:1000\tM5:3fe8a9b5a85c60b19e74e88ca5ca434e\tUR:/lustre/scratch124/tol/<ABS_PATH>",
-                    "@SQ\tSN:CAXIUN010000104.1\tLN:10110\tM5:10013ae295fb0e1a002ab812d6c2e77e\tUR:/lustre/scratch124/tol/<ABS_PATH>",
-                    "@SQ\tSN:CAXIUN010000129.1\tLN:29940\tM5:9579779c87681c88e68a924f572f5599\tUR:/lustre/scratch124/tol/<ABS_PATH>",
+                    "@SQ\tSN:CAXIUN010000020.1\tLN:15094\tM5:eb4b4e09fa2962e012fc983eeb6b65dc\tUR:GCA_964034985.1.subset.unmasked.fa",
+                    "@SQ\tSN:CAXIUN010000038.1\tLN:1000\tM5:3fe8a9b5a85c60b19e74e88ca5ca434e\tUR:GCA_964034985.1.subset.unmasked.fa",
+                    "@SQ\tSN:CAXIUN010000104.1\tLN:10110\tM5:10013ae295fb0e1a002ab812d6c2e77e\tUR:GCA_964034985.1.subset.unmasked.fa",
+                    "@SQ\tSN:CAXIUN010000129.1\tLN:29940\tM5:9579779c87681c88e68a924f572f5599\tUR:GCA_964034985.1.subset.unmasked.fa",
                     "@RG\tID:0de7f0a4/27--27\tPL:PACBIO\tDS:READTYPE=CCS;Ipd:CodecV1=ip;PulseWidth:CodecV1=pw;BINDINGKIT=102-739-100;SEQUENCINGKIT=102-118-800;BASECALLERVERSION=5.0;SMRTCELLKIT=102-202-200;SMRTCELLID=EA138735;RUNID=r84093_20241115_102726;ICSVERSION=13.0.0.212033;MOVIELENGTH=1440.0;FRAMERATEHZ=100.000000;BarcodeFile=metadata/m84093_241116_151316_s2.barcodes.fasta;BarcodeHash=86d73e586a6d3ede0295785b51105eea;BarcodeCount=96;BarcodeMode=Symmetric;BarcodeQuality=Score\tLB:TRAC-2-8053\tPU:m84093_241116_151316_s2\tSM:TOL_ASG14652249\tPM:REVIO\tBC:ACTGCAGCACGAGTAT\tCM:R/P1-C1/5.0-25M",
                     "@PG\tID:minimap2\tPN:minimap2\tVN:2.30-r1287\tCL:minimap2 -t4 -ax map-hifi --cs=short -y -R @RG\\tID:0de7f0a4/27--27\\tPL:PACBIO\\tDS:READTYPE=CCS;Ipd:CodecV1=ip;PulseWidth:CodecV1=pw;BINDINGKIT=102-739-100;SEQUENCINGKIT=102-118-800;BASECALLERVERSION=5.0;SMRTCELLKIT=102-202-200;SMRTCELLID=EA138735;RUNID=r84093_20241115_102726;ICSVERSION=13.0.0.212033;MOVIELENGTH=1440.0;FRAMERATEHZ=100.000000;BarcodeFile=metadata/m84093_241116_151316_s2.barcodes.fasta;BarcodeHash=86d73e586a6d3ede0295785b51105eea;BarcodeCount=96;BarcodeMode=Symmetric;BarcodeQuality=Score\\tLB:TRAC-2-8053\\tPU:m84093_241116_151316_s2\\tSM:TOL_ASG14652249\\tPM:REVIO\\tBC:ACTGCAGCACGAGTAT\\tCM:R/P1-C1/5.0-25M -I1G -a GCA_964034985.1.subset.unmasked.mmi -",
                     "@PG\tID:samtools\tPN:samtools\tPP:minimap2\tVN:1.23.1\tCL:samtools sort -@ 3 -o pacbio.SAMEA114784749.ERR14209104.hifitrimmer.fastq.gz.0.SAMEA114784749.ERR14209104.bam -T pacbio.SAMEA114784749.ERR14209104.hifitrimmer.fastq.gz.0.SAMEA114784749.ERR14209104_sort_tmp --write-index -l1 -",
@@ -188,10 +188,10 @@
                 ],
                 "GCA_964034985.1.subset.pacbio.SAMEA114784749.ERR14209104_test.minimap2.cram": [
                     "@HD\tVN:1.6\tSO:coordinate",
-                    "@SQ\tSN:CAXIUN010000020.1\tLN:15094\tM5:eb4b4e09fa2962e012fc983eeb6b65dc\tUR:/lustre/scratch124/tol/<ABS_PATH>",
-                    "@SQ\tSN:CAXIUN010000038.1\tLN:1000\tM5:3fe8a9b5a85c60b19e74e88ca5ca434e\tUR:/lustre/scratch124/tol/<ABS_PATH>",
-                    "@SQ\tSN:CAXIUN010000104.1\tLN:10110\tM5:10013ae295fb0e1a002ab812d6c2e77e\tUR:/lustre/scratch124/tol/<ABS_PATH>",
-                    "@SQ\tSN:CAXIUN010000129.1\tLN:29940\tM5:9579779c87681c88e68a924f572f5599\tUR:/lustre/scratch124/tol/<ABS_PATH>",
+                    "@SQ\tSN:CAXIUN010000020.1\tLN:15094\tM5:eb4b4e09fa2962e012fc983eeb6b65dc\tUR:GCA_964034985.1.subset.unmasked.fa",
+                    "@SQ\tSN:CAXIUN010000038.1\tLN:1000\tM5:3fe8a9b5a85c60b19e74e88ca5ca434e\tUR:GCA_964034985.1.subset.unmasked.fa",
+                    "@SQ\tSN:CAXIUN010000104.1\tLN:10110\tM5:10013ae295fb0e1a002ab812d6c2e77e\tUR:GCA_964034985.1.subset.unmasked.fa",
+                    "@SQ\tSN:CAXIUN010000129.1\tLN:29940\tM5:9579779c87681c88e68a924f572f5599\tUR:GCA_964034985.1.subset.unmasked.fa",
                     "@RG\tID:0de7f0a4/27--27\tPL:PACBIO\tDS:READTYPE=CCS;Ipd:CodecV1=ip;PulseWidth:CodecV1=pw;BINDINGKIT=102-739-100;SEQUENCINGKIT=102-118-800;BASECALLERVERSION=5.0;SMRTCELLKIT=102-202-200;SMRTCELLID=EA138735;RUNID=r84093_20241115_102726;ICSVERSION=13.0.0.212033;MOVIELENGTH=1440.0;FRAMERATEHZ=100.000000;BarcodeFile=metadata/m84093_241116_151316_s2.barcodes.fasta;BarcodeHash=86d73e586a6d3ede0295785b51105eea;BarcodeCount=96;BarcodeMode=Symmetric;BarcodeQuality=Score\tLB:TRAC-2-8053\tPU:m84093_241116_151316_s2\tSM:TOL_ASG14652249\tPM:REVIO\tBC:ACTGCAGCACGAGTAT\tCM:R/P1-C1/5.0-25M",
                     "@PG\tID:minimap2\tPN:minimap2\tVN:2.30-r1287\tCL:minimap2 -t4 -ax map-hifi --cs=short -y -R @RG\\tID:0de7f0a4/27--27\\tPL:PACBIO\\tDS:READTYPE=CCS;Ipd:CodecV1=ip;PulseWidth:CodecV1=pw;BINDINGKIT=102-739-100;SEQUENCINGKIT=102-118-800;BASECALLERVERSION=5.0;SMRTCELLKIT=102-202-200;SMRTCELLID=EA138735;RUNID=r84093_20241115_102726;ICSVERSION=13.0.0.212033;MOVIELENGTH=1440.0;FRAMERATEHZ=100.000000;BarcodeFile=metadata/m84093_241116_151316_s2.barcodes.fasta;BarcodeHash=86d73e586a6d3ede0295785b51105eea;BarcodeCount=96;BarcodeMode=Symmetric;BarcodeQuality=Score\\tLB:TRAC-2-8053\\tPU:m84093_241116_151316_s2\\tSM:TOL_ASG14652249\\tPM:REVIO\\tBC:ACTGCAGCACGAGTAT\\tCM:R/P1-C1/5.0-25M -I1G -a GCA_964034985.1.subset.unmasked.mmi -",
                     "@PG\tID:samtools\tPN:samtools\tPP:minimap2\tVN:1.23.1\tCL:samtools sort -@ 3 -o pacbio.SAMEA114784749.ERR14209104_test.hifitrimmer.fastq.gz.0.SAMEA114784749.ERR14209104_test.bam -T pacbio.SAMEA114784749.ERR14209104_test.hifitrimmer.fastq.gz.0.SAMEA114784749.ERR14209104_test_sort_tmp --write-index -l1 -",
@@ -209,6 +209,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-05-29T00:46:30.255398793"
+        "timestamp": "2026-05-29T03:53:26.611534435"
     }
 }
