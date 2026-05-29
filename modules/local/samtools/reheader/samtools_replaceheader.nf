@@ -24,7 +24,8 @@ process SAMTOOLS_REHEADER {
     suffix = file.getExtension()
     def sq_template = header_template ? " | grep -v ^@SQ && grep '^@SQ' ${header_template}" : ""
     // Suffix all PG IDs from sample extra_header to keep them distinct from native file-header PG IDs.
-    def pg_extra = sample_extra_header ? "grep '^@PG' ${sample_extra_header} | awk 'BEGIN { FS = OFS = \"\\t\" } { for (i = 1; i <= NF; i++) if (\$i ~ /^ID:/) { \$i = \$i \".extra_header\"; break } print }' || true" : "true"
+    // Also rewrite matching PP references so the extra-header PG chain remains intact after suffixing.
+    def pg_extra = sample_extra_header ? "awk 'BEGIN { FS = OFS = \"\\t\" } FNR == NR { if (\$1 == \"@PG\") for (i = 1; i <= NF; i++) if (\$i ~ /^ID:/) { ids[substr(\$i, 4)] = 1; break } next } \$1 == \"@PG\" { for (i = 1; i <= NF; i++) { if (\$i ~ /^ID:/) { \$i = \$i \".extra_header\" } else if (\$i ~ /^PP:/) { pp = substr(\$i, 4); if (pp in ids) \$i = \"PP:\" pp \".extra_header\" } } print }' ${sample_extra_header} ${sample_extra_header} || true" : "true"
 
     if ("$file" == "${prefix}.${suffix}") error "Input and output names are the same, use \"task.ext.prefix\" to disambiguate!"
     """
