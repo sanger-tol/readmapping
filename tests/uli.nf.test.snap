@@ -78,7 +78,7 @@
                 "SAMTOOLS_MERGE": {
                     "samtools": "1.23.1"
                 },
-                "SAMTOOLS_SPLITHEADER": {
+                "SAMTOOLS_SPLITHEADER_BAM": {
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_STATS": {
@@ -209,6 +209,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-05-29T03:53:26.611534435"
+        "timestamp": "2026-06-03T15:10:45.578688714"
     }
 }
