@@ -37,7 +37,6 @@ nextflow_pipeline {
                     .collect { line ->
                             line.toString()
                                 .replaceAll(/\bUR:\/((?:[^\/\s]+\/){2})\S+/, 'UR:/$1<ABS_PATH>')
-                                .replaceAll(/\tDT:[^\t\n]+/, '')
                     }
             }
 
