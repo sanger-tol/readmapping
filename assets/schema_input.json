@@ -50,8 +50,8 @@
                 "type": "string",
                 "format": "file-path",
                 "exists": true,
-                "pattern": "^\\S+\\.(sam|sam.gz)$",
-                "errorMessage": "SAM header file cannot contain spaces and must be in SAM format",
+                "pattern": "^\\S+\\.sam$",
+                "errorMessage": "SAM header file cannot contain spaces and must be an uncompressed SAM file"
                 "meta": ["extra_header"]
             }
         },
