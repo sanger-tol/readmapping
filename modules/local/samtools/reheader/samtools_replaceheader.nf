@@ -14,7 +14,7 @@ process SAMTOOLS_REHEADER {
     output:
     tuple val(meta), path("${prefix}.bam") , optional:true, emit: bam
     tuple val(meta), path("${prefix}.cram"), optional:true, emit: cram
-    tuple val("${task.process}"), val('samtools'), eval("samtools version | sed '1!d;s/.* //'"), topic: versions, emit: versions_samtools
+    tuple val("${task.process}"), val('samtools'), eval("samtools version | sed '1!d;s/.* //'") , topic: versions, emit: versions_samtools
 
     when:
     task.ext.when == null || task.ext.when
@@ -26,6 +26,8 @@ process SAMTOOLS_REHEADER {
     // Suffix all PG IDs from sample extra_header to keep them distinct from native file-header PG IDs.
     // Also rewrite matching PP references so the extra-header PG chain remains intact after suffixing.
     def pg_extra = sample_extra_header ? "awk 'BEGIN { FS = OFS = \"\\t\" } FNR == NR { if (\$1 == \"@PG\") for (i = 1; i <= NF; i++) if (\$i ~ /^ID:/) { ids[substr(\$i, 4)] = 1; break } next } \$1 == \"@PG\" { for (i = 1; i <= NF; i++) { if (\$i ~ /^ID:/) { \$i = \$i \".extra_header\" } else if (\$i ~ /^PP:/) { pp = substr(\$i, 4); if (pp in ids) \$i = \"PP:\" pp \".extra_header\" } } print }' ${sample_extra_header} ${sample_extra_header} || true" : "true"
+    // Last inserted PG ID (after suffix) used to bridge native PG root via PP.
+    def pg_extra_last_id = sample_extra_header ? "awk 'BEGIN { FS = OFS = \"\\t\" } \$1 == \"@PG\" { for (i = 1; i <= NF; i++) if (\$i ~ /^ID:/) { last = substr(\$i, 4) \".extra_header\"; break } } END { if (last != \"\") print last }' ${sample_extra_header}" : "echo ''"
 
     if ("$file" == "${prefix}.${suffix}") error "Input and output names are the same, use \"task.ext.prefix\" to disambiguate!"
     """
@@ -34,13 +36,14 @@ process SAMTOOLS_REHEADER {
         ${sq_template} ) > temp.header.sam
 
     # custom sort for readability (retain order of insertion but sort groups by tag)
-    # Add PG lines from sample header
+    # Add PG lines from sample header and bridge native PG root to inserted chain
     # Sort order: HD, SQ, RG, extra PG, PG, other
+    bridge_id="\$(${pg_extra_last_id})"
     ( grep ^@HD temp.header.sam || true && \\
     grep ^@SQ temp.header.sam || true && \\
     grep ^@RG temp.header.sam || true && \\
     ${pg_extra} && \\
-    grep ^@PG temp.header.sam || true && \\
+    awk -v bridge_id="\$bridge_id" 'BEGIN { FS = OFS = "\\t" } \$1 == "@PG" { if (!bridged) { has_pp = 0; for (i = 1; i <= NF; i++) if (\$i ~ /^PP:/) { has_pp = 1; break } if (!has_pp && bridge_id != "") \$0 = \$0 OFS "PP:" bridge_id; bridged = 1 } print; next }' temp.header.sam || true && \\
     grep -v -E '^@HD|^@SQ|^@RG|^@PG' temp.header.sam || true; \\
     ) > temp.sorted.header.sam
 
