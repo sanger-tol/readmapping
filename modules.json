@@ -130,7 +130,8 @@
                     "samtools/view": {
                         "branch": "master",
                         "git_sha": "2057a0a8dbd67000d08613a556570aa7184a7c89",
-                        "installed_by": ["modules"]
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/samtools/view/samtools-view.diff"
                     }
                 }
             },

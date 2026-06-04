@@ -1,7 +1,7 @@
 {
     "-profile test --short_aligner minimap2 --outfmt 'bam,cram'": {
         "content": [
-            81,
+            74,
             {
                 "BGZIP_BEDGRAPH": {
                     "samtools": "1.23.1"
@@ -46,9 +46,6 @@
                 "SAMTOOLS_ADDREPLACERG": {
                     "samtools": "1.23.1"
                 },
-                "SAMTOOLS_ADD_PG": {
-                    "samtools": "1.23.1"
-                },
                 "SAMTOOLS_CRAM": {
                     "samtools": "1.23.1"
                 },
@@ -67,16 +64,10 @@
                 "SAMTOOLS_INDEX_BAM": {
                     "samtools": "1.23.1"
                 },
-                "SAMTOOLS_INDEX_CRAM": {
-                    "samtools": "1.23.1"
-                },
                 "SAMTOOLS_MERGEDUP": {
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_REHEADER_BAM": {
-                    "samtools": "1.23.1"
-                },
-                "SAMTOOLS_REHEADER_CRAM": {
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_SPLITHEADER": {
@@ -250,17 +241,14 @@
                     "@PG\tID:samtools.3.extra_header\tPN:samtools\tPP:scramble.extra_header\tVN:1.15\tCL:/usr/local/bin/samtools view -h /lustre/scratch124/tol/projects/darwin/data/mammals/Meles_meles/genomic_data/mMelMel3/hic-arima2/35528_2#1.cram",
                     "@PG\tID:samtools.4.extra_header\tPN:samtools\tPP:samtools.3.extra_header\tVN:1.20\tCL:/usr/local/bin/samtools view --cram 35528_2#1.subset.sam",
                     "@PG\tID:samtools.5.extra_header\tPN:samtools\tPP:samtools.4.extra_header\tVN:1.23.1\tCL:samtools view -H 35528_2_1.subset.cram",
-                    "@PG\tID:minimap2\tPN:minimap2\tVN:2.30-r1287\tCL:minimap2 -t4 -ax sr --cs=short -I1.0G -y -R @RG\\tID:35528_2#1\\tDT:2020-11-17T00:00:00+0000\\tPU:201117_A00948_0206_AHGML2DSXY_2#1\\tLB:33637906\\tPG:SCS\\tSM:SAMEA5962964\\tCN:SC\\tPL:ILLUMINA\\tDS:ERP116890: Sequencing and assembly of genomes from British species for the Darwin Tree of Life Project. This data is part of a pre-publication release. For information on the proper use of pre-publication data shared by the Wellcome Trust Sanger Institute (including details of any publication moratoria), please see http://www.sanger.ac.uk/datasharing/  GCA_922984935.2.subset.unmasked.mmi -",
+                    "@PG\tID:minimap2\tPN:minimap2\tVN:2.30-r1287\tCL:minimap2 -t4 -ax sr --cs=short -I1.0G -y -R @RG\\tID:35528_2#1\\tDT:2020-11-17T00:00:00+0000\\tPU:201117_A00948_0206_AHGML2DSXY_2#1\\tLB:33637906\\tPG:SCS\\tSM:SAMEA5962964\\tCN:SC\\tPL:ILLUMINA\\tDS:ERP116890: Sequencing and assembly of genomes from British species for the Darwin Tree of Life Project. This data is part of a pre-publication release. For information on the proper use of pre-publication data shared by the Wellcome Trust Sanger Institute (including details of any publication moratoria), please see http://www.sanger.ac.uk/datasharing/  GCA_922984935.2.subset.unmasked.mmi -\tPP:samtools.5.extra_header",
                     "@PG\tID:samtools\tPN:samtools\tPP:minimap2\tVN:1.22.1\tCL:samtools fixmate -mpu - -",
                     "@PG\tID:samtools.1\tPN:samtools\tPP:samtools\tVN:1.22.1\tCL:samtools view -h",
                     "@PG\tID:samtools.2\tPN:samtools\tPP:samtools.1\tVN:1.22.1\tCL:samtools sort --write-index -l1 -@4 -T 35528_2_1.subset.cram.0.SAMEA7524440.ERR6688402_tmp -o 35528_2_1.subset.cram.0.SAMEA7524440.ERR6688402.bam -",
                     "@PG\tID:samtools.3\tPN:samtools\tPP:samtools.2\tVN:1.23.1\tCL:samtools merge --threads 3 -c -p --reference GCA_922984935.2.subset.unmasked.fa - 1/35528_2_1.subset.cram.0.SAMEA7524440.ERR6688402.bam 2/35528_2_1.subset.cram.1.SAMEA7524440.ERR6688402.bam",
                     "@PG\tID:samtools.4\tPN:samtools\tPP:samtools.3\tVN:1.23.1\tCL:samtools markdup -T SAMEA7524440.ERR6688402 -f SAMEA7524440.ERR6688402.metrics --threads 4 --reference GCA_922984935.2.subset.unmasked.fa - SAMEA7524440.ERR6688402.bam",
                     "@PG\tID:crumble\tPN:crumble\tPP:samtools.4\tVN:0.9.1\tCL:crumble -O bam SAMEA7524440.ERR6688402.bam SAMEA7524440.ERR6688402.crumble.bam",
-                    "@PG\tID:samtools.5\tPN:samtools\tPP:samtools.5.extra_header\tVN:1.23.1\tCL:samtools reheader temp.sorted.header.sam input/GCA_922984935.2.subset.hic.SAMEA7524440.ERR6688402.minimap2.bam",
-                    "@PG\tID:samtools.6\tPN:samtools\tPP:crumble\tVN:1.23.1\tCL:samtools reheader temp.sorted.header.sam input/GCA_922984935.2.subset.hic.SAMEA7524440.ERR6688402.minimap2.bam",
-                    "@PG\tID:samtools.7\tPN:samtools\tPP:samtools.5\tVN:1.23.1\tCL:samtools reheader temp.sorted.header.sam input/GCA_922984935.2.subset.hic.SAMEA7524440.ERR6688402.minimap2.bam",
-                    "@PG\tID:samtools.8\tPN:samtools\tPP:samtools.6\tVN:1.23.1\tCL:samtools reheader temp.sorted.header.sam input/GCA_922984935.2.subset.hic.SAMEA7524440.ERR6688402.minimap2.bam"
+                    "@PG\tID:samtools.5\tPN:samtools\tPP:crumble\tVN:1.23.1\tCL:samtools reheader temp.sorted.header.sam input/GCA_922984935.2.subset.hic.SAMEA7524440.ERR6688402.minimap2.bam"
                 ],
                 "GCA_922984935.2.subset.illumina.SAMEA7524438.ERR6688599.minimap2.bam": [
                     "@HD\tVN:1.6\tSO:coordinate",
@@ -310,19 +298,16 @@
                     "@PG\tID:samtools.3.extra_header\tPN:samtools\tPP:scramble.extra_header\tVN:1.15\tCL:/usr/local/bin/samtools view -h /lustre/scratch124/tol/projects/darwin/data/mammals/Meles_meles/genomic_data/mMelMel3/hic-arima2/35528_2#1.cram",
                     "@PG\tID:samtools.4.extra_header\tPN:samtools\tPP:samtools.3.extra_header\tVN:1.20\tCL:/usr/local/bin/samtools view --cram 35528_2#1.subset.sam",
                     "@PG\tID:samtools.5.extra_header\tPN:samtools\tPP:samtools.4.extra_header\tVN:1.23.1\tCL:samtools view -H 35528_2_1.subset.cram",
-                    "@PG\tID:minimap2\tPN:minimap2\tVN:2.30-r1287\tCL:minimap2 -t4 -ax sr --cs=short -I1.0G -y -R @RG\\tID:35528_2#1\\tDT:2020-11-17T00:00:00+0000\\tPU:201117_A00948_0206_AHGML2DSXY_2#1\\tLB:33637906\\tPG:SCS\\tSM:SAMEA5962964\\tCN:SC\\tPL:ILLUMINA\\tDS:ERP116890: Sequencing and assembly of genomes from British species for the Darwin Tree of Life Project. This data is part of a pre-publication release. For information on the proper use of pre-publication data shared by the Wellcome Trust Sanger Institute (including details of any publication moratoria), please see http://www.sanger.ac.uk/datasharing/  GCA_922984935.2.subset.unmasked.mmi -",
+                    "@PG\tID:minimap2\tPN:minimap2\tVN:2.30-r1287\tCL:minimap2 -t4 -ax sr --cs=short -I1.0G -y -R @RG\\tID:35528_2#1\\tDT:2020-11-17T00:00:00+0000\\tPU:201117_A00948_0206_AHGML2DSXY_2#1\\tLB:33637906\\tPG:SCS\\tSM:SAMEA5962964\\tCN:SC\\tPL:ILLUMINA\\tDS:ERP116890: Sequencing and assembly of genomes from British species for the Darwin Tree of Life Project. This data is part of a pre-publication release. For information on the proper use of pre-publication data shared by the Wellcome Trust Sanger Institute (including details of any publication moratoria), please see http://www.sanger.ac.uk/datasharing/  GCA_922984935.2.subset.unmasked.mmi -\tPP:samtools.5.extra_header",
                     "@PG\tID:samtools\tPN:samtools\tPP:minimap2\tVN:1.22.1\tCL:samtools fixmate -mpu - -",
                     "@PG\tID:samtools.1\tPN:samtools\tPP:samtools\tVN:1.22.1\tCL:samtools view -h",
                     "@PG\tID:samtools.2\tPN:samtools\tPP:samtools.1\tVN:1.22.1\tCL:samtools sort --write-index -l1 -@4 -T 35528_2_1.subset.cram.0.SAMEA7524440.ERR6688402_tmp -o 35528_2_1.subset.cram.0.SAMEA7524440.ERR6688402.bam -",
                     "@PG\tID:samtools.3\tPN:samtools\tPP:samtools.2\tVN:1.23.1\tCL:samtools merge --threads 3 -c -p --reference GCA_922984935.2.subset.unmasked.fa - 1/35528_2_1.subset.cram.0.SAMEA7524440.ERR6688402.bam 2/35528_2_1.subset.cram.1.SAMEA7524440.ERR6688402.bam",
                     "@PG\tID:samtools.4\tPN:samtools\tPP:samtools.3\tVN:1.23.1\tCL:samtools markdup -T SAMEA7524440.ERR6688402 -f SAMEA7524440.ERR6688402.metrics --threads 4 --reference GCA_922984935.2.subset.unmasked.fa - SAMEA7524440.ERR6688402.bam",
                     "@PG\tID:crumble\tPN:crumble\tPP:samtools.4\tVN:0.9.1\tCL:crumble -O bam SAMEA7524440.ERR6688402.bam SAMEA7524440.ERR6688402.crumble.bam",
-                    "@PG\tID:samtools.5\tPN:samtools\tPP:samtools.5.extra_header\tVN:1.23.1\tCL:samtools reheader temp.sorted.header.sam input/GCA_922984935.2.subset.hic.SAMEA7524440.ERR6688402.minimap2.bam",
-                    "@PG\tID:samtools.6\tPN:samtools\tPP:crumble\tVN:1.23.1\tCL:samtools reheader temp.sorted.header.sam input/GCA_922984935.2.subset.hic.SAMEA7524440.ERR6688402.minimap2.bam",
-                    "@PG\tID:samtools.7\tPN:samtools\tPP:samtools.5\tVN:1.23.1\tCL:samtools view --threads 3 --reference GCA_922984935.2.subset.unmasked.fa --output-fmt cram,version=3.0,archive,level=8,embed_ref=1,lossy_names=1 --write-index -o GCA_922984935.2.subset.hic.SAMEA7524440.ERR6688402.minimap2.cram GCA_922984935.2.subset.hic.SAMEA7524440.ERR6688402.minimap2.bam",
-                    "@PG\tID:samtools.8\tPN:samtools\tPP:samtools.6\tVN:1.23.1\tCL:samtools view --threads 3 --reference GCA_922984935.2.subset.unmasked.fa --output-fmt cram,version=3.0,archive,level=8,embed_ref=1,lossy_names=1 --write-index -o GCA_922984935.2.subset.hic.SAMEA7524440.ERR6688402.minimap2.cram GCA_922984935.2.subset.hic.SAMEA7524440.ERR6688402.minimap2.bam",
-                    "@PG\tID:samtools.9\tPN:samtools\tPP:samtools.7\tVN:1.23.1\tCL:samtools reheader temp.sorted.header.sam input/GCA_922984935.2.subset.hic.SAMEA7524440.ERR6688402.minimap2.cram",
-                    "@PG\tID:samtools.10\tPN:samtools\tPP:samtools.8\tVN:1.23.1\tCL:samtools reheader temp.sorted.header.sam input/GCA_922984935.2.subset.hic.SAMEA7524440.ERR6688402.minimap2.cram"
+                    "@PG\tID:samtools.5\tPN:samtools\tPP:crumble\tVN:1.23.1\tCL:samtools reheader temp.sorted.header.sam input/GCA_922984935.2.subset.hic.SAMEA7524440.ERR6688402.minimap2.bam",
+                    "@PG\tID:samtools.6\tPN:samtools\tPP:samtools.5\tVN:1.23.1\tCL:samtools view --threads 3 --reference GCA_922984935.2.subset.unmasked.fa --output-fmt cram,version=3.0,archive,level=8,embed_ref=1,lossy_names=1 --write-index -o GCA_922984935.2.subset.hic.SAMEA7524440.ERR6688402.minimap2.cram GCA_922984935.2.subset.hic.SAMEA7524440.ERR6688402.minimap2.bam",
+                    "@PG\tID:samtools.7\tPN:samtools\tPP:samtools.6\tVN:1.23.1\tCL:samtools reheader temp.reheader.header.sam GCA_922984935.2.subset.hic.SAMEA7524440.ERR6688402.minimap2.cram"
                 ],
                 "GCA_922984935.2.subset.illumina.SAMEA7524438.ERR6688599.minimap2.cram": [
                     "@HD\tVN:1.6\tSO:coordinate",
@@ -335,8 +320,9 @@
                     "@PG\tID:samtools.3\tPN:samtools\tPP:samtools.2\tVN:1.23.1\tCL:samtools merge --threads 3 -c -p --reference GCA_922984935.2.subset.unmasked.fa - 1/SAMEA7524438.ERR6688599.cram.0.SAMEA7524438.ERR6688599.bam 2/SAMEA7524438.ERR6688599.cram.1.SAMEA7524438.ERR6688599.bam",
                     "@PG\tID:samtools.4\tPN:samtools\tPP:samtools.3\tVN:1.23.1\tCL:samtools markdup -T SAMEA7524438.ERR6688599 -f SAMEA7524438.ERR6688599.metrics --threads 4 --reference GCA_922984935.2.subset.unmasked.fa - SAMEA7524438.ERR6688599.bam",
                     "@PG\tID:crumble\tPN:crumble\tPP:samtools.4\tVN:0.9.1\tCL:crumble -O bam SAMEA7524438.ERR6688599.bam SAMEA7524438.ERR6688599.crumble.bam",
-                    "@PG\tID:samtools.5\tPN:samtools\tPP:crumble\tVN:1.23.1\tCL:samtools view --threads 3 --reference GCA_922984935.2.subset.unmasked.fa --output-fmt cram,version=3.0,archive,level=8,embed_ref=1,lossy_names=1 --write-index -o GCA_922984935.2.subset.illumina.SAMEA7524438.ERR6688599.minimap2.cram GCA_922984935.2.subset.illumina.SAMEA7524438.ERR6688599.minimap2.bam",
-                    "@PG\tID:samtools.6\tPN:samtools\tPP:samtools.5\tVN:1.23.1\tCL:samtools reheader temp.sorted.header.sam input/GCA_922984935.2.subset.illumina.SAMEA7524438.ERR6688599.minimap2.cram"
+                    "@PG\tID:samtools.5\tPN:samtools\tPP:crumble\tVN:1.23.1\tCL:samtools reheader temp.sorted.header.sam input/GCA_922984935.2.subset.illumina.SAMEA7524438.ERR6688599.minimap2.bam",
+                    "@PG\tID:samtools.6\tPN:samtools\tPP:samtools.5\tVN:1.23.1\tCL:samtools view --threads 3 --reference GCA_922984935.2.subset.unmasked.fa --output-fmt cram,version=3.0,archive,level=8,embed_ref=1,lossy_names=1 --write-index -o GCA_922984935.2.subset.illumina.SAMEA7524438.ERR6688599.minimap2.cram GCA_922984935.2.subset.illumina.SAMEA7524438.ERR6688599.minimap2.bam",
+                    "@PG\tID:samtools.7\tPN:samtools\tPP:samtools.6\tVN:1.23.1\tCL:samtools reheader temp.reheader.header.sam GCA_922984935.2.subset.illumina.SAMEA7524438.ERR6688599.minimap2.cram"
                 ],
                 "GCA_922984935.2.subset.illumina.SAMEA7524439.ERR6688600.minimap2.cram": [
                     "@HD\tVN:1.6\tSO:coordinate",
@@ -349,8 +335,9 @@
                     "@PG\tID:samtools.3\tPN:samtools\tPP:samtools.2\tVN:1.23.1\tCL:samtools merge --threads 3 -c -p --reference GCA_922984935.2.subset.unmasked.fa - 1/SAMEA7524439.ERR6688600_addRG.cram.0.SAMEA7524439.ERR6688600.bam 2/SAMEA7524439.ERR6688600_addRG.cram.1.SAMEA7524439.ERR6688600.bam",
                     "@PG\tID:samtools.4\tPN:samtools\tPP:samtools.3\tVN:1.23.1\tCL:samtools markdup -T SAMEA7524439.ERR6688600 -f SAMEA7524439.ERR6688600.metrics --threads 4 --reference GCA_922984935.2.subset.unmasked.fa - SAMEA7524439.ERR6688600.bam",
                     "@PG\tID:crumble\tPN:crumble\tPP:samtools.4\tVN:0.9.1\tCL:crumble -O bam SAMEA7524439.ERR6688600.bam SAMEA7524439.ERR6688600.crumble.bam",
-                    "@PG\tID:samtools.5\tPN:samtools\tPP:crumble\tVN:1.23.1\tCL:samtools view --threads 3 --reference GCA_922984935.2.subset.unmasked.fa --output-fmt cram,version=3.0,archive,level=8,embed_ref=1,lossy_names=1 --write-index -o GCA_922984935.2.subset.illumina.SAMEA7524439.ERR6688600.minimap2.cram GCA_922984935.2.subset.illumina.SAMEA7524439.ERR6688600.minimap2.bam",
-                    "@PG\tID:samtools.6\tPN:samtools\tPP:samtools.5\tVN:1.23.1\tCL:samtools reheader temp.sorted.header.sam input/GCA_922984935.2.subset.illumina.SAMEA7524439.ERR6688600.minimap2.cram"
+                    "@PG\tID:samtools.5\tPN:samtools\tPP:crumble\tVN:1.23.1\tCL:samtools reheader temp.sorted.header.sam input/GCA_922984935.2.subset.illumina.SAMEA7524439.ERR6688600.minimap2.bam",
+                    "@PG\tID:samtools.6\tPN:samtools\tPP:samtools.5\tVN:1.23.1\tCL:samtools view --threads 3 --reference GCA_922984935.2.subset.unmasked.fa --output-fmt cram,version=3.0,archive,level=8,embed_ref=1,lossy_names=1 --write-index -o GCA_922984935.2.subset.illumina.SAMEA7524439.ERR6688600.minimap2.cram GCA_922984935.2.subset.illumina.SAMEA7524439.ERR6688600.minimap2.bam",
+                    "@PG\tID:samtools.7\tPN:samtools\tPP:samtools.6\tVN:1.23.1\tCL:samtools reheader temp.reheader.header.sam GCA_922984935.2.subset.illumina.SAMEA7524439.ERR6688600.minimap2.cram"
                 ]
             },
             [
@@ -361,6 +348,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-06-03T15:03:31.017178618"
+        "timestamp": "2026-06-04T18:01:23.719076494"
     }
 }

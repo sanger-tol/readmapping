@@ -5,9 +5,7 @@
 
 // MODULE: local modules
 include { CHANGE_NAME                                   } from '../../modules/local/change_name'
-include { SAMTOOLS_REHEADER as SAMTOOLS_ADD_PG          } from '../../modules/local/samtools/reheader/samtools_replaceheader'
 include { SAMTOOLS_REHEADER as SAMTOOLS_REHEADER_BAM    } from '../../modules/local/samtools/reheader/samtools_replaceheader'
-include { SAMTOOLS_REHEADER as SAMTOOLS_REHEADER_CRAM   } from '../../modules/local/samtools/reheader/samtools_replaceheader'
 
 // MODULE: nf-core modules
 include { BLOBTK_DEPTH                              } from '../../modules/nf-core/blobtk/depth/main'
@@ -15,7 +13,6 @@ include { CRUMBLE                                   } from '../../modules/nf-cor
 include { PIGZ_COMPRESS as GZIP_STATS               } from '../../modules/nf-core/pigz/compress/main'
 include { SAMTOOLS_VIEW as SAMTOOLS_CRAM            } from '../../modules/nf-core/samtools/view/main'
 include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_BAM      } from '../../modules/nf-core/samtools/index/main'
-include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_CRAM     } from '../../modules/nf-core/samtools/index/main'
 include { SAMTOOLS_STATS                            } from '../../modules/nf-core/samtools/stats/main'
 include { SAMTOOLS_FLAGSTAT                         } from '../../modules/nf-core/samtools/flagstat/main'
 include { SAMTOOLS_IDXSTATS                         } from '../../modules/nf-core/samtools/idxstats/main'
@@ -57,16 +54,18 @@ workflow CONVERT_STATS {
     // Change name of BAM files to final name for publishing
     CHANGE_NAME ( ch_bams_for_renaming, fasta )
 
+    header_value = params.header ? header.first() : channel.value([])
     ch_renamed_bams = CHANGE_NAME.out.file
     .branch { meta, bam_file ->
-        extra_header: meta.add_pg
-            return [ meta, bam_file, meta.extra_header ]
-        no_extra_header: true
+        reheader: (params.header || meta.add_pg)
+            return [ meta, bam_file, (meta.add_pg ? meta.extra_header : []) ]
+        passthrough: true
     }
 
-    SAMTOOLS_ADD_PG( ch_renamed_bams.extra_header, [] )
-    ch_bams_add_pg = SAMTOOLS_ADD_PG.out.bam
-    .mix( ch_renamed_bams.no_extra_header )
+    // Reheader only when needed: optional template header and/or sample extra @PG.
+    SAMTOOLS_REHEADER_BAM( ch_renamed_bams.reheader, header_value )
+    ch_bams_reheadered = SAMTOOLS_REHEADER_BAM.out.bam
+    .mix( ch_renamed_bams.passthrough )
     .map { meta, bam_file -> [ meta, bam_file, [] ] }
 
     // (Optionally) convert to CRAM if it's specified in outfmt
@@ -74,17 +73,11 @@ workflow CONVERT_STATS {
     ch_crai = channel.empty()
 
     fasta_dummy_idx = fasta.map { meta, fasta_file -> [ meta, fasta_file, [] ] }
+    cram_reheader_header = params.header ? header_value.map { hdr -> [[], hdr] } : [[],[]]
     if ( "cram" in outfmt_options ) {
-        SAMTOOLS_CRAM ( ch_bams_add_pg, fasta_dummy_idx, [[],[]], [[],[]], "" )
+        SAMTOOLS_CRAM ( ch_bams_reheadered, fasta_dummy_idx, [[],[]], [[],[]], cram_reheader_header, "" )
         ch_cram = SAMTOOLS_CRAM.out.cram
         ch_crai = SAMTOOLS_CRAM.out.crai
-
-        if ( params.header ) {
-            SAMTOOLS_REHEADER_CRAM ( SAMTOOLS_CRAM.out.cram.map{ meta, cram -> [ meta, cram, []] }, header.first() )
-            SAMTOOLS_INDEX_CRAM ( SAMTOOLS_REHEADER_CRAM.out.cram )
-            ch_cram = SAMTOOLS_INDEX_CRAM.out.input
-            ch_crai = SAMTOOLS_INDEX_CRAM.out.index
-        }
 
         // Combine CRAM and CRAI into one channel
         ch_for_stats = ch_cram.join ( ch_crai )
@@ -95,8 +88,8 @@ workflow CONVERT_STATS {
     ch_bai = channel.empty()
 
     if ( "bam" in outfmt_options ) {
-        // Re-header && reindex BAM
-        ch_bam = params.header ? SAMTOOLS_REHEADER_BAM ( ch_bams_add_pg, header.first() ).bam : ch_bams_add_pg.map{ meta, bam_file, _empty -> [ meta, bam_file ] }
+        // Reindex BAM already processed by unified reheader step.
+        ch_bam = ch_bams_reheadered.map{ meta, bam_file, _empty -> [ meta, bam_file ] }
         SAMTOOLS_INDEX_BAM ( ch_bam )
 
         // Set the BAM and BAI channels for emission
@@ -110,7 +103,7 @@ workflow CONVERT_STATS {
     }
 
     // Calculate read depth
-    BLOBTK_DEPTH ( ch_bams_add_pg )
+    BLOBTK_DEPTH ( ch_bams_reheadered )
     BGZIP_BEDGRAPH ( BLOBTK_DEPTH.out.bed )
 
     // Calculate statistics

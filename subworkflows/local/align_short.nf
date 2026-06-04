@@ -34,7 +34,7 @@ workflow ALIGN_SHORT {
     ch_reads_non_crams = ch_reads.non_cram.map { meta, file -> [ meta, file, [] ] }
 
     fasta_dummy_idx = fasta.map { meta, fasta_file -> [ meta, fasta_file, [] ] }
-    CONVERT_CRAM ( ch_reads_non_crams, fasta_dummy_idx, [[],[]], [[],[]], "" )
+    CONVERT_CRAM ( ch_reads_non_crams, fasta_dummy_idx, [[],[]], [[],[]], [[],[]], "" )
 
     // Add read group information to CRAMs if not already present, and merge with CRAMs that already have RG information
     ch_crams_to_addrg = CONVERT_CRAM.out.cram

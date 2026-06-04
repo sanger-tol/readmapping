@@ -1,0 +1,92 @@
+Changes in component 'nf-core/samtools/view'
+'modules/nf-core/samtools/view/meta.yml' is unchanged
+'modules/nf-core/samtools/view/environment.yml' is unchanged
+Changes in 'samtools/view/main.nf':
+--- modules/nf-core/samtools/view/main.nf
++++ modules/nf-core/samtools/view/main.nf
+@@ -12,6 +12,7 @@
+     tuple val(meta2), path(fasta), path(fai)
+     tuple val(meta3), path(qname)
+     tuple val(meta4), path(bed)
++    tuple val(meta5), path(reheader_header)
+     val index_format
+ 
+     output:
+@@ -33,6 +34,9 @@
+     def args2 = task.ext.args2 ?: ''
+     prefix = task.ext.prefix ?: "${meta.id}"
+     def reference = fasta ? "--reference ${fasta}" : ""
++    def args_no_write_index = args.replaceAll(/(^|\\s)--write-index(\\s|$)/, ' ').trim()
++    def should_index = index_format || args.contains('--write-index')
++    def index_opt = index_format == 'bai' ? '-b' : index_format == 'csi' ? '-c' : ''
+     file_type = args.contains("--output-fmt sam")
+         ? "sam"
+         : args.contains("--output-fmt bam")
+@@ -57,19 +61,49 @@
+             error("Indexing not compatible with SAM output")
+         }
+     }
+-    """
+-    # Note: --threads value represents *additional* CPUs to allocate (total CPUs = 1 + --threads).
+-    samtools \\
+-        view \\
+-        --threads ${task.cpus - 1} \\
+-        ${reference} \\
+-        ${readnames} \\
+-        ${bedfile} \\
+-        ${args} \\
+-        -o ${output_file} \\
+-        ${input} \\
+-        ${args2}
+-    """
++
++    if (reheader_header) {
++        """
++        # Note: --threads value represents *additional* CPUs to allocate (total CPUs = 1 + --threads).
++        samtools \\
++            view \\
++            --threads ${task.cpus - 1} \\
++            ${reference} \\
++            ${readnames} \\
++            ${bedfile} \\
++            ${args_no_write_index} \\
++            -o ${prefix}.${file_type} \\
++            ${input} \\
++            ${args2}
++
++        # Build a complete header by preserving existing lines and replacing only @SQ from template.
++        ( samtools view --no-PG --header-only ${prefix}.${file_type} | grep -v '^@SQ' && grep '^@SQ' ${reheader_header} ) > temp.reheader.header.sam
++
++        samtools reheader temp.reheader.header.sam ${prefix}.${file_type} > ${prefix}.reheader.${file_type}
++        mv ${prefix}.reheader.${file_type} ${prefix}.${file_type}
++
++        if [[ "${should_index}" == "true" && "${file_type}" != "sam" ]]; then
++            samtools index --threads ${task.cpus - 1} ${index_opt} ${prefix}.${file_type}
++            if [[ -s ${prefix}.unselected.${file_type} ]]; then
++                samtools index --threads ${task.cpus - 1} ${index_opt} ${prefix}.unselected.${file_type}
++            fi
++        fi
++        """
++    } else {
++        """
++        # Note: --threads value represents *additional* CPUs to allocate (total CPUs = 1 + --threads).
++        samtools \\
++            view \\
++            --threads ${task.cpus - 1} \\
++            ${reference} \\
++            ${readnames} \\
++            ${bedfile} \\
++            ${args} \\
++            -o ${output_file} \\
++            ${input} \\
++            ${args2}
++        """
++    }
+ 
+     stub:
+     def args = task.ext.args ?: ''
+
+'modules/nf-core/samtools/view/tests/nextflow.config' is unchanged
+'modules/nf-core/samtools/view/tests/main.nf.test' is unchanged
+'modules/nf-core/samtools/view/tests/main.nf.test.snap' is unchanged
+************************************************************
