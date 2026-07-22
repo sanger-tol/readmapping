@@ -105,7 +105,7 @@ workflow PIPELINE_INITIALISATION {
     def checkPathParamList = [
         params.input,
         params.fasta,
-        params.pacbio_adapter_fasta,
+        params.pacbio_adapter,
         params.pacbio_adapter_yaml,
         params.pacbio_uli_adapter,
     ]
