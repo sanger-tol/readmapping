@@ -3,6 +3,20 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [[v2.0.4](https://github.com/sanger-tol/readmapping/releases/tag/2.0.3)] - Hungarian Horntail (patch 4) - [2026-release-date]
+
+### Enhancements & fixes
+
+- Accept a prebuilt blast DB for HiFi adapters
+
+### Parameters
+
+| Old parameter            | New parameter      |
+| ------------------------ | ------------------ |
+| `--pacbio_adapter_fasta` | `--pacbio_adapter` |
+
+> **NB:** Parameter has been **updated** if both old and new parameter information is present. </br> **NB:** Parameter has been **added** if just the new parameter information is present. </br> **NB:** Parameter has been **removed** if new parameter information isn't present.
+
 ## [[v2.0.3](https://github.com/sanger-tol/readmapping/releases/tag/2.0.3)] - Hungarian Horntail (patch 3) - [2026-05-15]
 
 ### Enhancements & fixes
