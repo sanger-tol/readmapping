@@ -91,7 +91,7 @@ workflow ALIGN_LONG {
             GAWK_MODIFY_YAML_BARCODE( ch_yaml_meta.has_barcode, [], false )
             ch_yml_barcoded = GAWK_MODIFY_YAML_BARCODE.out.output.mix( ch_yaml_meta.no_barcode )
             ch_pacbio_read_yaml = ch_reads.pacbio.combine(ch_yml_barcoded, by: 0)
-            adapter_fasta_for_preprocess = [[id:file( val_pacbio_adapter ).baseName], val_pacbio_adapter]
+            adapter_fasta_for_preprocess = val_pacbio_adapter
         } else {
             ch_pacbio_read_yaml = ch_reads.pacbio.map { meta, read_files -> [ meta, read_files, [] ] } //PacBio reads with dummy yaml
             adapter_fasta_for_preprocess = false
@@ -138,7 +138,7 @@ workflow ALIGN_LONG {
             .mix( PACBIO_PREPROCESS_ULI.out.lima_summary )
             .mix( PACBIO_PREPROCESS_ULI.out.hifitrimmer_bed )
             .mix( PACBIO_PREPROCESS_ULI.out.hifitrimmer_summary )
-            .mix( PACBIO_PREPROCESS_ULI.out.pbmarkdup_stat )
+            .mix( PACBIO_PREPROCESS_ULI.out.pbmarkdup_stats )
 
         bam_to_fastx = untrimmed_bam.mix( ch_reads.non_pacbio_bam )
         fastx = pacbio_fastx.mix( ch_reads.non_pacbio_fastx )
