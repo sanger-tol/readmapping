@@ -163,7 +163,7 @@
             "modules": {
                 "sanger-tol": {
                     "blast/blastn": {
-                        "branch": "accept_blastdb_hifitrimmer",
+                        "branch": "main",
                         "git_sha": "a4798f6a4c641ae7b4f482053b2ea5a0a87ed3f6",
                         "installed_by": ["pacbio_preprocess"]
                     },
@@ -223,7 +223,7 @@
                         "installed_by": ["subworkflows"]
                     },
                     "pacbio_preprocess": {
-                        "branch": "accept_blastdb_hifitrimmer",
+                        "branch": "main",
                         "git_sha": "c98eb0c4b23e47bf525886465a60d2a4c52df36d",
                         "installed_by": ["subworkflows"]
                     }
