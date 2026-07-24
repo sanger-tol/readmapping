@@ -85,7 +85,7 @@
                     "untar": 1.34
                 },
                 "Workflow": {
-                    "sanger-tol/readmapping": "v4"
+                    "sanger-tol/readmapping": "v2.0.4"
                 }
             },
             [
