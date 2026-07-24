@@ -110,7 +110,7 @@
                     "untar": 1.34
                 },
                 "Workflow": {
-                    "sanger-tol/readmapping": "v2.0.3"
+                    "sanger-tol/readmapping": "v2.0.4"
                 }
             },
             [
@@ -274,7 +274,7 @@
                 "GCA_922984935.2.subset.pacbio.SAMEA7524440.merged_1.minimap2.stats.gz:md5,d0afecc3b0dc7c3dda2fb8684c5cec7a"
             ],
             {
-                
+
             },
             {
                 "GCA_922984935.2.subset.hic.SAMEA7524440.ERR6688402.bwamem2.cram": {
