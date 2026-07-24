@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Enhancements & fixes
 
 - Accept a prebuilt blast DB for HiFi adapters
-- Fix BigDecimal error
+- Fix BigDecimal error when running under Nextflow 26.04
 
 ### Parameters
 
