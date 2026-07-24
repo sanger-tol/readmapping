@@ -4,13 +4,14 @@ include { HIFITRIMMER_PROCESSBLAST             } from '../../../modules/nf-core/
 include { HIFITRIMMER_FILTERBAM                } from '../../../modules/nf-core/hifitrimmer/filterbam/main'
 include { LIMA                                 } from '../../../modules/nf-core/lima/main'
 include { PBMARKDUP                            } from '../../../modules/nf-core/pbmarkdup/main'
+include { UNTAR                                } from '../../../modules/nf-core/untar/main'
 
 workflow PACBIO_PREPROCESS {
 
     take:
     ch_reads                    // Channel [meta, input]: input reads in FASTA/FASTQ/BAM format
     ch_adapter_yaml             // Channel [meta, yaml]: yaml file for hifitrimmer adapter trimming
-    val_adapter_fasta           // Adapter fasta to make database for blastn
+    val_hifi_adapter            // Path to Hifi adapter DB or Hifi adapter fasta to make database for blastn
     val_uli_primers             // Primer file for lima
     val_pbmarkdup               // Options to run pbmarkdup
 
@@ -57,7 +58,7 @@ workflow PACBIO_PREPROCESS {
     //
     hifitrimmer_summary = channel.empty()
     hifitrimmer_bed = channel.empty()
-    if ( val_adapter_fasta ) {
+    if ( val_hifi_adapter ) {
         // Assign ch_input_skip_trimm to those without adapter yaml for trimming
         ch_input_skip_trim = ch_input_pre_trim
             .join(ch_adapter_yaml, by: 0, remainder: true)
@@ -77,13 +78,20 @@ workflow PACBIO_PREPROCESS {
             .map { meta, reads, _yaml -> [meta, reads] }
 
         // Make adapter database
-        BLAST_MAKEBLASTDB( val_adapter_fasta, [] )
+        adapter_fasta_ch = channel.of([ [id: file(val_hifi_adapter).baseName], file(val_hifi_adapter) ])
+        if ( val_hifi_adapter.endsWith('.tar.gz') ) {
+            UNTAR( adapter_fasta_ch )
+            adapter_db = UNTAR.out.untar
+        } else {
+            BLAST_MAKEBLASTDB( adapter_fasta_ch, [] )
+            adapter_db = BLAST_MAKEBLASTDB.out.db
+        }
 
         //
         // ADAPTER SEARCH WITH BLASTN
         //
         // Convert reads to FASTA for BLASTN
-        BLAST_BLASTN ( ch_input_to_trim, BLAST_MAKEBLASTDB.out.db.collect(), [],[],[] )
+        BLAST_BLASTN ( ch_input_to_trim, adapter_db.collect(), [],[],[] )
 
         //
         // PROCESS BLAST OUTPUT WITH HIFITRIMMER PROCESSBLAST
@@ -128,5 +136,5 @@ workflow PACBIO_PREPROCESS {
     lima_summary        = lima_summary                      // [meta, summary]
     hifitrimmer_bed     = hifitrimmer_bed                   // [meta, bed]
     hifitrimmer_summary = hifitrimmer_summary               // [meta, summary]
-    pbmarkdup_stat      = pbmarkdup_stats                   // [meta, log]
+    pbmarkdup_stats     = pbmarkdup_stats                   // [meta, log]
 }
