@@ -19,7 +19,7 @@ workflow ALIGN_LONG {
     take:
     fasta                          // channel: [ val(meta), /path/to/fasta ]
     reads                          // channel: [ val(meta), /path/to/datafile ] only accept FASTQ/BAM
-    val_pacbio_adapter_fasta       // channel: /path/to/pacbio_adapter_fasta for blastn database (produce blast input for hifi_trimmer_processblast)
+    val_pacbio_adapter             // channel: /path/to/pacbio_adapter for blastn database (produce blast input for hifi_trimmer_processblast)
     val_pacbio_adapter_yaml        // channel: /path/to/pacbio_adapter_yaml for hifitrimmer to process blast output for adapter trimming
     val_pacbio_uli_adapter         // channel: /path/to/pacbio_uli_adapter for lima demultiplexing
 
@@ -61,7 +61,7 @@ workflow ALIGN_LONG {
     //
     // PACBIO READ PREPROCESSING
     //
-    if (val_pacbio_adapter_fasta || val_pacbio_adapter_yaml || val_pacbio_uli_adapter) { // pacbio_adapter_fasta, pacbio_adapter_yaml, pacbio_uli_adapter always provided
+    if (val_pacbio_adapter || val_pacbio_adapter_yaml || val_pacbio_uli_adapter) { // pacbio_adapter, pacbio_adapter_yaml, pacbio_uli_adapter always provided
         ch_reads = ch_reads_rg
             .branch { meta, read_files ->
                 pacbio: meta.datatype == "pacbio"
@@ -73,14 +73,14 @@ workflow ALIGN_LONG {
         // PREPARE INPUT FOR ADAPTER TRIMMING WITH HIFITRIMMER
         //
         // If adapter fasta provided but not yaml, throw error as yaml is needed for adapter trimming with hifitrimmer
-        if ( (val_pacbio_adapter_fasta && !val_pacbio_adapter_yaml) || (!val_pacbio_adapter_fasta && val_pacbio_adapter_yaml) ) {
+        if ( (val_pacbio_adapter && !val_pacbio_adapter_yaml) || (!val_pacbio_adapter && val_pacbio_adapter_yaml) ) {
             log.error("""
-            Adapter trimming configuration is invalid. Please provide BOTH parameters: pacbio_adapter_fasta & pacbio_adapter_yaml.
+            Adapter trimming configuration is invalid. Please provide BOTH parameters: pacbio_adapter & pacbio_adapter_yaml.
             Or set BOTH to false to disable adapter trimming for PacBio reads.
             """)
         }
 
-        if (val_pacbio_adapter_fasta && val_pacbio_adapter_yaml) {
+        if (val_pacbio_adapter && val_pacbio_adapter_yaml) {
             ch_yaml_meta = ch_reads.pacbio
                 .combine( channel.fromPath(val_pacbio_adapter_yaml, checkIfExists: true) )
                 .map{ meta, _reads, yaml -> [ meta, yaml ]}
@@ -91,7 +91,7 @@ workflow ALIGN_LONG {
             GAWK_MODIFY_YAML_BARCODE( ch_yaml_meta.has_barcode, [], false )
             ch_yml_barcoded = GAWK_MODIFY_YAML_BARCODE.out.output.mix( ch_yaml_meta.no_barcode )
             ch_pacbio_read_yaml = ch_reads.pacbio.combine(ch_yml_barcoded, by: 0)
-            adapter_fasta_for_preprocess = [[id:file( val_pacbio_adapter_fasta ).baseName], val_pacbio_adapter_fasta]
+            adapter_fasta_for_preprocess = val_pacbio_adapter
         } else {
             ch_pacbio_read_yaml = ch_reads.pacbio.map { meta, read_files -> [ meta, read_files, [] ] } //PacBio reads with dummy yaml
             adapter_fasta_for_preprocess = false
@@ -138,7 +138,7 @@ workflow ALIGN_LONG {
             .mix( PACBIO_PREPROCESS_ULI.out.lima_summary )
             .mix( PACBIO_PREPROCESS_ULI.out.hifitrimmer_bed )
             .mix( PACBIO_PREPROCESS_ULI.out.hifitrimmer_summary )
-            .mix( PACBIO_PREPROCESS_ULI.out.pbmarkdup_stat )
+            .mix( PACBIO_PREPROCESS_ULI.out.pbmarkdup_stats )
 
         bam_to_fastx = untrimmed_bam.mix( ch_reads.non_pacbio_bam )
         fastx = pacbio_fastx.mix( ch_reads.non_pacbio_fastx )

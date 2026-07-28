@@ -53,7 +53,7 @@
                     "fa_icon": "fas fa-chart-bar",
                     "minimum": 1
                 },
-                "pacbio_adapter_fasta": {
+                "pacbio_adapter": {
                     "type": "string",
                     "description": "Path to FASTA file contains adapter sequences for PacBio HiFi reads.",
                     "format": "file-path",

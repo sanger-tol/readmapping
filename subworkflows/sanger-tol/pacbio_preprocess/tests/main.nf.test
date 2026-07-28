@@ -14,6 +14,8 @@ nextflow_workflow {
     tag "subworkflows/../../modules/nf-core/hifitrimmer/filterbam"
     tag "subworkflows/../../modules/nf-core/lima"
     tag "subworkflows/../../modules/nf-core/pbmarkdup"
+    tag "subworkflows/../../modules/nf-core/untar"
+
 
     setup {
         nfcoreInitialise("${launchDir}/library/")
@@ -24,7 +26,8 @@ nextflow_workflow {
                 "hifitrimmer/processblast",
                 "hifitrimmer/filterbam",
                 "lima",
-                "pbmarkdup"
+                "pbmarkdup",
+                "untar"
             ]
         )
         nfcoreLink("${launchDir}/library/", "${baseDir}/modules/")
@@ -71,12 +74,7 @@ nextflow_workflow {
                         file(params.modules_testdata_base_path + 'resources/modules/pacbio_preprocess/HiFi_adapter.yaml', checkIfExists: true)
                     ]
                 )
-                input[2] = Channel.of(
-                    [
-                        [id:'blast_db'], // meta map
-                        file(params.modules_testdata_base_path + 'resources/modules/pacbio_preprocess//HiFi_adapter_DB.fasta', checkIfExists: true)
-                    ]
-                )
+                input[2] = params.modules_testdata_base_path + 'resources/modules/pacbio_preprocess/HiFi_adapter_DB.fasta'
                 input[3] = file(params.modules_testdata_base_path + 'resources/modules/pacbio_preprocess/pacbio_uli_adapter.fasta', checkIfExists: true)
                 input[4] = true
                 """
@@ -100,7 +98,83 @@ nextflow_workflow {
                         workflow.out.hifitrimmer_bed,
                         workflow.out.lima_report,
                         workflow.out.lima_summary,
-                        workflow.out.pbmarkdup_stat
+                        workflow.out.pbmarkdup_stats
+                    ).match()
+                }
+            )
+        }
+
+        cleanup {
+            nfcoreUnlink("${launchDir}/library/", "${baseDir}/modules/nf-core")
+        }
+    }
+
+    test("acropora cervicornis - HiFi_adapter_DB") {
+
+        when {
+            params {
+                lima_args             = "--hifi-preset SYMMETRIC-ADAPTERS"
+                pbmarkdup_args        = "--clobber --rmdup --log-level INFO"
+                makeblastdb_args      = "-dbtype nucl"
+                blastn_args           = '-task blastn -reward 1 -penalty -5 -gapopen 3 -gapextend 3 -dust no -soft_masking true -evalue 700 -searchsp 1750000000000 -outfmt "6 std qlen"'
+                hifitrimmer_args      = ""
+            }
+
+            workflow {
+                """
+                input[0] = Channel.of(
+                    [
+                        [ id:'test_bam' ],
+                        file(params.modules_testdata_base_path + 'Acropora_cervicornis/genomic_data/m84093_241116_151316_s2.hifi_reads.bc2028.subset.bam', checkIfExists: true)
+                    ],
+                    [
+                        [ id:'test_fasta' ],
+                        file(params.modules_testdata_base_path + 'Acropora_cervicornis/genomic_data/m84093_241116_151316_s2.hifi_reads.bc2028.subset.fasta', checkIfExists: true)
+                    ],
+                    [
+                        [ id:'test_fastq' ],
+                        file(params.modules_testdata_base_path + 'Acropora_cervicornis/genomic_data/m84093_241116_151316_s2.hifi_reads.bc2028.subset.fastq', checkIfExists: true)
+                    ]
+                )
+                input[1] = Channel.of(
+                    [
+                        [ id:'test_bam' ], // meta map
+                        file(params.modules_testdata_base_path + 'resources/modules/pacbio_preprocess/HiFi_adapter.yaml', checkIfExists: true)
+                    ],
+                    [
+                        [ id:'test_fasta' ], // meta map
+                        file(params.modules_testdata_base_path + 'resources/modules/pacbio_preprocess/HiFi_adapter.yaml', checkIfExists: true)
+                    ],
+                    [
+                        [ id:'test_fastq' ], // meta map
+                        file(params.modules_testdata_base_path + 'resources/modules/pacbio_preprocess/HiFi_adapter.yaml', checkIfExists: true)
+                    ]
+                )
+                input[2] = params.modules_testdata_base_path + 'resources/modules/pacbio_preprocess/HiFi_adapter_DB.tar.gz'
+                input[3] = file(params.modules_testdata_base_path + 'resources/modules/pacbio_preprocess/pacbio_uli_adapter.fasta', checkIfExists: true)
+                input[4] = true
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.out.trimmed_fastx.size() == 3 }, // hifitrimmer always output fastx
+                { assert workflow.out.untrimmed_fastx.size() == 0 },
+                { assert workflow.out.untrimmed_bam.size() == 0 },
+                {
+                    assert snapshot(
+                        workflow.out.untrimmed_fastx,
+                        workflow.out.trimmed_fastx,
+                        workflow.out.untrimmed_bam.collect{ meta, bam_file -> bam(bam_file, stringency: "silent").getStatistics() }.sort(),
+                        workflow.out.hifitrimmer_summary.collect{ meta, summary_file ->
+                            [ meta, path(summary_file).json.tap { it.remove('run_info') } ]
+                        },
+                        workflow.out.hifitrimmer_bed,
+                        workflow.out.lima_report,
+                        workflow.out.lima_summary,
+                        workflow.out.pbmarkdup_stats
                     ).match()
                 }
             )
@@ -148,12 +222,7 @@ nextflow_workflow {
                         file(params.modules_testdata_base_path + 'resources/modules/pacbio_preprocess/HiFi_adapter.yaml', checkIfExists: true)
                     ]
                 )
-                input[2] = channel.of(
-                    [
-                        [id:'blast_db'], // meta map
-                        file(params.modules_testdata_base_path + 'resources/modules/pacbio_preprocess//HiFi_adapter_DB.fasta', checkIfExists: true)
-                    ]
-                )
+                input[2] = params.modules_testdata_base_path + 'resources/modules/pacbio_preprocess/HiFi_adapter_DB.fasta'
                 input[3] = []
                 input[4] = true
                 """
@@ -177,7 +246,7 @@ nextflow_workflow {
                         workflow.out.hifitrimmer_bed,
                         workflow.out.lima_report,
                         workflow.out.lima_summary,
-                        workflow.out.pbmarkdup_stat
+                        workflow.out.pbmarkdup_stats
                     ).match()
                 }
             )
@@ -217,7 +286,7 @@ nextflow_workflow {
                     ]
                 )
                 input[1] = channel.empty()
-                input[2] = []
+                input[2] = ''
                 input[3] = file(params.modules_testdata_base_path + 'resources/modules/pacbio_preprocess/pacbio_uli_adapter.fasta', checkIfExists: true)
                 input[4] = false
                 """
@@ -241,7 +310,7 @@ nextflow_workflow {
                         workflow.out.hifitrimmer_bed,
                         workflow.out.lima_report,
                         workflow.out.lima_summary,
-                        workflow.out.pbmarkdup_stat
+                        workflow.out.pbmarkdup_stats
                     ).match()
                 }
             )
@@ -280,7 +349,7 @@ nextflow_workflow {
                     ]
                 )
                 input[1] = channel.empty()
-                input[2] = []
+                input[2] = ''
                 input[3] = file(params.modules_testdata_base_path + 'resources/modules/pacbio_preprocess/pacbio_uli_adapter.fasta', checkIfExists: true)
                 input[4] = false
                 """
@@ -304,7 +373,7 @@ nextflow_workflow {
                         workflow.out.hifitrimmer_bed,
                         workflow.out.lima_report,
                         workflow.out.lima_summary,
-                        workflow.out.pbmarkdup_stat
+                        workflow.out.pbmarkdup_stats
                     ).match()
                 }
             )

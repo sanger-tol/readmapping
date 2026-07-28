@@ -30,7 +30,7 @@ lint:
     - manifest.name
     - manifest.homePage
     - config_defaults:
-        - params.pacbio_adapter_fasta
+        - params.pacbio_adapter
         - params.pacbio_adapter_yaml
         - params.pacbio_uli_adapter
 nf_core_version: 3.5.2
@@ -47,4 +47,4 @@ template:
     - igenomes
     - multiqc
     - fastqc
-  version: 2.0.3
+  version: 2.0.4

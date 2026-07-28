@@ -18,6 +18,8 @@ components:
       git_remote: https://github.com/nf-core/modules.git
   - pbmarkdup:
       git_remote: https://github.com/nf-core/modules.git
+  - untar:
+      git_remote: https://github.com/nf-core/modules.git
 
 input:
   - ch_reads:
@@ -32,10 +34,10 @@ input:
         Input channel containing YAML file for HiFiTrimmer adapter trimming, specific to each read files, paired by meta information.
         Structure: [ val(meta), path(yaml) ]
       pattern: "*.yaml"
-  - val_adapter_fasta:
+  - val_hifi_adapter:
       type: file
       description: |
-        Adapter database for BLASTN adapter detection.
+        Path to Adapter database or Adapter fasta for BLASTN adapter detection.
       pattern: "*.(fasta|fa|fna)"
   - val_uli_primers:
       type: file
@@ -97,12 +99,6 @@ output:
         pbmarkdup duplicate marking statistics (if val_uli_primers provided).
         Structure: [ val(meta), path(log) ]
       pattern: "*.log"
-  - versions:
-      type: file
-      description: |
-        File containing software versions.
-        Structure: [ path(versions.yml) ]
-      pattern: "versions.yml"
 authors:
   - "@sainsachiko"
 maintainers:

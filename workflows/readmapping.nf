@@ -53,7 +53,7 @@ workflow READMAPPING {
     reports          = channel.empty()
 
     // Initialize input values for PacBio read preprocessing
-    val_pacbio_adapter_fasta = params.pacbio_adapter_fasta ?: []
+    val_pacbio_adapter = params.pacbio_adapter ?: []
     val_pacbio_adapter_yaml = params.pacbio_adapter_yaml ?: []
     val_pacbio_uli_adapter  = params.pacbio_uli_adapter ?: []
 
@@ -85,7 +85,7 @@ workflow READMAPPING {
     ALIGN_LONG (
         INPUT_CHECK.out.fasta,
         ch_reads.long_reads,
-        val_pacbio_adapter_fasta,
+        val_pacbio_adapter,
         val_pacbio_adapter_yaml,
         val_pacbio_uli_adapter,
     )

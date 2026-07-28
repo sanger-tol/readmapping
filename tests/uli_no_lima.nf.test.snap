@@ -11,9 +11,6 @@
                     "samtools": "1.23.1",
                     "seqkit": "2.12.0"
                 },
-                "BLAST_MAKEBLASTDB": {
-                    "makeblastdb": "2.17.0+"
-                },
                 "BLOBTK_DEPTH": {
                     "blobtk": "0.7.1"
                 },
@@ -81,8 +78,11 @@
                 "SAMTOOLS_STATS": {
                     "samtools": "1.23.1"
                 },
+                "UNTAR": {
+                    "untar": 1.34
+                },
                 "Workflow": {
-                    "sanger-tol/readmapping": "v2.0.3"
+                    "sanger-tol/readmapping": "v2.0.4"
                 }
             },
             [
@@ -169,10 +169,10 @@
                 "pacbio.SAMEA114784749.ERR14209104_test.hifitrimmer.summary.json:md5,4ab835890a22ca1dd2206300f30fbc27"
             ]
         ],
+        "timestamp": "2026-07-22T20:13:51.327699025",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-04-29T19:16:58.80829055"
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.3"
+        }
     }
 }
