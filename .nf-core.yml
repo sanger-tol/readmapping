@@ -30,10 +30,10 @@ lint:
     - manifest.name
     - manifest.homePage
     - config_defaults:
-        - params.hifi_adapter_db
-        - params.hifi_adapter_yaml
-        - params.uli_adapter
-nf_core_version: 3.5.2
+        - params.pacbio_adapter
+        - params.pacbio_adapter_yaml
+        - params.pacbio_uli_adapter
+nf_core_version: 4.1.0
 repository_type: pipeline
 template:
   author: "@priyanka-surana"
@@ -48,4 +48,4 @@ template:
     - igenomes
     - multiqc
     - fastqc
-  version: 1.4.0dev
+  version: 2.0.4
