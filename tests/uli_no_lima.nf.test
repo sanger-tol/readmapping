@@ -36,6 +36,7 @@ nextflow_pipeline {
                     .collect { line ->
                         line.toString()
                             .replaceAll(/\bUR:\/(?:[^\/\s]+\/)*([^\/\s]+)/, 'UR:$1')
+                            .replaceAll(/\bCL:\/(?:[^\t ]*\/)?([^\/\t ]+)(?= )/, 'CL:$1')
                     }
             }
 
