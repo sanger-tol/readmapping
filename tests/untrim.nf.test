@@ -30,6 +30,16 @@ nextflow_pipeline {
             def cram_path = getAllFilesFromDir(params.outdir, include: ['**/*.cram'], relative: true, includeDir: false)
             def bam_path = getAllFilesFromDir(params.outdir, include: ['**/*.bam'], relative: true, includeDir: false)
             def fasta = 'https://tolit.cog.sanger.ac.uk/test-data/Meles_meles/assembly/release/mMelMel3.1_paternal_haplotype/GCA_922984935.2.subset.fasta'
+            def strip_absolute_path_lines = { text ->
+                def lines = text?.getClass()?.isArray()
+                    ? text.toList()
+                    : (text instanceof Collection ? text : (text?.toString()?.readLines() ?: []))
+                lines
+                    .collect { line ->
+                        line.toString()
+                            .replaceAll(/\bUR:\/(?:[^\/\s]+\/)*([^\/\s]+)/, 'UR:$1')
+                    }
+            }
 
             assertAll(
                 { assert workflow.success},
@@ -44,6 +54,8 @@ nextflow_pipeline {
                     // Stable mapping files
                     bam_path.collect{ f -> [(new File(f).getName()): bam("${params.outdir}/${f}").getStatistics()] }.collectEntries{ it }.sort(),
                     cram_path.collect{ f -> [(new File(f).getName()): cram("${params.outdir}/${f}", fasta).getStatistics()] }.collectEntries{ it }.sort(),
+                    bam_path.collect{ f -> [(new File(f).getName()): strip_absolute_path_lines(bam("${params.outdir}/${f}").getHeader())] }.collectEntries{ it }.sort(),
+                    cram_path.collect{ f -> [(new File(f).getName()): strip_absolute_path_lines(cram("${params.outdir}/${f}", fasta).getHeader())] }.collectEntries{ it }.sort(),
 
                      // Stable trimming json
                     hifitrimmer_json.collect{ f ->
