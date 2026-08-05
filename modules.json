@@ -40,15 +40,15 @@
                         "git_sha": "96c57dfd98a0641886a67bd449fe33ee2ec0e374",
                         "installed_by": ["modules"]
                     },
-                    "hifitrimmer/filterbam": {
-                        "branch": "master",
-                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
-                        "installed_by": ["pacbio_preprocess"]
-                    },
                     "hifitrimmer/processblast": {
                         "branch": "master",
-                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
+                        "git_sha": "8a90603f7591995c51e6eb6bac31d4694aa3ee83",
                         "installed_by": ["pacbio_preprocess"]
+                    },
+                    "hifitrimmer/trim": {
+                        "branch": "master",
+                        "git_sha": "8a90603f7591995c51e6eb6bac31d4694aa3ee83",
+                        "installed_by": ["_", "a", "b", "c", "e", "i", "o", "p", "r", "s"]
                     },
                     "lima": {
                         "branch": "master",
@@ -224,7 +224,7 @@
                     },
                     "pacbio_preprocess": {
                         "branch": "main",
-                        "git_sha": "c98eb0c4b23e47bf525886465a60d2a4c52df36d",
+                        "git_sha": "bc3bc62987c8ea30b39ba5a7ab9ae719d4592810",
                         "installed_by": ["subworkflows"]
                     }
                 }

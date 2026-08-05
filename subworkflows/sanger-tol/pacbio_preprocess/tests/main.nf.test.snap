@@ -16,9 +16,6 @@
                 ]
             ],
             [
-                
-            ],
-            [
                 {
                     "maxReadLength": 18595,
                     "minReadLength": 1416,
@@ -38,6 +35,15 @@
                 
             ],
             [
+                
+            ],
+            [
+                
+            ],
+            [
+                
+            ],
+            [
                 [
                     {
                         "id": "test_bam"
@@ -81,10 +87,10 @@
                 
             ]
         ],
-        "timestamp": "2026-02-07T03:24:17.839534975",
+        "timestamp": "2026-08-04T00:22:09.339436763",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.3"
         }
     },
     "acropora cervicornis": {
@@ -93,24 +99,77 @@
                 
             ],
             [
-                [
-                    {
-                        "id": "test_bam"
-                    },
-                    "test_bam.fasta.gz:md5,cc85381555ca9711ccc240b62f0f3eba"
-                ],
-                [
-                    {
-                        "id": "test_fasta"
-                    },
-                    "test_fasta.fasta.gz:md5,bf709af5faaa020dc4e6a7b7e23a0002"
-                ],
-                [
-                    {
-                        "id": "test_fastq"
-                    },
-                    "test_fastq.fasta.gz:md5,3f93e046cbb0278282b96bfd584255f5"
-                ]
+                {
+                    "maxReadLength": 17907,
+                    "minReadLength": 1416,
+                    "meanReadLength": 8468,
+                    "maxQuality": 0,
+                    "minQuality": 0,
+                    "meanQuality": 0,
+                    "readCount": 42253,
+                    "duplicateReadCount": 0,
+                    "sorted": true
+                },
+                {
+                    "maxReadLength": 17907,
+                    "minReadLength": 1416,
+                    "meanReadLength": 8468,
+                    "maxQuality": 0,
+                    "minQuality": 0,
+                    "meanQuality": 0,
+                    "readCount": 42253,
+                    "duplicateReadCount": 0,
+                    "sorted": true
+                },
+                {
+                    "maxReadLength": 17907,
+                    "minReadLength": 1416,
+                    "meanReadLength": 8468,
+                    "maxQuality": 255,
+                    "minQuality": 255,
+                    "meanQuality": 255,
+                    "readCount": 42206,
+                    "duplicateReadCount": 0,
+                    "sorted": true
+                }
+            ],
+            [
+                
+            ],
+            [
+                {
+                    "maxReadLength": 17907,
+                    "minReadLength": 1416,
+                    "meanReadLength": 8468,
+                    "maxQuality": 0,
+                    "minQuality": 0,
+                    "meanQuality": 0,
+                    "readCount": 42253,
+                    "duplicateReadCount": 0,
+                    "sorted": true
+                },
+                {
+                    "maxReadLength": 17907,
+                    "minReadLength": 1416,
+                    "meanReadLength": 8468,
+                    "maxQuality": 0,
+                    "minQuality": 0,
+                    "meanQuality": 0,
+                    "readCount": 42253,
+                    "duplicateReadCount": 0,
+                    "sorted": true
+                },
+                {
+                    "maxReadLength": 17907,
+                    "minReadLength": 1416,
+                    "meanReadLength": 8468,
+                    "maxQuality": 255,
+                    "minQuality": 255,
+                    "meanQuality": 255,
+                    "readCount": 42206,
+                    "duplicateReadCount": 0,
+                    "sorted": true
+                }
             ],
             [
                 
@@ -297,6 +356,8 @@
                             }
                         ],
                         "summary": {
+                            "total_reads_processed": 4569,
+                            "total_bases_processed": 39736811,
                             "total_reads_discarded": 294,
                             "total_reads_trimmed": 0,
                             "total_bases_removed": 2560108
@@ -484,6 +545,8 @@
                             }
                         ],
                         "summary": {
+                            "total_reads_processed": 4521,
+                            "total_bases_processed": 39340317,
                             "total_reads_discarded": 249,
                             "total_reads_trimmed": 0,
                             "total_bases_removed": 2193582
@@ -671,6 +734,8 @@
                             }
                         ],
                         "summary": {
+                            "total_reads_processed": 4521,
+                            "total_bases_processed": 39340317,
                             "total_reads_discarded": 249,
                             "total_reads_trimmed": 0,
                             "total_bases_removed": 2193582
@@ -759,10 +824,10 @@
                 ]
             ]
         ],
-        "timestamp": "2026-02-27T14:11:52.790373707",
+        "timestamp": "2026-08-03T21:42:01.009698971",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.3"
         }
     },
     "acropora cervicornis - HiFi_adapter_DB": {
@@ -771,27 +836,48 @@
                 
             ],
             [
-                [
-                    {
-                        "id": "test_bam"
-                    },
-                    "test_bam.fasta.gz:md5,cc85381555ca9711ccc240b62f0f3eba"
-                ],
-                [
-                    {
-                        "id": "test_fasta"
-                    },
-                    "test_fasta.fasta.gz:md5,bf709af5faaa020dc4e6a7b7e23a0002"
-                ],
-                [
-                    {
-                        "id": "test_fastq"
-                    },
-                    "test_fastq.fasta.gz:md5,3f93e046cbb0278282b96bfd584255f5"
-                ]
+                
             ],
             [
                 
+            ],
+            [
+                
+            ],
+            [
+                {
+                    "maxReadLength": 17907,
+                    "minReadLength": 1416,
+                    "meanReadLength": 8468,
+                    "maxQuality": 0,
+                    "minQuality": 0,
+                    "meanQuality": 0,
+                    "readCount": 42253,
+                    "duplicateReadCount": 0,
+                    "sorted": true
+                },
+                {
+                    "maxReadLength": 17907,
+                    "minReadLength": 1416,
+                    "meanReadLength": 8468,
+                    "maxQuality": 0,
+                    "minQuality": 0,
+                    "meanQuality": 0,
+                    "readCount": 42253,
+                    "duplicateReadCount": 0,
+                    "sorted": true
+                },
+                {
+                    "maxReadLength": 17907,
+                    "minReadLength": 1416,
+                    "meanReadLength": 8468,
+                    "maxQuality": 0,
+                    "minQuality": 0,
+                    "meanQuality": 0,
+                    "readCount": 42206,
+                    "duplicateReadCount": 0,
+                    "sorted": true
+                }
             ],
             [
                 [
@@ -975,6 +1061,8 @@
                             }
                         ],
                         "summary": {
+                            "total_reads_processed": 4569,
+                            "total_bases_processed": 39736811,
                             "total_reads_discarded": 294,
                             "total_reads_trimmed": 0,
                             "total_bases_removed": 2560108
@@ -1162,6 +1250,8 @@
                             }
                         ],
                         "summary": {
+                            "total_reads_processed": 4521,
+                            "total_bases_processed": 39340317,
                             "total_reads_discarded": 249,
                             "total_reads_trimmed": 0,
                             "total_bases_removed": 2193582
@@ -1349,6 +1439,8 @@
                             }
                         ],
                         "summary": {
+                            "total_reads_processed": 4521,
+                            "total_bases_processed": 39340317,
                             "total_reads_discarded": 249,
                             "total_reads_trimmed": 0,
                             "total_bases_removed": 2193582
@@ -1437,7 +1529,7 @@
                 ]
             ]
         ],
-        "timestamp": "2026-07-22T13:02:28.547484648",
+        "timestamp": "2026-08-04T00:08:44.62610924",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.3"
@@ -1454,18 +1546,34 @@
                 ]
             ],
             [
-                [
-                    {
-                        "id": "test_bam"
-                    },
-                    "test_bam.fasta.gz:md5,afb3e501c2dd781b90a689246bf65767"
-                ],
-                [
-                    {
-                        "id": "test_fastq"
-                    },
-                    "test_fastq.fasta.gz:md5,afb3e501c2dd781b90a689246bf65767"
-                ]
+                
+            ],
+            [
+                {
+                    "maxReadLength": 12807,
+                    "minReadLength": 2604,
+                    "meanReadLength": 8693,
+                    "maxQuality": 255,
+                    "minQuality": 255,
+                    "meanQuality": 255,
+                    "readCount": 40,
+                    "duplicateReadCount": 0,
+                    "sorted": true
+                },
+                {
+                    "maxReadLength": 12807,
+                    "minReadLength": 2604,
+                    "meanReadLength": 8693,
+                    "maxQuality": 0,
+                    "minQuality": 0,
+                    "meanQuality": 0,
+                    "readCount": 40,
+                    "duplicateReadCount": 0,
+                    "sorted": true
+                }
+            ],
+            [
+                
             ],
             [
                 
@@ -1656,6 +1764,8 @@
                             }
                         ],
                         "summary": {
+                            "total_reads_processed": 42512,
+                            "total_bases_processed": 362243755,
                             "total_reads_discarded": 42501,
                             "total_reads_trimmed": 0,
                             "total_bases_removed": 362139516
@@ -1847,6 +1957,8 @@
                             }
                         ],
                         "summary": {
+                            "total_reads_processed": 42512,
+                            "total_bases_processed": 362243755,
                             "total_reads_discarded": 42501,
                             "total_reads_trimmed": 0,
                             "total_bases_removed": 362139516
@@ -1895,10 +2007,10 @@
                 ]
             ]
         ],
-        "timestamp": "2026-02-27T14:15:01.259857743",
+        "timestamp": "2026-08-04T00:13:40.25899023",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.3"
         }
     },
     "acropora cervicornis - uli - no pbmarkdup - no trim": {
@@ -1918,9 +2030,6 @@
                 ]
             ],
             [
-                
-            ],
-            [
                 {
                     "maxReadLength": 18595,
                     "minReadLength": 1416,
@@ -1932,6 +2041,15 @@
                     "duplicateReadCount": 0,
                     "sorted": true
                 }
+            ],
+            [
+                
+            ],
+            [
+                
+            ],
+            [
+                
             ],
             [
                 
@@ -1983,10 +2101,10 @@
                 
             ]
         ],
-        "timestamp": "2026-02-07T03:18:48.301519067",
+        "timestamp": "2026-08-04T00:17:51.389972254",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.3"
         }
     }
 }

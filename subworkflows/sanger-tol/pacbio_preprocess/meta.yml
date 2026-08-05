@@ -12,7 +12,7 @@ components:
       git_remote: https://github.com/nf-core/modules.git
   - hifitrimmer/processblast:
       git_remote: https://github.com/nf-core/modules.git
-  - hifitrimmer/filterbam:
+  - hifitrimmer/trim:
       git_remote: https://github.com/nf-core/modules.git
   - lima:
       git_remote: https://github.com/nf-core/modules.git
