@@ -169,7 +169,7 @@
                     },
                     "cramalign/bwamem2alignhic": {
                         "branch": "main",
-                        "git_sha": "2e28234fb0e2970767dab28310c7eb553ad40081",
+                        "git_sha": "3f65725eb72ebad4004d9c5b18817121c5e39a3f",
                         "installed_by": ["cram_map_illumina_hic"]
                     },
                     "cramalign/gencramchunks": {
@@ -184,7 +184,7 @@
                     },
                     "cramalign/minimap2alignhic": {
                         "branch": "main",
-                        "git_sha": "2e28234fb0e2970767dab28310c7eb553ad40081",
+                        "git_sha": "3f65725eb72ebad4004d9c5b18817121c5e39a3f",
                         "installed_by": ["cram_map_illumina_hic"],
                         "patch": "modules/sanger-tol/cramalign/minimap2alignhic/cramalign-minimap2alignhic.diff"
                     },
