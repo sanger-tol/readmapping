@@ -508,7 +508,7 @@
                     "@PG\tID:lima\tVN:1.11.0 (commit v1.11.0)\tCL:lima -j 8 --split-bam-named --same --peek-guess --guess-min-count 1000 --ccs m64094_200910_173211.ccs.bam /lustre/scratch116/vr/projects/vgp/ref/barcodes/Sequel_16_Barcodes_v3.fasta lima/m64094_200910_173211.ccs.bam",
                     "@PG\tID:samtools\tPN:samtools\tVN:1.10\tPP:ccs-4.2.0\tCL:samtools merge -@8 -ncp -b m64094_200910_173211.chunks.fofn m64094_200910_173211.ccs.bam",
                     "@PG\tID:samtools.1\tPN:samtools\tVN:1.19.2\tPP:samtools\tCL:samtools view -b -h -N /nfs/users/nfs_m/mm49/READS -o /nfs/users/nfs_m/mm49/x.bam m64094_200910_173211.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.bam",
-                    "@PG\tID:hifi-trimmer\tPN:hifi-trimmer\tVN:4.0.0\tPP:samtools.1\tCL:hifi-trimmer trim -t 1 -f cram m64094_200910_173211.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.subset.bam pacbio.SAMEA7524440.ERR6939248.hifitrimmer.bed.gz",
+                    "@PG\tID:hifi-trimmer\tPN:hifi-trimmer\tVN:4.0.0\tPP:samtools.1\tCL:hifi-trimmer trim -t 4 -f cram m64094_200910_173211.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.subset.bam pacbio.SAMEA7524440.ERR6939248.hifitrimmer.bed.gz",
                     "@PG\tID:samtools.2\tPN:samtools\tPP:hifi-trimmer\tVN:1.22.1\tCL:samtools view -H pacbio.SAMEA7524440.ERR6939248.hifitrimmer.cram",
                     "@PG\tID:minimap2\tPN:minimap2\tVN:2.30-r1287\tCL:minimap2 -t4 -ax map-hifi --cs=short -I1G -y -R @RG\\tID:61ddc6c3/15--15\\tLB:DN615654G-A1\\tPU:m64094_200910_173211\\tDS:READTYPE=CCS;BINDINGKIT=101-789-500;SEQUENCINGKIT=101-826-100;BASECALLERVERSION=5.0.0;FRAMERATEHZ=100.000000;BarcodeFile=/lustre/scratch116/vr/projects/vgp/ref/barcodes/Sequel_16_Barcodes_v3.fasta;BarcodeHash=e418d89cefcbef90f3cb0e6455b7e2a3;BarcodeCount=16;BarcodeMode=Symmetric;BarcodeQuality=Score\\tPL:PACBIO\\tPM:SEQUELII\\tBC:CACTCACGTGTGATATT\\tSM:SAMEA7524440.ERR6939248 GCA_922984935.2.subset.unmasked.mmi -\tPP:samtools.2",
                     "@PG\tID:samtools.3\tPN:samtools\tPP:minimap2\tVN:1.22.1\tCL:samtools sort -@4 -T pacbio.SAMEA7524440.ERR6939248.hifitrimmer.cram.0.SAMEA7524440.ERR6939248_sort_tmp -o pacbio.SAMEA7524440.ERR6939248.hifitrimmer.cram.0.SAMEA7524440.ERR6939248.bam -",
@@ -520,8 +520,8 @@
                 "GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939249.minimap2.cram": [
                     "@HD\tVN:1.6\tSO:coordinate",
                     "@SQ\tSN:OV277441.1\tLN:7999920\tM5:0457acf8690429f1c98ee545cb8573b8\tUR:GCA_922984935.2.subset.fasta.gz\tAS:GCA_922984935.2\tAN:SUPER_1\tSP:Meles meles",
-                    "@PG\tID:samtools\tPN:samtools\tVN:1.24\tCL:samtools import -@ 1 m64094_200911_174739.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.subset.fastq.gz",
-                    "@PG\tID:hifi-trimmer\tPN:hifi-trimmer\tVN:4.0.0\tPP:samtools\tCL:hifi-trimmer trim -t 1 -f cram /dev/fd/63 pacbio.SAMEA7524440.ERR6939249.hifitrimmer.bed.gz",
+                    "@PG\tID:samtools\tPN:samtools\tVN:1.24\tCL:samtools import -@ 4 m64094_200911_174739.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.subset.fastq.gz",
+                    "@PG\tID:hifi-trimmer\tPN:hifi-trimmer\tVN:4.0.0\tPP:samtools\tCL:hifi-trimmer trim -t 4 -f cram /dev/fd/63 pacbio.SAMEA7524440.ERR6939249.hifitrimmer.bed.gz",
                     "@PG\tID:samtools.1\tPN:samtools\tPP:hifi-trimmer\tVN:1.22.1\tCL:samtools view -H pacbio.SAMEA7524440.ERR6939249.hifitrimmer.cram",
                     "@PG\tID:minimap2\tPN:minimap2\tVN:2.30-r1287\tCL:minimap2 -t4 -ax map-hifi --cs=short -I1G GCA_922984935.2.subset.unmasked.mmi -\tPP:samtools.1",
                     "@PG\tID:samtools.2\tPN:samtools\tPP:minimap2\tVN:1.22.1\tCL:samtools sort -@4 -T pacbio.SAMEA7524440.ERR6939249.hifitrimmer.cram.0.SAMEA7524440.ERR6939249_sort_tmp -o pacbio.SAMEA7524440.ERR6939249.hifitrimmer.cram.0.SAMEA7524440.ERR6939249.bam -",
@@ -538,7 +538,7 @@
                     "@PG\tID:lima\tVN:1.11.0 (commit v1.11.0)\tCL:lima -j 8 --split-bam-named --same --peek-guess --guess-min-count 1000 --ccs m64094_200910_173211.ccs.bam /lustre/scratch116/vr/projects/vgp/ref/barcodes/Sequel_16_Barcodes_v3.fasta lima/m64094_200910_173211.ccs.bam",
                     "@PG\tID:samtools\tPN:samtools\tVN:1.10\tPP:ccs-4.2.0\tCL:samtools merge -@8 -ncp -b m64094_200910_173211.chunks.fofn m64094_200910_173211.ccs.bam",
                     "@PG\tID:samtools.1\tPN:samtools\tVN:1.19.2\tPP:samtools\tCL:samtools view -b -h -N /nfs/users/nfs_m/mm49/READS -o /nfs/users/nfs_m/mm49/x.bam m64094_200910_173211.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.bam",
-                    "@PG\tID:hifi-trimmer\tPN:hifi-trimmer\tVN:4.0.0\tPP:samtools.1\tCL:hifi-trimmer trim -t 1 -f cram m64094_200910_173211.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.subset.bam pacbio.SAMEA7524440.ERR6939248.hifitrimmer.bed.gz",
+                    "@PG\tID:hifi-trimmer\tPN:hifi-trimmer\tVN:4.0.0\tPP:samtools.1\tCL:hifi-trimmer trim -t 4 -f cram m64094_200910_173211.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.subset.bam pacbio.SAMEA7524440.ERR6939248.hifitrimmer.bed.gz",
                     "@PG\tID:samtools.2\tPN:samtools\tPP:hifi-trimmer\tVN:1.22.1\tCL:samtools view -H pacbio.SAMEA7524440.ERR6939248.hifitrimmer.cram",
                     "@PG\tID:minimap2\tPN:minimap2\tVN:2.30-r1287\tCL:minimap2 -t4 -ax map-hifi --cs=short -I1G -y -R @RG\\tID:61ddc6c3/15--15\\tLB:DN615654G-A1\\tPU:m64094_200910_173211\\tDS:READTYPE=CCS;BINDINGKIT=101-789-500;SEQUENCINGKIT=101-826-100;BASECALLERVERSION=5.0.0;FRAMERATEHZ=100.000000;BarcodeFile=/lustre/scratch116/vr/projects/vgp/ref/barcodes/Sequel_16_Barcodes_v3.fasta;BarcodeHash=e418d89cefcbef90f3cb0e6455b7e2a3;BarcodeCount=16;BarcodeMode=Symmetric;BarcodeQuality=Score\\tPL:PACBIO\\tPM:SEQUELII\\tBC:CACTCACGTGTGATATT\\tSM:SAMEA7524440.ERR6939248 GCA_922984935.2.subset.unmasked.mmi -\tPP:samtools.2",
                     "@PG\tID:samtools.3\tPN:samtools\tPP:minimap2\tVN:1.22.1\tCL:samtools sort -@4 -T pacbio.SAMEA7524440.ERR6939248.hifitrimmer.cram.0.SAMEA7524440.ERR6939248_sort_tmp -o pacbio.SAMEA7524440.ERR6939248.hifitrimmer.cram.0.SAMEA7524440.ERR6939248.bam -",
@@ -554,7 +554,7 @@
                 "pacbio.SAMEA7524440.ERR6939249.hifitrimmer.summary.json:md5,b41de1b1e61f9063cb042aa6393462d9"
             ]
         ],
-        "timestamp": "2026-08-10T10:04:41.297937416",
+        "timestamp": "2026-08-10T11:52:57.759046173",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.3"
