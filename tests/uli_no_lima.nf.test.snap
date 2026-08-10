@@ -174,8 +174,8 @@
                     "@PG\tID:samtools\tPN:samtools\tVN:1.21\tPP:lima\tCL:samtools view -s 42.008 -b m84093_241116_151316_s2.hifi_reads.bc2028.bam",
                     "@PG\tID:hifi-trimmer\tPN:hifi-trimmer\tVN:4.0.0\tPP:samtools\tCL:hifi-trimmer trim -t 1 -f cram pacbio.SAMEA114784749.ERR14209104.rmdup.bam pacbio.SAMEA114784749.ERR14209104.hifitrimmer.bed.gz",
                     "@PG\tID:samtools.1\tPN:samtools\tPP:hifi-trimmer\tVN:1.22.1\tCL:samtools view -H pacbio.SAMEA114784749.ERR14209104.hifitrimmer.cram",
-                    "@PG\tID:minimap2\tPN:minimap2\tVN:2.30-r1287\tCL:minimap2 -t1 -ax map-hifi --cs=short -I1G -y -R @RG\\tID:0de7f0a4/27--27\\tSM:TOL_ASG14652249\\tLB:TRAC-2-8053\\tPU:m84093_241116_151316_s2\\tDS:READTYPE=CCS;Ipd:CodecV1=ip;PulseWidth:CodecV1=pw;BINDINGKIT=102-739-100;SEQUENCINGKIT=102-118-800;BASECALLERVERSION=5.0;SMRTCELLKIT=102-202-200;SMRTCELLID=EA138735;RUNID=r84093_20241115_102726;ICSVERSION=13.0.0.212033;MOVIELENGTH=1440.0;FRAMERATEHZ=100.000000;BarcodeFile=metadata/m84093_241116_151316_s2.barcodes.fasta;BarcodeHash=86d73e586a6d3ede0295785b51105eea;BarcodeCount=96;BarcodeMode=Symmetric;BarcodeQuality=Score\\tPL:PACBIO\\tPM:REVIO\\tBC:ACTGCAGCACGAGTAT GCA_964034985.1.subset.unmasked.mmi -\tPP:samtools.1",
-                    "@PG\tID:samtools.2\tPN:samtools\tPP:minimap2\tVN:1.22.1\tCL:samtools sort -@1 -T pacbio.SAMEA114784749.ERR14209104.hifitrimmer.cram.0.SAMEA114784749.ERR14209104_sort_tmp -o pacbio.SAMEA114784749.ERR14209104.hifitrimmer.cram.0.SAMEA114784749.ERR14209104.bam -",
+                    "@PG\tID:minimap2\tPN:minimap2\tVN:2.30-r1287\tCL:minimap2 -t4 -ax map-hifi --cs=short -I1G -y -R @RG\\tID:0de7f0a4/27--27\\tSM:TOL_ASG14652249\\tLB:TRAC-2-8053\\tPU:m84093_241116_151316_s2\\tDS:READTYPE=CCS;Ipd:CodecV1=ip;PulseWidth:CodecV1=pw;BINDINGKIT=102-739-100;SEQUENCINGKIT=102-118-800;BASECALLERVERSION=5.0;SMRTCELLKIT=102-202-200;SMRTCELLID=EA138735;RUNID=r84093_20241115_102726;ICSVERSION=13.0.0.212033;MOVIELENGTH=1440.0;FRAMERATEHZ=100.000000;BarcodeFile=metadata/m84093_241116_151316_s2.barcodes.fasta;BarcodeHash=86d73e586a6d3ede0295785b51105eea;BarcodeCount=96;BarcodeMode=Symmetric;BarcodeQuality=Score\\tPL:PACBIO\\tPM:REVIO\\tBC:ACTGCAGCACGAGTAT GCA_964034985.1.subset.unmasked.mmi -\tPP:samtools.1",
+                    "@PG\tID:samtools.2\tPN:samtools\tPP:minimap2\tVN:1.22.1\tCL:samtools sort -@4 -T pacbio.SAMEA114784749.ERR14209104.hifitrimmer.cram.0.SAMEA114784749.ERR14209104_sort_tmp -o pacbio.SAMEA114784749.ERR14209104.hifitrimmer.cram.0.SAMEA114784749.ERR14209104.bam -",
                     "@PG\tID:samtools.3\tPN:samtools\tPP:samtools.2\tVN:1.23.1\tCL:samtools merge --threads 3 -c -p --reference GCA_964034985.1.subset.unmasked.fa SAMEA114784749.ERR14209104.merge.bam 1/pacbio.SAMEA114784749.ERR14209104.hifitrimmer.cram.0.SAMEA114784749.ERR14209104.bam",
                     "@PG\tID:crumble\tPN:crumble\tPP:samtools.3\tVN:0.9.1\tCL:crumble -y pbccs -O bam SAMEA114784749.ERR14209104.merge.bam SAMEA114784749.ERR14209104.merge.crumble.bam"
                 ],
@@ -193,8 +193,8 @@
                     "@PG\tID:samtools\tPN:samtools\tVN:1.21\tPP:lima\tCL:samtools view -s 42.008 -b m84093_241116_151316_s2.hifi_reads.bc2028.bam",
                     "@PG\tID:hifi-trimmer\tPN:hifi-trimmer\tVN:4.0.0\tPP:samtools\tCL:hifi-trimmer trim -t 1 -f cram m84093_241116_151316_s2.hifi_reads.bc2028.subset.bam pacbio.SAMEA114784749.ERR14209104_test.hifitrimmer.bed.gz",
                     "@PG\tID:samtools.1\tPN:samtools\tPP:hifi-trimmer\tVN:1.22.1\tCL:samtools view -H pacbio.SAMEA114784749.ERR14209104_test.hifitrimmer.cram",
-                    "@PG\tID:minimap2\tPN:minimap2\tVN:2.30-r1287\tCL:minimap2 -t1 -ax map-hifi --cs=short -I1G -y -R @RG\\tID:0de7f0a4/27--27\\tSM:TOL_ASG14652249\\tLB:TRAC-2-8053\\tPU:m84093_241116_151316_s2\\tDS:READTYPE=CCS;Ipd:CodecV1=ip;PulseWidth:CodecV1=pw;BINDINGKIT=102-739-100;SEQUENCINGKIT=102-118-800;BASECALLERVERSION=5.0;SMRTCELLKIT=102-202-200;SMRTCELLID=EA138735;RUNID=r84093_20241115_102726;ICSVERSION=13.0.0.212033;MOVIELENGTH=1440.0;FRAMERATEHZ=100.000000;BarcodeFile=metadata/m84093_241116_151316_s2.barcodes.fasta;BarcodeHash=86d73e586a6d3ede0295785b51105eea;BarcodeCount=96;BarcodeMode=Symmetric;BarcodeQuality=Score\\tPL:PACBIO\\tPM:REVIO\\tBC:ACTGCAGCACGAGTAT GCA_964034985.1.subset.unmasked.mmi -\tPP:samtools.1",
-                    "@PG\tID:samtools.2\tPN:samtools\tPP:minimap2\tVN:1.22.1\tCL:samtools sort -@1 -T pacbio.SAMEA114784749.ERR14209104_test.hifitrimmer.cram.0.SAMEA114784749.ERR14209104_test_sort_tmp -o pacbio.SAMEA114784749.ERR14209104_test.hifitrimmer.cram.0.SAMEA114784749.ERR14209104_test.bam -",
+                    "@PG\tID:minimap2\tPN:minimap2\tVN:2.30-r1287\tCL:minimap2 -t4 -ax map-hifi --cs=short -I1G -y -R @RG\\tID:0de7f0a4/27--27\\tSM:TOL_ASG14652249\\tLB:TRAC-2-8053\\tPU:m84093_241116_151316_s2\\tDS:READTYPE=CCS;Ipd:CodecV1=ip;PulseWidth:CodecV1=pw;BINDINGKIT=102-739-100;SEQUENCINGKIT=102-118-800;BASECALLERVERSION=5.0;SMRTCELLKIT=102-202-200;SMRTCELLID=EA138735;RUNID=r84093_20241115_102726;ICSVERSION=13.0.0.212033;MOVIELENGTH=1440.0;FRAMERATEHZ=100.000000;BarcodeFile=metadata/m84093_241116_151316_s2.barcodes.fasta;BarcodeHash=86d73e586a6d3ede0295785b51105eea;BarcodeCount=96;BarcodeMode=Symmetric;BarcodeQuality=Score\\tPL:PACBIO\\tPM:REVIO\\tBC:ACTGCAGCACGAGTAT GCA_964034985.1.subset.unmasked.mmi -\tPP:samtools.1",
+                    "@PG\tID:samtools.2\tPN:samtools\tPP:minimap2\tVN:1.22.1\tCL:samtools sort -@4 -T pacbio.SAMEA114784749.ERR14209104_test.hifitrimmer.cram.0.SAMEA114784749.ERR14209104_test_sort_tmp -o pacbio.SAMEA114784749.ERR14209104_test.hifitrimmer.cram.0.SAMEA114784749.ERR14209104_test.bam -",
                     "@PG\tID:samtools.3\tPN:samtools\tPP:samtools.2\tVN:1.23.1\tCL:samtools merge --threads 3 -c -p --reference GCA_964034985.1.subset.unmasked.fa SAMEA114784749.ERR14209104_test.merge.bam 1/pacbio.SAMEA114784749.ERR14209104_test.hifitrimmer.cram.0.SAMEA114784749.ERR14209104_test.bam",
                     "@PG\tID:crumble\tPN:crumble\tPP:samtools.3\tVN:0.9.1\tCL:crumble -y pbccs -O bam SAMEA114784749.ERR14209104_test.merge.bam SAMEA114784749.ERR14209104_test.merge.crumble.bam"
                 ]
@@ -207,10 +207,10 @@
                 "pacbio.SAMEA114784749.ERR14209104_test.hifitrimmer.summary.json:md5,a0bb029ebd213c14bad17ac343db6cfb"
             ]
         ],
-        "timestamp": "2026-08-05T14:31:37.648488732",
+        "timestamp": "2026-08-10T09:54:16.180953746",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.3"
+            "nextflow": "26.04.4"
         }
     }
 }
