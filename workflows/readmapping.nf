@@ -124,7 +124,7 @@ workflow READMAPPING {
             "${process}:\n${tool_versions.join('\n')}"
         }
 
-    ch_collated_versions = softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
+    def ch_collated_versions = softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
         .mix(topic_versions_string)
         .collectFile(
             storeDir: "${params.outdir}/pipeline_info",
@@ -159,8 +159,7 @@ workflow READMAPPING {
 
 
     emit:
-    versions       = ch_collated_versions                 // channel: [ path(versions.yml) ]
-
+    versions       = ch_versions                 // channel: [ path(versions.yml) ]
 }
 
 /*
