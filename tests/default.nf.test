@@ -1,3 +1,5 @@
+import HeaderUtils
+
 nextflow_pipeline {
 
     name "Test readmapping pipeline with default settings"
@@ -39,6 +41,8 @@ nextflow_pipeline {
                     // Stable mapping files
                     bam_path.collect{ f -> [(new File(f).getName()): bam("${params.outdir}/${f}").getStatistics()] }.collectEntries{ it }.sort(),
                     cram_path.collect{ f -> [(new File(f).getName()): cram("${params.outdir}/${f}", fasta).getStatistics()] }.collectEntries{ it }.sort(),
+                    bam_path.collect{ f -> [(new File(f).getName()): HeaderUtils.sanitizeHeader(bam("${params.outdir}/${f}").getHeader())] }.collectEntries{ it }.sort(),
+                    cram_path.collect{ f -> [(new File(f).getName()): HeaderUtils.sanitizeHeader(cram("${params.outdir}/${f}", fasta).getHeader())] }.collectEntries{ it }.sort(),
 
                      // Stable trimming json
                     hifitrimmer_json.collect{ f ->
