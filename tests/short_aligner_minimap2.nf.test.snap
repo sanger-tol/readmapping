@@ -237,7 +237,7 @@
                 "GCA_922984935.2.subset.illumina.SAMEA7524438.ERR6688599.minimap2.bam": [
                     "@HD\tVN:1.6\tSO:coordinate",
                     "@SQ\tSN:OV277441.1\tLN:7999920\tM5:0457acf8690429f1c98ee545cb8573b8\tUR:GCA_922984935.2.subset.fasta.gz\tAS:GCA_922984935.2\tAN:SUPER_1\tSP:Meles meles",
-                    "@RG\tID:31231_3#1\tDT:2019-10-03T01:00:00+0100\tPU:191003_HX4_31231_A_H3353CCX2_3#1\tLB:23687379\tPG:SCS\tSM:SAMEA5962962\tCN:SC\tPL:ILLUMINA\tDS:ERP114452: Sequencing and assembly of vertebrate genomes from British species for the Darwin Tree of Life Project in collaboration with the Vertebrate Genomes Project. This data is part of a pre-publication release. For information on the proper use of pre-publication data shared by the Wellcome Trust Sanger Institute (including details of any publication moratoria), please see http:/datasharing/",
+                    "@RG\tID:31231_3#1\tDT:2019-10-03T00:00:00+0000\tPU:191003_HX4_31231_A_H3353CCX2_3#1\tLB:23687379\tPG:SCS\tSM:SAMEA5962962\tCN:SC\tPL:ILLUMINA\tDS:ERP114452: Sequencing and assembly of vertebrate genomes from British species for the Darwin Tree of Life Project in collaboration with the Vertebrate Genomes Project. This data is part of a pre-publication release. For information on the proper use of pre-publication data shared by the Wellcome Trust Sanger Institute (including details of any publication moratoria), please see http:/datasharing/",
                     "@PG\tID:minimap2\tPN:minimap2\tVN:2.30-r1287\tCL:minimap2 -t N -ax sr --cs=short -I1.0G -y -R @RG\\tID:31231_3#1\\tDT:2019-10-03T00:00:00+0000\\tPU:191003_HX4_31231_A_H3353CCX2_3#1\\tLB:23687379\\tPG:SCS\\tSM:SAMEA5962962\\tCN:SC\\tPL:ILLUMINA\\tDS:ERP114452: Sequencing and assembly of vertebrate genomes from British species for the Darwin Tree of Life Project in collaboration with the Vertebrate Genomes Project. This data is part of a pre-publication release. For information on the proper use of pre-publication data shared by the Wellcome Trust Sanger Institute (including details of any publication moratoria), please see http:/datasharing/ GCA_922984935.2.subset.unmasked.mmi -",
                     "@PG\tID:samtools\tPN:samtools\tPP:minimap2\tVN:1.22.1\tCL:samtools fixmate -mpu - -",
                     "@PG\tID:samtools.1\tPN:samtools\tPP:samtools\tVN:1.22.1\tCL:samtools view -h",
@@ -279,7 +279,7 @@
                 "GCA_922984935.2.subset.illumina.SAMEA7524438.ERR6688599.minimap2.cram": [
                     "@HD\tVN:1.6\tSO:coordinate",
                     "@SQ\tSN:OV277441.1\tLN:7999920\tM5:0457acf8690429f1c98ee545cb8573b8\tUR:GCA_922984935.2.subset.fasta.gz\tAS:GCA_922984935.2\tAN:SUPER_1\tSP:Meles meles",
-                    "@RG\tID:31231_3#1\tDT:2019-10-03T01:00:00+0100\tPU:191003_HX4_31231_A_H3353CCX2_3#1\tLB:23687379\tPG:SCS\tSM:SAMEA5962962\tCN:SC\tPL:ILLUMINA\tDS:ERP114452: Sequencing and assembly of vertebrate genomes from British species for the Darwin Tree of Life Project in collaboration with the Vertebrate Genomes Project. This data is part of a pre-publication release. For information on the proper use of pre-publication data shared by the Wellcome Trust Sanger Institute (including details of any publication moratoria), please see http:/datasharing/",
+                    "@RG\tID:31231_3#1\tDT:2019-10-03T00:00:00+0000\tPU:191003_HX4_31231_A_H3353CCX2_3#1\tLB:23687379\tPG:SCS\tSM:SAMEA5962962\tCN:SC\tPL:ILLUMINA\tDS:ERP114452: Sequencing and assembly of vertebrate genomes from British species for the Darwin Tree of Life Project in collaboration with the Vertebrate Genomes Project. This data is part of a pre-publication release. For information on the proper use of pre-publication data shared by the Wellcome Trust Sanger Institute (including details of any publication moratoria), please see http:/datasharing/",
                     "@PG\tID:minimap2\tPN:minimap2\tVN:2.30-r1287\tCL:minimap2 -t N -ax sr --cs=short -I1.0G -y -R @RG\\tID:31231_3#1\\tDT:2019-10-03T00:00:00+0000\\tPU:191003_HX4_31231_A_H3353CCX2_3#1\\tLB:23687379\\tPG:SCS\\tSM:SAMEA5962962\\tCN:SC\\tPL:ILLUMINA\\tDS:ERP114452: Sequencing and assembly of vertebrate genomes from British species for the Darwin Tree of Life Project in collaboration with the Vertebrate Genomes Project. This data is part of a pre-publication release. For information on the proper use of pre-publication data shared by the Wellcome Trust Sanger Institute (including details of any publication moratoria), please see http:/datasharing/ GCA_922984935.2.subset.unmasked.mmi -",
                     "@PG\tID:samtools\tPN:samtools\tPP:minimap2\tVN:1.22.1\tCL:samtools fixmate -mpu - -",
                     "@PG\tID:samtools.1\tPN:samtools\tPP:samtools\tVN:1.22.1\tCL:samtools view -h",
@@ -309,7 +309,7 @@
                 
             ]
         ],
-        "timestamp": "2026-08-14T13:57:33.951994888",
+        "timestamp": "2026-08-14T13:31:59.376285779",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.3"
