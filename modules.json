@@ -210,7 +210,8 @@
                     "bam_samtools_merge_markdup": {
                         "branch": "main",
                         "git_sha": "dabc24fcfd9184c4bc95c6f48745c92aeee94c24",
-                        "installed_by": ["cram_map_illumina_hic", "fastx_map_long_reads"]
+                        "installed_by": ["cram_map_illumina_hic", "fastx_map_long_reads"],
+                        "patch": "subworkflows/sanger-tol/bam_samtools_merge_markdup/bam_samtools_merge_markdup.diff"
                     },
                     "cram_map_illumina_hic": {
                         "branch": "main",
