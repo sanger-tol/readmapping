@@ -16,7 +16,10 @@ workflow MERGE_OUTPUT {
         ch_multi_bams = ch_bam
         .map { meta, bam -> [['specimen':meta.specimen, 'datatype': meta.datatype], meta.run, meta.read_count, bam] }
         .groupTuple( by: [0] )
-        .map { meta, runs, read_counts, bams -> [meta + [id: meta.specimen + ".merged_${params.merge_output}", merge_source: runs.sort().join("\n") + "\n", read_count: read_counts.sum()], bams] }
+        .map { meta, runs, read_counts, bams ->
+            def sorted = [runs, bams].transpose().sort { a, b -> a[0].toString() <=> b[0].toString() }
+            [meta + [id: meta.specimen + ".merged_${params.merge_output}", merge_source: sorted.collect { it[0] }.join("\n") + "\n", read_count: read_counts.sum()], sorted.collect { it[1] }]
+        }
         .filter { _meta, bams -> bams.size() > 1 }
         .map { meta, bam -> [meta + [merged: true], bam, []] }
 
