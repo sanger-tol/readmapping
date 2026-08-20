@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add check for BAM/CRAM headers in nf-test
 - Preserve PG lines from original BAM/CRAM files and processing steps in final alignment outputs
 - Replace post-filtering FastQC with Hifi_trimmer trimming statistics in the MultiQC report
+- Add MultiQC report per datatype
 
 ### Parameters
 
