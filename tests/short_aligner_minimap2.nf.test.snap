@@ -1,7 +1,7 @@
 {
     "-profile test --short_aligner minimap2 --outfmt 'bam,cram'": {
         "content": [
-            77,
+            79,
             {
                 "BGZIP_BEDGRAPH": {
                     "samtools": "1.23.1"
@@ -106,6 +106,7 @@
                 "read_mapping/hic/SAMEA7524440/ERR6688402/stats/GCA_922984935.2.subset.hic.SAMEA7524440.ERR6688402.minimap2.flagstat",
                 "read_mapping/hic/SAMEA7524440/ERR6688402/stats/GCA_922984935.2.subset.hic.SAMEA7524440.ERR6688402.minimap2.idxstats",
                 "read_mapping/hic/SAMEA7524440/ERR6688402/stats/GCA_922984935.2.subset.hic.SAMEA7524440.ERR6688402.minimap2.stats.gz",
+                "read_mapping/hic/multiqc_hic.html",
                 "read_mapping/illumina",
                 "read_mapping/illumina/SAMEA7524438",
                 "read_mapping/illumina/SAMEA7524438/ERR6688599",
@@ -134,7 +135,8 @@
                 "read_mapping/illumina/SAMEA7524439/ERR6688600/stats",
                 "read_mapping/illumina/SAMEA7524439/ERR6688600/stats/GCA_922984935.2.subset.illumina.SAMEA7524439.ERR6688600.minimap2.flagstat",
                 "read_mapping/illumina/SAMEA7524439/ERR6688600/stats/GCA_922984935.2.subset.illumina.SAMEA7524439.ERR6688600.minimap2.idxstats",
-                "read_mapping/illumina/SAMEA7524439/ERR6688600/stats/GCA_922984935.2.subset.illumina.SAMEA7524439.ERR6688600.minimap2.stats.gz"
+                "read_mapping/illumina/SAMEA7524439/ERR6688600/stats/GCA_922984935.2.subset.illumina.SAMEA7524439.ERR6688600.minimap2.stats.gz",
+                "read_mapping/illumina/multiqc_illumina.html"
             ],
             [
                 "GCA_922984935.2.subset.hic.SAMEA7524440.ERR6688402.minimap2.coverage.1k.bedGraph.gz:md5,ff7769269a41dcaf0ae5fac79146ac55",
@@ -383,7 +385,7 @@
                 
             ]
         ],
-        "timestamp": "2026-08-20T11:14:07.27929384",
+        "timestamp": "2026-08-20T20:54:39.944283852",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.3"

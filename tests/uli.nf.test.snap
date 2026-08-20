@@ -1,7 +1,7 @@
 {
     "-profile test_uli": {
         "content": [
-            53,
+            54,
             {
                 "BGZIP_BEDGRAPH": {
                     "samtools": "1.23.1"
@@ -120,7 +120,8 @@
                 "read_mapping/pacbio/SAMEA114784749/ERR14209104_test/stats",
                 "read_mapping/pacbio/SAMEA114784749/ERR14209104_test/stats/GCA_964034985.1.subset.pacbio.SAMEA114784749.ERR14209104_test.minimap2.flagstat",
                 "read_mapping/pacbio/SAMEA114784749/ERR14209104_test/stats/GCA_964034985.1.subset.pacbio.SAMEA114784749.ERR14209104_test.minimap2.idxstats",
-                "read_mapping/pacbio/SAMEA114784749/ERR14209104_test/stats/GCA_964034985.1.subset.pacbio.SAMEA114784749.ERR14209104_test.minimap2.stats.gz"
+                "read_mapping/pacbio/SAMEA114784749/ERR14209104_test/stats/GCA_964034985.1.subset.pacbio.SAMEA114784749.ERR14209104_test.minimap2.stats.gz",
+                "read_mapping/pacbio/multiqc_pacbio.html"
             ],
             [
                 "GCA_964034985.1.subset.pacbio.SAMEA114784749.ERR14209104.minimap2.coverage.1k.bedGraph.gz:md5,9429905629f201ee569a7ce817756752",
@@ -219,7 +220,7 @@
                 "pacbio.SAMEA114784749.ERR14209104_test.hifitrimmer.summary.json:md5,a0bb029ebd213c14bad17ac343db6cfb"
             ]
         ],
-        "timestamp": "2026-08-20T11:18:12.320513356",
+        "timestamp": "2026-08-20T20:58:24.199150905",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.3"
