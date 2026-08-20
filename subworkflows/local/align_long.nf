@@ -50,7 +50,8 @@ workflow ALIGN_LONG {
 
     // FASTQ path: build the samtools-style RG arg from the meta.read_group string
     ch_fastq_rg = ch_reads_by_format.fastq
-        .map { meta, read_files -> [ meta + [ read_group: "-y -R $meta.read_group" ], read_files ] }
+        // add_rg=true forces this record through SAMTOOLS_ADDREPLACERG, in case it is converted to CRAM.
+        .map { meta, read_files -> [ meta + [ read_group: "-y -R $meta.read_group", add_rg: true ], read_files ] }
 
     // BAM path: extract @RG and @PG lines from the header
     SAMTOOLS_SPLITHEADER(ch_reads_by_format.bam)
@@ -145,6 +146,8 @@ workflow ALIGN_LONG {
         bam_to_cram = untrimmed_bam.mix(ch_reads_by_datatype.non_pacbio_bam)
         fastx       = PACBIO_PREPROCESS.out.untrimmed_fastx
             .mix(PACBIO_PREPROCESS_ULI.out.untrimmed_fastx)
+            .mix(PACBIO_PREPROCESS.out.trimmed_fastq)
+            .mix(PACBIO_PREPROCESS_ULI.out.trimmed_fastq)
             .mix(ch_reads_by_datatype.non_pacbio_fastx)
 
         // MultiQC files from both preprocess invocations
