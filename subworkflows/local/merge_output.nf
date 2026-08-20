@@ -17,7 +17,7 @@ workflow MERGE_OUTPUT {
         .map { meta, bam -> [['specimen':meta.specimen, 'datatype': meta.datatype], meta.run, meta.read_count, bam] }
         .groupTuple( by: [0] )
         .map { meta, runs, read_counts, bams ->
-            def sorted = [runs, bams].transpose().sort { a, b -> a[0].toString() <=> b[0].toString() }
+            def sorted = [runs, bams].transpose().sort { new File(it[0]).name }
             [meta + [id: meta.specimen + ".merged_${params.merge_output}", merge_source: sorted.collect { it[0] }.join("\n") + "\n", read_count: read_counts.sum()], sorted.collect { it[1] }]
         }
         .filter { _meta, bams -> bams.size() > 1 }
