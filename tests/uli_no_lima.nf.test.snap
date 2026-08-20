@@ -1,5 +1,5 @@
 {
-    "-profile test_uli --pacbio_uli_adapter false --outfmt bam": {
+    "-profile test_uli --pacbio_uli_adapter false --alignment_format bam": {
         "content": [
             50,
             {
