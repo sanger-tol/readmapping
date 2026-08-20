@@ -1,5 +1,5 @@
 {
-    "-profile test --short_aligner minimap2 --outfmt 'bam,cram'": {
+    "-profile test --short_aligner minimap2 --alignment_format 'bam,cram'": {
         "content": [
             79,
             {
@@ -83,7 +83,7 @@
                     "untar": 1.34
                 },
                 "Workflow": {
-                    "sanger-tol/readmapping": "v2.0.4"
+                    "sanger-tol/readmapping": "v2.1.0dev"
                 }
             },
             [

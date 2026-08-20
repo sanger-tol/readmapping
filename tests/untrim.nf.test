@@ -6,7 +6,7 @@ nextflow_pipeline {
     script "../main.nf"
     tag "pipeline"
 
-    test("-profile test --pacbio_adapter false --pacbio_adapter_yaml false --outfmt bam") {
+    test("-profile test --pacbio_adapter false --pacbio_adapter_yaml false --alignment_format bam") {
 
         when {
             params {
@@ -14,7 +14,7 @@ nextflow_pipeline {
                 input = "${projectDir}/assets/samplesheet_long_read.csv"
                 pacbio_adapter = false
                 pacbio_adapter_yaml = false
-                outfmt = "bam"
+                alignment_format = "bam"
             }
         }
 

@@ -1,5 +1,5 @@
 {
-    "-profile test_uli --pacbio_uli_adapter false --outfmt bam": {
+    "-profile test_uli --pacbio_uli_adapter false --alignment_format bam": {
         "content": [
             53,
             {
@@ -80,7 +80,7 @@
                     "untar": 1.34
                 },
                 "Workflow": {
-                    "sanger-tol/readmapping": "v2.0.4"
+                    "sanger-tol/readmapping": "v2.1.0dev"
                 }
             },
             [

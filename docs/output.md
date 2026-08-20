@@ -40,7 +40,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 - `read_mapping`
 - `${datatype}/${specimen}`
   - `${run}/`
-    - `${assembly}.${datatype}.${specimen}.${run}.${aligner}.cram`: Aligned CRAM file (or `.bam` depending on `--outfmt`)
+    - `${assembly}.${datatype}.${specimen}.${run}.${aligner}.cram`: Aligned CRAM file (or `.bam` depending on `--alignment_format`)
     - `${assembly}.${datatype}.${specimen}.${run}.${aligner}.cram.crai`: Index for the alignment
     - `${assembly}.${datatype}.${specimen}.${run}.${aligner}.coverage.${window_size}.bedGraph.gz`: Read coverage in bedGraph format
     - `qc/`
@@ -115,7 +115,7 @@ This section documents the output files from alignment and duplicate marking ste
 
 ### Output options
 
-- **outfmt**: Specifies the output format for alignments. It can be set to "bam", "cram", or both, separated by a comma (e.g., `--outfmt bam,cram`). The pipeline will generate output files in the specified formats.
+- **alignment_format**: Specifies the output format for alignments. It can be set to "bam", "cram", or both, separated by a comma (e.g., `--alignment_format bam,cram`). The pipeline will generate output files in the specified formats.
 - **compression**: Specifies the compression method for alignments. It can be set to "none" or "crumble". When set to "crumble", the pipeline compresses the quality scores of the alignments.
 - **merge_output**: Merge output at the individual level. If merge_output is enabled (default: false), both unmerged and merged output files per sample will be generated; otherwise, only unmerged files are exported.
 
@@ -129,7 +129,7 @@ Short read data from HiC and Illumina technologies is aligned with `BWAMEM2_MEM`
 - `read_mapping`
   - `${datatype}/${specimen}`
     - `${run}/`
-      - `${assembly}.${datatype}.${specimen}.${run}.${aligner}.cram`: Aligned CRAM file (or `.bam` depending on `--outfmt`)
+      - `${assembly}.${datatype}.${specimen}.${run}.${aligner}.cram`: Aligned CRAM file (or `.bam` depending on `--alignment_format`)
       - `${assembly}.${datatype}.${specimen}.${run}.${aligner}.cram.crai`: Index for the alignment
       - `${assembly}.${datatype}.${specimen}.${run}.${aligner}.coverage.${window_size}.bedGraph.gz`: Read coverage in bedGraph format
     - `merged_${#}/` - if params `merge_output`, merged output files with same structure as individual runs, without `qc` folder
@@ -146,7 +146,7 @@ Reads generated using Oxford Nanopore technology are aligned with `MINIMAP2_ALIG
 - `read_mapping`
   - `ont/${specimen}`
     - `${run}/`
-      - `${assembly}.ont.${specimen}.${run}.${aligner}.cram`: Aligned CRAM file (or `.bam` depending on `--outfmt`)
+      - `${assembly}.ont.${specimen}.${run}.${aligner}.cram`: Aligned CRAM file (or `.bam` depending on `--alignment_format`)
       - `${assembly}.ont.${specimen}.${run}.${aligner}.cram.crai`: Index for the alignment
       - `${assembly}.ont.${specimen}.${run}.${aligner}.coverage.${window_size}.bedGraph.gz`: Read coverage in bedGraph format
     - `merged_${#}/` - if params `merge_output`.
@@ -163,7 +163,7 @@ The filtered PacBio reads are aligned with `MINIMAP2_ALIGN`. The sorted alignmen
 - `read_mapping`
   - `pacbio/${specimen}`
     - `${run}/`
-      - `${assembly}.pacbio.${specimen}.${run}.${aligner}.cram`: Aligned CRAM file (or `.bam` depending on `--outfmt`)
+      - `${assembly}.pacbio.${specimen}.${run}.${aligner}.cram`: Aligned CRAM file (or `.bam` depending on `--alignment_format`)
       - `${assembly}.pacbio.${specimen}.${run}.${aligner}.cram.crai`: Index for the alignment
       - `${assembly}.pacbio.${specimen}.${run}.${aligner}.coverage.${window_size}.bedGraph.gz`: Read coverage in bedGraph format
     - `merged_${#}/` - if params `merge_output`.
