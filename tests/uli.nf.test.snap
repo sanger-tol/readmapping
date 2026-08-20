@@ -40,8 +40,7 @@
                     "hifi-trimmer": "5.0.1"
                 },
                 "HIFITRIMMER_TRIM": {
-                    "hifi-trimmer": "5.0.1",
-                    "samtools": null
+                    "hifi-trimmer": "5.0.1"
                 },
                 "LIMA": {
                     "lima": "2.12.0"
