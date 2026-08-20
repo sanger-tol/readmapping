@@ -197,11 +197,11 @@ def validateInputParameters() {
         log.error "Genome fasta file not specified with e.g. '--fasta genome.fa' or via a detectable config file."
     }
 
-    // Validate outfmt parameter
-    if (!params.outfmt) {
-        log.error "Output format not specified. Please specify '--outfmt bam', '--outfmt cram', or both separated by a comma."
+    // Validate alignment_format parameter
+    if (!params.alignment_format) {
+        log.error "Output format not specified. Please specify '--alignment_format bam', '--alignment_format cram', or both separated by a comma."
     } else {
-        def outfmtOptions = params.outfmt.split(',').collect { fmt -> fmt.trim() }
+        def outfmtOptions = params.alignment_format.split(',').collect { fmt -> fmt.trim() }
         def validOutfmtOptions = ['bam', 'cram']
         def invalidOptions = outfmtOptions.findAll { fmt -> !(fmt in validOutfmtOptions) }
 

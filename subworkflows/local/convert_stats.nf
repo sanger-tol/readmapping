@@ -31,8 +31,8 @@ workflow CONVERT_STATS {
     main:
     ch_versions = channel.empty()
 
-    // Split outfmt parameter into a list
-    def outfmt_options = params.outfmt.split(',').collect { fmt -> fmt.trim() }
+    // Split alignment_format parameter into a list
+    def outfmt_options = params.alignment_format.split(',').collect { fmt -> fmt.trim() }
 
     // (Optionally) Compress the quality scores of Illumina and PacBio CCS alignments
     if ( params.compression == "crumble" ) {
@@ -58,7 +58,7 @@ workflow CONVERT_STATS {
     ch_renamed_bams = CHANGE_NAME.out.file
     .map { meta, bam_file -> [meta, bam_file, []] }
 
-    // (Optionally) convert to CRAM if it's specified in outfmt
+    // (Optionally) convert to CRAM if it's specified in alignment_format parameter
     ch_cram = channel.empty()
     ch_crai = channel.empty()
 
@@ -79,7 +79,7 @@ workflow CONVERT_STATS {
         ch_for_stats = ch_cram.join ( ch_crai )
     }
 
-    // Re-generate BAM index if BAM is in outfmt
+    // Re-generate BAM index if BAM is in alignment_format parameter
     ch_bam = channel.empty()
     ch_bai = channel.empty()
 
