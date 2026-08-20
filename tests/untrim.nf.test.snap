@@ -1,5 +1,5 @@
 {
-    "-profile test --pacbio_adapter false --pacbio_adapter_yaml false --outfmt bam": {
+    "-profile test --pacbio_adapter false --pacbio_adapter_yaml false --alignment_format bam": {
         "content": [
             68,
             {
@@ -67,7 +67,7 @@
                     "samtools": "1.23.1"
                 },
                 "Workflow": {
-                    "sanger-tol/readmapping": "v2.0.4"
+                    "sanger-tol/readmapping": "v2.1.0dev"
                 }
             },
             [

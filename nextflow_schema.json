@@ -10,7 +10,7 @@
             "type": "object",
             "fa_icon": "fas fa-terminal",
             "description": "Define where the pipeline should find input data and save output data.",
-            "required": ["input", "outdir", "outfmt", "compression"],
+            "required": ["input", "outdir", "alignment_format", "compression"],
             "properties": {
                 "input": {
                     "type": "string",
@@ -29,7 +29,7 @@
                     "description": "The output directory where the results will be saved. You have to use absolute paths to storage on Cloud infrastructure.",
                     "fa_icon": "fas fa-folder-open"
                 },
-                "outfmt": {
+                "alignment_format": {
                     "type": "string",
                     "default": "cram",
                     "description": "Format for output alignment files. Accepts options: \"bam\" or \"cram\".",
