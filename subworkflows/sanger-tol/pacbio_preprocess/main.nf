@@ -60,6 +60,8 @@ workflow PACBIO_PREPROCESS {
     trimmed_bam = channel.empty()
     trimmed_cram = channel.empty()
     trimmed_sam = channel.empty()
+    trimmed_fasta = channel.empty()
+    trimmed_fastq = channel.empty()
     if ( val_hifi_adapter ) {
         // Assign ch_input_skip_trimm to those without adapter yaml for trimming
         ch_input_skip_trim = ch_input_pre_trim
@@ -120,6 +122,8 @@ workflow PACBIO_PREPROCESS {
         trimmed_bam = trimmed_bam.mix( HIFITRIMMER_TRIM.out.bam )
         trimmed_cram = trimmed_cram.mix( HIFITRIMMER_TRIM.out.cram )
         trimmed_sam = trimmed_sam.mix( HIFITRIMMER_TRIM.out.sam )
+        trimmed_fasta = trimmed_fasta.mix( HIFITRIMMER_TRIM.out.fasta )
+        trimmed_fastq = trimmed_fastq.mix( HIFITRIMMER_TRIM.out.fastq )
     } else {
         ch_input_skip_trim = ch_input_pre_trim
     }
@@ -138,6 +142,8 @@ workflow PACBIO_PREPROCESS {
     trimmed_cram        = trimmed_cram                      // [meta, CRAM] preprocessed reads in CRAM format
     trimmed_bam         = trimmed_bam                       // [meta, BAM] preprocessed reads in BAM format
     trimmed_sam         = trimmed_sam                       // [meta, SAM] preprocessed reads in SAM format
+    trimmed_fasta       = trimmed_fasta                     // [meta, FASTA] preprocessed reads in FASTA format
+    trimmed_fastq       = trimmed_fastq                     // [meta, FASTQ] preprocessed reads in FASTQ format
     lima_report         = lima_reports                      // [meta, report]
     lima_summary        = lima_summary                      // [meta, summary]
     hifitrimmer_bed     = hifitrimmer_bed                   // [meta, bed]

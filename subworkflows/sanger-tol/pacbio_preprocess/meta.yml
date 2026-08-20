@@ -57,18 +57,42 @@ output:
         Channel containing preprocessed reads that are not filtered/trimmed with hifitrimmer in FASTA/FASTQ format.
         Structure: [ val(meta), path(fasta/fastq) ]
       pattern: "*.fasta|*.fa|*.fastq|*.fq"
-  - trimmed_fastx:
-      type: file
-      description: |
-        Channel containing preprocessed reads that have been filtered/trimmed with hifitrimmer in FASTA/FASTQ format.
-        Structure: [ val(meta), path(fasta/fastq) ]
-      pattern: "*.fasta|*.fa|*.fastq|*.fq"
   - untrimmed_bam:
       type: file
       description: |
         Channel containing preprocessed reads that are not filtered/trimmed with hifitrimmer in BAM format.
         Structure: [ val(meta), path(bam) ]
       pattern: "*.bam"
+  - trimmed_cram:
+      type: file
+      description: |
+        Channel containing preprocessed reads that have been filtered/trimmed with hifitrimmer in CRAM format.
+        Structure: [ val(meta), path(cram) ]
+      pattern: "*.cram"
+  - trimmed_bam:
+      type: file
+      description: |
+        Channel containing preprocessed reads that have been filtered/trimmed with hifitrimmer in BAM format.
+        Structure: [ val(meta), path(bam) ]
+      pattern: "*.bam"
+  - trimmed_sam:
+      type: file
+      description: |
+        Channel containing preprocessed reads that have been filtered/trimmed with hifitrimmer in SAM format.
+        Structure: [ val(meta), path(sam) ]
+      pattern: "*.sam"
+  - trimmed_fasta:
+      type: file
+      description: |
+        Channel containing preprocessed reads that have been filtered/trimmed with hifitrimmer in FASTA format.
+        Structure: [ val(meta), path(fasta) ]
+      pattern: "*.fasta|*.fa|*.fna"
+  - trimmed_fastq:
+      type: file
+      description: |
+        Channel containing preprocessed reads that have been filtered/trimmed with hifitrimmer in FASTQ format.
+        Structure: [ val(meta), path(fastq) ]
+      pattern: "*.fastq|*.fq"
   - lima_report:
       type: file
       description: |
