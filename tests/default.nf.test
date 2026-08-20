@@ -28,17 +28,6 @@ nextflow_pipeline {
             def cram_path = getAllFilesFromDir(params.outdir, include: ['**/*.cram'], relative: true, includeDir: false)
             def bam_path = getAllFilesFromDir(params.outdir, include: ['**/*.bam'], relative: true, includeDir: false)
             def fasta = 'https://tolit.cog.sanger.ac.uk/test-data/Meles_meles/assembly/release/mMelMel3.1_paternal_haplotype/GCA_922984935.2.subset.fasta'
-            def strip_absolute_path_lines = { text ->
-                def lines = text?.getClass()?.isArray()
-                    ? text.toList()
-                    : (text instanceof Collection ? text : (text?.toString()?.readLines() ?: []))
-                lines
-                    .collect { line ->
-                        line.toString()
-                            .replaceAll(/\bUR:\/(?:[^\/\s]+\/)*([^\/\s]+)/, 'UR:$1')
-                            .replaceAll(/\bCL:\/(?:[^\t ]*\/)?([^\/\t ]+)(?= )/, 'CL:$1')
-                    }
-            }
 
             assertAll(
                 { assert snapshot(
