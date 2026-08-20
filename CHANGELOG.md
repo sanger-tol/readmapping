@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Enhancements & fixes
 
+- Removed fixed nextflow version for test download
+- Fix FASTA file name for test_full profile
+- Upgraded to the nf-core template v4.1.0
+- Slack / Teams functionality now moved to Nextflow plugins ([nf-slack](https://github.com/seqeralabs/nf-slack), [nf-teams](https://github.com/nvnieuwk/nf-teams))
+- Add check for BAM/CRAM headers in nf-test
+- Preserve PG lines from original BAM/CRAM files and processing steps in final alignment outputs
+- Replace post-filtering FastQC with Hifi_trimmer trimming statistics in the MultiQC report
+
 ### Parameters
 
 | Old parameter | New parameter        |
@@ -14,6 +22,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | `--outfmt`    | `--alignment_format` |
 
 > **NB:** Parameter has been **updated** if both old and new parameter information is present. </br> **NB:** Parameter has been **added** if just the new parameter information is present. </br> **NB:** Parameter has been **removed** if new parameter information isn't present.
+
+### Software dependencies
+
+Note, since the pipeline is using Nextflow DSL2, each process will be run with its own [Biocontainer](https://biocontainers.pro/#/registry). This means that on occasion it is entirely possible for the pipeline to be using different versions of the same tool. However, the overall software dependency changes compared to the last release have been listed below for reference.
+
+| Dependency     | Old version | New version |
+| -------------- | ----------- | ----------- |
+| `hifi-trimmer` | 2.2.0       | 5.0.1       |
+| `multiqc`      | 1.33        | 1.35        |
+
+> **NB:** Dependency has been **updated** if both old and new version information is present. </br> **NB:** Dependency has been **added** if just the new version information is present. </br> **NB:** Dependency has been **removed** if version information isn't present.
 
 ## [[v2.0.4](https://github.com/sanger-tol/readmapping/releases/tag/2.0.4)] - Hungarian Horntail (patch 4) - [2026-07-24]
 
