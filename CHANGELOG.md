@@ -3,6 +3,18 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [[v2.1.0dev](https://github.com/sanger-tol/readmapping/releases/tag/2.1.0dev)] - 2.1.0dev - [release-date]
+
+### Enhancements & fixes
+
+### Parameters
+
+| Old parameter | New parameter        |
+| ------------- | -------------------- |
+| `--outfmt`    | `--alignment_format` |
+
+> **NB:** Parameter has been **updated** if both old and new parameter information is present. </br> **NB:** Parameter has been **added** if just the new parameter information is present. </br> **NB:** Parameter has been **removed** if new parameter information isn't present.
+
 ## [[v2.0.4](https://github.com/sanger-tol/readmapping/releases/tag/2.0.4)] - Hungarian Horntail (patch 4) - [2026-07-24]
 
 ### Enhancements & fixes
