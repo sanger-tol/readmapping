@@ -63,17 +63,18 @@ workflow ALIGN_LONG {
         .join(ch_reads_by_format.bam, by: 0)
         .map { meta, rg_file, bam ->
             def rglines = file(rg_file).readLines()
+            // Format for samtools addreplacerg: '@RG\t...' quoted, joined by ' -r ' so the module's
+            // "-r ${read_group}" expansion yields "-r '@RG\t...' -r '@RG\t...'".
             def rg_args = rglines
-                ? '-y ' + rglines.collect { line ->
-                    // Add SM tag when missing (required by downstream tools, e.g. variant callers)
+                ? rglines.collect { line ->
                     def with_sm = line.contains('SM:') ? line
                                 : meta.sample     ? "${line}\tSM:${meta.sample}"
                                                   : "${line}\tSM:${meta.id}"
-                    "-R '${with_sm.replaceAll('\t', '\\\\t')}'"
-                }.join(' ')
-                : "-y -R $meta.read_group"
-            // add_rg=true when the BAM header lacked @RG lines and we had to synthesise one
-            [ meta + [ read_group: rg_args, add_rg: !rglines ], bam ]
+                    "'${with_sm.replaceAll('\t', '\\\\t')}'"
+                }.join(' -r ')
+                : "$meta.read_group"
+            // add_rg=true when the BAM header lacked @RG lines, or none of them carried an SM tag
+            [ meta + [ read_group: rg_args, add_rg: !rglines.any { it.contains('SM:') } ], bam ]
         }
 
     ch_reads_rg = ch_bam_rg.mix(ch_fastq_rg)
