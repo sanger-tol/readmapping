@@ -95,7 +95,7 @@
                 "read_mapping/ont/SAMEA7524440/PAE35587/stats/GCA_922984935.2.subset.ont.SAMEA7524440.PAE35587.minimap2.flagstat",
                 "read_mapping/ont/SAMEA7524440/PAE35587/stats/GCA_922984935.2.subset.ont.SAMEA7524440.PAE35587.minimap2.idxstats",
                 "read_mapping/ont/SAMEA7524440/PAE35587/stats/GCA_922984935.2.subset.ont.SAMEA7524440.PAE35587.minimap2.stats.gz",
-                "read_mapping/ont/multiqc_ont.html",
+                "read_mapping/ont/multiqc_report.ont.html",
                 "read_mapping/pacbio",
                 "read_mapping/pacbio/SAMEA7524440",
                 "read_mapping/pacbio/SAMEA7524440/ERR6939248",
@@ -129,7 +129,7 @@
                 "read_mapping/pacbio/SAMEA7524440/merged_1/stats/GCA_922984935.2.subset.pacbio.SAMEA7524440.merged_1.minimap2.flagstat",
                 "read_mapping/pacbio/SAMEA7524440/merged_1/stats/GCA_922984935.2.subset.pacbio.SAMEA7524440.merged_1.minimap2.idxstats",
                 "read_mapping/pacbio/SAMEA7524440/merged_1/stats/GCA_922984935.2.subset.pacbio.SAMEA7524440.merged_1.minimap2.stats.gz",
-                "read_mapping/pacbio/multiqc_pacbio.html"
+                "read_mapping/pacbio/multiqc_report.pacbio.html"
             ],
             [
                 "GCA_922984935.2.subset.ont.SAMEA7524440.PAE35587.minimap2.coverage.1k.bedGraph.gz:md5,ea7da789c0df79e50fc9765a21cb5a8e",

@@ -117,7 +117,7 @@
                 "read_mapping/pacbio/SAMEA114784749/ERR14209104_test/stats/GCA_964034985.1.subset.pacbio.SAMEA114784749.ERR14209104_test.minimap2.flagstat",
                 "read_mapping/pacbio/SAMEA114784749/ERR14209104_test/stats/GCA_964034985.1.subset.pacbio.SAMEA114784749.ERR14209104_test.minimap2.idxstats",
                 "read_mapping/pacbio/SAMEA114784749/ERR14209104_test/stats/GCA_964034985.1.subset.pacbio.SAMEA114784749.ERR14209104_test.minimap2.stats.gz",
-                "read_mapping/pacbio/multiqc_pacbio.html"
+                "read_mapping/pacbio/multiqc_report.pacbio.html"
             ],
             [
                 "GCA_964034985.1.subset.pacbio.SAMEA114784749.ERR14209104.minimap2.coverage.1k.bedGraph.gz:md5,91d8507d7cea42e6b85e1c9dc7cab12d",
