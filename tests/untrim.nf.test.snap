@@ -1,7 +1,7 @@
 {
     "-profile test --pacbio_adapter false --pacbio_adapter_yaml false --alignment_format bam": {
         "content": [
-            69,
+            71,
             {
                 "BGZIP_BEDGRAPH": {
                     "samtools": "1.23.1"
@@ -98,6 +98,7 @@
                 "read_mapping/ont/SAMEA7524440/PAE35587/stats/GCA_922984935.2.subset.ont.SAMEA7524440.PAE35587.minimap2.flagstat",
                 "read_mapping/ont/SAMEA7524440/PAE35587/stats/GCA_922984935.2.subset.ont.SAMEA7524440.PAE35587.minimap2.idxstats",
                 "read_mapping/ont/SAMEA7524440/PAE35587/stats/GCA_922984935.2.subset.ont.SAMEA7524440.PAE35587.minimap2.stats.gz",
+                "read_mapping/ont/multiqc_report.ont.html",
                 "read_mapping/pacbio",
                 "read_mapping/pacbio/SAMEA7524440",
                 "read_mapping/pacbio/SAMEA7524440/ERR6939248",
@@ -130,7 +131,8 @@
                 "read_mapping/pacbio/SAMEA7524440/merged_1/stats",
                 "read_mapping/pacbio/SAMEA7524440/merged_1/stats/GCA_922984935.2.subset.pacbio.SAMEA7524440.merged_1.minimap2.flagstat",
                 "read_mapping/pacbio/SAMEA7524440/merged_1/stats/GCA_922984935.2.subset.pacbio.SAMEA7524440.merged_1.minimap2.idxstats",
-                "read_mapping/pacbio/SAMEA7524440/merged_1/stats/GCA_922984935.2.subset.pacbio.SAMEA7524440.merged_1.minimap2.stats.gz"
+                "read_mapping/pacbio/SAMEA7524440/merged_1/stats/GCA_922984935.2.subset.pacbio.SAMEA7524440.merged_1.minimap2.stats.gz",
+                "read_mapping/pacbio/multiqc_report.pacbio.html"
             ],
             [
                 "GCA_922984935.2.subset.ont.SAMEA7524440.PAE35587.minimap2.coverage.1k.bedGraph.gz:md5,ea7da789c0df79e50fc9765a21cb5a8e",
@@ -264,7 +266,7 @@
                 
             ]
         ],
-        "timestamp": "2026-08-21T14:47:48.070261495",
+        "timestamp": "2026-08-24T14:09:05.441443362",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.3"
