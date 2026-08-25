@@ -41,51 +41,12 @@ workflow ALIGN_LONG {
     }
 
     //
-    // Split reads by input format (BAM inputs need read-group extraction from header)
-    //
-    ch_reads_by_format = reads.branch { _meta, read_files ->
-        bam:   read_files.name.endsWith('bam')
-        fastq: true
-    }
-
-    // FASTQ path: build the samtools-style RG arg from the meta.read_group string
-    ch_fastq_rg = ch_reads_by_format.fastq
-        // add_rg=true forces this record through SAMTOOLS_ADDREPLACERG, in case it is converted to CRAM.
-        .map { meta, read_files -> [ meta + [ read_group: "-y -R $meta.read_group", add_rg: true ], read_files ] }
-
-    // BAM path: extract @RG and @PG lines from the header
-    SAMTOOLS_SPLITHEADER(ch_reads_by_format.bam)
-
-    pg_lines = SAMTOOLS_SPLITHEADER.out.programs
-        .map { meta, file -> [ meta, file.readLines() ] }
-
-    ch_bam_rg = SAMTOOLS_SPLITHEADER.out.readgroup
-        .join(ch_reads_by_format.bam, by: 0)
-        .map { meta, rg_file, bam ->
-            def rglines = file(rg_file).readLines()
-            // Format for samtools addreplacerg: '@RG\t...' quoted, joined by ' -r ' so the module's
-            // "-r ${read_group}" expansion yields "-r '@RG\t...' -r '@RG\t...'".
-            def rg_args = rglines
-                ? rglines.collect { line ->
-                    def with_sm = line.contains('SM:') ? line
-                                : meta.sample     ? "${line}\tSM:${meta.sample}"
-                                                  : "${line}\tSM:${meta.id}"
-                    "'${with_sm.replaceAll('\t', '\\\\t')}'"
-                }.join(' -r ')
-                : "$meta.read_group"
-            // add_rg=true when the BAM header lacked @RG lines, or none of them carried an SM tag
-            [ meta + [ read_group: rg_args, add_rg: !rglines.any { it.contains('SM:') } ], bam ]
-        }
-
-    ch_reads_rg = ch_bam_rg.mix(ch_fastq_rg)
-
-    //
     // PacBio preprocessing (adapter trimming, ULI demultiplexing, dedup)
     //
     if (val_pacbio_adapter || val_pacbio_adapter_yaml || val_pacbio_uli_adapter) {
 
         // Split reads by datatype: PacBio goes through preprocessing; others pass through
-        ch_reads_by_datatype = ch_reads_rg.branch { meta, read_files ->
+        ch_reads_by_datatype = reads.branch { meta, read_files ->
             pacbio:           meta.datatype == 'pacbio'
             non_pacbio_bam:   read_files.name.endsWith('.bam')  // ONT / PacBio CLR BAM
             non_pacbio_fastx: true                              // ONT / PacBio CLR FASTQ
@@ -161,12 +122,25 @@ workflow ALIGN_LONG {
         )
     } else {
         // No preprocessing requested: BAM inputs → CRAM, FASTQ inputs → fastx alignment
-        bam_to_cram  = ch_bam_rg
+        ch_reads_by_format = reads.branch { _meta, read_files ->
+            bam:   read_files.name.endsWith('bam')
+            fastq: true
+        }
+        bam_to_cram  = ch_reads_by_format.bam
         fastx        = ch_reads_by_format.fastq
         trimmed_cram = channel.empty()
     }
 
     //
+    // Handle read group and PG lines
+    //
+
+    // FASTQ path: build the samtools-style RG arg from the meta.read_group string
+    // add_rg=true forces this record through SAMTOOLS_ADDREPLACERG, in case it is converted to CRAM.
+    ch_fastq_rg = fastx.map { meta, read_files -> [ meta + [ read_group: "-y -R $meta.read_group", add_rg: true ], read_files ] }
+
+    // BAM path: extract @RG and @PG lines from the header
+        //
     // Convert BAM inputs to CRAM (readmapping expects a single FASTA reference)
     //
     CONVERT_CRAM(
@@ -176,10 +150,42 @@ workflow ALIGN_LONG {
     )
     ch_reads_cram = CONVERT_CRAM.out.cram.mix(trimmed_cram)
 
+    SAMTOOLS_SPLITHEADER(ch_reads_cram)
+    ch_cram_rg = SAMTOOLS_SPLITHEADER.out.readgroup
+        .join(ch_reads_cram, by: 0)
+        .map { meta, rg_file, bam ->
+            def rglines = file(rg_file).readLines()
+            // Format for samtools addreplacerg: '@RG\t...' quoted, joined by ' -r ' so the module's
+            // "-r ${read_group}" expansion yields "-r '@RG\t...' -r '@RG\t...'".
+            def rg_args = rglines
+                ? rglines.collect { line ->
+                    def with_sm = line.contains('SM:') ? line
+                                : meta.sample     ? "${line}\tSM:${meta.sample}"
+                                                  : "${line}\tSM:${meta.id}"
+                    "'${with_sm.replaceAll('\t', '\\\\t')}'"
+                }.join(' -r ')
+                : "$meta.read_group"
+            // add_rg=true when the BAM header lacked @RG lines, or none of them carried an SM tag
+            [ meta + [ read_group: rg_args, add_rg: !rglines.any { it.contains('SM:') } ], bam ]
+        }
+
+    ch_reads_cram_by_rg = ch_cram_rg.branch { meta, _cram ->
+        add_rg:    meta.add_rg
+        no_add_rg: true
+    }
+
+    SAMTOOLS_ADDREPLACERG(
+        ch_reads_cram_by_rg.add_rg.map { meta, cram -> [ meta, cram, [], meta.read_group ] },
+        [[], [], [], []]
+    )
+
+    pg_lines = SAMTOOLS_SPLITHEADER.out.programs
+        .map { meta, file -> [ meta, file.readLines() ] }
+
     //
     // FASTX alignment path
     //
-    ch_align_fastx = fastx
+    ch_align_fastx = ch_fastq_rg
         .map { meta, fastx_file -> [ meta + [ reads_size: fastx_file.size() ], fastx_file ] }
         .combine(fasta)
         .multiMap { meta, fastx_file, meta_asm, fasta_file ->
@@ -199,15 +205,6 @@ workflow ALIGN_LONG {
     //
     // CRAM alignment path: re-header CRAMs whose source BAM had no @RG lines
     //
-    ch_reads_cram_by_rg = ch_reads_cram.branch { meta, _cram ->
-        add_rg:    meta.add_rg
-        no_add_rg: true
-    }
-
-    SAMTOOLS_ADDREPLACERG(
-        ch_reads_cram_by_rg.add_rg.map { meta, cram -> [ meta, cram, [], meta.read_group ] },
-        [[], [], [], []]
-    )
 
     ch_align_cram = SAMTOOLS_ADDREPLACERG.out.cram
         .mix(ch_reads_cram_by_rg.no_add_rg)
