@@ -1,0 +1,216 @@
+{
+    "meles meles - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "PAE35587_pass_1f1f0707_115.subset.cram.1.test.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    [
+                        "CRAMALIGN_MINIMAP2ALIGN",
+                        "minimap2",
+                        "2.30-r1287"
+                    ]
+                ],
+                "2": [
+                    [
+                        "CRAMALIGN_MINIMAP2ALIGN",
+                        "samtools",
+                        "1.22.1"
+                    ]
+                ],
+                "bam": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "PAE35587_pass_1f1f0707_115.subset.cram.1.test.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions_minimap2": [
+                    [
+                        "CRAMALIGN_MINIMAP2ALIGN",
+                        "minimap2",
+                        "2.30-r1287"
+                    ]
+                ],
+                "versions_samtools": [
+                    [
+                        "CRAMALIGN_MINIMAP2ALIGN",
+                        "samtools",
+                        "1.22.1"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-01-15T14:40:37.641168",
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
+        }
+    },
+    "Meles meles - ONT filtered reads": {
+        "content": [
+            "46218777936eb60118e3e131c8d742eb",
+            {
+                "PAE35587_pass_1f1f0707_115.subset.cram.1.test.bam": [
+                    "@HD\tVN:1.6\tSO:coordinate",
+                    "@SQ\tSN:OV277441.1\tLN:7999920",
+                    "@RG\tID:PAE35587_pass_1f1f0707_115\tPL:ONT\tSM:mMelMel3",
+                    "@PG\tID:samtools\tPN:samtools\tVN:1.22.1\tCL:samtools collate --output-fmt cram -O -u -T mMelMel3_T2.collate --threads 4 --reference GCA_922984935.2.subset.unmasked.fasta PAE35587_pass_1f1f0707_115.subset.fastq.gz -",
+                    "@PG\tID:samtools.1\tPN:samtools\tPP:samtools\tVN:1.22.1\tCL:samtools fixmate -m -u --threads 4 - -",
+                    "@PG\tID:samtools.2\tPN:samtools\tPP:samtools.1\tVN:1.22.1\tCL:samtools sort -u -T mMelMel3_T2.sort --threads 4 -",
+                    "@PG\tID:samtools.3\tPN:samtools\tPP:samtools.2\tVN:1.22.1\tCL:samtools markdup -T mMelMel3_T2.markdup -f mMelMel3_T2.metrics --threads 4 - mMelMel3_T2.cram",
+                    "@PG\tID:samtools.4\tPN:samtools\tPP:samtools.3\tVN:1.22.1\tCL:samtools view -H PAE35587_pass_1f1f0707_115.subset.cram",
+                    "@PG\tID:minimap2\tPN:minimap2\tVN:2.30-r1287\tCL:minimap2 -t2 -ax map-ont -y -R @RG\\tID:PAE35587_pass_1f1f0707_115\\tPL:ONT\\tSM:mMelMel3 GCA_922984935.2.subset.fasta.mmi -\tPP:samtools.4",
+                    "@PG\tID:samtools.5\tPN:samtools\tPP:minimap2\tVN:1.22.1\tCL:samtools view -h -q 0 -F 0x904",
+                    "@PG\tID:samtools.6\tPN:samtools\tPP:samtools.5\tVN:1.22.1\tCL:samtools sort --write-index -l1 -@2 -T PAE35587_pass_1f1f0707_115.subset.cram.1.test_sort_tmp -o PAE35587_pass_1f1f0707_115.subset.cram.1.test.bam -"
+                ]
+            },
+            {
+                "versions_minimap2": [
+                    [
+                        "CRAMALIGN_MINIMAP2ALIGN",
+                        "minimap2",
+                        "2.30-r1287"
+                    ]
+                ],
+                "versions_samtools": [
+                    [
+                        "CRAMALIGN_MINIMAP2ALIGN",
+                        "samtools",
+                        "1.22.1"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-07-17T14:03:14.56815319",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.3"
+        }
+    },
+    "Meles meles - PacBio HiFi reads": {
+        "content": [
+            "dfcc4dbebe23293f4f0b9338c2aef9cd",
+            {
+                "m64094_200911_174739.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.subset.cram.1.test.bam": [
+                    "@HD\tVN:1.6\tSO:coordinate",
+                    "@SQ\tSN:OV277441.1\tLN:7999920",
+                    "@PG\tID:samtools\tPN:samtools\tVN:1.22.1\tCL:samtools collate --output-fmt cram -O -u -T mMelMel3_T4.collate --threads 4 --reference GCA_922984935.2.subset.unmasked.fasta m64094_200911_174739.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.subset.fastq.gz -",
+                    "@PG\tID:samtools.1\tPN:samtools\tPP:samtools\tVN:1.22.1\tCL:samtools fixmate -m -u --threads 4 - -",
+                    "@PG\tID:samtools.2\tPN:samtools\tPP:samtools.1\tVN:1.22.1\tCL:samtools sort -u -T mMelMel3_T4.sort --threads 4 -",
+                    "@PG\tID:samtools.3\tPN:samtools\tPP:samtools.2\tVN:1.22.1\tCL:samtools markdup -T mMelMel3_T4.markdup -f mMelMel3_T4.metrics --threads 4 - mMelMel3_T4.cram",
+                    "@PG\tID:samtools.4\tPN:samtools\tPP:samtools.3\tVN:1.22.1\tCL:samtools view -H m64094_200911_174739.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.subset.cram",
+                    "@PG\tID:minimap2\tPN:minimap2\tVN:2.30-r1287\tCL:minimap2 -t2 -ax map-hifi GCA_922984935.2.subset.fasta.mmi -\tPP:samtools.4",
+                    "@PG\tID:samtools.5\tPN:samtools\tPP:minimap2\tVN:1.22.1\tCL:samtools sort --write-index -l1 -@2 -T m64094_200911_174739.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.subset.cram.1.test_sort_tmp -o m64094_200911_174739.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.subset.cram.1.test.bam -"
+                ]
+            },
+            {
+                "versions_minimap2": [
+                    [
+                        "CRAMALIGN_MINIMAP2ALIGN",
+                        "minimap2",
+                        "2.30-r1287"
+                    ]
+                ],
+                "versions_samtools": [
+                    [
+                        "CRAMALIGN_MINIMAP2ALIGN",
+                        "samtools",
+                        "1.22.1"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-07-17T14:04:39.772182723",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.3"
+        }
+    },
+    "Meles meles - ONT reads - no readgroup lines": {
+        "content": [
+            "c2aa5ec574995707a01cb9b4b887b4a9",
+            {
+                "PAE35587_pass_1f1f0707_115.subset.cram.1.test.bam": [
+                    "@HD\tVN:1.6\tSO:coordinate",
+                    "@SQ\tSN:OV277441.1\tLN:7999920",
+                    "@PG\tID:samtools\tPN:samtools\tVN:1.22.1\tCL:samtools collate --output-fmt cram -O -u -T mMelMel3_T2.collate --threads 4 --reference GCA_922984935.2.subset.unmasked.fasta PAE35587_pass_1f1f0707_115.subset.fastq.gz -",
+                    "@PG\tID:samtools.1\tPN:samtools\tPP:samtools\tVN:1.22.1\tCL:samtools fixmate -m -u --threads 4 - -",
+                    "@PG\tID:samtools.2\tPN:samtools\tPP:samtools.1\tVN:1.22.1\tCL:samtools sort -u -T mMelMel3_T2.sort --threads 4 -",
+                    "@PG\tID:samtools.3\tPN:samtools\tPP:samtools.2\tVN:1.22.1\tCL:samtools markdup -T mMelMel3_T2.markdup -f mMelMel3_T2.metrics --threads 4 - mMelMel3_T2.cram",
+                    "@PG\tID:samtools.4\tPN:samtools\tPP:samtools.3\tVN:1.22.1\tCL:samtools view -H PAE35587_pass_1f1f0707_115.subset.cram",
+                    "@PG\tID:minimap2\tPN:minimap2\tVN:2.30-r1287\tCL:minimap2 -t2 -ax map-ont GCA_922984935.2.subset.fasta.mmi -\tPP:samtools.4",
+                    "@PG\tID:samtools.5\tPN:samtools\tPP:minimap2\tVN:1.22.1\tCL:samtools sort --write-index -l1 -@2 -T PAE35587_pass_1f1f0707_115.subset.cram.1.test_sort_tmp -o PAE35587_pass_1f1f0707_115.subset.cram.1.test.bam -"
+                ]
+            },
+            {
+                "versions_minimap2": [
+                    [
+                        "CRAMALIGN_MINIMAP2ALIGN",
+                        "minimap2",
+                        "2.30-r1287"
+                    ]
+                ],
+                "versions_samtools": [
+                    [
+                        "CRAMALIGN_MINIMAP2ALIGN",
+                        "samtools",
+                        "1.22.1"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-07-17T14:06:49.235724726",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.3"
+        }
+    },
+    "Meles meles - ONT reads": {
+        "content": [
+            "c2aa5ec574995707a01cb9b4b887b4a9",
+            {
+                "PAE35587_pass_1f1f0707_115.subset.cram.1.test.bam": [
+                    "@HD\tVN:1.6\tSO:coordinate",
+                    "@SQ\tSN:OV277441.1\tLN:7999920",
+                    "@RG\tID:PAE35587_pass_1f1f0707_115\tPL:ONT\tSM:mMelMel3",
+                    "@PG\tID:samtools\tPN:samtools\tVN:1.22.1\tCL:samtools collate --output-fmt cram -O -u -T mMelMel3_T2.collate --threads 4 --reference GCA_922984935.2.subset.unmasked.fasta PAE35587_pass_1f1f0707_115.subset.fastq.gz -",
+                    "@PG\tID:samtools.1\tPN:samtools\tPP:samtools\tVN:1.22.1\tCL:samtools fixmate -m -u --threads 4 - -",
+                    "@PG\tID:samtools.2\tPN:samtools\tPP:samtools.1\tVN:1.22.1\tCL:samtools sort -u -T mMelMel3_T2.sort --threads 4 -",
+                    "@PG\tID:samtools.3\tPN:samtools\tPP:samtools.2\tVN:1.22.1\tCL:samtools markdup -T mMelMel3_T2.markdup -f mMelMel3_T2.metrics --threads 4 - mMelMel3_T2.cram",
+                    "@PG\tID:samtools.4\tPN:samtools\tPP:samtools.3\tVN:1.22.1\tCL:samtools view -H PAE35587_pass_1f1f0707_115.subset.cram",
+                    "@PG\tID:minimap2\tPN:minimap2\tVN:2.30-r1287\tCL:minimap2 -t2 -ax map-ont -y -R @RG\\tID:PAE35587_pass_1f1f0707_115\\tPL:ONT\\tSM:mMelMel3 GCA_922984935.2.subset.fasta.mmi -\tPP:samtools.4",
+                    "@PG\tID:samtools.5\tPN:samtools\tPP:minimap2\tVN:1.22.1\tCL:samtools sort --write-index -l1 -@2 -T PAE35587_pass_1f1f0707_115.subset.cram.1.test_sort_tmp -o PAE35587_pass_1f1f0707_115.subset.cram.1.test.bam -"
+                ]
+            },
+            {
+                "versions_minimap2": [
+                    [
+                        "CRAMALIGN_MINIMAP2ALIGN",
+                        "minimap2",
+                        "2.30-r1287"
+                    ]
+                ],
+                "versions_samtools": [
+                    [
+                        "CRAMALIGN_MINIMAP2ALIGN",
+                        "samtools",
+                        "1.22.1"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-07-17T14:01:57.899554473",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.3"
+        }
+    }
+}

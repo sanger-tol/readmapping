@@ -10,19 +10,41 @@ report_comment: >
 
 report_section_order:
   "sanger-tol-readmapping-methods-description":
-    order: -1000
-  software_versions:
     order: -1001
-  "sanger-tol-readmapping-summary":
+  software_versions:
     order: -1002
+  "sanger-tol-readmapping-summary":
+    order: -1003
+  samtools_stats:
+    order: 100
+  samtools_flagstat:
+    order: 99
+  samtools_idxstats:
+    order: 98
+  fastqc:
+    order: 97
+  pbmarkdup:
+    order: 96
+  lima:
+    order: 95
+  hifi_trimmer:
+    order: 94
 
 export_plots: true
 
 extra_fn_clean_exts:
   - ".bwamem2"
   - ".minimap2"
+  - ".hifitrimmer"
+  - ".rmdup"
   - type: regex
     pattern: ".*(?=(ont|illumina|pacbio|hic)\\.)"
+
+sp:
+  hifi_trimmer:
+    fn: "*.json"
+    contents: '"total_reads_trimmed"'
+    num_lines: 1000
 
 custom_plot_config:
   samtools_alignment_plot:

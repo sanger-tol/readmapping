@@ -11,11 +11,10 @@ nextflow_workflow {
     tag "blast/blastn"
     tag "subworkflows/../../modules/nf-core/blast/makeblastdb"
     tag "subworkflows/../../modules/nf-core/hifitrimmer/processblast"
-    tag "subworkflows/../../modules/nf-core/hifitrimmer/filterbam"
+    tag "subworkflows/../../modules/nf-core/hifitrimmer/trim"
     tag "subworkflows/../../modules/nf-core/lima"
     tag "subworkflows/../../modules/nf-core/pbmarkdup"
     tag "subworkflows/../../modules/nf-core/untar"
-
 
     setup {
         nfcoreInitialise("${launchDir}/library/")
@@ -24,7 +23,7 @@ nextflow_workflow {
             [
                 "blast/makeblastdb",
                 "hifitrimmer/processblast",
-                "hifitrimmer/filterbam",
+                "hifitrimmer/trim",
                 "lima",
                 "pbmarkdup",
                 "untar"
@@ -41,7 +40,7 @@ nextflow_workflow {
                 pbmarkdup_args        = "--clobber --rmdup --log-level INFO"
                 makeblastdb_args      = "-dbtype nucl"
                 blastn_args           = '-task blastn -reward 1 -penalty -5 -gapopen 3 -gapextend 3 -dust no -soft_masking true -evalue 700 -searchsp 1750000000000 -outfmt "6 std qlen"'
-                hifitrimmer_args      = ""
+                hifitrimmer_output    = 'fasta'
             }
 
             workflow {
@@ -84,14 +83,22 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert workflow.out.trimmed_fastx.size() == 3 }, // hifitrimmer always output fastx
+                { assert workflow.out.trimmed_fasta.size() == 3 },
+                { assert workflow.out.trimmed_fastq.size() == 0 },
+                { assert workflow.out.trimmed_sam.size() == 0 },
+                { assert workflow.out.trimmed_bam.size() == 0 }, // hifitrimmer output BAM by default
+                { assert workflow.out.trimmed_cram.size() == 0 },
                 { assert workflow.out.untrimmed_fastx.size() == 0 },
                 { assert workflow.out.untrimmed_bam.size() == 0 },
                 {
                     assert snapshot(
                         workflow.out.untrimmed_fastx,
-                        workflow.out.trimmed_fastx,
-                        workflow.out.untrimmed_bam.collect{ meta, bam_file -> bam(bam_file, stringency: "silent").getStatistics() }.sort(),
+                        workflow.out.trimmed_fasta,
+                        workflow.out.trimmed_fastq,
+                        workflow.out.trimmed_bam.collect{ meta, bam_file -> bam(bam_file, stringency: "silent").getStatistics() }.sort(),
+                        workflow.out.trimmed_sam.collect{ meta, sam_file -> bam(sam_file, stringency: "silent").getStatistics() }.sort(),
+                        workflow.out.trimmed_bam.collect{ meta, bam_file -> bam(bam_file, stringency: "silent").getStatistics() }.sort(),
+                        workflow.out.trimmed_cram.collect{ meta, cram_file -> cram(cram_file, stringency: "silent").getStatistics() }.sort(),
                         workflow.out.hifitrimmer_summary.collect{ meta, summary_file ->
                             [ meta, path(summary_file).json.tap { it.remove('run_info') } ]
                         },
@@ -117,7 +124,7 @@ nextflow_workflow {
                 pbmarkdup_args        = "--clobber --rmdup --log-level INFO"
                 makeblastdb_args      = "-dbtype nucl"
                 blastn_args           = '-task blastn -reward 1 -penalty -5 -gapopen 3 -gapextend 3 -dust no -soft_masking true -evalue 700 -searchsp 1750000000000 -outfmt "6 std qlen"'
-                hifitrimmer_args      = ""
+                hifitrimmer_output    = 'cram'
             }
 
             workflow {
@@ -160,14 +167,106 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert workflow.out.trimmed_fastx.size() == 3 }, // hifitrimmer always output fastx
+                { assert workflow.out.trimmed_fasta.size() == 1 },
+                { assert workflow.out.trimmed_fastq.size() == 1 },
+                { assert workflow.out.trimmed_sam.size() == 0 },
+                { assert workflow.out.trimmed_bam.size() == 0 },
+                { assert workflow.out.trimmed_cram.size() == 1 }, // hifitrimmer output CRAM with -f cram
                 { assert workflow.out.untrimmed_fastx.size() == 0 },
                 { assert workflow.out.untrimmed_bam.size() == 0 },
                 {
                     assert snapshot(
                         workflow.out.untrimmed_fastx,
-                        workflow.out.trimmed_fastx,
-                        workflow.out.untrimmed_bam.collect{ meta, bam_file -> bam(bam_file, stringency: "silent").getStatistics() }.sort(),
+                        workflow.out.trimmed_fasta,
+                        workflow.out.trimmed_fastq,
+                        workflow.out.trimmed_bam.collect{ meta, bam_file -> bam(bam_file, stringency: "silent").getStatistics() }.sort(),
+                        workflow.out.trimmed_sam.collect{ meta, sam_file -> bam(sam_file, stringency: "silent").getStatistics() }.sort(),
+                        workflow.out.trimmed_bam.collect{ meta, bam_file -> bam(bam_file, stringency: "silent").getStatistics() }.sort(),
+                        workflow.out.trimmed_cram.collect{ meta, cram_file -> cram(cram_file, stringency: "silent").getStatistics() }.sort(),
+                        workflow.out.hifitrimmer_summary.collect{ meta, summary_file ->
+                            [ meta, path(summary_file).json.tap { it.remove('run_info') } ]
+                        },
+                        workflow.out.hifitrimmer_bed,
+                        workflow.out.lima_report,
+                        workflow.out.lima_summary,
+                        workflow.out.pbmarkdup_stats
+                    ).match()
+                }
+            )
+        }
+
+        cleanup {
+            nfcoreUnlink("${launchDir}/library/", "${baseDir}/modules/nf-core")
+        }
+    }
+
+    test("acropora cervicornis - trimmed fastq") {
+
+        when {
+            params {
+                lima_args             = "--hifi-preset SYMMETRIC-ADAPTERS"
+                pbmarkdup_args        = "--clobber --rmdup --log-level INFO"
+                makeblastdb_args      = "-dbtype nucl"
+                blastn_args           = '-task blastn -reward 1 -penalty -5 -gapopen 3 -gapextend 3 -dust no -soft_masking true -evalue 700 -searchsp 1750000000000 -outfmt "6 std qlen"'
+                hifitrimmer_output    = 'fastq'
+            }
+
+            workflow {
+                """
+                input[0] = Channel.of(
+                    [
+                        [ id:'test_bam' ],
+                        file(params.modules_testdata_base_path + 'Acropora_cervicornis/genomic_data/m84093_241116_151316_s2.hifi_reads.bc2028.subset.bam', checkIfExists: true)
+                    ],
+                    [
+                        [ id:'test_fasta' ],
+                        file(params.modules_testdata_base_path + 'Acropora_cervicornis/genomic_data/m84093_241116_151316_s2.hifi_reads.bc2028.subset.fasta', checkIfExists: true)
+                    ],
+                    [
+                        [ id:'test_fastq' ],
+                        file(params.modules_testdata_base_path + 'Acropora_cervicornis/genomic_data/m84093_241116_151316_s2.hifi_reads.bc2028.subset.fastq', checkIfExists: true)
+                    ]
+                )
+                input[1] = Channel.of(
+                    [
+                        [ id:'test_bam' ], // meta map
+                        file(params.modules_testdata_base_path + 'resources/modules/pacbio_preprocess/HiFi_adapter.yaml', checkIfExists: true)
+                    ],
+                    [
+                        [ id:'test_fasta' ], // meta map
+                        file(params.modules_testdata_base_path + 'resources/modules/pacbio_preprocess/HiFi_adapter.yaml', checkIfExists: true)
+                    ],
+                    [
+                        [ id:'test_fastq' ], // meta map
+                        file(params.modules_testdata_base_path + 'resources/modules/pacbio_preprocess/HiFi_adapter.yaml', checkIfExists: true)
+                    ]
+                )
+                input[2] = params.modules_testdata_base_path + 'resources/modules/pacbio_preprocess/HiFi_adapter_DB.fasta'
+                input[3] = file(params.modules_testdata_base_path + 'resources/modules/pacbio_preprocess/pacbio_uli_adapter.fasta', checkIfExists: true)
+                input[4] = true
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.out.trimmed_fasta.size() == 1 },
+                { assert workflow.out.trimmed_fastq.size() == 2 },
+                { assert workflow.out.trimmed_sam.size() == 0 },
+                { assert workflow.out.trimmed_bam.size() == 0 },
+                { assert workflow.out.trimmed_cram.size() == 0 },
+                { assert workflow.out.untrimmed_fastx.size() == 0 },
+                { assert workflow.out.untrimmed_bam.size() == 0 },
+                {
+                    assert snapshot(
+                        workflow.out.untrimmed_fastx,
+                        workflow.out.trimmed_fasta,
+                        workflow.out.trimmed_fastq,
+                        workflow.out.trimmed_bam.collect{ meta, bam_file -> bam(bam_file, stringency: "silent").getStatistics() }.sort(),
+                        workflow.out.trimmed_sam.collect{ meta, sam_file -> bam(sam_file, stringency: "silent").getStatistics() }.sort(),
+                        workflow.out.trimmed_bam.collect{ meta, bam_file -> bam(bam_file, stringency: "silent").getStatistics() }.sort(),
+                        workflow.out.trimmed_cram.collect{ meta, cram_file -> cram(cram_file, stringency: "silent").getStatistics() }.sort(),
                         workflow.out.hifitrimmer_summary.collect{ meta, summary_file ->
                             [ meta, path(summary_file).json.tap { it.remove('run_info') } ]
                         },
@@ -193,7 +292,7 @@ nextflow_workflow {
                 pbmarkdup_args        = "--clobber --rmdup --log-level INFO"
                 makeblastdb_args      = "-dbtype nucl"
                 blastn_args           = '-task blastn -reward 1 -penalty -5 -gapopen 3 -gapextend 3 -dust no -soft_masking true -evalue 700 -searchsp 1750000000000 -outfmt "6 std qlen"'
-                hifitrimmer_args      = ""
+                hifitrimmer_output    = 'sam'
             }
 
             workflow {
@@ -232,14 +331,22 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert workflow.out.trimmed_fastx.size() == 2 }, // hifitrimmer always output fastx
+                { assert workflow.out.trimmed_fasta.size() == 0 },
+                { assert workflow.out.trimmed_fastq.size() == 1 },
+                { assert workflow.out.trimmed_sam.size() == 1 }, // hifitrimmer output SAM with `-f sam`
+                { assert workflow.out.trimmed_bam.size() == 0 },
+                { assert workflow.out.trimmed_cram.size() == 0 },
                 { assert workflow.out.untrimmed_fastx.size() == 1 },
                 { assert workflow.out.untrimmed_bam.size() == 0 },
                 {
                     assert snapshot(
                         workflow.out.untrimmed_fastx,
-                        workflow.out.trimmed_fastx,
-                        workflow.out.untrimmed_bam.collect{ meta, bam_file -> bam(bam_file, stringency: "silent").getStatistics() }.sort(),
+                        workflow.out.trimmed_fasta,
+                        workflow.out.trimmed_fastq,
+                        workflow.out.trimmed_bam.collect{ meta, bam_file -> bam(bam_file, stringency: "silent").getStatistics() }.sort(),
+                        workflow.out.trimmed_sam.collect{ meta, sam_file -> bam(sam_file, stringency: "silent").getStatistics()}.sort(),
+                        workflow.out.trimmed_bam.collect{ meta, bam_file -> bam(bam_file, stringency: "silent").getStatistics() }.sort(),
+                        workflow.out.trimmed_cram.collect{ meta, cram_file -> cram(cram_file, stringency: "silent").getStatistics() }.sort(),
                         workflow.out.hifitrimmer_summary.collect{ meta, summary_file ->
                             [ meta, path(summary_file).json.tap { it.remove('run_info') } ]
                         },
@@ -266,7 +373,7 @@ nextflow_workflow {
                 fq2bam_args           = ""
                 makeblastdb_args      = "-dbtype nucl"
                 blastn_args           = '-task blastn -reward 1 -penalty -5 -gapopen 3 -gapextend 3 -dust no -soft_masking true -evalue 700 -searchsp 1750000000000 -outfmt "6 std qlen"'
-                hifitrimmer_args      = "-f"
+                hifitrimmer_output    = ''
             }
 
             workflow {
@@ -296,14 +403,22 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert workflow.out.trimmed_fastx.size() == 0 }, // hifitrimmer always output fastx
+                { assert workflow.out.trimmed_fasta.size() == 0 },
+                { assert workflow.out.trimmed_fastq.size() == 0 },
+                { assert workflow.out.trimmed_sam.size() == 0 },
+                { assert workflow.out.trimmed_bam.size() == 0 },
+                { assert workflow.out.trimmed_cram.size() == 0 },
                 { assert workflow.out.untrimmed_fastx.size() == 2 },
                 { assert workflow.out.untrimmed_bam.size() == 1 },
                 {
                     assert snapshot(
                         workflow.out.untrimmed_fastx,
-                        workflow.out.trimmed_fastx,
+                        workflow.out.trimmed_fasta,
+                        workflow.out.trimmed_fastq,
                         workflow.out.untrimmed_bam.collect{ meta, bam_file -> bam(bam_file, stringency: "silent").getStatistics() }.sort(),
+                        workflow.out.trimmed_sam.collect{ meta, sam_file -> bam(sam_file, stringency: "silent").getStatistics() }.sort(),
+                        workflow.out.trimmed_bam.collect{ meta, bam_file -> bam(bam_file, stringency: "silent").getStatistics() }.sort(),
+                        workflow.out.trimmed_cram.collect{ meta, cram_file -> cram(cram_file, stringency: "silent").getStatistics() }.sort(),
                         workflow.out.hifitrimmer_summary.collect{ meta, summary_file ->
                             [ meta, path(summary_file).json.tap { it.remove('run_info') } ]
                         },
@@ -329,7 +444,7 @@ nextflow_workflow {
                 pbmarkdup_args        = "--clobber --rmdup --log-level INFO"
                 makeblastdb_args      = "-dbtype nucl"
                 blastn_args           = '-task blastn -reward 1 -penalty -5 -gapopen 3 -gapextend 3 -dust no -soft_masking true -evalue 700 -searchsp 1750000000000 -outfmt "6 std qlen"'
-                hifitrimmer_args      = "-f"
+                hifitrimmer_output    = ''
             }
 
             workflow {
@@ -359,14 +474,22 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert workflow.out.trimmed_fastx.size() == 0 }, // hifitrimmer always output fastx
-                { assert workflow.out.untrimmed_bam.size() == 1 },
+                { assert workflow.out.trimmed_fasta.size() == 0 },
+                { assert workflow.out.trimmed_fastq.size() == 0 },
+                { assert workflow.out.trimmed_sam.size() == 0 },
+                { assert workflow.out.trimmed_bam.size() == 0 },
+                { assert workflow.out.trimmed_cram.size() == 0 },
                 { assert workflow.out.untrimmed_fastx.size() == 2 },
+                { assert workflow.out.untrimmed_bam.size() == 1 },
                 {
                     assert snapshot(
                         workflow.out.untrimmed_fastx,
-                        workflow.out.trimmed_fastx,
+                        workflow.out.trimmed_fasta,
+                        workflow.out.trimmed_fastq,
                         workflow.out.untrimmed_bam.collect{ meta, bam_file -> bam(bam_file, stringency: "silent").getStatistics() }.sort(),
+                        workflow.out.trimmed_sam.collect{ meta, sam_file -> bam(sam_file, stringency: "silent").getStatistics() }.sort(),
+                        workflow.out.trimmed_bam.collect{ meta, bam_file -> bam(bam_file, stringency: "silent").getStatistics() }.sort(),
+                        workflow.out.trimmed_cram.collect{ meta, cram_file -> bam(cram_file, stringency: "silent").getStatistics() }.sort(),
                         workflow.out.hifitrimmer_summary.collect{ meta, summary_file ->
                             [ meta, path(summary_file).json.tap { it.remove('run_info') } ]
                         },
