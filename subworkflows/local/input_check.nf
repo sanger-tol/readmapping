@@ -58,6 +58,7 @@ def create_data_channel ( LinkedHashMap row, datafile, stats ) {
 
     def platform = (meta.datatype == "hic" || meta.datatype == "illumina") ? "ILLUMINA" :
                 (meta.datatype == "pacbio" || meta.datatype == "pacbio_clr") ? "PACBIO" :
+                (meta.datatype == "rnaseq") ? "RNASEQ" :
                 (meta.datatype == "ont") ? "ONT" : "UNKNOWN"
 
     // Convert datafile to string path and then split

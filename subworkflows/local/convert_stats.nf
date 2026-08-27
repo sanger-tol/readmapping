@@ -39,7 +39,7 @@ workflow CONVERT_STATS {
         crumble_selector = bam
         .branch {
             meta, _bam ->
-                run_crumble: meta.datatype == "hic" || meta.datatype == "illumina" || meta.datatype == "pacbio"
+                run_crumble: meta.datatype == "hic" || meta.datatype == "illumina" || meta.datatype == "pacbio" || meta.datatype == "rnaseq"
                 no_crumble: true
         }
 
