@@ -3,7 +3,7 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [[v2.1.0dev](https://github.com/sanger-tol/readmapping/releases/tag/2.1.0dev)] - 2.1.0dev - [release-date]
+## [[v2.1.0](https://github.com/sanger-tol/readmapping/releases/tag/2.1.0)] - Chinese Fireball - [release-date]
 
 ### Enhancements & fixes
 
@@ -13,8 +13,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Slack / Teams functionality now moved to Nextflow plugins ([nf-slack](https://github.com/seqeralabs/nf-slack), [nf-teams](https://github.com/nvnieuwk/nf-teams))
 - Add check for BAM/CRAM headers in nf-test
 - Preserve PG lines from original BAM/CRAM files and processing steps in final alignment outputs
-- Replace post-filtering FastQC with Hifi_trimmer trimming statistics in the MultiQC report
+- Add Hifi_trimmer trimming statistics to the MultiQC report
 - Add MultiQC report per datatype
+- Support PacBio PiMms and Amplified data
 
 ### Parameters
 
