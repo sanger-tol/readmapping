@@ -1,0 +1,2 @@
+specimen,run,datatype,datafile,library,adapter_file,adapter_preset,barcode
+SAMEA115183607,ERR15170332,pacbio,https://tolit.cog.sanger.ac.uk/test-data/Siboglinum_fiordicum/genomic_data/wsSibFior13/pacbio/m84047_250307_124228_s4.hifi_reads.bc2059.subset.bam,pimms,https://tolit.cog.sanger.ac.uk/test-data/resources/modules/pacbio_preprocess/TruSeq_adapters_v3.fasta,ASYMMETRIC,bc2059
