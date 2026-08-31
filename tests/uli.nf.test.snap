@@ -1,7 +1,7 @@
 {
     "-profile test_uli": {
         "content": [
-            54,
+            53,
             {
                 "BGZIP_BEDGRAPH": {
                     "samtools": "1.23.1"
@@ -220,10 +220,10 @@
                 "pacbio.SAMEA114784749.ERR14209104_test.hifitrimmer.summary.json:md5,a0bb029ebd213c14bad17ac343db6cfb"
             ]
         ],
-        "timestamp": "2026-08-20T20:58:24.199150905",
+        "timestamp": "2026-08-31T12:57:12.127986448",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.3"
+            "nextflow": "25.10.4"
         }
     }
 }

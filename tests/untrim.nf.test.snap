@@ -1,5 +1,5 @@
 {
-    "-profile test --pacbio_adapter false --pacbio_adapter_yaml false --alignment_format bam": {
+    "-profile test_untrim": {
         "content": [
             71,
             {
@@ -266,10 +266,10 @@
                 
             ]
         ],
-        "timestamp": "2026-08-24T14:09:05.441443362",
+        "timestamp": "2026-08-31T14:03:03.342008612",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.3"
+            "nextflow": "25.10.4"
         }
     }
 }
