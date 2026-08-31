@@ -58,6 +58,10 @@ def create_data_channel ( LinkedHashMap row, datafile, stats ) {
     meta.adapter_file   = row.adapter_file   ?: null
     meta.adapter_preset = row.adapter_preset ?: null
 
+    if (meta.library == 'pimms' && (meta.adapter_file == null || meta.adapter_preset == null)) {
+        error "Sample ${meta.specimen}.${meta.run} is library=pimms but missing adapter_file and/or adapter_preset column; both are required for PIMMS LIMA demultiplexing"
+    }
+
     def platform = (meta.datatype == "hic" || meta.datatype == "illumina") ? "ILLUMINA" :
                 (meta.datatype == "pacbio" || meta.datatype == "pacbio_clr") ? "PACBIO" :
                 (meta.datatype == "ont") ? "ONT" : "UNKNOWN"
