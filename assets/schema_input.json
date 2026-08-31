@@ -50,7 +50,7 @@
                 "type": "string",
                 "exists": true,
                 "pattern": "^\\S+\\.fasta$",
-                "errorMessage": "Adapter FASTA file for pimms LIMA demultiplexing cannot contain spaces",
+                "errorMessage": "Adapter FASTA file for ULI/PiMmS LIMA demultiplexing cannot contain spaces",
                 "default": "",
                 "meta": ["adapter_file"]
             },

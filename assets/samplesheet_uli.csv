@@ -1,3 +1,4 @@
-specimen,run,datatype,datafile,library,barcode
-SAMEA114784749,ERR14209104,pacbio,https://tolit.cog.sanger.ac.uk/test-data/Acropora_cervicornis/genomic_data/m84093_241116_151316_s2.hifi_reads.bc2028.subset.bam,uli,bc2028
-SAMEA114784749,ERR14209104_test,pacbio,https://tolit.cog.sanger.ac.uk/test-data/Acropora_cervicornis/genomic_data/m84093_241116_151316_s2.hifi_reads.bc2028.subset.bam,,bc2028
+specimen,run,datatype,datafile,library,adpater_file,barcode
+SAMEA114784749,ERR14209104,pacbio,https://tolit.cog.sanger.ac.uk/test-data/Acropora_cervicornis/genomic_data/m84093_241116_151316_s2.hifi_reads.bc2028.subset.bam,uli,,bc2028
+SAMEA114784749,ERR14209104_provided_adapter,pacbio,https://tolit.cog.sanger.ac.uk/test-data/Acropora_cervicornis/genomic_data/m84093_241116_151316_s2.hifi_reads.bc2028.subset.bam,uli,https://tolit.cog.sanger.ac.uk/test-data/resources/modules/pacbio_preprocess/pacbio_uli_adapter.fasta,bc2028
+SAMEA114784749,ERR14209104_test,pacbio,https://tolit.cog.sanger.ac.uk/test-data/Acropora_cervicornis/genomic_data/m84093_241116_151316_s2.hifi_reads.bc2028.subset.bam,,https://tolit.cog.sanger.ac.uk/test-data/resources/modules/pacbio_preprocess/pacbio_uli_adapter.fasta,bc2028

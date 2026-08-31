@@ -58,8 +58,14 @@ def create_data_channel ( LinkedHashMap row, datafile, stats ) {
     meta.adapter_file   = row.adapter_file   ?: null
     meta.adapter_preset = row.adapter_preset ?: null
 
-    if (meta.library == 'pimms' && (meta.adapter_file == null || meta.adapter_preset == null)) {
-        error "Sample ${meta.specimen}.${meta.run} is library=pimms but missing adapter_file and/or adapter_preset column; both are required for PIMMS LIMA demultiplexing"
+    if (meta.library == 'pimms') {
+        if (meta.adapter_file == null && meta.adapter_preset == null) {
+            log.warn "Sample ${meta.specimen}.${meta.run} is library=pimms but missing both adapter_file and adapter_preset; defaulting to ASYMMETRIC and no adapter file"
+        } else if (meta.adapter_file != null && meta.adapter_preset == null) {
+            error "Sample ${meta.specimen}.${meta.run} is library=pimms: adapter_file is provided but adapter_preset is missing"
+        } else if (meta.adapter_file == null && meta.adapter_preset != null) {
+            error "Sample ${meta.specimen}.${meta.run} is library=pimms: adapter_preset is provided but adapter_file is missing"
+        }
     }
 
     def platform = (meta.datatype == "hic" || meta.datatype == "illumina") ? "ILLUMINA" :

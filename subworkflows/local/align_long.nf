@@ -77,11 +77,12 @@ workflow ALIGN_LONG {
 
     //
     // PACBIO_PREPROCESS expects [meta, reads, lima_adapter, run_pbmarkdup, adapter_yaml].
-    // ULI uses the global adapter, PiMmS uses its per-sample adapter, amplified reads
-    // use pbmarkdup without LIMA, and standard HiFi reads use neither.
+    // ULI and PiMmS use per-sample adapter_file when provided, falling back to the
+    // global val_pacbio_uli_adapter for ULI only. Amplified reads use pbmarkdup
+    // without LIMA, and standard HiFi reads use neither.
     ch_pacbio_preprocess = ch_pacbio_read_yaml.map { meta, read_files, yaml ->
         def library = meta.library ?: ''
-        def lima_adapter = library == 'uli' ? val_pacbio_uli_adapter
+        def lima_adapter = library == 'uli' ? (meta.adapter_file ? file(meta.adapter_file) : val_pacbio_uli_adapter)
             : library == 'pimms' && meta.adapter_file ? file(meta.adapter_file)
             : false
         def run_pbmarkdup = library in ['uli', 'pimms', 'amplified']
