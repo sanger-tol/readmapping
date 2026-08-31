@@ -1,4 +1,4 @@
-%%metro title: sanger-tol/readmapping (PacBio Subtypes)
+%%metro title: sanger-tol/readmapping Data Flow
 %%metro style: dark
 %%metro font_scale: 0.95
 %%metro directional: true
@@ -7,31 +7,34 @@
 %%metro logo: sanger-tol-readmapping_logo_light.png
 %%metro legend: bl
 
-%% --- METRO LINES ---
+%% --- METRO DATA LINES ---
 %%metro line: reference | Reference Genome | #FA6863
-%%metro line: pacbio_std | PacBio Standard / Untrimmed | #3498db
-%%metro line: pacbio_uli | PacBio ULI (Ultra-Low Input) | #00bcd4
-%%metro line: pacbio_pimms | PacBio PiMmS | #00e676
-%%metro line: pacbio_amplified | PacBio Amplified | #e67e22
-%%metro line: short_reads | Illumina Hi-C / WGS | #e63946
-%%metro line: mapping | Merged Alignment & CRAM | #9b59b6
-%%metro line: qc | Quality Control & MultiQC | #0570b0
+%%metro line: pacbio_std | PacBio HiFi Standard | #3498db
+%%metro line: pacbio_uli | PacBio HiFi ULI | #00bcd4
+%%metro line: pacbio_pimms | PacBio HiFi PiMmS | #00e676
+%%metro line: pacbio_amplified | PacBio HiFi Amplified | #e67e22
+%%metro line: ont_clr | ONT / PacBio CLR | #f1c40f
+%%metro line: short_reads | Illumina / Hi-C | #e63946
+%%metro line: qc | Pre/Post-align QC & MultiQC | #9b59b6
 
 %% --- INPUT & OUTPUT FILES ---
 %%metro file: in_ref | FASTA
+%%metro file: in_pacbio_std | FASTQ
 %%metro file: in_pacbio_std | BAM
+%%metro file: in_pacbio_uli | FASTQ
 %%metro file: in_pacbio_uli | BAM
+%%metro file: in_pacbio_pimms | FASTQ
 %%metro file: in_pacbio_pimms | BAM
+%%metro file: in_pacbio_amplified | FASTQ
 %%metro file: in_pacbio_amplified | BAM
+%%metro file: in_ont_clr | FASTQ
+%%metro file: in_ont_clr | BAM
 %%metro file: in_short | FASTQ
 %%metro file: in_short | CRAM
-%%metro file: in_adapters | TAR
 %%metro file: cram_out | CRAM
 %%metro file: crai_out | CRAI
-%%metro file: bedgraph_out | bedgraph.gz
 %%metro file: stats_out | stats
-%%metro file: flagstat_out | flagstat
-%%metro file: idxstats_out | idxstats
+%%metro file: bedgraph_out | bedgraph
 %%metro file: multiqc_out | HTML
 
 %% --- OFF-TRACK ANCHORS ---
@@ -40,213 +43,143 @@
 %%metro off_track: in_pacbio_uli
 %%metro off_track: in_pacbio_pimms
 %%metro off_track: in_pacbio_amplified
+%%metro off_track: in_ont_clr
 %%metro off_track: in_short
-%%metro off_track: in_adapters
 %%metro off_track: cram_out
 %%metro off_track: crai_out
-%%metro off_track: bedgraph_out
 %%metro off_track: stats_out
-%%metro off_track: flagstat_out
-%%metro off_track: idxstats_out
+%%metro off_track: bedgraph_out
 %%metro off_track: multiqc_out
 
 %% --- GRID DEFINITIONS ---
-%%metro grid: inputs_block | 0, 0, 1
-%%metro grid: preprocess_block | 1, 0, 5
-%%metro grid: align_block | 2, 0, 5
-%%metro grid: postprocess_block | 3, 0, 4
-%%metro grid: qc_block | 4, 0, 2
+%%metro grid: inputs_block | 0, 0, 2
+%%metro grid: pre_qc_block | 1, 0, 3
+%%metro grid: pacbio_prep_block | 2, 0, 4
+%%metro grid: chunk_align_block | 3, 0, 5
+%%metro grid: postprocess_block | 4, 0, 4
+%%metro grid: multiqc_block | 5, 0, 2
 
 graph LR
     %% ==========================================
     %% 1. BLOCK: INPUT FILES
     %% ==========================================
     subgraph inputs_block [1 Input Files]
-        %%metro exit: right | reference,pacbio_std,pacbio_uli,pacbio_pimms,pacbio_amplified,short_reads
+        %%metro exit: right | reference,pacbio_std,pacbio_uli,pacbio_pimms,pacbio_amplified,ont_clr,short_reads
         in_ref[ ]
         in_pacbio_std[ ]
         in_pacbio_uli[ ]
         in_pacbio_pimms[ ]
         in_pacbio_amplified[ ]
+        in_ont_clr[ ]
         in_short[ ]
     end
 
     %% ==========================================
-    %% 2. BLOCK: INPUT CHECK & PREPROCESSING
+    %% 2. BLOCK: REFERENCE INDEXING & PRE-ALIGN QC
     %% ==========================================
-    subgraph preprocess_block [2 Input QC & Subtype Preprocessing]
-        %%metro entry: left | reference,pacbio_std,pacbio_uli,pacbio_pimms,pacbio_amplified,short_reads
-        %%metro exit: right | reference,pacbio_std,pacbio_uli,pacbio_pimms,pacbio_amplified,short_reads
+    subgraph pre_qc_block [2 Indexing & Pre-Align QC]
+        %%metro entry: left | reference,pacbio_std,pacbio_uli,pacbio_pimms,pacbio_amplified,ont_clr,short_reads
+        %%metro exit: right | reference,pacbio_std,pacbio_uli,pacbio_pimms,pacbio_amplified,ont_clr,short_reads
 
-        ref_faidx[Samtools\nfaidx]
-        bwa_idx[BWAMEM2\nindex]
-        mm2_idx[Minimap2\nindex]
+        ref_index[Reference Indexing\nFaidx / BWA / MM2]
+        fastqc_pre[FastQC\nPre-align QC]
 
-        mask_unmask[Mask\nUnmask]
-        flagstat_in[Samtools\nflagstat]
-
-        in_adapters[ ]
-        gawk_yaml[Gawk\nbarcode]
-        lima[Lima\ndemux]
-        pbmarkdup[PB\nMarkdup]
-        blastn[BlastN\nscreening]
-        processblast[HifiTrimmer\nprocessblast]
-        hifitrimmer[HifiTrimmer\ntrim]
-
-        conv_cram[Convert\nCRAM]
-        split_hdr[Samtools\nsplitheader]
-        add_rg[Samtools\naddreplacerg]
-
-        ref_faidx -->|reference| bwa_idx
-        ref_faidx -->|reference| mm2_idx
-
-        mask_unmask -->|pacbio_std,pacbio_uli,pacbio_pimms,pacbio_amplified,short_reads| flagstat_in
-
-        %% Common PacBio Entry
-        flagstat_in -->|pacbio_std,pacbio_uli,pacbio_pimms,pacbio_amplified| gawk_yaml
-        gawk_yaml -->|pacbio_std,pacbio_uli,pacbio_pimms,pacbio_amplified| lima
-        lima -->|pacbio_std,pacbio_uli,pacbio_pimms,pacbio_amplified| pbmarkdup
-
-        %% Screened & Trimmed Subtypes (ULI, PiMmS, Amplified)
-        in_adapters -->|pacbio_uli,pacbio_pimms,pacbio_amplified| blastn
-        pbmarkdup -->|pacbio_uli,pacbio_pimms,pacbio_amplified| blastn
-        blastn -->|pacbio_uli,pacbio_pimms,pacbio_amplified| processblast
-        processblast -->|pacbio_uli,pacbio_pimms,pacbio_amplified| hifitrimmer
-
-        %% Illumina Path
-        flagstat_in -->|short_reads| conv_cram
-        conv_cram -->|short_reads| split_hdr
-        split_hdr -->|short_reads| add_rg
+        in_ref -->|reference| ref_index
+        in_pacbio_std -->|pacbio_std| fastqc_pre
+        in_pacbio_uli -->|pacbio_uli| fastqc_pre
+        in_pacbio_pimms -->|pacbio_pimms| fastqc_pre
+        in_pacbio_amplified -->|pacbio_amplified| fastqc_pre
+        in_ont_clr -->|ont_clr| fastqc_pre
+        in_short -->|short_reads| fastqc_pre
     end
 
     %% ==========================================
-    %% 3. BLOCK: READ ALIGNMENT
+    %% 3. BLOCK: PACBIO PREPROCESSING
     %% ==========================================
-    subgraph align_block [3 Long & Short Read Alignment]
-        %%metro entry: left | reference,pacbio_std,pacbio_uli,pacbio_pimms,pacbio_amplified,short_reads
-        %%metro exit: right | mapping
+    subgraph pacbio_prep_block [3 PacBio Preprocessing]
+        %%metro entry: left | pacbio_std,pacbio_uli,pacbio_pimms,pacbio_amplified
+        %%metro exit: right | pacbio_std,pacbio_uli,pacbio_pimms,pacbio_amplified
 
-        cram_chunks_hic[CramAlign\ngen_chunks]
-        bwa_align_hic[BWAMEM2\nalign Hi-C]
-        merge_short[Samtools\nmergedup]
+        lima[Lima\nDemux]
+        pbmarkdup[PBMarkdup\nDeduplication]
+        hifitrimmer[HifiTrimmer\nAdapter Trim]
 
-        fastx_idx[PyFastx\nindex]
-        mm2_align_fastx[Minimap2\nalign FASTX]
+        fastqc_pre -->|pacbio_uli,pacbio_pimms| lima
+        fastqc_pre -->|pacbio_std,pacbio_amplified| pbmarkdup
 
-        cram_chunks_long[CramAlign\ngen_chunks]
-        mm2_align_cram[Minimap2\nalign CRAM]
-
-        merge_long[Samtools\nmerge]
-
-        %% Short Reads Alignment
-        cram_chunks_hic -->|short_reads| bwa_align_hic
-        bwa_align_hic -->|short_reads| merge_short
-
-        %% PacBio Subtypes Alignment (FASTX & CRAM Chunk Routes)
-        fastx_idx -->|pacbio_std,pacbio_uli,pacbio_pimms,pacbio_amplified| mm2_align_fastx
-        mm2_align_fastx -->|pacbio_std,pacbio_uli,pacbio_pimms,pacbio_amplified| merge_long
-
-        cram_chunks_long -->|pacbio_std,pacbio_uli,pacbio_pimms,pacbio_amplified| mm2_align_cram
-        mm2_align_cram -->|pacbio_std,pacbio_uli,pacbio_pimms,pacbio_amplified| merge_long
-
-        merge_short -->|mapping| merge_long
+        lima -->|pacbio_uli,pacbio_pimms| pbmarkdup
+        pbmarkdup -->|pacbio_std,pacbio_uli,pacbio_pimms,pacbio_amplified| hifitrimmer
     end
 
     %% ==========================================
-    %% 4. BLOCK: POST-PROCESSING & STATS
+    %% 4. BLOCK: CHUNKING & ALIGNMENT
     %% ==========================================
-    subgraph postprocess_block [4 Merge, CRAM & Statistics]
-        %%metro entry: left | mapping
-        %%metro exit: right | mapping,qc
+    subgraph chunk_align_block [4 Chunking & Alignment]
+        %%metro entry: left | reference,pacbio_std,pacbio_uli,pacbio_pimms,pacbio_amplified,ont_clr,short_reads
+        %%metro exit: right | reference,pacbio_std,pacbio_uli,pacbio_pimms,pacbio_amplified,ont_clr,short_reads
 
-        crumble[Crumble\ncompression]
-        change_name[Change\nname]
-        sam_cram[Samtools\nCRAM]
-        reheader[Samtools\nreheader]
-        sam_index[Samtools\nindex]
+        chunk_reads[CramAlign\nGenCramChunks]
+        align_long[Minimap2\nAlign Long]
+        align_short[BWAMEM2 / Minimap2\nAlign Short]
+        merge_aligned[Samtools\nMergeMarkdup]
 
-        blobtk[BlobTK\ndepth]
-        bgzip_bed[BGZIP\nBedGraph]
+        fastqc_pre -->|ont_clr,short_reads| chunk_reads
+        hifitrimmer -->|pacbio_std,pacbio_uli,pacbio_pimms,pacbio_amplified| chunk_reads
 
-        sam_stats[Samtools\nstats]
-        gzip_stats[GZIP\nstats]
-        sam_flagstat[Samtools\nflagstat]
-        sam_idxstats[Samtools\nidxstats]
+        chunk_reads -->|pacbio_std,pacbio_uli,pacbio_pimms,pacbio_amplified,ont_clr| align_long
+        chunk_reads -->|short_reads| align_short
+
+        ref_index -->|reference| align_long
+        ref_index -->|reference| align_short
+
+        align_long -->|pacbio_std,pacbio_uli,pacbio_pimms,pacbio_amplified,ont_clr| merge_aligned
+        align_short -->|short_reads| merge_aligned
+    end
+
+    %% ==========================================
+    %% 5. BLOCK: POST-PROCESSING & METRICS
+    %% ==========================================
+    subgraph postprocess_block [5 Post-Processing & Stats]
+        %%metro entry: left | reference,pacbio_std,pacbio_uli,pacbio_pimms,pacbio_amplified,ont_clr,short_reads
+        %%metro exit: right | qc
+
+        crumble[Crumble\nCompression]
+        cram_conv[Samtools CRAM\n& Index]
+        sam_stats[Samtools\nStats, Flagstat, Idxstats]
+        blobtk[BlobTK Depth\nCoverage]
 
         cram_out[ ]
         crai_out[ ]
-        bedgraph_out[ ]
         stats_out[ ]
-        flagstat_out[ ]
-        idxstats_out[ ]
+        bedgraph_out[ ]
 
-        crumble -->|mapping| change_name
-        change_name -->|mapping| sam_cram
-        sam_cram -->|mapping| reheader
-        reheader -->|mapping| sam_index
+        merge_aligned -->|pacbio_std,pacbio_uli,pacbio_pimms,pacbio_amplified,ont_clr,short_reads| crumble
+        crumble -->|pacbio_std,pacbio_uli,pacbio_pimms,pacbio_amplified,ont_clr,short_reads| cram_conv
+        ref_index -->|reference| cram_conv
 
-        sam_index -->|mapping| cram_out
-        sam_index -->|mapping| crai_out
+        cram_conv -->|pacbio_std,pacbio_uli,pacbio_pimms,pacbio_amplified,ont_clr,short_reads| cram_out
+        cram_conv -->|pacbio_std,pacbio_uli,pacbio_pimms,pacbio_amplified,ont_clr,short_reads| crai_out
 
-        change_name -->|mapping| blobtk
-        blobtk -->|mapping| bgzip_bed
-        bgzip_bed -->|mapping| bedgraph_out
+        cram_conv -->|qc| sam_stats
+        cram_conv -->|qc| blobtk
 
-        sam_index -->|qc| sam_stats
-        sam_stats -->|qc| gzip_stats
-        gzip_stats -->|qc| stats_out
-
-        sam_index -->|qc| sam_flagstat
-        sam_flagstat -->|qc| flagstat_out
-
-        sam_index -->|qc| sam_idxstats
-        sam_idxstats -->|qc| idxstats_out
+        sam_stats -->|qc| stats_out
+        blobtk -->|qc| bedgraph_out
     end
 
     %% ==========================================
-    %% 5. BLOCK: QUALITY CONTROL & REPORTS
+    %% 6. BLOCK: MULTIQC REPORTING
     %% ==========================================
-    subgraph qc_block [5 MultiQC Reporting]
+    subgraph multiqc_block [6 QC Reporting]
         %%metro entry: left | qc
         %%metro exit: right | qc
 
-        fastqc[FastQC]
-        multiqc[MultiQC]
+        multiqc[MultiQC\nReport]
         multiqc_out[ ]
 
-        fastqc -->|qc| multiqc
+        fastqc_pre -->|qc| multiqc
+        sam_stats -->|qc| multiqc
+        blobtk -->|qc| multiqc
+
         multiqc -->|qc| multiqc_out
     end
-
-    %% ==========================================
-    %% INTER-BLOCK CONNECTIONS
-    %% ==========================================
-    in_ref -->|reference| ref_faidx
-    in_pacbio_std -->|pacbio_std| mask_unmask
-    in_pacbio_uli -->|pacbio_uli| mask_unmask
-    in_pacbio_pimms -->|pacbio_pimms| mask_unmask
-    in_pacbio_amplified -->|pacbio_amplified| mask_unmask
-    in_short -->|short_reads| mask_unmask
-
-    flagstat_in -->|qc| fastqc
-    bwa_idx -->|reference| bwa_align_hic
-    mm2_idx -->|reference| mm2_align_fastx
-    mm2_idx -->|reference| mm2_align_cram
-
-    add_rg -->|short_reads| cram_chunks_hic
-
-    %% Standard/Untrimmed bypasses adapter trimming directly to aligners
-    pbmarkdup -->|pacbio_std| fastx_idx
-    pbmarkdup -->|pacbio_std| cram_chunks_long
-
-    %% Trimmed subtypes route from HifiTrimmer to aligners
-    hifitrimmer -->|pacbio_uli,pacbio_pimms,pacbio_amplified| fastx_idx
-    hifitrimmer -->|pacbio_uli,pacbio_pimms,pacbio_amplified| cram_chunks_long
-
-    merge_long -->|mapping| crumble
-
-    sam_stats -->|qc| multiqc
-    sam_flagstat -->|qc| multiqc
-    sam_idxstats -->|qc| multiqc
-    blastn -->|qc| multiqc
-    crumble -->|qc| multiqc
