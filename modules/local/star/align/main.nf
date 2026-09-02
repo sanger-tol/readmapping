@@ -9,7 +9,7 @@ process STAR_ALIGN {
   
     input:
     tuple val(meta),  path(cram),  path(crai), val(rglines)
-    tuple val(meta2), path(index)
+    tuple val(meta2), path(index), path(assembly)
     tuple val(chunkn), val(range)
 
     output:
