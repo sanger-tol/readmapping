@@ -1,4 +1,4 @@
-include { STAR_GENOMEGENERATE        } from '../../../modules/local/star/genomegenerate/main'
+include { STAR_GENOMEGENERATE        } from '../../../modules/nf-core/star/genomegenerate/main'
 include { CRAMALIGN_GENCRAMCHUNKS    } from '../../../modules/sanger-tol/cramalign/gencramchunks'
 include { STAR_ALIGN                 } from '../../../modules/local/star/align/main'
 include { SAMTOOLS_INDEX             } from '../../../modules/nf-core/samtools/index/main'
@@ -101,9 +101,10 @@ workflow CRAM_MAP_ILLUMINA_RNA {
     //
     if(val_aligner == "star") {
         //
-        // Module: Create bwa-mem2 index for assembly
+        // Module: Create star index for assembly. Pass empty gtf channel
         //
-        STAR_GENOMEGENERATE(ch_assemblies)
+        ch_gtf = channel.of([ [], [] ])
+        STAR_GENOMEGENERATE(ch_assemblies,ch_gtf)
 
         ch_mapping_inputs = ch_cram_rg
             .combine(ch_assemblies, by: 0)

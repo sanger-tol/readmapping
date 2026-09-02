@@ -132,6 +132,11 @@
                         "git_sha": "2057a0a8dbd67000d08613a556570aa7184a7c89",
                         "installed_by": ["modules"]
                     },
+                    "star/genomegenerate": {
+                        "branch": "master",
+                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
+                        "installed_by": ["modules"]
+                    },
                     "untar": {
                         "branch": "master",
                         "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
