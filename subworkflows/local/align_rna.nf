@@ -2,7 +2,7 @@
 // Align short read RNA-seq data against the genome
 //
 
-include { CRAM_MAP_ILLUMINA_RNA                       } from '../../subworkflows/sanger-tol/cram_map_illumina_rna'
+include { CRAM_MAP_ILLUMINA_RNA                       } from '../../subworkflows/local/cram_map_illumina_rna'
 include { MERGE_OUTPUT                                } from '../../subworkflows/local/merge_output'
 include { SAMTOOLS_ADDREPLACERG                       } from '../../modules/nf-core/samtools/addreplacerg/main'
 include { SAMTOOLS_VIEW as CONVERT_CRAM               } from '../../modules/nf-core/samtools/view/main'
@@ -59,7 +59,6 @@ workflow ALIGN_RNA {
     }
 
     TRIMGALORE( ch_illumina.fasta, ch_illumina.cram )
-    ch_trim_unpaired = TRIMGALORE.out.unpaired
     ch_trim_html = TRIMGALORE.out.html
     ch_trim_zip = TRIMGALORE.out.zip
     ch_trim_log = TRIMGALORE.out.log

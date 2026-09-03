@@ -4,7 +4,7 @@ include { STAR_ALIGN                 } from '../../../modules/local/star/align/m
 include { SAMTOOLS_INDEX             } from '../../../modules/nf-core/samtools/index/main'
 include { SAMTOOLS_SPLITHEADER       } from '../../../modules/nf-core/samtools/splitheader/main'
 
-include { BAM_SAMTOOLS_MERGE_MARKDUP } from '../bam_samtools_merge_markdup/main'
+include { BAM_SAMTOOLS_MERGE_MARKDUP } from '../../sanger-tol/bam_samtools_merge_markdup/main'
 
 workflow CRAM_MAP_ILLUMINA_RNA {
 
