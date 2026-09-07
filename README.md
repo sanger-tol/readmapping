@@ -1,6 +1,9 @@
-# sanger-tol/readmapping
-
-![sanger-tol/readmapping](docs/images/sanger-tol-readmapping_logo_light.png)
+<h1>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/images/sanger-tol-readmapping_logo_dark.png">
+    <img alt="sanger-tol/readmapping" src="docs/images/sanger-tol-readmapping_logo_light.png">
+  </picture>
+</h1>
 
 [![Open in GitHub Codespaces](https://img.shields.io/badge/Open_In_GitHub_Codespaces-black?labelColor=grey&logo=github)](https://github.com/codespaces/new/sanger-tol/readmapping)
 [![GitHub Actions CI Status](https://github.com/sanger-tol/readmapping/actions/workflows/nf-test.yml/badge.svg)](https://github.com/sanger-tol/readmapping/actions/workflows/nf-test.yml)
@@ -25,7 +28,10 @@ On merge to `dev` and `main` branch, automated continuous integration tests run 
 
 ## Pipeline summary
 
-<img src="docs/images/sanger-tol-readmapping_metro_map_light_animated.svg" height="700">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/images/sanger-tol-readmapping_metro_map_dark.svg">
+  <img alt="sanger-tol/readmapping" src="docs/images/sanger-tol-readmapping_metro_map_light.svg">
+</picture>
 
 ## Quick Start
 
