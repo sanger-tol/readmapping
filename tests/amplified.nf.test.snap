@@ -1,0 +1,162 @@
+{
+    "-profile test_amplified": {
+        "content": [
+            28,
+            {
+                "BGZIP_BEDGRAPH": {
+                    "samtools": "1.23.1"
+                },
+                "BLAST_BLASTN": {
+                    "blastn": "2.17.0+",
+                    "samtools": "1.23.1",
+                    "seqkit": "2.12.0"
+                },
+                "BLOBTK_DEPTH": {
+                    "blobtk": "0.7.1"
+                },
+                "CRAMALIGN_GENCRAMCHUNKS": {
+                    "cramchunks": "1.1.0"
+                },
+                "CRAMALIGN_MINIMAP2ALIGN": {
+                    "minimap2": "2.30-r1287",
+                    "samtools": "1.22.1"
+                },
+                "CRUMBLE": {
+                    "crumble": "0.9.1"
+                },
+                "FASTQC": {
+                    "fastqc": "0.12.1"
+                },
+                "GUNZIP": {
+                    "gunzip": 1.13
+                },
+                "GZIP_STATS": {
+                    "pigz": 2.8
+                },
+                "HIFITRIMMER_PROCESSBLAST": {
+                    "hifi-trimmer": "5.0.1"
+                },
+                "HIFITRIMMER_TRIM": {
+                    "hifi-trimmer": "5.0.1"
+                },
+                "MASK_UNMASK": {
+                    "gawk": "5.3.1",
+                    "unmask": 1.0
+                },
+                "MINIMAP2_INDEX": {
+                    "minimap2": "2.30-r1287"
+                },
+                "PBMARKDUP": {
+                    "pbmarkdup": "1.2.0"
+                },
+                "SAMTOOLS_CRAM": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_FAIDX": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_FLAGSTAT": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_IDXSTATS": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_INDEX": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_MERGE": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_SPLITHEADER": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_STATS": {
+                    "samtools": "1.23.1"
+                },
+                "UNTAR": {
+                    "untar": 1.34
+                },
+                "Workflow": {
+                    "sanger-tol/readmapping": "v2.1.0dev"
+                }
+            },
+            [
+                "multiqc_report.html",
+                "pipeline_info",
+                "pipeline_info/readmapping_software_mqc_versions.yml",
+                "read_mapping",
+                "read_mapping/pacbio",
+                "read_mapping/pacbio/icAdaBipu332",
+                "read_mapping/pacbio/icAdaBipu332/TRACTION-RUN-2387",
+                "read_mapping/pacbio/icAdaBipu332/TRACTION-RUN-2387/GCA_910592335.1.subset.pacbio.icAdaBipu332.TRACTION-RUN-2387.minimap2.coverage.1k.bedGraph.gz",
+                "read_mapping/pacbio/icAdaBipu332/TRACTION-RUN-2387/GCA_910592335.1.subset.pacbio.icAdaBipu332.TRACTION-RUN-2387.minimap2.cram",
+                "read_mapping/pacbio/icAdaBipu332/TRACTION-RUN-2387/GCA_910592335.1.subset.pacbio.icAdaBipu332.TRACTION-RUN-2387.minimap2.cram.crai",
+                "read_mapping/pacbio/icAdaBipu332/TRACTION-RUN-2387/qc",
+                "read_mapping/pacbio/icAdaBipu332/TRACTION-RUN-2387/qc/pacbio.icAdaBipu332.TRACTION-RUN-2387.fastqc.html",
+                "read_mapping/pacbio/icAdaBipu332/TRACTION-RUN-2387/qc/pacbio.icAdaBipu332.TRACTION-RUN-2387.fastqc.zip",
+                "read_mapping/pacbio/icAdaBipu332/TRACTION-RUN-2387/qc/pacbio.icAdaBipu332.TRACTION-RUN-2387.hifitrimmer.bed.gz",
+                "read_mapping/pacbio/icAdaBipu332/TRACTION-RUN-2387/qc/pacbio.icAdaBipu332.TRACTION-RUN-2387.hifitrimmer.summary.json",
+                "read_mapping/pacbio/icAdaBipu332/TRACTION-RUN-2387/qc/pacbio.icAdaBipu332.TRACTION-RUN-2387.rmdup.pbmarkdup.log",
+                "read_mapping/pacbio/icAdaBipu332/TRACTION-RUN-2387/stats",
+                "read_mapping/pacbio/icAdaBipu332/TRACTION-RUN-2387/stats/GCA_910592335.1.subset.pacbio.icAdaBipu332.TRACTION-RUN-2387.minimap2.flagstat",
+                "read_mapping/pacbio/icAdaBipu332/TRACTION-RUN-2387/stats/GCA_910592335.1.subset.pacbio.icAdaBipu332.TRACTION-RUN-2387.minimap2.idxstats",
+                "read_mapping/pacbio/icAdaBipu332/TRACTION-RUN-2387/stats/GCA_910592335.1.subset.pacbio.icAdaBipu332.TRACTION-RUN-2387.minimap2.stats.gz",
+                "read_mapping/pacbio/multiqc_report.pacbio.html"
+            ],
+            [
+                "GCA_910592335.1.subset.pacbio.icAdaBipu332.TRACTION-RUN-2387.minimap2.coverage.1k.bedGraph.gz:md5,0772989e688647309db6943a80711631",
+                "pacbio.icAdaBipu332.TRACTION-RUN-2387.hifitrimmer.bed.gz:md5,f8617a66cc5619f40ee6b956159b4b35",
+                "pacbio.icAdaBipu332.TRACTION-RUN-2387.rmdup.pbmarkdup.log:md5,6d652bd6b201e3b2cf417842f11e27e0",
+                "GCA_910592335.1.subset.pacbio.icAdaBipu332.TRACTION-RUN-2387.minimap2.flagstat:md5,9fb82346a708377f26b868784e475467",
+                "GCA_910592335.1.subset.pacbio.icAdaBipu332.TRACTION-RUN-2387.minimap2.idxstats:md5,f827113d3fd093c3a55301c8d963a36c",
+                "GCA_910592335.1.subset.pacbio.icAdaBipu332.TRACTION-RUN-2387.minimap2.stats.gz:md5,0873c0e7fa8d06bacd72c984f5eb3eb0"
+            ],
+            {
+                
+            },
+            {
+                "GCA_910592335.1.subset.pacbio.icAdaBipu332.TRACTION-RUN-2387.minimap2.cram": {
+                    "maxReadLength": 17360,
+                    "minReadLength": 0,
+                    "meanReadLength": 5779,
+                    "maxQuality": 60,
+                    "minQuality": 0,
+                    "meanQuality": 13,
+                    "readCount": 19390,
+                    "duplicateReadCount": 0,
+                    "sorted": false
+                }
+            },
+            {
+                
+            },
+            {
+                "GCA_910592335.1.subset.pacbio.icAdaBipu332.TRACTION-RUN-2387.minimap2.cram": [
+                    "@HD\tVN:1.6\tSO:coordinate",
+                    "@SQ\tSN:CAJUZD010000039.1\tLN:208855\tM5:ed0e4dbfd01993544dcb91eaaf070004\tUR:GCA_910592335.1.subset.unmasked.fa",
+                    "@RG\tID:a69c2469/50--51\tSM:DTOL_RD16425669\tLB:TRAC-2-23117\tPU:m84093_260423_193159_s3\tDS:READTYPE=CCS;Ipd:CodecV1=ip;PulseWidth:CodecV1=pw;BINDINGKIT=103-496-900;SEQUENCINGKIT=103-496-700;BASECALLERVERSION=5.0;SMRTCELLKIT=102-202-200;SMRTCELLID=EA268109;RUNID=r84093_20260423_132111;ICSVERSION=13.5.0.280199;MOVIELENGTH=1440.0;FRAMERATEHZ=100.000000;BarcodeFile=Twist_Universal_Adapters_with_UDI.barcodeset.xml;BarcodeHash=90b1895570d10fa009bc02315bd70227;BarcodeCount=800;BarcodeMode=Asymmetric;BarcodeQuality=Score\tPL:PACBIO\tPM:REVIO\tBC:AATGATACGGCGACCACCGAGATCTACACCTATGCCTTAACACTCTTTCCCTACACGACGCTCTTCCGATCT-CAAGCAGAAGACGGCATACGAGATACCTCGAGAGGTGACTGGAGTTCAGACGTGTGCTCTTCCGATCT",
+                    "@PG\tID:ccs\tPN:ccs\tVN:8.7.0 (commit v8.7.0)\tDS:Generate circular consensus sequences (ccs) from subreads.\tCL:ccs --streamed --log-level INFO --log-file metadatam84093_260423_193159_s3.ccs.log --append-log-file --stderr-json-log --instrument-files-layout --movie-name m84093_260423_193159_s3 --min-rq -1 --non-hifi-prefix fail --knrt-ada --knrt-gpu-preset A100,A100 --pbdc-model revio_13_3.onnx --alarms metadata/m84093_260423_193159_s3.ccs.alarms.json --max-hifi-reads 25M",
+                    "@PG\tID:pbtrim\tVN:1.3.99 (commit v1.3.0-4-g0c2e282)\tCL:trim --streamed --movie-name m84093_260423_193159_s3 --instrument-files-layout --reuse-source-uuid --quality hifi --log-level INFO --log-file metadatam84093_260423_193159_s3.hifi_reads.trim.log --append-log-file --alarms metadata/m84093_260423_193159_s3.hifi_reads.trim.alarms.json",
+                    "@PG\tID:jasmine\tPN:jasmine\tVN:2.7.99 (commit v2.7.0-5-ge11ab8a)\tDS:Call select base modifications in HiFi reads.\tCL:jasmine --streamed --movie-name m84093_260423_193159_s3 --instrument-files-layout --quality hifi --reuse-source-uuid --stderr-json-log --6ma --trt --gpu-devices 0,0,0,0 --log-level INFO --log-file metadatam84093_260423_193159_s3.hifi_reads.jasmine.log --append-log-file --alarms metadata/m84093_260423_193159_s3.hifi_reads.jasmine.alarms.json",
+                    "@PG\tID:lima\tVN:2.15.99 (commit v2.15.0-3-g39123c7)\tCL:lima -j 14 --log-level INFO --peek-guess --hifi-preset ASYMMETRIC --dump-removed --reuse-uuids --output-missing-pairs --biosample-csv lima_biosamples.csv --split-bam-named --split-subdirs --output-missing-pairs --guess-file-json m84093_260423_193159_s3.hifi_reads.lima_guesses.report.json --alarms alarms.json m84093_260423_193159_s3.hifi_reads.consensusreadset.xml Twist_Universal_Adapters_with_UDI.barcodeset.xml m84093_260423_193159_s3.hifi_reads.consensusreadset.xml",
+                    "@PG\tID:samtools\tPN:samtools\tVN:1.24\tPP:lima\tCL:samtools view -t N -s 0.04 -b m84093_260423_193159_s3.hifi_reads.Plate_A_26_B04_F--Plate_A_26_B04_R.bam",
+                    "@PG\tID:hifi-trimmer\tPN:hifi-trimmer\tVN:5.0.1\tPP:samtools\tCL:hifi-trimmer trim -t N -f cram -o pacbio.icAdaBipu332.TRACTION-RUN-2387.hifitrimmer.cram pacbio.icAdaBipu332.TRACTION-RUN-2387.rmdup.bam pacbio.icAdaBipu332.TRACTION-RUN-2387.hifitrimmer.bed.gz",
+                    "@PG\tID:samtools.1\tPN:samtools\tPP:hifi-trimmer\tVN:1.22.1\tCL:samtools view -H pacbio.icAdaBipu332.TRACTION-RUN-2387.hifitrimmer.cram",
+                    "@PG\tID:minimap2\tPN:minimap2\tVN:2.30-r1287\tCL:minimap2 -t N -ax map-hifi --cs=short -I1G -y -R @RG\\tID:a69c2469Twist_Universal_Adapters_with_UDI.barcodeset.xml;BarcodeHash=90b1895570d10fa009bc02315bd70227;BarcodeCount=800;BarcodeMode=Asymmetric;BarcodeQuality=Score\\tPL:PACBIO\\tPM:REVIO\\tBC:AATGATACGGCGACCACCGAGATCTACACCTATGCCTTAACACTCTTTCCCTACACGACGCTCTTCCGATCT-CAAGCAGAAGACGGCATACGAGATACCTCGAGAGGTGACTGGAGTTCAGACGTGTGCTCTTCCGATCT GCA_910592335.1.subset.unmasked.mmi -\tPP:samtools.1",
+                    "@PG\tID:samtools.2\tPN:samtools\tPP:minimap2\tVN:1.22.1\tCL:samtools sort -t N -T pacbio.icAdaBipu332.TRACTION-RUN-2387.hifitrimmer.cram.0.icAdaBipu332.TRACTION-RUN-2387_sort_tmp -o pacbio.icAdaBipu332.TRACTION-RUN-2387.hifitrimmer.cram.0.icAdaBipu332.TRACTION-RUN-2387.bam -",
+                    "@PG\tID:samtools.3\tPN:samtools\tPP:samtools.2\tVN:1.23.1\tCL:samtools merge --threads N -c -p --reference GCA_910592335.1.subset.unmasked.fa icAdaBipu332.TRACTION-RUN-2387.merge.bam 1/pacbio.icAdaBipu332.TRACTION-RUN-2387.hifitrimmer.cram.0.icAdaBipu332.TRACTION-RUN-2387.bam",
+                    "@PG\tID:crumble\tPN:crumble\tPP:samtools.3\tVN:0.9.1\tCL:crumble -y pbccs -O bam icAdaBipu332.TRACTION-RUN-2387.merge.bam icAdaBipu332.TRACTION-RUN-2387.merge.crumble.bam",
+                    "@PG\tID:samtools.4\tPN:samtools\tPP:crumble\tVN:1.23.1\tCL:samtools view --threads N --reference GCA_910592335.1.subset.unmasked.fa --output-fmt cram,version=3.0,archive,level=8,embed_ref=1 --write-index -o GCA_910592335.1.subset.pacbio.icAdaBipu332.TRACTION-RUN-2387.minimap2.cram GCA_910592335.1.subset.pacbio.icAdaBipu332.TRACTION-RUN-2387.minimap2.bam"
+                ]
+            },
+            [
+                "pacbio.icAdaBipu332.TRACTION-RUN-2387.hifitrimmer.summary.json:md5,146fdeb92fb58a450aa03e0f474b4edd"
+            ]
+        ],
+        "timestamp": "2026-08-31T14:21:36.79050696",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "25.10.4"
+        }
+    }
+}

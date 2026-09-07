@@ -8,7 +8,7 @@ This pipeline aligns raw reads from various technolgies (such as HiC, Illumina, 
 
 ## Samplesheet input
 
-You will need to create a samplesheet with information about the samples you would like to analyse before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with a header row as shown in the examples below. The first 4 columns are required (`specimen`, `run`, `datatype`, `datafile`), while `library` and `barcode` are optional.
+You will need to create a samplesheet with information about the samples you would like to analyse before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with a header row as shown in the examples below. The first 4 columns are required (`specimen`, `run`, `datatype`, `datafile`), while `library`, `barcode`, `adapter_file`, and `adapter_preset` are optional.
 
 ```bash
 --input '[path to samplesheet file]'
@@ -32,22 +32,48 @@ The samplesheet can have as many columns as you desire, however, there is a stri
 A final samplesheet file consisting of both HiC and PacBio data may look something like the one below.
 
 ```console
-specimen,run,datatype,datafile,library,barcode
-specimen1,run1,hic,hic1.cram,,
-specimen1,run2,hic,hic2.cram,,
-specimen2,run3,hic,hic3.cram,,
-specimen2,run4,pacbio,pacbio1.bam,uli,
-specimen3,run5,pacbio,pacbio2.bam,,
+specimen,run,datatype,datafile,library,adapter_file,adapter_preset,barcode
+specimen1,run1,hic,hic1.cram,,,,
+specimen1,run2,hic,hic2.cram,,,,
+specimen2,run3,hic,hic3.cram,,,,
+specimen2,run4,pacbio,pacbio1.bam,uli,,,
+specimen3,run5,pacbio,pacbio2.bam,amplified,,,
+specimen3,run6,pacbio,pacbio3.bam,,,,
 ```
 
-| Column     | Description                                                                                                                                                                                                                                 |
-| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `specimen` | Identifier of the specimen. Usually a BioSpecimen accession, i,e. `SAMEA7521529`.                                                                                                                                                           |
-| `run`      | Identifier of the sequencing run. Usually the accession number of the data in INSDC. For example,`ERR9248445` (hic), `ERR9284044` (pacbio).                                                                                                 |
-| `datatype` | Type of sequencing data. Must be one of `hic`, `illumina`, `pacbio`, `pacbio_clr`, or `ont`.                                                                                                                                                |
-| `datafile` | Full path to read data file. Must be `bam`, `cram`, `fastq.gz` or `fq.gz` for `illumina` and `hic`. Must be `bam`, `fastq.gz` or `fq.gz` for `pacbio`, `pacbio_clr`, and `ont`. Note that FASTQ inputs should be interleaved if paired-end. |
-| `library`  | (Optional) The library value is a unique identifier which is assigned to read group (`@RG`) ID. If the library name is not specified, the pipeline will auto-create library name using the data filename provided in the samplesheet.       |
-| `barcode`  | (Optional) Barcode identifier used to trim barcode adapter for PacBio reads. If empty, barcode-specific adapter sequences will not be trimmed.                                                                                              |
+### ULI and PiMMS samples
+
+For PacBio ULI (Unique Library Identifier) and PiMMS (PacBio Idempotent Multiplexed Molecular Sequencing) libraries, the `library` column should be set to `uli` or `pimms` respectively. These samples are demultiplexed and trimmed using [LIMA](https://github.com/PacificBiosciences/barcode).
+
+- **ULI samples** use the global `--pacbio_uli_adapter` parameter by default. You can override this on a per-sample basis by providing an `adapter_file` column.
+- **PiMMS samples** require both `adapter_file` (the adapter FASTA) and `adapter_preset` (`SYMMETRIC` or `ASYMMETRIC`). If both are missing, a warning is issued and LIMA is skipped. If only one is provided, the pipeline errors.
+
+```console
+specimen,run,datatype,datafile,library,adapter_file,adapter_preset,barcode
+SAMEA12345678,ERR12345678,pacbio,uli_reads.bam,uli,,ASYMMETRIC,bc001
+SAMEA12345678,ERR12345679,pacbio,uli_custom.bam,uli,assets/custom_adapters.fasta,,bc002
+SAMEA87654321,ERR87654321,pacbio,pimms_reads.bam,pimms,assets/truseq_adapters.fasta,SYMMETRIC,bc100
+```
+
+### Amplified libraries
+
+For PacBio amplified libraries, set `library=amplified`. These samples are not demultiplexed with LIMA but are processed with [pbmarkdup](https://github.com/PacificBiosciences/pbmarkdup) to remove PCR duplicates. No adapter or preset columns are needed.
+
+```console
+specimen,run,datatype,datafile,library,barcode
+icAdaBipu332,TRACTION-RUN-2387,pacbio,amplified.bam,amplified,bc050
+```
+
+| Column           | Description                                                                                                                                                                                                                                                                                                                                          |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `specimen`       | Identifier of the specimen. Usually a BioSpecimen accession, i,e. `SAMEA7521529`.                                                                                                                                                                                                                                                                    |
+| `run`            | Identifier of the sequencing run. Usually the accession number of the data in INSDC. For example,`ERR9248445` (hic), `ERR9284044` (pacbio).                                                                                                                                                                                                          |
+| `datatype`       | Type of sequencing data. Must be one of `hic`, `illumina`, `pacbio`, `pacbio_clr`, or `ont`.                                                                                                                                                                                                                                                         |
+| `datafile`       | Full path to read data file. Must be `bam`, `cram`, `fastq.gz` or `fq.gz` for `illumina` and `hic`. Must be `bam`, `fastq.gz` or `fq.gz` for `pacbio`, `pacbio_clr`, and `ont`. Note that FASTQ inputs should be interleaved if paired-end.                                                                                                          |
+| `library`        | (Optional) Library type. Set to `uli` for ULI demultiplexing with LIMA, `pimms` for PiMMS demultiplexing with LIMA, or `amplified` for PCR-duplicate removal with pbmarkdup. For other library types, use a free-form identifier which is assigned to read group (`@RG`) ID. If not specified, the pipeline auto-creates one from the data filename. |
+| `barcode`        | (Optional) Barcode identifier used to trim barcode adapter for PacBio reads. If empty, barcode-specific adapter sequences will not be trimmed.                                                                                                                                                                                                       |
+| `adapter_file`   | (Optional) Path to an adapter FASTA file. For ULI samples, overrides the global `--pacbio_uli_adapter`; for PiMMS samples, specifies the adapter sequences for LIMA demultiplexing.                                                                                                                                                                  |
+| `adapter_preset` | (Optional) LIMA adapter preset (`SYMMETRIC` or `ASYMMETRIC`). Required for PiMMS samples. If omitted for PiMMS, the pipeline warns when no `adapter_file` is given, and errors when `adapter_file` is provided without it.                                                                                                                           |
 
 An [example samplesheet](../assets/samplesheet.csv) has been provided with the pipeline.
 

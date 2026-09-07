@@ -1,825 +1,10 @@
 {
-    "acropora cervicornis - uli - pbmarkdup - no trim": {
-        "content": [
-            [
-                [
-                    {
-                        "id": "test_fasta"
-                    },
-                    "test_fasta.fasta:md5,431671b2d09b72a23ad5fc224f5af12a"
-                ],
-                [
-                    {
-                        "id": "test_fastq"
-                    },
-                    "test_fastq.fastq:md5,d82966330fbaa05fa5d962e173d10bcf"
-                ]
-            ],
-            [
-                
-            ],
-            [
-                
-            ],
-            [
-                {
-                    "maxReadLength": 18595,
-                    "minReadLength": 1416,
-                    "meanReadLength": 8470,
-                    "maxQuality": 255,
-                    "minQuality": 255,
-                    "meanQuality": 255,
-                    "readCount": 42509,
-                    "duplicateReadCount": 0,
-                    "sorted": true
-                }
-            ],
-            [
-                
-            ],
-            [
-                
-            ],
-            [
-                
-            ],
-            [
-                
-            ],
-            [
-                
-            ],
-            [
-                [
-                    {
-                        "id": "test_bam"
-                    },
-                    "test_bam.lima.report:md5,6343113d84641786308e9f96eca9adfe"
-                ],
-                [
-                    {
-                        "id": "test_fasta"
-                    },
-                    "test_fasta.lima.report:md5,f48651719c5d4863355725261708e9b4"
-                ],
-                [
-                    {
-                        "id": "test_fastq"
-                    },
-                    "test_fastq.lima.report:md5,f48651719c5d4863355725261708e9b4"
-                ]
-            ],
-            [
-                [
-                    {
-                        "id": "test_bam"
-                    },
-                    "test_bam.lima.summary:md5,8a416563a0207db595868964fa2275f9"
-                ],
-                [
-                    {
-                        "id": "test_fasta"
-                    },
-                    "test_fasta.lima.summary:md5,3bbe4a6ad5e8a563f1d7f39972e824fb"
-                ],
-                [
-                    {
-                        "id": "test_fastq"
-                    },
-                    "test_fastq.lima.summary:md5,3bbe4a6ad5e8a563f1d7f39972e824fb"
-                ]
-            ],
-            [
-                
-            ]
-        ],
-        "timestamp": "2026-08-18T06:15:12.801114788",
-        "meta": {
-            "nf-test": "0.9.5",
-            "nextflow": "26.04.3"
-        }
-    },
-    "acropora cervicornis - trimmed fastq": {
+    "Test HiFi adapter database instead of FASTA": {
         "content": [
             [
                 
             ],
             [
-                [
-                    {
-                        "id": "test_fasta"
-                    },
-                    "test_fasta.fasta.gz:md5,bf709af5faaa020dc4e6a7b7e23a0002"
-                ]
-            ],
-            [
-                [
-                    {
-                        "id": "test_bam"
-                    },
-                    "test_bam.fastq.gz:md5,4e9d67c3c3d3c01004093560341a125c"
-                ],
-                [
-                    {
-                        "id": "test_fastq"
-                    },
-                    "test_fastq.fastq.gz:md5,5e8015b2899944815a6b934a92e8ab8f"
-                ]
-            ],
-            [
-                
-            ],
-            [
-                
-            ],
-            [
-                
-            ],
-            [
-                
-            ],
-            [
-                [
-                    {
-                        "id": "test_bam"
-                    },
-                    {
-                        "detections": [
-                            {
-                                "adapter": "gnl|uv|NGB00973.1:1-35",
-                                "n_hits": 14340
-                            },
-                            {
-                                "adapter": "PacBio_ULI_adapter",
-                                "n_hits": 1217
-                            },
-                            {
-                                "adapter": "TruSeq_i7s_UDI003",
-                                "n_hits": 10
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP003",
-                                "n_hits": 10
-                            },
-                            {
-                                "adapter": "bc2028",
-                                "n_hits": 26
-                            },
-                            {
-                                "adapter": "gnl|uv|NGB00972.1:1-45",
-                                "n_hits": 49
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP009",
-                                "n_hits": 4
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP009",
-                                "n_hits": 6
-                            },
-                            {
-                                "adapter": "TruSeq_D706",
-                                "n_hits": 6
-                            },
-                            {
-                                "adapter": "TruSeq_i7s_UDI004",
-                                "n_hits": 3
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP010",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP004",
-                                "n_hits": 3
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP002",
-                                "n_hits": 4
-                            },
-                            {
-                                "adapter": "bc2092",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_D705",
-                                "n_hits": 4
-                            },
-                            {
-                                "adapter": "TruSeq_i7s_UDI006",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP006",
-                                "n_hits": 6
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP011",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP012",
-                                "n_hits": 4
-                            },
-                            {
-                                "adapter": "TruSeq_D508",
-                                "n_hits": 4
-                            },
-                            {
-                                "adapter": "TruSeq_D704",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_D707",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "bc2035",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP001",
-                                "n_hits": 3
-                            },
-                            {
-                                "adapter": "bc2025",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_D506",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_i5s_UDI004",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP004",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "bc2076",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "bc2083",
-                                "n_hits": 6
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP011",
-                                "n_hits": 4
-                            },
-                            {
-                                "adapter": "TruSeq_D502",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_D503",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "TruSeq_D702",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "TruSeq_D708",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "bc2055",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "TruSeq_D504",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP005",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP007",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "bc2082",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP008",
-                                "n_hits": 1
-                            }
-                        ],
-                        "hits": [
-                            {
-                                "adapter": "PacBio_ULI_adapter",
-                                "action": "discard",
-                                "n_hits": 1128,
-                                "n_reads": 294,
-                                "bases_removed": 2560108
-                            }
-                        ],
-                        "summary": {
-                            "total_reads_processed": 4569,
-                            "total_bases_processed": 39736811,
-                            "total_reads_discarded": 294,
-                            "total_reads_trimmed": 0,
-                            "total_bases_removed": 2560108
-                        }
-                    }
-                ],
-                [
-                    {
-                        "id": "test_fasta"
-                    },
-                    {
-                        "detections": [
-                            {
-                                "adapter": "gnl|uv|NGB00973.1:1-35",
-                                "n_hits": 14340
-                            },
-                            {
-                                "adapter": "PacBio_ULI_adapter",
-                                "n_hits": 1160
-                            },
-                            {
-                                "adapter": "TruSeq_i7s_UDI003",
-                                "n_hits": 10
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP003",
-                                "n_hits": 10
-                            },
-                            {
-                                "adapter": "gnl|uv|NGB00972.1:1-45",
-                                "n_hits": 49
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP009",
-                                "n_hits": 4
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP009",
-                                "n_hits": 6
-                            },
-                            {
-                                "adapter": "TruSeq_D706",
-                                "n_hits": 6
-                            },
-                            {
-                                "adapter": "TruSeq_i7s_UDI004",
-                                "n_hits": 3
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP010",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP004",
-                                "n_hits": 3
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP002",
-                                "n_hits": 4
-                            },
-                            {
-                                "adapter": "bc2092",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_D705",
-                                "n_hits": 4
-                            },
-                            {
-                                "adapter": "TruSeq_i7s_UDI006",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP006",
-                                "n_hits": 6
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP011",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP012",
-                                "n_hits": 4
-                            },
-                            {
-                                "adapter": "TruSeq_D508",
-                                "n_hits": 4
-                            },
-                            {
-                                "adapter": "TruSeq_D704",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_D707",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "bc2035",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP001",
-                                "n_hits": 3
-                            },
-                            {
-                                "adapter": "bc2025",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_D506",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_i5s_UDI004",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP004",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "bc2076",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "bc2083",
-                                "n_hits": 6
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP011",
-                                "n_hits": 4
-                            },
-                            {
-                                "adapter": "TruSeq_D502",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_D503",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "TruSeq_D702",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "TruSeq_D708",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "bc2055",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "bc2028",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_D504",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP005",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP007",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "bc2082",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP008",
-                                "n_hits": 1
-                            }
-                        ],
-                        "hits": [
-                            {
-                                "adapter": "PacBio_ULI_adapter",
-                                "action": "discard",
-                                "n_hits": 1083,
-                                "n_reads": 249,
-                                "bases_removed": 2193582
-                            }
-                        ],
-                        "summary": {
-                            "total_reads_processed": 4521,
-                            "total_bases_processed": 39340317,
-                            "total_reads_discarded": 249,
-                            "total_reads_trimmed": 0,
-                            "total_bases_removed": 2193582
-                        }
-                    }
-                ],
-                [
-                    {
-                        "id": "test_fastq"
-                    },
-                    {
-                        "detections": [
-                            {
-                                "adapter": "gnl|uv|NGB00973.1:1-35",
-                                "n_hits": 14340
-                            },
-                            {
-                                "adapter": "PacBio_ULI_adapter",
-                                "n_hits": 1160
-                            },
-                            {
-                                "adapter": "TruSeq_i7s_UDI003",
-                                "n_hits": 10
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP003",
-                                "n_hits": 10
-                            },
-                            {
-                                "adapter": "gnl|uv|NGB00972.1:1-45",
-                                "n_hits": 49
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP009",
-                                "n_hits": 4
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP009",
-                                "n_hits": 6
-                            },
-                            {
-                                "adapter": "TruSeq_D706",
-                                "n_hits": 6
-                            },
-                            {
-                                "adapter": "TruSeq_i7s_UDI004",
-                                "n_hits": 3
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP010",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP004",
-                                "n_hits": 3
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP002",
-                                "n_hits": 4
-                            },
-                            {
-                                "adapter": "bc2092",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_D705",
-                                "n_hits": 4
-                            },
-                            {
-                                "adapter": "TruSeq_i7s_UDI006",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP006",
-                                "n_hits": 6
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP011",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP012",
-                                "n_hits": 4
-                            },
-                            {
-                                "adapter": "TruSeq_D508",
-                                "n_hits": 4
-                            },
-                            {
-                                "adapter": "TruSeq_D704",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_D707",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "bc2035",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP001",
-                                "n_hits": 3
-                            },
-                            {
-                                "adapter": "bc2025",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_D506",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_i5s_UDI004",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP004",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "bc2076",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "bc2083",
-                                "n_hits": 6
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP011",
-                                "n_hits": 4
-                            },
-                            {
-                                "adapter": "TruSeq_D502",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_D503",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "TruSeq_D702",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "TruSeq_D708",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "bc2055",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "bc2028",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_D504",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP005",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP007",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "bc2082",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP008",
-                                "n_hits": 1
-                            }
-                        ],
-                        "hits": [
-                            {
-                                "adapter": "PacBio_ULI_adapter",
-                                "action": "discard",
-                                "n_hits": 1083,
-                                "n_reads": 249,
-                                "bases_removed": 2193582
-                            }
-                        ],
-                        "summary": {
-                            "total_reads_processed": 4521,
-                            "total_bases_processed": 39340317,
-                            "total_reads_discarded": 249,
-                            "total_reads_trimmed": 0,
-                            "total_bases_removed": 2193582
-                        }
-                    }
-                ]
-            ],
-            [
-                [
-                    {
-                        "id": "test_bam"
-                    },
-                    "test_bam.bed.gz:md5,c09824ea744da47e1190a207a24db950"
-                ],
-                [
-                    {
-                        "id": "test_fasta"
-                    },
-                    "test_fasta.bed.gz:md5,cb45e59936b15a601ab41df4a32e30d6"
-                ],
-                [
-                    {
-                        "id": "test_fastq"
-                    },
-                    "test_fastq.bed.gz:md5,cb45e59936b15a601ab41df4a32e30d6"
-                ]
-            ],
-            [
-                [
-                    {
-                        "id": "test_bam"
-                    },
-                    "test_bam.lima.report:md5,6343113d84641786308e9f96eca9adfe"
-                ],
-                [
-                    {
-                        "id": "test_fasta"
-                    },
-                    "test_fasta.lima.report:md5,f48651719c5d4863355725261708e9b4"
-                ],
-                [
-                    {
-                        "id": "test_fastq"
-                    },
-                    "test_fastq.lima.report:md5,f48651719c5d4863355725261708e9b4"
-                ]
-            ],
-            [
-                [
-                    {
-                        "id": "test_bam"
-                    },
-                    "test_bam.lima.summary:md5,8a416563a0207db595868964fa2275f9"
-                ],
-                [
-                    {
-                        "id": "test_fasta"
-                    },
-                    "test_fasta.lima.summary:md5,3bbe4a6ad5e8a563f1d7f39972e824fb"
-                ],
-                [
-                    {
-                        "id": "test_fastq"
-                    },
-                    "test_fastq.lima.summary:md5,3bbe4a6ad5e8a563f1d7f39972e824fb"
-                ]
-            ],
-            [
-                [
-                    {
-                        "id": "test_bam"
-                    },
-                    "test_bam_pbmarkdup.pbmarkdup.log:md5,3e29fd0f490cdf8c221660b0feabc518"
-                ],
-                [
-                    {
-                        "id": "test_fasta"
-                    },
-                    "test_fasta_pbmarkdup.pbmarkdup.log:md5,f685238e8c170c886d7dfb3c22623faf"
-                ],
-                [
-                    {
-                        "id": "test_fastq"
-                    },
-                    "test_fastq_pbmarkdup.pbmarkdup.log:md5,f685238e8c170c886d7dfb3c22623faf"
-                ]
-            ]
-        ],
-        "timestamp": "2026-08-18T13:09:17.317317702",
-        "meta": {
-            "nf-test": "0.9.5",
-            "nextflow": "25.10.4"
-        }
-    },
-    "acropora cervicornis": {
-        "content": [
-            [
-                
-            ],
-            [
-                [
-                    {
-                        "id": "test_bam"
-                    },
-                    "test_bam.fasta.gz:md5,cc85381555ca9711ccc240b62f0f3eba"
-                ],
-                [
-                    {
-                        "id": "test_fasta"
-                    },
-                    "test_fasta.fasta.gz:md5,bf709af5faaa020dc4e6a7b7e23a0002"
-                ],
-                [
-                    {
-                        "id": "test_fastq"
-                    },
-                    "test_fastq.fasta.gz:md5,3f93e046cbb0278282b96bfd584255f5"
-                ]
-            ],
-            [
                 
             ],
             [
@@ -835,1413 +20,18 @@
                 
             ],
             [
-                [
-                    {
-                        "id": "test_bam"
-                    },
-                    {
-                        "detections": [
-                            {
-                                "adapter": "gnl|uv|NGB00973.1:1-35",
-                                "n_hits": 14340
-                            },
-                            {
-                                "adapter": "PacBio_ULI_adapter",
-                                "n_hits": 1217
-                            },
-                            {
-                                "adapter": "TruSeq_i7s_UDI003",
-                                "n_hits": 10
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP003",
-                                "n_hits": 10
-                            },
-                            {
-                                "adapter": "bc2028",
-                                "n_hits": 26
-                            },
-                            {
-                                "adapter": "gnl|uv|NGB00972.1:1-45",
-                                "n_hits": 49
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP009",
-                                "n_hits": 4
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP009",
-                                "n_hits": 6
-                            },
-                            {
-                                "adapter": "TruSeq_D706",
-                                "n_hits": 6
-                            },
-                            {
-                                "adapter": "TruSeq_i7s_UDI004",
-                                "n_hits": 3
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP010",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP004",
-                                "n_hits": 3
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP002",
-                                "n_hits": 4
-                            },
-                            {
-                                "adapter": "bc2092",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_D705",
-                                "n_hits": 4
-                            },
-                            {
-                                "adapter": "TruSeq_i7s_UDI006",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP006",
-                                "n_hits": 6
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP011",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP012",
-                                "n_hits": 4
-                            },
-                            {
-                                "adapter": "TruSeq_D508",
-                                "n_hits": 4
-                            },
-                            {
-                                "adapter": "TruSeq_D704",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_D707",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "bc2035",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP001",
-                                "n_hits": 3
-                            },
-                            {
-                                "adapter": "bc2025",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_D506",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_i5s_UDI004",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP004",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "bc2076",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "bc2083",
-                                "n_hits": 6
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP011",
-                                "n_hits": 4
-                            },
-                            {
-                                "adapter": "TruSeq_D502",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_D503",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "TruSeq_D702",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "TruSeq_D708",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "bc2055",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "TruSeq_D504",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP005",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP007",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "bc2082",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP008",
-                                "n_hits": 1
-                            }
-                        ],
-                        "hits": [
-                            {
-                                "adapter": "PacBio_ULI_adapter",
-                                "action": "discard",
-                                "n_hits": 1128,
-                                "n_reads": 294,
-                                "bases_removed": 2560108
-                            }
-                        ],
-                        "summary": {
-                            "total_reads_processed": 4569,
-                            "total_bases_processed": 39736811,
-                            "total_reads_discarded": 294,
-                            "total_reads_trimmed": 0,
-                            "total_bases_removed": 2560108
-                        }
-                    }
-                ],
-                [
-                    {
-                        "id": "test_fasta"
-                    },
-                    {
-                        "detections": [
-                            {
-                                "adapter": "gnl|uv|NGB00973.1:1-35",
-                                "n_hits": 14340
-                            },
-                            {
-                                "adapter": "PacBio_ULI_adapter",
-                                "n_hits": 1160
-                            },
-                            {
-                                "adapter": "TruSeq_i7s_UDI003",
-                                "n_hits": 10
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP003",
-                                "n_hits": 10
-                            },
-                            {
-                                "adapter": "gnl|uv|NGB00972.1:1-45",
-                                "n_hits": 49
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP009",
-                                "n_hits": 4
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP009",
-                                "n_hits": 6
-                            },
-                            {
-                                "adapter": "TruSeq_D706",
-                                "n_hits": 6
-                            },
-                            {
-                                "adapter": "TruSeq_i7s_UDI004",
-                                "n_hits": 3
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP010",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP004",
-                                "n_hits": 3
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP002",
-                                "n_hits": 4
-                            },
-                            {
-                                "adapter": "bc2092",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_D705",
-                                "n_hits": 4
-                            },
-                            {
-                                "adapter": "TruSeq_i7s_UDI006",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP006",
-                                "n_hits": 6
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP011",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP012",
-                                "n_hits": 4
-                            },
-                            {
-                                "adapter": "TruSeq_D508",
-                                "n_hits": 4
-                            },
-                            {
-                                "adapter": "TruSeq_D704",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_D707",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "bc2035",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP001",
-                                "n_hits": 3
-                            },
-                            {
-                                "adapter": "bc2025",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_D506",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_i5s_UDI004",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP004",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "bc2076",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "bc2083",
-                                "n_hits": 6
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP011",
-                                "n_hits": 4
-                            },
-                            {
-                                "adapter": "TruSeq_D502",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_D503",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "TruSeq_D702",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "TruSeq_D708",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "bc2055",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "bc2028",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_D504",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP005",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP007",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "bc2082",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP008",
-                                "n_hits": 1
-                            }
-                        ],
-                        "hits": [
-                            {
-                                "adapter": "PacBio_ULI_adapter",
-                                "action": "discard",
-                                "n_hits": 1083,
-                                "n_reads": 249,
-                                "bases_removed": 2193582
-                            }
-                        ],
-                        "summary": {
-                            "total_reads_processed": 4521,
-                            "total_bases_processed": 39340317,
-                            "total_reads_discarded": 249,
-                            "total_reads_trimmed": 0,
-                            "total_bases_removed": 2193582
-                        }
-                    }
-                ],
-                [
-                    {
-                        "id": "test_fastq"
-                    },
-                    {
-                        "detections": [
-                            {
-                                "adapter": "gnl|uv|NGB00973.1:1-35",
-                                "n_hits": 14340
-                            },
-                            {
-                                "adapter": "PacBio_ULI_adapter",
-                                "n_hits": 1160
-                            },
-                            {
-                                "adapter": "TruSeq_i7s_UDI003",
-                                "n_hits": 10
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP003",
-                                "n_hits": 10
-                            },
-                            {
-                                "adapter": "gnl|uv|NGB00972.1:1-45",
-                                "n_hits": 49
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP009",
-                                "n_hits": 4
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP009",
-                                "n_hits": 6
-                            },
-                            {
-                                "adapter": "TruSeq_D706",
-                                "n_hits": 6
-                            },
-                            {
-                                "adapter": "TruSeq_i7s_UDI004",
-                                "n_hits": 3
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP010",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP004",
-                                "n_hits": 3
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP002",
-                                "n_hits": 4
-                            },
-                            {
-                                "adapter": "bc2092",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_D705",
-                                "n_hits": 4
-                            },
-                            {
-                                "adapter": "TruSeq_i7s_UDI006",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP006",
-                                "n_hits": 6
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP011",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP012",
-                                "n_hits": 4
-                            },
-                            {
-                                "adapter": "TruSeq_D508",
-                                "n_hits": 4
-                            },
-                            {
-                                "adapter": "TruSeq_D704",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_D707",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "bc2035",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP001",
-                                "n_hits": 3
-                            },
-                            {
-                                "adapter": "bc2025",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_D506",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_i5s_UDI004",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP004",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "bc2076",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "bc2083",
-                                "n_hits": 6
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP011",
-                                "n_hits": 4
-                            },
-                            {
-                                "adapter": "TruSeq_D502",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_D503",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "TruSeq_D702",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "TruSeq_D708",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "bc2055",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "bc2028",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_D504",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP005",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP007",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "bc2082",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP008",
-                                "n_hits": 1
-                            }
-                        ],
-                        "hits": [
-                            {
-                                "adapter": "PacBio_ULI_adapter",
-                                "action": "discard",
-                                "n_hits": 1083,
-                                "n_reads": 249,
-                                "bases_removed": 2193582
-                            }
-                        ],
-                        "summary": {
-                            "total_reads_processed": 4521,
-                            "total_bases_processed": 39340317,
-                            "total_reads_discarded": 249,
-                            "total_reads_trimmed": 0,
-                            "total_bases_removed": 2193582
-                        }
-                    }
-                ]
+                "91aa198f3b4cb8934347168b441b6b5d"
             ],
             [
                 [
                     {
-                        "id": "test_bam"
-                    },
-                    "test_bam.bed.gz:md5,c09824ea744da47e1190a207a24db950"
-                ],
-                [
-                    {
-                        "id": "test_fasta"
-                    },
-                    "test_fasta.bed.gz:md5,cb45e59936b15a601ab41df4a32e30d6"
-                ],
-                [
-                    {
-                        "id": "test_fastq"
-                    },
-                    "test_fastq.bed.gz:md5,cb45e59936b15a601ab41df4a32e30d6"
-                ]
-            ],
-            [
-                [
-                    {
-                        "id": "test_bam"
-                    },
-                    "test_bam.lima.report:md5,6343113d84641786308e9f96eca9adfe"
-                ],
-                [
-                    {
-                        "id": "test_fasta"
-                    },
-                    "test_fasta.lima.report:md5,f48651719c5d4863355725261708e9b4"
-                ],
-                [
-                    {
-                        "id": "test_fastq"
-                    },
-                    "test_fastq.lima.report:md5,f48651719c5d4863355725261708e9b4"
-                ]
-            ],
-            [
-                [
-                    {
-                        "id": "test_bam"
-                    },
-                    "test_bam.lima.summary:md5,8a416563a0207db595868964fa2275f9"
-                ],
-                [
-                    {
-                        "id": "test_fasta"
-                    },
-                    "test_fasta.lima.summary:md5,3bbe4a6ad5e8a563f1d7f39972e824fb"
-                ],
-                [
-                    {
-                        "id": "test_fastq"
-                    },
-                    "test_fastq.lima.summary:md5,3bbe4a6ad5e8a563f1d7f39972e824fb"
-                ]
-            ],
-            [
-                [
-                    {
-                        "id": "test_bam"
-                    },
-                    "test_bam_pbmarkdup.pbmarkdup.log:md5,3e29fd0f490cdf8c221660b0feabc518"
-                ],
-                [
-                    {
-                        "id": "test_fasta"
-                    },
-                    "test_fasta_pbmarkdup.pbmarkdup.log:md5,f685238e8c170c886d7dfb3c22623faf"
-                ],
-                [
-                    {
-                        "id": "test_fastq"
-                    },
-                    "test_fastq_pbmarkdup.pbmarkdup.log:md5,f685238e8c170c886d7dfb3c22623faf"
-                ]
-            ]
-        ],
-        "timestamp": "2026-08-18T12:44:34.662567522",
-        "meta": {
-            "nf-test": "0.9.5",
-            "nextflow": "25.10.4"
-        }
-    },
-    "acropora cervicornis - HiFi_adapter_DB": {
-        "content": [
-            [
-                
-            ],
-            [
-                [
-                    {
-                        "id": "test_fasta"
-                    },
-                    "test_fasta.fasta.gz:md5,bf709af5faaa020dc4e6a7b7e23a0002"
-                ]
-            ],
-            [
-                [
-                    {
-                        "id": "test_fastq"
-                    },
-                    "test_fastq.fastq.gz:md5,5e8015b2899944815a6b934a92e8ab8f"
-                ]
-            ],
-            [
-                
-            ],
-            [
-                
-            ],
-            [
-                
-            ],
-            [
-                {
-                    "maxReadLength": 17907,
-                    "minReadLength": 1416,
-                    "meanReadLength": 8468,
-                    "maxQuality": 0,
-                    "minQuality": 0,
-                    "meanQuality": 0,
-                    "readCount": 42206,
-                    "duplicateReadCount": 0,
-                    "sorted": true
-                }
-            ],
-            [
-                [
-                    {
-                        "id": "test_bam"
-                    },
-                    {
-                        "detections": [
-                            {
-                                "adapter": "gnl|uv|NGB00973.1:1-35",
-                                "n_hits": 14340
-                            },
-                            {
-                                "adapter": "PacBio_ULI_adapter",
-                                "n_hits": 1217
-                            },
-                            {
-                                "adapter": "TruSeq_i7s_UDI003",
-                                "n_hits": 10
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP003",
-                                "n_hits": 10
-                            },
-                            {
-                                "adapter": "bc2028",
-                                "n_hits": 26
-                            },
-                            {
-                                "adapter": "gnl|uv|NGB00972.1:1-45",
-                                "n_hits": 49
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP009",
-                                "n_hits": 4
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP009",
-                                "n_hits": 6
-                            },
-                            {
-                                "adapter": "TruSeq_D706",
-                                "n_hits": 6
-                            },
-                            {
-                                "adapter": "TruSeq_i7s_UDI004",
-                                "n_hits": 3
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP010",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP004",
-                                "n_hits": 3
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP002",
-                                "n_hits": 4
-                            },
-                            {
-                                "adapter": "bc2092",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_D705",
-                                "n_hits": 4
-                            },
-                            {
-                                "adapter": "TruSeq_i7s_UDI006",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP006",
-                                "n_hits": 6
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP011",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP012",
-                                "n_hits": 4
-                            },
-                            {
-                                "adapter": "TruSeq_D508",
-                                "n_hits": 4
-                            },
-                            {
-                                "adapter": "TruSeq_D704",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_D707",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "bc2035",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP001",
-                                "n_hits": 3
-                            },
-                            {
-                                "adapter": "bc2025",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_D506",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_i5s_UDI004",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP004",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "bc2076",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "bc2083",
-                                "n_hits": 6
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP011",
-                                "n_hits": 4
-                            },
-                            {
-                                "adapter": "TruSeq_D502",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_D503",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "TruSeq_D702",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "TruSeq_D708",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "bc2055",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "TruSeq_D504",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP005",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP007",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "bc2082",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP008",
-                                "n_hits": 1
-                            }
-                        ],
-                        "hits": [
-                            {
-                                "adapter": "PacBio_ULI_adapter",
-                                "action": "discard",
-                                "n_hits": 1128,
-                                "n_reads": 294,
-                                "bases_removed": 2560108
-                            }
-                        ],
-                        "summary": {
-                            "total_reads_processed": 4569,
-                            "total_bases_processed": 39736811,
-                            "total_reads_discarded": 294,
-                            "total_reads_trimmed": 0,
-                            "total_bases_removed": 2560108
-                        }
-                    }
-                ],
-                [
-                    {
-                        "id": "test_fasta"
-                    },
-                    {
-                        "detections": [
-                            {
-                                "adapter": "gnl|uv|NGB00973.1:1-35",
-                                "n_hits": 14340
-                            },
-                            {
-                                "adapter": "PacBio_ULI_adapter",
-                                "n_hits": 1160
-                            },
-                            {
-                                "adapter": "TruSeq_i7s_UDI003",
-                                "n_hits": 10
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP003",
-                                "n_hits": 10
-                            },
-                            {
-                                "adapter": "gnl|uv|NGB00972.1:1-45",
-                                "n_hits": 49
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP009",
-                                "n_hits": 4
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP009",
-                                "n_hits": 6
-                            },
-                            {
-                                "adapter": "TruSeq_D706",
-                                "n_hits": 6
-                            },
-                            {
-                                "adapter": "TruSeq_i7s_UDI004",
-                                "n_hits": 3
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP010",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP004",
-                                "n_hits": 3
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP002",
-                                "n_hits": 4
-                            },
-                            {
-                                "adapter": "bc2092",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_D705",
-                                "n_hits": 4
-                            },
-                            {
-                                "adapter": "TruSeq_i7s_UDI006",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP006",
-                                "n_hits": 6
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP011",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP012",
-                                "n_hits": 4
-                            },
-                            {
-                                "adapter": "TruSeq_D508",
-                                "n_hits": 4
-                            },
-                            {
-                                "adapter": "TruSeq_D704",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_D707",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "bc2035",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP001",
-                                "n_hits": 3
-                            },
-                            {
-                                "adapter": "bc2025",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_D506",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_i5s_UDI004",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP004",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "bc2076",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "bc2083",
-                                "n_hits": 6
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP011",
-                                "n_hits": 4
-                            },
-                            {
-                                "adapter": "TruSeq_D502",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_D503",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "TruSeq_D702",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "TruSeq_D708",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "bc2055",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "bc2028",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_D504",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP005",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP007",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "bc2082",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP008",
-                                "n_hits": 1
-                            }
-                        ],
-                        "hits": [
-                            {
-                                "adapter": "PacBio_ULI_adapter",
-                                "action": "discard",
-                                "n_hits": 1083,
-                                "n_reads": 249,
-                                "bases_removed": 2193582
-                            }
-                        ],
-                        "summary": {
-                            "total_reads_processed": 4521,
-                            "total_bases_processed": 39340317,
-                            "total_reads_discarded": 249,
-                            "total_reads_trimmed": 0,
-                            "total_bases_removed": 2193582
-                        }
-                    }
-                ],
-                [
-                    {
-                        "id": "test_fastq"
-                    },
-                    {
-                        "detections": [
-                            {
-                                "adapter": "gnl|uv|NGB00973.1:1-35",
-                                "n_hits": 14340
-                            },
-                            {
-                                "adapter": "PacBio_ULI_adapter",
-                                "n_hits": 1160
-                            },
-                            {
-                                "adapter": "TruSeq_i7s_UDI003",
-                                "n_hits": 10
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP003",
-                                "n_hits": 10
-                            },
-                            {
-                                "adapter": "gnl|uv|NGB00972.1:1-45",
-                                "n_hits": 49
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP009",
-                                "n_hits": 4
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP009",
-                                "n_hits": 6
-                            },
-                            {
-                                "adapter": "TruSeq_D706",
-                                "n_hits": 6
-                            },
-                            {
-                                "adapter": "TruSeq_i7s_UDI004",
-                                "n_hits": 3
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP010",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP004",
-                                "n_hits": 3
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP002",
-                                "n_hits": 4
-                            },
-                            {
-                                "adapter": "bc2092",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_D705",
-                                "n_hits": 4
-                            },
-                            {
-                                "adapter": "TruSeq_i7s_UDI006",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP006",
-                                "n_hits": 6
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP011",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP012",
-                                "n_hits": 4
-                            },
-                            {
-                                "adapter": "TruSeq_D508",
-                                "n_hits": 4
-                            },
-                            {
-                                "adapter": "TruSeq_D704",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_D707",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "bc2035",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_i7_UDP001",
-                                "n_hits": 3
-                            },
-                            {
-                                "adapter": "bc2025",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_D506",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_i5s_UDI004",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP004",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "bc2076",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "bc2083",
-                                "n_hits": 6
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP011",
-                                "n_hits": 4
-                            },
-                            {
-                                "adapter": "TruSeq_D502",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_D503",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "TruSeq_D702",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "TruSeq_D708",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "bc2055",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "bc2028",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "TruSeq_D504",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP005",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP007",
-                                "n_hits": 2
-                            },
-                            {
-                                "adapter": "bc2082",
-                                "n_hits": 1
-                            },
-                            {
-                                "adapter": "TruSeq_i5_UDP008",
-                                "n_hits": 1
-                            }
-                        ],
-                        "hits": [
-                            {
-                                "adapter": "PacBio_ULI_adapter",
-                                "action": "discard",
-                                "n_hits": 1083,
-                                "n_reads": 249,
-                                "bases_removed": 2193582
-                            }
-                        ],
-                        "summary": {
-                            "total_reads_processed": 4521,
-                            "total_bases_processed": 39340317,
-                            "total_reads_discarded": 249,
-                            "total_reads_trimmed": 0,
-                            "total_bases_removed": 2193582
-                        }
-                    }
-                ]
-            ],
-            [
-                [
-                    {
-                        "id": "test_bam"
-                    },
-                    "test_bam.bed.gz:md5,c09824ea744da47e1190a207a24db950"
-                ],
-                [
-                    {
-                        "id": "test_fasta"
-                    },
-                    "test_fasta.bed.gz:md5,cb45e59936b15a601ab41df4a32e30d6"
-                ],
-                [
-                    {
-                        "id": "test_fastq"
-                    },
-                    "test_fastq.bed.gz:md5,cb45e59936b15a601ab41df4a32e30d6"
-                ]
-            ],
-            [
-                [
-                    {
-                        "id": "test_bam"
-                    },
-                    "test_bam.lima.report:md5,6343113d84641786308e9f96eca9adfe"
-                ],
-                [
-                    {
-                        "id": "test_fasta"
-                    },
-                    "test_fasta.lima.report:md5,f48651719c5d4863355725261708e9b4"
-                ],
-                [
-                    {
-                        "id": "test_fastq"
-                    },
-                    "test_fastq.lima.report:md5,f48651719c5d4863355725261708e9b4"
-                ]
-            ],
-            [
-                [
-                    {
-                        "id": "test_bam"
-                    },
-                    "test_bam.lima.summary:md5,8a416563a0207db595868964fa2275f9"
-                ],
-                [
-                    {
-                        "id": "test_fasta"
-                    },
-                    "test_fasta.lima.summary:md5,3bbe4a6ad5e8a563f1d7f39972e824fb"
-                ],
-                [
-                    {
-                        "id": "test_fastq"
-                    },
-                    "test_fastq.lima.summary:md5,3bbe4a6ad5e8a563f1d7f39972e824fb"
-                ]
-            ],
-            [
-                [
-                    {
-                        "id": "test_bam"
-                    },
-                    "test_bam_pbmarkdup.pbmarkdup.log:md5,3e29fd0f490cdf8c221660b0feabc518"
-                ],
-                [
-                    {
-                        "id": "test_fasta"
-                    },
-                    "test_fasta_pbmarkdup.pbmarkdup.log:md5,f685238e8c170c886d7dfb3c22623faf"
-                ],
-                [
-                    {
-                        "id": "test_fastq"
-                    },
-                    "test_fastq_pbmarkdup.pbmarkdup.log:md5,f685238e8c170c886d7dfb3c22623faf"
-                ]
-            ]
-        ],
-        "timestamp": "2026-08-18T12:56:06.650382974",
-        "meta": {
-            "nf-test": "0.9.5",
-            "nextflow": "25.10.4"
-        }
-    },
-    "acropora cervicornis - non-uli - pbmarkdup - trim": {
-        "content": [
-            [
-                [
-                    {
-                        "id": "test_fasta"
-                    },
-                    "test_fasta_pbmarkdup.fasta:md5,8d47ef74249cd43bbe35434c3fe73731"
-                ]
-            ],
-            [
-                
-            ],
-            [
-                [
-                    {
-                        "id": "test_fastq"
-                    },
-                    "test_fastq.fastq.gz:md5,ddb9c66e940a63a9363cbd2d0815964f"
-                ]
-            ],
-            [
-                
-            ],
-            [
-                {
-                    "maxReadLength": 12807,
-                    "minReadLength": 2604,
-                    "meanReadLength": 8693,
-                    "maxQuality": 255,
-                    "minQuality": 255,
-                    "meanQuality": 255,
-                    "readCount": 40,
-                    "duplicateReadCount": 0,
-                    "sorted": true
-                }
-            ],
-            [
-                
-            ],
-            [
-                
-            ],
-            [
-                [
-                    {
-                        "id": "test_bam"
+                        "id": "standard_bam"
                     },
                     {
                         "detections": [
                             {
                                 "adapter": "PacBio_ULI_adapter",
-                                "n_hits": 83335
+                                "n_hits": 83353
                             },
                             {
                                 "adapter": "gnl|uv|NGB00973.1:1-35",
@@ -2412,29 +202,1164 @@
                             {
                                 "adapter": "PacBio_ULI_adapter",
                                 "action": "discard",
-                                "n_hits": 82744,
-                                "n_reads": 42501,
-                                "bases_removed": 362139516
+                                "n_hits": 82762,
+                                "n_reads": 42510,
+                                "bases_removed": 362209796
                             }
                         ],
                         "summary": {
-                            "total_reads_processed": 42512,
-                            "total_bases_processed": 362243755,
-                            "total_reads_discarded": 42501,
+                            "total_reads_processed": 42521,
+                            "total_bases_processed": 362314035,
+                            "total_reads_discarded": 42510,
                             "total_reads_trimmed": 0,
-                            "total_bases_removed": 362139516
+                            "total_bases_removed": 362209796
+                        }
+                    }
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "standard_bam"
+                    },
+                    "standard_bam.bed.gz:md5,45c78d87eee0433dd4e0300c04c3bd64"
+                ]
+            ],
+            [
+                
+            ],
+            [
+                
+            ],
+            [
+                
+            ]
+        ],
+        "timestamp": "2026-08-26T22:18:00.151207566",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.3"
+        }
+    },
+    "Test skip trimming when preprocess standard, ULI, PiMmS, and amplified reads": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "pimms_fastq"
+                    },
+                    "pimms_fastq_pbmarkdup.fastq.gz:md5,51ae992ee2beed0028d347c6fcf655b7"
+                ],
+                [
+                    {
+                        "id": "standard_fasta"
+                    },
+                    "/test-data/Acropora_cervicornis/genomic_data/m84093_241116_151316_s2.hifi_reads.bc2028.subset.fasta"
+                ],
+                [
+                    {
+                        "id": "standard_fastq"
+                    },
+                    "/test-data/Acropora_cervicornis/genomic_data/m84093_241116_151316_s2.hifi_reads.bc2028.subset.fastq"
+                ]
+            ],
+            [
+                
+            ],
+            [
+                
+            ],
+            [
+                
+            ],
+            [
+                
+            ],
+            [
+                
+            ],
+            [
+                
+            ],
+            [
+                
+            ],
+            [
+                
+            ],
+            [
+                [
+                    {
+                        "id": "pimms_bam"
+                    },
+                    "pimms_bam.lima.report:md5,ae560485462c93d2ca3097927a2dcb69"
+                ],
+                [
+                    {
+                        "id": "pimms_fastq"
+                    },
+                    "pimms_fastq.lima.report:md5,591367f5cd965fd8c869564fbd561446"
+                ],
+                [
+                    {
+                        "id": "uli_bam_untrim"
+                    },
+                    "uli_bam_untrim.lima.report:md5,4e75e227f80bb115040ac340345e4742"
+                ],
+                [
+                    {
+                        "id": "uli_bam"
+                    },
+                    "uli_bam.lima.report:md5,4e75e227f80bb115040ac340345e4742"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "pimms_bam"
+                    },
+                    "pimms_bam.lima.summary:md5,25bf7f3bf06e36b2980627934ff9f795"
+                ],
+                [
+                    {
+                        "id": "pimms_fastq"
+                    },
+                    "pimms_fastq.lima.summary:md5,25bf7f3bf06e36b2980627934ff9f795"
+                ],
+                [
+                    {
+                        "id": "uli_bam_untrim"
+                    },
+                    "uli_bam_untrim.lima.summary:md5,3bbe4a6ad5e8a563f1d7f39972e824fb"
+                ],
+                [
+                    {
+                        "id": "uli_bam"
+                    },
+                    "uli_bam.lima.summary:md5,3bbe4a6ad5e8a563f1d7f39972e824fb"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "amplified_bam"
+                    },
+                    "amplified_bam_pbmarkdup.pbmarkdup.log:md5,6d652bd6b201e3b2cf417842f11e27e0"
+                ],
+                [
+                    {
+                        "id": "pimms_bam"
+                    },
+                    "pimms_bam_pbmarkdup.pbmarkdup.log:md5,a9ae60b02f4d3da0612e607f88ab47be"
+                ],
+                [
+                    {
+                        "id": "pimms_fastq"
+                    },
+                    "pimms_fastq_pbmarkdup.pbmarkdup.log:md5,a9fec4132362ef6d12b134e5e67af0e3"
+                ],
+                [
+                    {
+                        "id": "uli_bam_untrim"
+                    },
+                    "uli_bam_untrim_pbmarkdup.pbmarkdup.log:md5,02efc656c114d8029ad4e8e79e778e35"
+                ],
+                [
+                    {
+                        "id": "uli_bam"
+                    },
+                    "uli_bam_pbmarkdup.pbmarkdup.log:md5,02efc656c114d8029ad4e8e79e778e35"
+                ]
+            ]
+        ],
+        "timestamp": "2026-08-28T11:43:18.287761026",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "25.10.4"
+        }
+    },
+    "Test full preprocessing for standard, ULI, PiMmS, and amplified reads": {
+        "content": [
+            [
+                
+            ],
+            [
+                [
+                    {
+                        "id": "standard_fasta"
+                    },
+                    "standard_fasta.fasta.gz:md5,afb3e501c2dd781b90a689246bf65767"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "pimms_fastq"
+                    },
+                    "pimms_fastq.fastq.gz:md5,a54d1559e43f04ef611f431f4a1aae36"
+                ],
+                [
+                    {
+                        "id": "standard_fastq"
+                    },
+                    "standard_fastq.fastq.gz:md5,ddb9c66e940a63a9363cbd2d0815964f"
+                ]
+            ],
+            [
+                
+            ],
+            [
+                
+            ],
+            [
+                
+            ],
+            [
+                "91aa198f3b4cb8934347168b441b6b5d",
+                "9b94f58967a9b5bed52a6a56ce0ee405",
+                "d5aa6c0b4c05f78aadff0a63a814ccf6",
+                "f95b68051caa07568e20c2da31ad337d"
+            ],
+            [
+                [
+                    {
+                        "id": "amplified_bam"
+                    },
+                    {
+                        "detections": [
+                            {
+                                "adapter": "gnl|uv|NGB00973.1:1-35",
+                                "n_hits": 2840
+                            },
+                            {
+                                "adapter": "TruSeq_i7s_UDI006",
+                                "n_hits": 10
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP006",
+                                "n_hits": 17
+                            },
+                            {
+                                "adapter": "TruSeq_D506",
+                                "n_hits": 11
+                            },
+                            {
+                                "adapter": "TruSeq_D503",
+                                "n_hits": 12
+                            },
+                            {
+                                "adapter": "TruSeq_D501",
+                                "n_hits": 11
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP004",
+                                "n_hits": 11
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP008",
+                                "n_hits": 11
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP012",
+                                "n_hits": 12
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP009",
+                                "n_hits": 8
+                            },
+                            {
+                                "adapter": "TruSeq_D711",
+                                "n_hits": 8
+                            },
+                            {
+                                "adapter": "TruSeq_D703",
+                                "n_hits": 8
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP010",
+                                "n_hits": 8
+                            },
+                            {
+                                "adapter": "TruSeq_D707",
+                                "n_hits": 8
+                            },
+                            {
+                                "adapter": "TruSeq_D507",
+                                "n_hits": 12
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP011",
+                                "n_hits": 12
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP005",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "TruSeq_D508",
+                                "n_hits": 12
+                            },
+                            {
+                                "adapter": "TruSeq_D504",
+                                "n_hits": 12
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP009",
+                                "n_hits": 13
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP005",
+                                "n_hits": 13
+                            },
+                            {
+                                "adapter": "TruSeq_i7s_UDI007",
+                                "n_hits": 8
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP002",
+                                "n_hits": 13
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP001",
+                                "n_hits": 12
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP007",
+                                "n_hits": 15
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP004",
+                                "n_hits": 8
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP001",
+                                "n_hits": 8
+                            },
+                            {
+                                "adapter": "TruSeq_D710",
+                                "n_hits": 8
+                            },
+                            {
+                                "adapter": "TruSeq_D705",
+                                "n_hits": 8
+                            },
+                            {
+                                "adapter": "TruSeq_D702",
+                                "n_hits": 8
+                            },
+                            {
+                                "adapter": "TruSeq_i5s_UDI008",
+                                "n_hits": 10
+                            },
+                            {
+                                "adapter": "TruSeq_i5s_UDI004",
+                                "n_hits": 10
+                            },
+                            {
+                                "adapter": "TruSeq_i7s_UDI005",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "TruSeq_i7s_UDI003",
+                                "n_hits": 8
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP003",
+                                "n_hits": 15
+                            },
+                            {
+                                "adapter": "TruSeq_D709",
+                                "n_hits": 15
+                            },
+                            {
+                                "adapter": "TruSeq_i5s_UDI002",
+                                "n_hits": 10
+                            },
+                            {
+                                "adapter": "TruSeq_i7s_UDI008",
+                                "n_hits": 8
+                            },
+                            {
+                                "adapter": "TruSeq_i7s_UDI004",
+                                "n_hits": 8
+                            },
+                            {
+                                "adapter": "TruSeq_i7s_UDI002",
+                                "n_hits": 8
+                            },
+                            {
+                                "adapter": "TruSeq_i7s_UDI001",
+                                "n_hits": 8
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP012",
+                                "n_hits": 15
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP011",
+                                "n_hits": 15
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP008",
+                                "n_hits": 15
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP002",
+                                "n_hits": 20
+                            },
+                            {
+                                "adapter": "TruSeq_D712",
+                                "n_hits": 15
+                            },
+                            {
+                                "adapter": "TruSeq_D708",
+                                "n_hits": 15
+                            },
+                            {
+                                "adapter": "TruSeq_D706",
+                                "n_hits": 15
+                            },
+                            {
+                                "adapter": "TruSeq_D704",
+                                "n_hits": 15
+                            },
+                            {
+                                "adapter": "TruSeq_D701",
+                                "n_hits": 15
+                            },
+                            {
+                                "adapter": "TruSeq_i5s_UDI007",
+                                "n_hits": 10
+                            },
+                            {
+                                "adapter": "TruSeq_i5s_UDI006",
+                                "n_hits": 10
+                            },
+                            {
+                                "adapter": "TruSeq_i5s_UDI005",
+                                "n_hits": 10
+                            },
+                            {
+                                "adapter": "TruSeq_i5s_UDI003",
+                                "n_hits": 10
+                            },
+                            {
+                                "adapter": "TruSeq_i5s_UDI001",
+                                "n_hits": 10
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP010",
+                                "n_hits": 19
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP007",
+                                "n_hits": 18
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP006",
+                                "n_hits": 19
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP003",
+                                "n_hits": 18
+                            },
+                            {
+                                "adapter": "TruSeq_D505",
+                                "n_hits": 18
+                            },
+                            {
+                                "adapter": "TruSeq_D502",
+                                "n_hits": 20
+                            },
+                            {
+                                "adapter": "gnl|uv|NGB00972.1:1-45",
+                                "n_hits": 7
+                            },
+                            {
+                                "adapter": "bc2050",
+                                "n_hits": 1
+                            }
+                        ],
+                        "hits": [
+                            {
+                                "adapter": "TruSeq_i5_UDP009",
+                                "action": "trim",
+                                "n_hits": 3,
+                                "n_reads": 1,
+                                "bases_removed": 150
+                            },
+                            {
+                                "adapter": "TruSeq_i7s_UDI007",
+                                "action": "discard",
+                                "n_hits": 7,
+                                "n_reads": 6,
+                                "bases_removed": 29414
+                            },
+                            {
+                                "adapter": "TruSeq_i5s_UDI008",
+                                "action": "discard",
+                                "n_hits": 8,
+                                "n_reads": 1,
+                                "bases_removed": 7693
+                            },
+                            {
+                                "adapter": "TruSeq_i5s_UDI004",
+                                "action": "discard",
+                                "n_hits": 8,
+                                "n_reads": 1,
+                                "bases_removed": 3592
+                            },
+                            {
+                                "adapter": "TruSeq_i7s_UDI008",
+                                "action": "trim",
+                                "n_hits": 1,
+                                "n_reads": 1,
+                                "bases_removed": 150
+                            },
+                            {
+                                "adapter": "TruSeq_i5s_UDI007",
+                                "action": "discard",
+                                "n_hits": 9,
+                                "n_reads": 1,
+                                "bases_removed": 9460
+                            }
+                        ],
+                        "summary": {
+                            "total_reads_processed": 830,
+                            "total_bases_processed": 5834496,
+                            "total_reads_discarded": 9,
+                            "total_reads_trimmed": 2,
+                            "total_bases_removed": 50459
                         }
                     }
                 ],
                 [
                     {
-                        "id": "test_fastq"
+                        "id": "pimms_bam"
+                    },
+                    {
+                        "detections": [
+                            {
+                                "adapter": "gnl|uv|NGB00973.1:1-35",
+                                "n_hits": 2970
+                            },
+                            {
+                                "adapter": "TruSeq_D708",
+                                "n_hits": 49
+                            },
+                            {
+                                "adapter": "TruSeq_D711",
+                                "n_hits": 49
+                            },
+                            {
+                                "adapter": "TruSeq_i7s_UDI001",
+                                "n_hits": 47
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP001",
+                                "n_hits": 50
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP011",
+                                "n_hits": 48
+                            },
+                            {
+                                "adapter": "TruSeq_D712",
+                                "n_hits": 48
+                            },
+                            {
+                                "adapter": "TruSeq_D705",
+                                "n_hits": 48
+                            },
+                            {
+                                "adapter": "TruSeq_D701",
+                                "n_hits": 52
+                            },
+                            {
+                                "adapter": "TruSeq_i7s_UDI008",
+                                "n_hits": 46
+                            },
+                            {
+                                "adapter": "TruSeq_i7s_UDI007",
+                                "n_hits": 46
+                            },
+                            {
+                                "adapter": "TruSeq_i7s_UDI006",
+                                "n_hits": 46
+                            },
+                            {
+                                "adapter": "TruSeq_i7s_UDI005",
+                                "n_hits": 46
+                            },
+                            {
+                                "adapter": "TruSeq_i7s_UDI004",
+                                "n_hits": 46
+                            },
+                            {
+                                "adapter": "TruSeq_i7s_UDI003",
+                                "n_hits": 46
+                            },
+                            {
+                                "adapter": "TruSeq_i7s_UDI002",
+                                "n_hits": 46
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP012",
+                                "n_hits": 48
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP010",
+                                "n_hits": 49
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP009",
+                                "n_hits": 48
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP008",
+                                "n_hits": 48
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP007",
+                                "n_hits": 48
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP006",
+                                "n_hits": 48
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP005",
+                                "n_hits": 48
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP004",
+                                "n_hits": 48
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP003",
+                                "n_hits": 48
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP002",
+                                "n_hits": 49
+                            },
+                            {
+                                "adapter": "TruSeq_D710",
+                                "n_hits": 48
+                            },
+                            {
+                                "adapter": "TruSeq_D709",
+                                "n_hits": 49
+                            },
+                            {
+                                "adapter": "TruSeq_D707",
+                                "n_hits": 48
+                            },
+                            {
+                                "adapter": "TruSeq_D706",
+                                "n_hits": 48
+                            },
+                            {
+                                "adapter": "TruSeq_D704",
+                                "n_hits": 48
+                            },
+                            {
+                                "adapter": "TruSeq_D703",
+                                "n_hits": 50
+                            },
+                            {
+                                "adapter": "TruSeq_D702",
+                                "n_hits": 48
+                            },
+                            {
+                                "adapter": "TruSeq_i5s_UDI008",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "TruSeq_i5s_UDI007",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "TruSeq_i5s_UDI006",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "TruSeq_i5s_UDI005",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "TruSeq_i5s_UDI004",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "TruSeq_i5s_UDI003",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "TruSeq_i5s_UDI002",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "TruSeq_i5s_UDI001",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP012",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP011",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP010",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP009",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP008",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP007",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP006",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP005",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP004",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP003",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP002",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP001",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "TruSeq_D508",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "TruSeq_D507",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "TruSeq_D506",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "TruSeq_D505",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "TruSeq_D504",
+                                "n_hits": 10
+                            },
+                            {
+                                "adapter": "TruSeq_D503",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "TruSeq_D502",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "TruSeq_D501",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "gnl|uv|NGB00972.1:1-45",
+                                "n_hits": 8
+                            },
+                            {
+                                "adapter": "bc2085",
+                                "n_hits": 1
+                            },
+                            {
+                                "adapter": "bc2059",
+                                "n_hits": 1
+                            }
+                        ],
+                        "hits": [
+                            {
+                                "adapter": "TruSeq_i7s_UDI001",
+                                "action": "discard",
+                                "n_hits": 44,
+                                "n_reads": 25,
+                                "bases_removed": 336463
+                            },
+                            {
+                                "adapter": "TruSeq_i7s_UDI001",
+                                "action": "trim",
+                                "n_hits": 1,
+                                "n_reads": 1,
+                                "bases_removed": 150
+                            },
+                            {
+                                "adapter": "TruSeq_i5s_UDI008",
+                                "action": "trim",
+                                "n_hits": 2,
+                                "n_reads": 1,
+                                "bases_removed": 150
+                            },
+                            {
+                                "adapter": "TruSeq_i5s_UDI005",
+                                "action": "discard",
+                                "n_hits": 7,
+                                "n_reads": 1,
+                                "bases_removed": 16121
+                            },
+                            {
+                                "adapter": "TruSeq_i5s_UDI001",
+                                "action": "discard",
+                                "n_hits": 7,
+                                "n_reads": 2,
+                                "bases_removed": 22370
+                            }
+                        ],
+                        "summary": {
+                            "total_reads_processed": 517,
+                            "total_bases_processed": 5406475,
+                            "total_reads_discarded": 28,
+                            "total_reads_trimmed": 2,
+                            "total_bases_removed": 375254
+                        }
+                    }
+                ],
+                [
+                    {
+                        "id": "pimms_fastq"
+                    },
+                    {
+                        "detections": [
+                            {
+                                "adapter": "gnl|uv|NGB00973.1:1-35",
+                                "n_hits": 2970
+                            },
+                            {
+                                "adapter": "TruSeq_D708",
+                                "n_hits": 49
+                            },
+                            {
+                                "adapter": "TruSeq_D711",
+                                "n_hits": 49
+                            },
+                            {
+                                "adapter": "TruSeq_i7s_UDI001",
+                                "n_hits": 47
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP001",
+                                "n_hits": 50
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP011",
+                                "n_hits": 48
+                            },
+                            {
+                                "adapter": "TruSeq_D712",
+                                "n_hits": 48
+                            },
+                            {
+                                "adapter": "TruSeq_D705",
+                                "n_hits": 48
+                            },
+                            {
+                                "adapter": "TruSeq_D701",
+                                "n_hits": 52
+                            },
+                            {
+                                "adapter": "TruSeq_i7s_UDI008",
+                                "n_hits": 46
+                            },
+                            {
+                                "adapter": "TruSeq_i7s_UDI007",
+                                "n_hits": 46
+                            },
+                            {
+                                "adapter": "TruSeq_i7s_UDI006",
+                                "n_hits": 46
+                            },
+                            {
+                                "adapter": "TruSeq_i7s_UDI005",
+                                "n_hits": 46
+                            },
+                            {
+                                "adapter": "TruSeq_i7s_UDI004",
+                                "n_hits": 46
+                            },
+                            {
+                                "adapter": "TruSeq_i7s_UDI003",
+                                "n_hits": 46
+                            },
+                            {
+                                "adapter": "TruSeq_i7s_UDI002",
+                                "n_hits": 46
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP012",
+                                "n_hits": 48
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP010",
+                                "n_hits": 49
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP009",
+                                "n_hits": 48
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP008",
+                                "n_hits": 48
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP007",
+                                "n_hits": 48
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP006",
+                                "n_hits": 48
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP005",
+                                "n_hits": 48
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP004",
+                                "n_hits": 48
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP003",
+                                "n_hits": 48
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP002",
+                                "n_hits": 49
+                            },
+                            {
+                                "adapter": "TruSeq_D710",
+                                "n_hits": 48
+                            },
+                            {
+                                "adapter": "TruSeq_D709",
+                                "n_hits": 49
+                            },
+                            {
+                                "adapter": "TruSeq_D707",
+                                "n_hits": 48
+                            },
+                            {
+                                "adapter": "TruSeq_D706",
+                                "n_hits": 48
+                            },
+                            {
+                                "adapter": "TruSeq_D704",
+                                "n_hits": 48
+                            },
+                            {
+                                "adapter": "TruSeq_D703",
+                                "n_hits": 50
+                            },
+                            {
+                                "adapter": "TruSeq_D702",
+                                "n_hits": 48
+                            },
+                            {
+                                "adapter": "TruSeq_i5s_UDI008",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "TruSeq_i5s_UDI007",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "TruSeq_i5s_UDI006",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "TruSeq_i5s_UDI005",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "TruSeq_i5s_UDI004",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "TruSeq_i5s_UDI003",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "TruSeq_i5s_UDI002",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "TruSeq_i5s_UDI001",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP012",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP011",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP010",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP009",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP008",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP007",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP006",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP005",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP004",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP003",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP002",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP001",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "TruSeq_D508",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "TruSeq_D507",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "TruSeq_D506",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "TruSeq_D505",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "TruSeq_D504",
+                                "n_hits": 10
+                            },
+                            {
+                                "adapter": "TruSeq_D503",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "TruSeq_D502",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "TruSeq_D501",
+                                "n_hits": 9
+                            },
+                            {
+                                "adapter": "gnl|uv|NGB00972.1:1-45",
+                                "n_hits": 8
+                            },
+                            {
+                                "adapter": "bc2085",
+                                "n_hits": 1
+                            },
+                            {
+                                "adapter": "bc2059",
+                                "n_hits": 1
+                            }
+                        ],
+                        "hits": [
+                            {
+                                "adapter": "TruSeq_i7s_UDI001",
+                                "action": "discard",
+                                "n_hits": 44,
+                                "n_reads": 25,
+                                "bases_removed": 336463
+                            },
+                            {
+                                "adapter": "TruSeq_i7s_UDI001",
+                                "action": "trim",
+                                "n_hits": 1,
+                                "n_reads": 1,
+                                "bases_removed": 150
+                            },
+                            {
+                                "adapter": "TruSeq_i5s_UDI008",
+                                "action": "trim",
+                                "n_hits": 2,
+                                "n_reads": 1,
+                                "bases_removed": 150
+                            },
+                            {
+                                "adapter": "TruSeq_i5s_UDI005",
+                                "action": "discard",
+                                "n_hits": 7,
+                                "n_reads": 1,
+                                "bases_removed": 16121
+                            },
+                            {
+                                "adapter": "TruSeq_i5s_UDI001",
+                                "action": "discard",
+                                "n_hits": 7,
+                                "n_reads": 2,
+                                "bases_removed": 22370
+                            }
+                        ],
+                        "summary": {
+                            "total_reads_processed": 517,
+                            "total_bases_processed": 5406475,
+                            "total_reads_discarded": 28,
+                            "total_reads_trimmed": 2,
+                            "total_bases_removed": 375254
+                        }
+                    }
+                ],
+                [
+                    {
+                        "id": "standard_bam"
                     },
                     {
                         "detections": [
                             {
                                 "adapter": "PacBio_ULI_adapter",
-                                "n_hits": 83335
+                                "n_hits": 83353
                             },
                             {
                                 "adapter": "gnl|uv|NGB00973.1:1-35",
@@ -2605,17 +1530,592 @@
                             {
                                 "adapter": "PacBio_ULI_adapter",
                                 "action": "discard",
-                                "n_hits": 82744,
-                                "n_reads": 42501,
-                                "bases_removed": 362139516
+                                "n_hits": 82762,
+                                "n_reads": 42510,
+                                "bases_removed": 362209796
                             }
                         ],
                         "summary": {
-                            "total_reads_processed": 42512,
-                            "total_bases_processed": 362243755,
-                            "total_reads_discarded": 42501,
+                            "total_reads_processed": 42521,
+                            "total_bases_processed": 362314035,
+                            "total_reads_discarded": 42510,
                             "total_reads_trimmed": 0,
-                            "total_bases_removed": 362139516
+                            "total_bases_removed": 362209796
+                        }
+                    }
+                ],
+                [
+                    {
+                        "id": "standard_fasta"
+                    },
+                    {
+                        "detections": [
+                            {
+                                "adapter": "PacBio_ULI_adapter",
+                                "n_hits": 83353
+                            },
+                            {
+                                "adapter": "gnl|uv|NGB00973.1:1-35",
+                                "n_hits": 14347
+                            },
+                            {
+                                "adapter": "TruSeq_i7s_UDI003",
+                                "n_hits": 10
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP003",
+                                "n_hits": 10
+                            },
+                            {
+                                "adapter": "bc2028",
+                                "n_hits": 27
+                            },
+                            {
+                                "adapter": "gnl|uv|NGB00972.1:1-45",
+                                "n_hits": 49
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP009",
+                                "n_hits": 4
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP009",
+                                "n_hits": 6
+                            },
+                            {
+                                "adapter": "TruSeq_D706",
+                                "n_hits": 6
+                            },
+                            {
+                                "adapter": "TruSeq_i7s_UDI004",
+                                "n_hits": 3
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP010",
+                                "n_hits": 2
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP004",
+                                "n_hits": 3
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP002",
+                                "n_hits": 4
+                            },
+                            {
+                                "adapter": "bc2092",
+                                "n_hits": 2
+                            },
+                            {
+                                "adapter": "TruSeq_D705",
+                                "n_hits": 4
+                            },
+                            {
+                                "adapter": "TruSeq_i7s_UDI006",
+                                "n_hits": 2
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP006",
+                                "n_hits": 6
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP011",
+                                "n_hits": 2
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP012",
+                                "n_hits": 4
+                            },
+                            {
+                                "adapter": "TruSeq_D508",
+                                "n_hits": 4
+                            },
+                            {
+                                "adapter": "TruSeq_D704",
+                                "n_hits": 2
+                            },
+                            {
+                                "adapter": "TruSeq_D707",
+                                "n_hits": 1
+                            },
+                            {
+                                "adapter": "bc2035",
+                                "n_hits": 2
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP001",
+                                "n_hits": 3
+                            },
+                            {
+                                "adapter": "bc2025",
+                                "n_hits": 2
+                            },
+                            {
+                                "adapter": "TruSeq_D506",
+                                "n_hits": 2
+                            },
+                            {
+                                "adapter": "TruSeq_i5s_UDI004",
+                                "n_hits": 2
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP004",
+                                "n_hits": 2
+                            },
+                            {
+                                "adapter": "bc2076",
+                                "n_hits": 1
+                            },
+                            {
+                                "adapter": "bc2083",
+                                "n_hits": 6
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP011",
+                                "n_hits": 4
+                            },
+                            {
+                                "adapter": "TruSeq_D502",
+                                "n_hits": 2
+                            },
+                            {
+                                "adapter": "TruSeq_D503",
+                                "n_hits": 1
+                            },
+                            {
+                                "adapter": "TruSeq_D702",
+                                "n_hits": 1
+                            },
+                            {
+                                "adapter": "TruSeq_D708",
+                                "n_hits": 1
+                            },
+                            {
+                                "adapter": "bc2055",
+                                "n_hits": 1
+                            },
+                            {
+                                "adapter": "bc2078",
+                                "n_hits": 1
+                            },
+                            {
+                                "adapter": "TruSeq_D504",
+                                "n_hits": 1
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP005",
+                                "n_hits": 1
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP007",
+                                "n_hits": 2
+                            },
+                            {
+                                "adapter": "bc2082",
+                                "n_hits": 1
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP008",
+                                "n_hits": 1
+                            }
+                        ],
+                        "hits": [
+                            {
+                                "adapter": "PacBio_ULI_adapter",
+                                "action": "discard",
+                                "n_hits": 82762,
+                                "n_reads": 42510,
+                                "bases_removed": 362209796
+                            }
+                        ],
+                        "summary": {
+                            "total_reads_processed": 42521,
+                            "total_bases_processed": 362314035,
+                            "total_reads_discarded": 42510,
+                            "total_reads_trimmed": 0,
+                            "total_bases_removed": 362209796
+                        }
+                    }
+                ],
+                [
+                    {
+                        "id": "standard_fastq"
+                    },
+                    {
+                        "detections": [
+                            {
+                                "adapter": "PacBio_ULI_adapter",
+                                "n_hits": 83353
+                            },
+                            {
+                                "adapter": "gnl|uv|NGB00973.1:1-35",
+                                "n_hits": 14347
+                            },
+                            {
+                                "adapter": "TruSeq_i7s_UDI003",
+                                "n_hits": 10
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP003",
+                                "n_hits": 10
+                            },
+                            {
+                                "adapter": "bc2028",
+                                "n_hits": 27
+                            },
+                            {
+                                "adapter": "gnl|uv|NGB00972.1:1-45",
+                                "n_hits": 49
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP009",
+                                "n_hits": 4
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP009",
+                                "n_hits": 6
+                            },
+                            {
+                                "adapter": "TruSeq_D706",
+                                "n_hits": 6
+                            },
+                            {
+                                "adapter": "TruSeq_i7s_UDI004",
+                                "n_hits": 3
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP010",
+                                "n_hits": 2
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP004",
+                                "n_hits": 3
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP002",
+                                "n_hits": 4
+                            },
+                            {
+                                "adapter": "bc2092",
+                                "n_hits": 2
+                            },
+                            {
+                                "adapter": "TruSeq_D705",
+                                "n_hits": 4
+                            },
+                            {
+                                "adapter": "TruSeq_i7s_UDI006",
+                                "n_hits": 2
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP006",
+                                "n_hits": 6
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP011",
+                                "n_hits": 2
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP012",
+                                "n_hits": 4
+                            },
+                            {
+                                "adapter": "TruSeq_D508",
+                                "n_hits": 4
+                            },
+                            {
+                                "adapter": "TruSeq_D704",
+                                "n_hits": 2
+                            },
+                            {
+                                "adapter": "TruSeq_D707",
+                                "n_hits": 1
+                            },
+                            {
+                                "adapter": "bc2035",
+                                "n_hits": 2
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP001",
+                                "n_hits": 3
+                            },
+                            {
+                                "adapter": "bc2025",
+                                "n_hits": 2
+                            },
+                            {
+                                "adapter": "TruSeq_D506",
+                                "n_hits": 2
+                            },
+                            {
+                                "adapter": "TruSeq_i5s_UDI004",
+                                "n_hits": 2
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP004",
+                                "n_hits": 2
+                            },
+                            {
+                                "adapter": "bc2076",
+                                "n_hits": 1
+                            },
+                            {
+                                "adapter": "bc2083",
+                                "n_hits": 6
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP011",
+                                "n_hits": 4
+                            },
+                            {
+                                "adapter": "TruSeq_D502",
+                                "n_hits": 2
+                            },
+                            {
+                                "adapter": "TruSeq_D503",
+                                "n_hits": 1
+                            },
+                            {
+                                "adapter": "TruSeq_D702",
+                                "n_hits": 1
+                            },
+                            {
+                                "adapter": "TruSeq_D708",
+                                "n_hits": 1
+                            },
+                            {
+                                "adapter": "bc2055",
+                                "n_hits": 1
+                            },
+                            {
+                                "adapter": "bc2078",
+                                "n_hits": 1
+                            },
+                            {
+                                "adapter": "TruSeq_D504",
+                                "n_hits": 1
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP005",
+                                "n_hits": 1
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP007",
+                                "n_hits": 2
+                            },
+                            {
+                                "adapter": "bc2082",
+                                "n_hits": 1
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP008",
+                                "n_hits": 1
+                            }
+                        ],
+                        "hits": [
+                            {
+                                "adapter": "PacBio_ULI_adapter",
+                                "action": "discard",
+                                "n_hits": 82762,
+                                "n_reads": 42510,
+                                "bases_removed": 362209796
+                            }
+                        ],
+                        "summary": {
+                            "total_reads_processed": 42521,
+                            "total_bases_processed": 362314035,
+                            "total_reads_discarded": 42510,
+                            "total_reads_trimmed": 0,
+                            "total_bases_removed": 362209796
+                        }
+                    }
+                ],
+                [
+                    {
+                        "id": "uli_bam"
+                    },
+                    {
+                        "detections": [
+                            {
+                                "adapter": "gnl|uv|NGB00973.1:1-35",
+                                "n_hits": 14340
+                            },
+                            {
+                                "adapter": "PacBio_ULI_adapter",
+                                "n_hits": 1160
+                            },
+                            {
+                                "adapter": "TruSeq_i7s_UDI003",
+                                "n_hits": 10
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP003",
+                                "n_hits": 10
+                            },
+                            {
+                                "adapter": "gnl|uv|NGB00972.1:1-45",
+                                "n_hits": 49
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP009",
+                                "n_hits": 4
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP009",
+                                "n_hits": 6
+                            },
+                            {
+                                "adapter": "TruSeq_D706",
+                                "n_hits": 6
+                            },
+                            {
+                                "adapter": "TruSeq_i7s_UDI004",
+                                "n_hits": 3
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP010",
+                                "n_hits": 2
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP004",
+                                "n_hits": 3
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP002",
+                                "n_hits": 4
+                            },
+                            {
+                                "adapter": "bc2092",
+                                "n_hits": 2
+                            },
+                            {
+                                "adapter": "TruSeq_D705",
+                                "n_hits": 4
+                            },
+                            {
+                                "adapter": "TruSeq_i7s_UDI006",
+                                "n_hits": 2
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP006",
+                                "n_hits": 6
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP011",
+                                "n_hits": 2
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP012",
+                                "n_hits": 4
+                            },
+                            {
+                                "adapter": "TruSeq_D508",
+                                "n_hits": 4
+                            },
+                            {
+                                "adapter": "TruSeq_D704",
+                                "n_hits": 2
+                            },
+                            {
+                                "adapter": "TruSeq_D707",
+                                "n_hits": 1
+                            },
+                            {
+                                "adapter": "bc2035",
+                                "n_hits": 2
+                            },
+                            {
+                                "adapter": "TruSeq_i7_UDP001",
+                                "n_hits": 3
+                            },
+                            {
+                                "adapter": "bc2025",
+                                "n_hits": 2
+                            },
+                            {
+                                "adapter": "TruSeq_D506",
+                                "n_hits": 2
+                            },
+                            {
+                                "adapter": "TruSeq_i5s_UDI004",
+                                "n_hits": 2
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP004",
+                                "n_hits": 2
+                            },
+                            {
+                                "adapter": "bc2076",
+                                "n_hits": 1
+                            },
+                            {
+                                "adapter": "bc2083",
+                                "n_hits": 6
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP011",
+                                "n_hits": 4
+                            },
+                            {
+                                "adapter": "TruSeq_D502",
+                                "n_hits": 2
+                            },
+                            {
+                                "adapter": "TruSeq_D503",
+                                "n_hits": 1
+                            },
+                            {
+                                "adapter": "TruSeq_D702",
+                                "n_hits": 1
+                            },
+                            {
+                                "adapter": "TruSeq_D708",
+                                "n_hits": 1
+                            },
+                            {
+                                "adapter": "bc2055",
+                                "n_hits": 1
+                            },
+                            {
+                                "adapter": "bc2028",
+                                "n_hits": 2
+                            },
+                            {
+                                "adapter": "TruSeq_D504",
+                                "n_hits": 1
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP005",
+                                "n_hits": 1
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP007",
+                                "n_hits": 2
+                            },
+                            {
+                                "adapter": "bc2082",
+                                "n_hits": 1
+                            },
+                            {
+                                "adapter": "TruSeq_i5_UDP008",
+                                "n_hits": 1
+                            }
+                        ],
+                        "hits": [
+                            {
+                                "adapter": "PacBio_ULI_adapter",
+                                "action": "discard",
+                                "n_hits": 1083,
+                                "n_reads": 249,
+                                "bases_removed": 2193582
+                            }
+                        ],
+                        "summary": {
+                            "total_reads_processed": 4521,
+                            "total_bases_processed": 39340317,
+                            "total_reads_discarded": 249,
+                            "total_reads_trimmed": 0,
+                            "total_bases_removed": 2193582
                         }
                     }
                 ]
@@ -2623,148 +2123,136 @@
             [
                 [
                     {
-                        "id": "test_bam"
+                        "id": "amplified_bam"
                     },
-                    "test_bam.bed.gz:md5,c88ccab95c5c4b9a71a1c659af74673e"
+                    "amplified_bam.bed.gz:md5,f8617a66cc5619f40ee6b956159b4b35"
                 ],
                 [
                     {
-                        "id": "test_fastq"
+                        "id": "pimms_bam"
                     },
-                    "test_fastq.bed.gz:md5,c88ccab95c5c4b9a71a1c659af74673e"
+                    "pimms_bam.bed.gz:md5,362b78a7695dd2e2dafa85f335adfcab"
+                ],
+                [
+                    {
+                        "id": "pimms_fastq"
+                    },
+                    "pimms_fastq.bed.gz:md5,362b78a7695dd2e2dafa85f335adfcab"
+                ],
+                [
+                    {
+                        "id": "standard_bam"
+                    },
+                    "standard_bam.bed.gz:md5,45c78d87eee0433dd4e0300c04c3bd64"
+                ],
+                [
+                    {
+                        "id": "standard_fasta"
+                    },
+                    "standard_fasta.bed.gz:md5,45c78d87eee0433dd4e0300c04c3bd64"
+                ],
+                [
+                    {
+                        "id": "standard_fastq"
+                    },
+                    "standard_fastq.bed.gz:md5,45c78d87eee0433dd4e0300c04c3bd64"
+                ],
+                [
+                    {
+                        "id": "uli_bam"
+                    },
+                    "uli_bam.bed.gz:md5,cb45e59936b15a601ab41df4a32e30d6"
                 ]
             ],
             [
-                
-            ],
-            [
-                
-            ],
-            [
                 [
                     {
-                        "id": "test_bam"
+                        "id": "pimms_bam"
                     },
-                    "test_bam_pbmarkdup.pbmarkdup.log:md5,b0f9657238ccc2feb3701b156e03b837"
+                    "pimms_bam.lima.report:md5,ae560485462c93d2ca3097927a2dcb69"
                 ],
                 [
                     {
-                        "id": "test_fasta"
+                        "id": "pimms_fastq"
                     },
-                    "test_fasta_pbmarkdup.pbmarkdup.log:md5,8c2b2839e7af4e8342dcc6480cb2b1b8"
+                    "pimms_fastq.lima.report:md5,591367f5cd965fd8c869564fbd561446"
                 ],
                 [
                     {
-                        "id": "test_fastq"
+                        "id": "uli_bam_untrim"
                     },
-                    "test_fastq_pbmarkdup.pbmarkdup.log:md5,8c2b2839e7af4e8342dcc6480cb2b1b8"
+                    "uli_bam_untrim.lima.report:md5,4e75e227f80bb115040ac340345e4742"
+                ],
+                [
+                    {
+                        "id": "uli_bam"
+                    },
+                    "uli_bam.lima.report:md5,4e75e227f80bb115040ac340345e4742"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "pimms_bam"
+                    },
+                    "pimms_bam.lima.summary:md5,25bf7f3bf06e36b2980627934ff9f795"
+                ],
+                [
+                    {
+                        "id": "pimms_fastq"
+                    },
+                    "pimms_fastq.lima.summary:md5,25bf7f3bf06e36b2980627934ff9f795"
+                ],
+                [
+                    {
+                        "id": "uli_bam_untrim"
+                    },
+                    "uli_bam_untrim.lima.summary:md5,3bbe4a6ad5e8a563f1d7f39972e824fb"
+                ],
+                [
+                    {
+                        "id": "uli_bam"
+                    },
+                    "uli_bam.lima.summary:md5,3bbe4a6ad5e8a563f1d7f39972e824fb"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "amplified_bam"
+                    },
+                    "amplified_bam_pbmarkdup.pbmarkdup.log:md5,6d652bd6b201e3b2cf417842f11e27e0"
+                ],
+                [
+                    {
+                        "id": "pimms_bam"
+                    },
+                    "pimms_bam_pbmarkdup.pbmarkdup.log:md5,a9ae60b02f4d3da0612e607f88ab47be"
+                ],
+                [
+                    {
+                        "id": "pimms_fastq"
+                    },
+                    "pimms_fastq_pbmarkdup.pbmarkdup.log:md5,a9fec4132362ef6d12b134e5e67af0e3"
+                ],
+                [
+                    {
+                        "id": "uli_bam_untrim"
+                    },
+                    "uli_bam_untrim_pbmarkdup.pbmarkdup.log:md5,02efc656c114d8029ad4e8e79e778e35"
+                ],
+                [
+                    {
+                        "id": "uli_bam"
+                    },
+                    "uli_bam_pbmarkdup.pbmarkdup.log:md5,02efc656c114d8029ad4e8e79e778e35"
                 ]
             ]
         ],
-        "timestamp": "2026-08-18T13:17:12.130893536",
+        "timestamp": "2026-08-28T11:37:34.278494292",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "25.10.4"
-        }
-    },
-    "acropora cervicornis - uli - no pbmarkdup - no trim": {
-        "content": [
-            [
-                [
-                    {
-                        "id": "test_fasta"
-                    },
-                    "test_fasta.fasta:md5,431671b2d09b72a23ad5fc224f5af12a"
-                ],
-                [
-                    {
-                        "id": "test_fastq"
-                    },
-                    "test_fastq.fastq:md5,d82966330fbaa05fa5d962e173d10bcf"
-                ]
-            ],
-            [
-                
-            ],
-            [
-                
-            ],
-            [
-                {
-                    "maxReadLength": 18595,
-                    "minReadLength": 1416,
-                    "meanReadLength": 8470,
-                    "maxQuality": 255,
-                    "minQuality": 255,
-                    "meanQuality": 255,
-                    "readCount": 42509,
-                    "duplicateReadCount": 0,
-                    "sorted": true
-                }
-            ],
-            [
-                
-            ],
-            [
-                
-            ],
-            [
-                
-            ],
-            [
-                
-            ],
-            [
-                
-            ],
-            [
-                [
-                    {
-                        "id": "test_bam"
-                    },
-                    "test_bam.lima.report:md5,6343113d84641786308e9f96eca9adfe"
-                ],
-                [
-                    {
-                        "id": "test_fasta"
-                    },
-                    "test_fasta.lima.report:md5,f48651719c5d4863355725261708e9b4"
-                ],
-                [
-                    {
-                        "id": "test_fastq"
-                    },
-                    "test_fastq.lima.report:md5,f48651719c5d4863355725261708e9b4"
-                ]
-            ],
-            [
-                [
-                    {
-                        "id": "test_bam"
-                    },
-                    "test_bam.lima.summary:md5,8a416563a0207db595868964fa2275f9"
-                ],
-                [
-                    {
-                        "id": "test_fasta"
-                    },
-                    "test_fasta.lima.summary:md5,3bbe4a6ad5e8a563f1d7f39972e824fb"
-                ],
-                [
-                    {
-                        "id": "test_fastq"
-                    },
-                    "test_fastq.lima.summary:md5,3bbe4a6ad5e8a563f1d7f39972e824fb"
-                ]
-            ],
-            [
-                
-            ]
-        ],
-        "timestamp": "2026-08-18T06:00:09.944311741",
-        "meta": {
-            "nf-test": "0.9.5",
-            "nextflow": "26.04.3"
         }
     }
 }

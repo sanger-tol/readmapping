@@ -45,6 +45,21 @@
                 "errorMessage": "Sample barcode cannot contain spaces",
                 "default": "",
                 "meta": ["barcode"]
+            },
+            "adapter_file": {
+                "type": "string",
+                "exists": true,
+                "pattern": "^\\S+\\.fasta$",
+                "errorMessage": "Adapter FASTA file for ULI/PiMmS LIMA demultiplexing cannot contain spaces",
+                "default": "",
+                "meta": ["adapter_file"]
+            },
+            "adapter_preset": {
+                "type": "string",
+                "enum": ["SYMMETRIC", "ASYMMETRIC", ""],
+                "errorMessage": "adapter_preset must be SYMMETRIC or ASYMMETRIC",
+                "default": "",
+                "meta": ["adapter_preset"]
             }
         },
         "required": ["specimen", "run", "datatype", "datafile"]

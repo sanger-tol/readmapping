@@ -9,79 +9,80 @@ include { UNTAR                                } from '../../../modules/nf-core/
 workflow PACBIO_PREPROCESS {
 
     take:
-    ch_reads                    // Channel [meta, input]: input reads in FASTA/FASTQ/BAM format
-    ch_adapter_yaml             // Channel [meta, yaml]: yaml file for hifitrimmer adapter trimming
-    val_hifi_adapter            // Path to Hifi adapter DB or Hifi adapter fasta to make database for blastn
-    val_uli_primers             // Primer file for lima
-    val_pbmarkdup               // Options to run pbmarkdup
+    ch_reads          // Channel [meta, reads, lima_adapter, run_pbmarkdup, adapter_yaml]
+    val_hifi_adapter  // Path to Hifi adapter DB or Hifi adapter fasta to make database for blastn
 
     main:
-    lima_reports = channel.empty()
-    lima_summary = channel.empty()
-    pbmarkdup_stats = channel.empty()
-
-    //
-    // DEMULTIPLEX WITH LIMA
-    //
-    if ( val_uli_primers ) {
-        LIMA( ch_reads, val_uli_primers )
-
-        lima_reports = lima_reports.mix( LIMA.out.report )
-        lima_summary = lima_summary.mix( LIMA.out.summary )
-
-        // prepare input for markdup or trimming
-        ch_input_for_md = LIMA.out.bam
-            .mix(LIMA.out.fastq)
-            .mix(LIMA.out.fasta)
-            .mix(LIMA.out.fastqgz)
-            .mix( LIMA.out.fastagz )
-    } else {
-        ch_input_for_md = ch_reads
+    ch_reads_branch = ch_reads.branch { meta, reads, lima_adapter, run_pbmarkdup, adapter_yaml ->
+        lima: lima_adapter
+            return [ meta + [_run_pbmarkdup: run_pbmarkdup, _adapter_yaml: adapter_yaml], reads, lima_adapter ]
+        no_lima: true
+            return [ meta + [_adapter_yaml: adapter_yaml], reads, run_pbmarkdup ]
     }
 
-    //
-    // MARKDUP WITH PBMARKDUP
-    //
-    if ( val_pbmarkdup ) {
-        PBMARKDUP( ch_input_for_md )
-        pbmarkdup_stats = pbmarkdup_stats.mix( PBMARKDUP.out.log )
+    ch_lima_input = ch_reads_branch.lima
+        .multiMap { meta, reads, adapter ->
+            reads:    [ meta, reads ]
+            adapters: adapter
+        }
 
-        ch_input_pre_trim = PBMARKDUP.out.markduped
-    } else {
-        // If not running markdup, pass the input to trimming step
-        ch_input_pre_trim = ch_input_for_md
-    }
+    // args for LIMA should be passed to config file based on libary type
+    // For ULI: --hifi-preset 'SYMMETRIC' (For TOL setting, we have one ULI adapter, whose preset is SYMMETRIC)
+    // For PiMms: --peek-guess --hifi-preset ${adapter_preset} --split-named"
+    LIMA(ch_lima_input.reads, ch_lima_input.adapters)
+    lima_reports = LIMA.out.report.map { meta, report -> [ meta - meta.subMap('_run_pbmarkdup', '_adapter_yaml'), report ] }
+    lima_summary = LIMA.out.summary.map { meta, summary -> [ meta - meta.subMap('_run_pbmarkdup', '_adapter_yaml'), summary ] }
+    ch_post_lima = LIMA.out.bam
+        .mix(LIMA.out.fastq)
+        .mix(LIMA.out.fasta)
+        .mix(LIMA.out.fastqgz)
+        .mix(LIMA.out.fastagz)
+        .map { meta, reads -> [ meta - meta.subMap('_run_pbmarkdup'), reads, meta._run_pbmarkdup ] }
+
+    ch_pbmarkdup_branch = ch_reads_branch.no_lima
+        .mix(ch_post_lima)
+        .branch { meta, reads, run_pbmarkdup ->
+            markdup: run_pbmarkdup
+                return [ meta, reads ]
+            no_markdup: true
+                return [ meta, reads ]
+        }
+
+    PBMARKDUP(ch_pbmarkdup_branch.markdup)
+    pbmarkdup_stats = PBMARKDUP.out.log
+        .map { meta, log -> [ meta - meta.subMap('_adapter_yaml'), log ] }
 
     //
     // TRIMMING WITH HIFITRIMMER
     //
     hifitrimmer_summary = channel.empty()
-    hifitrimmer_bed = channel.empty()
-    trimmed_bam = channel.empty()
-    trimmed_cram = channel.empty()
-    trimmed_sam = channel.empty()
-    trimmed_fasta = channel.empty()
-    trimmed_fastq = channel.empty()
-    if ( val_hifi_adapter ) {
-        // Assign ch_input_skip_trimm to those without adapter yaml for trimming
-        ch_input_skip_trim = ch_input_pre_trim
-            .join(ch_adapter_yaml, by: 0, remainder: true)
-            .filter { _meta, _reads, yaml -> !yaml }
-            .map { meta, reads, _yaml -> [meta, reads] }
+    hifitrimmer_bed     = channel.empty()
+    trimmed_bam         = channel.empty()
+    trimmed_cram        = channel.empty()
+    trimmed_sam         = channel.empty()
+    trimmed_fasta       = channel.empty()
+    trimmed_fastq       = channel.empty()
+    ch_hifitrimmer_input = ch_pbmarkdup_branch.no_markdup.mix(PBMARKDUP.out.markduped)
 
-        // Warning for skip trimming
+    if ( val_hifi_adapter ) {
+
+        // Split on whether this record carries an adapter YAML (rides in meta._adapter_yaml)
+        ch_hifitrimmer_branch = ch_hifitrimmer_input.branch { meta, reads ->
+            trim:      meta._adapter_yaml
+            skip_trim: true
+        }
+
+        ch_input_skip_trim = ch_hifitrimmer_branch.skip_trim
+            .map { meta, reads -> [ meta - meta.subMap('_adapter_yaml'), reads ] }
+
         ch_input_skip_trim
             .subscribe { _meta, reads ->
                 log.warn "No adapter YAML provided, skipping adapter trimming step for: ${reads}"
             }
 
-        // PREPARE INPUT FOR TRIMMING
-        // Combine adapter yaml to input reads, only those with adapter yaml will be used for trimming, skip those without
-        ch_input_to_trim = ch_input_pre_trim
-            .combine(ch_adapter_yaml, by: 0)
-            .map { meta, reads, _yaml -> [meta, reads] }
+        ch_input_to_trim = ch_hifitrimmer_branch.trim
+            .map { meta, reads -> [ meta - meta.subMap('_adapter_yaml'), reads ] }
 
-        // Make adapter database
         adapter_fasta_ch = channel.of([ [id: file(val_hifi_adapter).baseName], file(val_hifi_adapter) ])
         if ( val_hifi_adapter.endsWith('.tar.gz') ) {
             UNTAR( adapter_fasta_ch )
@@ -91,41 +92,32 @@ workflow PACBIO_PREPROCESS {
             adapter_db = BLAST_MAKEBLASTDB.out.db
         }
 
-        //
-        // ADAPTER SEARCH WITH BLASTN
-        //
-        // Convert reads to FASTA for BLASTN
         BLAST_BLASTN ( ch_input_to_trim, adapter_db.collect(), [],[],[] )
 
-        //
-        // PROCESS BLAST OUTPUT WITH HIFITRIMMER PROCESSBLAST
-        //
-        // Prepare input for Hifitimmer processblast
-        ch_input_processblast = BLAST_BLASTN.out.txtgz.combine( ch_adapter_yaml, by: 0 )
+        // Recover each sample's YAML from meta._adapter_yaml alongside its blastn output
+        ch_input_processblast = BLAST_BLASTN.out.txtgz
+            .join(ch_hifitrimmer_branch.trim.map { meta, reads -> [ meta - meta.subMap('_adapter_yaml'), meta._adapter_yaml ] }, by: 0)
             .multiMap { meta, blastn, yaml ->
                 blastn: [ meta, blastn ]
-                yaml: [ meta, yaml ]
+                yaml:   [ meta, yaml ]
             }
 
         HIFITRIMMER_PROCESSBLAST ( ch_input_processblast.blastn, ch_input_processblast.yaml )
 
         hifitrimmer_summary = hifitrimmer_summary.mix ( HIFITRIMMER_PROCESSBLAST.out.summary )
-        hifitrimmer_bed = hifitrimmer_bed.mix ( HIFITRIMMER_PROCESSBLAST.out.bed )
+        hifitrimmer_bed     = hifitrimmer_bed.mix ( HIFITRIMMER_PROCESSBLAST.out.bed )
 
-        //
-        // FILTER READS WITH HIFITRIMMER FILTERBAM
-        //
-        // Convert FASTA and FASTQ to BAM for hifitrimmer filtering
         ch_input_filterbam = ch_input_to_trim.combine( HIFITRIMMER_PROCESSBLAST.out.bed, by: 0 )
         HIFITRIMMER_TRIM ( ch_input_filterbam )
 
-        trimmed_bam = trimmed_bam.mix( HIFITRIMMER_TRIM.out.bam )
-        trimmed_cram = trimmed_cram.mix( HIFITRIMMER_TRIM.out.cram )
-        trimmed_sam = trimmed_sam.mix( HIFITRIMMER_TRIM.out.sam )
+        trimmed_bam   = trimmed_bam.mix( HIFITRIMMER_TRIM.out.bam )
+        trimmed_cram  = trimmed_cram.mix( HIFITRIMMER_TRIM.out.cram )
+        trimmed_sam   = trimmed_sam.mix( HIFITRIMMER_TRIM.out.sam )
         trimmed_fasta = trimmed_fasta.mix( HIFITRIMMER_TRIM.out.fasta )
         trimmed_fastq = trimmed_fastq.mix( HIFITRIMMER_TRIM.out.fastq )
     } else {
-        ch_input_skip_trim = ch_input_pre_trim
+        log.warn "No adapter DB provided, skipping adapter trimming"
+        ch_input_skip_trim = ch_hifitrimmer_input.map { meta, reads -> [ meta - meta.subMap('_adapter_yaml'), reads ] }
     }
 
     ch_input_skip_trim_branch = ch_input_skip_trim

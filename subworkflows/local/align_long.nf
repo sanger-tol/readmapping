@@ -8,7 +8,6 @@ include { MERGE_OUTPUT                               } from '../../subworkflows/
 // sanger-tol subworkflows
 include { CRAM_MAP_LONG_READS                        } from '../../subworkflows/sanger-tol/cram_map_long_reads/main'
 include { PACBIO_PREPROCESS                          } from '../../subworkflows/sanger-tol/pacbio_preprocess/main'
-include { PACBIO_PREPROCESS as PACBIO_PREPROCESS_ULI } from '../../subworkflows/sanger-tol/pacbio_preprocess/main'
 include { FASTX_MAP_LONG_READS                       } from '../../subworkflows/sanger-tol/fastx_map_long_reads/main'
 
 // nf-core modules
@@ -41,95 +40,75 @@ workflow ALIGN_LONG {
     }
 
     //
-    // PacBio preprocessing (adapter trimming, ULI demultiplexing, dedup)
+    // PacBio preprocessing (adapter trimming, ULI demultiplexing, dedup, pimms/amplified)
+    // Always executed; empty channels propagate harmlessly when no PacBio data is present.
     //
-    if (val_pacbio_adapter || val_pacbio_adapter_yaml || val_pacbio_uli_adapter) {
-
-        // Split reads by datatype: PacBio goes through preprocessing; others pass through
-        ch_reads_by_datatype = reads.branch { meta, read_files ->
-            pacbio:           meta.datatype == 'pacbio'
-            non_pacbio_bam:   read_files.name.endsWith('.bam')  // ONT / PacBio CLR BAM
-            non_pacbio_fastx: true                              // ONT / PacBio CLR FASTQ
-        }
-
-        //
-        // Prepare per-sample YAML for HiFi-Trimmer (with barcode substitution if needed)
-        //
-        if (val_pacbio_adapter && val_pacbio_adapter_yaml) {
-            ch_yaml_by_barcode = ch_reads_by_datatype.pacbio
-                .combine(channel.fromPath(val_pacbio_adapter_yaml, checkIfExists: true))
-                .map { meta, _reads, yaml -> [ meta, yaml ] }
-                .branch { meta, _yaml ->
-                    has_barcode: meta.barcode != null && !meta.barcode.isEmpty()
-                    no_barcode:  true
-                }
-
-            GAWK_MODIFY_YAML_BARCODE(ch_yaml_by_barcode.has_barcode, [], false)
-
-            ch_pacbio_read_yaml = ch_reads_by_datatype.pacbio.combine(
-                GAWK_MODIFY_YAML_BARCODE.out.output.mix(ch_yaml_by_barcode.no_barcode),
-                by: 0
-            )
-            adapter_fasta = val_pacbio_adapter
-        } else {
-            // No hifi-trimmer adapters requested; attach an empty yaml placeholder
-            ch_pacbio_read_yaml = ch_reads_by_datatype.pacbio
-                .map { meta, read_files -> [ meta, read_files, [] ] }
-            adapter_fasta = false
-        }
-
-        //
-        // Split PacBio reads by library type (ULI needs LIMA demultiplexing + pbmarkdup)
-        //
-        ch_pacbio_by_library = ch_pacbio_read_yaml.branch { meta, _reads, _yaml ->
-            uli:   meta.library == 'uli'
-            other: true
-        }
-
-        ch_uli_input = ch_pacbio_by_library.uli.multiMap { meta, read_files, yaml ->
-            reads: [ meta, read_files ]
-            yaml:  [ meta, yaml ]
-        }
-        ch_other_input = ch_pacbio_by_library.other.multiMap { meta, read_files, yaml ->
-            reads: [ meta, read_files ]
-            yaml:  [ meta, yaml ]
-        }
-
-        // ULI is read-file-level so preprocessing is invoked twice (with/without pbmarkdup)
-        PACBIO_PREPROCESS_ULI(ch_uli_input.reads,   ch_uli_input.yaml,   adapter_fasta, val_pacbio_uli_adapter, true)
-        PACBIO_PREPROCESS    (ch_other_input.reads, ch_other_input.yaml, adapter_fasta, [],                     false)
-
-        //
-        // Aggregate preprocessing outputs
-        //
-        trimmed_cram  = PACBIO_PREPROCESS.out.trimmed_cram.mix(PACBIO_PREPROCESS_ULI.out.trimmed_cram)
-        untrimmed_bam = PACBIO_PREPROCESS.out.untrimmed_bam.mix(PACBIO_PREPROCESS_ULI.out.untrimmed_bam)
-
-        bam_to_cram = untrimmed_bam.mix(ch_reads_by_datatype.non_pacbio_bam)
-        fastx       = PACBIO_PREPROCESS.out.untrimmed_fastx
-            .mix(PACBIO_PREPROCESS_ULI.out.untrimmed_fastx)
-            .mix(PACBIO_PREPROCESS.out.trimmed_fastq)
-            .mix(PACBIO_PREPROCESS_ULI.out.trimmed_fastq)
-            .mix(ch_reads_by_datatype.non_pacbio_fastx)
-
-        // MultiQC files from both preprocess invocations
-        ch_mqc_files = ch_mqc_files.mix(
-            PACBIO_PREPROCESS.out.lima_report,          PACBIO_PREPROCESS_ULI.out.lima_report,
-            PACBIO_PREPROCESS.out.lima_summary,         PACBIO_PREPROCESS_ULI.out.lima_summary,
-            PACBIO_PREPROCESS.out.hifitrimmer_bed,      PACBIO_PREPROCESS_ULI.out.hifitrimmer_bed,
-            PACBIO_PREPROCESS.out.hifitrimmer_summary,  PACBIO_PREPROCESS_ULI.out.hifitrimmer_summary,
-            PACBIO_PREPROCESS.out.pbmarkdup_stats,      PACBIO_PREPROCESS_ULI.out.pbmarkdup_stats,
-        )
-    } else {
-        // No preprocessing requested: BAM inputs → CRAM, FASTQ inputs → fastx alignment
-        ch_reads_by_format = reads.branch { _meta, read_files ->
-            bam:   read_files.name.endsWith('bam')
-            fastq: true
-        }
-        bam_to_cram  = ch_reads_by_format.bam
-        fastx        = ch_reads_by_format.fastq
-        trimmed_cram = channel.empty()
+    ch_reads_by_datatype = reads.branch { meta, read_files ->
+        pacbio:           meta.datatype == 'pacbio'
+        non_pacbio_bam:   read_files.name.endsWith('.bam')  // ONT / PacBio CLR BAM
+        non_pacbio_fastx: true                              // ONT / PacBio CLR FASTQ
     }
+
+    //
+    // Prepare per-sample YAML for HiFi-Trimmer (with barcode substitution if needed)
+    //
+    if (val_pacbio_adapter && val_pacbio_adapter_yaml) {
+        ch_yaml_by_barcode = ch_reads_by_datatype.pacbio
+            .combine(channel.fromPath(val_pacbio_adapter_yaml, checkIfExists: true))
+            .map { meta, _reads, yaml -> [ meta, yaml ] }
+            .branch { meta, _yaml ->
+                has_barcode: meta.barcode != null && !meta.barcode.isEmpty()
+                no_barcode:  true
+            }
+
+        GAWK_MODIFY_YAML_BARCODE(ch_yaml_by_barcode.has_barcode, [], false)
+
+        ch_pacbio_read_yaml = ch_reads_by_datatype.pacbio.combine(
+            GAWK_MODIFY_YAML_BARCODE.out.output.mix(ch_yaml_by_barcode.no_barcode),
+            by: 0
+        )
+        adapter_fasta = val_pacbio_adapter
+    } else {
+        // No hifi-trimmer adapters requested; attach an empty yaml placeholder
+        ch_pacbio_read_yaml = ch_reads_by_datatype.pacbio
+            .map { meta, read_files -> [ meta, read_files, [] ] }
+        adapter_fasta = false
+    }
+
+    //
+    // PACBIO_PREPROCESS expects [meta, reads, lima_adapter, run_pbmarkdup, adapter_yaml].
+    // ULI and PiMmS use per-sample adapter_file when provided, falling back to the
+    // global val_pacbio_uli_adapter for ULI only. Amplified reads use pbmarkdup
+    // without LIMA, and standard HiFi reads use neither.
+    ch_pacbio_preprocess = ch_pacbio_read_yaml.map { meta, read_files, yaml ->
+        def library = meta.library ?: ''
+        def lima_adapter = library == 'uli' ? (meta.adapter_file ? file(meta.adapter_file) : val_pacbio_uli_adapter)
+            : library == 'pimms' && meta.adapter_file ? file(meta.adapter_file)
+            : false
+        def run_pbmarkdup = library in ['uli', 'pimms', 'amplified']
+        [ meta, read_files, lima_adapter, run_pbmarkdup, yaml ]
+    }
+
+    PACBIO_PREPROCESS(ch_pacbio_preprocess, adapter_fasta)
+
+    //
+    // Aggregate preprocessing outputs
+    //
+    trimmed_cram  = PACBIO_PREPROCESS.out.trimmed_cram
+    untrimmed_bam = PACBIO_PREPROCESS.out.untrimmed_bam  // includes ULI/pimms/amplified via untrimmed_bam emit
+
+    bam_to_cram = untrimmed_bam.mix(ch_reads_by_datatype.non_pacbio_bam)
+    fastx       = PACBIO_PREPROCESS.out.untrimmed_fastx
+        .mix(PACBIO_PREPROCESS.out.trimmed_fastq)
+        .mix(ch_reads_by_datatype.non_pacbio_fastx)
+
+    ch_mqc_files = ch_mqc_files.mix(
+        PACBIO_PREPROCESS.out.lima_report,
+        PACBIO_PREPROCESS.out.lima_summary,
+        PACBIO_PREPROCESS.out.hifitrimmer_bed,
+        PACBIO_PREPROCESS.out.hifitrimmer_summary,
+        PACBIO_PREPROCESS.out.pbmarkdup_stats,
+    )
 
     //
     // Handle read group and PG lines
@@ -139,8 +118,7 @@ workflow ALIGN_LONG {
     // add_rg=true forces this record through SAMTOOLS_ADDREPLACERG, in case it is converted to CRAM.
     ch_fastq_rg = fastx.map { meta, read_files -> [ meta + [ read_group: "-y -R $meta.read_group", add_rg: true ], read_files ] }
 
-    // BAM path: extract @RG and @PG lines from the header
-        //
+    //
     // Convert BAM inputs to CRAM (readmapping expects a single FASTA reference)
     //
     CONVERT_CRAM(
