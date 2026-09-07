@@ -12,6 +12,8 @@ nextflow_pipeline {
         when {
             params {
                 outdir = "$outputDir"
+                alignment_format = "bam"
+                compression = "none"
             }
         }
 
