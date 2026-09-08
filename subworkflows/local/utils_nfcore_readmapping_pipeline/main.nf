@@ -249,7 +249,8 @@ def toolCitationText() {
             "bwa-mem2 (Vasimuddin et al. 2019),",
             "Crumble (Bonfield et al. 2019),",
             "MiniMap2 (Li 2018),",
-            "Samtools (Li et al. 2009)"
+            "Samtools (Li et al. 2009)",
+            "STAR (Dobin et al. 2013)"
         ].join(' ').trim()
 
     return citation_text

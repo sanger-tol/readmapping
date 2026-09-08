@@ -9,6 +9,7 @@
 // SUBWORKFLOW: Consisting of a mix of local and nf-core/modules
 //
 include { ALIGN_SHORT                        } from '../subworkflows/local/align_short'
+include { ALIGN_RNA                          } from '../subworkflows/local/align_rna'
 include { ALIGN_LONG                         } from '../subworkflows/local/align_long'
 include { CONVERT_STATS                      } from '../subworkflows/local/convert_stats'
 include { INPUT_CHECK                        } from '../subworkflows/local/input_check'
@@ -59,6 +60,7 @@ workflow READMAPPING {
 
     //
     // SUBWORKFLOW: Prepare the reads and the genome
+    // NB: Add isoseq to the rna workflow at a later date
     //
     ch_genome = ch_fasta.map { fasta -> [[id: fasta.baseName], fasta] }
 
@@ -66,6 +68,7 @@ workflow READMAPPING {
     ch_reads = INPUT_CHECK.out.reads.branch {
         meta, _reads ->
             short_reads : meta.datatype == "hic" || meta.datatype == "illumina"
+            rna_reads : meta.datatype == "rnaseq"
             long_reads : true
     }
 
@@ -81,6 +84,7 @@ workflow READMAPPING {
     //
 
     ALIGN_SHORT ( INPUT_CHECK.out.fasta, ch_reads.short_reads )
+    ALIGN_RNA ( INPUT_CHECK.out.fasta, ch_reads.rna_reads )
 
     ALIGN_LONG (
         INPUT_CHECK.out.fasta,
@@ -95,6 +99,7 @@ workflow READMAPPING {
     // gather alignments
     ch_aligned_bams = channel.empty()
     .mix( ALIGN_SHORT.out.bam )
+    .mix( ALIGN_RNA.out.bam )
     .mix( ALIGN_LONG.out.bam )
 
     // convert to cram and gather stats
