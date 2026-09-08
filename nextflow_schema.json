@@ -137,7 +137,7 @@
                     "default": 10000,
                     "description": "Chunk size for parallel alignment of short read data, in number of cram containers",
                     "minimum": 1
-                }
+                },
                 "rnaseq_map_chunk_size": {
                     "type": "integer",
                     "default": 10000,
