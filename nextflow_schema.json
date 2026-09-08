@@ -120,6 +120,12 @@
                     "description": "Alignment method to use for short-reads (options are: \"minimap2\" or \"bwamem2\"",
                     "enum": ["minimap2", "bwamem2"]
                 },
+                "rna_aligner": {
+                    "type": "string",
+                    "default": "star",
+                    "description": "Alignment method to use for rna-seq (only option is currently: \"star\"",
+                    "enum": ["star"]
+                },
                 "long_reads_map_chunk_size": {
                     "type": "integer",
                     "default": 10000,
@@ -130,6 +136,12 @@
                     "type": "integer",
                     "default": 10000,
                     "description": "Chunk size for parallel alignment of short read data, in number of cram containers",
+                    "minimum": 1
+                }
+                "rnaseq_map_chunk_size": {
+                    "type": "integer",
+                    "default": 10000,
+                    "description": "Chunk size for parallel alignment of rna-seq data, in number of cram containers",
                     "minimum": 1
                 }
             }
