@@ -57,7 +57,7 @@
             "adapter_preset": {
                 "type": "string",
                 "enum": ["SYMMETRIC", "ASYMMETRIC", ""],
-                "errorMessage": "adapter_preset must be SYMMETRIC or ASYMMETRIC",
+                "errorMessage": "When provided, adapter_preset must be SYMMETRIC or ASYMMETRIC",
                 "default": "",
                 "meta": ["adapter_preset"]
             }
