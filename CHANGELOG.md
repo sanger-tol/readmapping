@@ -15,7 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Preserve PG lines from original BAM/CRAM files and processing steps in final alignment outputs
 - Add Hifi_trimmer trimming statistics to the MultiQC report
 - Add MultiQC report per datatype
-- Support PacBio PiMms and Amplified data
+- Support PacBio PiMmS and Ampli-Fi data
 
 ### Parameters
 

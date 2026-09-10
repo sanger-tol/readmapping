@@ -40,7 +40,7 @@ workflow ALIGN_LONG {
     }
 
     //
-    // PacBio preprocessing (adapter trimming, ULI demultiplexing, dedup, pimms/amplified)
+    // PacBio preprocessing (adapter trimming, ULI demultiplexing, dedup, PiMmS/Ampli-Fi)
     // Always executed; empty channels propagate harmlessly when no PacBio data is present.
     //
     ch_reads_by_datatype = reads.branch { meta, read_files ->
@@ -78,14 +78,14 @@ workflow ALIGN_LONG {
     //
     // PACBIO_PREPROCESS expects [meta, reads, lima_adapter, run_pbmarkdup, adapter_yaml].
     // ULI and PiMmS use per-sample adapter_file when provided, falling back to the
-    // global val_pacbio_uli_adapter for ULI only. Amplified reads use pbmarkdup
+    // global val_pacbio_uli_adapter for ULI only. Ampli-Fi reads use pbmarkdup
     // without LIMA, and standard HiFi reads use neither.
     ch_pacbio_preprocess = ch_pacbio_read_yaml.map { meta, read_files, yaml ->
         def library = meta.library ?: ''
         def lima_adapter = library == 'uli' ? (meta.adapter_file ? file(meta.adapter_file) : val_pacbio_uli_adapter)
             : library == 'pimms' && meta.adapter_file ? file(meta.adapter_file)
             : false
-        def run_pbmarkdup = library in ['uli', 'pimms', 'amplified']
+        def run_pbmarkdup = library in ['uli', 'pimms', 'amplifi']
         [ meta, read_files, lima_adapter, run_pbmarkdup, yaml ]
     }
 
@@ -95,7 +95,7 @@ workflow ALIGN_LONG {
     // Aggregate preprocessing outputs
     //
     trimmed_cram  = PACBIO_PREPROCESS.out.trimmed_cram
-    untrimmed_bam = PACBIO_PREPROCESS.out.untrimmed_bam  // includes ULI/pimms/amplified via untrimmed_bam emit
+    untrimmed_bam = PACBIO_PREPROCESS.out.untrimmed_bam  // includes ULI/PiMmS/Ampli-Fi via untrimmed_bam emit
 
     bam_to_cram = untrimmed_bam.mix(ch_reads_by_datatype.non_pacbio_bam)
     fastx       = PACBIO_PREPROCESS.out.untrimmed_fastx

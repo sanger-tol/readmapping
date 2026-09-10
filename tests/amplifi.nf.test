@@ -2,12 +2,12 @@ import HeaderUtils
 
 nextflow_pipeline {
 
-    name "Test pipeline with amplified PacBio data"
+    name "Test pipeline with Ampli-Fi PacBio data"
     script "../main.nf"
     tag "pipeline"
-    profile "test_amplified"
+    profile "test_amplifi"
 
-    test("-profile test_amplified") {
+    test("-profile test_amplifi") {
 
         when {
             params {
