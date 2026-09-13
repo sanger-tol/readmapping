@@ -1,7 +1,7 @@
 {
-    "-profile test_uli --pacbio_uli_adapter false --alignment_format bam": {
+    "-profile test_uli --pacbio_uli_adapter false": {
         "content": [
-            76,
+            73,
             {
                 "BGZIP_BEDGRAPH": {
                     "samtools": "1.23.1"
@@ -20,9 +20,6 @@
                 "CRAMALIGN_MINIMAP2ALIGN": {
                     "minimap2": "2.30-r1287",
                     "samtools": "1.22.1"
-                },
-                "CRUMBLE": {
-                    "crumble": "0.9.1"
                 },
                 "FASTQC": {
                     "fastqc": "0.12.1"
@@ -139,18 +136,18 @@
                 "pacbio.SAMEA114784749.ERR14209104.rmdup.pbmarkdup.log:md5,b0f9657238ccc2feb3701b156e03b837",
                 "GCA_964034985.1.subset.pacbio.SAMEA114784749.ERR14209104.minimap2.flagstat:md5,0c28e76bdd020bb1485746de33ce9252",
                 "GCA_964034985.1.subset.pacbio.SAMEA114784749.ERR14209104.minimap2.idxstats:md5,9d2ad4c54b1cefb73d70e576f2e89650",
-                "GCA_964034985.1.subset.pacbio.SAMEA114784749.ERR14209104.minimap2.stats.gz:md5,926e90e15c7e78d2ea1101cd1245098f",
+                "GCA_964034985.1.subset.pacbio.SAMEA114784749.ERR14209104.minimap2.stats.gz:md5,7240557c97c38434bdd7ec0f1f66d384",
                 "GCA_964034985.1.subset.pacbio.SAMEA114784749.ERR14209104_provided_adapter.minimap2.coverage.1k.bedGraph.gz:md5,91d8507d7cea42e6b85e1c9dc7cab12d",
                 "pacbio.SAMEA114784749.ERR14209104_provided_adapter.hifitrimmer.bed.gz:md5,c88ccab95c5c4b9a71a1c659af74673e",
                 "pacbio.SAMEA114784749.ERR14209104_provided_adapter.rmdup.pbmarkdup.log:md5,b0f9657238ccc2feb3701b156e03b837",
                 "GCA_964034985.1.subset.pacbio.SAMEA114784749.ERR14209104_provided_adapter.minimap2.flagstat:md5,0c28e76bdd020bb1485746de33ce9252",
                 "GCA_964034985.1.subset.pacbio.SAMEA114784749.ERR14209104_provided_adapter.minimap2.idxstats:md5,9d2ad4c54b1cefb73d70e576f2e89650",
-                "GCA_964034985.1.subset.pacbio.SAMEA114784749.ERR14209104_provided_adapter.minimap2.stats.gz:md5,c79151c9549893b55cc220686bf45c70",
+                "GCA_964034985.1.subset.pacbio.SAMEA114784749.ERR14209104_provided_adapter.minimap2.stats.gz:md5,be503b43af2c732757df919c775199c3",
                 "GCA_964034985.1.subset.pacbio.SAMEA114784749.ERR14209104_test.minimap2.coverage.1k.bedGraph.gz:md5,91d8507d7cea42e6b85e1c9dc7cab12d",
                 "pacbio.SAMEA114784749.ERR14209104_test.hifitrimmer.bed.gz:md5,45c78d87eee0433dd4e0300c04c3bd64",
                 "GCA_964034985.1.subset.pacbio.SAMEA114784749.ERR14209104_test.minimap2.flagstat:md5,0c28e76bdd020bb1485746de33ce9252",
                 "GCA_964034985.1.subset.pacbio.SAMEA114784749.ERR14209104_test.minimap2.idxstats:md5,9d2ad4c54b1cefb73d70e576f2e89650",
-                "GCA_964034985.1.subset.pacbio.SAMEA114784749.ERR14209104_test.minimap2.stats.gz:md5,722c63c08fd814e69ad7b508ea8bd6c5"
+                "GCA_964034985.1.subset.pacbio.SAMEA114784749.ERR14209104_test.minimap2.stats.gz:md5,f786435a0d19f59d7df928d9d264c739"
             ],
             {
                 "GCA_964034985.1.subset.pacbio.SAMEA114784749.ERR14209104.minimap2.bam": {
@@ -207,8 +204,7 @@
                     "@PG\tID:samtools.1\tPN:samtools\tPP:hifi-trimmer\tVN:1.22.1\tCL:samtools view -H pacbio.SAMEA114784749.ERR14209104.hifitrimmer.cram",
                     "@PG\tID:minimap2\tPN:minimap2\tVN:2.30-r1287\tCL:minimap2 -t N -ax map-hifi --cs=short -I1G -y -R @RG\\tID:0de7f0a4m84093_241116_151316_s2.barcodes.fasta;BarcodeHash=86d73e586a6d3ede0295785b51105eea;BarcodeCount=96;BarcodeMode=Symmetric;BarcodeQuality=Score\\tPL:PACBIO\\tPM:REVIO\\tBC:ACTGCAGCACGAGTAT GCA_964034985.1.subset.unmasked.mmi -\tPP:samtools.1",
                     "@PG\tID:samtools.2\tPN:samtools\tPP:minimap2\tVN:1.22.1\tCL:samtools sort -t N -T pacbio.SAMEA114784749.ERR14209104.hifitrimmer.cram.0.SAMEA114784749.ERR14209104_sort_tmp -o pacbio.SAMEA114784749.ERR14209104.hifitrimmer.cram.0.SAMEA114784749.ERR14209104.bam -",
-                    "@PG\tID:samtools.3\tPN:samtools\tPP:samtools.2\tVN:1.23.1\tCL:samtools merge --threads N -c -p --reference GCA_964034985.1.subset.unmasked.fa SAMEA114784749.ERR14209104.merge.bam 1/pacbio.SAMEA114784749.ERR14209104.hifitrimmer.cram.0.SAMEA114784749.ERR14209104.bam",
-                    "@PG\tID:crumble\tPN:crumble\tPP:samtools.3\tVN:0.9.1\tCL:crumble -y pbccs -O bam SAMEA114784749.ERR14209104.merge.bam SAMEA114784749.ERR14209104.merge.crumble.bam"
+                    "@PG\tID:samtools.3\tPN:samtools\tPP:samtools.2\tVN:1.23.1\tCL:samtools merge --threads N -c -p --reference GCA_964034985.1.subset.unmasked.fa SAMEA114784749.ERR14209104.merge.bam 1/pacbio.SAMEA114784749.ERR14209104.hifitrimmer.cram.0.SAMEA114784749.ERR14209104.bam"
                 ],
                 "GCA_964034985.1.subset.pacbio.SAMEA114784749.ERR14209104_provided_adapter.minimap2.bam": [
                     "@HD\tVN:1.6\tSO:coordinate",
@@ -226,8 +222,7 @@
                     "@PG\tID:samtools.1\tPN:samtools\tPP:hifi-trimmer\tVN:1.22.1\tCL:samtools view -H pacbio.SAMEA114784749.ERR14209104_provided_adapter.hifitrimmer.cram",
                     "@PG\tID:minimap2\tPN:minimap2\tVN:2.30-r1287\tCL:minimap2 -t N -ax map-hifi --cs=short -I1G -y -R @RG\\tID:0de7f0a4m84093_241116_151316_s2.barcodes.fasta;BarcodeHash=86d73e586a6d3ede0295785b51105eea;BarcodeCount=96;BarcodeMode=Symmetric;BarcodeQuality=Score\\tPL:PACBIO\\tPM:REVIO\\tBC:ACTGCAGCACGAGTAT GCA_964034985.1.subset.unmasked.mmi -\tPP:samtools.1",
                     "@PG\tID:samtools.2\tPN:samtools\tPP:minimap2\tVN:1.22.1\tCL:samtools sort -t N -T pacbio.SAMEA114784749.ERR14209104_provided_adapter.hifitrimmer.cram.0.SAMEA114784749.ERR14209104_provided_adapter_sort_tmp -o pacbio.SAMEA114784749.ERR14209104_provided_adapter.hifitrimmer.cram.0.SAMEA114784749.ERR14209104_provided_adapter.bam -",
-                    "@PG\tID:samtools.3\tPN:samtools\tPP:samtools.2\tVN:1.23.1\tCL:samtools merge --threads N -c -p --reference GCA_964034985.1.subset.unmasked.fa SAMEA114784749.ERR14209104_provided_adapter.merge.bam 1/pacbio.SAMEA114784749.ERR14209104_provided_adapter.hifitrimmer.cram.0.SAMEA114784749.ERR14209104_provided_adapter.bam",
-                    "@PG\tID:crumble\tPN:crumble\tPP:samtools.3\tVN:0.9.1\tCL:crumble -y pbccs -O bam SAMEA114784749.ERR14209104_provided_adapter.merge.bam SAMEA114784749.ERR14209104_provided_adapter.merge.crumble.bam"
+                    "@PG\tID:samtools.3\tPN:samtools\tPP:samtools.2\tVN:1.23.1\tCL:samtools merge --threads N -c -p --reference GCA_964034985.1.subset.unmasked.fa SAMEA114784749.ERR14209104_provided_adapter.merge.bam 1/pacbio.SAMEA114784749.ERR14209104_provided_adapter.hifitrimmer.cram.0.SAMEA114784749.ERR14209104_provided_adapter.bam"
                 ],
                 "GCA_964034985.1.subset.pacbio.SAMEA114784749.ERR14209104_test.minimap2.bam": [
                     "@HD\tVN:1.6\tSO:coordinate",
@@ -245,8 +240,7 @@
                     "@PG\tID:samtools.1\tPN:samtools\tPP:hifi-trimmer\tVN:1.22.1\tCL:samtools view -H pacbio.SAMEA114784749.ERR14209104_test.hifitrimmer.cram",
                     "@PG\tID:minimap2\tPN:minimap2\tVN:2.30-r1287\tCL:minimap2 -t N -ax map-hifi --cs=short -I1G -y -R @RG\\tID:0de7f0a4m84093_241116_151316_s2.barcodes.fasta;BarcodeHash=86d73e586a6d3ede0295785b51105eea;BarcodeCount=96;BarcodeMode=Symmetric;BarcodeQuality=Score\\tPL:PACBIO\\tPM:REVIO\\tBC:ACTGCAGCACGAGTAT GCA_964034985.1.subset.unmasked.mmi -\tPP:samtools.1",
                     "@PG\tID:samtools.2\tPN:samtools\tPP:minimap2\tVN:1.22.1\tCL:samtools sort -t N -T pacbio.SAMEA114784749.ERR14209104_test.hifitrimmer.cram.0.SAMEA114784749.ERR14209104_test_sort_tmp -o pacbio.SAMEA114784749.ERR14209104_test.hifitrimmer.cram.0.SAMEA114784749.ERR14209104_test.bam -",
-                    "@PG\tID:samtools.3\tPN:samtools\tPP:samtools.2\tVN:1.23.1\tCL:samtools merge --threads N -c -p --reference GCA_964034985.1.subset.unmasked.fa SAMEA114784749.ERR14209104_test.merge.bam 1/pacbio.SAMEA114784749.ERR14209104_test.hifitrimmer.cram.0.SAMEA114784749.ERR14209104_test.bam",
-                    "@PG\tID:crumble\tPN:crumble\tPP:samtools.3\tVN:0.9.1\tCL:crumble -y pbccs -O bam SAMEA114784749.ERR14209104_test.merge.bam SAMEA114784749.ERR14209104_test.merge.crumble.bam"
+                    "@PG\tID:samtools.3\tPN:samtools\tPP:samtools.2\tVN:1.23.1\tCL:samtools merge --threads N -c -p --reference GCA_964034985.1.subset.unmasked.fa SAMEA114784749.ERR14209104_test.merge.bam 1/pacbio.SAMEA114784749.ERR14209104_test.hifitrimmer.cram.0.SAMEA114784749.ERR14209104_test.bam"
                 ]
             },
             {
@@ -258,10 +252,10 @@
                 "pacbio.SAMEA114784749.ERR14209104_test.hifitrimmer.summary.json:md5,a0bb029ebd213c14bad17ac343db6cfb"
             ]
         ],
-        "timestamp": "2026-08-31T18:10:47.225263977",
+        "timestamp": "2026-09-07T18:20:10.994372903",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "25.10.4"
+            "nextflow": "26.04.0"
         }
     }
 }

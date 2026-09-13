@@ -2,7 +2,7 @@ import HeaderUtils
 
 nextflow_pipeline {
 
-    name "Test short-read mapping with minimap2 as short aligner"
+    name "Test pipeline on short reads with minimap2 set as the aligner"
     script "../main.nf"
     tag "pipeline"
 
@@ -23,6 +23,7 @@ nextflow_pipeline {
 
             // stable_path: All files in ${params.outdir}/ with stable content
             def stable_path = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore')
+
             // path to hifi-trimmer summary
             def hifitrimmer_json = getAllFilesFromDir("${params.outdir}", include: ['**/*.summary.json'], relative: true, includeDir: false)
 
@@ -53,7 +54,7 @@ nextflow_pipeline {
                         obj.remove('run_info')
                         new File(f).getName() + ":md5," + groovy.json.JsonOutput.toJson(new TreeMap(obj)).md5().toString()
                     }.sort()
-                 ).match() }
+                ).match() }
             )
         }
     }

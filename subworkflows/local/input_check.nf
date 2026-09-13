@@ -60,7 +60,7 @@ def create_data_channel ( LinkedHashMap row, datafile, stats ) {
 
     if (meta.library == 'pimms') {
         if (meta.adapter_file == null && meta.adapter_preset == null) {
-            log.warn "Sample ${meta.specimen}.${meta.run} is library=pimms but missing both adapter_file and adapter_preset; defaulting to ASYMMETRIC and no adapter file"
+            error "Sample ${meta.specimen}.${meta.run} is library=pimms: neither adapter_file nor adapter_preset are provided"
         } else if (meta.adapter_file != null && meta.adapter_preset == null) {
             error "Sample ${meta.specimen}.${meta.run} is library=pimms: adapter_file is provided but adapter_preset is missing"
         } else if (meta.adapter_file == null && meta.adapter_preset != null) {

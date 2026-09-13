@@ -342,9 +342,9 @@
             [
                 [
                     {
-                        "id": "amplified_bam"
+                        "id": "amplifi_bam"
                     },
-                    "amplified_bam_pbmarkdup.pbmarkdup.log:md5,6d652bd6b201e3b2cf417842f11e27e0"
+                    "amplifi_bam_pbmarkdup.pbmarkdup.log:md5,6d652bd6b201e3b2cf417842f11e27e0"
                 ],
                 [
                     {
@@ -423,7 +423,7 @@
             [
                 [
                     {
-                        "id": "amplified_bam"
+                        "id": "amplifi_bam"
                     },
                     {
                         "detections": [
@@ -2123,9 +2123,9 @@
             [
                 [
                     {
-                        "id": "amplified_bam"
+                        "id": "amplifi_bam"
                     },
-                    "amplified_bam.bed.gz:md5,f8617a66cc5619f40ee6b956159b4b35"
+                    "amplifi_bam.bed.gz:md5,f8617a66cc5619f40ee6b956159b4b35"
                 ],
                 [
                     {
@@ -2219,9 +2219,9 @@
             [
                 [
                     {
-                        "id": "amplified_bam"
+                        "id": "amplifi_bam"
                     },
-                    "amplified_bam_pbmarkdup.pbmarkdup.log:md5,6d652bd6b201e3b2cf417842f11e27e0"
+                    "amplifi_bam_pbmarkdup.pbmarkdup.log:md5,6d652bd6b201e3b2cf417842f11e27e0"
                 ],
                 [
                     {
