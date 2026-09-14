@@ -63,7 +63,7 @@ workflow ALIGN_RNA {
     ch_trim_zip = TRIMGALORE.out.zip
     ch_trim_log = TRIMGALORE.out.log
 
-    CRAM_MAP_ILLUMINA_RNA( ch_illumina.fasta, TRIMGALORE.out.cram, params.rna_aligner, params.short_reads_map_chunk_size )
+    CRAM_MAP_ILLUMINA_RNA( ch_illumina.fasta, TRIMGALORE.out.cram, "star" params.short_reads_map_chunk_size )
     //
     // SUBWORKFLOW: Merge all alignment outputs by specimen
     //
