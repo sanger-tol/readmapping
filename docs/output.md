@@ -213,12 +213,15 @@ For merged output (when `merge_output` is enabled), replace `${run}` with `merge
 
 ### MultiQC report
 
-The workflow generates a MultiQC summary report that aggregates and visualises statistics (e.g., FastQC, alignment statistics).
+The workflow generates a MultiQC summary report that aggregates and visualises statistics (e.g., FastQC, alignment statistics) of all data file. The pipeline also generates a MultiQC summary report per type of sequencing data.
 
 <details markdown="1">
 <summary>Output files</summary>
 
 - `multiqc_report.html`: Interactive HTML report summarizing quality metrics from FastQC, alignment statistics, and other quality control data across all samples
+- `read_mapping`
+  - `${datatype}`
+    - `multiqc_report.${datatype}.html`
 
 </details>
 

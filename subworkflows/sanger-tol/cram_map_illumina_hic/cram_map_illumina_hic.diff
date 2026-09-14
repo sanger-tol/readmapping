@@ -1,0 +1,45 @@
+Changes in component 'sanger-tol/cram_map_illumina_hic'
+'subworkflows/sanger-tol/cram_map_illumina_hic/meta.yml' is unchanged
+Changes in 'cram_map_illumina_hic/nextflow.config':
+--- subworkflows/sanger-tol/cram_map_illumina_hic/nextflow.config
++++ subworkflows/sanger-tol/cram_map_illumina_hic/nextflow.config
+@@ -1,7 +1,7 @@
+ nextflow.enable.moduleBinaries = true
+ 
+ process {
+-    withName: '.*:CRAM_MAP_ILLUMINA_HIC:CRAMALIGN_BWAMEM2ALIGNHIC' {
++    withName: CRAMALIGN_BWAMEM2ALIGNHIC {
+         ext.args1 = { ""                  }
+         ext.args2 = { "-F0xB00 -nt"       }
+         ext.args3 = { "-5SPCp"            }
+@@ -11,7 +11,7 @@
+ 
+     }
+ 
+-    withName: '.*:CRAM_MAP_ILLUMINA_HIC:CRAMALIGN_MINIMAP2ALIGNHIC' {
++    withName: CRAMALIGN_MINIMAP2ALIGNHIC {
+         ext.args1 = { ""                    }
+         ext.args2 = { "-F0xB00 -nt"         }
+         ext.args3 = { "-ax sr"              }
+
+Changes in 'cram_map_illumina_hic/main.nf':
+--- subworkflows/sanger-tol/cram_map_illumina_hic/main.nf
++++ subworkflows/sanger-tol/cram_map_illumina_hic/main.nf
+@@ -85,7 +85,11 @@
+ 
+     ch_readgroups = SAMTOOLS_SPLITHEADER.out.readgroup
+         .map { meta, rg_file ->
+-            [ meta, rg_file.readLines().collect { line -> line.replaceAll("\t", "\\\\t") } ]
++            // Add specimen/sample as SM to read group lines 
++            def sm = meta.specimen ?: meta.sample ?: meta.id
++            [ meta, rg_file.readLines().collect { line ->
++                ((line =~ /(?:^|\t)SM:[^\t]+/).find() ? line : "${line}\tSM:${sm}").replaceAll("\t", "\\\\t")
++            } ]
+         }
+ 
+     //
+
+'subworkflows/sanger-tol/cram_map_illumina_hic/tests/nextflow.config' is unchanged
+'subworkflows/sanger-tol/cram_map_illumina_hic/tests/main.nf.test' is unchanged
+'subworkflows/sanger-tol/cram_map_illumina_hic/tests/main.nf.test.snap' is unchanged
+************************************************************
