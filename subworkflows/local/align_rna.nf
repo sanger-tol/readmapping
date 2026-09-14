@@ -58,7 +58,7 @@ workflow ALIGN_RNA {
         fasta: [ meta_ + meta + [ assembly_id: meta_.id ] , fasta_file ]
     }
 
-    TRIMGALORE( ch_illumina.fasta, ch_illumina.cram )
+    TRIMGALORE( ch_illumina.cram )
     ch_trim_html = TRIMGALORE.out.html
     ch_trim_zip = TRIMGALORE.out.zip
     ch_trim_log = TRIMGALORE.out.log
