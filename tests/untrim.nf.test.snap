@@ -1,7 +1,7 @@
 {
-    "-profile test --pacbio_adapter false --pacbio_adapter_yaml false --alignment_format bam": {
+    "-profile test_untrim": {
         "content": [
-            71,
+            68,
             {
                 "BGZIP_BEDGRAPH": {
                     "samtools": "1.23.1"
@@ -18,9 +18,6 @@
                 "CRAMALIGN_MINIMAP2ALIGN": {
                     "minimap2": "2.30-r1287",
                     "samtools": "1.22.1"
-                },
-                "CRUMBLE": {
-                    "crumble": "0.9.1"
                 },
                 "FASTQC": {
                     "fastqc": "0.12.1"
@@ -142,16 +139,16 @@
                 "GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939248.minimap2.coverage.1k.bedGraph.gz:md5,0a6131f8ea8f155a36017bcabd2bc679",
                 "GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939248.minimap2.flagstat:md5,db1610f3490d314de7e60f10d404178d",
                 "GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939248.minimap2.idxstats:md5,f757bd37fc1461e576348525ae0ba087",
-                "GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939248.minimap2.stats.gz:md5,7cf00458c15cd073d7beaadafdd9987d",
+                "GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939248.minimap2.stats.gz:md5,5ed23a2e58e0bf093b3c7ee57523e81e",
                 "GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939249.minimap2.coverage.1k.bedGraph.gz:md5,e0fc17e71bf3d81c154ed3964edba5d9",
                 "GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939249.minimap2.flagstat:md5,81a2332a3cdcc6b37dd2687d2cc77752",
                 "GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939249.minimap2.idxstats:md5,fe8b829d5241701b172cf4ff55cbf4f6",
-                "GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939249.minimap2.stats.gz:md5,b1bb9155dc743314c7c426b58b1a0763",
+                "GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939249.minimap2.stats.gz:md5,a423cdb368850d7567cc60af9e0eb163",
                 "GCA_922984935.2.subset.pacbio.SAMEA7524440.merged_1.minimap2.coverage.1k.bedGraph.gz:md5,2d6da9f2a9b3aeb61bc50fd26b53d3dd",
                 "SOURCE.txt:md5,343a5205e5b93005576ee69a0869dad3",
                 "GCA_922984935.2.subset.pacbio.SAMEA7524440.merged_1.minimap2.flagstat:md5,da9dcde0937f27935637db67c14c9928",
                 "GCA_922984935.2.subset.pacbio.SAMEA7524440.merged_1.minimap2.idxstats:md5,ee312e0f5e6053bc81b737ae5805807f",
-                "GCA_922984935.2.subset.pacbio.SAMEA7524440.merged_1.minimap2.stats.gz:md5,eb965ae8ff35f6a6ebd7c13b6ba0ab77"
+                "GCA_922984935.2.subset.pacbio.SAMEA7524440.merged_1.minimap2.stats.gz:md5,af19f53fa8f86a0a82861b39a1fe3eaf"
             ],
             {
                 "GCA_922984935.2.subset.ont.SAMEA7524440.PAE35587.minimap2.bam": {
@@ -226,8 +223,7 @@
                     "@PG\tID:minimap2\tPN:minimap2\tVN:2.30-r1287\tCL:minimap2 -t N -ax map-hifi --cs=short -I1G -y -R @RG\\tID:61ddc6c35.0-8M\\tSM:SAMEA7524440 GCA_922984935.2.subset.unmasked.mmi -\tPP:samtools.4",
                     "@PG\tID:samtools.5\tPN:samtools\tPP:minimap2\tVN:1.22.1\tCL:samtools sort -t N -T SAMEA7524440.ERR6939248_addRG.cram.0.SAMEA7524440.ERR6939248_sort_tmp -o SAMEA7524440.ERR6939248_addRG.cram.0.SAMEA7524440.ERR6939248.bam -",
                     "@PG\tID:samtools.6\tPN:samtools\tPP:samtools.5\tVN:1.23.1\tCL:samtools merge --threads N -c -p --reference GCA_922984935.2.subset.unmasked.fa SAMEA7524440.ERR6939248.merge.bam 1/SAMEA7524440.ERR6939248_addRG.cram.0.SAMEA7524440.ERR6939248.bam",
-                    "@PG\tID:crumble\tPN:crumble\tPP:samtools.6\tVN:0.9.1\tCL:crumble -y pbccs -O bam SAMEA7524440.ERR6939248.merge.bam SAMEA7524440.ERR6939248.merge.crumble.bam",
-                    "@PG\tID:samtools.7\tPN:samtools\tPP:crumble\tVN:1.23.1\tCL:samtools reheader temp.sorted.header.sam input/GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939248.minimap2.bam"
+                    "@PG\tID:samtools.7\tPN:samtools\tPP:samtools.6\tVN:1.23.1\tCL:samtools reheader temp.sorted.header.sam input/GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939248.minimap2.bam"
                 ],
                 "GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939249.minimap2.bam": [
                     "@HD\tVN:1.6\tSO:coordinate",
@@ -236,8 +232,7 @@
                     "@PG\tID:minimap2\tPN:minimap2\tVN:2.30-r1287\tCL:minimap2 -t N -ax map-hifi --cs=short -y -R @RG\\tID:m64094_200911_174739\\tPL:PACBIO\\tSM:SAMEA7524440 -I1G -a GCA_922984935.2.subset.unmasked.mmi -",
                     "@PG\tID:samtools\tPN:samtools\tPP:minimap2\tVN:1.23.1\tCL:samtools sort -t N -o m64094_200911_174739.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.subset.fastq.gz.0.SAMEA7524440.ERR6939249.bam -T m64094_200911_174739.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.subset.fastq.gz.0.SAMEA7524440.ERR6939249_sort_tmp --write-index -l1 -",
                     "@PG\tID:samtools.1\tPN:samtools\tPP:samtools\tVN:1.23.1\tCL:samtools merge --threads N -c -p --reference GCA_922984935.2.subset.unmasked.fa SAMEA7524440.ERR6939249.merge.bam 1/m64094_200911_174739.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.subset.fastq.gz.0.SAMEA7524440.ERR6939249.bam",
-                    "@PG\tID:crumble\tPN:crumble\tPP:samtools.1\tVN:0.9.1\tCL:crumble -y pbccs -O bam SAMEA7524440.ERR6939249.merge.bam SAMEA7524440.ERR6939249.merge.crumble.bam",
-                    "@PG\tID:samtools.2\tPN:samtools\tPP:crumble\tVN:1.23.1\tCL:samtools reheader temp.sorted.header.sam input/GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939249.minimap2.bam"
+                    "@PG\tID:samtools.2\tPN:samtools\tPP:samtools.1\tVN:1.23.1\tCL:samtools reheader temp.sorted.header.sam input/GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939249.minimap2.bam"
                 ],
                 "GCA_922984935.2.subset.pacbio.SAMEA7524440.merged_1.minimap2.bam": [
                     "@HD\tVN:1.6\tSO:coordinate",
@@ -255,8 +250,7 @@
                     "@PG\tID:samtools.5\tPN:samtools\tPP:minimap2\tVN:1.22.1\tCL:samtools sort -t N -T SAMEA7524440.ERR6939248_addRG.cram.0.SAMEA7524440.ERR6939248_sort_tmp -o SAMEA7524440.ERR6939248_addRG.cram.0.SAMEA7524440.ERR6939248.bam -",
                     "@PG\tID:samtools.6\tPN:samtools\tPP:samtools.5\tVN:1.23.1\tCL:samtools merge --threads N -c -p --reference GCA_922984935.2.subset.unmasked.fa SAMEA7524440.ERR6939248.merge.bam 1/SAMEA7524440.ERR6939248_addRG.cram.0.SAMEA7524440.ERR6939248.bam",
                     "@PG\tID:samtools.7\tPN:samtools\tPP:samtools.6\tVN:1.23.1\tCL:samtools merge --threads N -c -p SAMEA7524440.merged_1.merge.bam 1/SAMEA7524440.ERR6939248.merge.bam 2/SAMEA7524440.ERR6939249.merge.bam",
-                    "@PG\tID:crumble\tPN:crumble\tPP:samtools.7\tVN:0.9.1\tCL:crumble -y pbccs -O bam SAMEA7524440.merged_1.merge.bam SAMEA7524440.merged_1.merge.crumble.bam",
-                    "@PG\tID:samtools.8\tPN:samtools\tPP:crumble\tVN:1.23.1\tCL:samtools reheader temp.sorted.header.sam input/GCA_922984935.2.subset.pacbio.SAMEA7524440.merged_1.minimap2.bam"
+                    "@PG\tID:samtools.8\tPN:samtools\tPP:samtools.7\tVN:1.23.1\tCL:samtools reheader temp.sorted.header.sam input/GCA_922984935.2.subset.pacbio.SAMEA7524440.merged_1.minimap2.bam"
                 ]
             },
             {
@@ -266,10 +260,10 @@
                 
             ]
         ],
-        "timestamp": "2026-08-24T14:09:05.441443362",
+        "timestamp": "2026-09-07T18:23:25.700402365",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.3"
+            "nextflow": "26.04.0"
         }
     }
 }
