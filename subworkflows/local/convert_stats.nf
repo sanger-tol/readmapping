@@ -99,7 +99,7 @@ workflow CONVERT_STATS {
     }
 
     ch_non_rnaseq_bams = ch_renamed_bams
-    .filter { it[0].datatype in ['illumina', 'pacbio', 'hic'] }
+    .filter { ! it[0].datatype in ['rnaseq'] }
 
     // Calculate read depth
     BLOBTK_DEPTH(ch_non_rnaseq_bams)
