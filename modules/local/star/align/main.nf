@@ -41,15 +41,20 @@ process STAR_ALIGN {
 
     samtools cat ${args} -r "#:${range[0]}-${range[1]}" ${cram} |\\
         samtools fastq ${args2} -1 read_1.fastq -2 read_2.fastq -0 /dev/null -s /dev/null
-        STAR \\
+
+    STAR \\
         --genomeDir $index \\
         --runThreadN $task.cpus \\
         --outFileNamePrefix $prefix. \\
         $args3 \\
         --readFilesIn read_1.fastq read_2.fastq
-        samtools fixmate ${args4} ${prefix}.Aligned.out.bam - |\\
+
+    samtools fixmate ${args4} ${prefix}.Aligned.out.bam - |\\
         samtools view -h ${args5} |\\
         samtools sort ${args6} -@${task.cpus} -T ${prefix}_tmp -o ${prefix}.star.bam -
+    
+    rm reads_1.fastq read_2.fastq
+    rm ${prefix}.Aligned.out.bam
     """
 
     stub:
