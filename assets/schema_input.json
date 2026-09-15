@@ -21,8 +21,8 @@
             },
             "datatype": {
                 "type": "string",
-                "enum": ["hic", "illumina", "pacbio", "pacbio_clr", "ont"],
-                "errorMessage": "Datatype must be one of: hic, illumina, pacbio, pacbio_clr, ont",
+                "enum": ["hic", "illumina", "pacbio", "pacbio_clr", "ont","rnaseq"],
+                "errorMessage": "Datatype must be one of: hic, illumina, pacbio, pacbio_clr, ont, rnaseq",
                 "meta": ["datatype"]
             },
             "datafile": {
