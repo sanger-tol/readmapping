@@ -22,10 +22,10 @@ process STAR_ALIGN {
 
     script:
     def prefix  = task.ext.prefix ?: "${cram}.${chunkn}.${meta.id}"
-    def args1 = task.ext.args1 ?: ''
-    def args2 = task.ext.args2 ?: '-t' // copy RG, BC and QT tags to the FASTQ header line
-    def args3 = task.ext.args3 ?: "--outSAMtype BAM Unsorted --outSAMattrRGline 'ID:$prefix' 'SM:$prefix'"
-    def args4 = task.ext.args4 ?: '-m'
+    def args = task.ext.args ?: ''
+    def args2 = task.ext.args2 ?: ''
+    def args3 = task.ext.args3 ?: ""
+    def args4 = task.ext.args4 ?: ''
     def args5 = task.ext.args5 ?: ''
     def args6 = task.ext.args6 ?: ''
     // Prepare read group arguments if rglines are found, else, empty string
@@ -39,7 +39,7 @@ process STAR_ALIGN {
         : ''
     """
 
-    samtools cat ${args1} -r "#:${range[0]}-${range[1]}" ${cram} |\\
+    samtools cat ${args} -r "#:${range[0]}-${range[1]}" ${cram} |\\
         samtools fastq ${args2} -1 read_1.fastq -2 read_2.fastq -0 /dev/null -s /dev/null
         STAR \\
         --genomeDir $index \\
