@@ -22,7 +22,7 @@ process TRIMGALORE {
     task.ext.when == null || task.ext.when
 
     script:
-    def args = task.ext.args ?: '--preserve-tags  RG,BC,QT --poly_a'
+    def args = task.ext.args ?: ''
     // Calculate number of --cores for TrimGalore based on value of task.cpus
     // See: https://github.com/FelixKrueger/TrimGalore/blob/master/CHANGELOG.md#version-060-release-on-1-mar-2019
     // See: https://github.com/nf-core/atacseq/pull/65
