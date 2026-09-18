@@ -1,0 +1,133 @@
+%%metro title: sanger-tol/readmapping
+%%metro style: dark
+%%metro compact_offsets: true
+%%metro legend: bl
+
+%% --- METRO DATA LINES ---
+%%metro line: reference | Reference Genome | #f5c542
+%%metro line: pacbio_std | PacBio HiFi Standard | #e63946
+%%metro line: pacbio_amplified | PacBio HiFi Amplified | #fa6863
+%%metro line: pacbio_uli | PacBio HiFi ULI | #e67e22
+%%metro line: pacbio_pimms | PacBio HiFi PiMmS | #ff9800
+%%metro line: ont_clr | ONT / PacBio CLR | #9b59b6
+%%metro line: short_reads | Illumina / Hi-C | #0570b0
+%%metro line: qc | Pre/Post-align QC & MultiQC | #2db572
+
+%% other brown colours: #795548
+%% other yellow colours: #f1c40f
+%% other green colours: #00e676
+%% other blue colours: #00bcd4 #3498db
+
+%% --- INPUT & OUTPUT FILES ---
+%%metro file: in_ref | FASTA
+%%metro file: in_pacbio | FASTQ
+%%metro file: in_pacbio | BAM
+%%metro file: in_ont_clr | FASTQ
+%%metro file: in_ont_clr | BAM
+%%metro file: in_short | FASTQ
+%%metro file: in_short | CRAM
+%%metro file: cram_out | CRAM
+%%metro file: cram_out | CRAI
+%%metro file: stats_out | stats
+%%metro file: bedgraph_out | bedgraph
+%%metro file: multiqc_out | HTML
+
+graph LR
+    %% ==========================================
+    %% 2. BLOCK: REFERENCE INDEXING & PRE-ALIGN QC
+    %% ==========================================
+    subgraph pre_qc_block [Indexing & Pre-Align QC]
+        in_ref[ ]
+        in_pacbio[ ]
+        in_ont_clr[ ]
+        in_short[ ]
+
+        ref_index[Reference Indexing\nFaidx / BWA / MM2]
+        fastqc_pre[FastQC\nPre-align QC]
+
+        in_ref -->|reference| ref_index
+        in_pacbio -->|pacbio_std,pacbio_uli,pacbio_pimms,pacbio_amplified| fastqc_pre
+        in_ont_clr -->|ont_clr| fastqc_pre
+        in_short -->|short_reads| fastqc_pre
+    end
+
+    %% ==========================================
+    %% 3. BLOCK: PACBIO PREPROCESSING
+    %% ==========================================
+    subgraph pacbio_prep_block [PacBio Preprocessing]
+        lima[Lima\nDemux]
+        pbmarkdup[PBMarkdup\nDeduplication]
+        hifitrimmer[hifi-trimmer\nAdapter trimming]
+
+        lima -->|pacbio_uli,pacbio_pimms| pbmarkdup
+        pbmarkdup -->|pacbio_std,pacbio_uli,pacbio_pimms,pacbio_amplified| hifitrimmer
+    end
+
+    %% ==========================================
+    %% 4. BLOCK: CHUNKING & ALIGNMENT
+    %% ==========================================
+    subgraph chunk_align_block [Chunking & Alignment]
+        chunk_reads[Generate CRAM chunks\nParallelise alignments]
+        align_long[Minimap2\nAlign long reads]
+        align_short[BWAMEM2 / Minimap2\nAlign short reads]
+        merge_aligned[Samtools\nMerge (and Markdup)]
+
+        _genome
+        _genome -->|reference| align_long
+        _genome -->|reference| align_short
+
+        chunk_reads -->|pacbio_std,pacbio_uli,pacbio_pimms,pacbio_amplified,ont_clr| align_long
+        chunk_reads -->|short_reads| align_short
+
+        align_long -->|pacbio_std,pacbio_uli,pacbio_pimms,pacbio_amplified,ont_clr| merge_aligned
+        align_short -->|short_reads| merge_aligned
+    end
+
+    %% ==========================================
+    %% 5. BLOCK: POST-PROCESSING & METRICS
+    %% ==========================================
+    subgraph postprocess_block [Post-Processing & Stats]
+        crumble[Crumble\nCompression]
+        cram_conv[Samtools CRAM\n& Index]
+        sam_stats[Samtools\nStats, Flagstat, Idxstats]
+        blobtk[BlobTK Depth\nCoverage]
+
+        cram_out[ ]
+        stats_out[ ]
+        bedgraph_out[ ]
+
+        crumble -->|pacbio_std,pacbio_uli,pacbio_pimms,pacbio_amplified,ont_clr,short_reads| cram_conv
+        ref_index -->|reference| cram_conv
+
+        cram_conv -->|pacbio_std,pacbio_uli,pacbio_pimms,pacbio_amplified,ont_clr,short_reads| cram_out
+
+        cram_conv -->|qc| sam_stats
+        cram_conv -->|qc| blobtk
+
+        sam_stats -->|qc| stats_out
+        blobtk -->|qc| bedgraph_out
+    end
+
+    %% ==========================================
+    %% 6. BLOCK: MULTIQC REPORTING
+    %% ==========================================
+    subgraph multiqc_block [QC Reporting]
+        multiqc[MultiQC\nReport]
+        multiqc_out[ ]
+
+        fastqc_pre -->|qc| multiqc
+        sam_stats -->|qc| multiqc
+        blobtk -->|qc| multiqc
+
+        multiqc -->|qc| multiqc_out
+    end
+
+    fastqc_pre -->|pacbio_uli,pacbio_pimms| lima
+    fastqc_pre -->|pacbio_std,pacbio_amplified| pbmarkdup
+    fastqc_pre -->|ont_clr,short_reads| chunk_reads
+    hifitrimmer -->|pacbio_std,pacbio_uli,pacbio_pimms,pacbio_amplified| chunk_reads
+    ref_index -->|reference| _genome
+
+    merge_aligned -->|pacbio_std,pacbio_uli,pacbio_pimms,pacbio_amplified,ont_clr,short_reads| crumble
+
+end
