@@ -55,6 +55,18 @@ def create_data_channel ( LinkedHashMap row, datafile, stats ) {
     meta.datatype      = row.datatype
     meta.library       = row.library
     meta.barcode       = row.barcode
+    meta.adapter_file   = row.adapter_file   ?: null
+    meta.adapter_preset = row.adapter_preset ?: null
+
+    if (meta.library == 'pimms') {
+        if (meta.adapter_file == null && meta.adapter_preset == null) {
+            error "Sample ${meta.specimen}.${meta.run} is library=pimms: neither adapter_file nor adapter_preset are provided"
+        } else if (meta.adapter_file != null && meta.adapter_preset == null) {
+            error "Sample ${meta.specimen}.${meta.run} is library=pimms: adapter_file is provided but adapter_preset is missing"
+        } else if (meta.adapter_file == null && meta.adapter_preset != null) {
+            error "Sample ${meta.specimen}.${meta.run} is library=pimms: adapter_preset is provided but adapter_file is missing"
+        }
+    }
 
     def platform = (meta.datatype == "hic" || meta.datatype == "illumina") ? "ILLUMINA" :
                 (meta.datatype == "pacbio" || meta.datatype == "pacbio_clr") ? "PACBIO" :

@@ -236,7 +236,7 @@
                     },
                     "pacbio_preprocess": {
                         "branch": "main",
-                        "git_sha": "011adc17d7510505f080c7c09f66f36e092c3683",
+                        "git_sha": "338bb85224cd73d71df5a9c2a436579b943a7657",
                         "installed_by": ["subworkflows"]
                     }
                 }
