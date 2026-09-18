@@ -18,11 +18,10 @@ nextflow_pipeline {
         }
 
         then {
-            // stable_name: All files + folders in ${params.outdir}/ with a stable name
-            def stable_name = getAllFilesFromDir("${params.outdir}", relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}'])
-
-            // stable_path: All files in ${params.outdir}/ with stable content
-            def stable_path = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore')
+            // stable_path: All files + folders in ${params.outdir}/ with a stable path (including file name)
+            def stable_path = getAllFilesFromDir(params.outdir, relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}'])
+            // stable_content: All files in ${params.outdir}/ with stable content
+            def stable_content = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore')
 
             // path to hifi-trimmer summary
             def hifitrimmer_json = getAllFilesFromDir("${params.outdir}", include: ['**/*.summary.json'], relative: true, includeDir: false)
@@ -32,17 +31,19 @@ nextflow_pipeline {
             def bam_path = getAllFilesFromDir(params.outdir, include: ['**/*.bam'], relative: true, includeDir: false)
             def fasta = 'https://tolit.cog.sanger.ac.uk/test-data/Meles_meles/assembly/release/mMelMel3.1_paternal_haplotype/GCA_922984935.2.subset.fasta'
 
+            assert workflow.success
             assertAll(
-                { assert workflow.success },
                 { assert snapshot(
                     // Number of successful tasks
                     workflow.trace.succeeded().size(),
                     // pipeline versions.yml file for multiqc from which Nextflow version is removed because we test pipelines on multiple Nextflow versions
                     removeNextflowVersion("$outputDir/pipeline_info/readmapping_software_mqc_versions.yml"),
                     // All stable path name, with a relative path
-                    stable_name,
                     stable_path,
-                    // Stable mapping files
+                    // All files with stable contents
+                    stable_content
+
+                    // Files that need a special filter to be seen as stable
                     bam_path.collect{ f -> [(new File(f).getName()): bam("${params.outdir}/${f}").getStatistics()] }.collectEntries{ it }.sort(),
                     cram_path.collect{ f -> [(new File(f).getName()): cram("${params.outdir}/${f}", fasta).getStatistics()] }.collectEntries{ it }.sort(),
                     bam_path.collect{ f -> [(new File(f).getName()): HeaderUtils.sanitizeHeader(bam("${params.outdir}/${f}").getHeader())] }.collectEntries{ it }.sort(),
