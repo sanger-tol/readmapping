@@ -40,7 +40,8 @@ workflow SANGERTOL_READMAPPING {
     READMAPPING (
         samplesheet,
         fasta,
-        header
+        header,
+        params.outdir,
     )
 }
 /*
