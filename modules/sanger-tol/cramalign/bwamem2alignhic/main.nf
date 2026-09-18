@@ -44,7 +44,7 @@ process CRAMALIGN_BWAMEM2ALIGNHIC {
     """
     INDEX=`find -L ./ -name "*.amb" | sed 's/\\.amb\$//'`
 
-    samtools view -H ${cram} | grep ^@PG > ${prefix}_cram_pg.tmp
+    samtools view --no-PG -H ${cram} | grep ^@PG > ${prefix}_cram_pg.tmp
 
     samtools cat ${args} -r "#:${range[0]}-${range[1]}" ${cram} |\\
         samtools fastq ${args2} - |\\
