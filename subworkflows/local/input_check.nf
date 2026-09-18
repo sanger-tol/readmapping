@@ -39,8 +39,8 @@ workflow INPUT_CHECK {
     MASK_UNMASK ( ch_fasta_for_unmask )
 
     emit:
-    reads                                        // channel: [ val(meta), /path/to/datafile ]
-    fasta    = MASK_UNMASK.out.unmasked.first()    // channel: [ meta, /path/to/fasta ]
+    reads = reads                                 // channel: [ val(meta), /path/to/datafile ]
+    fasta = MASK_UNMASK.out.unmasked.first()      // channel: [ meta, /path/to/fasta ]
 }
 
 

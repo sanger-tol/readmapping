@@ -28,10 +28,10 @@ workflow PIPELINE_INITIALISATION {
     take:
     version           // boolean: Display version and exit
     validate_params   // boolean: Boolean whether to validate parameters against the schema at runtime
-    // monochrome_logs   // boolean: Do not use coloured log outputs
+    monochrome_logs   // boolean: Do not use coloured log outputs
     nextflow_cli_args //   array: List of positional nextflow CLI args
     outdir            //  string: The output directory where the results will be saved
-    // input             //  string: Path to input samplesheet
+    input             //  string: Path to input samplesheet
     help              // boolean: Display help message and exit
     help_full         // boolean: Show the full help message
     show_hidden       // boolean: Show hidden parameters in the help message
@@ -74,6 +74,10 @@ workflow PIPELINE_INITIALISATION {
 * Software dependencies
     https://github.com/sanger-tol/readmapping/blob/main/CITATIONS.md
 """
+    if (monochrome_logs) {
+        before_text = before_text.replaceAll(/\033\[[0-9;]*m/, '')
+    }
+
     command = "nextflow run ${workflow.manifest.name} -profile <docker/singularity/.../institute> --input samplesheet.csv --outdir <OUTDIR>"
 
     UTILS_NFSCHEMA_PLUGIN (
@@ -103,7 +107,7 @@ workflow PIPELINE_INITIALISATION {
 
     // Check input path parameters to see if they exist
     def checkPathParamList = [
-        params.input,
+        input,
         params.fasta,
         params.pacbio_adapter,
         params.pacbio_adapter_yaml,
@@ -124,7 +128,7 @@ workflow PIPELINE_INITIALISATION {
     //
 
     ch_samplesheet = channel
-        .fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
+        .fromList(samplesheetToList(input, "${projectDir}/assets/schema_input.json"))
         .map { meta, datafile ->
             def new_meta = meta + [id: file(datafile).baseName]
             return [new_meta, datafile]
