@@ -1,6 +1,6 @@
 Changes in component 'sanger-tol/cramalign/minimap2alignhic'
-'modules/sanger-tol/cramalign/minimap2alignhic/meta.yml' is unchanged
 'modules/sanger-tol/cramalign/minimap2alignhic/environment.yml' is unchanged
+'modules/sanger-tol/cramalign/minimap2alignhic/meta.yml' is unchanged
 Changes in 'cramalign/minimap2alignhic/main.nf':
 --- modules/sanger-tol/cramalign/minimap2alignhic/main.nf
 +++ modules/sanger-tol/cramalign/minimap2alignhic/main.nf
@@ -10,7 +10,7 @@ Changes in 'cramalign/minimap2alignhic/main.nf':
          : ''
 +    def filter_5end = meta.datatype == 'hic' ?
      """
--    samtools view -H ${cram} | grep ^@PG > ${prefix}_cram_pg.tmp
+-    samtools view --no-PG -H ${cram} | grep ^@PG > ${prefix}_cram_pg.tmp
 -
 -    samtools cat ${args} -r "#:${range[0]}-${range[1]}" ${cram} |\\
 -        samtools fastq ${args2} - |\\
@@ -25,7 +25,7 @@ Changes in 'cramalign/minimap2alignhic/main.nf':
          ' |\\
 +    """ : ''
 +    """
-+    samtools view -H ${cram} | grep ^@PG > ${prefix}_cram_pg.tmp
++    samtools view --no-PG -H ${cram} | grep ^@PG > ${prefix}_cram_pg.tmp
 +
 +    samtools cat ${args} -r "#:${range[0]}-${range[1]}" ${cram} |\\
 +        samtools fastq ${args2} - |\\
@@ -36,9 +36,9 @@ Changes in 'cramalign/minimap2alignhic/main.nf':
          samtools view -h ${args5} |\\
          samtools sort ${args6} -@${task.cpus} -T ${prefix}_tmp -o ${prefix}.bam -
 
-'modules/sanger-tol/cramalign/minimap2alignhic/resources/usr/bin/filter_five_end.pl' is unchanged
-'modules/sanger-tol/cramalign/minimap2alignhic/resources/usr/bin/insert_cram_pg_header.awk' is unchanged
 'modules/sanger-tol/cramalign/minimap2alignhic/tests/nextflow.config' is unchanged
 'modules/sanger-tol/cramalign/minimap2alignhic/tests/main.nf.test' is unchanged
 'modules/sanger-tol/cramalign/minimap2alignhic/tests/main.nf.test.snap' is unchanged
+'modules/sanger-tol/cramalign/minimap2alignhic/resources/usr/bin/filter_five_end.pl' is unchanged
+'modules/sanger-tol/cramalign/minimap2alignhic/resources/usr/bin/insert_cram_pg_header.awk' is unchanged
 ************************************************************
