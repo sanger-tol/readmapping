@@ -1,6 +1,9 @@
-# sanger-tol/readmapping
-
-![sanger-tol/readmapping](docs/images/sanger-tol-readmapping_logo.png)
+<h1>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/images/sanger-tol-readmapping_logo_dark.png">
+    <img alt="sanger-tol/readmapping" src="docs/images/sanger-tol-readmapping_logo_light.png">
+  </picture>
+</h1>
 
 [![Open in GitHub Codespaces](https://img.shields.io/badge/Open_In_GitHub_Codespaces-black?labelColor=grey&logo=github)](https://github.com/codespaces/new/sanger-tol/readmapping)
 [![GitHub Actions CI Status](https://github.com/sanger-tol/readmapping/actions/workflows/nf-test.yml/badge.svg)](https://github.com/sanger-tol/readmapping/actions/workflows/nf-test.yml)
@@ -25,11 +28,14 @@ On merge to `dev` and `main` branch, automated continuous integration tests run 
 
 ## Pipeline summary
 
-<img src="https://raw.githubusercontent.com/sanger-tol/readmapping/976525ad7b5327607a049aa85bbca36a48c6ba48/docs/images/sanger-tol-readmapping_workflow.png" height="700">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/images/sanger-tol-readmapping_metro_map_dark.svg">
+  <img alt="sanger-tol/readmapping" src="docs/images/sanger-tol-readmapping_metro_map_light.svg">
+</picture>
 
 ## Quick Start
 
-1. Install [`Nextflow`](https://www.nextflow.io/docs/latest/getstarted.html#installation) (`>=22.10.1`)
+1. Install [`Nextflow`](https://www.nextflow.io/docs/latest/getstarted.html#installation) (`>=25.10.4`)
 
 2. Install any of [`Docker`](https://docs.docker.com/engine/installation/), [`Singularity`](https://www.sylabs.io/guides/3.0/user-guide/) (you can follow [this tutorial](https://singularity-tutorial.github.io/01-installation/)), [`Podman`](https://podman.io/), [`Shifter`](https://nersc.gitlab.io/development/shifter/how-to-use/) or [`Charliecloud`](https://hpc.github.io/charliecloud/) for full pipeline reproducibility _(you can use [`Conda`](https://conda.io/miniconda.html) both to install Nextflow itself and also to manage software within pipelines. Please only use it within pipelines as a last resort; see [docs](https://nf-co.re/usage/configuration#basic-configuration-profiles))_.
 

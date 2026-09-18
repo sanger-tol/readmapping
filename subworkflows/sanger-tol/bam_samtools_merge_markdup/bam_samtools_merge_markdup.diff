@@ -1,0 +1,20 @@
+Changes in component 'sanger-tol/bam_samtools_merge_markdup'
+'subworkflows/sanger-tol/bam_samtools_merge_markdup/meta.yml' is unchanged
+Changes in 'bam_samtools_merge_markdup/main.nf':
+--- subworkflows/sanger-tol/bam_samtools_merge_markdup/main.nf
++++ subworkflows/sanger-tol/bam_samtools_merge_markdup/main.nf
+@@ -35,6 +35,9 @@
+     ch_samtools_merge_input = ch_bam
+         .combine(ch_assemblies, by: 0)
+         .combine(ch_fai_gzi, by: 0)
++        .map { meta, bams, assembly, fai, gzi ->
++            [ meta, bams.sort { b -> b.getName() }, assembly, fai, gzi ]
++        }
+         .multiMap { meta, bams, assembly, fai, gzi ->
+             bam:   [ meta, bams, [] ]
+             fasta: [ meta, assembly, fai, gzi ]
+
+'subworkflows/sanger-tol/bam_samtools_merge_markdup/tests/nextflow.config' is unchanged
+'subworkflows/sanger-tol/bam_samtools_merge_markdup/tests/main.nf.test' is unchanged
+'subworkflows/sanger-tol/bam_samtools_merge_markdup/tests/main.nf.test.snap' is unchanged
+************************************************************
