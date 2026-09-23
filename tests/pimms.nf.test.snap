@@ -1,10 +1,11 @@
 {
     "-profile test_pimms": {
         "content": [
-            29,
+            30,
             {
                 "BGZIP_BEDGRAPH": {
-                    "samtools": "1.23.1"
+                    "bgzip": 1.24,
+                    "tabix": 1.24
                 },
                 "BLAST_BLASTN": {
                     "blastn": "2.17.0+",
@@ -94,6 +95,9 @@
                 "read_mapping/pacbio/SAMEA115183607/ERR15170332/GCA_965260885.1.subset.pacbio.SAMEA115183607.ERR15170332.minimap2.bam",
                 "read_mapping/pacbio/SAMEA115183607/ERR15170332/GCA_965260885.1.subset.pacbio.SAMEA115183607.ERR15170332.minimap2.bam.bai",
                 "read_mapping/pacbio/SAMEA115183607/ERR15170332/GCA_965260885.1.subset.pacbio.SAMEA115183607.ERR15170332.minimap2.coverage.1k.bedGraph.gz",
+                "read_mapping/pacbio/SAMEA115183607/ERR15170332/GCA_965260885.1.subset.pacbio.SAMEA115183607.ERR15170332.minimap2.coverage.1k.bedGraph.gz.csi",
+                "read_mapping/pacbio/SAMEA115183607/ERR15170332/GCA_965260885.1.subset.pacbio.SAMEA115183607.ERR15170332.minimap2.coverage.1k.bedGraph.gz.gzi",
+                "read_mapping/pacbio/SAMEA115183607/ERR15170332/GCA_965260885.1.subset.pacbio.SAMEA115183607.ERR15170332.minimap2.coverage.1k.bedGraph.gz.tbi",
                 "read_mapping/pacbio/SAMEA115183607/ERR15170332/qc",
                 "read_mapping/pacbio/SAMEA115183607/ERR15170332/qc/pacbio.SAMEA115183607.ERR15170332.fastqc.html",
                 "read_mapping/pacbio/SAMEA115183607/ERR15170332/qc/pacbio.SAMEA115183607.ERR15170332.fastqc.zip",
@@ -109,6 +113,8 @@
             ],
             [
                 "GCA_965260885.1.subset.pacbio.SAMEA115183607.ERR15170332.minimap2.coverage.1k.bedGraph.gz:md5,96c5d2ee658a26581d46c841d50e14d9",
+                "GCA_965260885.1.subset.pacbio.SAMEA115183607.ERR15170332.minimap2.coverage.1k.bedGraph.gz.gzi:md5,7dea362b3fac8e00956a4952a3d4f474",
+                "GCA_965260885.1.subset.pacbio.SAMEA115183607.ERR15170332.minimap2.coverage.1k.bedGraph.gz.tbi:md5,14c135d7fbb875374c8c485daaacf463",
                 "pacbio.SAMEA115183607.ERR15170332.hifitrimmer.bed.gz:md5,66059210a3a9e7d9318035c66ebe3037",
                 "pacbio.SAMEA115183607.ERR15170332.lima.report:md5,ae560485462c93d2ca3097927a2dcb69",
                 "pacbio.SAMEA115183607.ERR15170332.rmdup.pbmarkdup.log:md5,a9ae60b02f4d3da0612e607f88ab47be",
@@ -156,7 +162,7 @@
                 "pacbio.SAMEA115183607.ERR15170332.hifitrimmer.summary.json:md5,40119066fb16727f9fc8ffd2943efc62"
             ]
         ],
-        "timestamp": "2026-09-18T15:02:50.06140474",
+        "timestamp": "2026-09-23T14:45:39.63559776",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.0"

@@ -18,7 +18,7 @@ include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_CRAM     } from '../../modules/nf-cor
 include { SAMTOOLS_STATS                            } from '../../modules/nf-core/samtools/stats/main'
 include { SAMTOOLS_FLAGSTAT                         } from '../../modules/nf-core/samtools/flagstat/main'
 include { SAMTOOLS_IDXSTATS                         } from '../../modules/nf-core/samtools/idxstats/main'
-include { SAMTOOLS_BGZIP as BGZIP_BEDGRAPH          } from '../../modules/nf-core/samtools/bgzip/main'
+include { BGZIPTABIX as BGZIP_BEDGRAPH              } from '../../modules/sanger-tol/bgziptabix/main'
 
 
 workflow CONVERT_STATS {
@@ -100,7 +100,9 @@ workflow CONVERT_STATS {
 
     // Calculate read depth
     BLOBTK_DEPTH ( ch_renamed_bams )
-    BGZIP_BEDGRAPH ( BLOBTK_DEPTH.out.bed )
+
+    ch_bed_for_bgzip = BLOBTK_DEPTH.out.bed.map { meta, bed -> tuple(meta, bed, meta.genome_size) }
+    BGZIP_BEDGRAPH ( ch_bed_for_bgzip, tuple(null, null, "bedGraph") )
 
     // Calculate statistics
     // Samtools stats does not need fasta for embed_ref CRAM

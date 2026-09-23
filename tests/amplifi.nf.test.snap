@@ -1,10 +1,11 @@
 {
     "-profile test_amplifi": {
         "content": [
-            27,
+            28,
             {
                 "BGZIP_BEDGRAPH": {
-                    "samtools": "1.23.1"
+                    "bgzip": 1.24,
+                    "tabix": 1.24
                 },
                 "BLAST_BLASTN": {
                     "blastn": "2.17.0+",
@@ -88,6 +89,9 @@
                 "read_mapping/pacbio/icAdaBipu332/TRACTION-RUN-2387/GCA_910592335.1.subset.pacbio.icAdaBipu332.TRACTION-RUN-2387.minimap2.bam",
                 "read_mapping/pacbio/icAdaBipu332/TRACTION-RUN-2387/GCA_910592335.1.subset.pacbio.icAdaBipu332.TRACTION-RUN-2387.minimap2.bam.bai",
                 "read_mapping/pacbio/icAdaBipu332/TRACTION-RUN-2387/GCA_910592335.1.subset.pacbio.icAdaBipu332.TRACTION-RUN-2387.minimap2.coverage.1k.bedGraph.gz",
+                "read_mapping/pacbio/icAdaBipu332/TRACTION-RUN-2387/GCA_910592335.1.subset.pacbio.icAdaBipu332.TRACTION-RUN-2387.minimap2.coverage.1k.bedGraph.gz.csi",
+                "read_mapping/pacbio/icAdaBipu332/TRACTION-RUN-2387/GCA_910592335.1.subset.pacbio.icAdaBipu332.TRACTION-RUN-2387.minimap2.coverage.1k.bedGraph.gz.gzi",
+                "read_mapping/pacbio/icAdaBipu332/TRACTION-RUN-2387/GCA_910592335.1.subset.pacbio.icAdaBipu332.TRACTION-RUN-2387.minimap2.coverage.1k.bedGraph.gz.tbi",
                 "read_mapping/pacbio/icAdaBipu332/TRACTION-RUN-2387/qc",
                 "read_mapping/pacbio/icAdaBipu332/TRACTION-RUN-2387/qc/pacbio.icAdaBipu332.TRACTION-RUN-2387.fastqc.html",
                 "read_mapping/pacbio/icAdaBipu332/TRACTION-RUN-2387/qc/pacbio.icAdaBipu332.TRACTION-RUN-2387.fastqc.zip",
@@ -102,6 +106,8 @@
             ],
             [
                 "GCA_910592335.1.subset.pacbio.icAdaBipu332.TRACTION-RUN-2387.minimap2.coverage.1k.bedGraph.gz:md5,0772989e688647309db6943a80711631",
+                "GCA_910592335.1.subset.pacbio.icAdaBipu332.TRACTION-RUN-2387.minimap2.coverage.1k.bedGraph.gz.gzi:md5,7dea362b3fac8e00956a4952a3d4f474",
+                "GCA_910592335.1.subset.pacbio.icAdaBipu332.TRACTION-RUN-2387.minimap2.coverage.1k.bedGraph.gz.tbi:md5,1e8caf4107da8240bd1e71da045f9ff2",
                 "pacbio.icAdaBipu332.TRACTION-RUN-2387.hifitrimmer.bed.gz:md5,f8617a66cc5619f40ee6b956159b4b35",
                 "pacbio.icAdaBipu332.TRACTION-RUN-2387.rmdup.pbmarkdup.log:md5,6d652bd6b201e3b2cf417842f11e27e0",
                 "GCA_910592335.1.subset.pacbio.icAdaBipu332.TRACTION-RUN-2387.minimap2.flagstat:md5,9fb82346a708377f26b868784e475467",
@@ -147,7 +153,7 @@
                 "pacbio.icAdaBipu332.TRACTION-RUN-2387.hifitrimmer.summary.json:md5,146fdeb92fb58a450aa03e0f474b4edd"
             ]
         ],
-        "timestamp": "2026-09-18T14:53:35.24821984",
+        "timestamp": "2026-09-23T14:31:49.629301842",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.0"

@@ -80,15 +80,10 @@
                         "git_sha": "156feda0cb6589cd29c04902004fa3b53bc00205",
                         "installed_by": ["modules"]
                     },
-                    "samtools/bgzip": {
-                        "branch": "master",
-                        "git_sha": "156feda0cb6589cd29c04902004fa3b53bc00205",
-                        "installed_by": ["modules"]
-                    },
                     "samtools/faidx": {
                         "branch": "master",
                         "git_sha": "156feda0cb6589cd29c04902004fa3b53bc00205",
-                        "installed_by": ["bam_samtools_merge_markdup"]
+                        "installed_by": ["bam_samtools_merge_markdup", "modules"]
                     },
                     "samtools/fastq": {
                         "branch": "master",
@@ -162,6 +157,11 @@
         "https://github.com/sanger-tol/nf-core-modules": {
             "modules": {
                 "sanger-tol": {
+                    "bgziptabix": {
+                        "branch": "main",
+                        "git_sha": "10a069ff0f5b847b6ba52e4ca57997daf0bd2f72",
+                        "installed_by": ["modules"]
+                    },
                     "blast/blastn": {
                         "branch": "main",
                         "git_sha": "a4798f6a4c641ae7b4f482053b2ea5a0a87ed3f6",
