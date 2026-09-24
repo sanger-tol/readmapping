@@ -47,7 +47,7 @@
                     "slice_fasta.py": "1.0.0"
                 },
                 "GAWK_MODIFY_YAML_BARCODE": {
-                    "gawk": "5.3.0"
+                    "gawk": "5.3.1"
                 },
                 "GUNZIP": {
                     "gunzip": 1.13
@@ -597,7 +597,7 @@
                 "pacbio.SAMEA7524440.ERR6939249.hifitrimmer.summary.json:md5,b41de1b1e61f9063cb042aa6393462d9"
             ]
         ],
-        "timestamp": "2026-09-24T14:58:27.304517747",
+        "timestamp": "2026-09-24T15:56:14.592636758",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.0"

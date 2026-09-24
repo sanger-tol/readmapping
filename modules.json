@@ -32,7 +32,7 @@
                     },
                     "gawk": {
                         "branch": "master",
-                        "git_sha": "76b1f53edcf72798d8515c82f4728ad44b3dd902",
+                        "git_sha": "7844e96252d0693fb2331969a1c9790eb831b0f6",
                         "installed_by": ["modules"]
                     },
                     "gunzip": {

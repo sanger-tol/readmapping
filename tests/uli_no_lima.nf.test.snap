@@ -26,7 +26,7 @@
                     "fastqc": "0.12.1"
                 },
                 "GAWK_MODIFY_YAML_BARCODE": {
-                    "gawk": "5.3.0"
+                    "gawk": "5.3.1"
                 },
                 "GUNZIP": {
                     "gunzip": 1.13
@@ -265,7 +265,7 @@
                 "pacbio.SAMEA114784749.ERR14209104_test.hifitrimmer.summary.json:md5,a0bb029ebd213c14bad17ac343db6cfb"
             ]
         ],
-        "timestamp": "2026-09-24T09:22:29.435875046",
+        "timestamp": "2026-09-24T16:03:31.809960683",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.0"
