@@ -48,28 +48,28 @@
                     "pbmarkdup": "1.2.0"
                 },
                 "SAMTOOLS_FAIDX": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.24
                 },
                 "SAMTOOLS_FLAGSTAT": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.24
                 },
                 "SAMTOOLS_IDXSTATS": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.24
                 },
                 "SAMTOOLS_INDEX": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.24
                 },
                 "SAMTOOLS_INDEX_BAM": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.24
                 },
                 "SAMTOOLS_MERGE": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.24
                 },
                 "SAMTOOLS_SPLITHEADER": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.24
                 },
                 "SAMTOOLS_STATS": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.24
                 },
                 "UNTAR": {
                     "untar": 1.34
@@ -112,7 +112,7 @@
                 "pacbio.icAdaBipu332.TRACTION-RUN-2387.rmdup.pbmarkdup.log:md5,6d652bd6b201e3b2cf417842f11e27e0",
                 "GCA_910592335.1.subset.pacbio.icAdaBipu332.TRACTION-RUN-2387.minimap2.flagstat:md5,9fb82346a708377f26b868784e475467",
                 "GCA_910592335.1.subset.pacbio.icAdaBipu332.TRACTION-RUN-2387.minimap2.idxstats:md5,f827113d3fd093c3a55301c8d963a36c",
-                "GCA_910592335.1.subset.pacbio.icAdaBipu332.TRACTION-RUN-2387.minimap2.stats.gz:md5,bab15aa122292783b660f4acb88b63e8"
+                "GCA_910592335.1.subset.pacbio.icAdaBipu332.TRACTION-RUN-2387.minimap2.stats.gz:md5,5ed728de4c9149660ec3c35f3bcee930"
             ],
             {
                 "GCA_910592335.1.subset.pacbio.icAdaBipu332.TRACTION-RUN-2387.minimap2.bam": {
@@ -143,7 +143,7 @@
                     "@PG\tID:hifi-trimmer\tPN:hifi-trimmer\tVN:5.0.1\tPP:samtools\tCL:hifi-trimmer trim -t N -f cram -o pacbio.icAdaBipu332.TRACTION-RUN-2387.hifitrimmer.cram pacbio.icAdaBipu332.TRACTION-RUN-2387.rmdup.bam pacbio.icAdaBipu332.TRACTION-RUN-2387.hifitrimmer.bed.gz",
                     "@PG\tID:minimap2\tPN:minimap2\tVN:2.30-r1287\tCL:minimap2 -t N -ax map-hifi --cs=short -I1G -y -R @RG\\tID:a69c2469Twist_Universal_Adapters_with_UDI.barcodeset.xml;BarcodeHash=90b1895570d10fa009bc02315bd70227;BarcodeCount=800;BarcodeMode=Asymmetric;BarcodeQuality=Score\\tPL:PACBIO\\tPM:REVIO\\tBC:AATGATACGGCGACCACCGAGATCTACACCTATGCCTTAACACTCTTTCCCTACACGACGCTCTTCCGATCT-CAAGCAGAAGACGGCATACGAGATACCTCGAGAGGTGACTGGAGTTCAGACGTGTGCTCTTCCGATCT GCA_910592335.1.subset.unmasked.mmi -\tPP:hifi-trimmer",
                     "@PG\tID:samtools.1\tPN:samtools\tPP:minimap2\tVN:1.22.1\tCL:samtools sort -t N -T pacbio.icAdaBipu332.TRACTION-RUN-2387.hifitrimmer.cram.0.icAdaBipu332.TRACTION-RUN-2387_sort_tmp -o pacbio.icAdaBipu332.TRACTION-RUN-2387.hifitrimmer.cram.0.icAdaBipu332.TRACTION-RUN-2387.bam -",
-                    "@PG\tID:samtools.2\tPN:samtools\tPP:samtools.1\tVN:1.23.1\tCL:samtools merge --threads N -c -p --reference GCA_910592335.1.subset.unmasked.fa icAdaBipu332.TRACTION-RUN-2387.merge.bam 1/pacbio.icAdaBipu332.TRACTION-RUN-2387.hifitrimmer.cram.0.icAdaBipu332.TRACTION-RUN-2387.bam"
+                    "@PG\tID:samtools.2\tPN:samtools\tPP:samtools.1\tVN:1.24\tCL:samtools merge --threads N -c -p --reference GCA_910592335.1.subset.unmasked.fa icAdaBipu332.TRACTION-RUN-2387.merge.bam 1/pacbio.icAdaBipu332.TRACTION-RUN-2387.hifitrimmer.cram.0.icAdaBipu332.TRACTION-RUN-2387.bam"
                 ]
             },
             {
@@ -153,7 +153,7 @@
                 "pacbio.icAdaBipu332.TRACTION-RUN-2387.hifitrimmer.summary.json:md5,146fdeb92fb58a450aa03e0f474b4edd"
             ]
         ],
-        "timestamp": "2026-09-23T14:31:49.629301842",
+        "timestamp": "2026-09-24T09:00:08.575929342",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.0"
