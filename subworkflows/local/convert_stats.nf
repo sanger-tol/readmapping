@@ -29,7 +29,6 @@ workflow CONVERT_STATS {
 
 
     main:
-    ch_versions = channel.empty()
 
     // Split alignment_format parameter into a list
     def outfmt_options = params.alignment_format.split(',').collect { fmt -> fmt.trim() }
@@ -44,7 +43,6 @@ workflow CONVERT_STATS {
         }
 
         CRUMBLE ( crumble_selector.run_crumble, [], [] )
-        ch_versions = ch_versions.mix( CRUMBLE.out.versions )
 
         ch_bams_for_renaming = CRUMBLE.out.bam
         .mix( crumble_selector.no_crumble )
@@ -125,5 +123,4 @@ workflow CONVERT_STATS {
     stats    = SAMTOOLS_STATS.out.stats             // channel: [ val(meta), /path/to/stats ]
     flagstat = SAMTOOLS_FLAGSTAT.out.flagstat       // channel: [ val(meta), /path/to/flagstat ]
     idxstats = SAMTOOLS_IDXSTATS.out.idxstats       // channel: [ val(meta), /path/to/idxstats ]
-    versions = ch_versions                          // channel: [ versions.yml ]
 }
