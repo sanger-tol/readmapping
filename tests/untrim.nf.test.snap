@@ -8,7 +8,7 @@
                     "tabix": 1.24
                 },
                 "BLOBTK_DEPTH": {
-                    "blobtk": "0.7.1"
+                    "blobtk": "0.8.0"
                 },
                 "CONVERT_CRAM": {
                     "samtools": 1.24

@@ -13,7 +13,7 @@
                     "seqkit": "2.12.0"
                 },
                 "BLOBTK_DEPTH": {
-                    "blobtk": "0.7.1"
+                    "blobtk": "0.8.0"
                 },
                 "BWAMEM2_INDEX": {
                     "bwamem2": "2.2.1"

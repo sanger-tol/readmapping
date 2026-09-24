@@ -12,7 +12,7 @@
                     },
                     "blobtk/depth": {
                         "branch": "master",
-                        "git_sha": "f0ee15907fcece823c1cd5129902405d36108191",
+                        "git_sha": "afe7137ce04ae44c379341ae8223c65ea579c300",
                         "installed_by": ["modules"]
                     },
                     "bwamem2/index": {
