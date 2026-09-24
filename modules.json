@@ -17,7 +17,7 @@
                     },
                     "bwamem2/index": {
                         "branch": "master",
-                        "git_sha": "5dd46a36fca68d6ad1a6b22ec47adc8c6863717d",
+                        "git_sha": "8327445b5266b0df32212e5c27407546d100429f",
                         "installed_by": ["cram_map_illumina_hic"]
                     },
                     "crumble": {
@@ -37,7 +37,7 @@
                     },
                     "gunzip": {
                         "branch": "master",
-                        "git_sha": "96c57dfd98a0641886a67bd449fe33ee2ec0e374",
+                        "git_sha": "0902eac3012baaf4f9ab6513c8c55acc9353c96c",
                         "installed_by": ["modules"]
                     },
                     "hifitrimmer/processblast": {
@@ -72,7 +72,7 @@
                     },
                     "pigz/compress": {
                         "branch": "master",
-                        "git_sha": "c908ccaf0a5c802b6f8e814d8c5cf85da2364222",
+                        "git_sha": "0bd9da8d8d90e8740c12964f5bf70a61a61f2142",
                         "installed_by": ["modules"]
                     },
                     "samtools/addreplacerg": {
@@ -174,7 +174,7 @@
                     },
                     "cramalign/gencramchunks": {
                         "branch": "main",
-                        "git_sha": "d4ca71bc08dc21d68af38c147cbd972c8e25c3e0",
+                        "git_sha": "442b00f5d587b1f2a0112cec0e66dd7199b446d6",
                         "installed_by": ["cram_map_illumina_hic", "cram_map_long_reads"]
                     },
                     "cramalign/minimap2align": {
@@ -200,7 +200,7 @@
                     },
                     "mask/unmask": {
                         "branch": "main",
-                        "git_sha": "ace57f272f7fb447c21b881b4c9bba9ec4ef6656",
+                        "git_sha": "2e28234fb0e2970767dab28310c7eb553ad40081",
                         "installed_by": ["modules"]
                     },
                     "samtools/mergedup": {
@@ -236,7 +236,7 @@
                     },
                     "pacbio_preprocess": {
                         "branch": "main",
-                        "git_sha": "338bb85224cd73d71df5a9c2a436579b943a7657",
+                        "git_sha": "937bf2d22e930957256aacc56cfe5d23d7ac0cf9",
                         "installed_by": ["subworkflows"]
                     }
                 }
