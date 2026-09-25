@@ -41,11 +41,13 @@ include { methodsDescriptionText                            } from '../subworkfl
 workflow READMAPPING {
 
     take:
-    ch_samplesheet
+    ch_samplesheet // channel: samplesheet read in from --input
     ch_fasta
     ch_header
+    outdir
 
     main:
+
     // Initialize an empty versions channel
     ch_versions      = channel.empty()
     ch_multiqc_files = channel.empty()
@@ -127,7 +129,7 @@ workflow READMAPPING {
     def ch_collated_versions = softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
         .mix(topic_versions_string)
         .collectFile(
-            storeDir: "${params.outdir}/pipeline_info",
+            storeDir: "${outdir}/pipeline_info",
             name:  'readmapping_software_mqc_'  + 'versions.yml',
             sort: true,
             newLine: true
@@ -189,6 +191,7 @@ workflow READMAPPING {
         .map { _meta, report -> [report] }
         .toList() // channel: list of /path/to/multiqc reports (overall + per datatype)
     multiqc_publish = MULTIQC.out.data.mix(MULTIQC.out.plots, MULTIQC.out.report)
+    versions        = ch_versions                 // channel: [ path(versions.yml) ]
 }
 
 /*

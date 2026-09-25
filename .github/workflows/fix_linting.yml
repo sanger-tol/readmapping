@@ -12,10 +12,8 @@ jobs:
       github.repository == 'sanger-tol/readmapping'
     runs-on: ubuntu-latest
     steps:
-      # Use the @nf-core-bot token to check out so we can push later
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       # Use the @sanger-tolsoft token to check out so we can push later
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           token: ${{ secrets.sangertolsoft_access_token }}
 
