@@ -85,7 +85,11 @@ workflow CRAM_MAP_ILLUMINA_HIC {
 
     ch_readgroups = SAMTOOLS_SPLITHEADER.out.readgroup
         .map { meta, rg_file ->
-            [ meta, rg_file.readLines().collect { line -> line.replaceAll("\t", "\\\\t") } ]
+            // Add specimen/sample as SM to read group lines 
+            def sm = meta.specimen ?: meta.sample ?: meta.id
+            [ meta, rg_file.readLines().collect { line ->
+                ((line =~ /(?:^|\t)SM:[^\t]+/).find() ? line : "${line}\tSM:${sm}").replaceAll("\t", "\\\\t")
+            } ]
         }
 
     //
