@@ -226,7 +226,7 @@
                     "@PG\tID:lima.1\tVN:2.12.0 (commit v2.12.0)\tCL:lima m84093_241116_151316_s2.hifi_reads.bc2028.subset.bam pacbio_uli_adapter.fasta pacbio.SAMEA114784749.ERR14209104.bam -j 4 --hifi-preset SYMMETRIC\tPP:samtools",
                     "@PG\tID:hifi-trimmer\tPN:hifi-trimmer\tVN:5.0.1\tPP:lima.1\tCL:hifi-trimmer trim -t N -f cram -o pacbio.SAMEA114784749.ERR14209104.hifitrimmer.cram pacbio.SAMEA114784749.ERR14209104.rmdup.bam pacbio.SAMEA114784749.ERR14209104.hifitrimmer.bed.gz",
                     "@PG\tID:minimap2\tPN:minimap2\tVN:2.30-r1287\tCL:minimap2 -t N -ax map-hifi --cs=short -I1G -y -R @RG\\tID:0de7f0a4/0--0\\tSM:TOL_ASG14652249\\tLB:TRAC-2-8053\\tPU:m84093_241116_151316_s2\\tDS:READTYPE=CCS;Ipd:CodecV1=ip;PulseWidth:CodecV1=pw;BINDINGKIT=102-739-100;SEQUENCINGKIT=102-118-800;BASECALLERVERSION=5.0;SMRTCELLKIT=102-202-200;SMRTCELLID=EA138735;RUNID=r84093_20241115_102726;ICSVERSION=13.0.0.212033;MOVIELENGTH=1440.0;FRAMERATEHZ=100.000000;BarcodeFile=pacbio_uli_adapter.fasta;BarcodeHash=de9645f867bb5ebe1b8881c7a778817b;BarcodeCount=1;BarcodeMode=Symmetric;BarcodeQuality=Score\\tPL:PACBIO\\tPM:REVIO\\tBC:AAGCAGTGGTATCAACGCAGAGTACT GCA_964034985.1.subset.unmasked.mmi -\tPP:hifi-trimmer",
-                    "@PG\tID:samtools.1\tPN:samtools\tPP:minimap2\tVN:1.22.1\tCL:samtools sort -t N -T pacbio.SAMEA114784749.ERR14209104.hifitrimmer.cram.0.SAMEA114784749.ERR14209104_sort_tmp -o pacbio.SAMEA114784749.ERR14209104.hifitrimmer.cram.0.SAMEA114784749.ERR14209104.bam -",
+                    "@PG\tID:samtools.1\tPN:samtools\tPP:minimap2\tVN:1.22.1\tCL:samtools sort --write-index -l1 -t N -T pacbio.SAMEA114784749.ERR14209104.hifitrimmer.cram.0.SAMEA114784749.ERR14209104_sort_tmp -o pacbio.SAMEA114784749.ERR14209104.hifitrimmer.cram.0.SAMEA114784749.ERR14209104.bam -",
                     "@PG\tID:samtools.2\tPN:samtools\tPP:samtools.1\tVN:1.24\tCL:samtools merge --threads N -c -p --reference GCA_964034985.1.subset.unmasked.fa SAMEA114784749.ERR14209104.merge.bam 1/pacbio.SAMEA114784749.ERR14209104.hifitrimmer.cram.0.SAMEA114784749.ERR14209104.bam"
                 ],
                 "GCA_964034985.1.subset.pacbio.SAMEA114784749.ERR14209104_provided_adapter.minimap2.bam": [
@@ -244,7 +244,7 @@
                     "@PG\tID:lima.1\tVN:2.12.0 (commit v2.12.0)\tCL:lima m84093_241116_151316_s2.hifi_reads.bc2028.subset.bam pacbio_uli_adapter.fasta pacbio.SAMEA114784749.ERR14209104_provided_adapter.bam -j 4 --hifi-preset SYMMETRIC\tPP:samtools",
                     "@PG\tID:hifi-trimmer\tPN:hifi-trimmer\tVN:5.0.1\tPP:lima.1\tCL:hifi-trimmer trim -t N -f cram -o pacbio.SAMEA114784749.ERR14209104_provided_adapter.hifitrimmer.cram pacbio.SAMEA114784749.ERR14209104_provided_adapter.rmdup.bam pacbio.SAMEA114784749.ERR14209104_provided_adapter.hifitrimmer.bed.gz",
                     "@PG\tID:minimap2\tPN:minimap2\tVN:2.30-r1287\tCL:minimap2 -t N -ax map-hifi --cs=short -I1G -y -R @RG\\tID:0de7f0a4/0--0\\tSM:TOL_ASG14652249\\tLB:TRAC-2-8053\\tPU:m84093_241116_151316_s2\\tDS:READTYPE=CCS;Ipd:CodecV1=ip;PulseWidth:CodecV1=pw;BINDINGKIT=102-739-100;SEQUENCINGKIT=102-118-800;BASECALLERVERSION=5.0;SMRTCELLKIT=102-202-200;SMRTCELLID=EA138735;RUNID=r84093_20241115_102726;ICSVERSION=13.0.0.212033;MOVIELENGTH=1440.0;FRAMERATEHZ=100.000000;BarcodeFile=pacbio_uli_adapter.fasta;BarcodeHash=de9645f867bb5ebe1b8881c7a778817b;BarcodeCount=1;BarcodeMode=Symmetric;BarcodeQuality=Score\\tPL:PACBIO\\tPM:REVIO\\tBC:AAGCAGTGGTATCAACGCAGAGTACT GCA_964034985.1.subset.unmasked.mmi -\tPP:hifi-trimmer",
-                    "@PG\tID:samtools.1\tPN:samtools\tPP:minimap2\tVN:1.22.1\tCL:samtools sort -t N -T pacbio.SAMEA114784749.ERR14209104_provided_adapter.hifitrimmer.cram.0.SAMEA114784749.ERR14209104_provided_adapter_sort_tmp -o pacbio.SAMEA114784749.ERR14209104_provided_adapter.hifitrimmer.cram.0.SAMEA114784749.ERR14209104_provided_adapter.bam -",
+                    "@PG\tID:samtools.1\tPN:samtools\tPP:minimap2\tVN:1.22.1\tCL:samtools sort --write-index -l1 -t N -T pacbio.SAMEA114784749.ERR14209104_provided_adapter.hifitrimmer.cram.0.SAMEA114784749.ERR14209104_provided_adapter_sort_tmp -o pacbio.SAMEA114784749.ERR14209104_provided_adapter.hifitrimmer.cram.0.SAMEA114784749.ERR14209104_provided_adapter.bam -",
                     "@PG\tID:samtools.2\tPN:samtools\tPP:samtools.1\tVN:1.24\tCL:samtools merge --threads N -c -p --reference GCA_964034985.1.subset.unmasked.fa SAMEA114784749.ERR14209104_provided_adapter.merge.bam 1/pacbio.SAMEA114784749.ERR14209104_provided_adapter.hifitrimmer.cram.0.SAMEA114784749.ERR14209104_provided_adapter.bam"
                 ],
                 "GCA_964034985.1.subset.pacbio.SAMEA114784749.ERR14209104_test.minimap2.bam": [
@@ -261,7 +261,7 @@
                     "@PG\tID:samtools\tPN:samtools\tVN:1.21\tPP:lima\tCL:samtools view -s 42.008 -b m84093_241116_151316_s2.hifi_reads.bc2028.bam",
                     "@PG\tID:hifi-trimmer\tPN:hifi-trimmer\tVN:5.0.1\tPP:samtools\tCL:hifi-trimmer trim -t N -f cram -o pacbio.SAMEA114784749.ERR14209104_test.hifitrimmer.cram m84093_241116_151316_s2.hifi_reads.bc2028.subset.bam pacbio.SAMEA114784749.ERR14209104_test.hifitrimmer.bed.gz",
                     "@PG\tID:minimap2\tPN:minimap2\tVN:2.30-r1287\tCL:minimap2 -t N -ax map-hifi --cs=short -I1G -y -R @RG\\tID:0de7f0a4m84093_241116_151316_s2.barcodes.fasta;BarcodeHash=86d73e586a6d3ede0295785b51105eea;BarcodeCount=96;BarcodeMode=Symmetric;BarcodeQuality=Score\\tPL:PACBIO\\tPM:REVIO\\tBC:ACTGCAGCACGAGTAT GCA_964034985.1.subset.unmasked.mmi -\tPP:hifi-trimmer",
-                    "@PG\tID:samtools.1\tPN:samtools\tPP:minimap2\tVN:1.22.1\tCL:samtools sort -t N -T pacbio.SAMEA114784749.ERR14209104_test.hifitrimmer.cram.0.SAMEA114784749.ERR14209104_test_sort_tmp -o pacbio.SAMEA114784749.ERR14209104_test.hifitrimmer.cram.0.SAMEA114784749.ERR14209104_test.bam -",
+                    "@PG\tID:samtools.1\tPN:samtools\tPP:minimap2\tVN:1.22.1\tCL:samtools sort --write-index -l1 -t N -T pacbio.SAMEA114784749.ERR14209104_test.hifitrimmer.cram.0.SAMEA114784749.ERR14209104_test_sort_tmp -o pacbio.SAMEA114784749.ERR14209104_test.hifitrimmer.cram.0.SAMEA114784749.ERR14209104_test.bam -",
                     "@PG\tID:samtools.2\tPN:samtools\tPP:samtools.1\tVN:1.24\tCL:samtools merge --threads N -c -p --reference GCA_964034985.1.subset.unmasked.fa SAMEA114784749.ERR14209104_test.merge.bam 1/pacbio.SAMEA114784749.ERR14209104_test.hifitrimmer.cram.0.SAMEA114784749.ERR14209104_test.bam"
                 ]
             },
@@ -274,7 +274,7 @@
                 "pacbio.SAMEA114784749.ERR14209104_test.hifitrimmer.summary.json:md5,a0bb029ebd213c14bad17ac343db6cfb"
             ]
         ],
-        "timestamp": "2026-09-24T16:01:26.641049964",
+        "timestamp": "2026-09-26T09:50:11.390208589",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.0"

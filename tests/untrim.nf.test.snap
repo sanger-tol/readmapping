@@ -241,7 +241,7 @@
                     "@PG\tID:samtools.2\tPN:samtools\tPP:samtools.1\tVN:1.24\tCL:samtools view --threads N --reference GCA_922984935.2.subset.unmasked.fa --output-fmt cram -o SAMEA7524440.ERR6939248.cram m64094_200910_173211.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.subset.bam",
                     "@PG\tID:samtools.3\tPN:samtools\tPP:samtools.2\tVN:1.24\tCL:samtools addreplacerg --threads N -w -m overwrite_all -r @RG\\tID:61ddc6c35.0-8M\\tSM:SAMEA7524440 -o SAMEA7524440.ERR6939248_addRG.cram SAMEA7524440.ERR6939248.cram",
                     "@PG\tID:minimap2\tPN:minimap2\tVN:2.30-r1287\tCL:minimap2 -t N -ax map-hifi --cs=short -I1G -y -R @RG\\tID:61ddc6c35.0-8M\\tSM:SAMEA7524440 GCA_922984935.2.subset.unmasked.mmi -\tPP:samtools.3",
-                    "@PG\tID:samtools.4\tPN:samtools\tPP:minimap2\tVN:1.22.1\tCL:samtools sort -t N -T SAMEA7524440.ERR6939248_addRG.cram.0.SAMEA7524440.ERR6939248_sort_tmp -o SAMEA7524440.ERR6939248_addRG.cram.0.SAMEA7524440.ERR6939248.bam -",
+                    "@PG\tID:samtools.4\tPN:samtools\tPP:minimap2\tVN:1.22.1\tCL:samtools sort --write-index -l1 -t N -T SAMEA7524440.ERR6939248_addRG.cram.0.SAMEA7524440.ERR6939248_sort_tmp -o SAMEA7524440.ERR6939248_addRG.cram.0.SAMEA7524440.ERR6939248.bam -",
                     "@PG\tID:samtools.5\tPN:samtools\tPP:samtools.4\tVN:1.24\tCL:samtools merge --threads N -c -p --reference GCA_922984935.2.subset.unmasked.fa SAMEA7524440.ERR6939248.merge.bam 1/SAMEA7524440.ERR6939248_addRG.cram.0.SAMEA7524440.ERR6939248.bam",
                     "@PG\tID:samtools.6\tPN:samtools\tPP:samtools.5\tVN:1.24\tCL:samtools reheader temp.sorted.header.sam input/GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939248.minimap2.bam"
                 ],
@@ -266,7 +266,7 @@
                     "@PG\tID:samtools.2\tPN:samtools\tPP:samtools.1\tVN:1.24\tCL:samtools view --threads N --reference GCA_922984935.2.subset.unmasked.fa --output-fmt cram -o SAMEA7524440.ERR6939248.cram m64094_200910_173211.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.subset.bam",
                     "@PG\tID:samtools.3\tPN:samtools\tPP:samtools.2\tVN:1.24\tCL:samtools addreplacerg --threads N -w -m overwrite_all -r @RG\\tID:61ddc6c35.0-8M\\tSM:SAMEA7524440 -o SAMEA7524440.ERR6939248_addRG.cram SAMEA7524440.ERR6939248.cram",
                     "@PG\tID:minimap2\tPN:minimap2\tVN:2.30-r1287\tCL:minimap2 -t N -ax map-hifi --cs=short -I1G -y -R @RG\\tID:61ddc6c35.0-8M\\tSM:SAMEA7524440 GCA_922984935.2.subset.unmasked.mmi -\tPP:samtools.3",
-                    "@PG\tID:samtools.4\tPN:samtools\tPP:minimap2\tVN:1.22.1\tCL:samtools sort -t N -T SAMEA7524440.ERR6939248_addRG.cram.0.SAMEA7524440.ERR6939248_sort_tmp -o SAMEA7524440.ERR6939248_addRG.cram.0.SAMEA7524440.ERR6939248.bam -",
+                    "@PG\tID:samtools.4\tPN:samtools\tPP:minimap2\tVN:1.22.1\tCL:samtools sort --write-index -l1 -t N -T SAMEA7524440.ERR6939248_addRG.cram.0.SAMEA7524440.ERR6939248_sort_tmp -o SAMEA7524440.ERR6939248_addRG.cram.0.SAMEA7524440.ERR6939248.bam -",
                     "@PG\tID:samtools.5\tPN:samtools\tPP:samtools.4\tVN:1.24\tCL:samtools merge --threads N -c -p --reference GCA_922984935.2.subset.unmasked.fa SAMEA7524440.ERR6939248.merge.bam 1/SAMEA7524440.ERR6939248_addRG.cram.0.SAMEA7524440.ERR6939248.bam",
                     "@PG\tID:samtools.6\tPN:samtools\tPP:samtools.5\tVN:1.24\tCL:samtools merge --threads N -c -p SAMEA7524440.merged_1.merge.bam 1/SAMEA7524440.ERR6939248.merge.bam 2/SAMEA7524440.ERR6939249.merge.bam",
                     "@PG\tID:samtools.7\tPN:samtools\tPP:samtools.6\tVN:1.24\tCL:samtools reheader temp.sorted.header.sam input/GCA_922984935.2.subset.pacbio.SAMEA7524440.merged_1.minimap2.bam"
@@ -279,7 +279,7 @@
                 
             ]
         ],
-        "timestamp": "2026-09-24T15:13:16.086263089",
+        "timestamp": "2026-09-26T09:55:10.256053777",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.0"
