@@ -1,7 +1,7 @@
 {
     "-profile test_untrim": {
         "content": [
-            69,
+            72,
             {
                 "BGZIP_BEDGRAPH": {
                     "bgzip": 1.24,
@@ -224,11 +224,12 @@
                 "GCA_922984935.2.subset.ont.SAMEA7524440.PAE35587.minimap2.bam": [
                     "@HD\tVN:1.6\tSO:coordinate",
                     "@SQ\tSN:OV277441.1\tLN:7999920\tM5:0457acf8690429f1c98ee545cb8573b8\tUR:GCA_922984935.2.subset.fasta.gz\tAS:GCA_922984935.2\tAN:SUPER_1\tSP:Meles meles",
-                    "@RG\tID:PAE35587_pass_1f1f0707_115\tPL:ONT\tSM:SAMEA7524440",
-                    "@PG\tID:minimap2\tPN:minimap2\tVN:2.30-r1287\tCL:minimap2 -t N -ax map-ont -y -R @RG\\tID:PAE35587_pass_1f1f0707_115\\tPL:ONT\\tSM:SAMEA7524440 -I1G -a GCA_922984935.2.subset.unmasked.mmi -",
-                    "@PG\tID:samtools\tPN:samtools\tPP:minimap2\tVN:1.23.1\tCL:samtools sort -t N -o PAE35587_pass_1f1f0707_115.subset.fastq.gz.0.SAMEA7524440.PAE35587.bam -T PAE35587_pass_1f1f0707_115.subset.fastq.gz.0.SAMEA7524440.PAE35587_sort_tmp --write-index -l1 -",
-                    "@PG\tID:samtools.1\tPN:samtools\tPP:samtools\tVN:1.24\tCL:samtools merge --threads N -c -p --reference GCA_922984935.2.subset.unmasked.fa SAMEA7524440.PAE35587.merge.bam 1/PAE35587_pass_1f1f0707_115.subset.fastq.gz.0.SAMEA7524440.PAE35587.bam",
-                    "@PG\tID:samtools.2\tPN:samtools\tPP:samtools.1\tVN:1.24\tCL:samtools reheader temp.sorted.header.sam input/GCA_922984935.2.subset.ont.SAMEA7524440.PAE35587.minimap2.bam"
+                    "@RG\tID:PAE35587_pass_1f1f0707_115\tPL:ONT\tSM:mMelMel3",
+                    "@PG\tID:samtools\tPN:samtools\tVN:1.24\tCL:samtools import -r @RG ID:PAE35587_pass_1f1f0707_115 PL:ONT SM:mMelMel3 --output-fmt cram,version=3.0 -o PAE35587_pass_1f1f0707_115.subset.rg.cram PAE35587_pass_1f1f0707_115.subset.fastq.gz",
+                    "@PG\tID:minimap2\tPN:minimap2\tVN:2.30-r1287\tCL:minimap2 -t N -ax map-ont -I1G -y -R @RG\\tID:PAE35587_pass_1f1f0707_115\\tPL:ONT\\tSM:mMelMel3 GCA_922984935.2.subset.unmasked.mmi -\tPP:samtools",
+                    "@PG\tID:samtools.1\tPN:samtools\tPP:minimap2\tVN:1.22.1\tCL:samtools sort --write-index -l1 -t N -T PAE35587_pass_1f1f0707_115.subset.rg.cram.0.SAMEA7524440.PAE35587_sort_tmp -o PAE35587_pass_1f1f0707_115.subset.rg.cram.0.SAMEA7524440.PAE35587.bam -",
+                    "@PG\tID:samtools.2\tPN:samtools\tPP:samtools.1\tVN:1.24\tCL:samtools merge --threads N -c -p --reference GCA_922984935.2.subset.unmasked.fa SAMEA7524440.PAE35587.merge.bam 1/PAE35587_pass_1f1f0707_115.subset.rg.cram.0.SAMEA7524440.PAE35587.bam",
+                    "@PG\tID:samtools.3\tPN:samtools\tPP:samtools.2\tVN:1.24\tCL:samtools reheader temp.sorted.header.sam input/GCA_922984935.2.subset.ont.SAMEA7524440.PAE35587.minimap2.bam"
                 ],
                 "GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939248.minimap2.bam": [
                     "@HD\tVN:1.6\tSO:coordinate",
@@ -279,7 +280,7 @@
                 
             ]
         ],
-        "timestamp": "2026-09-25T15:30:22.145191529",
+        "timestamp": "2026-09-25T13:59:27.341358237",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.0"

@@ -46,6 +46,7 @@ workflow ALIGN_LONG {
     ch_reads_by_datatype = reads.branch { meta, read_files ->
         pacbio:           meta.datatype == 'pacbio'
         non_pacbio_bam:   read_files.name.endsWith('.bam')  // ONT / PacBio CLR BAM
+        non_pacbio_cram:  read_files.name.endsWith('.cram') // ONT / PacBio CLR CRAM
         non_pacbio_fastx: true                              // ONT / PacBio CLR FASTQ
     }
 
@@ -128,6 +129,7 @@ workflow ALIGN_LONG {
         [[], []], [[], []], ''
     )
     ch_reads_cram = CONVERT_CRAM.out.cram.mix(trimmed_cram)
+        .mix(ch_reads_by_datatype.non_pacbio_cram)
 
     SAMTOOLS_SPLITHEADER(ch_reads_cram)
     ch_cram_rg = SAMTOOLS_SPLITHEADER.out.readgroup
