@@ -120,6 +120,7 @@ nextflow_workflow {
                 """
                 input[0] = channel.of(
                     [ [ id:'standard_bam' ], file(params.modules_testdata_base_path + 'Acropora_cervicornis/genomic_data/m84093_241116_151316_s2.hifi_reads.bc2028.subset.bam', checkIfExists: true), [], false, file(params.modules_testdata_base_path + 'resources/modules/pacbio_preprocess/HiFi_adapter.yaml', checkIfExists: true) ],
+                    [ [ id:'standard_cram' ], file(params.modules_testdata_base_path + 'Acropora_cervicornis/genomic_data/m84093_241116_151316_s2.hifi_reads.bc2028.subset.cram', checkIfExists: true), [], false, file(params.modules_testdata_base_path + 'resources/modules/pacbio_preprocess/HiFi_adapter.yaml', checkIfExists: true) ],
                     [ [ id:'standard_fastq' ], file(params.modules_testdata_base_path + 'Acropora_cervicornis/genomic_data/m84093_241116_151316_s2.hifi_reads.bc2028.subset.fastq', checkIfExists: true), [], false, file(params.modules_testdata_base_path + 'resources/modules/pacbio_preprocess/HiFi_adapter.yaml', checkIfExists: true) ],
                     [ [ id:'standard_fasta' ], file(params.modules_testdata_base_path + 'Acropora_cervicornis/genomic_data/m84093_241116_151316_s2.hifi_reads.bc2028.subset.fasta', checkIfExists: true), [], false, file(params.modules_testdata_base_path + 'resources/modules/pacbio_preprocess/HiFi_adapter.yaml', checkIfExists: true) ],
                     [ [ id:'uli_bam' ], file(params.modules_testdata_base_path + 'Acropora_cervicornis/genomic_data/m84093_241116_151316_s2.hifi_reads.bc2028.subset.bam', checkIfExists: true), file(params.modules_testdata_base_path + 'resources/modules/pacbio_preprocess/pacbio_uli_adapter.fasta', checkIfExists: true), true, file(params.modules_testdata_base_path + 'resources/modules/pacbio_preprocess/HiFi_adapter.yaml', checkIfExists: true) ],
@@ -148,8 +149,11 @@ nextflow_workflow {
                 { assert workflow.out.pbmarkdup_stats.size() == 5 },
                 { assert workflow.out.untrimmed_bam.size() == 5 },
                 { assert workflow.out.untrimmed_bam.collect { meta, _reads -> meta.id }.contains('uli_bam_untrim') },
+                { assert workflow.out.untrimmed_cram.size() == 1 },
+                { assert workflow.out.untrimmed_cram.collect { meta, _reads -> meta.id }.contains('standard_cram') },
                 { assert workflow.out.untrimmed_fastx.size() == 3 },
                 { assert workflow.out.untrimmed_bam.every { _meta, reads -> reads.size() > 0 } },
+                { assert workflow.out.untrimmed_cram.every { _meta, reads -> reads.size() > 0 } },
                 { assert workflow.out.untrimmed_fastx.every { _meta, reads -> reads.size() > 0 } },
                 {
                     assert snapshot(

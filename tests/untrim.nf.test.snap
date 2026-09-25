@@ -1,7 +1,7 @@
 {
     "-profile test_untrim": {
         "content": [
-            72,
+            71,
             {
                 "BGZIP_BEDGRAPH": {
                     "bgzip": 1.24,
@@ -9,9 +9,6 @@
                 },
                 "BLOBTK_DEPTH": {
                     "blobtk": "0.8.0"
-                },
-                "CONVERT_CRAM": {
-                    "samtools": 1.24
                 },
                 "CRAMALIGN_GENCRAMCHUNKS": {
                     "cramchunks": "1.1.0"
@@ -239,7 +236,7 @@
                     "@PG\tID:lima\tVN:1.11.0 (commit v1.11.0)\tCL:lima -j 8 --split-bam-named --same --peek-guess --guess-min-count 1000 --ccs m64094_200910_173211.ccs.bam Sequel_16_Barcodes_v3.fasta lima/m64094_200910_173211.ccs.bam",
                     "@PG\tID:samtools\tPN:samtools\tVN:1.10\tPP:ccs-4.2.0\tCL:samtools merge -t N -ncp -b m64094_200910_173211.chunks.fofn m64094_200910_173211.ccs.bam",
                     "@PG\tID:samtools.1\tPN:samtools\tPP:samtools\tVN:1.19.2\tCL:samtools view -b -h -N READS -o x.bam m64094_200910_173211.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.bam",
-                    "@PG\tID:samtools.2\tPN:samtools\tPP:samtools.1\tVN:1.24\tCL:samtools view --threads N --reference GCA_922984935.2.subset.unmasked.fa --output-fmt cram -o m64094_200910_173211.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.subset.cram m64094_200910_173211.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.subset.bam",
+                    "@PG\tID:samtools.2\tPN:samtools\tPP:samtools.1\tVN:1.24\tCL:samtools view --output-fmt cram,version=3.0 -o m64094_200910_173211.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.subset.cram m64094_200910_173211.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.subset.bam",
                     "@PG\tID:samtools.3\tPN:samtools\tPP:samtools.2\tVN:1.24\tCL:samtools addreplacerg --threads N -w -m overwrite_all -r @RG\\tID:61ddc6c35.0-8M\\tSM:SAMEA7524440 -o m64094_200910_173211.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.subset_addRG.cram m64094_200910_173211.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.subset.cram",
                     "@PG\tID:minimap2\tPN:minimap2\tVN:2.30-r1287\tCL:minimap2 -t N -ax map-hifi --cs=short -I1G -y -R @RG\\tID:61ddc6c35.0-8M\\tSM:SAMEA7524440 GCA_922984935.2.subset.unmasked.mmi -\tPP:samtools.3",
                     "@PG\tID:samtools.4\tPN:samtools\tPP:minimap2\tVN:1.22.1\tCL:samtools sort --write-index -l1 -t N -T m64094_200910_173211.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.subset_addRG.cram.0.SAMEA7524440.ERR6939248_sort_tmp -o m64094_200910_173211.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.subset_addRG.cram.0.SAMEA7524440.ERR6939248.bam -",
@@ -264,7 +261,7 @@
                     "@PG\tID:lima\tVN:1.11.0 (commit v1.11.0)\tCL:lima -j 8 --split-bam-named --same --peek-guess --guess-min-count 1000 --ccs m64094_200910_173211.ccs.bam Sequel_16_Barcodes_v3.fasta lima/m64094_200910_173211.ccs.bam",
                     "@PG\tID:samtools\tPN:samtools\tVN:1.10\tPP:ccs-4.2.0\tCL:samtools merge -t N -ncp -b m64094_200910_173211.chunks.fofn m64094_200910_173211.ccs.bam",
                     "@PG\tID:samtools.1\tPN:samtools\tPP:samtools\tVN:1.19.2\tCL:samtools view -b -h -N READS -o x.bam m64094_200910_173211.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.bam",
-                    "@PG\tID:samtools.2\tPN:samtools\tPP:samtools.1\tVN:1.24\tCL:samtools view --threads N --reference GCA_922984935.2.subset.unmasked.fa --output-fmt cram -o m64094_200910_173211.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.subset.cram m64094_200910_173211.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.subset.bam",
+                    "@PG\tID:samtools.2\tPN:samtools\tPP:samtools.1\tVN:1.24\tCL:samtools view --output-fmt cram,version=3.0 -o m64094_200910_173211.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.subset.cram m64094_200910_173211.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.subset.bam",
                     "@PG\tID:samtools.3\tPN:samtools\tPP:samtools.2\tVN:1.24\tCL:samtools addreplacerg --threads N -w -m overwrite_all -r @RG\\tID:61ddc6c35.0-8M\\tSM:SAMEA7524440 -o m64094_200910_173211.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.subset_addRG.cram m64094_200910_173211.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.subset.cram",
                     "@PG\tID:minimap2\tPN:minimap2\tVN:2.30-r1287\tCL:minimap2 -t N -ax map-hifi --cs=short -I1G -y -R @RG\\tID:61ddc6c35.0-8M\\tSM:SAMEA7524440 GCA_922984935.2.subset.unmasked.mmi -\tPP:samtools.3",
                     "@PG\tID:samtools.4\tPN:samtools\tPP:minimap2\tVN:1.22.1\tCL:samtools sort --write-index -l1 -t N -T m64094_200910_173211.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.subset_addRG.cram.0.SAMEA7524440.ERR6939248_sort_tmp -o m64094_200910_173211.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.subset_addRG.cram.0.SAMEA7524440.ERR6939248.bam -",
@@ -280,7 +277,7 @@
                 
             ]
         ],
-        "timestamp": "2026-09-25T13:59:27.341358237",
+        "timestamp": "2026-09-25T16:46:04.756591699",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.0"

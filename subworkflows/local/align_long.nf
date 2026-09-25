@@ -96,8 +96,9 @@ workflow ALIGN_LONG {
     //
     // Aggregate preprocessing outputs
     //
-    trimmed_cram  = PACBIO_PREPROCESS.out.trimmed_cram
-    untrimmed_bam = PACBIO_PREPROCESS.out.untrimmed_bam  // includes ULI/PiMmS/Ampli-Fi via untrimmed_bam emit
+    trimmed_cram   = PACBIO_PREPROCESS.out.trimmed_cram
+    untrimmed_cram = PACBIO_PREPROCESS.out.untrimmed_cram
+    untrimmed_bam  = PACBIO_PREPROCESS.out.untrimmed_bam  // includes ULI/PiMmS/Ampli-Fi via untrimmed_bam emit
 
     bam_to_cram = untrimmed_bam.mix(ch_reads_by_datatype.non_pacbio_bam)
     fastx       = PACBIO_PREPROCESS.out.untrimmed_fastx
@@ -129,6 +130,7 @@ workflow ALIGN_LONG {
         [[], []], [[], []], ''
     )
     ch_reads_cram = CONVERT_CRAM.out.cram.mix(trimmed_cram)
+        .mix(untrimmed_cram)
         .mix(ch_reads_by_datatype.non_pacbio_cram)
 
     SAMTOOLS_SPLITHEADER(ch_reads_cram)

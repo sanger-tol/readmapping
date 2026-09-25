@@ -124,6 +124,8 @@ workflow PACBIO_PREPROCESS {
         .branch { meta, reads ->
             bam: reads.name.endsWith('.bam')
                 return [ meta, reads ]
+            cram: reads.name.endsWith('.cram')
+                return [ meta, reads ]
             fastx: true
                 return [ meta, reads ]
         }
@@ -131,6 +133,7 @@ workflow PACBIO_PREPROCESS {
     emit:
     untrimmed_fastx     = ch_input_skip_trim_branch.fastx   // [meta, fastx] untrimmed reads in FASTA/FASTQ format
     untrimmed_bam       = ch_input_skip_trim_branch.bam     // [meta, bam] untrimmed reads in BAM format
+    untrimmed_cram      = ch_input_skip_trim_branch.cram    // [meta, bam] untrimmed reads in CRAM format
     trimmed_cram        = trimmed_cram                      // [meta, CRAM] preprocessed reads in CRAM format
     trimmed_bam         = trimmed_bam                       // [meta, BAM] preprocessed reads in BAM format
     trimmed_sam         = trimmed_sam                       // [meta, SAM] preprocessed reads in SAM format
