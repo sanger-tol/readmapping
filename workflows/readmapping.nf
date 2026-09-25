@@ -101,7 +101,6 @@ workflow READMAPPING {
 
     // convert to cram and gather stats
     CONVERT_STATS ( ch_aligned_bams, INPUT_CHECK.out.fasta, ch_header )
-    ch_versions = ch_versions.mix ( CONVERT_STATS.out.versions )
     reports = reports.mix ( CONVERT_STATS.out.stats )
                      .mix ( CONVERT_STATS.out.flagstat )
                      .mix ( CONVERT_STATS.out.idxstats )

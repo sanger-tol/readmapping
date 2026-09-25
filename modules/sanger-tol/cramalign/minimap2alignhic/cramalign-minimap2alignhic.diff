@@ -1,5 +1,4 @@
 Changes in component 'sanger-tol/cramalign/minimap2alignhic'
-'modules/sanger-tol/cramalign/minimap2alignhic/environment.yml' is unchanged
 'modules/sanger-tol/cramalign/minimap2alignhic/meta.yml' is unchanged
 Changes in 'cramalign/minimap2alignhic/main.nf':
 --- modules/sanger-tol/cramalign/minimap2alignhic/main.nf
@@ -36,8 +35,9 @@ Changes in 'cramalign/minimap2alignhic/main.nf':
          samtools view -h ${args5} |\\
          samtools sort ${args6} -@${task.cpus} -T ${prefix}_tmp -o ${prefix}.bam -
 
-'modules/sanger-tol/cramalign/minimap2alignhic/tests/nextflow.config' is unchanged
+'modules/sanger-tol/cramalign/minimap2alignhic/environment.yml' is unchanged
 'modules/sanger-tol/cramalign/minimap2alignhic/tests/main.nf.test' is unchanged
+'modules/sanger-tol/cramalign/minimap2alignhic/tests/nextflow.config' is unchanged
 'modules/sanger-tol/cramalign/minimap2alignhic/tests/main.nf.test.snap' is unchanged
 'modules/sanger-tol/cramalign/minimap2alignhic/resources/usr/bin/filter_five_end.pl' is unchanged
 'modules/sanger-tol/cramalign/minimap2alignhic/resources/usr/bin/insert_cram_pg_header.awk' is unchanged

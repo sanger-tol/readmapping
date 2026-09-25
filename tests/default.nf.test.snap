@@ -1,10 +1,11 @@
 {
     "-profile test": {
         "content": [
-            181,
+            182,
             {
                 "BGZIP_BEDGRAPH": {
-                    "samtools": "1.23.1"
+                    "bgzip": 1.24,
+                    "tabix": 1.24
                 },
                 "BLAST_BLASTN": {
                     "blastn": "2.17.0+",
@@ -12,13 +13,13 @@
                     "seqkit": "2.12.0"
                 },
                 "BLOBTK_DEPTH": {
-                    "blobtk": "0.7.1"
+                    "blobtk": "0.8.0"
                 },
                 "BWAMEM2_INDEX": {
                     "bwamem2": "2.2.1"
                 },
                 "CONVERT_CRAM": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.24
                 },
                 "CRAMALIGN_BWAMEM2ALIGNHIC": {
                     "bwamem2": "2.2.1",
@@ -46,7 +47,7 @@
                     "slice_fasta.py": "1.0.0"
                 },
                 "GAWK_MODIFY_YAML_BARCODE": {
-                    "gawk": "5.3.0"
+                    "gawk": "5.3.1"
                 },
                 "GUNZIP": {
                     "gunzip": 1.13
@@ -68,40 +69,40 @@
                     "minimap2": "2.30-r1287"
                 },
                 "SAMTOOLS_ADDREPLACERG": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.24
                 },
                 "SAMTOOLS_CRAM": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.24
                 },
                 "SAMTOOLS_FAIDX": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.24
                 },
                 "SAMTOOLS_FLAGSTAT": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.24
                 },
                 "SAMTOOLS_IDXSTATS": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.24
                 },
                 "SAMTOOLS_INDEX": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.24
                 },
                 "SAMTOOLS_INDEX_CRAM": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.24
                 },
                 "SAMTOOLS_MERGE": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.24
                 },
                 "SAMTOOLS_MERGEDUP": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.24
                 },
                 "SAMTOOLS_REHEADER_CRAM": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.24
                 },
                 "SAMTOOLS_SPLITHEADER": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.24
                 },
                 "SAMTOOLS_STATS": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.24
                 },
                 "UNTAR": {
                     "untar": 1.34
@@ -119,6 +120,9 @@
                 "read_mapping/hic/SAMEA7524440",
                 "read_mapping/hic/SAMEA7524440/ERR6688402",
                 "read_mapping/hic/SAMEA7524440/ERR6688402/GCA_922984935.2.subset.hic.SAMEA7524440.ERR6688402.bwamem2.coverage.1k.bedGraph.gz",
+                "read_mapping/hic/SAMEA7524440/ERR6688402/GCA_922984935.2.subset.hic.SAMEA7524440.ERR6688402.bwamem2.coverage.1k.bedGraph.gz.csi",
+                "read_mapping/hic/SAMEA7524440/ERR6688402/GCA_922984935.2.subset.hic.SAMEA7524440.ERR6688402.bwamem2.coverage.1k.bedGraph.gz.gzi",
+                "read_mapping/hic/SAMEA7524440/ERR6688402/GCA_922984935.2.subset.hic.SAMEA7524440.ERR6688402.bwamem2.coverage.1k.bedGraph.gz.tbi",
                 "read_mapping/hic/SAMEA7524440/ERR6688402/GCA_922984935.2.subset.hic.SAMEA7524440.ERR6688402.bwamem2.cram",
                 "read_mapping/hic/SAMEA7524440/ERR6688402/GCA_922984935.2.subset.hic.SAMEA7524440.ERR6688402.bwamem2.cram.crai",
                 "read_mapping/hic/SAMEA7524440/ERR6688402/qc",
@@ -133,6 +137,9 @@
                 "read_mapping/illumina/SAMEA7524438",
                 "read_mapping/illumina/SAMEA7524438/ERR6688599",
                 "read_mapping/illumina/SAMEA7524438/ERR6688599/GCA_922984935.2.subset.illumina.SAMEA7524438.ERR6688599.bwamem2.coverage.1k.bedGraph.gz",
+                "read_mapping/illumina/SAMEA7524438/ERR6688599/GCA_922984935.2.subset.illumina.SAMEA7524438.ERR6688599.bwamem2.coverage.1k.bedGraph.gz.csi",
+                "read_mapping/illumina/SAMEA7524438/ERR6688599/GCA_922984935.2.subset.illumina.SAMEA7524438.ERR6688599.bwamem2.coverage.1k.bedGraph.gz.gzi",
+                "read_mapping/illumina/SAMEA7524438/ERR6688599/GCA_922984935.2.subset.illumina.SAMEA7524438.ERR6688599.bwamem2.coverage.1k.bedGraph.gz.tbi",
                 "read_mapping/illumina/SAMEA7524438/ERR6688599/GCA_922984935.2.subset.illumina.SAMEA7524438.ERR6688599.bwamem2.cram",
                 "read_mapping/illumina/SAMEA7524438/ERR6688599/GCA_922984935.2.subset.illumina.SAMEA7524438.ERR6688599.bwamem2.cram.crai",
                 "read_mapping/illumina/SAMEA7524438/ERR6688599/qc",
@@ -145,6 +152,9 @@
                 "read_mapping/illumina/SAMEA7524439",
                 "read_mapping/illumina/SAMEA7524439/ERR6688600",
                 "read_mapping/illumina/SAMEA7524439/ERR6688600/GCA_922984935.2.subset.illumina.SAMEA7524439.ERR6688600.bwamem2.coverage.1k.bedGraph.gz",
+                "read_mapping/illumina/SAMEA7524439/ERR6688600/GCA_922984935.2.subset.illumina.SAMEA7524439.ERR6688600.bwamem2.coverage.1k.bedGraph.gz.csi",
+                "read_mapping/illumina/SAMEA7524439/ERR6688600/GCA_922984935.2.subset.illumina.SAMEA7524439.ERR6688600.bwamem2.coverage.1k.bedGraph.gz.gzi",
+                "read_mapping/illumina/SAMEA7524439/ERR6688600/GCA_922984935.2.subset.illumina.SAMEA7524439.ERR6688600.bwamem2.coverage.1k.bedGraph.gz.tbi",
                 "read_mapping/illumina/SAMEA7524439/ERR6688600/GCA_922984935.2.subset.illumina.SAMEA7524439.ERR6688600.bwamem2.cram",
                 "read_mapping/illumina/SAMEA7524439/ERR6688600/GCA_922984935.2.subset.illumina.SAMEA7524439.ERR6688600.bwamem2.cram.crai",
                 "read_mapping/illumina/SAMEA7524439/ERR6688600/qc",
@@ -159,6 +169,9 @@
                 "read_mapping/ont/SAMEA7524440",
                 "read_mapping/ont/SAMEA7524440/PAE35587",
                 "read_mapping/ont/SAMEA7524440/PAE35587/GCA_922984935.2.subset.ont.SAMEA7524440.PAE35587.minimap2.coverage.1k.bedGraph.gz",
+                "read_mapping/ont/SAMEA7524440/PAE35587/GCA_922984935.2.subset.ont.SAMEA7524440.PAE35587.minimap2.coverage.1k.bedGraph.gz.csi",
+                "read_mapping/ont/SAMEA7524440/PAE35587/GCA_922984935.2.subset.ont.SAMEA7524440.PAE35587.minimap2.coverage.1k.bedGraph.gz.gzi",
+                "read_mapping/ont/SAMEA7524440/PAE35587/GCA_922984935.2.subset.ont.SAMEA7524440.PAE35587.minimap2.coverage.1k.bedGraph.gz.tbi",
                 "read_mapping/ont/SAMEA7524440/PAE35587/GCA_922984935.2.subset.ont.SAMEA7524440.PAE35587.minimap2.cram",
                 "read_mapping/ont/SAMEA7524440/PAE35587/GCA_922984935.2.subset.ont.SAMEA7524440.PAE35587.minimap2.cram.crai",
                 "read_mapping/ont/SAMEA7524440/PAE35587/qc",
@@ -170,6 +183,9 @@
                 "read_mapping/ont/SAMEA7524440/PAE35587/stats/GCA_922984935.2.subset.ont.SAMEA7524440.PAE35587.minimap2.stats.gz",
                 "read_mapping/ont/SAMEA7524440/PAE35587_test",
                 "read_mapping/ont/SAMEA7524440/PAE35587_test/GCA_922984935.2.subset.ont.SAMEA7524440.PAE35587_test.minimap2.coverage.1k.bedGraph.gz",
+                "read_mapping/ont/SAMEA7524440/PAE35587_test/GCA_922984935.2.subset.ont.SAMEA7524440.PAE35587_test.minimap2.coverage.1k.bedGraph.gz.csi",
+                "read_mapping/ont/SAMEA7524440/PAE35587_test/GCA_922984935.2.subset.ont.SAMEA7524440.PAE35587_test.minimap2.coverage.1k.bedGraph.gz.gzi",
+                "read_mapping/ont/SAMEA7524440/PAE35587_test/GCA_922984935.2.subset.ont.SAMEA7524440.PAE35587_test.minimap2.coverage.1k.bedGraph.gz.tbi",
                 "read_mapping/ont/SAMEA7524440/PAE35587_test/GCA_922984935.2.subset.ont.SAMEA7524440.PAE35587_test.minimap2.cram",
                 "read_mapping/ont/SAMEA7524440/PAE35587_test/GCA_922984935.2.subset.ont.SAMEA7524440.PAE35587_test.minimap2.cram.crai",
                 "read_mapping/ont/SAMEA7524440/PAE35587_test/qc",
@@ -181,6 +197,9 @@
                 "read_mapping/ont/SAMEA7524440/PAE35587_test/stats/GCA_922984935.2.subset.ont.SAMEA7524440.PAE35587_test.minimap2.stats.gz",
                 "read_mapping/ont/SAMEA7524440/merged_1",
                 "read_mapping/ont/SAMEA7524440/merged_1/GCA_922984935.2.subset.ont.SAMEA7524440.merged_1.minimap2.coverage.1k.bedGraph.gz",
+                "read_mapping/ont/SAMEA7524440/merged_1/GCA_922984935.2.subset.ont.SAMEA7524440.merged_1.minimap2.coverage.1k.bedGraph.gz.csi",
+                "read_mapping/ont/SAMEA7524440/merged_1/GCA_922984935.2.subset.ont.SAMEA7524440.merged_1.minimap2.coverage.1k.bedGraph.gz.gzi",
+                "read_mapping/ont/SAMEA7524440/merged_1/GCA_922984935.2.subset.ont.SAMEA7524440.merged_1.minimap2.coverage.1k.bedGraph.gz.tbi",
                 "read_mapping/ont/SAMEA7524440/merged_1/GCA_922984935.2.subset.ont.SAMEA7524440.merged_1.minimap2.cram",
                 "read_mapping/ont/SAMEA7524440/merged_1/GCA_922984935.2.subset.ont.SAMEA7524440.merged_1.minimap2.cram.crai",
                 "read_mapping/ont/SAMEA7524440/merged_1/SOURCE.txt",
@@ -193,6 +212,9 @@
                 "read_mapping/pacbio/SAMEA7524440",
                 "read_mapping/pacbio/SAMEA7524440/ERR6939248",
                 "read_mapping/pacbio/SAMEA7524440/ERR6939248/GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939248.minimap2.coverage.1k.bedGraph.gz",
+                "read_mapping/pacbio/SAMEA7524440/ERR6939248/GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939248.minimap2.coverage.1k.bedGraph.gz.csi",
+                "read_mapping/pacbio/SAMEA7524440/ERR6939248/GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939248.minimap2.coverage.1k.bedGraph.gz.gzi",
+                "read_mapping/pacbio/SAMEA7524440/ERR6939248/GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939248.minimap2.coverage.1k.bedGraph.gz.tbi",
                 "read_mapping/pacbio/SAMEA7524440/ERR6939248/GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939248.minimap2.cram",
                 "read_mapping/pacbio/SAMEA7524440/ERR6939248/GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939248.minimap2.cram.crai",
                 "read_mapping/pacbio/SAMEA7524440/ERR6939248/qc",
@@ -206,6 +228,9 @@
                 "read_mapping/pacbio/SAMEA7524440/ERR6939248/stats/GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939248.minimap2.stats.gz",
                 "read_mapping/pacbio/SAMEA7524440/ERR6939249",
                 "read_mapping/pacbio/SAMEA7524440/ERR6939249/GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939249.minimap2.coverage.1k.bedGraph.gz",
+                "read_mapping/pacbio/SAMEA7524440/ERR6939249/GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939249.minimap2.coverage.1k.bedGraph.gz.csi",
+                "read_mapping/pacbio/SAMEA7524440/ERR6939249/GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939249.minimap2.coverage.1k.bedGraph.gz.gzi",
+                "read_mapping/pacbio/SAMEA7524440/ERR6939249/GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939249.minimap2.coverage.1k.bedGraph.gz.tbi",
                 "read_mapping/pacbio/SAMEA7524440/ERR6939249/GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939249.minimap2.cram",
                 "read_mapping/pacbio/SAMEA7524440/ERR6939249/GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939249.minimap2.cram.crai",
                 "read_mapping/pacbio/SAMEA7524440/ERR6939249/qc",
@@ -219,6 +244,9 @@
                 "read_mapping/pacbio/SAMEA7524440/ERR6939249/stats/GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939249.minimap2.stats.gz",
                 "read_mapping/pacbio/SAMEA7524440/merged_1",
                 "read_mapping/pacbio/SAMEA7524440/merged_1/GCA_922984935.2.subset.pacbio.SAMEA7524440.merged_1.minimap2.coverage.1k.bedGraph.gz",
+                "read_mapping/pacbio/SAMEA7524440/merged_1/GCA_922984935.2.subset.pacbio.SAMEA7524440.merged_1.minimap2.coverage.1k.bedGraph.gz.csi",
+                "read_mapping/pacbio/SAMEA7524440/merged_1/GCA_922984935.2.subset.pacbio.SAMEA7524440.merged_1.minimap2.coverage.1k.bedGraph.gz.gzi",
+                "read_mapping/pacbio/SAMEA7524440/merged_1/GCA_922984935.2.subset.pacbio.SAMEA7524440.merged_1.minimap2.coverage.1k.bedGraph.gz.tbi",
                 "read_mapping/pacbio/SAMEA7524440/merged_1/GCA_922984935.2.subset.pacbio.SAMEA7524440.merged_1.minimap2.cram",
                 "read_mapping/pacbio/SAMEA7524440/merged_1/GCA_922984935.2.subset.pacbio.SAMEA7524440.merged_1.minimap2.cram.crai",
                 "read_mapping/pacbio/SAMEA7524440/merged_1/SOURCE.txt",
@@ -230,45 +258,63 @@
             ],
             [
                 "GCA_922984935.2.subset.hic.SAMEA7524440.ERR6688402.bwamem2.coverage.1k.bedGraph.gz:md5,f9372384d1d4a3eee9b9757ce332d642",
+                "GCA_922984935.2.subset.hic.SAMEA7524440.ERR6688402.bwamem2.coverage.1k.bedGraph.gz.gzi:md5,7da5ed389293e8c314daaffe80540fd6",
+                "GCA_922984935.2.subset.hic.SAMEA7524440.ERR6688402.bwamem2.coverage.1k.bedGraph.gz.tbi:md5,03e0abf1312464dec3af574b5940328b",
                 "GCA_922984935.2.subset.hic.SAMEA7524440.ERR6688402.bwamem2.flagstat:md5,377a62d8b94ca72e11c23312853c2f45",
                 "GCA_922984935.2.subset.hic.SAMEA7524440.ERR6688402.bwamem2.idxstats:md5,a8753bcb649b5e04f1eb818ee10a379d",
-                "GCA_922984935.2.subset.hic.SAMEA7524440.ERR6688402.bwamem2.stats.gz:md5,e6dcfc22db45501185aa4634427b3ed8",
+                "GCA_922984935.2.subset.hic.SAMEA7524440.ERR6688402.bwamem2.stats.gz:md5,45f4754d378261a3da8f67cf30dc0d6d",
                 "GCA_922984935.2.subset.illumina.SAMEA7524438.ERR6688599.bwamem2.coverage.1k.bedGraph.gz:md5,49bf216b8c4a6d2c71a18ec48ccceecd",
+                "GCA_922984935.2.subset.illumina.SAMEA7524438.ERR6688599.bwamem2.coverage.1k.bedGraph.gz.gzi:md5,dea89bd71e8c9b1163fa2f89f05101f7",
+                "GCA_922984935.2.subset.illumina.SAMEA7524438.ERR6688599.bwamem2.coverage.1k.bedGraph.gz.tbi:md5,2e4f8c36b8ca8ed8eb8e08744e0d2bea",
                 "GCA_922984935.2.subset.illumina.SAMEA7524438.ERR6688599.bwamem2.flagstat:md5,7e9067f135ec24e6f006fa1c1f35d824",
                 "GCA_922984935.2.subset.illumina.SAMEA7524438.ERR6688599.bwamem2.idxstats:md5,fe722c89224d50b23f09b151f5f3ed71",
-                "GCA_922984935.2.subset.illumina.SAMEA7524438.ERR6688599.bwamem2.stats.gz:md5,1c8c841c80f743fbd200e112a64d8e8a",
+                "GCA_922984935.2.subset.illumina.SAMEA7524438.ERR6688599.bwamem2.stats.gz:md5,c58a3dc435f93ec8bda6e9066cb73d34",
                 "GCA_922984935.2.subset.illumina.SAMEA7524439.ERR6688600.bwamem2.coverage.1k.bedGraph.gz:md5,4451897978546df6c70bba890b7d11ad",
+                "GCA_922984935.2.subset.illumina.SAMEA7524439.ERR6688600.bwamem2.coverage.1k.bedGraph.gz.gzi:md5,67b85c71eeea30eab1fcd738b28cd26e",
+                "GCA_922984935.2.subset.illumina.SAMEA7524439.ERR6688600.bwamem2.coverage.1k.bedGraph.gz.tbi:md5,c4ec3dc148a357a7dd0fad86753c2551",
                 "GCA_922984935.2.subset.illumina.SAMEA7524439.ERR6688600.bwamem2.flagstat:md5,dc3ce33662dc0f44587f115ed91aaa05",
                 "GCA_922984935.2.subset.illumina.SAMEA7524439.ERR6688600.bwamem2.idxstats:md5,b94e8483f1e3365ed6f616c757d08f86",
-                "GCA_922984935.2.subset.illumina.SAMEA7524439.ERR6688600.bwamem2.stats.gz:md5,f38c43c8ab49dd670da66e83842e1f03",
+                "GCA_922984935.2.subset.illumina.SAMEA7524439.ERR6688600.bwamem2.stats.gz:md5,47ea3819c84ae4d4c449a7a8a6cd5c40",
                 "GCA_922984935.2.subset.ont.SAMEA7524440.PAE35587.minimap2.coverage.1k.bedGraph.gz:md5,ea7da789c0df79e50fc9765a21cb5a8e",
+                "GCA_922984935.2.subset.ont.SAMEA7524440.PAE35587.minimap2.coverage.1k.bedGraph.gz.gzi:md5,f6ed22ad290af74d5b102ab8edf9ba70",
+                "GCA_922984935.2.subset.ont.SAMEA7524440.PAE35587.minimap2.coverage.1k.bedGraph.gz.tbi:md5,947bcdbafa0e3581b97efaa94805a516",
                 "GCA_922984935.2.subset.ont.SAMEA7524440.PAE35587.minimap2.flagstat:md5,9a975d9cca35785dc8044aa06a63e7b5",
                 "GCA_922984935.2.subset.ont.SAMEA7524440.PAE35587.minimap2.idxstats:md5,f176a0ddb87700171fa3f88525b94272",
-                "GCA_922984935.2.subset.ont.SAMEA7524440.PAE35587.minimap2.stats.gz:md5,f247553a3a7c6e99f6705acf5cbd8ea4",
+                "GCA_922984935.2.subset.ont.SAMEA7524440.PAE35587.minimap2.stats.gz:md5,a46864cdd313c597851fd062e2f0ae7d",
                 "GCA_922984935.2.subset.ont.SAMEA7524440.PAE35587_test.minimap2.coverage.1k.bedGraph.gz:md5,ea7da789c0df79e50fc9765a21cb5a8e",
+                "GCA_922984935.2.subset.ont.SAMEA7524440.PAE35587_test.minimap2.coverage.1k.bedGraph.gz.gzi:md5,f6ed22ad290af74d5b102ab8edf9ba70",
+                "GCA_922984935.2.subset.ont.SAMEA7524440.PAE35587_test.minimap2.coverage.1k.bedGraph.gz.tbi:md5,947bcdbafa0e3581b97efaa94805a516",
                 "GCA_922984935.2.subset.ont.SAMEA7524440.PAE35587_test.minimap2.flagstat:md5,9a975d9cca35785dc8044aa06a63e7b5",
                 "GCA_922984935.2.subset.ont.SAMEA7524440.PAE35587_test.minimap2.idxstats:md5,f176a0ddb87700171fa3f88525b94272",
-                "GCA_922984935.2.subset.ont.SAMEA7524440.PAE35587_test.minimap2.stats.gz:md5,6ab2937b13ae69edd3ff3dd39387abdf",
+                "GCA_922984935.2.subset.ont.SAMEA7524440.PAE35587_test.minimap2.stats.gz:md5,0a96788425e7329954379985cad52a00",
                 "GCA_922984935.2.subset.ont.SAMEA7524440.merged_1.minimap2.coverage.1k.bedGraph.gz:md5,c1c170acbd5ba0b3d2022ffa707d8eb3",
+                "GCA_922984935.2.subset.ont.SAMEA7524440.merged_1.minimap2.coverage.1k.bedGraph.gz.gzi:md5,7b7e0194c0fe355bbf22d3a0715bdf31",
+                "GCA_922984935.2.subset.ont.SAMEA7524440.merged_1.minimap2.coverage.1k.bedGraph.gz.tbi:md5,96564f064191638534e43b73b8f9c52f",
                 "SOURCE.txt:md5,21b2344ef9fcd3b506888828b12a853e",
                 "GCA_922984935.2.subset.ont.SAMEA7524440.merged_1.minimap2.flagstat:md5,ec6aaeb8be068f8b35a56d091d38c8b0",
                 "GCA_922984935.2.subset.ont.SAMEA7524440.merged_1.minimap2.idxstats:md5,5e872e9487a31f09266c6a73b3dbbd38",
-                "GCA_922984935.2.subset.ont.SAMEA7524440.merged_1.minimap2.stats.gz:md5,b2196feb830687c0f303effdd7a2ad94",
+                "GCA_922984935.2.subset.ont.SAMEA7524440.merged_1.minimap2.stats.gz:md5,c7bf3858991b0d866cff4eb044d0977f",
                 "GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939248.minimap2.coverage.1k.bedGraph.gz:md5,0a6131f8ea8f155a36017bcabd2bc679",
+                "GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939248.minimap2.coverage.1k.bedGraph.gz.gzi:md5,f297b353688011805b5094271f49a25b",
+                "GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939248.minimap2.coverage.1k.bedGraph.gz.tbi:md5,d539cea286167d39eb37baff8ff5203b",
                 "pacbio.SAMEA7524440.ERR6939248.hifitrimmer.bed.gz:md5,4b602acd4e4432500db70c1fa13197ca",
                 "GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939248.minimap2.flagstat:md5,db1610f3490d314de7e60f10d404178d",
                 "GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939248.minimap2.idxstats:md5,f757bd37fc1461e576348525ae0ba087",
-                "GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939248.minimap2.stats.gz:md5,e5d4b3ceb1f66914a92049e39a3b2edf",
+                "GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939248.minimap2.stats.gz:md5,d88d27440068dd1ea2ae72060157bfbf",
                 "GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939249.minimap2.coverage.1k.bedGraph.gz:md5,adf81ade1a26064658861318edfb5df1",
+                "GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939249.minimap2.coverage.1k.bedGraph.gz.gzi:md5,b47f2822be792fcf4397b0804dc8c823",
+                "GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939249.minimap2.coverage.1k.bedGraph.gz.tbi:md5,e9ef3989764d849255cff358c54a58f1",
                 "pacbio.SAMEA7524440.ERR6939249.hifitrimmer.bed.gz:md5,8071cbff2962fa7f0d9d24fbd973cc36",
                 "GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939249.minimap2.flagstat:md5,81a2332a3cdcc6b37dd2687d2cc77752",
                 "GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939249.minimap2.idxstats:md5,fe8b829d5241701b172cf4ff55cbf4f6",
-                "GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939249.minimap2.stats.gz:md5,f36413bdc297f3a7c855809522377bb0",
+                "GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939249.minimap2.stats.gz:md5,240244878ec4a8f60db905692b1d51b1",
                 "GCA_922984935.2.subset.pacbio.SAMEA7524440.merged_1.minimap2.coverage.1k.bedGraph.gz:md5,30aecc23035794276e5cf4f2d13251d0",
+                "GCA_922984935.2.subset.pacbio.SAMEA7524440.merged_1.minimap2.coverage.1k.bedGraph.gz.gzi:md5,dbd310343fb98279de354b506e20a37e",
+                "GCA_922984935.2.subset.pacbio.SAMEA7524440.merged_1.minimap2.coverage.1k.bedGraph.gz.tbi:md5,179f65063d6b080161734ff4e41fe232",
                 "SOURCE.txt:md5,343a5205e5b93005576ee69a0869dad3",
                 "GCA_922984935.2.subset.pacbio.SAMEA7524440.merged_1.minimap2.flagstat:md5,da9dcde0937f27935637db67c14c9928",
                 "GCA_922984935.2.subset.pacbio.SAMEA7524440.merged_1.minimap2.idxstats:md5,ee312e0f5e6053bc81b737ae5805807f",
-                "GCA_922984935.2.subset.pacbio.SAMEA7524440.merged_1.minimap2.stats.gz:md5,e0eaddf3347d4a2585cdd425d529a6d8"
+                "GCA_922984935.2.subset.pacbio.SAMEA7524440.merged_1.minimap2.stats.gz:md5,d78c691f4c573b72a599287ad657e0bd"
             ],
             {
                 
@@ -401,11 +447,11 @@
                     "@PG\tID:samtools.5\tPN:samtools\tPP:bwa-mem2\tVN:1.22.1\tCL:samtools fixmate -mpu - -",
                     "@PG\tID:samtools.6\tPN:samtools\tPP:samtools.5\tVN:1.22.1\tCL:samtools view -h",
                     "@PG\tID:samtools.7\tPN:samtools\tPP:samtools.6\tVN:1.22.1\tCL:samtools sort --write-index -l1 -t N -T 35528_2_1.subset.cram.0.SAMEA7524440.ERR6688402_tmp -o 35528_2_1.subset.cram.0.SAMEA7524440.ERR6688402.bam",
-                    "@PG\tID:samtools.8\tPN:samtools\tPP:samtools.7\tVN:1.23.1\tCL:samtools merge --threads N -c -p --reference GCA_922984935.2.subset.unmasked.fa - 1/35528_2_1.subset.cram.0.SAMEA7524440.ERR6688402.bam 2/35528_2_1.subset.cram.1.SAMEA7524440.ERR6688402.bam",
-                    "@PG\tID:samtools.9\tPN:samtools\tPP:samtools.8\tVN:1.23.1\tCL:samtools markdup -T SAMEA7524440.ERR6688402 -f SAMEA7524440.ERR6688402.metrics --threads N --reference GCA_922984935.2.subset.unmasked.fa - SAMEA7524440.ERR6688402.bam",
+                    "@PG\tID:samtools.8\tPN:samtools\tPP:samtools.7\tVN:1.24\tCL:samtools merge --threads N -c -p --reference GCA_922984935.2.subset.unmasked.fa - 1/35528_2_1.subset.cram.0.SAMEA7524440.ERR6688402.bam 2/35528_2_1.subset.cram.1.SAMEA7524440.ERR6688402.bam",
+                    "@PG\tID:samtools.9\tPN:samtools\tPP:samtools.8\tVN:1.24\tCL:samtools markdup -T SAMEA7524440.ERR6688402 -f SAMEA7524440.ERR6688402.metrics --threads N --reference GCA_922984935.2.subset.unmasked.fa - SAMEA7524440.ERR6688402.bam",
                     "@PG\tID:crumble\tPN:crumble\tPP:samtools.9\tVN:0.9.1\tCL:crumble -O bam SAMEA7524440.ERR6688402.bam SAMEA7524440.ERR6688402.crumble.bam",
-                    "@PG\tID:samtools.10\tPN:samtools\tPP:crumble\tVN:1.23.1\tCL:samtools view --threads N --reference GCA_922984935.2.subset.unmasked.fa --output-fmt cram,version=3.0,archive,level=8,embed_ref=1,lossy_names=1 --write-index -o GCA_922984935.2.subset.hic.SAMEA7524440.ERR6688402.bwamem2.cram GCA_922984935.2.subset.hic.SAMEA7524440.ERR6688402.bwamem2.bam",
-                    "@PG\tID:samtools.11\tPN:samtools\tPP:samtools.10\tVN:1.23.1\tCL:samtools reheader temp.sorted.header.sam input/GCA_922984935.2.subset.hic.SAMEA7524440.ERR6688402.bwamem2.cram"
+                    "@PG\tID:samtools.10\tPN:samtools\tPP:crumble\tVN:1.24\tCL:samtools view --threads N --reference GCA_922984935.2.subset.unmasked.fa --output-fmt cram,version=3.0,archive,level=8,embed_ref=1,lossy_names=1 --write-index -o GCA_922984935.2.subset.hic.SAMEA7524440.ERR6688402.bwamem2.cram GCA_922984935.2.subset.hic.SAMEA7524440.ERR6688402.bwamem2.bam",
+                    "@PG\tID:samtools.11\tPN:samtools\tPP:samtools.10\tVN:1.24\tCL:samtools reheader temp.sorted.header.sam input/GCA_922984935.2.subset.hic.SAMEA7524440.ERR6688402.bwamem2.cram"
                 ],
                 "GCA_922984935.2.subset.illumina.SAMEA7524438.ERR6688599.bwamem2.cram": [
                     "@HD\tVN:1.6\tSO:coordinate",
@@ -430,27 +476,27 @@
                     "@PG\tID:samtools.3\tPN:samtools\tPP:bwa-mem2\tVN:1.22.1\tCL:samtools fixmate -mpu - -",
                     "@PG\tID:samtools.4\tPN:samtools\tPP:samtools.3\tVN:1.22.1\tCL:samtools view -h",
                     "@PG\tID:samtools.5\tPN:samtools\tPP:samtools.4\tVN:1.22.1\tCL:samtools sort --write-index -l1 -t N -T 31231_3_1.subset.cram.0.SAMEA7524438.ERR6688599_tmp -o 31231_3_1.subset.cram.0.SAMEA7524438.ERR6688599.bam",
-                    "@PG\tID:samtools.6\tPN:samtools\tPP:samtools.5\tVN:1.23.1\tCL:samtools merge --threads N -c -p --reference GCA_922984935.2.subset.unmasked.fa - 1/31231_3_1.subset.cram.0.SAMEA7524438.ERR6688599.bam 2/31231_3_1.subset.cram.1.SAMEA7524438.ERR6688599.bam",
-                    "@PG\tID:samtools.7\tPN:samtools\tPP:samtools.6\tVN:1.23.1\tCL:samtools markdup -T SAMEA7524438.ERR6688599 -f SAMEA7524438.ERR6688599.metrics --threads N --reference GCA_922984935.2.subset.unmasked.fa - SAMEA7524438.ERR6688599.bam",
+                    "@PG\tID:samtools.6\tPN:samtools\tPP:samtools.5\tVN:1.24\tCL:samtools merge --threads N -c -p --reference GCA_922984935.2.subset.unmasked.fa - 1/31231_3_1.subset.cram.0.SAMEA7524438.ERR6688599.bam 2/31231_3_1.subset.cram.1.SAMEA7524438.ERR6688599.bam",
+                    "@PG\tID:samtools.7\tPN:samtools\tPP:samtools.6\tVN:1.24\tCL:samtools markdup -T SAMEA7524438.ERR6688599 -f SAMEA7524438.ERR6688599.metrics --threads N --reference GCA_922984935.2.subset.unmasked.fa - SAMEA7524438.ERR6688599.bam",
                     "@PG\tID:crumble\tPN:crumble\tPP:samtools.7\tVN:0.9.1\tCL:crumble -O bam SAMEA7524438.ERR6688599.bam SAMEA7524438.ERR6688599.crumble.bam",
-                    "@PG\tID:samtools.8\tPN:samtools\tPP:crumble\tVN:1.23.1\tCL:samtools view --threads N --reference GCA_922984935.2.subset.unmasked.fa --output-fmt cram,version=3.0,archive,level=8,embed_ref=1,lossy_names=1 --write-index -o GCA_922984935.2.subset.illumina.SAMEA7524438.ERR6688599.bwamem2.cram GCA_922984935.2.subset.illumina.SAMEA7524438.ERR6688599.bwamem2.bam",
-                    "@PG\tID:samtools.9\tPN:samtools\tPP:samtools.8\tVN:1.23.1\tCL:samtools reheader temp.sorted.header.sam input/GCA_922984935.2.subset.illumina.SAMEA7524438.ERR6688599.bwamem2.cram"
+                    "@PG\tID:samtools.8\tPN:samtools\tPP:crumble\tVN:1.24\tCL:samtools view --threads N --reference GCA_922984935.2.subset.unmasked.fa --output-fmt cram,version=3.0,archive,level=8,embed_ref=1,lossy_names=1 --write-index -o GCA_922984935.2.subset.illumina.SAMEA7524438.ERR6688599.bwamem2.cram GCA_922984935.2.subset.illumina.SAMEA7524438.ERR6688599.bwamem2.bam",
+                    "@PG\tID:samtools.9\tPN:samtools\tPP:samtools.8\tVN:1.24\tCL:samtools reheader temp.sorted.header.sam input/GCA_922984935.2.subset.illumina.SAMEA7524438.ERR6688599.bwamem2.cram"
                 ],
                 "GCA_922984935.2.subset.illumina.SAMEA7524439.ERR6688600.bwamem2.cram": [
                     "@HD\tVN:1.6\tSO:coordinate",
                     "@SQ\tSN:OV277441.1\tLN:7999920\tM5:0457acf8690429f1c98ee545cb8573b8\tUR:GCA_922984935.2.subset.fasta.gz\tAS:GCA_922984935.2\tAN:SUPER_1\tSP:Meles meles",
                     "@RG\tID:31231_4_1\tPL:ILLUMINA\tSM:SAMEA7524439",
-                    "@PG\tID:samtools\tPN:samtools\tVN:1.23.1\tCL:samtools view --threads N --reference GCA_922984935.2.subset.unmasked.fa --output-fmt cram -o SAMEA7524439.ERR6688600.cram 31231_4_1.subset.fastq.gz",
-                    "@PG\tID:samtools.1\tPN:samtools\tPP:samtools\tVN:1.23.1\tCL:samtools addreplacerg --threads N -r @RG\\tID:31231_4_1\\tPL:ILLUMINA\\tSM:SAMEA7524439 -o SAMEA7524439.ERR6688600_addRG.cram SAMEA7524439.ERR6688600.cram",
+                    "@PG\tID:samtools\tPN:samtools\tVN:1.24\tCL:samtools view --threads N --reference GCA_922984935.2.subset.unmasked.fa --output-fmt cram -o SAMEA7524439.ERR6688600.cram 31231_4_1.subset.fastq.gz",
+                    "@PG\tID:samtools.1\tPN:samtools\tPP:samtools\tVN:1.24\tCL:samtools addreplacerg --threads N -r @RG\\tID:31231_4_1\\tPL:ILLUMINA\\tSM:SAMEA7524439 -o SAMEA7524439.ERR6688600_addRG.cram SAMEA7524439.ERR6688600.cram",
                     "@PG\tID:bwa-mem2\tPN:bwa-mem2\tVN:2.2.1\tCL:bwa-mem2 mem -p -t N .GCA_922984935.2.subset.unmasked.fa -C -H @RG\\tID:31231_4_1\\tPL:ILLUMINA\\tSM:SAMEA7524439 -\tPP:samtools.1",
                     "@PG\tID:samtools.2\tPN:samtools\tPP:bwa-mem2\tVN:1.22.1\tCL:samtools fixmate -mpu - -",
                     "@PG\tID:samtools.3\tPN:samtools\tPP:samtools.2\tVN:1.22.1\tCL:samtools view -h",
                     "@PG\tID:samtools.4\tPN:samtools\tPP:samtools.3\tVN:1.22.1\tCL:samtools sort --write-index -l1 -t N -T SAMEA7524439.ERR6688600_addRG.cram.0.SAMEA7524439.ERR6688600_tmp -o SAMEA7524439.ERR6688600_addRG.cram.0.SAMEA7524439.ERR6688600.bam",
-                    "@PG\tID:samtools.5\tPN:samtools\tPP:samtools.4\tVN:1.23.1\tCL:samtools merge --threads N -c -p --reference GCA_922984935.2.subset.unmasked.fa - 1/SAMEA7524439.ERR6688600_addRG.cram.0.SAMEA7524439.ERR6688600.bam 2/SAMEA7524439.ERR6688600_addRG.cram.1.SAMEA7524439.ERR6688600.bam",
-                    "@PG\tID:samtools.6\tPN:samtools\tPP:samtools.5\tVN:1.23.1\tCL:samtools markdup -T SAMEA7524439.ERR6688600 -f SAMEA7524439.ERR6688600.metrics --threads N --reference GCA_922984935.2.subset.unmasked.fa - SAMEA7524439.ERR6688600.bam",
+                    "@PG\tID:samtools.5\tPN:samtools\tPP:samtools.4\tVN:1.24\tCL:samtools merge --threads N -c -p --reference GCA_922984935.2.subset.unmasked.fa - 1/SAMEA7524439.ERR6688600_addRG.cram.0.SAMEA7524439.ERR6688600.bam 2/SAMEA7524439.ERR6688600_addRG.cram.1.SAMEA7524439.ERR6688600.bam",
+                    "@PG\tID:samtools.6\tPN:samtools\tPP:samtools.5\tVN:1.24\tCL:samtools markdup -T SAMEA7524439.ERR6688600 -f SAMEA7524439.ERR6688600.metrics --threads N --reference GCA_922984935.2.subset.unmasked.fa - SAMEA7524439.ERR6688600.bam",
                     "@PG\tID:crumble\tPN:crumble\tPP:samtools.6\tVN:0.9.1\tCL:crumble -O bam SAMEA7524439.ERR6688600.bam SAMEA7524439.ERR6688600.crumble.bam",
-                    "@PG\tID:samtools.7\tPN:samtools\tPP:crumble\tVN:1.23.1\tCL:samtools view --threads N --reference GCA_922984935.2.subset.unmasked.fa --output-fmt cram,version=3.0,archive,level=8,embed_ref=1,lossy_names=1 --write-index -o GCA_922984935.2.subset.illumina.SAMEA7524439.ERR6688600.bwamem2.cram GCA_922984935.2.subset.illumina.SAMEA7524439.ERR6688600.bwamem2.bam",
-                    "@PG\tID:samtools.8\tPN:samtools\tPP:samtools.7\tVN:1.23.1\tCL:samtools reheader temp.sorted.header.sam input/GCA_922984935.2.subset.illumina.SAMEA7524439.ERR6688600.bwamem2.cram"
+                    "@PG\tID:samtools.7\tPN:samtools\tPP:crumble\tVN:1.24\tCL:samtools view --threads N --reference GCA_922984935.2.subset.unmasked.fa --output-fmt cram,version=3.0,archive,level=8,embed_ref=1,lossy_names=1 --write-index -o GCA_922984935.2.subset.illumina.SAMEA7524439.ERR6688600.bwamem2.cram GCA_922984935.2.subset.illumina.SAMEA7524439.ERR6688600.bwamem2.bam",
+                    "@PG\tID:samtools.8\tPN:samtools\tPP:samtools.7\tVN:1.24\tCL:samtools reheader temp.sorted.header.sam input/GCA_922984935.2.subset.illumina.SAMEA7524439.ERR6688600.bwamem2.cram"
                 ],
                 "GCA_922984935.2.subset.ont.SAMEA7524440.PAE35587.minimap2.cram": [
                     "@HD\tVN:1.6\tSO:coordinate",
@@ -458,9 +504,9 @@
                     "@RG\tID:PAE35587_pass_1f1f0707_115\tPL:ONT\tSM:SAMEA7524440",
                     "@PG\tID:minimap2\tPN:minimap2\tVN:2.30-r1287\tCL:minimap2 -t N -ax map-ont -y -R @RG\\tID:PAE35587_pass_1f1f0707_115\\tPL:ONT\\tSM:SAMEA7524440 -I1G -a GCA_922984935.2.subset.unmasked.mmi -",
                     "@PG\tID:samtools\tPN:samtools\tPP:minimap2\tVN:1.23.1\tCL:samtools sort -t N -o PAE35587_pass_1f1f0707_115.subset.fastq.gz.0.SAMEA7524440.PAE35587.bam -T PAE35587_pass_1f1f0707_115.subset.fastq.gz.0.SAMEA7524440.PAE35587_sort_tmp --write-index -l1 -",
-                    "@PG\tID:samtools.1\tPN:samtools\tPP:samtools\tVN:1.23.1\tCL:samtools merge --threads N -c -p --reference GCA_922984935.2.subset.unmasked.fa SAMEA7524440.PAE35587.merge.bam 1/PAE35587_pass_1f1f0707_115.subset.fastq.gz.0.SAMEA7524440.PAE35587.bam",
-                    "@PG\tID:samtools.2\tPN:samtools\tPP:samtools.1\tVN:1.23.1\tCL:samtools view --threads N --reference GCA_922984935.2.subset.unmasked.fa --output-fmt cram,version=3.0,archive,level=8,embed_ref=1 --write-index -o GCA_922984935.2.subset.ont.SAMEA7524440.PAE35587.minimap2.cram GCA_922984935.2.subset.ont.SAMEA7524440.PAE35587.minimap2.bam",
-                    "@PG\tID:samtools.3\tPN:samtools\tPP:samtools.2\tVN:1.23.1\tCL:samtools reheader temp.sorted.header.sam input/GCA_922984935.2.subset.ont.SAMEA7524440.PAE35587.minimap2.cram"
+                    "@PG\tID:samtools.1\tPN:samtools\tPP:samtools\tVN:1.24\tCL:samtools merge --threads N -c -p --reference GCA_922984935.2.subset.unmasked.fa SAMEA7524440.PAE35587.merge.bam 1/PAE35587_pass_1f1f0707_115.subset.fastq.gz.0.SAMEA7524440.PAE35587.bam",
+                    "@PG\tID:samtools.2\tPN:samtools\tPP:samtools.1\tVN:1.24\tCL:samtools view --threads N --reference GCA_922984935.2.subset.unmasked.fa --output-fmt cram,version=3.0,archive,level=8,embed_ref=1 --write-index -o GCA_922984935.2.subset.ont.SAMEA7524440.PAE35587.minimap2.cram GCA_922984935.2.subset.ont.SAMEA7524440.PAE35587.minimap2.bam",
+                    "@PG\tID:samtools.3\tPN:samtools\tPP:samtools.2\tVN:1.24\tCL:samtools reheader temp.sorted.header.sam input/GCA_922984935.2.subset.ont.SAMEA7524440.PAE35587.minimap2.cram"
                 ],
                 "GCA_922984935.2.subset.ont.SAMEA7524440.PAE35587_test.minimap2.cram": [
                     "@HD\tVN:1.6\tSO:coordinate",
@@ -471,12 +517,12 @@
                     "@PG\tID:samtools.2\tPN:samtools\tPP:samtools.1\tVN:1.22.1\tCL:samtools sort -u -T mMelMel3_T2.sort --threads N -",
                     "@PG\tID:samtools.3\tPN:samtools\tPP:samtools.2\tVN:1.22.1\tCL:samtools markdup -T mMelMel3_T2.markdup -f mMelMel3_T2.metrics --threads N - mMelMel3_T2.cram",
                     "@PG\tID:samtools.4\tPN:samtools\tPP:samtools.3\tVN:1.19.2\tCL:samtools view -t N -b -o PAE35587_pass_1f1f0707_115.subset.addrg.bam PAE35587_pass_1f1f0707_115.subset.addrg.cram",
-                    "@PG\tID:samtools.5\tPN:samtools\tPP:samtools.4\tVN:1.23.1\tCL:samtools view --threads N --reference GCA_922984935.2.subset.unmasked.fa --output-fmt cram -o SAMEA7524440.PAE35587_test.cram PAE35587_pass_1f1f0707_115.subset.addrg.bam",
+                    "@PG\tID:samtools.5\tPN:samtools\tPP:samtools.4\tVN:1.24\tCL:samtools view --threads N --reference GCA_922984935.2.subset.unmasked.fa --output-fmt cram -o SAMEA7524440.PAE35587_test.cram PAE35587_pass_1f1f0707_115.subset.addrg.bam",
                     "@PG\tID:minimap2\tPN:minimap2\tVN:2.30-r1287\tCL:minimap2 -t N -ax map-ont -I1G -y -R @RG\\tID:PAE35587_pass_1f1f0707_115\\tPL:ONT\\tSM:mMelMel3 GCA_922984935.2.subset.unmasked.mmi -\tPP:samtools.5",
                     "@PG\tID:samtools.6\tPN:samtools\tPP:minimap2\tVN:1.22.1\tCL:samtools sort -t N -T SAMEA7524440.PAE35587_test.cram.0.SAMEA7524440.PAE35587_test_sort_tmp -o SAMEA7524440.PAE35587_test.cram.0.SAMEA7524440.PAE35587_test.bam -",
-                    "@PG\tID:samtools.7\tPN:samtools\tPP:samtools.6\tVN:1.23.1\tCL:samtools merge --threads N -c -p --reference GCA_922984935.2.subset.unmasked.fa SAMEA7524440.PAE35587_test.merge.bam 1/SAMEA7524440.PAE35587_test.cram.0.SAMEA7524440.PAE35587_test.bam",
-                    "@PG\tID:samtools.8\tPN:samtools\tPP:samtools.7\tVN:1.23.1\tCL:samtools view --threads N --reference GCA_922984935.2.subset.unmasked.fa --output-fmt cram,version=3.0,archive,level=8,embed_ref=1 --write-index -o GCA_922984935.2.subset.ont.SAMEA7524440.PAE35587_test.minimap2.cram GCA_922984935.2.subset.ont.SAMEA7524440.PAE35587_test.minimap2.bam",
-                    "@PG\tID:samtools.9\tPN:samtools\tPP:samtools.8\tVN:1.23.1\tCL:samtools reheader temp.sorted.header.sam input/GCA_922984935.2.subset.ont.SAMEA7524440.PAE35587_test.minimap2.cram"
+                    "@PG\tID:samtools.7\tPN:samtools\tPP:samtools.6\tVN:1.24\tCL:samtools merge --threads N -c -p --reference GCA_922984935.2.subset.unmasked.fa SAMEA7524440.PAE35587_test.merge.bam 1/SAMEA7524440.PAE35587_test.cram.0.SAMEA7524440.PAE35587_test.bam",
+                    "@PG\tID:samtools.8\tPN:samtools\tPP:samtools.7\tVN:1.24\tCL:samtools view --threads N --reference GCA_922984935.2.subset.unmasked.fa --output-fmt cram,version=3.0,archive,level=8,embed_ref=1 --write-index -o GCA_922984935.2.subset.ont.SAMEA7524440.PAE35587_test.minimap2.cram GCA_922984935.2.subset.ont.SAMEA7524440.PAE35587_test.minimap2.bam",
+                    "@PG\tID:samtools.9\tPN:samtools\tPP:samtools.8\tVN:1.24\tCL:samtools reheader temp.sorted.header.sam input/GCA_922984935.2.subset.ont.SAMEA7524440.PAE35587_test.minimap2.cram"
                 ],
                 "GCA_922984935.2.subset.ont.SAMEA7524440.merged_1.minimap2.cram": [
                     "@HD\tVN:1.6\tSO:coordinate",
@@ -484,19 +530,19 @@
                     "@RG\tID:PAE35587_pass_1f1f0707_115\tPL:ONT\tSM:SAMEA7524440",
                     "@PG\tID:minimap2\tPN:minimap2\tVN:2.30-r1287\tCL:minimap2 -t N -ax map-ont -y -R @RG\\tID:PAE35587_pass_1f1f0707_115\\tPL:ONT\\tSM:SAMEA7524440 -I1G -a GCA_922984935.2.subset.unmasked.mmi -",
                     "@PG\tID:samtools\tPN:samtools\tPP:minimap2\tVN:1.23.1\tCL:samtools sort -t N -o PAE35587_pass_1f1f0707_115.subset.fastq.gz.0.SAMEA7524440.PAE35587.bam -T PAE35587_pass_1f1f0707_115.subset.fastq.gz.0.SAMEA7524440.PAE35587_sort_tmp --write-index -l1 -",
-                    "@PG\tID:samtools.1\tPN:samtools\tPP:samtools\tVN:1.23.1\tCL:samtools merge --threads N -c -p --reference GCA_922984935.2.subset.unmasked.fa SAMEA7524440.PAE35587.merge.bam 1/PAE35587_pass_1f1f0707_115.subset.fastq.gz.0.SAMEA7524440.PAE35587.bam",
+                    "@PG\tID:samtools.1\tPN:samtools\tPP:samtools\tVN:1.24\tCL:samtools merge --threads N -c -p --reference GCA_922984935.2.subset.unmasked.fa SAMEA7524440.PAE35587.merge.bam 1/PAE35587_pass_1f1f0707_115.subset.fastq.gz.0.SAMEA7524440.PAE35587.bam",
                     "@PG\tID:samtools.2\tPN:samtools\tPP:samtools.1\tVN:1.22.1\tCL:samtools sort -u -T mMelMel3_T2.sort --threads N -",
                     "@PG\tID:samtools.3\tPN:samtools\tPP:samtools.2\tVN:1.22.1\tCL:samtools markdup -T mMelMel3_T2.markdup -f mMelMel3_T2.metrics --threads N - mMelMel3_T2.cram",
                     "@PG\tID:samtools.4\tPN:samtools\tPP:samtools.3\tVN:1.19.2\tCL:samtools view -t N -b -o PAE35587_pass_1f1f0707_115.subset.addrg.bam PAE35587_pass_1f1f0707_115.subset.addrg.cram",
-                    "@PG\tID:samtools.5\tPN:samtools\tPP:samtools.4\tVN:1.23.1\tCL:samtools view --threads N --reference GCA_922984935.2.subset.unmasked.fa --output-fmt cram -o SAMEA7524440.PAE35587_test.cram PAE35587_pass_1f1f0707_115.subset.addrg.bam",
+                    "@PG\tID:samtools.5\tPN:samtools\tPP:samtools.4\tVN:1.24\tCL:samtools view --threads N --reference GCA_922984935.2.subset.unmasked.fa --output-fmt cram -o SAMEA7524440.PAE35587_test.cram PAE35587_pass_1f1f0707_115.subset.addrg.bam",
                     "@PG\tID:samtools.6\tPN:samtools\tPP:minimap2\tVN:1.22.1\tCL:samtools sort -t N -T SAMEA7524440.PAE35587_test.cram.0.SAMEA7524440.PAE35587_test_sort_tmp -o SAMEA7524440.PAE35587_test.cram.0.SAMEA7524440.PAE35587_test.bam -",
-                    "@PG\tID:samtools.7\tPN:samtools\tPP:samtools.6\tVN:1.23.1\tCL:samtools merge --threads N -c -p --reference GCA_922984935.2.subset.unmasked.fa SAMEA7524440.PAE35587_test.merge.bam 1/SAMEA7524440.PAE35587_test.cram.0.SAMEA7524440.PAE35587_test.bam",
-                    "@PG\tID:samtools.8\tPN:samtools\tPP:samtools.5\tVN:1.23.1\tCL:samtools merge --threads N -c -p SAMEA7524440.merged_1.merge.bam 1/SAMEA7524440.PAE35587.merge.bam 2/SAMEA7524440.PAE35587_test.merge.bam",
-                    "@PG\tID:samtools.9\tPN:samtools\tPP:samtools.7\tVN:1.23.1\tCL:samtools merge --threads N -c -p SAMEA7524440.merged_1.merge.bam 1/SAMEA7524440.PAE35587.merge.bam 2/SAMEA7524440.PAE35587_test.merge.bam",
-                    "@PG\tID:samtools.10\tPN:samtools\tPP:samtools.8\tVN:1.23.1\tCL:samtools view --threads N --reference GCA_922984935.2.subset.unmasked.fa --output-fmt cram,version=3.0,archive,level=8,embed_ref=1 --write-index -o GCA_922984935.2.subset.ont.SAMEA7524440.merged_1.minimap2.cram GCA_922984935.2.subset.ont.SAMEA7524440.merged_1.minimap2.bam",
-                    "@PG\tID:samtools.11\tPN:samtools\tPP:samtools.9\tVN:1.23.1\tCL:samtools view --threads N --reference GCA_922984935.2.subset.unmasked.fa --output-fmt cram,version=3.0,archive,level=8,embed_ref=1 --write-index -o GCA_922984935.2.subset.ont.SAMEA7524440.merged_1.minimap2.cram GCA_922984935.2.subset.ont.SAMEA7524440.merged_1.minimap2.bam",
-                    "@PG\tID:samtools.12\tPN:samtools\tPP:samtools.10\tVN:1.23.1\tCL:samtools reheader temp.sorted.header.sam input/GCA_922984935.2.subset.ont.SAMEA7524440.merged_1.minimap2.cram",
-                    "@PG\tID:samtools.13\tPN:samtools\tPP:samtools.11\tVN:1.23.1\tCL:samtools reheader temp.sorted.header.sam input/GCA_922984935.2.subset.ont.SAMEA7524440.merged_1.minimap2.cram"
+                    "@PG\tID:samtools.7\tPN:samtools\tPP:samtools.6\tVN:1.24\tCL:samtools merge --threads N -c -p --reference GCA_922984935.2.subset.unmasked.fa SAMEA7524440.PAE35587_test.merge.bam 1/SAMEA7524440.PAE35587_test.cram.0.SAMEA7524440.PAE35587_test.bam",
+                    "@PG\tID:samtools.8\tPN:samtools\tPP:samtools.5\tVN:1.24\tCL:samtools merge --threads N -c -p SAMEA7524440.merged_1.merge.bam 1/SAMEA7524440.PAE35587.merge.bam 2/SAMEA7524440.PAE35587_test.merge.bam",
+                    "@PG\tID:samtools.9\tPN:samtools\tPP:samtools.7\tVN:1.24\tCL:samtools merge --threads N -c -p SAMEA7524440.merged_1.merge.bam 1/SAMEA7524440.PAE35587.merge.bam 2/SAMEA7524440.PAE35587_test.merge.bam",
+                    "@PG\tID:samtools.10\tPN:samtools\tPP:samtools.8\tVN:1.24\tCL:samtools view --threads N --reference GCA_922984935.2.subset.unmasked.fa --output-fmt cram,version=3.0,archive,level=8,embed_ref=1 --write-index -o GCA_922984935.2.subset.ont.SAMEA7524440.merged_1.minimap2.cram GCA_922984935.2.subset.ont.SAMEA7524440.merged_1.minimap2.bam",
+                    "@PG\tID:samtools.11\tPN:samtools\tPP:samtools.9\tVN:1.24\tCL:samtools view --threads N --reference GCA_922984935.2.subset.unmasked.fa --output-fmt cram,version=3.0,archive,level=8,embed_ref=1 --write-index -o GCA_922984935.2.subset.ont.SAMEA7524440.merged_1.minimap2.cram GCA_922984935.2.subset.ont.SAMEA7524440.merged_1.minimap2.bam",
+                    "@PG\tID:samtools.12\tPN:samtools\tPP:samtools.10\tVN:1.24\tCL:samtools reheader temp.sorted.header.sam input/GCA_922984935.2.subset.ont.SAMEA7524440.merged_1.minimap2.cram",
+                    "@PG\tID:samtools.13\tPN:samtools\tPP:samtools.11\tVN:1.24\tCL:samtools reheader temp.sorted.header.sam input/GCA_922984935.2.subset.ont.SAMEA7524440.merged_1.minimap2.cram"
                 ],
                 "GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939248.minimap2.cram": [
                     "@HD\tVN:1.6\tSO:coordinate",
@@ -507,13 +553,13 @@
                     "@PG\tID:samtools\tPN:samtools\tVN:1.10\tPP:ccs-4.2.0\tCL:samtools merge -t N -ncp -b m64094_200910_173211.chunks.fofn m64094_200910_173211.ccs.bam",
                     "@PG\tID:samtools.1\tPN:samtools\tVN:1.19.2\tPP:samtools\tCL:samtools view -b -h -N READS -o x.bam m64094_200910_173211.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.bam",
                     "@PG\tID:hifi-trimmer\tPN:hifi-trimmer\tVN:5.0.1\tPP:samtools.1\tCL:hifi-trimmer trim -t N -f cram -o pacbio.SAMEA7524440.ERR6939248.hifitrimmer.cram m64094_200910_173211.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.subset.bam pacbio.SAMEA7524440.ERR6939248.hifitrimmer.bed.gz",
-                    "@PG\tID:samtools.2\tPN:samtools\tPP:hifi-trimmer\tVN:1.23.1\tCL:samtools addreplacerg --threads N -w -m overwrite_all -r @RG\\tID:61ddc6c3Sequel_16_Barcodes_v3.fasta;BarcodeHash=e418d89cefcbef90f3cb0e6455b7e2a3;BarcodeCount=16;BarcodeMode=Symmetric;BarcodeQuality=Score\\tPL:PACBIO\\tPM:SEQUELII\\tBC:CACTCACGTGTGATATT\\tSM:SAMEA7524440 -o pacbio.SAMEA7524440.ERR6939248.hifitrimmer_addRG.cram pacbio.SAMEA7524440.ERR6939248.hifitrimmer.cram",
+                    "@PG\tID:samtools.2\tPN:samtools\tPP:hifi-trimmer\tVN:1.24\tCL:samtools addreplacerg --threads N -w -m overwrite_all -r @RG\\tID:61ddc6c3Sequel_16_Barcodes_v3.fasta;BarcodeHash=e418d89cefcbef90f3cb0e6455b7e2a3;BarcodeCount=16;BarcodeMode=Symmetric;BarcodeQuality=Score\\tPL:PACBIO\\tPM:SEQUELII\\tBC:CACTCACGTGTGATATT\\tSM:SAMEA7524440 -o pacbio.SAMEA7524440.ERR6939248.hifitrimmer_addRG.cram pacbio.SAMEA7524440.ERR6939248.hifitrimmer.cram",
                     "@PG\tID:minimap2\tPN:minimap2\tVN:2.30-r1287\tCL:minimap2 -t N -ax map-hifi --cs=short -I1G -y -R @RG\\tID:61ddc6c3Sequel_16_Barcodes_v3.fasta;BarcodeHash=e418d89cefcbef90f3cb0e6455b7e2a3;BarcodeCount=16;BarcodeMode=Symmetric;BarcodeQuality=Score\\tPL:PACBIO\\tPM:SEQUELII\\tBC:CACTCACGTGTGATATT\\tSM:SAMEA7524440 GCA_922984935.2.subset.unmasked.mmi -\tPP:samtools.2",
                     "@PG\tID:samtools.3\tPN:samtools\tPP:minimap2\tVN:1.22.1\tCL:samtools sort -t N -T pacbio.SAMEA7524440.ERR6939248.hifitrimmer_addRG.cram.0.SAMEA7524440.ERR6939248_sort_tmp -o pacbio.SAMEA7524440.ERR6939248.hifitrimmer_addRG.cram.0.SAMEA7524440.ERR6939248.bam -",
-                    "@PG\tID:samtools.4\tPN:samtools\tPP:samtools.3\tVN:1.23.1\tCL:samtools merge --threads N -c -p --reference GCA_922984935.2.subset.unmasked.fa SAMEA7524440.ERR6939248.merge.bam 1/pacbio.SAMEA7524440.ERR6939248.hifitrimmer_addRG.cram.0.SAMEA7524440.ERR6939248.bam",
+                    "@PG\tID:samtools.4\tPN:samtools\tPP:samtools.3\tVN:1.24\tCL:samtools merge --threads N -c -p --reference GCA_922984935.2.subset.unmasked.fa SAMEA7524440.ERR6939248.merge.bam 1/pacbio.SAMEA7524440.ERR6939248.hifitrimmer_addRG.cram.0.SAMEA7524440.ERR6939248.bam",
                     "@PG\tID:crumble\tPN:crumble\tPP:samtools.4\tVN:0.9.1\tCL:crumble -y pbccs -O bam SAMEA7524440.ERR6939248.merge.bam SAMEA7524440.ERR6939248.merge.crumble.bam",
-                    "@PG\tID:samtools.5\tPN:samtools\tPP:crumble\tVN:1.23.1\tCL:samtools view --threads N --reference GCA_922984935.2.subset.unmasked.fa --output-fmt cram,version=3.0,archive,level=8,embed_ref=1 --write-index -o GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939248.minimap2.cram GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939248.minimap2.bam",
-                    "@PG\tID:samtools.6\tPN:samtools\tPP:samtools.5\tVN:1.23.1\tCL:samtools reheader temp.sorted.header.sam input/GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939248.minimap2.cram"
+                    "@PG\tID:samtools.5\tPN:samtools\tPP:crumble\tVN:1.24\tCL:samtools view --threads N --reference GCA_922984935.2.subset.unmasked.fa --output-fmt cram,version=3.0,archive,level=8,embed_ref=1 --write-index -o GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939248.minimap2.cram GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939248.minimap2.bam",
+                    "@PG\tID:samtools.6\tPN:samtools\tPP:samtools.5\tVN:1.24\tCL:samtools reheader temp.sorted.header.sam input/GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939248.minimap2.cram"
                 ],
                 "GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939249.minimap2.cram": [
                     "@HD\tVN:1.6\tSO:coordinate",
@@ -521,10 +567,10 @@
                     "@RG\tID:m64094_200911_174739\tPL:PACBIO\tSM:SAMEA7524440",
                     "@PG\tID:minimap2\tPN:minimap2\tVN:2.30-r1287\tCL:minimap2 -t N -ax map-hifi --cs=short -y -R @RG\\tID:m64094_200911_174739\\tPL:PACBIO\\tSM:SAMEA7524440 -I1G -a GCA_922984935.2.subset.unmasked.mmi -",
                     "@PG\tID:samtools\tPN:samtools\tPP:minimap2\tVN:1.23.1\tCL:samtools sort -t N -o pacbio.SAMEA7524440.ERR6939249.hifitrimmer.fastq.gz.0.SAMEA7524440.ERR6939249.bam -T pacbio.SAMEA7524440.ERR6939249.hifitrimmer.fastq.gz.0.SAMEA7524440.ERR6939249_sort_tmp --write-index -l1 -",
-                    "@PG\tID:samtools.1\tPN:samtools\tPP:samtools\tVN:1.23.1\tCL:samtools merge --threads N -c -p --reference GCA_922984935.2.subset.unmasked.fa SAMEA7524440.ERR6939249.merge.bam 1/pacbio.SAMEA7524440.ERR6939249.hifitrimmer.fastq.gz.0.SAMEA7524440.ERR6939249.bam",
+                    "@PG\tID:samtools.1\tPN:samtools\tPP:samtools\tVN:1.24\tCL:samtools merge --threads N -c -p --reference GCA_922984935.2.subset.unmasked.fa SAMEA7524440.ERR6939249.merge.bam 1/pacbio.SAMEA7524440.ERR6939249.hifitrimmer.fastq.gz.0.SAMEA7524440.ERR6939249.bam",
                     "@PG\tID:crumble\tPN:crumble\tPP:samtools.1\tVN:0.9.1\tCL:crumble -y pbccs -O bam SAMEA7524440.ERR6939249.merge.bam SAMEA7524440.ERR6939249.merge.crumble.bam",
-                    "@PG\tID:samtools.2\tPN:samtools\tPP:crumble\tVN:1.23.1\tCL:samtools view --threads N --reference GCA_922984935.2.subset.unmasked.fa --output-fmt cram,version=3.0,archive,level=8,embed_ref=1 --write-index -o GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939249.minimap2.cram GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939249.minimap2.bam",
-                    "@PG\tID:samtools.3\tPN:samtools\tPP:samtools.2\tVN:1.23.1\tCL:samtools reheader temp.sorted.header.sam input/GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939249.minimap2.cram"
+                    "@PG\tID:samtools.2\tPN:samtools\tPP:crumble\tVN:1.24\tCL:samtools view --threads N --reference GCA_922984935.2.subset.unmasked.fa --output-fmt cram,version=3.0,archive,level=8,embed_ref=1 --write-index -o GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939249.minimap2.cram GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939249.minimap2.bam",
+                    "@PG\tID:samtools.3\tPN:samtools\tPP:samtools.2\tVN:1.24\tCL:samtools reheader temp.sorted.header.sam input/GCA_922984935.2.subset.pacbio.SAMEA7524440.ERR6939249.minimap2.cram"
                 ],
                 "GCA_922984935.2.subset.pacbio.SAMEA7524440.merged_1.minimap2.cram": [
                     "@HD\tVN:1.6\tSO:coordinate",
@@ -536,14 +582,14 @@
                     "@PG\tID:samtools\tPN:samtools\tVN:1.10\tPP:ccs-4.2.0\tCL:samtools merge -t N -ncp -b m64094_200910_173211.chunks.fofn m64094_200910_173211.ccs.bam",
                     "@PG\tID:samtools.1\tPN:samtools\tVN:1.19.2\tPP:samtools\tCL:samtools view -b -h -N READS -o x.bam m64094_200910_173211.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.bam",
                     "@PG\tID:hifi-trimmer\tPN:hifi-trimmer\tVN:5.0.1\tPP:samtools.1\tCL:hifi-trimmer trim -t N -f cram -o pacbio.SAMEA7524440.ERR6939248.hifitrimmer.cram m64094_200910_173211.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.subset.bam pacbio.SAMEA7524440.ERR6939248.hifitrimmer.bed.gz",
-                    "@PG\tID:samtools.2\tPN:samtools\tPP:hifi-trimmer\tVN:1.23.1\tCL:samtools addreplacerg --threads N -w -m overwrite_all -r @RG\\tID:61ddc6c3Sequel_16_Barcodes_v3.fasta;BarcodeHash=e418d89cefcbef90f3cb0e6455b7e2a3;BarcodeCount=16;BarcodeMode=Symmetric;BarcodeQuality=Score\\tPL:PACBIO\\tPM:SEQUELII\\tBC:CACTCACGTGTGATATT\\tSM:SAMEA7524440 -o pacbio.SAMEA7524440.ERR6939248.hifitrimmer_addRG.cram pacbio.SAMEA7524440.ERR6939248.hifitrimmer.cram",
+                    "@PG\tID:samtools.2\tPN:samtools\tPP:hifi-trimmer\tVN:1.24\tCL:samtools addreplacerg --threads N -w -m overwrite_all -r @RG\\tID:61ddc6c3Sequel_16_Barcodes_v3.fasta;BarcodeHash=e418d89cefcbef90f3cb0e6455b7e2a3;BarcodeCount=16;BarcodeMode=Symmetric;BarcodeQuality=Score\\tPL:PACBIO\\tPM:SEQUELII\\tBC:CACTCACGTGTGATATT\\tSM:SAMEA7524440 -o pacbio.SAMEA7524440.ERR6939248.hifitrimmer_addRG.cram pacbio.SAMEA7524440.ERR6939248.hifitrimmer.cram",
                     "@PG\tID:minimap2\tPN:minimap2\tVN:2.30-r1287\tCL:minimap2 -t N -ax map-hifi --cs=short -I1G -y -R @RG\\tID:61ddc6c3Sequel_16_Barcodes_v3.fasta;BarcodeHash=e418d89cefcbef90f3cb0e6455b7e2a3;BarcodeCount=16;BarcodeMode=Symmetric;BarcodeQuality=Score\\tPL:PACBIO\\tPM:SEQUELII\\tBC:CACTCACGTGTGATATT\\tSM:SAMEA7524440 GCA_922984935.2.subset.unmasked.mmi -\tPP:samtools.2",
                     "@PG\tID:samtools.3\tPN:samtools\tPP:minimap2\tVN:1.22.1\tCL:samtools sort -t N -T pacbio.SAMEA7524440.ERR6939248.hifitrimmer_addRG.cram.0.SAMEA7524440.ERR6939248_sort_tmp -o pacbio.SAMEA7524440.ERR6939248.hifitrimmer_addRG.cram.0.SAMEA7524440.ERR6939248.bam -",
-                    "@PG\tID:samtools.4\tPN:samtools\tPP:samtools.3\tVN:1.23.1\tCL:samtools merge --threads N -c -p --reference GCA_922984935.2.subset.unmasked.fa SAMEA7524440.ERR6939248.merge.bam 1/pacbio.SAMEA7524440.ERR6939248.hifitrimmer_addRG.cram.0.SAMEA7524440.ERR6939248.bam",
-                    "@PG\tID:samtools.5\tPN:samtools\tPP:samtools.4\tVN:1.23.1\tCL:samtools merge --threads N -c -p SAMEA7524440.merged_1.merge.bam 1/SAMEA7524440.ERR6939248.merge.bam 2/SAMEA7524440.ERR6939249.merge.bam",
+                    "@PG\tID:samtools.4\tPN:samtools\tPP:samtools.3\tVN:1.24\tCL:samtools merge --threads N -c -p --reference GCA_922984935.2.subset.unmasked.fa SAMEA7524440.ERR6939248.merge.bam 1/pacbio.SAMEA7524440.ERR6939248.hifitrimmer_addRG.cram.0.SAMEA7524440.ERR6939248.bam",
+                    "@PG\tID:samtools.5\tPN:samtools\tPP:samtools.4\tVN:1.24\tCL:samtools merge --threads N -c -p SAMEA7524440.merged_1.merge.bam 1/SAMEA7524440.ERR6939248.merge.bam 2/SAMEA7524440.ERR6939249.merge.bam",
                     "@PG\tID:crumble\tPN:crumble\tPP:samtools.5\tVN:0.9.1\tCL:crumble -y pbccs -O bam SAMEA7524440.merged_1.merge.bam SAMEA7524440.merged_1.merge.crumble.bam",
-                    "@PG\tID:samtools.6\tPN:samtools\tPP:crumble\tVN:1.23.1\tCL:samtools view --threads N --reference GCA_922984935.2.subset.unmasked.fa --output-fmt cram,version=3.0,archive,level=8,embed_ref=1 --write-index -o GCA_922984935.2.subset.pacbio.SAMEA7524440.merged_1.minimap2.cram GCA_922984935.2.subset.pacbio.SAMEA7524440.merged_1.minimap2.bam",
-                    "@PG\tID:samtools.7\tPN:samtools\tPP:samtools.6\tVN:1.23.1\tCL:samtools reheader temp.sorted.header.sam input/GCA_922984935.2.subset.pacbio.SAMEA7524440.merged_1.minimap2.cram"
+                    "@PG\tID:samtools.6\tPN:samtools\tPP:crumble\tVN:1.24\tCL:samtools view --threads N --reference GCA_922984935.2.subset.unmasked.fa --output-fmt cram,version=3.0,archive,level=8,embed_ref=1 --write-index -o GCA_922984935.2.subset.pacbio.SAMEA7524440.merged_1.minimap2.cram GCA_922984935.2.subset.pacbio.SAMEA7524440.merged_1.minimap2.bam",
+                    "@PG\tID:samtools.7\tPN:samtools\tPP:samtools.6\tVN:1.24\tCL:samtools reheader temp.sorted.header.sam input/GCA_922984935.2.subset.pacbio.SAMEA7524440.merged_1.minimap2.cram"
                 ]
             },
             [
@@ -551,7 +597,7 @@
                 "pacbio.SAMEA7524440.ERR6939249.hifitrimmer.summary.json:md5,b41de1b1e61f9063cb042aa6393462d9"
             ]
         ],
-        "timestamp": "2026-09-18T15:00:56.648422217",
+        "timestamp": "2026-09-24T15:56:14.592636758",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.0"

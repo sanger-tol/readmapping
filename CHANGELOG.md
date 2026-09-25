@@ -33,6 +33,9 @@ Note, since the pipeline is using Nextflow DSL2, each process will be run with i
 | -------------- | ----------- | ----------- |
 | `hifi-trimmer` | 2.2.0       | 5.0.1       |
 | `multiqc`      | 1.33        | 1.35        |
+| `samtools`     | 1.23.1      | 1.24.0      |
+| `gawk`         | 5.3.0       | 5.3.1       |
+| `blobtk depth` | 0.7.1       | 0.8.0       |
 
 > **NB:** Dependency has been **updated** if both old and new version information is present. </br> **NB:** Dependency has been **added** if just the new version information is present. </br> **NB:** Dependency has been **removed** if version information isn't present.
 

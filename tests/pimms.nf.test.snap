@@ -1,10 +1,11 @@
 {
     "-profile test_pimms": {
         "content": [
-            29,
+            30,
             {
                 "BGZIP_BEDGRAPH": {
-                    "samtools": "1.23.1"
+                    "bgzip": 1.24,
+                    "tabix": 1.24
                 },
                 "BLAST_BLASTN": {
                     "blastn": "2.17.0+",
@@ -12,7 +13,7 @@
                     "seqkit": "2.12.0"
                 },
                 "BLOBTK_DEPTH": {
-                    "blobtk": "0.7.1"
+                    "blobtk": "0.8.0"
                 },
                 "CRAMALIGN_GENCRAMCHUNKS": {
                     "cramchunks": "1.1.0"
@@ -25,7 +26,7 @@
                     "fastqc": "0.12.1"
                 },
                 "GAWK_MODIFY_YAML_BARCODE": {
-                    "gawk": "5.3.0"
+                    "gawk": "5.3.1"
                 },
                 "GUNZIP": {
                     "gunzip": 1.13
@@ -53,28 +54,28 @@
                     "pbmarkdup": "1.2.0"
                 },
                 "SAMTOOLS_FAIDX": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.24
                 },
                 "SAMTOOLS_FLAGSTAT": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.24
                 },
                 "SAMTOOLS_IDXSTATS": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.24
                 },
                 "SAMTOOLS_INDEX": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.24
                 },
                 "SAMTOOLS_INDEX_BAM": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.24
                 },
                 "SAMTOOLS_MERGE": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.24
                 },
                 "SAMTOOLS_SPLITHEADER": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.24
                 },
                 "SAMTOOLS_STATS": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.24
                 },
                 "UNTAR": {
                     "untar": 1.34
@@ -94,6 +95,9 @@
                 "read_mapping/pacbio/SAMEA115183607/ERR15170332/GCA_965260885.1.subset.pacbio.SAMEA115183607.ERR15170332.minimap2.bam",
                 "read_mapping/pacbio/SAMEA115183607/ERR15170332/GCA_965260885.1.subset.pacbio.SAMEA115183607.ERR15170332.minimap2.bam.bai",
                 "read_mapping/pacbio/SAMEA115183607/ERR15170332/GCA_965260885.1.subset.pacbio.SAMEA115183607.ERR15170332.minimap2.coverage.1k.bedGraph.gz",
+                "read_mapping/pacbio/SAMEA115183607/ERR15170332/GCA_965260885.1.subset.pacbio.SAMEA115183607.ERR15170332.minimap2.coverage.1k.bedGraph.gz.csi",
+                "read_mapping/pacbio/SAMEA115183607/ERR15170332/GCA_965260885.1.subset.pacbio.SAMEA115183607.ERR15170332.minimap2.coverage.1k.bedGraph.gz.gzi",
+                "read_mapping/pacbio/SAMEA115183607/ERR15170332/GCA_965260885.1.subset.pacbio.SAMEA115183607.ERR15170332.minimap2.coverage.1k.bedGraph.gz.tbi",
                 "read_mapping/pacbio/SAMEA115183607/ERR15170332/qc",
                 "read_mapping/pacbio/SAMEA115183607/ERR15170332/qc/pacbio.SAMEA115183607.ERR15170332.fastqc.html",
                 "read_mapping/pacbio/SAMEA115183607/ERR15170332/qc/pacbio.SAMEA115183607.ERR15170332.fastqc.zip",
@@ -109,12 +113,14 @@
             ],
             [
                 "GCA_965260885.1.subset.pacbio.SAMEA115183607.ERR15170332.minimap2.coverage.1k.bedGraph.gz:md5,96c5d2ee658a26581d46c841d50e14d9",
+                "GCA_965260885.1.subset.pacbio.SAMEA115183607.ERR15170332.minimap2.coverage.1k.bedGraph.gz.gzi:md5,7dea362b3fac8e00956a4952a3d4f474",
+                "GCA_965260885.1.subset.pacbio.SAMEA115183607.ERR15170332.minimap2.coverage.1k.bedGraph.gz.tbi:md5,14c135d7fbb875374c8c485daaacf463",
                 "pacbio.SAMEA115183607.ERR15170332.hifitrimmer.bed.gz:md5,66059210a3a9e7d9318035c66ebe3037",
                 "pacbio.SAMEA115183607.ERR15170332.lima.report:md5,ae560485462c93d2ca3097927a2dcb69",
                 "pacbio.SAMEA115183607.ERR15170332.rmdup.pbmarkdup.log:md5,a9ae60b02f4d3da0612e607f88ab47be",
                 "GCA_965260885.1.subset.pacbio.SAMEA115183607.ERR15170332.minimap2.flagstat:md5,c62eb1fb1428e36687ce9e77419539a0",
                 "GCA_965260885.1.subset.pacbio.SAMEA115183607.ERR15170332.minimap2.idxstats:md5,c96bb119e9a07aad4d52b37237c46201",
-                "GCA_965260885.1.subset.pacbio.SAMEA115183607.ERR15170332.minimap2.stats.gz:md5,fb6345ed638051d23ecb55946737c6ce"
+                "GCA_965260885.1.subset.pacbio.SAMEA115183607.ERR15170332.minimap2.stats.gz:md5,c7b38d1442d21616b7b3911cb1324108"
             ],
             {
                 "GCA_965260885.1.subset.pacbio.SAMEA115183607.ERR15170332.minimap2.bam": {
@@ -146,7 +152,7 @@
                     "@PG\tID:hifi-trimmer\tPN:hifi-trimmer\tVN:5.0.1\tPP:lima.1\tCL:hifi-trimmer trim -t N -f cram -o pacbio.SAMEA115183607.ERR15170332.hifitrimmer.cram pacbio.SAMEA115183607.ERR15170332.rmdup.bam pacbio.SAMEA115183607.ERR15170332.hifitrimmer.bed.gz",
                     "@PG\tID:minimap2\tPN:minimap2\tVN:2.30-r1287\tCL:minimap2 -t N -ax map-hifi --cs=short -I1G -y -R @RG\\tID:337ee413/0--8\\tSM:TOL_ASG15300914\\tLB:TRAC-2-13801\\tPU:m84047_250307_124228_s4\\tDS:READTYPE=CCS;Ipd:CodecV1=ip;PulseWidth:CodecV1=pw;BINDINGKIT=102-739-100;SEQUENCINGKIT=102-118-800;BASECALLERVERSION=5.0;SMRTCELLKIT=102-202-200;SMRTCELLID=EA168037;RUNID=r84047_20250307_104418;ICSVERSION=13.3.0.253824;MOVIELENGTH=1440.0;FRAMERATEHZ=100.000000;BarcodeFile=TruSeq_adapters_v3.fasta;BarcodeHash=7ad395b587183d9864e930798b07689b;BarcodeCount=16;BarcodeMode=Asymmetric;BarcodeQuality=Score\\tPL:PACBIO\\tPM:REVIO\\tBC:CCGCGGTTGTGACTGGAGTTCAGACGTGTGCTCTTCCGATCT-AGCGCTAGACACTCTTTCCCTACACGACGCTCTTCCGATCT GCA_965260885.1.subset.unmasked.mmi -\tPP:hifi-trimmer",
                     "@PG\tID:samtools.1\tPN:samtools\tPP:minimap2\tVN:1.22.1\tCL:samtools sort -t N -T pacbio.SAMEA115183607.ERR15170332.hifitrimmer.cram.0.SAMEA115183607.ERR15170332_sort_tmp -o pacbio.SAMEA115183607.ERR15170332.hifitrimmer.cram.0.SAMEA115183607.ERR15170332.bam -",
-                    "@PG\tID:samtools.2\tPN:samtools\tPP:samtools.1\tVN:1.23.1\tCL:samtools merge --threads N -c -p --reference GCA_965260885.1.subset.unmasked.fa SAMEA115183607.ERR15170332.merge.bam 1/pacbio.SAMEA115183607.ERR15170332.hifitrimmer.cram.0.SAMEA115183607.ERR15170332.bam"
+                    "@PG\tID:samtools.2\tPN:samtools\tPP:samtools.1\tVN:1.24\tCL:samtools merge --threads N -c -p --reference GCA_965260885.1.subset.unmasked.fa SAMEA115183607.ERR15170332.merge.bam 1/pacbio.SAMEA115183607.ERR15170332.hifitrimmer.cram.0.SAMEA115183607.ERR15170332.bam"
                 ]
             },
             {
@@ -156,7 +162,7 @@
                 "pacbio.SAMEA115183607.ERR15170332.hifitrimmer.summary.json:md5,40119066fb16727f9fc8ffd2943efc62"
             ]
         ],
-        "timestamp": "2026-09-18T15:02:50.06140474",
+        "timestamp": "2026-09-24T15:57:49.523609407",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.0"

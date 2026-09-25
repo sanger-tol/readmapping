@@ -14,7 +14,7 @@ workflow MERGE_OUTPUT {
 
     if ( params.merge_output ) {
         ch_multi_bams = ch_bam
-        .map { meta, bam -> [['specimen':meta.specimen, 'datatype': meta.datatype], meta.run, meta.read_count, bam] }
+        .map { meta, bam -> [['specimen':meta.specimen, 'datatype': meta.datatype, 'genome_size': meta.genome_size], meta.run, meta.read_count, bam] }
         .groupTuple( by: [0] )
         .map { meta, runs, read_counts, bams ->
             def sorted = [runs, bams].transpose().sort { pair -> file(pair[0]).name }
@@ -24,7 +24,7 @@ workflow MERGE_OUTPUT {
         .map { meta, bam -> [meta + [merged: true], bam, []] }
 
         // Merge, but only if there is more than 1 file
-        SAMTOOLS_MERGE ( ch_multi_bams, [[],[],[],[]] )
+        SAMTOOLS_MERGE ( ch_multi_bams, [[],[],[],[]], [] )
 
         ch_bam = SAMTOOLS_MERGE.out.bam
         .mix ( ch_bam )

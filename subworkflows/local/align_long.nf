@@ -61,7 +61,8 @@ workflow ALIGN_LONG {
                 no_barcode:  true
             }
 
-        GAWK_MODIFY_YAML_BARCODE(ch_yaml_by_barcode.has_barcode, [], false)
+        ch_yaml_for_gawk = ch_yaml_by_barcode.has_barcode.map { meta, yaml -> tuple(meta, yaml, "") }
+        GAWK_MODIFY_YAML_BARCODE(ch_yaml_for_gawk, [], false)
 
         ch_pacbio_read_yaml = ch_reads_by_datatype.pacbio.combine(
             GAWK_MODIFY_YAML_BARCODE.out.output.mix(ch_yaml_by_barcode.no_barcode),

@@ -67,7 +67,7 @@ workflow PACBIO_PREPROCESS {
     if ( val_hifi_adapter ) {
 
         // Split on whether this record carries an adapter YAML (rides in meta._adapter_yaml)
-        ch_hifitrimmer_branch = ch_hifitrimmer_input.branch { meta, reads ->
+        ch_hifitrimmer_branch = ch_hifitrimmer_input.branch { meta, _reads ->
             trim:      meta._adapter_yaml
             skip_trim: true
         }
@@ -96,7 +96,7 @@ workflow PACBIO_PREPROCESS {
 
         // Recover each sample's YAML from meta._adapter_yaml alongside its blastn output
         ch_input_processblast = BLAST_BLASTN.out.txtgz
-            .join(ch_hifitrimmer_branch.trim.map { meta, reads -> [ meta - meta.subMap('_adapter_yaml'), meta._adapter_yaml ] }, by: 0)
+            .join(ch_hifitrimmer_branch.trim.map { meta, _reads -> [ meta - meta.subMap('_adapter_yaml'), meta._adapter_yaml ] }, by: 0)
             .multiMap { meta, blastn, yaml ->
                 blastn: [ meta, blastn ]
                 yaml:   [ meta, yaml ]
