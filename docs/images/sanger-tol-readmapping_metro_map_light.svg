@@ -169,10 +169,16 @@
 <g class="nf-metro-station-group" data-node-id="in_pacbio" data-node-cx="152.0" data-node-cy="172.2" data-node-r="6.0" data-node-groups="pacbio_amplified,pacbio_pimms,pacbio_std,pacbio_uli" data-node-region="pre_qc_block" data-node-w="12.0" data-node-h="24.0" data-node-rx="6.0">
 <rect x="146.0" y="160.2" width="12.0" height="24.0" fill="#ffffff" stroke="#333333" stroke-width="2.0" class="nf-metro-station" data-station-id="in_pacbio" data-station-lines="pacbio_amplified,pacbio_pimms,pacbio_std,pacbio_uli" data-station-label="in_pacbio" data-section-id="pre_qc_block" data-section-name="Indexing &amp; Pre-Align QC" />
 <g data-station-id="in_pacbio">
+<path d="M118.19999999999999,152.0 L136.2,152.0 L144.2,160.0 L144.2,182.0 Q144.2,184.0,142.2,184.0 L118.19999999999999,184.0 Q116.19999999999999,184.0,116.19999999999999,182.0 L116.19999999999999,154.0 Q116.19999999999999,152.0,118.19999999999999,152.0 Z" fill="#ffffff" stroke="#333333" stroke-width="1.5" stroke-linejoin="round" />
+<path d="M136.2,152.0 L136.2,160.0 L144.2,160.0 Z" fill="#333333" opacity="0.15" stroke="none" />
+<path d="M136.2,152.0 L136.2,160.0 L144.2,160.0" fill="none" stroke="#333333" stroke-width="0.8999999999999999" />
 <path d="M114.0,156.2 L132.0,156.2 L140.0,164.2 L140.0,186.2 Q140.0,188.2,138.0,188.2 L114.0,188.2 Q112.0,188.2,112.0,186.2 L112.0,158.2 Q112.0,156.2,114.0,156.2 Z" fill="#ffffff" stroke="#333333" stroke-width="1.5" stroke-linejoin="round" />
 <path d="M132.0,156.2 L132.0,164.2 L140.0,164.2 Z" fill="#333333" opacity="0.15" stroke="none" />
 <path d="M132.0,156.2 L132.0,164.2 L140.0,164.2" fill="none" stroke="#333333" stroke-width="0.8999999999999999" />
 <text x="126.0" y="173.39999999999998" font-size="7.5" fill="#000000" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-weight="bold" text-anchor="middle" dy="0.3em">FASTQ</text>
+<path d="M86.2,152.0 L104.2,152.0 L112.2,160.0 L112.2,182.0 Q112.2,184.0,110.2,184.0 L86.2,184.0 Q84.2,184.0,84.2,182.0 L84.2,154.0 Q84.2,152.0,86.2,152.0 Z" fill="#ffffff" stroke="#333333" stroke-width="1.5" stroke-linejoin="round" />
+<path d="M104.2,152.0 L104.2,160.0 L112.2,160.0 Z" fill="#333333" opacity="0.15" stroke="none" />
+<path d="M104.2,152.0 L104.2,160.0 L112.2,160.0" fill="none" stroke="#333333" stroke-width="0.8999999999999999" />
 <path d="M82.0,156.2 L100.0,156.2 L108.0,164.2 L108.0,186.2 Q108.0,188.2,106.0,188.2 L82.0,188.2 Q80.0,188.2,80.0,186.2 L80.0,158.2 Q80.0,156.2,82.0,156.2 Z" fill="#ffffff" stroke="#333333" stroke-width="1.5" stroke-linejoin="round" />
 <path d="M100.0,156.2 L100.0,164.2 L108.0,164.2 Z" fill="#333333" opacity="0.15" stroke="none" />
 <path d="M100.0,156.2 L100.0,164.2 L108.0,164.2" fill="none" stroke="#333333" stroke-width="0.8999999999999999" />
@@ -182,14 +188,23 @@
 <g class="nf-metro-station-group" data-node-id="in_ont_clr" data-node-cx="152.0" data-node-cy="229.2" data-node-r="6.0" data-node-groups="ont_clr" data-node-region="pre_qc_block" data-node-w="12.0" data-node-h="12.0" data-node-rx="6.0">
 <rect x="146.0" y="223.2" width="12.0" height="12.0" fill="#ffffff" stroke="#333333" stroke-width="2.0" class="nf-metro-station" data-station-id="in_ont_clr" data-station-lines="ont_clr" data-station-label="in_ont_clr" data-section-id="pre_qc_block" data-section-name="Indexing &amp; Pre-Align QC" />
 <g data-station-id="in_ont_clr">
+<path d="M118.19999999999999,209.0 L136.2,209.0 L144.2,217.0 L144.2,239.0 Q144.2,241.0,142.2,241.0 L118.19999999999999,241.0 Q116.19999999999999,241.0,116.19999999999999,239.0 L116.19999999999999,211.0 Q116.19999999999999,209.0,118.19999999999999,209.0 Z" fill="#ffffff" stroke="#333333" stroke-width="1.5" stroke-linejoin="round" />
+<path d="M136.2,209.0 L136.2,217.0 L144.2,217.0 Z" fill="#333333" opacity="0.15" stroke="none" />
+<path d="M136.2,209.0 L136.2,217.0 L144.2,217.0" fill="none" stroke="#333333" stroke-width="0.8999999999999999" />
 <path d="M114.0,213.2 L132.0,213.2 L140.0,221.2 L140.0,243.2 Q140.0,245.2,138.0,245.2 L114.0,245.2 Q112.0,245.2,112.0,243.2 L112.0,215.2 Q112.0,213.2,114.0,213.2 Z" fill="#ffffff" stroke="#333333" stroke-width="1.5" stroke-linejoin="round" />
 <path d="M132.0,213.2 L132.0,221.2 L140.0,221.2 Z" fill="#333333" opacity="0.15" stroke="none" />
 <path d="M132.0,213.2 L132.0,221.2 L140.0,221.2" fill="none" stroke="#333333" stroke-width="0.8999999999999999" />
 <text x="126.0" y="230.39999999999998" font-size="7.5" fill="#000000" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-weight="bold" text-anchor="middle" dy="0.3em">FASTQ</text>
+<path d="M86.2,209.0 L104.2,209.0 L112.2,217.0 L112.2,239.0 Q112.2,241.0,110.2,241.0 L86.2,241.0 Q84.2,241.0,84.2,239.0 L84.2,211.0 Q84.2,209.0,86.2,209.0 Z" fill="#ffffff" stroke="#333333" stroke-width="1.5" stroke-linejoin="round" />
+<path d="M104.2,209.0 L104.2,217.0 L112.2,217.0 Z" fill="#333333" opacity="0.15" stroke="none" />
+<path d="M104.2,209.0 L104.2,217.0 L112.2,217.0" fill="none" stroke="#333333" stroke-width="0.8999999999999999" />
 <path d="M82.0,213.2 L100.0,213.2 L108.0,221.2 L108.0,243.2 Q108.0,245.2,106.0,245.2 L82.0,245.2 Q80.0,245.2,80.0,243.2 L80.0,215.2 Q80.0,213.2,82.0,213.2 Z" fill="#ffffff" stroke="#333333" stroke-width="1.5" stroke-linejoin="round" />
 <path d="M100.0,213.2 L100.0,221.2 L108.0,221.2 Z" fill="#333333" opacity="0.15" stroke="none" />
 <path d="M100.0,213.2 L100.0,221.2 L108.0,221.2" fill="none" stroke="#333333" stroke-width="0.8999999999999999" />
 <text x="94.0" y="230.39999999999998" font-size="7.5" fill="#000000" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-weight="bold" text-anchor="middle" dy="0.3em">BAM</text>
+<path d="M54.2,209.0 L72.2,209.0 L80.2,217.0 L80.2,239.0 Q80.2,241.0,78.2,241.0 L54.2,241.0 Q52.2,241.0,52.2,239.0 L52.2,211.0 Q52.2,209.0,54.2,209.0 Z" fill="#ffffff" stroke="#333333" stroke-width="1.5" stroke-linejoin="round" />
+<path d="M72.2,209.0 L72.2,217.0 L80.2,217.0 Z" fill="#333333" opacity="0.15" stroke="none" />
+<path d="M72.2,209.0 L72.2,217.0 L80.2,217.0" fill="none" stroke="#333333" stroke-width="0.8999999999999999" />
 <path d="M50.0,213.2 L68.0,213.2 L76.0,221.2 L76.0,243.2 Q76.0,245.2,74.0,245.2 L50.0,245.2 Q48.0,245.2,48.0,243.2 L48.0,215.2 Q48.0,213.2,50.0,213.2 Z" fill="#ffffff" stroke="#333333" stroke-width="1.5" stroke-linejoin="round" />
 <path d="M68.0,213.2 L68.0,221.2 L76.0,221.2 Z" fill="#333333" opacity="0.15" stroke="none" />
 <path d="M68.0,213.2 L68.0,221.2 L76.0,221.2" fill="none" stroke="#333333" stroke-width="0.8999999999999999" />
@@ -199,14 +214,23 @@
 <g class="nf-metro-station-group" data-node-id="in_short" data-node-cx="152.0" data-node-cy="292.2" data-node-r="6.0" data-node-groups="short_reads" data-node-region="pre_qc_block" data-node-w="12.0" data-node-h="12.0" data-node-rx="6.0">
 <rect x="146.0" y="286.2" width="12.0" height="12.0" fill="#ffffff" stroke="#333333" stroke-width="2.0" class="nf-metro-station" data-station-id="in_short" data-station-lines="short_reads" data-station-label="in_short" data-section-id="pre_qc_block" data-section-name="Indexing &amp; Pre-Align QC" />
 <g data-station-id="in_short">
+<path d="M118.19999999999999,272.0 L136.2,272.0 L144.2,280.0 L144.2,302.0 Q144.2,304.0,142.2,304.0 L118.19999999999999,304.0 Q116.19999999999999,304.0,116.19999999999999,302.0 L116.19999999999999,274.0 Q116.19999999999999,272.0,118.19999999999999,272.0 Z" fill="#ffffff" stroke="#333333" stroke-width="1.5" stroke-linejoin="round" />
+<path d="M136.2,272.0 L136.2,280.0 L144.2,280.0 Z" fill="#333333" opacity="0.15" stroke="none" />
+<path d="M136.2,272.0 L136.2,280.0 L144.2,280.0" fill="none" stroke="#333333" stroke-width="0.8999999999999999" />
 <path d="M114.0,276.2 L132.0,276.2 L140.0,284.2 L140.0,306.2 Q140.0,308.2,138.0,308.2 L114.0,308.2 Q112.0,308.2,112.0,306.2 L112.0,278.2 Q112.0,276.2,114.0,276.2 Z" fill="#ffffff" stroke="#333333" stroke-width="1.5" stroke-linejoin="round" />
 <path d="M132.0,276.2 L132.0,284.2 L140.0,284.2 Z" fill="#333333" opacity="0.15" stroke="none" />
 <path d="M132.0,276.2 L132.0,284.2 L140.0,284.2" fill="none" stroke="#333333" stroke-width="0.8999999999999999" />
 <text x="126.0" y="293.4" font-size="7.5" fill="#000000" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-weight="bold" text-anchor="middle" dy="0.3em">FASTQ</text>
+<path d="M86.2,272.0 L104.2,272.0 L112.2,280.0 L112.2,302.0 Q112.2,304.0,110.2,304.0 L86.2,304.0 Q84.2,304.0,84.2,302.0 L84.2,274.0 Q84.2,272.0,86.2,272.0 Z" fill="#ffffff" stroke="#333333" stroke-width="1.5" stroke-linejoin="round" />
+<path d="M104.2,272.0 L104.2,280.0 L112.2,280.0 Z" fill="#333333" opacity="0.15" stroke="none" />
+<path d="M104.2,272.0 L104.2,280.0 L112.2,280.0" fill="none" stroke="#333333" stroke-width="0.8999999999999999" />
 <path d="M82.0,276.2 L100.0,276.2 L108.0,284.2 L108.0,306.2 Q108.0,308.2,106.0,308.2 L82.0,308.2 Q80.0,308.2,80.0,306.2 L80.0,278.2 Q80.0,276.2,82.0,276.2 Z" fill="#ffffff" stroke="#333333" stroke-width="1.5" stroke-linejoin="round" />
 <path d="M100.0,276.2 L100.0,284.2 L108.0,284.2 Z" fill="#333333" opacity="0.15" stroke="none" />
 <path d="M100.0,276.2 L100.0,284.2 L108.0,284.2" fill="none" stroke="#333333" stroke-width="0.8999999999999999" />
 <text x="94.0" y="293.4" font-size="7.5" fill="#000000" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-weight="bold" text-anchor="middle" dy="0.3em">BAM</text>
+<path d="M54.2,272.0 L72.2,272.0 L80.2,280.0 L80.2,302.0 Q80.2,304.0,78.2,304.0 L54.2,304.0 Q52.2,304.0,52.2,302.0 L52.2,274.0 Q52.2,272.0,54.2,272.0 Z" fill="#ffffff" stroke="#333333" stroke-width="1.5" stroke-linejoin="round" />
+<path d="M72.2,272.0 L72.2,280.0 L80.2,280.0 Z" fill="#333333" opacity="0.15" stroke="none" />
+<path d="M72.2,272.0 L72.2,280.0 L80.2,280.0" fill="none" stroke="#333333" stroke-width="0.8999999999999999" />
 <path d="M50.0,276.2 L68.0,276.2 L76.0,284.2 L76.0,306.2 Q76.0,308.2,74.0,308.2 L50.0,308.2 Q48.0,308.2,48.0,306.2 L48.0,278.2 Q48.0,276.2,50.0,276.2 Z" fill="#ffffff" stroke="#333333" stroke-width="1.5" stroke-linejoin="round" />
 <path d="M68.0,276.2 L68.0,284.2 L76.0,284.2 Z" fill="#333333" opacity="0.15" stroke="none" />
 <path d="M68.0,276.2 L68.0,284.2 L76.0,284.2" fill="none" stroke="#333333" stroke-width="0.8999999999999999" />
@@ -268,10 +292,16 @@ Coverage" data-section-id="postprocess_block" data-section-name="Post-Processing
 <g class="nf-metro-station-group" data-node-id="bam_out" data-node-cx="2068.5" data-node-cy="117.2" data-node-r="6.0" data-node-groups="ont_clr,pacbio_amplified,pacbio_pimms,pacbio_std,pacbio_uli,short_reads" data-node-region="postprocess_block" data-node-w="12.0" data-node-h="32.0" data-node-rx="6.0">
 <rect x="2062.5" y="101.2" width="12.0" height="32.0" fill="#ffffff" stroke="#333333" stroke-width="2.0" class="nf-metro-station" data-station-id="bam_out" data-station-lines="ont_clr,pacbio_amplified,pacbio_pimms,pacbio_std,pacbio_uli,short_reads" data-station-label="bam_out" data-section-id="postprocess_block" data-section-name="Post-Processing &amp; Stats" />
 <g data-station-id="bam_out">
+<path d="M2086.7,97.0 L2104.7,97.0 L2112.7,105.0 L2112.7,127.0 Q2112.7,129.0,2110.7,129.0 L2086.7,129.0 Q2084.7,129.0,2084.7,127.0 L2084.7,99.0 Q2084.7,97.0,2086.7,97.0 Z" fill="#ffffff" stroke="#333333" stroke-width="1.5" stroke-linejoin="round" />
+<path d="M2104.7,97.0 L2104.7,105.0 L2112.7,105.0 Z" fill="#333333" opacity="0.15" stroke="none" />
+<path d="M2104.7,97.0 L2104.7,105.0 L2112.7,105.0" fill="none" stroke="#333333" stroke-width="0.8999999999999999" />
 <path d="M2082.5,101.2 L2100.5,101.2 L2108.5,109.2 L2108.5,131.2 Q2108.5,133.2,2106.5,133.2 L2082.5,133.2 Q2080.5,133.2,2080.5,131.2 L2080.5,103.2 Q2080.5,101.2,2082.5,101.2 Z" fill="#ffffff" stroke="#333333" stroke-width="1.5" stroke-linejoin="round" />
 <path d="M2100.5,101.2 L2100.5,109.2 L2108.5,109.2 Z" fill="#333333" opacity="0.15" stroke="none" />
 <path d="M2100.5,101.2 L2100.5,109.2 L2108.5,109.2" fill="none" stroke="#333333" stroke-width="0.8999999999999999" />
 <text x="2094.5" y="118.4" font-size="7.5" fill="#000000" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-weight="bold" text-anchor="middle" dy="0.3em">BAM</text>
+<path d="M2118.7,97.0 L2136.7,97.0 L2144.7,105.0 L2144.7,127.0 Q2144.7,129.0,2142.7,129.0 L2118.7,129.0 Q2116.7,129.0,2116.7,127.0 L2116.7,99.0 Q2116.7,97.0,2118.7,97.0 Z" fill="#ffffff" stroke="#333333" stroke-width="1.5" stroke-linejoin="round" />
+<path d="M2136.7,97.0 L2136.7,105.0 L2144.7,105.0 Z" fill="#333333" opacity="0.15" stroke="none" />
+<path d="M2136.7,97.0 L2136.7,105.0 L2144.7,105.0" fill="none" stroke="#333333" stroke-width="0.8999999999999999" />
 <path d="M2114.5,101.2 L2132.5,101.2 L2140.5,109.2 L2140.5,131.2 Q2140.5,133.2,2138.5,133.2 L2114.5,133.2 Q2112.5,133.2,2112.5,131.2 L2112.5,103.2 Q2112.5,101.2,2114.5,101.2 Z" fill="#ffffff" stroke="#333333" stroke-width="1.5" stroke-linejoin="round" />
 <path d="M2132.5,101.2 L2132.5,109.2 L2140.5,109.2 Z" fill="#333333" opacity="0.15" stroke="none" />
 <path d="M2132.5,101.2 L2132.5,109.2 L2140.5,109.2" fill="none" stroke="#333333" stroke-width="0.8999999999999999" />
@@ -281,10 +311,16 @@ Coverage" data-section-id="postprocess_block" data-section-name="Post-Processing
 <g class="nf-metro-station-group" data-node-id="cram_out" data-node-cx="2068.5" data-node-cy="243.2" data-node-r="6.0" data-node-groups="ont_clr,pacbio_amplified,pacbio_pimms,pacbio_std,pacbio_uli,short_reads" data-node-region="postprocess_block" data-node-w="12.0" data-node-h="32.0" data-node-rx="6.0">
 <rect x="2062.5" y="227.2" width="12.0" height="32.0" fill="#ffffff" stroke="#333333" stroke-width="2.0" class="nf-metro-station" data-station-id="cram_out" data-station-lines="ont_clr,pacbio_amplified,pacbio_pimms,pacbio_std,pacbio_uli,short_reads" data-station-label="cram_out" data-section-id="postprocess_block" data-section-name="Post-Processing &amp; Stats" />
 <g data-station-id="cram_out">
+<path d="M2086.7,223.0 L2104.7,223.0 L2112.7,231.0 L2112.7,253.0 Q2112.7,255.0,2110.7,255.0 L2086.7,255.0 Q2084.7,255.0,2084.7,253.0 L2084.7,225.0 Q2084.7,223.0,2086.7,223.0 Z" fill="#ffffff" stroke="#333333" stroke-width="1.5" stroke-linejoin="round" />
+<path d="M2104.7,223.0 L2104.7,231.0 L2112.7,231.0 Z" fill="#333333" opacity="0.15" stroke="none" />
+<path d="M2104.7,223.0 L2104.7,231.0 L2112.7,231.0" fill="none" stroke="#333333" stroke-width="0.8999999999999999" />
 <path d="M2082.5,227.2 L2100.5,227.2 L2108.5,235.2 L2108.5,257.2 Q2108.5,259.2,2106.5,259.2 L2082.5,259.2 Q2080.5,259.2,2080.5,257.2 L2080.5,229.2 Q2080.5,227.2,2082.5,227.2 Z" fill="#ffffff" stroke="#333333" stroke-width="1.5" stroke-linejoin="round" />
 <path d="M2100.5,227.2 L2100.5,235.2 L2108.5,235.2 Z" fill="#333333" opacity="0.15" stroke="none" />
 <path d="M2100.5,227.2 L2100.5,235.2 L2108.5,235.2" fill="none" stroke="#333333" stroke-width="0.8999999999999999" />
 <text x="2094.5" y="244.39999999999998" font-size="7.5" fill="#000000" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-weight="bold" text-anchor="middle" dy="0.3em">CRAM</text>
+<path d="M2118.7,223.0 L2136.7,223.0 L2144.7,231.0 L2144.7,253.0 Q2144.7,255.0,2142.7,255.0 L2118.7,255.0 Q2116.7,255.0,2116.7,253.0 L2116.7,225.0 Q2116.7,223.0,2118.7,223.0 Z" fill="#ffffff" stroke="#333333" stroke-width="1.5" stroke-linejoin="round" />
+<path d="M2136.7,223.0 L2136.7,231.0 L2144.7,231.0 Z" fill="#333333" opacity="0.15" stroke="none" />
+<path d="M2136.7,223.0 L2136.7,231.0 L2144.7,231.0" fill="none" stroke="#333333" stroke-width="0.8999999999999999" />
 <path d="M2114.5,227.2 L2132.5,227.2 L2140.5,235.2 L2140.5,257.2 Q2140.5,259.2,2138.5,259.2 L2114.5,259.2 Q2112.5,259.2,2112.5,257.2 L2112.5,229.2 Q2112.5,227.2,2114.5,227.2 Z" fill="#ffffff" stroke="#333333" stroke-width="1.5" stroke-linejoin="round" />
 <path d="M2132.5,227.2 L2132.5,235.2 L2140.5,235.2 Z" fill="#333333" opacity="0.15" stroke="none" />
 <path d="M2132.5,227.2 L2132.5,235.2 L2140.5,235.2" fill="none" stroke="#333333" stroke-width="0.8999999999999999" />
@@ -294,6 +330,9 @@ Coverage" data-section-id="postprocess_block" data-section-name="Post-Processing
 <g class="nf-metro-station-group" data-node-id="stats_out" data-node-cx="2245.0" data-node-cy="395.2" data-node-r="6.0" data-node-groups="qc" data-node-region="postprocess_block" data-node-w="12.0" data-node-h="12.0" data-node-rx="6.0">
 <rect x="2239.0" y="389.2" width="12.0" height="12.0" fill="#ffffff" stroke="#333333" stroke-width="2.0" class="nf-metro-station" data-station-id="stats_out" data-station-lines="qc" data-station-label="stats_out" data-section-id="postprocess_block" data-section-name="Post-Processing &amp; Stats" />
 <g data-station-id="stats_out">
+<path d="M2263.2,375.0 L2281.2,375.0 L2289.2,383.0 L2289.2,405.0 Q2289.2,407.0,2287.2,407.0 L2263.2,407.0 Q2261.2,407.0,2261.2,405.0 L2261.2,377.0 Q2261.2,375.0,2263.2,375.0 Z" fill="#ffffff" stroke="#333333" stroke-width="1.5" stroke-linejoin="round" />
+<path d="M2281.2,375.0 L2281.2,383.0 L2289.2,383.0 Z" fill="#333333" opacity="0.15" stroke="none" />
+<path d="M2281.2,375.0 L2281.2,383.0 L2289.2,383.0" fill="none" stroke="#333333" stroke-width="0.8999999999999999" />
 <path d="M2259.0,379.2 L2277.0,379.2 L2285.0,387.2 L2285.0,409.2 Q2285.0,411.2,2283.0,411.2 L2259.0,411.2 Q2257.0,411.2,2257.0,409.2 L2257.0,381.2 Q2257.0,379.2,2259.0,379.2 Z" fill="#ffffff" stroke="#333333" stroke-width="1.5" stroke-linejoin="round" />
 <path d="M2277.0,379.2 L2277.0,387.2 L2285.0,387.2 Z" fill="#333333" opacity="0.15" stroke="none" />
 <path d="M2277.0,379.2 L2277.0,387.2 L2285.0,387.2" fill="none" stroke="#333333" stroke-width="0.8999999999999999" />
@@ -303,6 +342,9 @@ Coverage" data-section-id="postprocess_block" data-section-name="Post-Processing
 <g class="nf-metro-station-group" data-node-id="bedgraph_out" data-node-cx="2186.5" data-node-cy="458.2" data-node-r="6.0" data-node-groups="qc" data-node-region="postprocess_block" data-node-w="12.0" data-node-h="12.0" data-node-rx="6.0">
 <rect x="2180.5" y="452.2" width="12.0" height="12.0" fill="#ffffff" stroke="#333333" stroke-width="2.0" class="nf-metro-station" data-station-id="bedgraph_out" data-station-lines="qc" data-station-label="bedgraph_out" data-section-id="postprocess_block" data-section-name="Post-Processing &amp; Stats" />
 <g data-station-id="bedgraph_out">
+<path d="M2204.7,438.0 L2222.7,438.0 L2230.7,446.0 L2230.7,468.0 Q2230.7,470.0,2228.7,470.0 L2204.7,470.0 Q2202.7,470.0,2202.7,468.0 L2202.7,440.0 Q2202.7,438.0,2204.7,438.0 Z" fill="#ffffff" stroke="#333333" stroke-width="1.5" stroke-linejoin="round" />
+<path d="M2222.7,438.0 L2222.7,446.0 L2230.7,446.0 Z" fill="#333333" opacity="0.15" stroke="none" />
+<path d="M2222.7,438.0 L2222.7,446.0 L2230.7,446.0" fill="none" stroke="#333333" stroke-width="0.8999999999999999" />
 <path d="M2200.5,442.2 L2218.5,442.2 L2226.5,450.2 L2226.5,472.2 Q2226.5,474.2,2224.5,474.2 L2200.5,474.2 Q2198.5,474.2,2198.5,472.2 L2198.5,444.2 Q2198.5,442.2,2200.5,442.2 Z" fill="#ffffff" stroke="#333333" stroke-width="1.5" stroke-linejoin="round" />
 <path d="M2218.5,442.2 L2218.5,450.2 L2226.5,450.2 Z" fill="#333333" opacity="0.15" stroke="none" />
 <path d="M2218.5,442.2 L2218.5,450.2 L2226.5,450.2" fill="none" stroke="#333333" stroke-width="0.8999999999999999" />
@@ -316,6 +358,9 @@ Report" data-section-id="multiqc_block" data-section-name="QC Reporting" />
 <g class="nf-metro-station-group" data-node-id="multiqc_out" data-node-cx="2491.0" data-node-cy="103.2" data-node-r="6.0" data-node-groups="qc" data-node-region="multiqc_block" data-node-w="12.0" data-node-h="12.0" data-node-rx="6.0">
 <rect x="2485.0" y="97.2" width="12.0" height="12.0" fill="#ffffff" stroke="#333333" stroke-width="2.0" class="nf-metro-station" data-station-id="multiqc_out" data-station-lines="qc" data-station-label="multiqc_out" data-section-id="multiqc_block" data-section-name="QC Reporting" />
 <g data-station-id="multiqc_out">
+<path d="M2509.2,83.0 L2527.2,83.0 L2535.2,91.0 L2535.2,113.0 Q2535.2,115.0,2533.2,115.0 L2509.2,115.0 Q2507.2,115.0,2507.2,113.0 L2507.2,85.0 Q2507.2,83.0,2509.2,83.0 Z" fill="#ffffff" stroke="#333333" stroke-width="1.5" stroke-linejoin="round" />
+<path d="M2527.2,83.0 L2527.2,91.0 L2535.2,91.0 Z" fill="#333333" opacity="0.15" stroke="none" />
+<path d="M2527.2,83.0 L2527.2,91.0 L2535.2,91.0" fill="none" stroke="#333333" stroke-width="0.8999999999999999" />
 <path d="M2505.0,87.2 L2523.0,87.2 L2531.0,95.2 L2531.0,117.2 Q2531.0,119.2,2529.0,119.2 L2505.0,119.2 Q2503.0,119.2,2503.0,117.2 L2503.0,89.2 Q2503.0,87.2,2505.0,87.2 Z" fill="#ffffff" stroke="#333333" stroke-width="1.5" stroke-linejoin="round" />
 <path d="M2523.0,87.2 L2523.0,95.2 L2531.0,95.2 Z" fill="#333333" opacity="0.15" stroke="none" />
 <path d="M2523.0,87.2 L2523.0,95.2 L2531.0,95.2" fill="none" stroke="#333333" stroke-width="0.8999999999999999" />
