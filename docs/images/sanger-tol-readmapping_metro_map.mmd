@@ -30,6 +30,8 @@
 %%metro file: in_short | CRAM
 %%metro file: cram_out | CRAM
 %%metro file: cram_out | CRAI
+%%metro file: bam_out | BAM
+%%metro file: bam_out | BAI
 %%metro file: stats_out | stats
 %%metro file: bedgraph_out | bedgraph
 %%metro file: multiqc_out | HTML
@@ -94,6 +96,7 @@ graph LR
         sam_stats[Samtools\nStats, Flagstat, Idxstats]
         blobtk[BlobTK Depth\nCoverage]
 
+        bam_out[ ]
         cram_out[ ]
         stats_out[ ]
         bedgraph_out[ ]
@@ -102,6 +105,7 @@ graph LR
         ref_index -->|reference| cram_conv
 
         cram_conv -->|pacbio_std,pacbio_uli,pacbio_pimms,pacbio_amplified,ont_clr,short_reads| cram_out
+        cram_conv -->|pacbio_std,pacbio_uli,pacbio_pimms,pacbio_amplified,ont_clr,short_reads| bam_out
 
         cram_conv -->|qc| sam_stats
         cram_conv -->|qc| blobtk
