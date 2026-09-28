@@ -75,7 +75,7 @@
                     "samtools": 1.24
                 },
                 "SAMTOOLS_STATS": {
-                    "samtools": 1.24
+                    "samtools": "1.23.1"
                 },
                 "UNTAR": {
                     "untar": 1.34
@@ -120,7 +120,7 @@
                 "pacbio.SAMEA115183607.ERR15170332.rmdup.pbmarkdup.log:md5,a9ae60b02f4d3da0612e607f88ab47be",
                 "GCA_965260885.1.subset.pacbio.SAMEA115183607.ERR15170332.minimap2.flagstat:md5,c62eb1fb1428e36687ce9e77419539a0",
                 "GCA_965260885.1.subset.pacbio.SAMEA115183607.ERR15170332.minimap2.idxstats:md5,c96bb119e9a07aad4d52b37237c46201",
-                "GCA_965260885.1.subset.pacbio.SAMEA115183607.ERR15170332.minimap2.stats.gz:md5,c7b38d1442d21616b7b3911cb1324108"
+                "GCA_965260885.1.subset.pacbio.SAMEA115183607.ERR15170332.minimap2.stats.gz:md5,fb6345ed638051d23ecb55946737c6ce"
             ],
             {
                 "GCA_965260885.1.subset.pacbio.SAMEA115183607.ERR15170332.minimap2.bam": {
@@ -162,7 +162,7 @@
                 "pacbio.SAMEA115183607.ERR15170332.hifitrimmer.summary.json:md5,40119066fb16727f9fc8ffd2943efc62"
             ]
         ],
-        "timestamp": "2026-09-26T09:46:14.942857676",
+        "timestamp": "2026-09-28T09:21:41.894354045",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.0"

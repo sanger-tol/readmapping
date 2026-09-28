@@ -29,13 +29,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Note, since the pipeline is using Nextflow DSL2, each process will be run with its own [Biocontainer](https://biocontainers.pro/#/registry). This means that on occasion it is entirely possible for the pipeline to be using different versions of the same tool. However, the overall software dependency changes compared to the last release have been listed below for reference.
 
-| Dependency     | Old version | New version |
-| -------------- | ----------- | ----------- |
-| `hifi-trimmer` | 2.2.0       | 5.0.1       |
-| `multiqc`      | 1.33        | 1.35        |
-| `samtools`     | 1.23.1      | 1.24.0      |
-| `gawk`         | 5.3.0       | 5.3.1       |
-| `blobtk depth` | 0.7.1       | 0.8.0       |
+| Dependency     | Old version              | New version                    |
+| -------------- | ------------------------ | ------------------------------ |
+| `hifi-trimmer` | 2.2.0                    | 5.0.1                          |
+| `multiqc`      | 1.33                     | 1.35                           |
+| `samtools`     | 1.22.1, 1.23, and 1.23.1 | 1.22.1, 1.23, 1.23.1, and 1.24 |
+| `gawk`         | 5.3.0                    | 5.3.1                          |
+| `blobtk depth` | 0.7.1                    | 0.8.0                          |
 
 > **NB:** Dependency has been **updated** if both old and new version information is present. </br> **NB:** Dependency has been **added** if just the new version information is present. </br> **NB:** Dependency has been **removed** if version information isn't present.
 
@@ -112,20 +112,20 @@ Note, since the pipeline is using Nextflow DSL2, each process will be run with i
 
 Note, since the pipeline is using Nextflow DSL2, each process will be run with its own [Biocontainer](https://biocontainers.pro/#/registry). This means that on occasion it is entirely possible for the pipeline to be using different versions of the same tool. However, the overall software dependency changes compared to the last release have been listed below for reference.
 
-| Dependency     | Old version | New version |
-| -------------- | ----------- | ----------- |
-| `blastn`       | 2.15        | 2.17        |
-| `bwa-mem2`     | 2.2.1       | 2.3         |
-| `blobtk depth` |             | 0.7.1       |
-| `fastqc`       |             | 0.12.1      |
-| `gawk`         |             | 5.3.0       |
-| `hifi-trimmer` |             | 2.2.0       |
-| `lima`         |             | 2.12.0      |
-| `minimap2`     | 2.28        | 2.30        |
-| `multiqc`      |             | 1.33        |
-| `pbmarkdup`    |             | 1.2.0       |
-| `pigz`         |             | 2.8         |
-| `samtools`     | 1.21        | 1.23.1      |
+| Dependency     | Old version | New version              |
+| -------------- | ----------- | ------------------------ |
+| `blastn`       | 2.15        | 2.17                     |
+| `bwa-mem2`     | 2.2.1       | 2.3                      |
+| `blobtk depth` |             | 0.7.1                    |
+| `fastqc`       |             | 0.12.1                   |
+| `gawk`         |             | 5.3.0                    |
+| `hifi-trimmer` |             | 2.2.0                    |
+| `lima`         |             | 2.12.0                   |
+| `minimap2`     | 2.28        | 2.30                     |
+| `multiqc`      |             | 1.33                     |
+| `pbmarkdup`    |             | 1.2.0                    |
+| `pigz`         |             | 2.8                      |
+| `samtools`     | 1.21        | 1.22.1, 1.23, and 1.23.1 |
 
 > **NB:** Dependency has been **updated** if both old and new version information is present. </br> **NB:** Dependency has been **added** if just the new version information is present. </br> **NB:** Dependency has been **removed** if version information isn't present.
 
