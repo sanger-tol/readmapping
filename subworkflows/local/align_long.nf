@@ -46,6 +46,7 @@ workflow ALIGN_LONG {
     ch_reads_by_datatype = reads.branch { meta, read_files ->
         pacbio:           meta.datatype == 'pacbio'
         non_pacbio_bam:   read_files.name.endsWith('.bam')  // ONT / PacBio CLR BAM
+        non_pacbio_cram:  read_files.name.endsWith('.cram') // ONT / PacBio CLR CRAM
         non_pacbio_fastx: true                              // ONT / PacBio CLR FASTQ
     }
 
@@ -95,8 +96,9 @@ workflow ALIGN_LONG {
     //
     // Aggregate preprocessing outputs
     //
-    trimmed_cram  = PACBIO_PREPROCESS.out.trimmed_cram
-    untrimmed_bam = PACBIO_PREPROCESS.out.untrimmed_bam  // includes ULI/PiMmS/Ampli-Fi via untrimmed_bam emit
+    trimmed_cram   = PACBIO_PREPROCESS.out.trimmed_cram
+    untrimmed_cram = PACBIO_PREPROCESS.out.untrimmed_cram
+    untrimmed_bam  = PACBIO_PREPROCESS.out.untrimmed_bam  // includes ULI/PiMmS/Ampli-Fi via untrimmed_bam emit
 
     bam_to_cram = untrimmed_bam.mix(ch_reads_by_datatype.non_pacbio_bam)
     fastx       = PACBIO_PREPROCESS.out.untrimmed_fastx
@@ -128,6 +130,8 @@ workflow ALIGN_LONG {
         [[], []], [[], []], ''
     )
     ch_reads_cram = CONVERT_CRAM.out.cram.mix(trimmed_cram)
+        .mix(untrimmed_cram)
+        .mix(ch_reads_by_datatype.non_pacbio_cram)
 
     SAMTOOLS_SPLITHEADER(ch_reads_cram)
     ch_cram_rg = SAMTOOLS_SPLITHEADER.out.readgroup

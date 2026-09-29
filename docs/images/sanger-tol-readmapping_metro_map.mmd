@@ -9,7 +9,7 @@
 %%metro line: pacbio_amplified | PacBio HiFi Amplified | #fa6863
 %%metro line: pacbio_uli | PacBio HiFi ULI | #e67e22
 %%metro line: pacbio_pimms | PacBio HiFi PiMmS | #ff9800
-%%metro line: ont_clr | ONT / PacBio CLR | #9b59b6
+%%metro line: ont_clr | ONT, PacBio CLR, PacBio without pre-processing | #9b59b6
 %%metro line: short_reads | Illumina / Hi-C | #0570b0
 %%metro line: qc | Pre/Post-align QC & MultiQC | #2db572
 
@@ -20,17 +20,21 @@
 
 %% --- INPUT & OUTPUT FILES ---
 %%metro file: in_ref | FASTA
-%%metro file: in_pacbio | FASTQ
-%%metro file: in_pacbio | BAM
-%%metro file: in_ont_clr | FASTQ
-%%metro file: in_ont_clr | BAM
-%%metro file: in_short | FASTQ
-%%metro file: in_short | CRAM
-%%metro file: cram_out | CRAM
-%%metro file: cram_out | CRAI
-%%metro file: stats_out | stats
-%%metro file: bedgraph_out | bedgraph
-%%metro file: multiqc_out | HTML
+%%metro files: in_pacbio | FASTQ
+%%metro files: in_pacbio | BAM
+%%metro files: in_ont_clr | FASTQ
+%%metro files: in_ont_clr | BAM
+%%metro files: in_ont_clr | CRAM
+%%metro files: in_short | FASTQ
+%%metro files: in_short | BAM
+%%metro files: in_short | CRAM
+%%metro files: cram_out | CRAM
+%%metro files: cram_out | CRAI
+%%metro files: bam_out | BAM
+%%metro files: bam_out | BAI
+%%metro files: stats_out | stats
+%%metro files: bedgraph_out | bedgraph
+%%metro files: multiqc_out | HTML
 
 graph LR
     %% ==========================================
@@ -92,6 +96,7 @@ graph LR
         sam_stats[Samtools\nStats, Flagstat, Idxstats]
         blobtk[BlobTK Depth\nCoverage]
 
+        bam_out[ ]
         cram_out[ ]
         stats_out[ ]
         bedgraph_out[ ]
@@ -100,6 +105,7 @@ graph LR
         ref_index -->|reference| cram_conv
 
         cram_conv -->|pacbio_std,pacbio_uli,pacbio_pimms,pacbio_amplified,ont_clr,short_reads| cram_out
+        cram_conv -->|pacbio_std,pacbio_uli,pacbio_pimms,pacbio_amplified,ont_clr,short_reads| bam_out
 
         cram_conv -->|qc| sam_stats
         cram_conv -->|qc| blobtk
