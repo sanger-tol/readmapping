@@ -13,20 +13,16 @@ repos:
         exclude: |
           (?x)^(
               .*ro-crate-metadata.json$|
-              modules/nf-core/.*|
-              subworkflows/nf-core/.*|
-              modules/sanger-tol/.*|
-              subworkflows/sanger-tol/.*|
+              modules/(?!local/).*|
+              subworkflows/(?!local/).*|
               .*\.snap$
           )$
       - id: end-of-file-fixer
         exclude: |
           (?x)^(
               .*ro-crate-metadata.json$|
-              modules/nf-core/.*|
-              subworkflows/nf-core/.*|
-              modules/sanger-tol/.*|
-              subworkflows/sanger-tol/.*|
+              modules/(?!local/).*|
+              subworkflows/(?!local/).*|
               .*\.snap$
           )$
       - id: check-added-large-files

@@ -25,4 +25,8 @@ process CRAMALIGN_GENCRAMCHUNKS {
 
         return [ lower, upper - 1 ]
     }
+
+    stub:
+    chunkn = []
+    slices = []
 }

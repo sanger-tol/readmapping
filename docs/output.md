@@ -40,9 +40,11 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 - `read_mapping`
 - `${datatype}/${specimen}`
   - `${run}/`
-    - `${assembly}.${datatype}.${specimen}.${run}.${aligner}.cram`: Aligned CRAM file (or `.bam` depending on `--outfmt`)
+    - `${assembly}.${datatype}.${specimen}.${run}.${aligner}.cram`: Aligned CRAM file (or `.bam` depending on `--alignment_format`)
     - `${assembly}.${datatype}.${specimen}.${run}.${aligner}.cram.crai`: Index for the alignment
     - `${assembly}.${datatype}.${specimen}.${run}.${aligner}.coverage.${window_size}.bedGraph.gz`: Read coverage in bedGraph format
+    - `${assembly}.${datatype}.${specimen}.${run}.${aligner}.coverage.${window_size}.bedGraph.gz.csi`: CSI index for the read coverage
+    - `${assembly}.${datatype}.${specimen}.${run}.${aligner}.coverage.${window_size}.bedGraph.gz.tbi`: TBI index for the read coverage
     - `qc/`
       - `${datatype}.${specimen}.${run}.fastqc.html`: FASTQC report of reads
       - `${datatype}.${specimen}.${run}.fastqc.zip`: FASTQC archive of reads
@@ -60,6 +62,8 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
     - `${assembly}.${datatype}.${specimen}.merged_${#}.${aligner}.cram`: Merged aligned CRAM file
     - `${assembly}.${datatype}.${specimen}.merged_${#}.${aligner}.cram.crai`: Index for the merged alignment
     - `${assembly}.${datatype}.${specimen}.merged_${#}.${aligner}.coverage.${window_size}.bedGraph.gz`: Read coverage for merged file
+    - `${assembly}.${datatype}.${specimen}.merged_${#}.${aligner}.coverage.${window_size}.bedGraph.gz.csi`: CSI index for the read coverage
+    - `${assembly}.${datatype}.${specimen}.merged_${#}.${aligner}.coverage.${window_size}.bedGraph.gz.tbi`: TBI index for the read coverage
     - `stats/`
       - `${assembly}.${datatype}.${specimen}.merged_${#}.${aligner}.flagstat`: Number of alignments for each FLAG type
       - `${assembly}.${datatype}.${specimen}.merged_${#}.${aligner}.idxstats`: Merged alignment summary statistics
@@ -115,7 +119,7 @@ This section documents the output files from alignment and duplicate marking ste
 
 ### Output options
 
-- **outfmt**: Specifies the output format for alignments. It can be set to "bam", "cram", or both, separated by a comma (e.g., `--outfmt bam,cram`). The pipeline will generate output files in the specified formats.
+- **alignment_format**: Specifies the output format for alignments. It can be set to "bam", "cram", or both, separated by a comma (e.g., `--alignment_format bam,cram`). The pipeline will generate output files in the specified formats.
 - **compression**: Specifies the compression method for alignments. It can be set to "none" or "crumble". When set to "crumble", the pipeline compresses the quality scores of the alignments.
 - **merge_output**: Merge output at the individual level. If merge_output is enabled (default: false), both unmerged and merged output files per sample will be generated; otherwise, only unmerged files are exported.
 
@@ -129,9 +133,11 @@ Short read data from HiC and Illumina technologies is aligned with `BWAMEM2_MEM`
 - `read_mapping`
   - `${datatype}/${specimen}`
     - `${run}/`
-      - `${assembly}.${datatype}.${specimen}.${run}.${aligner}.cram`: Aligned CRAM file (or `.bam` depending on `--outfmt`)
+      - `${assembly}.${datatype}.${specimen}.${run}.${aligner}.cram`: Aligned CRAM file (or `.bam` depending on `--alignment_format`)
       - `${assembly}.${datatype}.${specimen}.${run}.${aligner}.cram.crai`: Index for the alignment
       - `${assembly}.${datatype}.${specimen}.${run}.${aligner}.coverage.${window_size}.bedGraph.gz`: Read coverage in bedGraph format
+      - `${assembly}.${datatype}.${specimen}.${run}.${aligner}.coverage.${window_size}.bedGraph.gz.csi`: CSI index for the read coverage
+      - `${assembly}.${datatype}.${specimen}.${run}.${aligner}.coverage.${window_size}.bedGraph.gz.tbi`: TBI index for the read coverage
     - `merged_${#}/` - if params `merge_output`, merged output files with same structure as individual runs, without `qc` folder
 
 </details>
@@ -146,9 +152,11 @@ Reads generated using Oxford Nanopore technology are aligned with `MINIMAP2_ALIG
 - `read_mapping`
   - `ont/${specimen}`
     - `${run}/`
-      - `${assembly}.ont.${specimen}.${run}.${aligner}.cram`: Aligned CRAM file (or `.bam` depending on `--outfmt`)
+      - `${assembly}.ont.${specimen}.${run}.${aligner}.cram`: Aligned CRAM file (or `.bam` depending on `--alignment_format`)
       - `${assembly}.ont.${specimen}.${run}.${aligner}.cram.crai`: Index for the alignment
       - `${assembly}.ont.${specimen}.${run}.${aligner}.coverage.${window_size}.bedGraph.gz`: Read coverage in bedGraph format
+      - `${assembly}.ont.${specimen}.${run}.${aligner}.coverage.${window_size}.bedGraph.gz.csi`: CSI index for the read coverage
+      - `${assembly}.ont.${specimen}.${run}.${aligner}.coverage.${window_size}.bedGraph.gz.tbi`: TBI index for the read coverage
     - `merged_${#}/` - if params `merge_output`.
 
 </details>
@@ -163,9 +171,11 @@ The filtered PacBio reads are aligned with `MINIMAP2_ALIGN`. The sorted alignmen
 - `read_mapping`
   - `pacbio/${specimen}`
     - `${run}/`
-      - `${assembly}.pacbio.${specimen}.${run}.${aligner}.cram`: Aligned CRAM file (or `.bam` depending on `--outfmt`)
+      - `${assembly}.pacbio.${specimen}.${run}.${aligner}.cram`: Aligned CRAM file (or `.bam` depending on `--alignment_format`)
       - `${assembly}.pacbio.${specimen}.${run}.${aligner}.cram.crai`: Index for the alignment
       - `${assembly}.pacbio.${specimen}.${run}.${aligner}.coverage.${window_size}.bedGraph.gz`: Read coverage in bedGraph format
+      - `${assembly}.pacbio.${specimen}.${run}.${aligner}.coverage.${window_size}.bedGraph.gz.csi`: CSI index for the read coverage
+      - `${assembly}.pacbio.${specimen}.${run}.${aligner}.coverage.${window_size}.bedGraph.gz.tbi`: TBI index for the read coverage
     - `merged_${#}/` - if params `merge_output`.
 
 </details>
@@ -183,6 +193,9 @@ Read coverage of the output alignment file is calculated with [blobtk depth](htt
 **File naming:** `${assembly}.${type}.${specimen}.${run}.${aligner}.coverage.${window_size}.bedGraph.gz`
 
 The `${window_size}` is formatted as `<N>k` when the window size for coverage calculation (`params.window_size`) is divisible by 1000 (for example `1k`) and `<N>bp` otherwise (for example `1500bp`).
+
+The coverage file is indexed in both CSI and TBI formats **as long as the sequence lengths allow it**.
+Both index formats indeed have their own limit in term of sequence length.
 
 ### Statistics
 
@@ -213,12 +226,15 @@ For merged output (when `merge_output` is enabled), replace `${run}` with `merge
 
 ### MultiQC report
 
-The workflow generates a MultiQC summary report that aggregates and visualises statistics (e.g., FastQC, alignment statistics).
+The workflow generates a MultiQC summary report that aggregates and visualises statistics (e.g., FastQC, alignment statistics) of all data file. The pipeline also generates a MultiQC summary report per type of sequencing data.
 
 <details markdown="1">
 <summary>Output files</summary>
 
 - `multiqc_report.html`: Interactive HTML report summarizing quality metrics from FastQC, alignment statistics, and other quality control data across all samples
+- `read_mapping`
+  - `${datatype}`
+    - `multiqc_report.${datatype}.html`
 
 </details>
 
