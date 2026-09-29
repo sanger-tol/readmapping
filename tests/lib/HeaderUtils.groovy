@@ -12,6 +12,8 @@ class HeaderUtils {
                 // Thread counts that track CI cpus
                 .replaceAll(/\s-(?:t|@)\s*\d+/, ' -t N')
                 .replaceAll(/\s--threads\s+\d+/, ' --threads N')
+                // Remove the random hex string attached to the ID of PG lines during samtools merge
+                .replaceAll(/((ID|PP):[^-\s\\]+)-[0-9A-F]{8}/, '$1')
         }
     }
 }

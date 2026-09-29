@@ -266,8 +266,13 @@
                     "@PG\tID:minimap2\tPN:minimap2\tVN:2.30-r1287\tCL:minimap2 -t N -ax map-hifi --cs=short -I1G -y -R @RG\\tID:61ddc6c35.0-8M\\tSM:SAMEA7524440 GCA_922984935.2.subset.unmasked.mmi -\tPP:samtools.3",
                     "@PG\tID:samtools.4\tPN:samtools\tPP:minimap2\tVN:1.22.1\tCL:samtools sort --write-index -l1 -t N -T m64094_200910_173211.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.subset_addRG.cram.0.SAMEA7524440.ERR6939248_sort_tmp -o m64094_200910_173211.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.subset_addRG.cram.0.SAMEA7524440.ERR6939248.bam -",
                     "@PG\tID:samtools.5\tPN:samtools\tPP:samtools.4\tVN:1.24\tCL:samtools merge --threads N -c -p --reference GCA_922984935.2.subset.unmasked.fa SAMEA7524440.ERR6939248.merge.bam 1/m64094_200910_173211.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.subset_addRG.cram.0.SAMEA7524440.ERR6939248.bam",
-                    "@PG\tID:samtools.6\tPN:samtools\tPP:samtools.5\tVN:1.24\tCL:samtools merge --threads N -c -p SAMEA7524440.merged_1.merge.bam 1/SAMEA7524440.ERR6939248.merge.bam 2/SAMEA7524440.ERR6939249.merge.bam",
-                    "@PG\tID:samtools.7\tPN:samtools\tPP:samtools.6\tVN:1.24\tCL:samtools reheader temp.sorted.header.sam input/GCA_922984935.2.subset.pacbio.SAMEA7524440.merged_1.minimap2.bam"
+                    "@PG\tID:minimap2\tPN:minimap2\tVN:2.30-r1287\tCL:minimap2 -t N -ax map-hifi --cs=short -y -R @RG\\tID:m64094_200911_174739\\tPL:PACBIO\\tSM:SAMEA7524440 -I1G -a GCA_922984935.2.subset.unmasked.mmi -",
+                    "@PG\tID:samtools\tPN:samtools\tPP:minimap2\tVN:1.23.1\tCL:samtools sort -t N -o m64094_200911_174739.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.subset.fastq.gz.0.SAMEA7524440.ERR6939249.bam -T m64094_200911_174739.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.subset.fastq.gz.0.SAMEA7524440.ERR6939249_sort_tmp --write-index -l1 -",
+                    "@PG\tID:samtools.1\tPN:samtools\tPP:samtools\tVN:1.24\tCL:samtools merge --threads N -c -p --reference GCA_922984935.2.subset.unmasked.fa SAMEA7524440.ERR6939249.merge.bam 1/m64094_200911_174739.ccs.bc1022_BAK8B_OA--bc1022_BAK8B_OA.subset.fastq.gz.0.SAMEA7524440.ERR6939249.bam",
+                    "@PG\tID:samtools.6\tPN:samtools\tPP:samtools.5\tVN:1.24\tCL:samtools merge --threads N -c SAMEA7524440.merged_1.merge.bam 1/SAMEA7524440.ERR6939248.merge.bam 2/SAMEA7524440.ERR6939249.merge.bam",
+                    "@PG\tID:samtools.7\tPN:samtools\tPP:samtools.1\tVN:1.24\tCL:samtools merge --threads N -c SAMEA7524440.merged_1.merge.bam 1/SAMEA7524440.ERR6939248.merge.bam 2/SAMEA7524440.ERR6939249.merge.bam",
+                    "@PG\tID:samtools.8\tPN:samtools\tPP:samtools.6\tVN:1.24\tCL:samtools reheader temp.sorted.header.sam input/GCA_922984935.2.subset.pacbio.SAMEA7524440.merged_1.minimap2.bam",
+                    "@PG\tID:samtools.9\tPN:samtools\tPP:samtools.7\tVN:1.24\tCL:samtools reheader temp.sorted.header.sam input/GCA_922984935.2.subset.pacbio.SAMEA7524440.merged_1.minimap2.bam"
                 ]
             },
             {
@@ -277,7 +282,7 @@
                 
             ]
         ],
-        "timestamp": "2026-09-28T09:29:52.083949526",
+        "timestamp": "2026-09-28T14:29:45.103027594",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.0"
