@@ -130,9 +130,6 @@ workflow PIPELINE_INITIALISATION {
     ch_samplesheet = channel
         .fromList(samplesheetToList(input, "${projectDir}/assets/schema_input.json"))
         .map { meta, datafile ->
-            if (!datafile) {
-                error "Input samplesheet contains an empty datafile for metadata: ${meta}"
-            }
             def new_meta = meta + [id: file(datafile).baseName]
             return [new_meta, datafile]
         }
