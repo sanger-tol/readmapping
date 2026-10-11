@@ -10,6 +10,8 @@
             "specimen": {
                 "type": "string",
                 "pattern": "^\\S+$",
+                "description": "Identifier of the specimen. Usually a BioSpecimen accession.",
+                "help_text": "For example,. `SAMEA7521529`.",
                 "errorMessage": "specimen must be provided and cannot contain spaces",
                 "meta": ["specimen"]
             },
@@ -17,12 +19,15 @@
                 "type": "string",
                 "pattern": "^\\S+$",
                 "errorMessage": "run must be provided and cannot contain spaces",
+                "description": "Identifier of the sequencing run. Usually the accession number of the data in INSDC.",
+                "help_text": "For example,`ERR9248445` (hic), `ERR9284044` (pacbio).",
                 "meta": ["run"]
             },
             "datatype": {
                 "type": "string",
                 "enum": ["hic", "illumina", "pacbio", "pacbio_clr", "ont"],
                 "errorMessage": "Datatype must be one of: hic, illumina, pacbio, pacbio_clr, ont",
+                "description": "Type of sequencing data.",
                 "meta": ["datatype"]
             },
             "datafile": {
@@ -37,6 +42,7 @@
                 "pattern": "^\\S*$",
                 "errorMessage": "Library information cannot contain spaces",
                 "default": "",
+                "description": "Library type. Set to `uli` for ULI demultiplexing with LIMA, `pimms` for PiMmS demultiplexing with LIMA, or `amplifi` for PCR-duplicate removal with pbmarkdup. For other library types, use a free-form identifier which is assigned to read group (`@RG`) ID. If not specified, the pipeline auto-creates one from the data filename.",
                 "meta": ["library"]
             },
             "barcode": {
@@ -44,6 +50,7 @@
                 "pattern": "^\\S*$",
                 "errorMessage": "Sample barcode cannot contain spaces",
                 "default": "",
+                "description": "Barcode identifier used to trim barcode adapter for PacBio reads. If empty, barcode-specific adapter sequences will not be trimmed.",
                 "meta": ["barcode"]
             },
             "adapter_file": {
@@ -52,6 +59,7 @@
                 "pattern": "^\\S+\\.fasta$",
                 "errorMessage": "Adapter FASTA file for ULI/PiMmS LIMA demultiplexing cannot contain spaces",
                 "default": "",
+                "description": "Path to an adapter FASTA file. For ULI samples, overrides the global `--pacbio_uli_adapter`; for PiMmS samples, specifies the adapter sequences for LIMA demultiplexing.",
                 "meta": ["adapter_file"]
             },
             "adapter_preset": {
@@ -59,6 +67,7 @@
                 "enum": ["SYMMETRIC", "ASYMMETRIC", ""],
                 "errorMessage": "When provided, adapter_preset must be SYMMETRIC or ASYMMETRIC",
                 "default": "",
+                "description": "LIMA adapter preset (`SYMMETRIC` or `ASYMMETRIC`). Required for PiMmS samples. If omitted for PiMmS, the pipeline warns when no `adapter_file` is given, and errors when `adapter_file` is provided without it.",
                 "meta": ["adapter_preset"]
             }
         },

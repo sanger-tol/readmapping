@@ -123,13 +123,13 @@
                 "long_reads_map_chunk_size": {
                     "type": "integer",
                     "default": 10000,
-                    "description": "Chunk size for parallel alignment of long read data, in number of sequences",
+                    "description": "Chunk size for parallel alignment of long read data, in number of sequences (FASTQ input) or CRAM containers (BAM/CRAM input).",
                     "minimum": 1
                 },
                 "short_reads_map_chunk_size": {
                     "type": "integer",
                     "default": 10000,
-                    "description": "Chunk size for parallel alignment of short read data, in number of cram containers",
+                    "description": "Chunk size for parallel alignment of short read data, in number of CRAM containers. Note that the pipeline may output slightly different supplementary alignments in bwamem2 mode due to batching effects.",
                     "minimum": 1
                 }
             }
