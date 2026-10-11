@@ -214,9 +214,8 @@
                 "sanger-tol": {
                     "bam_samtools_merge_markdup": {
                         "branch": "main",
-                        "git_sha": "a8e753258767cf32f139c836003660caaf530a03",
-                        "installed_by": ["cram_map_illumina_hic", "cram_map_long_reads", "fastx_map_long_reads"],
-                        "patch": "subworkflows/sanger-tol/bam_samtools_merge_markdup/bam_samtools_merge_markdup.diff"
+                        "git_sha": "cf4aff6e0b6267b288cf0dc9c36bb5bb9b79eb72",
+                        "installed_by": ["cram_map_illumina_hic", "cram_map_long_reads", "fastx_map_long_reads"]
                     },
                     "cram_map_illumina_hic": {
                         "branch": "main",
