@@ -434,10 +434,65 @@
                 ]
             }
         ],
+        "timestamp": "2026-02-09T16:07:03.896003",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.3"
-        },
-        "timestamp": "2026-02-09T16:07:03.896003"
+        }
+    },
+    "stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "/test-data/Undibacterium_unclassified/genomic_data/baUndUnlc1/hic-arima2/41741_2%237.sub.cram",
+                        "/test-data/Undibacterium_unclassified/genomic_data/baUndUnlc1/hic-arima2/41741_2%237.sub.cram.crai",
+                        [
+                            
+                        ],
+                        [
+                            
+                        ]
+                    ]
+                ],
+                "1": [
+                    [
+                        "CRAMALIGN_GENCRAMCHUNKS",
+                        "cramchunks",
+                        "1.1.0"
+                    ]
+                ],
+                "cram_slices": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "/test-data/Undibacterium_unclassified/genomic_data/baUndUnlc1/hic-arima2/41741_2%237.sub.cram",
+                        "/test-data/Undibacterium_unclassified/genomic_data/baUndUnlc1/hic-arima2/41741_2%237.sub.cram.crai",
+                        [
+                            
+                        ],
+                        [
+                            
+                        ]
+                    ]
+                ],
+                "versions_cramchunks": [
+                    [
+                        "CRAMALIGN_GENCRAMCHUNKS",
+                        "cramchunks",
+                        "1.1.0"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-09-22T14:40:57.168308686",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.0"
+        }
     }
 }

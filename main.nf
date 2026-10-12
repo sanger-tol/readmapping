@@ -40,7 +40,8 @@ workflow SANGERTOL_READMAPPING {
     READMAPPING (
         samplesheet,
         fasta,
-        header
+        header,
+        params.outdir,
     )
 }
 /*
@@ -58,10 +59,10 @@ workflow {
     PIPELINE_INITIALISATION (
         params.version,
         params.validate_params,
-        // params.monochrome_logs,
+        params.monochrome_logs,
         args,
         params.outdir,
-        // params.input,
+        params.input,
         params.help,
         params.help_full,
         params.show_hidden
