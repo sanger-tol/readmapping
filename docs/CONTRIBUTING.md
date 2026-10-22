@@ -110,6 +110,9 @@ Please also refer to the [pipeline-specific contribution guidelines](#pipeline-s
 - [ ] Update `usage.md`, `output.md`, and `citation.md` as appropriate.
 - [ ] [Lint](#lint-tests) the code with nf-core/tools.
 - [ ] Update any diagrams or pipeline images as necessary.
+- [ ] Update MultiQC config `assets/multiqc_config.yml` so relevant suffixes, file name cleanup, and module plots are in the appropriate order.
+- [ ] If applicable, create a [MultiQC](https://seqera.io/multiqc/) module.
+- [ ] Add a description of the output files and, if relevant, images from the MultiQC report to `docs/output.md`.
 
 To update the minimum required Nextflow version, see the [Nextflow version bumping](#nextflow-version-bumping) section below. For more information about pipeline contributions, see [pipeline-specific contribution guidelines](#pipeline-specific-contribution-guidelines).
 
