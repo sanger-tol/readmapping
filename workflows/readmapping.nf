@@ -1,8 +1,29 @@
+
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
+    IMPORT LOCAL MODULES/SUBWORKFLOWS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
+
+//
+// SUBWORKFLOW: Consisting of a mix of local and nf-core/modules
+//
+include { ALIGN_SHORT                        } from '../subworkflows/local/align_short'
+include { ALIGN_LONG                         } from '../subworkflows/local/align_long'
+include { CONVERT_STATS                      } from '../subworkflows/local/convert_stats'
+include { INPUT_CHECK                        } from '../subworkflows/local/input_check'
+
+
+/*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    IMPORT NF-CORE MODULES/SUBWORKFLOWS
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+
+//
+// MODULE: Installed directly from nf-core/modules
+//
+
 include { FASTQC                 } from '../modules/nf-core/fastqc/main'
 include { MULTIQC                } from '../modules/nf-core/multiqc/main'
 include { paramsSummaryMap       } from 'plugin/nf-schema'
@@ -20,6 +41,8 @@ workflow READMAPPING {
 
     take:
     ch_samplesheet // channel: samplesheet read in from --input
+    ch_fasta
+    ch_header
     multiqc_config
     multiqc_logo
     multiqc_methods_description
@@ -27,13 +50,62 @@ workflow READMAPPING {
 
     main:
 
-    def ch_versions = channel.empty()
-    def ch_multiqc_files = channel.empty()
+    // Initialize an empty versions channel
+    ch_versions      = channel.empty()
+    ch_multiqc_files = channel.empty()
+    multiqc_report   = channel.empty()
+    reports          = channel.empty()
+
+    // Initialize input values for PacBio read preprocessing
+    val_pacbio_adapter = params.pacbio_adapter ?: []
+    val_pacbio_adapter_yaml = params.pacbio_adapter_yaml ?: []
+    val_pacbio_uli_adapter  = params.pacbio_uli_adapter ?: []
+
     //
-    // MODULE: Run FastQC
+    // SUBWORKFLOW: Prepare the reads and the genome
     //
-    FASTQC(ch_samplesheet)
-    ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip.map{ _meta, file -> file })
+    ch_genome = ch_fasta.map { fasta -> [[id: fasta.baseName], fasta] }
+
+    INPUT_CHECK(ch_genome, ch_samplesheet)
+    ch_reads = INPUT_CHECK.out.reads.branch {
+        meta, _reads ->
+            short_reads : meta.datatype == "hic" || meta.datatype == "illumina"
+            long_reads : true
+    }
+
+    //
+    // Control quality of input files
+    //
+
+    FASTQC ( INPUT_CHECK.out.reads )
+    reports = reports.mix ( FASTQC.out.zip )
+
+    //
+    // SUBWORKFLOW: Align raw reads to genome
+    //
+
+    ALIGN_SHORT ( INPUT_CHECK.out.fasta, ch_reads.short_reads )
+
+    ALIGN_LONG (
+        INPUT_CHECK.out.fasta,
+        ch_reads.long_reads,
+        val_pacbio_adapter,
+        val_pacbio_adapter_yaml,
+        val_pacbio_uli_adapter,
+    )
+
+    reports = reports.mix ( ALIGN_LONG.out.mqc_files )
+
+    // gather alignments
+    ch_aligned_bams = channel.empty()
+    .mix( ALIGN_SHORT.out.bam )
+    .mix( ALIGN_LONG.out.bam )
+
+    // convert to cram and gather stats
+    CONVERT_STATS ( ch_aligned_bams, INPUT_CHECK.out.fasta, ch_header )
+    reports = reports.mix ( CONVERT_STATS.out.stats )
+                     .mix ( CONVERT_STATS.out.flagstat )
+                     .mix ( CONVERT_STATS.out.idxstats )
 
     //
     // Collate and save software versions
@@ -67,6 +139,21 @@ workflow READMAPPING {
     //
     // MODULE: MultiQC
     //
+
+    def collated_reports = channel.topic("multiqc_files")
+        .map { _meta, _process, _tool, reports_ -> reports_ }
+
+    // MULTIQC
+    def ch_datatype_reports = reports
+        .map { meta, file -> [ meta.datatype ?: 'unknown', file ] }
+        .groupTuple(by: 0)
+        .map { datatype, files -> [ [id: "readmapping_${datatype}", datatype: datatype], files.unique() ] }
+
+    def ch_all_reports = reports
+        .map { _meta, file -> file }
+        .collect()
+        .map { files -> [ [id: 'readmapping_overall', datatype: 'all'], files.unique() ] }
+
     ch_multiqc_files = ch_multiqc_files.mix(ch_collated_versions)
     def ch_summary_params = paramsSummaryMap(workflow, parameters_schema: "nextflow_schema.json")
     def ch_workflow_summary = channel.value(paramsSummaryMultiqc(ch_summary_params))
@@ -75,12 +162,23 @@ workflow READMAPPING {
         ? file(multiqc_methods_description, checkIfExists: true)
         : file("${projectDir}/assets/methods_description_template.yml", checkIfExists: true)
     def ch_methods_description = channel.value(methodsDescriptionText(ch_multiqc_custom_methods_description))
+
+    ch_multiqc_files = ch_multiqc_files.mix(collated_reports)
     ch_multiqc_files = ch_multiqc_files.mix(ch_methods_description.collectFile(name: 'methods_description_mqc.yaml', sort: true))
+
+    def ch_multiqc_global_files = ch_multiqc_files.flatten().collect()
+
+    def ch_multiqc_reports = ch_datatype_reports
+        .mix(ch_all_reports)
+
     MULTIQC(
-        ch_multiqc_files.flatten().collect().map { files ->
+        ch_multiqc_reports.combine(ch_multiqc_global_files).map { row ->
+            def meta = row[0]
+            def report_files = row[1]
+            def global_files = row.size() > 2 ? row[2..-1] : []
             [
-                [id: 'readmapping'],
-                files,
+                meta,
+                (report_files + global_files).unique(),
                 multiqc_config
                     ? file(multiqc_config, checkIfExists: true)
                     : file("${projectDir}/assets/multiqc_config.yml", checkIfExists: true),
@@ -90,8 +188,13 @@ workflow READMAPPING {
             ]
         }
     )
-    emit:multiqc_report = MULTIQC.out.report.map { _meta, report -> [report] }.toList() // channel: /path/to/multiqc_report.html
-    versions       = ch_versions                 // channel: [ path(versions.yml) ]
+
+    emit:
+    multiqc_report  = MULTIQC.out.report
+        .map { _meta, report -> [report] }
+        .toList() // channel: list of /path/to/multiqc reports (overall + per datatype)
+    multiqc_publish = MULTIQC.out.data.mix(MULTIQC.out.plots, MULTIQC.out.report)
+    versions        = ch_versions                 // channel: [ path(versions.yml) ]
 }
 
 /*
