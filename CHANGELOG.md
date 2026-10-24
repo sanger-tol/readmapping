@@ -3,6 +3,22 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [[v2.1.1](https://github.com/sanger-tol/readmapping/releases/tag/2.1.1)] - Chinese Fireball (patch 1) - [2026-10-26]
+
+### Enhancements & fixes
+
+- Upgraded to the nf-core template v4.2.0
+
+### Software dependencies
+
+Note, since the pipeline is using Nextflow DSL2, each process will be run with its own [Biocontainer](https://biocontainers.pro/#/registry). This means that on occasion it is entirely possible for the pipeline to be using different versions of the same tool. However, the overall software dependency changes compared to the last release have been listed below for reference.
+
+| Dependency | Old version | New version |
+| ---------- | ----------- | ----------- |
+| `fastqc`   | 0.12.1      | 0.13.0      |
+
+> **NB:** Dependency has been **updated** if both old and new version information is present. </br> **NB:** Dependency has been **added** if just the new version information is present. </br> **NB:** Dependency has been **removed** if version information isn't present.
+
 ## [[v2.1.0](https://github.com/sanger-tol/readmapping/releases/tag/2.1.0)] - Chinese Fireball - [2026-10-12]
 
 ### Enhancements & fixes
