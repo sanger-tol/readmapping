@@ -1,0 +1,116 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/sanger-tol/nf-core-modules/main/subworkflows/yaml-schema.json
+name: "pacbio_preprocess"
+description: "Preprocesses PacBio reads with optional LIMA demultiplexing, duplicate marking, and adapter trimming configured per input."
+keywords:
+  - pacbio
+  - demultiplex
+  - adapter-trimming
+  - duplicate-marking
+components:
+  - blast/blastn
+  - blast/makeblastdb:
+      git_remote: https://github.com/nf-core/modules.git
+  - hifitrimmer/processblast:
+      git_remote: https://github.com/nf-core/modules.git
+  - hifitrimmer/trim:
+      git_remote: https://github.com/nf-core/modules.git
+  - lima:
+      git_remote: https://github.com/nf-core/modules.git
+  - pbmarkdup:
+      git_remote: https://github.com/nf-core/modules.git
+  - untar:
+      git_remote: https://github.com/nf-core/modules.git
+
+input:
+  - ch_reads:
+      type: file
+      description: |
+        PacBio reads with an optional per-input LIMA adapter file, a flag controlling duplicate marking,
+        and an optional per-input HiFiTrimmer configuration YAML.
+        Use an empty value for lima_adapter to skip LIMA.
+        Use an empty value for adapter_yaml to skip adapter trimming for that input.
+        Structure: [ val(meta), path(reads), path(lima_adapter), val(run_pbmarkdup), path(adapter_yaml) ]
+      pattern: "*.(bam|fastq|fq|fasta|fa|fna)(.gz)?"
+  - val_hifi_adapter:
+      type: file
+      description: |
+        HiFi adapter BLAST database archive or FASTA used to build a database. An empty value disables adapter trimming.
+      pattern: "*.(tar.gz|fasta|fa|fna)"
+
+output:
+  - untrimmed_fastx:
+      type: file
+      description: |
+        Channel containing preprocessed reads that are not filtered/trimmed with hifitrimmer in FASTA/FASTQ format.
+        Structure: [ val(meta), path(fasta/fastq) ]
+      pattern: "*.fasta|*.fa|*.fastq|*.fq"
+  - untrimmed_bam:
+      type: file
+      description: |
+        Channel containing preprocessed reads that are not filtered/trimmed with hifitrimmer in BAM format.
+        Structure: [ val(meta), path(bam) ]
+      pattern: "*.bam"
+  - trimmed_cram:
+      type: file
+      description: |
+        Channel containing preprocessed reads that have been filtered/trimmed with hifitrimmer in CRAM format.
+        Structure: [ val(meta), path(cram) ]
+      pattern: "*.cram"
+  - trimmed_bam:
+      type: file
+      description: |
+        Channel containing preprocessed reads that have been filtered/trimmed with hifitrimmer in BAM format.
+        Structure: [ val(meta), path(bam) ]
+      pattern: "*.bam"
+  - trimmed_sam:
+      type: file
+      description: |
+        Channel containing preprocessed reads that have been filtered/trimmed with hifitrimmer in SAM format.
+        Structure: [ val(meta), path(sam) ]
+      pattern: "*.sam"
+  - trimmed_fasta:
+      type: file
+      description: |
+        Channel containing preprocessed reads that have been filtered/trimmed with hifitrimmer in FASTA format.
+        Structure: [ val(meta), path(fasta) ]
+      pattern: "*.fasta|*.fa|*.fna"
+  - trimmed_fastq:
+      type: file
+      description: |
+        Channel containing preprocessed reads that have been filtered/trimmed with hifitrimmer in FASTQ format.
+        Structure: [ val(meta), path(fastq) ]
+      pattern: "*.fastq|*.fq"
+  - lima_report:
+      type: file
+      description: |
+        LIMA demultiplexing reports for reads supplied with a LIMA adapter.
+        Structure: [ val(meta), path(report) ]
+      pattern: "*.lima.report"
+  - lima_summary:
+      type: file
+      description: |
+        LIMA demultiplexing summaries for reads supplied with a LIMA adapter.
+        Structure: [ val(meta), path(summary) ]
+      pattern: "*.lima.summary"
+  - hifitrimmer_bed:
+      type: file
+      description: |
+        HiFiTrimmer adapter coordinates for reads with matching YAML configuration.
+        Structure: [ val(meta), path(bed) ]
+      pattern: "*.bed.gz"
+  - hifitrimmer_summary:
+      type: file
+      description: |
+        HiFiTrimmer summaries for reads with matching YAML configuration.
+        Structure: [ val(meta), path(summary) ]
+      pattern: "*.summary.json"
+  - pbmarkdup_stats:
+      type: file
+      description: |
+        pbmarkdup logs for reads with run_pbmarkdup set to true.
+        Structure: [ val(meta), path(log) ]
+      pattern: "*.pbmarkdup.log"
+authors:
+  - "@sainsachiko"
+maintainers:
+  - "@sainsachiko"

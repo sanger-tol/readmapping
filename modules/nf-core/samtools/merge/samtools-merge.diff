@@ -1,0 +1,70 @@
+Changes in component 'nf-core/samtools/merge'
+Changes in 'samtools/merge/meta.yml':
+--- modules/nf-core/samtools/merge/meta.yml
++++ modules/nf-core/samtools/merge/meta.yml
+@@ -91,6 +91,17 @@
+           description: BAM/CRAM index file, generated when index_format is specified. Can only be generated if the input files are coordinate sorted.
+           pattern: "*.{bai,crai,csi}"
+           ontologies: []
++  source_txt:
++    - - meta:
++          type: map
++          description: |
++            Groovy Map containing sample information
++            e.g. [ id:'test', single_end:false ]
++      - "SOURCE.txt":
++          type: file
++          description: Source file listing merged input files
++          pattern: "SOURCE.txt"
++          ontologies: []
+   versions_samtools:
+     - - ${task.process}:
+           type: string
+
+Changes in 'samtools/merge/main.nf':
+--- modules/nf-core/samtools/merge/main.nf
++++ modules/nf-core/samtools/merge/main.nf
+@@ -16,6 +16,7 @@
+     tuple val(meta), path("${prefix}.bam"), optional: true, emit: bam
+     tuple val(meta), path("${prefix}.cram"), optional: true, emit: cram
+     tuple val(meta), path("${prefix}.${file_type}.{bai,crai,csi}"), optional: true, emit: index
++    tuple val(meta), path("SOURCE.txt"), optional: true, emit: source_txt
+     tuple val("${task.process}"), val('samtools'), eval("samtools version | sed '1!d;s/.* //'"), topic: versions, emit: versions_samtools
+ 
+     when:
+@@ -38,6 +39,8 @@
+         write_index = "--write-index"
+         output_file = "${prefix}.${file_type}##idx##${prefix}.${file_type}.${index_format}"
+     }
++    // SOURCE.txt
++    def source_files_args = meta.merge_source ? "&& printf \"%s\" \"${meta.merge_source}\" > SOURCE.txt" : ""
+     """
+     # Note: --threads value represents *additional* CPUs to allocate (total CPUs = 1 + --threads).
+     samtools \\
+@@ -47,7 +50,7 @@
+         ${args} \\
+         ${reference} \\
+         ${output_file} \\
+-        ${input_files}
++        ${input_files} ${source_files_args}
+     """
+ 
+     stub:
+@@ -63,8 +66,10 @@
+ 
+     def index = index_format ? "touch ${prefix}.${file_type}.${index_format}" : ""
+ 
++    // SOURCE.txt
++    def source_files_args = meta.merge_source ? "&& printf \"%s\" \"${meta.merge_source}\" > SOURCE.txt" : ""
+     """
+-    touch ${prefix}.${file_type}
++    touch ${prefix}.${file_type} ${source_files_args}
+     ${index}
+     """
+ }
+
+'modules/nf-core/samtools/merge/environment.yml' is unchanged
+'modules/nf-core/samtools/merge/tests/main.nf.test' is unchanged
+'modules/nf-core/samtools/merge/tests/nextflow.config' is unchanged
+'modules/nf-core/samtools/merge/tests/main.nf.test.snap' is unchanged
+************************************************************
