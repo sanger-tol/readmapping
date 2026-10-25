@@ -56,7 +56,6 @@
                 "pacbio_adapter": {
                     "type": "string",
                     "description": "Path to FASTA file contains adapter sequences for PacBio HiFi reads.",
-                    "format": "file-path",
                     "default": "${projectDir}/assets/HiFi_adapter.fasta",
                     "fa_icon": "fas fa-bezier-curve"
                 },
@@ -64,16 +63,13 @@
                     "type": "string",
                     "description": "Path to YAML file containing guide for trimming/filtering PacBio data. See hifi-trimmer docs for details: https://github.com/sanger-tol/hifi-trimmer",
                     "help_text": "YAML file containing adapter sequences and trimming parameters for PacBio HiFi data processing. This file guides hifi-trimmer in identifying and removing adapter contamination from HiFi reads. For more information about the expected format and configuration options, see the hifi-trimmer documentation: https://github.com/sanger-tol/hifi-trimmer",
-                    "format": "file-path",
                     "default": "${projectDir}/assets/HiFi_adapter.yaml",
                     "fa_icon": "far fa-file-code"
                 },
                 "pacbio_uli_adapter": {
                     "type": "string",
                     "description": "Path to FASTA file containing the PacBio ULI adapter sequence.",
-                    "format": "file-path",
-                    "mimetype": "text/plain",
-                    "pattern": "^\\S+\\.fn?a(sta)?(\\.gz)?$",
+                    "pattern": "^(\\S+\\.fn?a(sta)?(\\.gz)?)?$",
                     "fa_icon": "far fa-file-code"
                 },
                 "email": {
