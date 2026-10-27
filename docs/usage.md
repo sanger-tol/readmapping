@@ -14,18 +14,7 @@ You will need to create a samplesheet with information about the samples you wou
 --input '[path to samplesheet file]'
 ```
 
-### Multiple runs of the same sample
-
-The `sample` identifiers have to be the same when you have re-sequenced the same sample more than once e.g. to increase sequencing depth. The pipeline will analyse the raw reads individually and then merge them by sample and datatype, before performing any downstream analysis. Below is an example for the same sample sequenced across 3 lanes of HiC:
-
-```console
-specimen,run,datatype,datafile,library
-specimen1,run1,hic,hic1.cram,
-specimen1,run2,hic,hic2.cram,
-specimen2,run1,hic,hic3.cram,
-```
-
-### Full samplesheet
+### Samplesheet format
 
 The samplesheet can have as many columns as you desire, however, there is a strict requirement for the first 4 columns to match those defined in the table below.
 
@@ -39,6 +28,32 @@ specimen2,run3,hic,hic3.cram,,,,
 specimen2,run4,pacbio,pacbio1.bam,uli,,,
 specimen3,run5,pacbio,pacbio2.bam,amplifi,,,
 specimen3,run6,pacbio,pacbio3.bam,,,,
+```
+
+### Full samplesheet
+
+| Column           | Description                                                                                                                                                                                                                                                                                                                                        |
+| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `specimen`       | Identifier of the specimen. Usually a BioSpecimen accession, i,e. `SAMEA7521529`.                                                                                                                                                                                                                                                                  |
+| `run`            | Identifier of the sequencing run. Usually the accession number of the data in INSDC. For example,`ERR9248445` (hic), `ERR9284044` (pacbio).                                                                                                                                                                                                        |
+| `datatype`       | Type of sequencing data. Must be one of `hic`, `illumina`, `pacbio`, `pacbio_clr`, or `ont`.                                                                                                                                                                                                                                                       |
+| `datafile`       | Full path to read data file. Must be `bam`, `cram`, `fastq.gz` or `fq.gz`. Note that FASTQ inputs should be interleaved if paired-end, and that Lima and PBMardkup don't support CRAM inputs.                                                                                                                                                      |
+| `library`        | (Optional) Library type. Set to `uli` for ULI demultiplexing with LIMA, `pimms` for PiMmS demultiplexing with LIMA, or `amplifi` for PCR-duplicate removal with pbmarkdup. For other library types, use a free-form identifier which is assigned to read group (`@RG`) ID. If not specified, the pipeline auto-creates one from the data filename. |
+| `barcode`        | (Optional) Barcode identifier used to trim barcode adapter for PacBio reads. If empty, barcode-specific adapter sequences will not be trimmed.                                                                                                                                                                                                     |
+| `adapter_file`   | (Optional) Path to an adapter FASTA file. For ULI samples, overrides the global `--pacbio_uli_adapter`; for PiMmS samples, specifies the adapter sequences for LIMA demultiplexing.                                                                                                                                                                |
+| `adapter_preset` | (Optional) LIMA adapter preset (`SYMMETRIC` or `ASYMMETRIC`). Required for PiMmS samples. If omitted for PiMmS, the pipeline warns when no `adapter_file` is given, and errors when `adapter_file` is provided without it.                                                                                                                         |
+
+An [example samplesheet](../assets/samplesheet.csv) has been provided with the pipeline.
+
+### Multiple runs of the same sample
+
+The `sample` identifiers have to be the same when you have re-sequenced the same sample more than once e.g. to increase sequencing depth. The pipeline will analyse the raw reads individually and then merge them by sample and datatype, before performing any downstream analysis. Below is an example for the same sample sequenced across 3 lanes of HiC:
+
+```console
+specimen,run,datatype,datafile,library
+specimen1,run1,hic,hic1.cram,
+specimen1,run2,hic,hic2.cram,
+specimen2,run1,hic,hic3.cram,
 ```
 
 ### ULI and PiMmS samples
@@ -64,18 +79,20 @@ specimen,run,datatype,datafile,library,barcode
 icAdaBipu332,TRACTION-RUN-2387,pacbio,amplifi.bam,amplifi,bc050
 ```
 
-| Column           | Description                                                                                                                                                                                                                                                                                                                                        |
-| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `specimen`       | Identifier of the specimen. Usually a BioSpecimen accession, i,e. `SAMEA7521529`.                                                                                                                                                                                                                                                                  |
-| `run`            | Identifier of the sequencing run. Usually the accession number of the data in INSDC. For example,`ERR9248445` (hic), `ERR9284044` (pacbio).                                                                                                                                                                                                        |
-| `datatype`       | Type of sequencing data. Must be one of `hic`, `illumina`, `pacbio`, `pacbio_clr`, or `ont`.                                                                                                                                                                                                                                                       |
-| `datafile`       | Full path to read data file. Must be `bam`, `cram`, `fastq.gz` or `fq.gz`. Note that FASTQ inputs should be interleaved if paired-end, and that Lima and PBMardkup don't support CRAM inputs.                                                                                                                                                      |
-| `library`        | (Optional) Library type. Set to `uli` for ULI demultiplexing with LIMA, `pimms` for PiMmS demultiplexing with LIMA, or `amplifi` for PCR-duplicate removal with pbmarkdup. For other library types, use a free-form identifier which is assigned to read group (`@RG`) ID. If not specified, the pipeline auto-creates one from the data filename. |
-| `barcode`        | (Optional) Barcode identifier used to trim barcode adapter for PacBio reads. If empty, barcode-specific adapter sequences will not be trimmed.                                                                                                                                                                                                     |
-| `adapter_file`   | (Optional) Path to an adapter FASTA file. For ULI samples, overrides the global `--pacbio_uli_adapter`; for PiMmS samples, specifies the adapter sequences for LIMA demultiplexing.                                                                                                                                                                |
-| `adapter_preset` | (Optional) LIMA adapter preset (`SYMMETRIC` or `ASYMMETRIC`). Required for PiMmS samples. If omitted for PiMmS, the pipeline warns when no `adapter_file` is given, and errors when `adapter_file` is provided without it.                                                                                                                         |
+### PacBio HiFi
 
-An [example samplesheet](../assets/samplesheet.csv) has been provided with the pipeline.
+Other PacBio HiFi libraries will be trimmed with [hifi-trimmer](https://github.com/sanger-tol/hifi-trimmer) using the Yaml file passed by `--pacbio_adapter_yaml`.
+
+To disable trimming altogether, pass an empty string to `--pacbio_adapter` and `--pacbio_adapter_yaml` **via a configuration file**.
+Nextflow indeed misinterprets empty strings on the command ilne as booleans.
+
+```config
+params {
+    // Disable PacBio adapter trimming
+    pacbio_adapter = ""
+    pacbio_adapter_yaml = ""
+}
+```
 
 ## Running the pipeline
 
@@ -135,7 +152,7 @@ It is a good idea to specify the pipeline version when running the pipeline on y
 
 First, go to the [sanger-tol/readmapping releases page](https://github.com/sanger-tol/readmapping/releases) and find the latest pipeline version - numeric only (eg. `1.3.1`). Then specify this when running the pipeline with `-r` (one hyphen) - eg. `-r 1.3.1`. Of course, you can switch to another version by changing the number after the `-r` flag.
 
-This version number will be logged in reports when you run the pipeline, so that you'll know what you used when you look back in the future.
+This version number will be logged in reports when you run the pipeline, so that you'll know what you used when you look back in the future. For example, at the bottom of the MultiQC reports.
 
 To further assist in reproducibility, you can use share and reuse [parameter files](#running-the-pipeline) to repeat pipeline runs with the same settings without having to write out a command with every single parameter.
 

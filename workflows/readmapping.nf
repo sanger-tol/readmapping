@@ -24,13 +24,12 @@ include { INPUT_CHECK                        } from '../subworkflows/local/input
 // MODULE: Installed directly from nf-core/modules
 //
 
-include { FASTQC         } from '../modules/nf-core/fastqc'
-include { MULTIQC        } from '../modules/nf-core/multiqc'
-
-include { paramsSummaryMap                                  } from 'plugin/nf-schema'
-include { paramsSummaryMultiqc                              } from '../subworkflows/nf-core/utils_nfcore_pipeline'
-include { softwareVersionsToYAML                            } from '../subworkflows/nf-core/utils_nfcore_pipeline'
-include { methodsDescriptionText                            } from '../subworkflows/local/utils_nfcore_readmapping_pipeline'
+include { FASTQC                 } from '../modules/nf-core/fastqc/main'
+include { MULTIQC                } from '../modules/nf-core/multiqc/main'
+include { paramsSummaryMap       } from 'plugin/nf-schema'
+include { paramsSummaryMultiqc   } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+include { methodsDescriptionText } from '../subworkflows/local/utils_nfcore_readmapping_pipeline'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -44,6 +43,9 @@ workflow READMAPPING {
     ch_samplesheet // channel: samplesheet read in from --input
     ch_fasta
     ch_header
+    multiqc_config
+    multiqc_logo
+    multiqc_methods_description
     outdir
 
     main:
@@ -129,7 +131,7 @@ workflow READMAPPING {
         .mix(topic_versions_string)
         .collectFile(
             storeDir: "${outdir}/pipeline_info",
-            name:  'readmapping_software_mqc_'  + 'versions.yml',
+            name:  'readmapping_software_'  + 'mqc_'  + 'versions.yml',
             sort: true,
             newLine: true
         )
@@ -152,15 +154,17 @@ workflow READMAPPING {
         .collect()
         .map { files -> [ [id: 'readmapping_overall', datatype: 'all'], files.unique() ] }
 
-    def summary_params = paramsSummaryMap(workflow, parameters_schema: "nextflow_schema.json")
-    def workflow_summary = channel.value(paramsSummaryMultiqc(summary_params))
-    def multiqc_custom_methods_description = params.multiqc_methods_description ? file(params.multiqc_methods_description, checkIfExists: true) : file("${projectDir}/assets/methods_description_template.yml", checkIfExists: true)
-    def methods_description = channel.value(methodsDescriptionText(multiqc_custom_methods_description))
-
     ch_multiqc_files = ch_multiqc_files.mix(ch_collated_versions)
+    def ch_summary_params = paramsSummaryMap(workflow, parameters_schema: "nextflow_schema.json")
+    def ch_workflow_summary = channel.value(paramsSummaryMultiqc(ch_summary_params))
+    ch_multiqc_files = ch_multiqc_files.mix(ch_workflow_summary.collectFile(name: 'workflow_summary_mqc.yaml'))
+    def ch_multiqc_custom_methods_description = multiqc_methods_description
+        ? file(multiqc_methods_description, checkIfExists: true)
+        : file("${projectDir}/assets/methods_description_template.yml", checkIfExists: true)
+    def ch_methods_description = channel.value(methodsDescriptionText(ch_multiqc_custom_methods_description))
+
     ch_multiqc_files = ch_multiqc_files.mix(collated_reports)
-    ch_multiqc_files = ch_multiqc_files.mix(workflow_summary.collectFile(name: 'workflow_summary_mqc.yaml'))
-    ch_multiqc_files = ch_multiqc_files.mix(methods_description.collectFile(name: 'methods_description_mqc.yaml', sort: true))
+    ch_multiqc_files = ch_multiqc_files.mix(ch_methods_description.collectFile(name: 'methods_description_mqc.yaml', sort: true))
 
     def ch_multiqc_global_files = ch_multiqc_files.flatten().collect()
 
@@ -175,10 +179,10 @@ workflow READMAPPING {
             [
                 meta,
                 (report_files + global_files).unique(),
-                params.multiqc_config
-                    ? file(params.multiqc_config, checkIfExists: true)
+                multiqc_config
+                    ? file(multiqc_config, checkIfExists: true)
                     : file("${projectDir}/assets/multiqc_config.yml", checkIfExists: true),
-                params.multiqc_logo ? file(params.multiqc_logo, checkIfExists: true) : [],
+                multiqc_logo ? file(multiqc_logo, checkIfExists: true) : [],
                 [],
                 [],
             ]

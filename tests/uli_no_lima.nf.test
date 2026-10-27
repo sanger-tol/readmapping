@@ -7,12 +7,12 @@ nextflow_pipeline {
     tag "pipeline"
     profile "test_uli"
 
-    test("-profile test_uli --pacbio_uli_adapter false") {
+    test("-profile test_uli without pacbio_uli_adapter") {
 
         when {
             params {
                 outdir = "$outputDir"
-                pacbio_uli_adapter = false
+                pacbio_uli_adapter = ""
             }
         }
 

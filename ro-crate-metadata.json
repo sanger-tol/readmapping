@@ -188,10 +188,10 @@
             },
             "url": [
                 "https://github.com/sanger-tol/readmapping",
-                "https://pipelines.tol.sanger.ac.uk/readmapping/2.1.0/"
+                "https://pipelines.tol.sanger.ac.uk/readmapping/2.1.1/"
             ],
             "version": [
-                "2.1.0"
+                "2.1.1"
             ]
         },
         {
