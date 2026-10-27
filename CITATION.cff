@@ -57,7 +57,7 @@ license: MIT
 message: If you use this software, please cite it using the metadata from this file
   and all references from CITATIONS.md.
 repository-code: https://github.com/sanger-tol/readmapping
-title: sanger-tol/readmapping v2.1.0 - Chinese Fireball
+title: sanger-tol/readmapping v2.1.1 - Chinese Fireball (patch 1)
 type: software
 url: https://pipelines.tol.sanger.ac.uk/readmapping
-version: 2.1.0
+version: 2.1.1
