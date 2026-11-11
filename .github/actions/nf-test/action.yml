@@ -37,7 +37,7 @@ runs:
 
     - name: Setup apptainer
       if: contains(inputs.profile, 'singularity')
-      uses: eWaterCycle/setup-apptainer@3f706d898c9db585b1d741b4692e66755f3a1b40 # v2.0.0
+      uses: eWaterCycle/setup-apptainer@95b5c781df5f72fd2271cc3cff06904a09d2a087 # v3
 
     - name: Set up Singularity
       if: contains(inputs.profile, 'singularity')
@@ -48,7 +48,7 @@ runs:
 
     - name: Conda setup
       if: contains(inputs.profile, 'conda')
-      uses: conda-incubator/setup-miniconda@8ee1f361103df19b6f8c8655fd3967a8ecb162d5 # v4
+      uses: conda-incubator/setup-miniconda@be893c923ea9cf1cf7cd510fbdde27c7e18cbdcb # v4.1.0
       with:
         auto-update-conda: true
         conda-solver: libmamba
