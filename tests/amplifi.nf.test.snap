@@ -23,7 +23,7 @@
                     "samtools": "1.22.1"
                 },
                 "FASTQC": {
-                    "fastqc": "0.12.1"
+                    "fastqc": "0.13.0"
                 },
                 "GUNZIP": {
                     "gunzip": 1.13
@@ -75,7 +75,7 @@
                     "untar": 1.34
                 },
                 "Workflow": {
-                    "sanger-tol/readmapping": "v2.1.0"
+                    "sanger-tol/readmapping": "v2.1.1"
                 }
             },
             [

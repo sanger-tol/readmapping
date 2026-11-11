@@ -18,7 +18,7 @@
                     "samtools": "1.22.1"
                 },
                 "FASTQC": {
-                    "fastqc": "0.12.1"
+                    "fastqc": "0.13.0"
                 },
                 "FASTXALIGN_MINIMAP2ALIGN": {
                     "minimap2": "2.30-r1287",
@@ -72,7 +72,7 @@
                     "samtools": "1.23.1"
                 },
                 "Workflow": {
-                    "sanger-tol/readmapping": "v2.1.0"
+                    "sanger-tol/readmapping": "v2.1.1"
                 }
             },
             [
