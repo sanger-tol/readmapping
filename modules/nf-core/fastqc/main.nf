@@ -1,11 +1,14 @@
+// Copyright (c) the nf-core community under an open-source MIT license.
+// See https://github.com/nf-core/modules for full license, file patching instructions and upstream contributing.
+
 process FASTQC {
     tag "${meta.id}"
     label 'process_low'
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine in ['singularity', 'apptainer'] && !task.ext.singularity_pull_docker_container
-?         'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/81/816bda6dd014e810753f642611232443ddeabb2b47f9681ad43f9044816f00ff/data'
-:         'community.wave.seqera.io/library/fastqc:0.13.0--b342db7b694c9af4' }"
+        ? 'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/81/816bda6dd014e810753f642611232443ddeabb2b47f9681ad43f9044816f00ff/data'
+        : 'community.wave.seqera.io/library/fastqc:0.13.0--b342db7b694c9af4' }"
 
     input:
     tuple val(meta), path(reads, stageAs: '?/*')
@@ -32,8 +35,8 @@ process FASTQC {
     def memory_in_mb = task.memory
         ? (task.memory.toUnit('MB') / task.cpus).intValue()
         : null
-    // FastQC memory value allowed range (100 - 10000)
-    def fastqc_memory = memory_in_mb > 10000 ? 10000 : (memory_in_mb < 100 ? 100 : memory_in_mb)
+    // FastQC memory value allowed range (100 - 25600)
+    def fastqc_memory = memory_in_mb > 25600 ? 25600 : (memory_in_mb < 100 ? 100 : memory_in_mb)
     def fastqc_memory_arg = fastqc_memory ? "--memory ${fastqc_memory}" : ''
 
     """
