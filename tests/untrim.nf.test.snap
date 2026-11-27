@@ -72,7 +72,7 @@
                     "samtools": "1.23.1"
                 },
                 "Workflow": {
-                    "sanger-tol/readmapping": "v2.1.1"
+                    "sanger-tol/readmapping": "v2.1.2"
                 }
             },
             [
@@ -282,10 +282,10 @@
                 
             ]
         ],
-        "timestamp": "2026-10-05T15:23:30.242846709",
+        "timestamp": "2026-11-27T15:57:29.508137707",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.0"
+            "nextflow": "26.04.6"
         }
     }
 }

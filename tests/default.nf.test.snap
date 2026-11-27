@@ -1,7 +1,7 @@
 {
     "-profile test": {
         "content": [
-            182,
+            181,
             {
                 "BGZIP_BEDGRAPH": {
                     "bgzip": 1.24,
@@ -108,7 +108,7 @@
                     "untar": 1.34
                 },
                 "Workflow": {
-                    "sanger-tol/readmapping": "v2.1.1"
+                    "sanger-tol/readmapping": "v2.1.2"
                 }
             },
             [
@@ -599,10 +599,10 @@
                 "pacbio.SAMEA7524440.ERR6939249.hifitrimmer.summary.json:md5,b41de1b1e61f9063cb042aa6393462d9"
             ]
         ],
-        "timestamp": "2026-10-05T15:13:39.00111332",
+        "timestamp": "2026-11-27T09:45:10.525400304",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.0"
+            "nextflow": "26.04.6"
         }
     }
 }
