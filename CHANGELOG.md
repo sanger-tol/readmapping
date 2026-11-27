@@ -3,6 +3,12 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [[v2.1.1](https://github.com/sanger-tol/readmapping/releases/tag/2.1.2)] - Chinese Fireball (patch 2) - [2026-11-26]
+
+### Enhancements & fixes
+
+- Updated the memory limit for FastQC in line with nf-core module
+
 ## [[v2.1.1](https://github.com/sanger-tol/readmapping/releases/tag/2.1.1)] - Chinese Fireball (patch 1) - [2026-11-11]
 
 ### Enhancements & fixes

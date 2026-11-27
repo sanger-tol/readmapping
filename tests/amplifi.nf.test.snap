@@ -75,7 +75,7 @@
                     "untar": 1.34
                 },
                 "Workflow": {
-                    "sanger-tol/readmapping": "v2.1.1"
+                    "sanger-tol/readmapping": "v2.1.2"
                 }
             },
             [
@@ -153,10 +153,10 @@
                 "pacbio.icAdaBipu332.TRACTION-RUN-2387.hifitrimmer.summary.json:md5,146fdeb92fb58a450aa03e0f474b4edd"
             ]
         ],
-        "timestamp": "2026-10-05T15:06:19.976923435",
+        "timestamp": "2026-11-27T16:11:10.561268454",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.0"
+            "nextflow": "26.04.6"
         }
     }
 }

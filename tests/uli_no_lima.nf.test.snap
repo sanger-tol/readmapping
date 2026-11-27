@@ -78,7 +78,7 @@
                     "untar": 1.34
                 },
                 "Workflow": {
-                    "sanger-tol/readmapping": "v2.1.1"
+                    "sanger-tol/readmapping": "v2.1.2"
                 }
             },
             [
@@ -265,10 +265,10 @@
                 "pacbio.SAMEA114784749.ERR14209104_test.hifitrimmer.summary.json:md5,a0bb029ebd213c14bad17ac343db6cfb"
             ]
         ],
-        "timestamp": "2026-10-05T15:20:53.478900392",
+        "timestamp": "2026-11-27T16:28:06.532237264",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.0"
+            "nextflow": "26.04.6"
         }
     }
 }
